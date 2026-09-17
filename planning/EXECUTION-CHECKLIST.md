@@ -16,8 +16,8 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 - [ ] Score weights approved
 - [ ] Pain taxonomy approved
 - [x] Product catalogue verified from official sources (Catalogue 1.0.0, 17 September 2026)
-- [ ] Three scenarios approved
-- [ ] ROI assumptions approved
+- [x] Three scenarios approved (Scenario Model 1.0.0)
+- [x] ROI assumptions approved (ROI Model 1.0.0)
 - [ ] Golden Case A approved
 - [ ] Third-party register created
 
