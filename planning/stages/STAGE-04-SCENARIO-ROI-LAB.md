@@ -1,6 +1,6 @@
 # Stage 04 - Scenario and ROI Lab
 
-Status: **Under review**
+Status: **Accepted**
 Implementer profile: **GPT-5.6 Sol, medium reasoning**
 Prerequisite: **Stage 03 accepted and published**
 Gate owner: **Main task**
@@ -171,3 +171,21 @@ The main task accepts Stage 04 only when:
 Return the exact changed-file list, commands/results, Case A values, browser
 checks, screenshots, assumptions, and limitations. Do not mark the stage
 accepted and do not merge the branch.
+
+## 9. Acceptance record
+
+Accepted by the main planning/integration task on 17 September 2026 after two
+implementation correction cycles and a cross-stage domain-boundary correction.
+
+- Lint and TypeScript checks passed independently.
+- All 12 test files and 74 tests passed independently.
+- The production build emitted all eight expected product routes.
+- Exact frozen Case A cost, operational-value, net-value, payback, budget-fit,
+  and conditional-expansion figures matched.
+- Editable assumptions retained `user_override` provenance, monthly state
+  reconciled to numeric events, and invalid edits preserved the last valid result.
+- The reusable core contained no current Exabytes capability, prerequisite, or
+  scenario-template identifiers.
+- Desktop and 360 px browser checks passed with 44 px targets, no horizontal
+  overflow, and no console or framework-overlay errors.
+- GitHub pull request #2 passed repository CI before this acceptance transition.
