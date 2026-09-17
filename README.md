@@ -2,7 +2,7 @@
 
 SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–03 are accepted; Scenario and ROI Lab is the next gated stage.
+> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–03 are accepted; Stage 04 Scenario and ROI Lab is in pull-request review.
 
 ## Why this exists
 
@@ -150,4 +150,3 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing contracts or core calcul
 ## License
 
 Licensed under the [MIT License](LICENSE). Third-party names and trademarks remain the property of their respective owners.
-

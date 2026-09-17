@@ -1,8 +1,8 @@
 # Stage 04 - Scenario and ROI Lab
 
-Status: **Ready for implementation**  
-Implementer profile: **GPT-5.6 Sol, medium reasoning**  
-Prerequisite: **Stage 03 accepted and published**  
+Status: **Under review**
+Implementer profile: **GPT-5.6 Sol, medium reasoning**
+Prerequisite: **Stage 03 accepted and published**
 Gate owner: **Main task**
 
 ## 1. Objective
@@ -171,4 +171,3 @@ The main task accepts Stage 04 only when:
 Return the exact changed-file list, commands/results, Case A values, browser
 checks, screenshots, assumptions, and limitations. Do not mark the stage
 accepted and do not merge the branch.
-

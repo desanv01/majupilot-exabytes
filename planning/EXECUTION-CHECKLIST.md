@@ -18,7 +18,7 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 - [x] Product catalogue verified from official sources (Catalogue 1.0.0, 17 September 2026)
 - [x] Three scenarios approved (Scenario Model 1.0.0)
 - [x] ROI assumptions approved (ROI Model 1.0.0)
-- [ ] Golden Case A approved
+- [x] Golden Case A approved
 - [ ] Third-party register created
 
 ## Gate 1 - Assessment
@@ -54,16 +54,16 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 
 ## Gate 4 - Scenarios and ROI
 
-- [ ] Lean scenario works
-- [ ] Balanced scenario works
-- [ ] Accelerated scenario works
-- [ ] Costs are visible
-- [ ] Benefits are shown as ranges
-- [ ] Assumptions are editable
-- [ ] ROI recalculates immediately
-- [ ] Payback matches a manual calculation
-- [ ] Dependencies affect the timeline
-- [ ] Scenario language avoids guarantees
+- [x] Lean scenario works
+- [x] Balanced scenario works
+- [x] Accelerated scenario works
+- [x] Costs are visible
+- [x] Benefits are shown as ranges
+- [x] Assumptions are editable
+- [x] ROI recalculates immediately
+- [x] Payback matches a manual calculation
+- [x] Dependencies affect the timeline
+- [x] Scenario language avoids guarantees
 
 ## Gate 5 - Advisor panel
 
