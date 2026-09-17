@@ -1,0 +1,27 @@
+# Dependencies
+/node_modules/
+
+# Next.js output
+/.next/
+/out/
+
+# Test and coverage output
+/coverage/
+/playwright-report/
+/test-results/
+
+# Local package-manager cache
+/.npm-cache/
+
+# Local environment files (the safe template remains tracked)
+.env*
+!.env.example
+
+# Logs and machine-local files
+*.log
+.DS_Store
+Thumbs.db
+
+# TypeScript build metadata
+*.tsbuildinfo
+next-env.d.ts

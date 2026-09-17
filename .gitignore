@@ -1,0 +1,22 @@
+# Local challenge and research source material
+/*.pdf
+/*.zip
+/*.jpg
+/tmp/
+
+# Editor and agent-local state
+/.codex/
+/.agents/
+.vscode/
+.idea/
+
+# 12ui execution metadata and generated conversion bundles
+planning/design/**/converted/
+planning/design/**/branch/**/journal.jsonl
+planning/design/**/branch/**/*.json
+planning/design/**/branch/**/prototype/
+
+# OS files
+.DS_Store
+Thumbs.db
+
