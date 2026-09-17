@@ -1,0 +1,32 @@
+import { catalogueSchema, type Catalogue } from "@/domain/recommendations";
+
+const common = { provider: "Exabytes catalogue offering", active: true, pricingTreatment: "verify_current_quote" as const, sourceLabel: "Official Exabytes source", verifiedAt: "2026-09-17", catalogueVersion: "1.0.0" as const };
+
+export const EXABYTES_CATALOGUE_1_0_0: Catalogue = catalogueSchema.parse({
+  version: "1.0.0",
+  offerings: [
+    { ...common, id: "exb_freshsales_crm", name: "Freshsales CRM", capabilityIds: ["shared_customer_operations"], approvedFactSummary: "Centralises customer information and interactions; supports sales pipelines, activities, follow-up, reports, workflows, and multi-channel engagement.", relativeCostTier: 2, sourceUrl: "https://www.exabytes.my/freshworks/freshsales-crm" },
+    { ...common, id: "exb_acronis_cyber_protect", name: "Acronis Cyber Protect", capabilityIds: ["protected_business_continuity"], approvedFactSummary: "Combines backup/recovery with endpoint cyber protection and centralised protection management across physical, virtual, and cloud environments.", relativeCostTier: 1, sourceUrl: "https://www.exabytes.my/acronis/cyber-protect" },
+    { ...common, id: "exb_business_email", name: "EBiz Mail Pro Business Email", capabilityIds: ["professional_team_collaboration"], approvedFactSummary: "Provides domain-based business email, web access, calendars/tasks/contacts, anti-spam, and team-sharing functions.", relativeCostTier: 1, sourceUrl: "https://www.exabytes.my/email/email-hosting" },
+    { ...common, id: "exb_lark", name: "Lark", capabilityIds: ["professional_team_collaboration"], approvedFactSummary: "Exabytes offers Lark as a team collaboration and work-management option. Use only the general collaboration mapping in v1.0.0; do not assert plan-specific features.", relativeCostTier: 1, sourceUrl: "https://www.exabytes.my/lark" },
+    { ...common, id: "exb_google_workspace", name: "Google Workspace", capabilityIds: ["professional_team_collaboration"], approvedFactSummary: "Provides custom business email, cloud files, real-time document collaboration, meetings, administration, and security controls.", relativeCostTier: 1, sourceUrl: "https://www.exabytes.my/google-workspace" },
+    { ...common, id: "exb_microsoft_365", name: "Microsoft 365", capabilityIds: ["professional_team_collaboration"], approvedFactSummary: "Provides business email, Office tools, OneDrive storage, and collaboration tooling; exact inclusions depend on plan.", relativeCostTier: 1, sourceUrl: "https://www.exabytes.my/microsoft-365" },
+    { ...common, id: "exb_ai_business_hosting", name: "AI-Powered Business Hosting", capabilityIds: ["measurable_digital_growth"], approvedFactSummary: "Provides managed website-hosting foundations with site-building tools, SSL, and backup; exact resources and AI tools depend on plan.", relativeCostTier: 1, sourceUrl: "https://www.exabytes.my/web-hosting/business-web-hosting" },
+    { ...common, id: "exb_cloudflare_managed", name: "Cloudflare Managed Services", capabilityIds: ["protected_web_presence"], approvedFactSummary: "Provides website performance and protection capabilities including CDN, DDoS mitigation, SSL compatibility, and WAF features depending on plan.", relativeCostTier: 2, sourceUrl: "https://www.exabytes.my/web-security/cloudflare-web-performance-booster" },
+    { ...common, id: "exb_vision_cloud", name: "Exabytes Vision Cloud", capabilityIds: ["scalable_cloud_operations"], approvedFactSummary: "A managed, Malaysia-hosted virtual infrastructure option for production workloads, dedicated virtual resources, networking, monitoring, and optional backup/disaster recovery.", relativeCostTier: 4, sourceUrl: "https://www.exabytes.my/enterprise/evc" },
+    { ...common, id: "exb_ai_cloud", name: "Exabytes AI Cloud", capabilityIds: ["governed_ai_automation"], approvedFactSummary: "Combines cloud infrastructure with workflow automation and AI tooling in a Malaysia-hosted platform. It is a consultation/register-interest offering in this catalogue.", relativeCostTier: 3, sourceUrl: "https://www.exabytes.ai/ai-cloud" },
+    { ...common, id: "exb_eva", name: "Exabytes Vision AI (EVA)", capabilityIds: ["governed_ai_automation"], approvedFactSummary: "A no-code agentic AI platform for visually building agents grounded in business knowledge and connected to apps/data. It is a consultation/register-interest offering in this catalogue.", relativeCostTier: 3, sourceUrl: "https://www.exabytes.ai/eva" },
+  ],
+  mappings: [
+    ["shared_customer_operations", "exb_freshsales_crm", "catalogue_rule_1", "Freshsales CRM is the active catalogue mapping for shared customer operations."],
+    ["protected_business_continuity", "exb_acronis_cyber_protect", "catalogue_rule_2", "Acronis Cyber Protect combines the backup/recovery and protection capabilities this capability requires."],
+    ["professional_team_collaboration", "exb_business_email", "catalogue_rule_3_email", "EBiz Mail Pro fits an absent professional-email foundation when cost is the highest concern."],
+    ["professional_team_collaboration", "exb_lark", "catalogue_rule_3_lark", "Lark is an allowed collaboration option when coordination and workflow are the dominant evidenced gap."],
+    ["professional_team_collaboration", "exb_google_workspace", "catalogue_rule_3_google", "Google Workspace requires an explicit browser-first shared-files preference."],
+    ["professional_team_collaboration", "exb_microsoft_365", "catalogue_rule_3_microsoft", "Microsoft 365 requires an explicit Office or Outlook compatibility need."],
+    ["measurable_digital_growth", "exb_ai_business_hosting", "catalogue_rule_4", "AI-Powered Business Hosting is eligible only when an owned website/store foundation is missing or informal."],
+    ["protected_web_presence", "exb_cloudflare_managed", "catalogue_rule_5", "Cloudflare Managed Services is eligible only for an active website with an evidenced protection gap."],
+    ["scalable_cloud_operations", "exb_vision_cloud", "catalogue_rule_6", "Exabytes Vision Cloud is eligible only for an evidenced production infrastructure or scaling need."],
+    ["governed_ai_automation", "exb_ai_cloud", "catalogue_rule_7", "Exabytes AI Cloud is the default future-fit offering for governed AI automation."],
+  ].map(([capabilityId, offeringId, selectionRuleId, mappingReason]) => ({ capabilityId, offeringId, selectionRuleId, mappingReason })),
+});
