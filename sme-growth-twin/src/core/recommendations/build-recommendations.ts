@@ -4,6 +4,7 @@ import {
   RECOMMENDATION_CATALOGUE_VERSION,
   RECOMMENDATION_MODEL_VERSION,
   recommendationResultSchema,
+  type RecommendationRulePack,
   type RecommendationResult,
 } from "@/domain/recommendations";
 import type { DiagnosticResult } from "@/domain/scoring";
@@ -16,11 +17,12 @@ export interface RecommendationFactories { now: () => string; id: () => string }
 export function buildRecommendationResult(
   twin: BusinessTwin,
   diagnostic: DiagnosticResult,
+  recommendationRulePack: RecommendationRulePack,
   catalogue: unknown,
   offeringSelectionPolicy: unknown,
   factories: RecommendationFactories,
 ): RecommendationResult {
-  const selected = selectCapabilityRecommendations(twin, diagnostic);
+  const selected = selectCapabilityRecommendations(twin, diagnostic, recommendationRulePack);
   const mapped = mapOfferingsAfterSelection(selected, twin, catalogue, offeringSelectionPolicy);
   return recommendationResultSchema.parse({
     id: factories.id() as RecommendationResultId,

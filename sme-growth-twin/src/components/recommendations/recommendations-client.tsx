@@ -9,6 +9,7 @@ import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
 import { buildRecommendationResult } from "@/core/recommendations/build-recommendations";
 import { EXABYTES_CATALOGUE_1_0_0 } from "@/domain-packs/exabytes/catalogue";
 import { EXABYTES_OFFERING_SELECTION_1_0_0 } from "@/domain-packs/exabytes/offering-selection";
+import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "@/domain-packs/exabytes/recommendation-rules";
 import type { BusinessTwin, Evidence } from "@/domain/business-twin";
 import type { CapabilityRecommendation, RecommendationResult } from "@/domain/recommendations";
 import type { DiagnosticResult } from "@/domain/scoring";
@@ -101,7 +102,7 @@ export function RecommendationsClient() {
       const diagnosticLoad = loadDiagnosticResult(localStorage, twin);
       if (diagnosticLoad.status !== "ok") { router.replace("/assessment/analysis"); return; }
       const saved = loadRecommendationResult(localStorage, twin, diagnosticLoad.result);
-      const result = saved.status === "ok" ? saved.result : buildRecommendationResult(twin, diagnosticLoad.result, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => new Date().toISOString(), id: () => `recommendation_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}` });
+      const result = saved.status === "ok" ? saved.result : buildRecommendationResult(twin, diagnosticLoad.result, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => new Date().toISOString(), id: () => `recommendation_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}` });
       if (saved.status !== "ok") saveRecommendationResult(localStorage, result);
       setState({ twin, diagnostic: diagnosticLoad.result, result });
     } catch { router.replace("/results"); }

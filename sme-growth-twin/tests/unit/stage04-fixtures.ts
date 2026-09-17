@@ -4,6 +4,7 @@ import { buildScenarioComparison } from "../../src/core/scenarios/build-scenario
 import { buildDiagnosticResult } from "../../src/core/scoring/build-diagnostic";
 import { EXABYTES_CATALOGUE_1_0_0 } from "../../src/domain-packs/exabytes/catalogue";
 import { EXABYTES_OFFERING_SELECTION_1_0_0 } from "../../src/domain-packs/exabytes/offering-selection";
+import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "../../src/domain-packs/exabytes/recommendation-rules";
 import { EXABYTES_SCENARIO_RULES_1_0_0 } from "../../src/domain-packs/exabytes/scenario-templates";
 import type { CoreAnswers, FollowUpAnswers, FollowUpId } from "../../src/domain/assessment";
 import { assessmentSessionIdSchema } from "../../src/domain/ids";
@@ -36,7 +37,7 @@ export function fullCase(answers = caseA, followUps: FollowUpAnswers = {}, selec
   let eventSequence = 0;
   const twin = buildBusinessTwin({ sessionId: assessmentSessionIdSchema.parse(`assessment_stage04${suffix.padEnd(4, "0")}`), answers, followUpAnswers: followUps, selectedFollowUpIds: selected }, { now: () => now, id: (kind) => `${kind}_stage04${String(++idSequence).padStart(4, "0")}` });
   const diagnostic = buildDiagnosticResult(twin, { now: () => now, id: () => `diagnostic_stage04${suffix.padEnd(4, "0")}` });
-  const recommendation = buildRecommendationResult(twin, diagnostic, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => now, id: () => `recommendation_stage04${suffix.padEnd(4, "0")}` });
+  const recommendation = buildRecommendationResult(twin, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => now, id: () => `recommendation_stage04${suffix.padEnd(4, "0")}` });
   const comparison = buildScenarioComparison(twin, diagnostic, recommendation, EXABYTES_SCENARIO_RULES_1_0_0, { now: () => now, id: () => `scenario_stage04${suffix.padEnd(5, "0")}`, eventId: () => `event_stage04${String(++eventSequence).padStart(5, "0")}` });
   return { twin, diagnostic, recommendation, comparison };
 }
