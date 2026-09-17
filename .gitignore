@@ -15,8 +15,9 @@ planning/design/**/converted/
 planning/design/**/branch/**/journal.jsonl
 planning/design/**/branch/**/*.json
 planning/design/**/branch/**/prototype/
+planning/design/**/branch/**/.local-sources/
+planning/design/**/branch/**/.local-runs/
 
 # OS files
 .DS_Store
 Thumbs.db
-
