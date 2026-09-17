@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { composeScenarioRecommendations, recalculateScenarioComparison } from "../../src/core/scenarios/build-scenarios";
+import { editRangeAssumption } from "../../src/core/scenarios/edit-assumptions";
 import { buildSensitivityTrace } from "../../src/core/scenarios/seeded-sensitivity";
 import { EXABYTES_SCENARIO_RULES_1_0_0 } from "../../src/domain-packs/exabytes/scenario-templates";
-import { scenarioResultSchema } from "../../src/domain/scenarios";
+import { scenarioComparisonSchema, scenarioResultSchema } from "../../src/domain/scenarios";
 import { isScenarioCurrent, loadScenarioComparison, saveScenarioComparison, SCENARIO_STORAGE_KEY } from "../../src/infrastructure/persistence/local-scenario-store";
 import { caseAFull, caseB, caseC, fullCase, memoryStorage, now } from "./stage04-fixtures";
 
@@ -17,7 +18,24 @@ describe("Stage 04 scenario composition and run", () => {
     ]);
     const recommendedIds = new Set(recommendation.recommendations.map((item) => item.capabilityId));
     expect(comparison.scenarios.every((scenario) => scenario.interventions.every((item) => recommendedIds.has(item.capabilityId)))).toBe(true);
-    expect(composeScenarioRecommendations(recommendation, "lean_foundation").committed).toHaveLength(3);
+    expect(composeScenarioRecommendations(recommendation, EXABYTES_SCENARIO_RULES_1_0_0.templates[0]).committed).toHaveLength(3);
+    expect(composeScenarioRecommendations(recommendation, { ...EXABYTES_SCENARIO_RULES_1_0_0.templates[0], maximumCommitted: 2 }).committed).toHaveLength(2);
+  });
+
+  it("allocates auditable monthly costs and benefits to their actual start windows", () => {
+    for (const scenario of caseAFull().comparison.scenarios) {
+      const firstBenefitMonth = Math.min(...scenario.events.filter((event) => event.type === "benefit_realised").map((event) => event.month));
+      const monthlyCost = scenario.months.reduce((sum, month) => sum + month.incurredCost, 0);
+      const monthlyBenefit = scenario.months.reduce((sum, month) => sum + month.realisedBenefit, 0);
+      const eventCost = scenario.events.filter((event) => event.type === "cost_incurred").reduce((sum, event) => sum + (event.numericPayload ?? 0), 0);
+      const eventBenefit = scenario.events.filter((event) => event.type === "benefit_realised").reduce((sum, event) => sum + (event.numericPayload ?? 0), 0);
+      expect(monthlyCost).toBe(scenario.costs.firstYear.base);
+      expect(eventCost).toBe(scenario.costs.firstYear.base);
+      expect(scenario.months.filter((month) => month.month < firstBenefitMonth).every((month) => month.realisedBenefit === 0)).toBe(true);
+      expect(monthlyBenefit).toBe(scenario.value.gross.status === "estimated" ? scenario.value.gross.range.base : 0);
+      expect(eventBenefit).toBe(monthlyBenefit);
+      expect(scenario.events.filter((event) => event.type === "cost_incurred" || event.type === "benefit_realised").every((event) => event.numericPayload !== undefined)).toBe(true);
+    }
   });
 
   it("enforces dependency order, exact 12 months, stable events and blocked conditional AI", () => {
@@ -64,6 +82,33 @@ describe("Stage 04 persistence", () => {
     saveScenarioComparison(storage, saved); expect(loadScenarioComparison(storage, full.twin, full.diagnostic, full.recommendation)).toEqual({ status: "ok", result: saved });
     data.set(SCENARIO_STORAGE_KEY, "{bad"); expect(loadScenarioComparison(storage)).toEqual({ status: "discarded", reason: "corrupt" });
     data.set(SCENARIO_STORAGE_KEY, JSON.stringify({ ...saved, scenarioModelVersion: "9.9.9" })); expect(loadScenarioComparison(storage)).toEqual({ status: "discarded", reason: "incompatible" });
+  });
+
+  it("persists user-edit provenance and rejects a foreign preferred scenario", () => {
+    const { storage } = memoryStorage();
+    const full = caseAFull();
+    const balanced = full.comparison.scenarios[1];
+    const edited = editRangeAssumption(balanced.assumptions, "operational", "loadedHourlyCost", "base", "30");
+    expect(edited.success).toBe(true);
+    if (!edited.success) return;
+    let event = 0;
+    const recalculated = recalculateScenarioComparison(
+      { ...full.comparison, selectedScenarioId: balanced.id },
+      full.twin,
+      full.recommendation,
+      EXABYTES_SCENARIO_RULES_1_0_0,
+      { balanced_growth: edited.data },
+      { now: () => now, eventId: () => `event_override${String(++event).padStart(4, "0")}` },
+    );
+    saveScenarioComparison(storage, recalculated);
+    const loaded = loadScenarioComparison(storage, full.twin, full.diagnostic, full.recommendation);
+    expect(loaded.status).toBe("ok");
+    if (loaded.status !== "ok") return;
+    const assumption = loaded.result.scenarios[1].assumptions.operational.loadedHourlyCost;
+    expect(assumption.range.base).toBe(30);
+    expect(assumption.source).toBe("user_override");
+    expect(assumption.sourceRef).toBe("scenario-lab-edit");
+    expect(scenarioComparisonSchema.safeParse({ ...loaded.result, selectedScenarioId: "foreign-scenario" }).success).toBe(false);
   });
 
   it("invalidates every upstream identity and version dimension", () => {

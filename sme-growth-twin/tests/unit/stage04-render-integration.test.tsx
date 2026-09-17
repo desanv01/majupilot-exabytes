@@ -17,6 +17,7 @@ describe("Stage 04 rendered and route contract", () => {
 
   it("renders all assumption groups, sources, formulas, exclusions and honest next stage", () => {
     for (const label of ["Costs", "Operational value", "Revenue value", "Avoided risk", "Sensitivity trace", "Derived User Fact", "Planning Default", "Reset all assumptions to Model 1.0.0", "Confidence", "Exclusions", "weekly hours saved × 52 × loaded hourly cost", "Advisor review and Blueprint", "not implemented yet"] ) expect(html).toContain(label);
+    for (const accessibleName of ["Implementation Low", "Implementation Base", "Implementation High", "Manual hours per week Low", "Loaded hourly cost Base", "Adoption High"]) expect(html).toContain(`aria-label="${accessibleName}"`);
     expect(html).not.toMatch(/generate blueprint|advisor panel|submit consultation|guaranteed|vendor quote|model request/i);
   });
 

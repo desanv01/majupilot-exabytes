@@ -9,6 +9,7 @@ const eventPriority: Record<ScenarioEvent["type"], number> = { scenario_started:
 const mapRange = (range: EstimateRange, multiplier: number): EstimateRange => ({ low: roundMoney(range.low * multiplier), base: roundMoney(range.base * multiplier), high: roundMoney(range.high * multiplier) });
 const zeroRange = (): EstimateRange => ({ low: 0, base: 0, high: 0 });
 const nullable = () => ({ low: null, base: null, high: null });
+const formatEventMoney = (value: number) => `RM${value.toLocaleString("en-MY")}`;
 const followUpHours = { under_5: 2.5, "5_10": 7.5, "11_20": 15.5, "21_40": 30.5, over_40: 41 } as const;
 
 function manualHours(twin: BusinessTwin) {
@@ -42,7 +43,7 @@ export function deriveAssumptions(twin: BusinessTwin, template: ScenarioTemplate
     },
     revenue: { addressableRevenue: nullableAssumption("addressable_revenue", "RM/year", "Revenue remains unestimated until supplied."), conversionChange: nullableAssumption("conversion_change", "ratio", "Revenue remains unestimated until supplied."), grossMargin: nullableAssumption("gross_margin", "ratio", "Revenue remains unestimated until supplied.") },
     avoidedRisk: { baselineIncidentProbability: nullableAssumption("baseline_incident_probability", "ratio", "Avoided risk remains unestimated until supplied."), incidentImpact: nullableAssumption("incident_impact", "RM", "Avoided risk remains unestimated until supplied."), riskReduction: nullableAssumption("risk_reduction", "ratio", "Avoided risk remains unestimated until supplied.") },
-    sensitivity: { seed: template.seed, ...template.sensitivity },
+    sensitivity: { seed: template.seed, ...template.sensitivity, source: "planning_default", sourceRef: "scenario-roi-model-1.0.0", rationale: "Seeded trace parameters affect only delay and adoption events, never headline ROI.", editable: true },
   };
 }
 
@@ -81,30 +82,60 @@ export function runScenario(args: { scenarioId: string; template: ScenarioTempla
   const committed = recommendations.filter((item) => commitments.get(item.capabilityId) === "committed");
   const conditional = recommendations.filter((item) => commitments.get(item.capabilityId) === "conditional");
   const assumptions = args.assumptions ?? deriveAssumptions(twin, template, committed, conditional, rules);
-  const firstYear = addRanges(assumptions.costs.implementation.range, assumptions.costs.training.range, assumptions.costs.annualRecurring.range);
+  const firstYearRaw = addRanges(assumptions.costs.implementation.range, assumptions.costs.training.range, assumptions.costs.annualRecurring.range);
+  const firstYear = { low: roundMoney(firstYearRaw.low), base: roundMoney(firstYearRaw.base), high: roundMoney(firstYearRaw.high) };
   const conditionalExpansionCost = conditional.length ? addRanges(
     conditional.reduce((sum, item) => addRanges(sum, mapRange(rules.costTiers[item.relativeCostTier as 1 | 2 | 3 | 4].implementation, template.paceMultiplier)), zeroRange()),
     conditional.reduce((sum, item) => addRanges(sum, mapRange(rules.costTiers[item.relativeCostTier as 1 | 2 | 3 | 4].training, template.paceMultiplier)), zeroRange()),
     conditional.reduce((sum, item) => addRanges(sum, rules.costTiers[item.relativeCostTier as 1 | 2 | 3 | 4].annualRecurring), zeroRange()),
   ) : null;
   const value = calculateScenarioValue(assumptions, firstYear);
+  const committedInterventions = interventions.filter((item) => item.commitment === "committed");
+  const firstBenefitMonth = committedInterventions.filter((item) => item.status !== "deferred").reduce((earliest, item) => Math.min(earliest, Math.min(12, item.completionMonth + 1)), 13);
+  const grossBase = value.gross.status === "estimated" ? value.gross.range.base : 0;
+  const benefitMonthCount = firstBenefitMonth <= 12 ? 13 - firstBenefitMonth : 0;
+  const monthlyBenefitBase = benefitMonthCount ? Math.floor(grossBase / benefitMonthCount) : 0;
+  const capabilityBaseCost = (recommendation: CapabilityRecommendation) => {
+    const tier = rules.costTiers[recommendation.relativeCostTier as 1 | 2 | 3 | 4];
+    return (tier.implementation.base + tier.training.base) * template.paceMultiplier + tier.annualRecurring.base;
+  };
+  const costWeightTotal = committed.reduce((sum, recommendation) => sum + capabilityBaseCost(recommendation), 0);
+  let allocatedCost = 0;
+  const costAllocations = new Map(committedInterventions.map((intervention, index) => {
+    const recommendation = committed.find((item) => item.capabilityId === intervention.capabilityId)!;
+    const amount = index === committedInterventions.length - 1 ? firstYear.base - allocatedCost : Math.floor(firstYear.base * capabilityBaseCost(recommendation) / costWeightTotal);
+    allocatedCost += amount;
+    return [intervention.capabilityId, amount] as const;
+  }));
   const events: ScenarioEvent[] = [{ id: eventId(), scenarioId, month: 1, type: "scenario_started", explanation: "The deterministic 12-month scenario begins." }];
   for (const intervention of interventions) {
     events.push({ id: eventId(), scenarioId, month: intervention.startMonth, type: "intervention_scheduled", capabilityId: intervention.capabilityId, explanation: `${intervention.title} is placed in the dependency-aware schedule.` });
     if (intervention.commitment === "conditional") events.push({ id: eventId(), scenarioId, month: template.conditionalGateMonth ?? 6, type: "conditional_gate_blocked", capabilityId: intervention.capabilityId, explanation: `Conditional gate blocked: ${intervention.prerequisiteChecks.filter((item) => item.status !== "met").map((item) => item.label).join(", ")}.` });
     else {
       events.push({ id: eventId(), scenarioId, month: intervention.startMonth, type: "training_started", capabilityId: intervention.capabilityId, explanation: `Training begins for ${intervention.title}.` });
-      events.push({ id: eventId(), scenarioId, month: intervention.startMonth, type: "cost_incurred", capabilityId: intervention.capabilityId, explanation: "Committed planning cost begins; conditional expansion is excluded." });
+      const incurredCost = costAllocations.get(intervention.capabilityId) ?? 0;
+      events.push({ id: eventId(), scenarioId, month: intervention.startMonth, type: "cost_incurred", capabilityId: intervention.capabilityId, numericPayload: incurredCost, explanation: `${formatEventMoney(incurredCost)} of committed base planning cost is allocated to this start month; conditional expansion is excluded.` });
       if (intervention.status !== "deferred") {
         events.push({ id: eventId(), scenarioId, month: intervention.completionMonth, type: "capability_activated", capabilityId: intervention.capabilityId, explanation: `${intervention.title} reaches its scheduled activation milestone.` });
-        events.push({ id: eventId(), scenarioId, month: Math.min(12, intervention.completionMonth + 1), type: "benefit_realised", capabilityId: intervention.capabilityId, explanation: "Operational value may begin after activation under the visible adoption assumptions." });
       }
     }
+  }
+  let allocatedBenefit = 0;
+  for (let month = firstBenefitMonth; month <= 12; month += 1) {
+    const amount = month === 12 ? grossBase - allocatedBenefit : monthlyBenefitBase;
+    allocatedBenefit += amount;
+    events.push({ id: eventId(), scenarioId, month, type: "benefit_realised", numericPayload: amount, explanation: `${formatEventMoney(amount)} of base gross value is allocated to this active benefit month.` });
   }
   events.push(...buildSensitivityTrace({ scenarioId, seed: assumptions.sensitivity.seed, delayProbability: assumptions.sensitivity.delayProbability, maximumDelayMonths: assumptions.sensitivity.maximumDelayMonths, adoptionVariation: assumptions.sensitivity.adoptionVariation, interventions, eventId }));
   events.push({ id: eventId(), scenarioId, month: 12, type: "scenario_completed", explanation: "The first-year comparison window closes." });
   events.sort((a, b) => a.month - b.month || eventPriority[a.type] - eventPriority[b.type] || (a.capabilityId ?? "").localeCompare(b.capabilityId ?? "") || a.id.localeCompare(b.id));
-  const months = Array.from({ length: 12 }, (_, index) => { const month = index + 1; const activeCapabilityIds = interventions.filter((item) => item.commitment === "committed" && item.status !== "deferred" && item.completionMonth <= month).map((item) => item.capabilityId); return { month, activeCapabilityIds, incurredCost: month === 1 ? firstYear.base : 0, realisedBenefit: value.gross.status === "estimated" ? roundMoney(value.gross.range.base / 12) : 0, notes: events.filter((event) => event.month === month && ["milestone_delayed", "conditional_gate_blocked"].includes(event.type)).map((event) => event.explanation) }; });
+  const months = Array.from({ length: 12 }, (_, index) => {
+    const month = index + 1;
+    const activeCapabilityIds = interventions.filter((item) => item.commitment === "committed" && item.status !== "deferred" && item.completionMonth <= month).map((item) => item.capabilityId);
+    const incurredCost = events.filter((event) => event.month === month && event.type === "cost_incurred").reduce((sum, event) => sum + (event.numericPayload ?? 0), 0);
+    const realisedBenefit = events.filter((event) => event.month === month && event.type === "benefit_realised").reduce((sum, event) => sum + (event.numericPayload ?? 0), 0);
+    return { month, activeCapabilityIds, incurredCost, realisedBenefit, notes: events.filter((event) => event.month === month && ["milestone_delayed", "conditional_gate_blocked"].includes(event.type)).map((event) => event.explanation) };
+  });
   const latest = Math.max(0, ...interventions.filter((item) => item.commitment === "committed" && item.status !== "deferred").map((item) => item.completionMonth));
   return scenarioResultSchema.parse({ id: scenarioId, templateId: template.id, title: template.title, intent: template.intent, riskLevel: template.riskLevel, seed: assumptions.sensitivity.seed, interventions, assumptions, costs: { implementation: assumptions.costs.implementation.range, training: assumptions.costs.training.range, annualRecurring: assumptions.costs.annualRecurring.range, firstYear, conditionalExpansionCost }, value, budgetFit: budgetFit(firstYear, twin.constraints.budgetBand), months, events, dependencies, confidence: value.exclusions.length >= 2 ? "medium" : "high", warnings: [...interventions.filter((item) => item.status === "blocked").map((item) => `${item.title} remains conditional until all hard prerequisites are met.`), ...interventions.filter((item) => item.status === "deferred").map((item) => `${item.title} completes after month 12 and is deferred from first-year benefit.`)], timelineLabel: latest ? `Months 1–${latest}` : "No committed schedule" });
 }

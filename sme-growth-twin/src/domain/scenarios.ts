@@ -52,7 +52,7 @@ export const scenarioAssumptionsSchema = z.object({
   operational: z.object({ manualHoursPerWeek: nullableRangeAssumptionSchema, automatableShare: ratioAssumptionSchema, adoption: ratioAssumptionSchema, loadedHourlyCost: rangeAssumptionSchema }).strict(),
   revenue: z.object({ addressableRevenue: nullableRangeAssumptionSchema, conversionChange: nullableRatioAssumptionSchema, grossMargin: nullableRatioAssumptionSchema }).strict(),
   avoidedRisk: z.object({ baselineIncidentProbability: nullableRatioAssumptionSchema, incidentImpact: nullableRangeAssumptionSchema, riskReduction: nullableRatioAssumptionSchema }).strict(),
-  sensitivity: z.object({ seed: z.number().int().nonnegative(), delayProbability: ratio, maximumDelayMonths: z.number().int().min(0).max(12), adoptionVariation: ratio }).strict(),
+  sensitivity: z.object({ seed: z.number().int().nonnegative(), delayProbability: ratio, maximumDelayMonths: z.number().int().min(0).max(12), adoptionVariation: ratio, source: assumptionSourceSchema, sourceRef: z.string().min(1), rationale: z.string().min(1), editable: z.boolean() }).strict(),
 }).strict();
 
 export const scenarioTemplateIdSchema = z.enum(["lean_foundation", "balanced_growth", "accelerated_ai"]);
@@ -107,7 +107,9 @@ export const scenarioComparisonSchema = z.object({
   id: scenarioComparisonIdSchema, assessmentSessionId: assessmentSessionIdSchema, businessTwinId: businessTwinIdSchema, twinRevision: z.number().int().positive(), diagnosticResultId: diagnosticResultIdSchema, recommendationResultId: recommendationResultIdSchema,
   sourceScoreModelVersion: z.literal(SCORE_MODEL_VERSION), sourcePainModelVersion: z.literal(PAIN_MODEL_VERSION), sourceRecommendationModelVersion: z.literal(RECOMMENDATION_MODEL_VERSION), sourceCatalogueVersion: z.literal(RECOMMENDATION_CATALOGUE_VERSION),
   scenarioModelVersion: z.literal(SCENARIO_MODEL_VERSION), roiModelVersion: z.literal(ROI_MODEL_VERSION), createdAt: z.iso.datetime({ offset: true }), updatedAt: z.iso.datetime({ offset: true }), selectedScenarioId: z.string().optional(), scenarios: z.array(scenarioResultSchema).length(3),
-}).strict();
+}).strict().superRefine((comparison, context) => {
+  if (comparison.selectedScenarioId && !comparison.scenarios.some((scenario) => scenario.id === comparison.selectedScenarioId)) context.addIssue({ code: "custom", path: ["selectedScenarioId"], message: "Selected scenario must belong to this comparison" });
+});
 
 export type EstimateRange = z.infer<typeof estimateRangeSchema>;
 export type NullableEstimateRange = z.infer<typeof nullableEstimateRangeSchema>;
@@ -126,6 +128,12 @@ export interface ScenarioTemplateDefinition {
   paceMultiplier: number;
   seed: number;
   maximumCommitted: number;
+  selection: {
+    whyNow: "all" | { phases: readonly RoadmapPhase[] };
+    addHighestEligibleIfMissing: boolean;
+    addHighestNextIfMissing: boolean;
+    conditionalCapabilityIds: readonly CapabilityId[];
+  };
   phaseSchedule: Record<RoadmapPhase, { startMonth: number; durationMonths: number } | null>;
   conditionalGateMonth?: number;
   conditionalPilotMonth?: number;

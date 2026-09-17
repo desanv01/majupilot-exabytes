@@ -7,10 +7,11 @@ import { useRouter } from "next/navigation";
 
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
 import { buildScenarioComparison, recalculateScenarioComparison } from "@/core/scenarios/build-scenarios";
+import { editRangeAssumption, editSensitivitySeed } from "@/core/scenarios/edit-assumptions";
 import { deriveAssumptions } from "@/core/scenarios/run-scenario";
 import { EXABYTES_SCENARIO_RULES_1_0_0 } from "@/domain-packs/exabytes/scenario-templates";
 import type { BusinessTwin } from "@/domain/business-twin";
-import { scenarioAssumptionsSchema, type EstimateRange, type ScenarioAssumptions, type ScenarioComparison, type ScenarioResult, type ScenarioTemplateId } from "@/domain/scenarios";
+import type { EstimateRange, ScenarioAssumptions, ScenarioComparison, ScenarioResult, ScenarioTemplateId } from "@/domain/scenarios";
 import type { DiagnosticResult } from "@/domain/scoring";
 import type { RecommendationResult } from "@/domain/recommendations";
 import { loadAssessmentDraft } from "@/infrastructure/persistence/local-assessment-store";
@@ -25,7 +26,6 @@ const formatRange = (range: EstimateRange) => `${formatMoney(range.low)} / ${for
 const budgetLabels = { within_range: "Within range", base_within: "Base within", only_low_within: "Only low within", over: "Over budget", unknown: "Budget unknown" } as const;
 const title = (value: string) => value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 const pathKey = (template: ScenarioTemplateId, group: string, field: string, band: string) => `${template}.${group}.${field}.${band}`;
-const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 
 function JourneyRail() {
   return <nav className="journey-rail" aria-label="Growth Twin journey"><ol>{["Discover", "Diagnose", "Compare", "Blueprint"].map((label, index) => <li className={index < 2 ? "done" : index === 2 ? "current" : ""} key={label}><span>{index < 2 ? "✓" : index + 1}</span><em>{label}</em></li>)}</ol></nav>;
@@ -71,8 +71,8 @@ function draftValues(comparison: ScenarioComparison) {
 
 function AssumptionPanel({ scenario, drafts, errors, onChange, onReset }: { scenario: ScenarioResult; drafts: Record<string, string>; errors: Record<string, string>; onChange: (key: string, value: string) => void; onReset: () => void }) {
   return <details className="assumptions-panel" open><summary><span><strong>Assumptions and calculation</strong><small>Edit valid inputs to recalculate synchronously.</small></span><span>Open controls</span></summary><div className="assumption-groups">
-    {assumptionGroups.map((group) => <fieldset className={`assumption-group ${group.key}`} key={group.key}><legend>{group.label}</legend>{group.fields.map(([field, label]) => { const value = getField(scenario.assumptions, group.key, field); return <div className="assumption-row" key={field}><div><label>{label}</label><small>{value.unit} · {title(value.source)} · {value.sourceRef}</small><p>{value.rationale}</p></div><div className="range-inputs">{(["low", "base", "high"] as const).map((band) => { const key = pathKey(scenario.templateId, group.key, field, band); return <label key={band}><span>{title(band)}</span><input aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? `${key}-error` : undefined} inputMode="decimal" value={drafts[key] ?? ""} onChange={(event) => onChange(key, event.target.value)} />{errors[key] ? <small className="error" id={`${key}-error`}>{errors[key]}</small> : null}</label>; })}</div></div>; })}<button className="reset-link" type="button" onClick={onReset}>Reset all assumptions to Model 1.0.0</button></fieldset>)}
-    <fieldset className="assumption-group sensitivity"><legend>Sensitivity trace</legend><div className="assumption-row"><div><label htmlFor={`${scenario.templateId}-seed`}>Deterministic seed</label><small>Trace only · cannot change headline ROI</small><p>Delay probability {scenario.assumptions.sensitivity.delayProbability}; maximum delay {scenario.assumptions.sensitivity.maximumDelayMonths} months; adoption variation ±{scenario.assumptions.sensitivity.adoptionVariation}.</p></div><input id={`${scenario.templateId}-seed`} inputMode="numeric" value={drafts[`${scenario.templateId}.sensitivity.seed`] ?? ""} onChange={(event) => onChange(`${scenario.templateId}.sensitivity.seed`, event.target.value)} /></div></fieldset>
+    {assumptionGroups.map((group) => <fieldset className={`assumption-group ${group.key}`} key={group.key}><legend>{group.label}</legend>{group.fields.map(([field, label]) => { const value = getField(scenario.assumptions, group.key, field); return <div className="assumption-row" key={field}><div><label>{label}</label><small>{value.unit} · {title(value.source)} · {value.sourceRef}</small><p>{value.rationale}</p></div><div className="range-inputs">{(["low", "base", "high"] as const).map((band) => { const key = pathKey(scenario.templateId, group.key, field, band); return <label key={band}><span>{title(band)}</span><input aria-label={`${label} ${title(band)}`} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? `${key}-error` : undefined} inputMode="decimal" value={drafts[key] ?? ""} onChange={(event) => onChange(key, event.target.value)} />{errors[key] ? <small className="error" id={`${key}-error`}>{errors[key]}</small> : null}</label>; })}</div></div>; })}<button className="reset-link" type="button" onClick={onReset}>Reset all assumptions to Model 1.0.0</button></fieldset>)}
+    <fieldset className="assumption-group sensitivity"><legend>Sensitivity trace</legend><div className="assumption-row"><div><label htmlFor={`${scenario.templateId}-seed`}>Deterministic seed</label><small>Trace only · {title(scenario.assumptions.sensitivity.source)} · {scenario.assumptions.sensitivity.sourceRef}</small><p>{scenario.assumptions.sensitivity.rationale} Delay probability {scenario.assumptions.sensitivity.delayProbability}; maximum delay {scenario.assumptions.sensitivity.maximumDelayMonths} months; adoption variation ±{scenario.assumptions.sensitivity.adoptionVariation}.</p></div><input id={`${scenario.templateId}-seed`} inputMode="numeric" value={drafts[`${scenario.templateId}.sensitivity.seed`] ?? ""} onChange={(event) => onChange(`${scenario.templateId}.sensitivity.seed`, event.target.value)} /></div></fieldset>
   </div></details>;
 }
 
@@ -93,14 +93,12 @@ export function ScenariosView({ initialResult, twin, diagnostic, recommendations
   const updateComparison = (next: ScenarioComparison) => { setComparison(next); onPersist?.(next); };
   const edit = (key: string, value: string) => {
     const nextDrafts = { ...drafts, [key]: value }; setDrafts(nextDrafts);
-    const assumptions = clone(focused.assumptions);
-    if (key.endsWith(".sensitivity.seed")) assumptions.sensitivity.seed = value.trim() === "" ? Number.NaN : Number(value);
+    let parsed;
+    if (key.endsWith(".sensitivity.seed")) parsed = editSensitivitySeed(focused.assumptions, value);
     else {
       const [, group, field, band] = key.split(".");
-      const target = getField(assumptions, group, field).range as Record<string, number | null>;
-      target[band] = value.trim() === "" ? (["revenue", "avoidedRisk"].includes(group) ? null : Number.NaN) : Number(value);
+      parsed = editRangeAssumption(focused.assumptions, group as "costs" | "operational" | "revenue" | "avoidedRisk", field, band as "low" | "base" | "high", value);
     }
-    const parsed = scenarioAssumptionsSchema.safeParse(assumptions);
     if (!parsed.success) { setErrors({ ...errors, [key]: parsed.error.issues[0]?.message ?? "Enter a valid value." }); return; }
     setErrors((current) => { const next = { ...current }; delete next[key]; return next; });
     updateComparison(recalculateScenarioComparison(comparison, twin, recommendations, EXABYTES_SCENARIO_RULES_1_0_0, { [focusedId]: parsed.data }, { now: () => new Date().toISOString(), eventId: eventFactory }));
