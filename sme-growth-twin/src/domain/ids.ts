@@ -25,6 +25,11 @@ export const recommendationResultIdSchema = entityId(
   "recommendation",
   "RecommendationResultId",
 );
+export const scenarioComparisonIdSchema = entityId(
+  "scenario",
+  "ScenarioComparisonId",
+);
+export const scenarioEventIdSchema = entityId("event", "ScenarioEventId");
 
 export type AssessmentSessionId = z.infer<typeof assessmentSessionIdSchema>;
 export type BusinessTwinId = z.infer<typeof businessTwinIdSchema>;
@@ -35,3 +40,5 @@ export type DiagnosticResultId = z.infer<typeof diagnosticResultIdSchema>;
 export type RecommendationResultId = z.infer<
   typeof recommendationResultIdSchema
 >;
+export type ScenarioComparisonId = z.infer<typeof scenarioComparisonIdSchema>;
+export type ScenarioEventId = z.infer<typeof scenarioEventIdSchema>;

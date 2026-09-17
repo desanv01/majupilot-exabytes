@@ -60,7 +60,8 @@ describe("Stage 03 rendered contract", () => {
 
   it("uses semantic disclosures and contains no later-stage controls or values", () => {
     expect(html.match(/<details/g)?.length).toBe(result.recommendations.length);
-    expect(html).toContain("Scenario and ROI comparison comes in Stage 04");
+    expect(html).toContain("Compare transformation scenarios");
+    expect(html).toContain('href="/scenarios"');
     expect(html).not.toMatch(/<form|<input|email address|phone number|generate blueprint|advisor review|submit consultation|projected ROI|estimated savings/i);
   });
 });

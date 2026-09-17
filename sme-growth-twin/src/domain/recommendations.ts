@@ -215,6 +215,7 @@ export const recommendationResultSchema = z.object({
 }).strict();
 
 export type CapabilityId = z.infer<typeof capabilityIdSchema>;
+export type RoadmapPhase = z.infer<typeof roadmapPhaseSchema>;
 export type GapId = z.infer<typeof gapIdSchema>;
 export type CapabilityDefinition = z.infer<typeof capabilityDefinitionSchema>;
 export type Offering = z.infer<typeof offeringSchema>;
