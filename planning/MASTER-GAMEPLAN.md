@@ -771,6 +771,18 @@ payback_months =
 
 If reliable revenue or risk inputs are unavailable, display those values as “not estimated” rather than inventing them.
 
+### Frozen Stage 04 model
+
+The exact scenario composition, intervention scheduling, dependency rules, cost
+tiers, pace multipliers, operational-value assumptions, optional-value gates,
+range arithmetic, budget-fit states, seeded sensitivity constraints, Case A
+fixtures, and persistence invalidation rules are frozen in
+[`SCENARIO-ROI-MODEL-1.0.0.md`](./scenarios/SCENARIO-ROI-MODEL-1.0.0.md).
+
+Cost figures in this model are editable internal planning assumptions, never
+Exabytes catalogue prices or quotes. Conditional capabilities contribute no
+committed cost or benefit until their hard prerequisites are explicitly met.
+
 ---
 
 ## 14. Multi-agent advisory panel
@@ -1683,6 +1695,23 @@ back to that stage task; and unlocks the next stage only after acceptance.
 - The integrator alone approves architectural changes.
 - No two agents rewrite shared foundations simultaneously.
 - The complete suite runs after every integration batch.
+
+### Design and Git delivery protocol
+
+- Use 12ui for every stage that creates or materially extends a non-trivial UI.
+- Extend the latest approved screen family through Branch instead of deriving a
+  disconnected visual direction.
+- Generated visuals govern composition and interaction; frozen contracts govern
+  facts, calculations, content, scope, and mandatory corrections.
+- Inspect every generated screen before it becomes an implementation reference.
+- Maintain one public GitHub repository with source, planning contracts, selected
+  design evidence, validation evidence, and an explicit stage ledger.
+- Stages 00–03 are labelled reconstructed checkpoints because Git was initialised
+  after their acceptance; they are not backdated.
+- Stage 04 onward uses a live stage branch, contract commit, implementation
+  commits, pull-request CI, main-task review/corrections, acceptance, and merge.
+- Do not commit raw competition documents, source archives, credentials,
+  machine-local caches, or unsanitized user data.
 
 ---
 

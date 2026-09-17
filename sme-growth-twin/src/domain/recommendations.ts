@@ -8,6 +8,8 @@ import {
   recommendationResultIdSchema,
 } from "./ids";
 import { PAIN_MODEL_VERSION, SCORE_MODEL_VERSION } from "./scoring";
+import type { DiagnosticResult } from "./scoring";
+import type { BusinessTwin } from "./business-twin";
 
 export const RECOMMENDATION_MODEL_VERSION = "1.0.0" as const;
 export const RECOMMENDATION_CATALOGUE_VERSION = "1.0.0" as const;
@@ -215,6 +217,7 @@ export const recommendationResultSchema = z.object({
 }).strict();
 
 export type CapabilityId = z.infer<typeof capabilityIdSchema>;
+export type RoadmapPhase = z.infer<typeof roadmapPhaseSchema>;
 export type GapId = z.infer<typeof gapIdSchema>;
 export type CapabilityDefinition = z.infer<typeof capabilityDefinitionSchema>;
 export type Offering = z.infer<typeof offeringSchema>;
@@ -226,3 +229,31 @@ export type Catalogue = z.infer<typeof catalogueSchema>;
 export type ComponentScores = z.infer<typeof componentScoresSchema>;
 export type CapabilityRecommendation = z.infer<typeof capabilityRecommendationSchema>;
 export type RecommendationResult = z.infer<typeof recommendationResultSchema>;
+
+export type RecommendationGapState = "not_used" | "informal" | "active" | "unknown";
+
+export interface RecommendationCandidateContext {
+  readonly assessedPrimaryStates: readonly RecommendationGapState[];
+  readonly primaryPainMatch: boolean;
+  readonly directGap: boolean;
+}
+
+/** Domain-owned decision strategy consumed by the provider-neutral core. */
+export interface RecommendationRulePack {
+  readonly definitions: readonly CapabilityDefinition[];
+  assessedGapState(twin: BusinessTwin, gapId: GapId): RecommendationGapState | undefined;
+  gapEvidenceRefs(gapId: GapId): readonly string[];
+  isCandidateEligible(
+    definition: CapabilityDefinition,
+    twin: BusinessTwin,
+    diagnostic: DiagnosticResult,
+    context: RecommendationCandidateContext,
+  ): boolean;
+  evaluatePrerequisites(
+    definition: CapabilityDefinition,
+    twin: BusinessTwin,
+    diagnostic: DiagnosticResult,
+  ): readonly z.infer<typeof prerequisiteResultSchema>[];
+  riskFit(definition: CapabilityDefinition, twin: BusinessTwin, budgetFit: number): number;
+  dataReadiness(definition: CapabilityDefinition, twin: BusinessTwin): number;
+}

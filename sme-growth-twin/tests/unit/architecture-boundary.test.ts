@@ -31,6 +31,9 @@ describe("deterministic core architecture", () => {
       expect(source, file).not.toMatch(/\bexb_/i);
       expect(source, file).not.toMatch(/domain-packs[\\/]exabytes/i);
       expect(source, file).not.toMatch(/exabytes/i);
+      expect(source, file).not.toMatch(/shared_customer_operations|protected_business_continuity|professional_team_collaboration|measurable_digital_growth|protected_web_presence|scalable_cloud_operations|governed_ai_automation/);
+      expect(source, file).not.toMatch(/active_web_presence|explicit_scaling_need|ai_readiness_60|data_3|process_3|leadership_3/);
+      if (file.startsWith(path.join(coreRoot, "scenarios"))) expect(source, file).not.toMatch(/governed_ai_automation|lean_foundation|balanced_growth|accelerated_ai/i);
     }
   });
 });

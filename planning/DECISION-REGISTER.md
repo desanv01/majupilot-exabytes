@@ -23,6 +23,10 @@
 | D-019 | Begin with Stage 00 Foundation and Baseline before product features | Frozen | Establishes a clean canonical app, contracts, commands, and test baseline before feature work |
 | D-020 | Freeze Exabytes Catalogue 1.0.0 as the only Stage 03 product-fact allow-list | Frozen | Official-source verification, semantic versioning, fail-closed mapping, and no hard-coded promotional pricing prevent invented or stale product claims |
 | D-021 | Use five outcome-level capability clusters for initial SME recommendations and keep advanced web/cloud capabilities conditional | Frozen | Prevents duplicate product cards, keeps capability-first reasoning understandable, and still preserves evidence from the detailed pain taxonomy |
+| D-022 | Freeze Scenario and ROI Model 1.0.0 as deterministic, range-based, and assumption-visible | Frozen | Produces reproducible scenario comparisons without allowing an LLM to mutate state or calculate financial outcomes |
+| D-023 | Estimate operational time value from accepted evidence by default and leave revenue/risk value unset until all required inputs are supplied | Frozen | Prevents invented revenue and incident claims while still allowing explicit user-entered sensitivity analysis |
+| D-024 | Use 12ui at every implementation stage when that stage introduces or extends a non-trivial interface | Frozen | Improves each stage's interaction design while Branch preserves a coherent visual system and the main task corrects generated content against product contracts |
+| D-025 | Publish development stage by stage through Git commits, CI, focused branches, reviewed pull requests, and merges | Frozen | Gives the GitHub repository an honest, representative development history and makes acceptance evidence visible |
 
 ## Change template
 

@@ -4,7 +4,6 @@ import { buildBusinessTwin } from "../../src/core/assessment/build-business-twin
 import { buildRecommendationResult } from "../../src/core/recommendations/build-recommendations";
 import {
   BUDGET_CAPACITY,
-  CAPABILITY_DEFINITIONS,
   PACE_CAPACITY,
   PREREQUISITE_SCORE,
   RECOMMENDATION_WEIGHTS,
@@ -18,6 +17,7 @@ import { mapOfferingsAfterSelection } from "../../src/core/recommendations/map-o
 import { buildDiagnosticResult } from "../../src/core/scoring/build-diagnostic";
 import { EXABYTES_CATALOGUE_1_0_0 } from "../../src/domain-packs/exabytes/catalogue";
 import { EXABYTES_OFFERING_SELECTION_1_0_0 } from "../../src/domain-packs/exabytes/offering-selection";
+import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "../../src/domain-packs/exabytes/recommendation-rules";
 import type { CoreAnswers, FollowUpAnswers, FollowUpId } from "../../src/domain/assessment";
 import { assessmentSessionIdSchema } from "../../src/domain/ids";
 import { catalogueSchema, recommendationResultSchema } from "../../src/domain/recommendations";
@@ -59,7 +59,7 @@ function twin(answers = caseA, followUpAnswers: FollowUpAnswers = {}, selectedFo
 function fullCase(answers = caseA, followUps: FollowUpAnswers = {}, selected: FollowUpId[] = []) {
   const currentTwin = twin(answers, followUps, selected);
   const diagnostic = buildDiagnosticResult(currentTwin, { now: () => now, id: () => "diagnostic_stage030001" });
-  const recommendation = buildRecommendationResult(currentTwin, diagnostic, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => now, id: () => "recommendation_stage030001" });
+  const recommendation = buildRecommendationResult(currentTwin, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => now, id: () => "recommendation_stage030001" });
   return { twin: currentTwin, diagnostic, recommendation };
 }
 function memoryStorage() {
@@ -93,34 +93,34 @@ describe("recommendation model 1.0.0", () => {
   it("uses primary matches to create candidates, supporting matches only to strengthen, and direct gaps without pain", () => {
     const neutral = twin(caseC);
     const diagnostic = buildDiagnosticResult(neutral, { now: () => now, id: () => "diagnostic_candidate01" });
-    const ids = generateCapabilityCandidates(neutral, diagnostic).map((item) => item.id);
+    const ids = generateCapabilityCandidates(neutral, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0).map((item) => item.id);
     expect(ids).toContain("shared_customer_operations");
     expect(ids).toContain("scalable_cloud_operations");
     expect(ids).not.toContain("professional_team_collaboration");
     expect(ids).not.toContain("protected_business_continuity");
 
-    const supportingOnly = CAPABILITY_DEFINITIONS.find((item) => item.id === "governed_ai_automation")!;
+    const supportingOnly = EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0.definitions.find((item) => item.id === "governed_ai_automation")!;
     const noAiGap = { ...neutral, capabilities: neutral.capabilities.map((item) => item.capabilityId === "aiTools" ? { ...item, currentState: "active" as const } : item), readiness: { ...neutral.readiness, data: 5, process: 5 } };
-    expect(generateCapabilityCandidates(noAiGap, diagnostic, [supportingOnly])).toEqual([]);
+    expect(generateCapabilityCandidates(noAiGap, diagnostic, { ...EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, definitions: [supportingOnly] })).toEqual([]);
   });
 
   it("cannot outweigh hard prerequisite, unknown prerequisite, or budget gates", () => {
     const { twin: value, diagnostic } = fullCase();
     const artificial = { ...diagnostic, painPoints: diagnostic.painPoints.map((pain) => ({ ...pain, priority: 100 })) };
-    const results = selectCapabilityRecommendations(value, artificial);
+    const results = selectCapabilityRecommendations(value, artificial, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0);
     const ai = results.find((item) => item.capabilityId === "governed_ai_automation")!;
     expect(ai.status).toBe("why_later");
     expect(ai.prerequisites.filter((item) => item.status !== "met").map((item) => item.ruleId)).toEqual(expect.arrayContaining(["ai_readiness_60", "data_3", "process_3"]));
 
     const unknownTwin = { ...value, readiness: { ...value.readiness, leadership: null, data: null, process: null } };
-    const unknownAi = selectCapabilityRecommendations(unknownTwin, diagnostic).find((item) => item.capabilityId === "governed_ai_automation")!;
+    const unknownAi = selectCapabilityRecommendations(unknownTwin, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0).find((item) => item.capabilityId === "governed_ai_automation")!;
     expect(unknownAi.status).toBe("why_later");
     expect(unknownAi.prerequisites.some((item) => item.status === "unknown")).toBe(true);
 
-    const expensive = CAPABILITY_DEFINITIONS.find((item) => item.id === "scalable_cloud_operations")!;
+    const expensive = EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0.definitions.find((item) => item.id === "scalable_cloud_operations")!;
     const scalingTwin = twin({ ...caseB, q3: { ...caseB.q3, biggestChallenge: "scaling_operations" }, q4: { ...caseB.q4, budgetBand: "under_5k" } });
     const scalingDiagnostic = buildDiagnosticResult(scalingTwin, { now: () => now, id: () => "diagnostic_budget001" });
-    expect(selectCapabilityRecommendations(scalingTwin, scalingDiagnostic, [expensive])[0].status).toBe("why_later");
+    expect(selectCapabilityRecommendations(scalingTwin, scalingDiagnostic, { ...EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, definitions: [expensive] })[0].status).toBe("why_later");
   });
 
   it("applies status, roadmap, stable eligible ordering and stable capability tie-breaks", () => {
@@ -179,7 +179,7 @@ describe("frozen cases and capability-first catalogue mapping", () => {
 
   it("maps only after selection and fails closed for unknown, expired, or invalid catalogue data", () => {
     const { twin: value, diagnostic } = fullCase();
-    const selected = selectCapabilityRecommendations(value, diagnostic);
+    const selected = selectCapabilityRecommendations(value, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0);
     expect(selected.every((item) => item.mappedOffering === undefined)).toBe(true);
     expect(mapOfferingsAfterSelection(selected, value, { version: "1.0.0", offerings: [], mappings: [] }, EXABYTES_OFFERING_SELECTION_1_0_0).every((item) => item.mappedOffering === undefined)).toBe(true);
     const expired = { ...EXABYTES_CATALOGUE_1_0_0, offerings: EXABYTES_CATALOGUE_1_0_0.offerings.map((item) => item.id === "exb_freshsales_crm" ? { ...item, active: false } : item) };
@@ -190,7 +190,7 @@ describe("frozen cases and capability-first catalogue mapping", () => {
 
   it("maps a non-provider synthetic catalogue through the generic rule evaluator", () => {
     const { twin: value, diagnostic } = fullCase();
-    const selected = selectCapabilityRecommendations(value, diagnostic).filter((item) => item.capabilityId === "shared_customer_operations");
+    const selected = selectCapabilityRecommendations(value, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0).filter((item) => item.capabilityId === "shared_customer_operations");
     const syntheticCatalogue = {
       version: "1.0.0",
       offerings: [{

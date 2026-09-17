@@ -9,6 +9,7 @@ import { buildDiagnosticResult } from "../../src/core/scoring/build-diagnostic";
 import { RecommendationsView } from "../../src/components/recommendations/recommendations-client";
 import { EXABYTES_CATALOGUE_1_0_0 } from "../../src/domain-packs/exabytes/catalogue";
 import { EXABYTES_OFFERING_SELECTION_1_0_0 } from "../../src/domain-packs/exabytes/offering-selection";
+import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "../../src/domain-packs/exabytes/recommendation-rules";
 import type { CoreAnswers } from "../../src/domain/assessment";
 import { assessmentSessionIdSchema } from "../../src/domain/ids";
 
@@ -25,7 +26,7 @@ const twin = buildBusinessTwin(
   { now: () => "2026-09-17T09:00:00+08:00", id: (kind) => `${kind}_render03${String(++sequence).padStart(4, "0")}` },
 );
 const diagnostic = buildDiagnosticResult(twin, { now: () => "2026-09-17T09:00:01+08:00", id: () => "diagnostic_render03001" });
-const result = buildRecommendationResult(twin, diagnostic, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => "2026-09-17T09:00:02+08:00", id: () => "recommendation_render03001" });
+const result = buildRecommendationResult(twin, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => "2026-09-17T09:00:02+08:00", id: () => "recommendation_render03001" });
 
 describe("Stage 03 rendered contract", () => {
   const html = renderToStaticMarkup(<RecommendationsView result={result} twin={twin} diagnostic={diagnostic} />);
@@ -60,7 +61,8 @@ describe("Stage 03 rendered contract", () => {
 
   it("uses semantic disclosures and contains no later-stage controls or values", () => {
     expect(html.match(/<details/g)?.length).toBe(result.recommendations.length);
-    expect(html).toContain("Scenario and ROI comparison comes in Stage 04");
+    expect(html).toContain("Compare transformation scenarios");
+    expect(html).toContain('href="/scenarios"');
     expect(html).not.toMatch(/<form|<input|email address|phone number|generate blueprint|advisor review|submit consultation|projected ROI|estimated savings/i);
   });
 });
