@@ -24,6 +24,16 @@ Record URL, target, `READY`/error status, commit SHA, detected framework, and bu
 
 Verify browser → API → data → response for: home headers and demo labels; one complete fictional Case A fallback journey; `/api/advisors/review` with credentials absent; consultation validation/default-unchecked consent; fictional submission safe receipt/idempotent replay; reset; 360 px; console/network/runtime logs. Never submit real contact data. Confirm no credential appears in client assets.
 
+Run the same Stage 07 browser gate against the reviewed URL without starting a local build/server:
+
+```powershell
+$env:STAGE07_BASE_URL="https://reviewed-preview.example"
+npm run test:stage07:browser
+Remove-Item Env:STAGE07_BASE_URL
+```
+
+Use only an explicit HTTP(S) URL without embedded credentials. Save the resulting report with `STAGE07_ARTIFACT_DIR` when deployment evidence must be archived.
+
 ## Promotion
 
 Promote the already verified preview rather than rebuilding a different artifact:

@@ -6,7 +6,13 @@ import path from "node:path";
 const chromePath = process.env.CHROME_PATH?.trim() || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const appPort = Number(process.env.STAGE07_PORT || 3017);
 const debugPort = Number(process.env.STAGE07_DEBUG_PORT || 9557);
-const baseUrl = `http://127.0.0.1:${appPort}`;
+const configuredBaseUrl = process.env.STAGE07_BASE_URL?.trim();
+let baseUrl = `http://127.0.0.1:${appPort}`;
+if (configuredBaseUrl) {
+  const parsedBaseUrl = new URL(configuredBaseUrl);
+  if (!["http:", "https:"].includes(parsedBaseUrl.protocol) || parsedBaseUrl.username || parsedBaseUrl.password) throw new Error("STAGE07_BASE_URL must be an HTTP(S) URL without embedded credentials");
+  baseUrl = parsedBaseUrl.toString().replace(/\/$/, "");
+}
 const artifactOverride = process.env.STAGE07_ARTIFACT_DIR?.trim();
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const stopTree = (child) => { if (!child?.pid) return; try { execFileSync("taskkill", ["/PID", String(child.pid), "/T", "/F"], { stdio: "ignore", windowsHide: true }); } catch { try { child.kill(); } catch {} } };
@@ -18,18 +24,19 @@ try {
   await mkdir(artifacts, { recursive: true });
   const axeSource = await readFile(path.join(process.cwd(), "node_modules", "axe-core", "axe.min.js"), "utf8");
 
-  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--port", String(appPort)], {
-    cwd: process.cwd(),
-    env: { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" },
-    stdio: ["ignore", "pipe", "pipe"],
-    windowsHide: true,
-  });
   let serverOutput = "";
-  server.stdout.on("data", (value) => { serverOutput += value.toString(); });
-  server.stderr.on("data", (value) => { serverOutput += value.toString(); });
+  if (!configuredBaseUrl) {
+    const localEnv = { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" };
+    execFileSync(process.execPath, ["node_modules/next/dist/bin/next", "build"], { cwd: process.cwd(), env: localEnv, stdio: "inherit", windowsHide: true });
+    server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--port", String(appPort)], {
+      cwd: process.cwd(), env: localEnv, stdio: ["ignore", "pipe", "pipe"], windowsHide: true,
+    });
+    server.stdout.on("data", (value) => { serverOutput += value.toString(); });
+    server.stderr.on("data", (value) => { serverOutput += value.toString(); });
+  }
   let ready = false;
   for (let attempt = 0; attempt < 120; attempt += 1) { try { if ((await fetch(baseUrl)).ok) { ready = true; break; } } catch {} await wait(500); }
-  if (!ready) throw new Error(`Production server did not start: ${serverOutput.slice(-3000)}`);
+  if (!ready) throw new Error(`${configuredBaseUrl ? "External target did not respond" : "Production server did not start"}: ${serverOutput.slice(-3000)}`);
 
   const headerResponse = await fetch(baseUrl);
   const securityHeaders = Object.fromEntries(["content-security-policy", "x-frame-options", "x-content-type-options", "referrer-policy", "permissions-policy"].map((name) => [name, headerResponse.headers.get(name)]));
@@ -100,11 +107,23 @@ try {
     return evaluate(`(() => { const b=JSON.parse(localStorage.getItem('sme-growth-twin:blueprint:1.0.0')); const s=b.snapshot.selectedScenario; return { name:b.snapshot.twin.identity.businessName,maturity:b.snapshot.diagnostic.digitalMaturity.value,readiness:b.snapshot.diagnostic.aiReadiness.value,recommendations:b.snapshot.recommendations.recommendations.map(r=>r.capabilityId+':'+r.status),scenario:s.templateId,cost:s.costs.firstYear,operational:s.value.operational.range,net:s.value.net.range,payback:s.value.payback,origins:b.advisorReviews.map(r=>r.origin),sections:b.sectionIds.length }; })()`);
   };
   const resetViaBanner = async () => { await evaluate("window.confirm=()=>true;document.querySelector('.demo-banner button')?.click()"); await poll("location.pathname", "/"); await poll("localStorage.getItem('sme-growth-twin:assessment-draft:1.0.0')", null); };
+  const knownLocalKeys = ["sme-growth-twin:assessment-draft:1.0.0", "sme-growth-twin:diagnostic:1.0.0", "sme-growth-twin:recommendations:1.0.0", "sme-growth-twin:scenarios:1.0.0", "sme-growth-twin:blueprint:1.0.0", "sme-growth-twin:demo-session:1.0.0"];
+  const knownSessionKeys = ["sme-growth-twin:lead-receipt:1.0.0", "sme-growth-twin:reset-status:1.0.0"];
 
   await cdp("Page.enable"); await cdp("Runtime.enable"); await cdp("Network.enable"); await viewport(1440, 1000);
   const accessibility = [];
   await navigate("/"); accessibility.push(await axe("home")); await checkLayout("/", 1440);
   await navigate("/assessment?new=1"); await poll("document.body.innerText.includes('Your business at a glance')", true); accessibility.push(await axe("assessment")); await checkLayout("/assessment", 1440);
+
+  await navigate("/");
+  await evaluate("document.querySelector('[data-fixture-id=\"case-a\"]')?.click()");
+  await poll("location.pathname", "/assessment/review");
+  await navigate("/");
+  await poll("Boolean(document.querySelector('.demo-banner'))", true);
+  const homeResetTimeOrigin = await evaluate("performance.timeOrigin");
+  await evaluate(`(() => { const localKeys=${JSON.stringify(knownLocalKeys)}; const sessionKeys=${JSON.stringify(knownSessionKeys)}; for(const key of localKeys)localStorage.setItem(key,'known-project-value'); for(const key of sessionKeys)sessionStorage.setItem(key,'known-project-value'); localStorage.setItem('unrelated-home-reset','keep'); sessionStorage.setItem('unrelated-home-reset-session','keep'); window.confirm=()=>true; document.querySelector('.reset-demo')?.click(); })()`);
+  await poll("Boolean(document.querySelector('.demo-banner'))", false);
+  const homeReset = await evaluate(`(() => { const localKeys=${JSON.stringify(knownLocalKeys)}; const sessionKeys=${JSON.stringify(knownSessionKeys)}; return { stayedOnHome:location.pathname==='/'&&performance.timeOrigin===${homeResetTimeOrigin}, bannerRemoved:!document.querySelector('.demo-banner'), knownLocalCleared:localKeys.every(key=>localStorage.getItem(key)===null), knownSessionCleared:sessionKeys.every(key=>sessionStorage.getItem(key)===null), unrelatedPreserved:localStorage.getItem('unrelated-home-reset')==='keep'&&sessionStorage.getItem('unrelated-home-reset-session')==='keep', statusVisible:document.querySelector('.reset-status')?.textContent.includes('demonstration data was reset')??false }; })()`);
 
   const journeyStarted = Date.now();
   const caseA = await runToBlueprint("Load CASE A", true);
@@ -147,10 +166,10 @@ try {
   };
   const casesMatch = [[caseA, expected.caseA], [caseB, expected.caseB], [caseC, expected.caseC]].every(([actual, frozen]) => Object.entries(frozen).every(([keyName, value]) => JSON.stringify(actual[keyName]) === JSON.stringify(value)) && actual.origins.every((origin) => origin === "deterministic_fallback"));
   const headersPass = securityHeaders["x-frame-options"] === "DENY" && securityHeaders["x-content-type-options"] === "nosniff" && securityHeaders["referrer-policy"] === "strict-origin-when-cross-origin" && securityHeaders["content-security-policy"]?.includes("frame-ancestors 'none'") && securityHeaders["permissions-policy"]?.includes("camera=()");
-  const evidence = { environment: { node: process.version, chromePath, mode: "production", baseUrl }, cases: { caseA, caseB, caseC }, accessibility, responsive: checks, keyboardJourney: { completed: true, receiptSafe, blueprintDurationMs, underFiveMinutes: blueprintDurationMs < 300_000 }, scopedReset, securityHeaders, consoleErrors, failedRequests, overlay: await evaluate("Boolean(document.querySelector('[data-nextjs-dialog],.vite-error-overlay,#webpack-dev-server-client-overlay'))") };
+  const evidence = { environment: { node: process.version, chromePath, mode: configuredBaseUrl ? "external" : "local-production", baseUrl }, cases: { caseA, caseB, caseC }, accessibility, responsive: checks, keyboardJourney: { completed: true, receiptSafe, blueprintDurationMs, underFiveMinutes: blueprintDurationMs < 300_000 }, homeReset, scopedReset, securityHeaders, consoleErrors, failedRequests, overlay: await evaluate("Boolean(document.querySelector('[data-nextjs-dialog],.vite-error-overlay,#webpack-dev-server-client-overlay'))") };
   await writeFile(path.join(artifacts, "stage-07-browser-evidence.json"), `${JSON.stringify(evidence, null, 2)}\n`);
   console.log(JSON.stringify(evidence, null, 2));
-  if (!casesMatch || !receiptSafe || !scopedReset || !headersPass || blueprintDurationMs >= 300_000 || consoleErrors.length || failedRequests.length || evidence.overlay) throw new Error("Stage 07 browser assertions failed");
+  if (!casesMatch || !receiptSafe || !Object.values(homeReset).every(Boolean) || !scopedReset || !headersPass || blueprintDurationMs >= 300_000 || consoleErrors.length || failedRequests.length || evidence.overlay) throw new Error("Stage 07 browser assertions failed");
   await cdp("Browser.close");
 } finally {
   try { ws?.close(); } catch {}

@@ -20,12 +20,12 @@ All three produce five deterministic fallback advisor origins and all 16 require
 | `npm ci` | Pass; 383 packages installed, 384 audited, 0 vulnerabilities |
 | `npm run lint` | Pass; 0 errors and 0 warnings |
 | `npm run type-check` | Pass |
-| `npm test` | Pass; 24 files, 135 tests |
+| `npm test` | Pass; 24 files, 137 tests |
 | `npm run build` | Pass; production route build and static generation completed |
 | `npm run test:stage05:browser` | Pass; deterministic fallback Blueprint, all 16 sections, desktop/mobile/print checks, 0 console errors |
 | `npm run test:stage06:browser` | Pass; consent, validation, safe receipt, replay, keyboard order, desktop/mobile/print checks, 0 console errors |
 | `npm run test:stage07:golden` | Pass; 1 file, 2 tests, all A/B/C frozen outputs exact |
-| `npm run test:stage07:security` | Pass; 1 file, 6 tests; 166 tracked text files scanned; 0 credential-shaped values; 0 client model-provider imports |
+| `npm run test:stage07:security` | Pass; 1 file, 8 tests; 187 tracked text files scanned; 0 credential-shaped values; 0 client model-provider imports |
 | `npm run test:stage07:browser` | Pass; production-mode three-fixture and keyboard journey evidence below |
 | `npm run release:offline` | Pass; final offline alias reran the production build and Stage 07 browser gate |
 | `npm run audit:production` | Pass; 0 vulnerabilities |
@@ -39,11 +39,12 @@ The hermetic `test:stage07:browser` report records representative axe critical/s
 
 Final local browser result:
 
-- Case A keyboard journey completed through consultation success in 2,193 ms on the final offline-release run; safe receipt check passed.
+- Case A keyboard journey completed through consultation success in 2,722 ms on the correction validation run; safe receipt check passed.
 - Cases A, B, and C matched frozen scores, recommendation ordering/status, Balanced Growth selection, cost, operational value, net value, payback, five fallback origins, and 16 Blueprint sections.
 - 12 axe state scans reported 0 critical/serious findings, covering home, assessment, review, results, recommendations, scenarios, Blueprint, consultation, consultation success, and mobile Blueprint.
 - 21 desktop/360 route-state layout checks reported no horizontal overflow, no framework overlay, and a smallest routine target height of at least 44 px.
-- Scoped reset removed only known project records and preserved unrelated local/session storage.
+- Home reset stayed on `/`, removed the demo banner in the same tab without reload, cleared every known local/session key, preserved unrelated storage, and displayed reset status. The banner reset path also passed.
+- The browser gate defaults to a hermetic local production build/server and supports an explicit credential-free `STAGE07_BASE_URL` mode that skips local startup for deployed verification.
 - Production headers passed: CSP with `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, strict-origin referrer policy, and restrictive permissions policy.
 - Console errors: 0. Failed same-origin fetch/XHR requests: 0. Framework error overlays: 0.
 

@@ -9,7 +9,7 @@
 - [x] Security-header, secret-boundary, dependency-audit, and privacy checks prepared.
 - [x] Hermetic axe/keyboard/responsive/clean-console/duration harness prepared.
 - [x] Offline release, release-manifest, deployment, demo, Q&A, architecture, and third-party material prepared.
-- [ ] Final validation commands recorded as passing in `TEST-EVIDENCE.md`.
+- [x] Final validation commands recorded as passing in `TEST-EVIDENCE.md`.
 - [ ] Main-task independent review and Stage 07 acceptance.
 - [ ] Reviewed Vercel artifact `READY` and deployed fallback journey verified.
 

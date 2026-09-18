@@ -66,6 +66,7 @@ export function HomeActions() {
     );
     if (!approved) return;
     clearKnownProjectStorage(localStorage, sessionStorage);
+    window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT));
     setResume(false);
     setStatus("SME Growth Twin demonstration data was reset. Other browser storage was not changed.");
   };

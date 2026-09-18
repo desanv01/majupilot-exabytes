@@ -49,7 +49,9 @@ Stage 07 likewise uses unique temporary Chrome-profile and artifact directories
 and cleans both in `finally`. Set `STAGE07_ARTIFACT_DIR` to retain an explicit
 JSON report and screenshot. The gate builds and runs with `next start`, forces
 optional Gateway credentials empty, and accepts `CHROME_PATH` for a non-default
-Chrome location. Vercel must use `sme-growth-twin/` as its Root Directory;
+Chrome location. Set `STAGE07_BASE_URL` to an explicit reviewed HTTP(S) deployment
+URL to skip the local build/server and run the same journey against that target.
+Do not embed credentials in the URL. Vercel must use `sme-growth-twin/` as its Root Directory;
 `vercel.json` supplies the install/build commands.
 
 For the first lockfile creation only, Stage 00 used `npm install`. Fresh

@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
@@ -15,6 +17,7 @@ import {
   DEMO_SESSION_STORAGE_KEY,
   PROJECT_LOCAL_STORAGE_KEYS,
   PROJECT_SESSION_STORAGE_KEYS,
+  RESET_STATUS_SESSION_KEY,
 } from "../../src/infrastructure/persistence/project-storage";
 import { caseAFull } from "./stage04-fixtures";
 
@@ -116,6 +119,28 @@ describe("Stage 07 scoped reset", () => {
     clearKnownProjectStorage(port(local), port(session));
     expect([...local.entries()]).toEqual([["unrelated-local", "keep"]]);
     expect([...session.entries()]).toEqual([["unrelated-session", "keep"]]);
+  });
+
+  it("owns the reset-status key and notifies the same tab after the home reset", async () => {
+    expect(PROJECT_SESSION_STORAGE_KEYS).toContain(RESET_STATUS_SESSION_KEY);
+    const source = await readFile(
+      path.resolve(process.cwd(), "src/components/assessment/home-actions.tsx"),
+      "utf8",
+    );
+    const resetBody = source.slice(source.indexOf("const reset = () =>"), source.indexOf("return ("));
+    expect(resetBody).toContain("clearKnownProjectStorage(localStorage, sessionStorage)");
+    expect(resetBody).toContain("window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT))");
+  });
+
+  it("keeps the browser gate local by default and skips local startup for an explicit external URL", async () => {
+    const source = await readFile(
+      path.resolve(process.cwd(), "scripts/stage07-browser-check.mjs"),
+      "utf8",
+    );
+    expect(source).toContain("process.env.STAGE07_BASE_URL?.trim()");
+    expect(source).toContain("if (!configuredBaseUrl)");
+    expect(source).toContain('mode: configuredBaseUrl ? "external" : "local-production"');
+    expect(source).toContain("without embedded credentials");
   });
 
   it("contains no consent or lead-creation key in fixture state", () => {

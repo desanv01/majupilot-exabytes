@@ -34,7 +34,10 @@ export const PROJECT_LOCAL_STORAGE_KEYS = [
   DEMO_SESSION_STORAGE_KEY,
 ] as const;
 
-export const PROJECT_SESSION_STORAGE_KEYS = [LEAD_RECEIPT_SESSION_KEY] as const;
+export const PROJECT_SESSION_STORAGE_KEYS = [
+  LEAD_RECEIPT_SESSION_KEY,
+  RESET_STATUS_SESSION_KEY,
+] as const;
 
 type ReadWriteStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
