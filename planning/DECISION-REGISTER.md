@@ -33,6 +33,7 @@
 | D-029 | Execute a product-wide visual and interaction overhaul across every visible phase while preserving the accepted core behavior and deterministic contracts | Frozen | The current application is functionally complete but visually generic; a full redesign is required without mixing in deferred core revisions |
 | D-030 | Use corrected 12ui Candidate D as the starting direction with DM Sans, Libre Baskerville, deep ink, warm paper, and evidence teal | Frozen | It provides the strongest distinctive identity while the correction list removes stock imagery, generated copy errors, tiny typography, and misleading preview content |
 | D-031 | Use corrected 12ui Candidate B as the Phase 02 assessment shell, with a functional deep-ink context rail and no generated botanical or logo assets | Frozen | The rail creates a focused advisory workspace consistent with the new homepage while preserving space for real save, trust, progress, and help information |
+| D-032 | Use corrected 12ui Candidate D as the Phase 03 analysis and results direction, with canonical data, accessible evidence disclosure, and no generated botanical or fabricated content | Frozen | It provides the clearest score-to-dimension-to-gap-to-pain scan hierarchy while the correction contract protects Stage 02 formulas, provenance, recovery, and route boundaries |
 
 ## Change template
 
