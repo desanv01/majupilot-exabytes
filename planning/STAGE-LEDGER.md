@@ -14,3 +14,16 @@ This ledger is updated only by the main planning/integration task after review.
 | 07 Hardening and Submission | Accepted | `01a0b2d9-0c6e-7a03-9dd3-e5217dd1fc06` | 2026-09-18 | 2026-09-18 | Main review after one correction cycle: lint and type-check pass; 24 test files / 137 tests pass; exact A/B/C golden values and five fallback origins pass; 8 security tests scan 187 tracked text files with no credential-shaped values or client model imports; production build and zero-vulnerability audit pass. Local and deployed browser gates verify all three cases, keyboard completion, 12 axe scans with zero serious/critical findings, 21 desktop/360 layout checks, both scoped reset paths, production headers, and clean console/network state. Vercel deployment `dpl_6UcGRsMhFfhKQyN339CLsn8zbfcB` is `READY` at `https://sme-growth-twin.vercel.app` with no runtime errors; GitHub PR #6 CI run 15 passed before acceptance. A new Stage 07 12ui payload was security-blocked, so the accepted Stage 06 visual system remained binding and no bypass was attempted. Manual human, rehearsal, video/YouTube, competition-submission, and receipt gates remain pending. |
 
 Allowed states: `Locked`, `Ready`, `Dispatched`, `Needs correction`, `Under review`, `Accepted`, `Re-planned`.
+
+## Product-wide UI upgrade ledger
+
+| Phase | Status | Implementation task | Accepted | Gate evidence / notes |
+|---|---|---|---|---|
+| 00 Audit and visual contract | Accepted | Main integration task | 2026-09-18 | PR #7 merged at `dfae549`; authoritative design, token, reference, and orchestration contracts frozen; GitHub validation and corrected Vercel preview passed. |
+| 01 Home and first viewport | Accepted | `01a0b45b-5df7-7eb0-9599-006cd7ac25bc` | 2026-09-18 | PR #8 merged at `a4d1c61`; main task independently reproduced lint, type-check, 24 test files / 139 tests, production build, and complete Stage 07 browser journey. Responsive screenshots cover pristine/resume at 1440, 1024, 390, and 360px. No console errors, failed requests, overflow, overlays, or serious/critical axe findings. |
+| 02 Assessment and Business Twin review | Ready | Pending dispatch | - | Corrected 12ui Candidate B and a bounded implementation packet are frozen; Stage 01 behavior and data contracts remain protected. |
+| 03 Analysis and results | Locked | - | - | Opens only after Phase 02 main-task acceptance. |
+| 04 Recommendations and catalogue | Locked | - | - | Opens only after Phase 03 main-task acceptance. |
+| 05 Scenario and ROI Lab | Locked | - | - | Opens only after Phase 04 main-task acceptance. |
+| 06 Blueprint and advisor experience | Locked | - | - | Opens only after Phase 05 main-task acceptance. |
+| 07 Consultation, demo, and release hardening | Locked | - | - | Opens only after Phase 06 main-task acceptance. |
