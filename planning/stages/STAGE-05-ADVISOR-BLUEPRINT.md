@@ -1,6 +1,6 @@
 # Stage 05 - Advisor Panel and Blueprint
 
-Status: **Dispatched**
+Status: **Accepted on 2026-09-18**
 Implementer profile: **GPT-5.6 Sol, medium reasoning**
 Prerequisite: **Stage 04 accepted and published**
 Gate owner: **Main task**
@@ -171,3 +171,16 @@ passes, and no Stage 06+ implementation appears.
 Return changed files, architecture decisions, exact commands/results, Case A
 advisor and blueprint evidence, model/fallback behavior, screenshots, and known
 limitations. Do not push, open/merge a PR, or mark the stage accepted.
+
+## 10. Acceptance record
+
+The main task accepted Stage 05 after one correction cycle and independent local
+verification: lint and type-check passed; 17 test files and 103 tests passed; the
+production build passed; and the hardened browser/print gate passed at desktop
+and 360 px. GitHub PR #3 CI also passed before acceptance. The verified fallback
+journey preserved exact Stage 04 Case A figures, stable persistence across reload,
+all 16 Blueprint sections, evidence-linked advisor outputs, 44 px controls, no
+horizontal overflow, and a clean console. Live AI Gateway execution was not run
+without credentials; its bounded retry and failure behavior is covered by
+deterministic tests, while the complete no-credential product path was exercised
+end to end.
