@@ -13,6 +13,20 @@ role falls back independently without changing trusted scores, costs, ROI, scope
 or schedule. Run `npm run test:stage05:browser` for the frozen desktop, mobile,
 print, persistence, accessibility-target, and exact-figure browser contract.
 
+An opt-in live acceptance harness is also available:
+
+```powershell
+$env:AI_GATEWAY_MODEL="provider/model"
+$env:AI_GATEWAY_API_KEY="..." # or set VERCEL_OIDC_TOKEN
+npm run test:stage05:gateway-live
+```
+
+The live harness refuses to start without `AI_GATEWAY_MODEL` and either
+`AI_GATEWAY_API_KEY` or `VERCEL_OIDC_TOKEN`. It exercises five real Gateway
+model calls and therefore incurs provider/Gateway cost. It is intentionally not
+run in CI. Harness output contains only bounded call metadata and never prints
+credentials, prompts, business context, generated statements, or response bodies.
+
 The repository-level [README](../README.md) describes the product, architecture,
 status, roadmap, security posture, and contribution workflow. For application
 details, see [Local development](./docs/local-development.md) and
