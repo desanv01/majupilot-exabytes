@@ -1,9 +1,10 @@
 "use client";
 
 /* eslint-disable react-hooks/set-state-in-effect -- persisted records are restored at the client boundary */
+import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { beginTwinEdit } from "@/core/assessment/follow-ups";
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
@@ -13,8 +14,7 @@ import type { DiagnosticResult, MetricResult, PainPointResult } from "@/domain/s
 import { loadAssessmentDraft, saveAssessmentDraft } from "@/infrastructure/persistence/local-assessment-store";
 import { clearDiagnosticResult, loadDiagnosticResult } from "@/infrastructure/persistence/local-diagnostic-store";
 
-import { Brand } from "../assessment/brand";
-import { Progress } from "../assessment/progress";
+import { PostAssessmentShell } from "./post-assessment-shell";
 
 const evidenceLabels: Record<string, string> = {
   "q2.websiteOrStore": "Website or online store",
@@ -61,16 +61,16 @@ const valueLabels: Record<string, string> = {
   strengthen_resilience: "Strengthen resilience",
   launch_ai_capability: "Launch an AI capability",
   within_30_days: "Within 30 days",
-  "1_3_months": "1–3 months",
-  "3_6_months": "3–6 months",
-  "6_12_months": "6–12 months",
+  "1_3_months": "1-3 months",
+  "3_6_months": "3-6 months",
+  "6_12_months": "6-12 months",
   messaging_apps: "Messaging apps",
   multiple_places: "Multiple places",
   accounting_system: "Accounting system",
   ad_hoc: "Ad hoc",
-  "5_10": "5–10 hours",
-  "11_20": "11–20 hours",
-  "21_40": "21–40 hours",
+  "5_10": "5-10 hours",
+  "11_20": "11-20 hours",
+  "21_40": "21-40 hours",
   under_5: "Under 5 hours",
   over_40: "Over 40 hours",
 };
@@ -88,6 +88,8 @@ const formatIdentifier = (value: string) => {
   const words = value.replaceAll("_", " ");
   return `${words.charAt(0).toUpperCase()}${words.slice(1)}`;
 };
+
+const confidenceLabel = (value: MetricResult["confidenceBand"]) => `${formatIdentifier(value)} confidence`;
 
 function evidenceByIds(twin: BusinessTwin, ids: readonly string[]) {
   const wanted = new Set(ids);
@@ -112,30 +114,56 @@ function EvidenceList({ evidence }: { evidence: Evidence[] }) {
 
 function MetricDetails({ title, metric, twin }: { title: string; metric: MetricResult; twin: BusinessTwin }) {
   return (
-    <details className="explanation">
+    <details className="explanation" data-metric-details={title.toLowerCase().replaceAll(" ", "-")}>
       <summary>Inspect {title.toLowerCase()} evidence and calculation</summary>
       <div className="explanation-grid">
-        <section><h4>Contributing evidence</h4><EvidenceList evidence={evidenceByIds(twin, metric.evidenceIds)} /></section>
-        <section className="missing"><h4>Missing evidence</h4>{metric.missingEvidence.length ? <ul>{metric.missingEvidence.map((item) => <li key={item}>{item}</li>)}</ul> : <p>No required evidence is missing.</p>}</section>
-        <section><h4>Strongest factor</h4><p>{metric.strongestPositiveFactor}</p></section>
-        <section className="limiting"><h4>Limiting factor</h4><p>{metric.largestLimitingFactor}</p></section>
-        <section><h4>Calculation details</h4><p>Rule version {metric.rulesVersion}. Confidence is based on available configured evidence weight, with unavailable inputs excluded from scores.</p></section>
-        <section><h4>Improvement action</h4><p>{metric.improvementAction}</p></section>
+        <section><h3>Contributing evidence</h3><EvidenceList evidence={evidenceByIds(twin, metric.evidenceIds)} /></section>
+        <section className="missing"><h3>Missing evidence</h3>{metric.missingEvidence.length ? <ul>{metric.missingEvidence.map((item) => <li key={item}>{item}</li>)}</ul> : <p>No required evidence is missing.</p>}</section>
+        <section><h3>Strongest factor</h3><p>{metric.strongestPositiveFactor}</p></section>
+        <section className="limiting"><h3>Limiting factor</h3><p>{metric.largestLimitingFactor}</p></section>
+        <section><h3>Confidence basis</h3><p>{metric.confidence.toFixed(2)} confidence. Available configured evidence weight is included, while unavailable inputs are excluded from the score.</p></section>
+        <section><h3>Calculation details</h3><p>Rule version {metric.rulesVersion}. Scores are weighted and renormalized only across available evidence.</p></section>
+        <section className="improvement"><h3>Improvement action</h3><p>{metric.improvementAction}</p></section>
       </div>
     </details>
   );
 }
 
-function DimensionPanel({ title, metric, tone }: { title: string; metric: MetricResult; tone: "teal" | "blue" }) {
+function ScorePanel({ title, description, metric, twin, tone }: { title: string; description: string; metric: MetricResult; twin: BusinessTwin; tone: "maturity" | "readiness" }) {
+  const confidencePercent = Math.round(metric.confidence * 100);
+  const confidenceStyle = { "--confidence": `${confidencePercent}%` } as CSSProperties;
   return (
-    <section className={`breakdown-card ${tone}`}>
-      <header><h2>{title}</h2><span>/100</span></header>
+    <section className={`score-panel ${tone}`}>
+      <div className="score-panel-heading">
+        <div><h2>{title}</h2><p>{description}</p></div>
+        <span className="score-band">{metric.bandLabel}</span>
+      </div>
+      <div className="score-panel-value">
+        <div className="score-number">
+          <strong>{metric.value ?? "Not available"}</strong>
+          {metric.value === null ? null : <span>out of 100</span>}
+        </div>
+        <div className="confidence-gauge" role="meter" aria-label={`${title} evidence confidence`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={confidencePercent} style={confidenceStyle}>
+          <span>{metric.confidence.toFixed(2)}</span>
+          <small>{confidenceLabel(metric.confidenceBand)}</small>
+        </div>
+      </div>
+      <p className="score-explainer"><strong>Score</strong> shows the calculated capability level. <strong>Confidence</strong> shows how much configured evidence was available.</p>
+      <MetricDetails title={title} metric={metric} twin={twin} />
+    </section>
+  );
+}
+
+function DimensionPanel({ title, metric, tone }: { title: string; metric: MetricResult; tone: "maturity" | "readiness" }) {
+  return (
+    <section className={`breakdown-panel ${tone}`}>
+      <header><h2>{title}</h2><span>Score and evidence confidence</span></header>
       <div className="dimension-list">
         {metric.dimensions.map((dimension) => (
           <div className="dimension-row" key={dimension.id}>
-            <div><strong>{dimension.label}</strong><small>{dimension.score === null ? "Unavailable" : `${Math.round(dimension.confidence * 100)}% evidence confidence`}</small></div>
+            <div className="dimension-copy"><strong>{dimension.label}</strong><small>{Math.round(dimension.confidence * 100)}% evidence confidence</small></div>
             <div
-              className="score-track"
+              className={`score-track${dimension.score === null ? " unavailable" : ""}`}
               role="progressbar"
               aria-label={dimension.label}
               aria-valuemin={0}
@@ -145,7 +173,7 @@ function DimensionPanel({ title, metric, tone }: { title: string; metric: Metric
             >
               <span style={{ width: `${dimension.score ?? 0}%` }} />
             </div>
-            <b>{dimension.score ?? "—"}</b>
+            <b>{dimension.score === null ? "Not available" : `${dimension.score}/100`}</b>
           </div>
         ))}
       </div>
@@ -155,18 +183,22 @@ function DimensionPanel({ title, metric, tone }: { title: string; metric: Metric
 
 function PainDetails({ pain, twin }: { pain: PainPointResult; twin: BusinessTwin }) {
   return (
-    <details className="pain-detail">
+    <details className="pain-detail" data-pain-id={pain.id}>
       <summary><span>{pain.title}</span><b>{pain.priority.toFixed(1)} priority</b></summary>
-      <p>{pain.mechanism}</p>
-      <dl className="component-grid">
-        <div><dt>Impact</dt><dd>{pain.impact}</dd></div>
-        <div><dt>Urgency</dt><dd>{pain.urgency}</dd></div>
-        <div><dt>Strategic alignment</dt><dd>{pain.strategicAlignment}</dd></div>
-        <div><dt>Confidence</dt><dd>{pain.confidence}</dd></div>
-      </dl>
-      <p><strong>Affected capabilities:</strong> {pain.affectedCapabilityIds.map(formatIdentifier).join(", ")}</p>
-      <p><strong>Audit triggers:</strong> {pain.triggerCodes.map(formatIdentifier).join(", ")}</p>
-      <EvidenceList evidence={evidenceByIds(twin, pain.evidenceIds)} />
+      <div className="pain-detail-body">
+        <p>{pain.mechanism}</p>
+        <dl className="component-grid">
+          <div><dt>Impact</dt><dd>{pain.impact}/100</dd></div>
+          <div><dt>Urgency</dt><dd>{pain.urgency}/100</dd></div>
+          <div><dt>Strategic alignment</dt><dd>{pain.strategicAlignment}/100</dd></div>
+          <div><dt>Confidence</dt><dd>{pain.confidence}/100</dd></div>
+        </dl>
+        <div className="pain-audit-grid">
+          <p><strong>Affected capabilities</strong><span>{pain.affectedCapabilityIds.map(formatIdentifier).join(", ")}</span></p>
+          <p><strong>Audit triggers</strong><span>{pain.triggerCodes.map(formatIdentifier).join(", ")}</span></p>
+        </div>
+        <section className="pain-evidence"><h3>Linked recorded evidence</h3><EvidenceList evidence={evidenceByIds(twin, pain.evidenceIds)} /></section>
+      </div>
     </details>
   );
 }
@@ -177,63 +209,106 @@ export function ResultsView({ result, twin, onEdit }: { result: DiagnosticResult
     .sort((a, b) => (a.score ?? 0) - (b.score ?? 0) || b.weight - a.weight || a.id.localeCompare(b.id))
     .slice(0, 3);
   const missingCount = result.digitalMaturity.missingEvidence.length + result.aiReadiness.missingEvidence.length;
+  const topPainPoints = result.painPoints.slice(0, 3);
+
   return (
-    <>
-      <header className="topbar"><Brand /><span className="save-status">✓ Saved on this device</span></header>
-      <Progress step={5} />
+    <PostAssessmentShell businessName={twin.identity.businessName} context="results">
       <main className="results-shell">
-        <header className="results-hero">
-          <div><p className="eyebrow">{twin.identity.businessName} results overview</p><h1>Your Business Assessment</h1><p className="lead">Here is how your business performs across digital maturity and AI readiness, based only on the evidence you provided.</p></div>
-          <div className="hero-emblem" aria-hidden="true">◎</div>
+        <header className="results-heading">
+          <div>
+            <p className="eyebrow">Evidence-based diagnosis</p>
+            <h1>Analysis and diagnostic results.</h1>
+            <p className="lead">A deterministic view of {twin.identity.businessName}, calculated only from the recorded Business Twin.</p>
+          </div>
+          <button className="button secondary edit-twin" onClick={onEdit}>Edit Business Twin</button>
         </header>
-        {missingCount ? <p className="missing-notice">Some evidence is unavailable. It was excluded from scoring and lowers confidence rather than being treated as zero.</p> : null}
-        <div className="metrics-grid">
-          {([["Digital Maturity", result.digitalMaturity, "teal"], ["AI Readiness", result.aiReadiness, "blue"]] as const).map(([title, metric, tone]) => (
-            <div className="metric-column" key={title}>
-              <section className={`score-card ${tone}`}>
-                <div><p>{title}</p><strong>{metric.value ?? "—"}<small>/100</small></strong></div>
-                <div className="score-meta"><span>{metric.bandLabel}</span><span>{metric.confidence.toFixed(2)} confidence · {metric.confidenceBand}</span></div>
-                <MetricDetails title={title} metric={metric} twin={twin} />
-              </section>
-              <DimensionPanel title={`${title} Breakdown`} metric={metric} tone={tone} />
-            </div>
-          ))}
+
+        {missingCount ? (
+          <p className="missing-notice" role="status">Some evidence is unavailable. It was excluded from scoring and lowers confidence instead of being treated as zero.</p>
+        ) : null}
+
+        <div className="score-grid">
+          <ScorePanel title="Digital maturity" description="How consistently the business uses digital tools, processes, and data." metric={result.digitalMaturity} twin={twin} tone="maturity" />
+          <ScorePanel title="AI readiness" description="How prepared the business is to adopt AI responsibly for useful work." metric={result.aiReadiness} twin={twin} tone="readiness" />
         </div>
+
+        <div className="breakdown-grid">
+          <DimensionPanel title="Six maturity dimensions" metric={result.digitalMaturity} tone="maturity" />
+          <DimensionPanel title="Four readiness dimensions" metric={result.aiReadiness} tone="readiness" />
+        </div>
+
         <div className="insight-grid">
-          <section className="gaps-card"><h2>Three largest gaps</h2><p>Lowest available dimensions under the canonical model.</p><ol>{gaps.map((gap) => <li key={`${gap.id}-${gap.label}`}><span>{gap.label}</span><b>{gap.score}/100</b></li>)}</ol></section>
-          <section className="pain-card"><h2>Evidence-linked pain points</h2><p>Ranked with fixed impact, urgency, alignment, and confidence arithmetic.</p>{result.painPoints.slice(0, 3).map((pain) => <PainDetails key={pain.id} pain={pain} twin={twin} />)}</section>
+          <section className="gaps-panel">
+            <h2>Three largest gaps</h2>
+            <p>These are the lowest available dimensions, not distances from an invented target.</p>
+            {gaps.length ? <ol>{gaps.map((gap) => <li key={`${gap.id}-${gap.label}`}><span>{gap.label}</span><b>{gap.score}/100</b></li>)}</ol> : <p className="empty-finding">More recorded evidence is needed before a gap can be identified.</p>}
+          </section>
+          <section className="pain-overview">
+            <h2>Top evidence-linked pain points</h2>
+            <p>Ranked by the accepted impact, urgency, alignment, and confidence arithmetic.</p>
+            {topPainPoints.length ? <ol>{topPainPoints.map((pain) => <li key={pain.id}><div><strong>{pain.title}</strong><span>{pain.mechanism}</span></div><b>{pain.priority.toFixed(1)}</b></li>)}</ol> : <p className="empty-finding">No pain point was emitted without valid linked evidence.</p>}
+          </section>
         </div>
-        <section className="all-findings"><h2>All triggered pain findings</h2><p>All findings are retained for auditability, including those outside the overview top three.</p>{result.painPoints.map((pain) => <PainDetails key={`all-${pain.id}`} pain={pain} twin={twin} />)}</section>
+
+        <section className="all-findings">
+          <header><div><h2>All triggered pain findings</h2><p>Open any finding to inspect components, audit triggers, affected capabilities, and linked recorded evidence.</p></div><span>{result.painPoints.length} triggered</span></header>
+          {result.painPoints.length ? result.painPoints.map((pain) => <PainDetails key={pain.id} pain={pain} twin={twin} />) : <p className="empty-finding">No evidence-linked pain finding was emitted.</p>}
+        </section>
+
         <footer className="results-footer">
-          <div><strong>Calculation versions</strong><span>Score {result.scoreModelVersion} · Pain {result.painModelVersion}</span></div>
-          <div className="next-stage"><strong>Your capability sequence is ready</strong><span>Review why each capability belongs now, next, or later.</span></div>
-          <Link className="button primary" href="/recommendations">View recommendations</Link>
-          <button className="button secondary" onClick={onEdit}>Edit Business Twin</button>
+          <div className="calculation-versions"><strong>Calculation versions</strong><span>Score {result.scoreModelVersion}</span><span>Pain {result.painModelVersion}</span></div>
+          <div className="next-stage"><strong>Capability recommendations come next.</strong><span>The next stage will sequence capabilities without changing this diagnosis.</span></div>
+          <div className="results-actions">
+            <Link className="button primary" href="/recommendations">View recommendations</Link>
+            <button className="button secondary" onClick={onEdit}>Edit Business Twin</button>
+          </div>
         </footer>
       </main>
-    </>
+    </PostAssessmentShell>
   );
 }
 
 export function ResultsClient() {
   const router = useRouter();
   const [state, setState] = useState<{ draft: AssessmentDraft; twin: BusinessTwin; result: DiagnosticResult }>();
+
   useEffect(() => {
     const assessment = loadAssessmentDraft(localStorage);
-    if (assessment.status !== "ok" || assessment.draft.status !== "ready_for_review") { router.replace("/assessment"); return; }
+    if (assessment.status !== "ok" || assessment.draft.status !== "ready_for_review") {
+      router.replace("/assessment");
+      return;
+    }
     try {
       const twin = rebuildCurrentTwin(assessment.draft);
       const diagnostic = loadDiagnosticResult(localStorage, twin);
-      if (diagnostic.status !== "ok") { router.replace("/assessment/analysis"); return; }
+      if (diagnostic.status !== "ok") {
+        router.replace("/assessment/analysis");
+        return;
+      }
       setState({ draft: assessment.draft, twin, result: diagnostic.result });
-    } catch { router.replace("/assessment/analysis"); }
+    } catch {
+      router.replace("/assessment/analysis");
+    }
   }, [router]);
-  if (!state) return <main className="loading">Restoring your validated results…</main>;
+
+  if (!state) {
+    return (
+      <PostAssessmentShell context="restoring">
+        <main className="results-restoring" aria-live="polite" aria-busy="true">
+          <p className="eyebrow">Restoring saved diagnosis</p>
+          <h1>Bringing your validated results back into view.</h1>
+          <div className="results-restoring-shape" aria-hidden="true"><span /><span /><span /></div>
+        </main>
+      </PostAssessmentShell>
+    );
+  }
+
   const edit = () => {
     const edited = beginTwinEdit(state.draft, 1, new Date().toISOString());
     saveAssessmentDraft(localStorage, edited);
     clearDiagnosticResult(localStorage);
     router.push("/assessment?step=1");
   };
+
   return <ResultsView result={state.result} twin={state.twin} onEdit={edit} />;
 }

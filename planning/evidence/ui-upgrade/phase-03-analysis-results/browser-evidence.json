@@ -1,0 +1,241 @@
+{
+  "environment": {
+    "node": "v24.14.1",
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "baseUrl": "http://127.0.0.1:3023",
+    "mode": "local-production"
+  },
+  "screenshots": [
+    "analysis-error-1440.png",
+    "analysis-1440.png",
+    "results-1440.png",
+    "score-evidence-1440.png",
+    "pain-evidence-1440.png",
+    "analysis-1024.png",
+    "results-1024.png",
+    "score-evidence-1024.png",
+    "pain-evidence-1024.png",
+    "analysis-390.png",
+    "results-390.png",
+    "score-evidence-390.png",
+    "pain-evidence-390.png",
+    "analysis-360.png",
+    "results-360.png",
+    "score-evidence-360.png",
+    "pain-evidence-360.png"
+  ],
+  "analysis": {
+    "progression": [
+      {
+        "width": 1440,
+        "step": "Step 1 of 5",
+        "heading": "Validating recorded evidence"
+      },
+      {
+        "width": 1024,
+        "step": "Step 1 of 5",
+        "heading": "Validating recorded evidence"
+      },
+      {
+        "width": 390,
+        "step": "Step 1 of 5",
+        "heading": "Validating recorded evidence"
+      },
+      {
+        "width": 360,
+        "step": "Step 1 of 5",
+        "heading": "Validating recorded evidence"
+      }
+    ],
+    "errorPreservedDraft": true,
+    "retryRecovered": true,
+    "reducedMotionMs": 232
+  },
+  "restoration": {
+    "validRestore": true,
+    "recovery": {
+      "corrupt": true,
+      "incompatible": true,
+      "stale": true
+    }
+  },
+  "edit": {
+    "revision": 2,
+    "diagnosticCleared": true,
+    "recomputed": true
+  },
+  "states": {
+    "lowConfidence": true,
+    "lowConfidenceMs": 306,
+    "insufficientEvidence": true,
+    "unknownMs": 243
+  },
+  "caseAValues": {
+    "maturity": 37.5,
+    "readiness": 42.5,
+    "pains": [
+      "pain_customer_followup",
+      "pain_data_visibility",
+      "pain_scaling_operations"
+    ]
+  },
+  "accessibility": [
+    {
+      "state": "results desktop",
+      "violations": []
+    },
+    {
+      "state": "analysis desktop",
+      "violations": []
+    },
+    {
+      "state": "analysis mobile",
+      "violations": []
+    },
+    {
+      "state": "results mobile",
+      "violations": []
+    }
+  ],
+  "layoutChecks": [
+    {
+      "state": "analysis",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "results",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "score evidence expanded",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "pain evidence expanded",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "analysis",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "results",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "score evidence expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "pain evidence expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "analysis",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "results",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "score evidence expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "pain evidence expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "analysis",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "results",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "score evidence expanded",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "pain evidence expanded",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    }
+  ],
+  "keyboard": {
+    "disclosureOpened": true,
+    "focusStyle": {
+      "tag": "SUMMARY",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  "consoleErrors": [],
+  "failedRequests": [],
+  "overlay": false
+}
