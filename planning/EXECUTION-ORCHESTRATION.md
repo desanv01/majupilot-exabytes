@@ -64,7 +64,7 @@ The main task creates one new project task with:
 
 - a stage-specific title;
 - GPT-5.6 Sol;
-- medium reasoning;
+- high reasoning for the UI upgrade programme and any later implementation or verification task, as required by D-028;
 - the saved local project as its environment;
 - the complete implementation packet in the prompt.
 
@@ -162,4 +162,3 @@ A stage is ready for review only when:
 5. the application remains buildable from documented steps;
 6. unresolved risks are explicit;
 7. the implementer has stopped and is waiting for main-task review.
-

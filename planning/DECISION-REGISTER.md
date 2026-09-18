@@ -18,7 +18,7 @@
 | D-014 | Record every studied MiroFish capability as retain, adapt, replace, or omit | Frozen | Keeps reference use deliberate, traceable, and aligned to the Exabytes and platform goals |
 | D-015 | Keep the current main Codex task as planner, architect, integrator, and reviewer | Frozen | Maintains one source of truth and prevents stage tasks from changing scope independently |
 | D-016 | Execute one implementation stage at a time in a separate project task | Frozen | Limits integration risk and gives every stage a verifiable acceptance gate |
-| D-017 | Use GPT-5.6 Sol with medium reasoning for stage implementation tasks | Frozen | Provides a consistent implementation profile while the main task handles higher-level integration judgment |
+| D-017 | Use GPT-5.6 Sol with medium reasoning for the original Stage 00 to Stage 07 implementation tasks | Superseded by D-028 | Records the completed build policy; the product-wide redesign now requires deeper visual and integration judgment |
 | D-018 | Require main-task inspection, testing, and acceptance before opening the next stage | Frozen | Completion is based on code and evidence, not an implementer's summary |
 | D-019 | Begin with Stage 00 Foundation and Baseline before product features | Frozen | Establishes a clean canonical app, contracts, commands, and test baseline before feature work |
 | D-020 | Freeze Exabytes Catalogue 1.0.0 as the only Stage 03 product-fact allow-list | Frozen | Official-source verification, semantic versioning, fail-closed mapping, and no hard-coded promotional pricing prevent invented or stale product claims |
@@ -29,6 +29,9 @@
 | D-025 | Publish development stage by stage through Git commits, CI, focused branches, reviewed pull requests, and merges | Frozen | Gives the GitHub repository an honest, representative development history and makes acceptance evidence visible |
 | D-026 | Freeze Advisor and Blueprint Model 1.0.0 with five domain-owned roles, structured optional model output, deterministic per-role fallback, deterministic synthesis, and immutable source-linked blueprints | Frozen | Preserves genuine multi-perspective AI value without allowing models or outages to alter numeric truth or block the report |
 | D-027 | Use browser print/save-as-PDF for Stage 05 and defer server PDF generation and consultation handoff | Frozen | Delivers a legible downloadable report now without adding fragile PDF infrastructure or prematurely implementing Stage 06 |
+| D-028 | Use GPT-5.6 Sol with high reasoning for every UI upgrade implementation, review, correction, and verification task | Frozen | The redesign spans visual systems, responsive behavior, accessibility, protected product contracts, and cross-screen consistency |
+| D-029 | Execute a product-wide visual and interaction overhaul across every visible phase while preserving the accepted core behavior and deterministic contracts | Frozen | The current application is functionally complete but visually generic; a full redesign is required without mixing in deferred core revisions |
+| D-030 | Use corrected 12ui Candidate D as the starting direction with DM Sans, Libre Baskerville, deep ink, warm paper, and evidence teal | Frozen | It provides the strongest distinctive identity while the correction list removes stock imagery, generated copy errors, tiny typography, and misleading preview content |
 
 ## Change template
 

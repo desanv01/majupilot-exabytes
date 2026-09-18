@@ -1656,8 +1656,9 @@ The binding operating protocol is defined in
 coordination guideline conflicts with that protocol, the protocol wins.
 
 For the hackathon build, this current main Codex task is the permanent planner,
-architect, integrator, and acceptance authority. Each implementation stage is
-performed in a separate Codex task using GPT-5.6 Sol at medium reasoning. Only
+architect, integrator, and acceptance authority. Each remaining implementation,
+redesign, correction, and verification stage is performed in a separate Codex
+task using GPT-5.6 Sol at high reasoning. Only
 one implementation stage is active at a time. The main task reviews the actual
 files, diffs, commands, test evidence, and runtime behavior; sends corrections
 back to that stage task; and unlocks the next stage only after acceptance.
@@ -1939,7 +1940,7 @@ The following execution decisions are also approved:
 
 - this main task is the planner, architect, integrator, and reviewer;
 - implementation is divided into gated stages;
-- each stage runs in a newly created project task using GPT-5.6 Sol at medium reasoning;
+- each remaining stage runs in a newly created project task using GPT-5.6 Sol at high reasoning;
 - implementation tasks edit the shared local project, report evidence, and do not approve their own work;
 - the main task reviews and tests each stage, returns corrections when needed, and alone authorizes the next stage;
 - implementation starts with Stage 00, Foundation and Baseline, not with feature development.

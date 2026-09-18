@@ -17,6 +17,7 @@ planning/design/**/branch/**/*.json
 planning/design/**/branch/**/prototype/
 planning/design/**/branch/**/.local-sources/
 planning/design/**/branch/**/.local-runs/
+planning/design/ui-upgrade/phase-01-home/12ui/
 
 # OS files
 .DS_Store
