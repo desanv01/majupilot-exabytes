@@ -113,7 +113,7 @@ handling. Escalate any proven compatibility issue before broadening scope.
   recovery routes.
 - Identical inputs produce identical recommendation content and order.
 - The Case A first item remains Shared customer operations with `why_now`, fit
-  `92.9`, phase Connect, and Freshsales CRM as a subordinate catalogue mapping.
+  `93.5`, phase Connect, and Freshsales CRM as a subordinate catalogue mapping.
 - The rest of Case A remains in canonical rule order. Do not hard-code an image's
   order or status.
 - Every one of the six component values remains visible in the expanded view.
