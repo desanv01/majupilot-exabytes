@@ -27,6 +27,8 @@
 | D-023 | Estimate operational time value from accepted evidence by default and leave revenue/risk value unset until all required inputs are supplied | Frozen | Prevents invented revenue and incident claims while still allowing explicit user-entered sensitivity analysis |
 | D-024 | Use 12ui at every implementation stage when that stage introduces or extends a non-trivial interface | Frozen | Improves each stage's interaction design while Branch preserves a coherent visual system and the main task corrects generated content against product contracts |
 | D-025 | Publish development stage by stage through Git commits, CI, focused branches, reviewed pull requests, and merges | Frozen | Gives the GitHub repository an honest, representative development history and makes acceptance evidence visible |
+| D-026 | Freeze Advisor and Blueprint Model 1.0.0 with five domain-owned roles, structured optional model output, deterministic per-role fallback, deterministic synthesis, and immutable source-linked blueprints | Frozen | Preserves genuine multi-perspective AI value without allowing models or outages to alter numeric truth or block the report |
+| D-027 | Use browser print/save-as-PDF for Stage 05 and defer server PDF generation and consultation handoff | Frozen | Delivers a legible downloadable report now without adding fragile PDF infrastructure or prematurely implementing Stage 06 |
 
 ## Change template
 

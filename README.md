@@ -2,7 +2,7 @@
 
 SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–04 are accepted; Advisor Panel and Blueprint is the next gated stage.
+> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–04 are accepted; Stage 05 Advisor Panel and Blueprint is ready for implementation.
 
 ## Why this exists
 
