@@ -24,8 +24,9 @@ components -> domain (types only, when needed)
 ```
 
 `core` must not import `app`, `infrastructure`, Next.js APIs, environment
-variables, or model-provider code. This keeps scoring, ranking, scenario, and
-ROI rules deterministic and testable without a browser, database, or LLM. A
+variables, or model-provider code. This keeps scoring, ranking, scenario, ROI,
+and lead construction deterministic and testable without a browser, database,
+or LLM. A
 unit-level architecture test enforces the most important forbidden imports.
 
 ## Boundary validation
@@ -43,12 +44,38 @@ records. Session, twin identity/revision, score-model version, and pain-model
 version are checked before a result may be reused. Diagnostic data is not
 embedded in the assessment draft.
 
+## Consultation lead boundary
+
+Stage 06 adds versioned `Lead` and `ConsentRecord` schemas and a pure
+`createLead` core. The route boundary accepts bounded JSON, rejects unknown
+fields, enforces consent independently, generates all authoritative IDs and
+timestamps, and returns only a safe receipt. Idempotency is keyed by a
+client-generated submission UUID: identical material replays the original lead,
+while changed-payload reuse fails closed.
+
+Consent wording/version, campaign, and initial status enter the generic core
+through a versioned `LeadPolicy`. The frozen Exabytes consultation policy lives
+in the Exabytes domain pack and is supplied only by API/UI composition roots;
+the reusable lead domain and core contain no provider or campaign identifiers.
+
+`LeadStore` is a server-only port. Its current process-local adapter atomically
+creates or replays records and retains the exact immutable Blueprint plus a
+derived consultant summary. A separate bounded process-local rate limiter stores
+only salted hashes of coarse request identifiers, never contact data. These
+adapters are honest prototype boundaries and can later be replaced without
+changing the domain or UI contracts.
+
+The consultation page revalidates Assessment → Business Twin → Diagnostic →
+Recommendation → Scenario → Blueprint before rendering. It never synthesizes a
+replacement Blueprint. Only the schema-validated lead receipt is stored in
+browser `sessionStorage`; the contact form is not written to browser storage.
+
 ## Deferred infrastructure
 
-The persistence layer currently exposes only a `RecordStore` port. No SQLite or
-hosted adapter is needed for the Stage 00 shell. The model boundary is a
-server-only `ModelProvider` port with no implementation, request, prompt, or
-provider dependency. Later stages must keep credentials and calls on the server.
+Durable database storage, authentication, consultant access, notification,
+retention automation, and deletion workflows remain deferred. The model boundary
+and lead boundary remain server-only; credentials and contact data must never be
+introduced into client bundles or logs.
 
 ## Domain packs
 
