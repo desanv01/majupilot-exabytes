@@ -102,6 +102,7 @@ describe("Stage 01 render smoke states", () => {
       />,
     );
     expect(html).toContain("Not sure");
+    expect(html).toContain('id="fu_ai_usage"');
     expect(html).toContain('aria-invalid="true"');
     expect(html).not.toMatch(forbiddenOutputs);
   });
@@ -115,6 +116,23 @@ describe("Stage 01 render smoke states", () => {
     expect(html).toContain("Not sure");
     expect(html).not.toContain("professional_services");
     expect(html).not.toContain("increase_productivity");
+    expect(html).toContain("Recorded fact");
+    expect(html).toContain("View technical evidence references");
+    const orderedHeadings = [
+      "Identity",
+      "Objectives",
+      "Capabilities",
+      "Process Friction",
+      "Constraints",
+      "Readiness",
+      "Evidence",
+    ];
+    expect(orderedHeadings.map((heading) => html.indexOf(`>${heading}</h2>`))).toEqual(
+      [...orderedHeadings.map((heading) => html.indexOf(`>${heading}</h2>`))].sort(
+        (left, right) => left - right,
+      ),
+    );
+    expect(html).not.toMatch(/[–—]/);
     expect(html).not.toMatch(forbiddenOutputs);
   });
 });

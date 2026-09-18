@@ -1,0 +1,870 @@
+{
+  "environment": {
+    "node": "v24.14.1",
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "baseUrl": "http://127.0.0.1:3022",
+    "mode": "local-production"
+  },
+  "screenshots": [
+    "q1-1440.png",
+    "q2-1440.png",
+    "follow-up-1440.png",
+    "validation-1440.png",
+    "review-1440.png",
+    "q1-1024.png",
+    "q2-1024.png",
+    "follow-up-1024.png",
+    "validation-1024.png",
+    "review-1024.png",
+    "q1-390.png",
+    "q2-390.png",
+    "follow-up-390.png",
+    "validation-390.png",
+    "review-390.png",
+    "q1-360.png",
+    "q2-360.png",
+    "follow-up-360.png",
+    "validation-360.png",
+    "review-360.png"
+  ],
+  "accessibility": [
+    {
+      "state": "assessment desktop",
+      "violations": []
+    },
+    {
+      "state": "review desktop",
+      "violations": []
+    },
+    {
+      "state": "assessment mobile",
+      "violations": []
+    },
+    {
+      "state": "review mobile",
+      "violations": []
+    }
+  ],
+  "layoutChecks": [
+    {
+      "state": "q1",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 398
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 398
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionB2BB2CHybrid",
+          "height": 48,
+          "width": 398
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q2",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not used",
+          "height": 46,
+          "width": 175
+        },
+        {
+          "tag": "SPAN",
+          "text": "Informal",
+          "height": 46,
+          "width": 175
+        },
+        {
+          "tag": "SPAN",
+          "text": "Active",
+          "height": 46,
+          "width": 175
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not sure",
+          "height": 46,
+          "width": 175
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "follow-up",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Under 5",
+          "height": 46,
+          "width": 384
+        },
+        {
+          "tag": "SPAN",
+          "text": "5-10",
+          "height": 46,
+          "width": 384
+        },
+        {
+          "tag": "SPAN",
+          "text": "11-20",
+          "height": 46,
+          "width": 384
+        },
+        {
+          "tag": "SPAN",
+          "text": "21-40",
+          "height": 46,
+          "width": 384
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "validation",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "A",
+          "text": "Business name: Complete this step before continuing.",
+          "height": 44,
+          "width": 401.03125
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 398
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 398
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "review",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q1",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 280.59375
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 280.59375
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionB2BB2CHybrid",
+          "height": 48,
+          "width": 280.59375
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q2",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not used",
+          "height": 46,
+          "width": 116.296875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Informal",
+          "height": 46,
+          "width": 116.296875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Active",
+          "height": 46,
+          "width": 116.296875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not sure",
+          "height": 46,
+          "width": 116.296875
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "follow-up",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "SPAN",
+          "text": "Under 5",
+          "height": 46,
+          "width": 266.59375
+        },
+        {
+          "tag": "SPAN",
+          "text": "5-10",
+          "height": 46,
+          "width": 266.59375
+        },
+        {
+          "tag": "SPAN",
+          "text": "11-20",
+          "height": 46,
+          "width": 266.59375
+        },
+        {
+          "tag": "SPAN",
+          "text": "21-40",
+          "height": 46,
+          "width": 266.59375
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "validation",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "A",
+          "text": "Business name: Complete this step before continuing.",
+          "height": 44,
+          "width": 401.03125
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 163.046875
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 280.59375
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 280.59375
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "review",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q1",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 350
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 328
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 328
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionB2BB2CHybrid",
+          "height": 48,
+          "width": 328
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q2",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 350
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not used",
+          "height": 46,
+          "width": 139
+        },
+        {
+          "tag": "SPAN",
+          "text": "Informal",
+          "height": 46,
+          "width": 139
+        },
+        {
+          "tag": "SPAN",
+          "text": "Active",
+          "height": 46,
+          "width": 139
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not sure",
+          "height": 46,
+          "width": 139
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "follow-up",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 350
+        },
+        {
+          "tag": "SPAN",
+          "text": "Under 5",
+          "height": 46,
+          "width": 139
+        },
+        {
+          "tag": "SPAN",
+          "text": "5-10",
+          "height": 46,
+          "width": 139
+        },
+        {
+          "tag": "SPAN",
+          "text": "11-20",
+          "height": 46,
+          "width": 139
+        },
+        {
+          "tag": "SPAN",
+          "text": "21-40",
+          "height": 46,
+          "width": 139
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "validation",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 350
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "A",
+          "text": "Business name: Complete this step before continuing.",
+          "height": 48,
+          "width": 288
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 328
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 328
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "review",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q1",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 320
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 298
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 298
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionB2BB2CHybrid",
+          "height": 48,
+          "width": 298
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "q2",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 320
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not used",
+          "height": 46,
+          "width": 256
+        },
+        {
+          "tag": "SPAN",
+          "text": "Informal",
+          "height": 46,
+          "width": 256
+        },
+        {
+          "tag": "SPAN",
+          "text": "Active",
+          "height": 46,
+          "width": 256
+        },
+        {
+          "tag": "SPAN",
+          "text": "Not sure",
+          "height": 46,
+          "width": 256
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "follow-up",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 320
+        },
+        {
+          "tag": "SPAN",
+          "text": "Under 5",
+          "height": 46,
+          "width": 256
+        },
+        {
+          "tag": "SPAN",
+          "text": "5-10",
+          "height": 46,
+          "width": 256
+        },
+        {
+          "tag": "SPAN",
+          "text": "11-20",
+          "height": 46,
+          "width": 256
+        },
+        {
+          "tag": "SPAN",
+          "text": "21-40",
+          "height": 46,
+          "width": 256
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "validation",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "text": "Reset demo data",
+          "height": 46,
+          "width": 320
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Start over",
+          "height": 46,
+          "width": 98.84375
+        },
+        {
+          "tag": "A",
+          "text": "Business name: Complete this step before continuing.",
+          "height": 48,
+          "width": 258
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "height": 48,
+          "width": 298
+        },
+        {
+          "tag": "SELECT",
+          "text": "Select an optionFood & beverageRetail / e-commerceProfe",
+          "height": 48,
+          "width": 298
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "review",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "smallest": [
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        },
+        {
+          "tag": "A",
+          "text": "Edit",
+          "height": 44,
+          "width": 54
+        }
+      ],
+      "undersized": [],
+      "visibleDashes": false
+    }
+  ],
+  "keyboardJourney": {
+    "caseAThroughReviewAndEditReturn": true,
+    "revisionIncrementedOnce": true
+  },
+  "restoration": {
+    "restoredAfterRefresh": true
+  },
+  "startOver": {
+    "cancelPreserved": true,
+    "confirmReset": true
+  },
+  "storageUnavailable": true,
+  "reducedMotion": {
+    "transition": "1e-05s",
+    "animation": "1e-05s",
+    "query": true
+  },
+  "consoleErrors": [],
+  "failedRequests": [],
+  "overlay": false
+}
