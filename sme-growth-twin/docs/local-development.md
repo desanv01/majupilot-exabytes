@@ -25,6 +25,9 @@ npm test
 
 # Production build
 npm run build
+
+# Stage 06 real-browser acceptance (starts and cleans up isolated local processes)
+npm run test:stage06:browser
 ```
 
 For the first lockfile creation only, Stage 00 used `npm install`. Fresh
@@ -32,4 +35,5 @@ implementers should use `npm ci` thereafter.
 
 Copy `.env.example` to `.env.local` only when a later approved stage introduces
 a server-side model adapter. Stage 00 does not require environment variables.
-Never commit `.env.local` or credentials.
+Never commit `.env.local` or credentials. Stage 06 needs no external service or
+new environment variable; its lead adapter and rate limiter are process-local.

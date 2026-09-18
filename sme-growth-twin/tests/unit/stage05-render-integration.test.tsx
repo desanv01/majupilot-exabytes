@@ -16,8 +16,8 @@ describe("Stage 05 rendered, responsive, and print contract", () => {
     expect(html.match(/class="advisor-card /g)).toHaveLength(5); expect(html).toContain("No material disagreement detected");
   });
 
-  it("renders all required sections, exact Case A values, provenance, limitations and preview-only consultation", () => {
-    for (const label of ["Executive summary", "Business profile", "Digital maturity and AI readiness", "Top five pain points", "Recommended capabilities and mapped offerings", "Three-scenario comparison", "Selected transformation plan", "ROI assumptions, ranges, formulas, and exclusions", "Month-by-month roadmap", "Risks, warnings, and prerequisites", "Five advisor reviews", "Consultant notes", "Claim provenance", "Model-call disclosure", "Consultation preview", "RM 9,200 / RM 18,400 / RM 27,600", "30.4 months", "Not Estimated", "Stage 06"]) expect(html).toContain(label);
+  it("renders all required sections, exact Case A values, provenance, limitations and active consultation handoff", () => {
+    for (const label of ["Executive summary", "Business profile", "Digital maturity and AI readiness", "Top five pain points", "Recommended capabilities and mapped offerings", "Three-scenario comparison", "Selected transformation plan", "ROI assumptions, ranges, formulas, and exclusions", "Month-by-month roadmap", "Risks, warnings, and prerequisites", "Five advisor reviews", "Consultant notes", "Claim provenance", "Model-call disclosure", "Consultation handoff", "Request consultation", "RM 9,200 / RM 18,400 / RM 27,600", "30.4 months", "Not Estimated"]) expect(html).toContain(label);
     expect(html).not.toMatch(/name=["'](?:email|phone|contact)|consent checkbox|submit consultation|send to exabytes/i);
   });
 

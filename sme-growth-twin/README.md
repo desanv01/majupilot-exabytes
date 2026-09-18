@@ -3,7 +3,18 @@
 This directory is the canonical Next.js application root. The accepted build
 currently includes the project foundation, discovery interview, Business Twin,
 deterministic diagnostics, capability recommendations, scenario and ROI modeling,
-and the immutable Stage 05 advisor-reviewed Transformation Blueprint.
+the immutable Stage 05 advisor-reviewed Transformation Blueprint, and the
+Stage 06 consented consultation handoff.
+
+Stage 06 validates the complete current source chain before showing the form,
+requires explicit versioned consent, and records one idempotent consultant-ready
+lead through `POST /api/leads`. The prototype adapter is deliberately
+process-local: it does not send email, call a webhook or CRM, expose a lead-list
+endpoint, or provide durable multi-instance storage. The browser stores only a
+safe receipt in `sessionStorage`; contact values remain in memory while the form
+is open. Run `npm run test:stage06:browser` for the real Case A Blueprint-to-lead
+journey, API consent and duplicate safety, desktop/mobile layout, keyboard/focus,
+safe-receipt, clean-console, and Blueprint print checks.
 
 Stage 05 works without any model credentials: each of the five roles resolves to
 an evidence-linked deterministic fallback. Optional live reviews use the
