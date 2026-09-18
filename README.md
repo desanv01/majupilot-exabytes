@@ -2,7 +2,7 @@
 
 SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–05 are accepted; Stage 06 Consultation and Full UX is ready for implementation.
+> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–06 are accepted; Stage 07 Hardening and Submission is ready for implementation.
 
 ## Why this exists
 
@@ -21,6 +21,7 @@ SME Growth Twin converts structured interview evidence into an inspectable busin
 - Three deterministic transformation scenarios with inspectable costs, value ranges, assumptions, exclusions, and payback.
 - Five evidence-bounded advisor perspectives with per-role deterministic fallback and optional server-only model review.
 - An immutable, source-linked 16-section Transformation Blueprint with responsive browser print/save-as-PDF output.
+- A consented consultation handoff with exact Blueprint verification, idempotent submission, and a privacy-minimizing safe receipt.
 - Stable local persistence and recalculation when upstream evidence changes.
 - Responsive, keyboard-accessible interfaces validated at desktop and 360 px.
 - Offline-friendly deterministic demonstration path.
@@ -60,7 +61,7 @@ The provider-neutral core cannot import or mention Exabytes-specific identifiers
 | Validation | Zod 4 |
 | Testing | Vitest 5 |
 | Quality | ESLint 9, TypeScript strict checks, GitHub Actions |
-| Current persistence | Versioned browser-local records behind storage ports |
+| Current persistence | Versioned browser-local records plus a process-local prototype lead adapter behind storage ports |
 | Design workflow | 12ui-generated directions, reviewed and corrected against product contracts |
 
 ## Quick start
@@ -87,6 +88,7 @@ Run these from `sme-growth-twin/`:
 | `npm test` | Run deterministic unit and integration tests |
 | `npm run build` | Produce the release build |
 | `npm run test:stage05:browser` | Verify the complete Stage 05 journey, exact figures, persistence, responsive layout, and print rendering |
+| `npm run test:stage06:browser` | Verify the Blueprint-to-consultation journey, consent and replay safety, privacy boundary, responsive layout, focus order, and print exclusion |
 
 Every pull request runs all four gates in GitHub Actions.
 
@@ -128,7 +130,7 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 - [x] Stage 03 — Capability recommendations and Exabytes catalogue
 - [x] Stage 04 — Scenario and ROI Lab
 - [x] Stage 05 — Advisor Panel and Blueprint
-- [ ] Stage 06 — Consultation handoff and full journey
+- [x] Stage 06 — Consultation handoff and full journey
 - [ ] Stage 07 — Hardening, evidence, and submission
 
 ## Security and data handling
@@ -137,7 +139,7 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 - Scoring, ranking, recommendation, scenario, and ROI arithmetic remain deterministic.
 - Product facts come from a reviewed, versioned catalogue rather than model memory.
 - Missing evidence lowers confidence; it is not silently converted to a negative answer.
-- Consultation data will only be created after explicit user consent.
+- Consultation data is created only after explicit user consent; contact values are not logged, returned by the API, placed in URLs, or persisted in the browser.
 
 See [SECURITY.md](SECURITY.md) for reporting and prototype limitations.
 

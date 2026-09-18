@@ -67,50 +67,50 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 
 ## Gate 5 - Advisor panel
 
-- [ ] Growth review is distinct
-- [ ] Operations review is distinct
-- [ ] Finance review is distinct
-- [ ] Cybersecurity review is distinct
-- [ ] Change-management review is distinct
-- [ ] Missing evidence is preserved
-- [ ] Disagreements are displayed
-- [ ] Advisors cannot alter numeric results
+- [x] Growth review is distinct
+- [x] Operations review is distinct
+- [x] Finance review is distinct
+- [x] Cybersecurity review is distinct
+- [x] Change-management review is distinct
+- [x] Missing evidence is preserved
+- [x] Disagreements are displayed
+- [x] Advisors cannot alter numeric results
 
 ## Gate 6 - Blueprint and lead
 
-- [ ] Blueprint matches application results
-- [ ] Report contains required challenge sections
-- [ ] Report identifies assumptions
-- [ ] PDF/print output is legible
-- [ ] Consultation form explains shared data
-- [ ] Explicit consent is mandatory
-- [ ] Lead contains the selected blueprint
-- [ ] Success state returns a lead reference
+- [x] Blueprint matches application results
+- [x] Report contains required challenge sections
+- [x] Report identifies assumptions
+- [x] PDF/print output is legible
+- [x] Consultation form explains shared data
+- [x] Explicit consent is mandatory
+- [x] Lead contains the selected blueprint
+- [x] Success state returns a lead reference
 
 ## Gate 7 - Resilience and security
 
-- [ ] Model keys never reach the browser
-- [ ] Inputs have lengths and schemas
-- [ ] Model output is sanitized
-- [ ] Numeric logic works without the model
-- [ ] Model timeout has a finite fallback
-- [ ] No indefinite loading state
+- [x] Model keys never reach the browser
+- [x] Inputs have lengths and schemas
+- [x] Model output is sanitized
+- [x] Numeric logic works without the model
+- [x] Model timeout has a finite fallback
+- [x] No indefinite loading state
 - [ ] Analysis has a cost/token cap
-- [ ] Contact data is not written to logs
+- [x] Contact data is not written to logs
 - [ ] Rate limits exist on expensive and lead endpoints
 
 ## Gate 8 - Testing
 
-- [ ] Score bounds tests pass
-- [ ] Weight tests pass
-- [ ] Missing-evidence tests pass
-- [ ] Recommendation prerequisite tests pass
-- [ ] ROI fixture tests pass
-- [ ] Consent tests pass
-- [ ] Case A passes end-to-end
+- [x] Score bounds tests pass
+- [x] Weight tests pass
+- [x] Missing-evidence tests pass
+- [x] Recommendation prerequisite tests pass
+- [x] ROI fixture tests pass
+- [x] Consent tests pass
+- [x] Case A passes end-to-end
 - [ ] Case B passes end-to-end
 - [ ] Case C passes end-to-end
-- [ ] Mobile viewport passes
+- [x] Mobile viewport passes
 - [ ] Keyboard-only flow passes
 - [ ] Critical accessibility issues equal zero
 - [ ] Full flow completes under five minutes
