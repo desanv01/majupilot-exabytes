@@ -12,9 +12,11 @@
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:stage05:browser": "node scripts/stage05-browser-check.mjs"
   },
   "dependencies": {
+    "ai": "^7.0.105",
     "next": "16.3.5",
     "react": "19.3.0",
     "react-dom": "19.3.0",

@@ -2,7 +2,7 @@
 
 SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–04 are accepted; Advisor Panel and Blueprint is the next gated stage.
+> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–05 are accepted; Stage 06 Consultation and Full UX is ready for implementation.
 
 ## Why this exists
 
@@ -18,6 +18,9 @@ SME Growth Twin converts structured interview evidence into an inspectable busin
 - Evidence-linked pain-point ranking and expandable calculation details.
 - Capability-first recommendations with prerequisites and timing.
 - Versioned mapping to a curated Exabytes offering catalogue.
+- Three deterministic transformation scenarios with inspectable costs, value ranges, assumptions, exclusions, and payback.
+- Five evidence-bounded advisor perspectives with per-role deterministic fallback and optional server-only model review.
+- An immutable, source-linked 16-section Transformation Blueprint with responsive browser print/save-as-PDF output.
 - Stable local persistence and recalculation when upstream evidence changes.
 - Responsive, keyboard-accessible interfaces validated at desktop and 360 px.
 - Offline-friendly deterministic demonstration path.
@@ -83,6 +86,7 @@ Run these from `sme-growth-twin/`:
 | `npm run type-check` | Run TypeScript without emitting files |
 | `npm test` | Run deterministic unit and integration tests |
 | `npm run build` | Produce the release build |
+| `npm run test:stage05:browser` | Verify the complete Stage 05 journey, exact figures, persistence, responsive layout, and print rendering |
 
 Every pull request runs all four gates in GitHub Actions.
 
@@ -123,7 +127,7 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 - [x] Stage 02 — Deterministic diagnostics and pain analysis
 - [x] Stage 03 — Capability recommendations and Exabytes catalogue
 - [x] Stage 04 — Scenario and ROI Lab
-- [ ] Stage 05 — Advisor Panel and Blueprint
+- [x] Stage 05 — Advisor Panel and Blueprint
 - [ ] Stage 06 — Consultation handoff and full journey
 - [ ] Stage 07 — Hardening, evidence, and submission
 

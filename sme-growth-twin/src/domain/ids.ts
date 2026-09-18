@@ -30,6 +30,9 @@ export const scenarioComparisonIdSchema = entityId(
   "ScenarioComparisonId",
 );
 export const scenarioEventIdSchema = entityId("event", "ScenarioEventId");
+export const advisorReviewIdSchema = entityId("advisor", "AdvisorReviewId");
+export const modelCallIdSchema = entityId("modelcall", "ModelCallId");
+export const blueprintIdSchema = entityId("blueprint", "BlueprintId");
 
 export type AssessmentSessionId = z.infer<typeof assessmentSessionIdSchema>;
 export type BusinessTwinId = z.infer<typeof businessTwinIdSchema>;
@@ -42,3 +45,6 @@ export type RecommendationResultId = z.infer<
 >;
 export type ScenarioComparisonId = z.infer<typeof scenarioComparisonIdSchema>;
 export type ScenarioEventId = z.infer<typeof scenarioEventIdSchema>;
+export type AdvisorReviewId = z.infer<typeof advisorReviewIdSchema>;
+export type ModelCallId = z.infer<typeof modelCallIdSchema>;
+export type BlueprintId = z.infer<typeof blueprintIdSchema>;
