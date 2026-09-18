@@ -26,6 +26,10 @@ The live harness refuses to start without `AI_GATEWAY_MODEL` and either
 model calls and therefore incurs provider/Gateway cost. It is intentionally not
 run in CI. Harness output contains only bounded call metadata and never prints
 credentials, prompts, business context, generated statements, or response bodies.
+Live success also requires the Gateway account and project to satisfy Vercel's
+authorization and payment prerequisites. HTTP 401, 402, and 403 responses are
+terminal safe fallbacks and are not retried. The live-success gate has not passed
+in an environment where the Gateway reports that a valid payment method is needed.
 
 The repository-level [README](../README.md) describes the product, architecture,
 status, roadmap, security posture, and contribution workflow. For application
