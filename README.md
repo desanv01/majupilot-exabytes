@@ -2,7 +2,7 @@
 
 SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–06 are accepted; Stage 07 is implemented locally and remains pending main-task acceptance and external deployment review.
+> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–07 are accepted. The reviewed release candidate is live at <https://sme-growth-twin.vercel.app>; human rehearsal, video/YouTube, competition submission, and receipt gates remain pending.
 
 ## Why this exists
 
@@ -138,7 +138,7 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 - [x] Stage 04 — Scenario and ROI Lab
 - [x] Stage 05 — Advisor Panel and Blueprint
 - [x] Stage 06 — Consultation handoff and full journey
-- [ ] Stage 07 — Hardening, evidence, and submission (implementation present; acceptance/deployment pending)
+- [x] Stage 07 — Hardening, evidence, and submission
 
 ## Security and data handling
 
@@ -150,7 +150,7 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 
 See [SECURITY.md](SECURITY.md) for reporting and prototype limitations.
 
-The self-contained demo, deployment, evidence, third-party, and manual-gate package is in [`planning/submission/`](planning/submission/README.md). No external deployment, video upload, competition submission, human study, or official receipt is claimed without real evidence.
+The self-contained demo, deployment, evidence, third-party, and manual-gate package is in [`planning/submission/`](planning/submission/README.md). A reviewed Vercel deployment is recorded there; no video upload, competition submission, human study, or official receipt is claimed without real evidence.
 
 ## Reference and originality
 

@@ -11,7 +11,7 @@
 | axe-core | 4.10.3 | MPL-2.0, Deque Systems | Local automated accessibility engine | Representative-state harness and acceptance policy |
 | ESLint / eslint-config-next | 9.39.5 / 16.3.5 | MIT | Static quality/a11y lint | Project rules and correction work |
 | Google Chrome DevTools Protocol | Locally installed Chrome | Google terms | Hermetic local browser automation | Unique-profile harness and assertions |
-| Vercel | Deployment target; external action pending | Vercel terms | Intended Next.js hosting and AI Gateway | Deployment configuration/runbook; no deploy claimed |
+| Vercel | Reviewed deployment `dpl_6UcGRsMhFfhKQyN339CLsn8zbfcB` | Vercel terms | Next.js hosting; optional AI Gateway | Team-built app deployed `READY`; deterministic fallback verified at the public production alias |
 | GitHub Actions | `checkout@v7`, `setup-node@v7` | GitHub terms | CI quality gates | Workflow composition and release gates |
 | 12ui | Stage design workflow; Stage 07 upload blocked | 12ui terms | Earlier accepted visual references | Final UI composition corrected to frozen contracts |
 | Exabytes public product sources | Catalogue references in `planning/catalogue/` | Exabytes/trademark owners | Reviewed product-fact allow-list | Capability-first mapping and claim controls |

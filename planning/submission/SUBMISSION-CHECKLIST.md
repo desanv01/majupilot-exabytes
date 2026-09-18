@@ -10,8 +10,8 @@
 - [x] Hermetic axe/keyboard/responsive/clean-console/duration harness prepared.
 - [x] Offline release, release-manifest, deployment, demo, Q&A, architecture, and third-party material prepared.
 - [x] Final validation commands recorded as passing in `TEST-EVIDENCE.md`.
-- [ ] Main-task independent review and Stage 07 acceptance.
-- [ ] Reviewed Vercel artifact `READY` and deployed fallback journey verified.
+- [x] Main-task independent review and Stage 07 acceptance.
+- [x] Reviewed Vercel artifact `READY` and deployed fallback journey verified.
 
 ## Manual/external gates — pending until real evidence exists
 

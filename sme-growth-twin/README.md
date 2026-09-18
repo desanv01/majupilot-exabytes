@@ -4,8 +4,8 @@ This directory is the canonical Next.js application root. The accepted build
 currently includes the project foundation, discovery interview, Business Twin,
 deterministic diagnostics, capability recommendations, scenario and ROI modeling,
 the immutable Stage 05 advisor-reviewed Transformation Blueprint, the Stage 06
-consented consultation handoff, and the locally implemented Stage 07 hardening
-package pending main-task acceptance.
+consented consultation handoff, and the accepted Stage 07 hardening and release
+package. The reviewed deployment is live at <https://sme-growth-twin.vercel.app>.
 
 Stage 07 adds one production-owned source for three fictional golden cases,
 scoped known-key load/reset controls, a persistent demo disclosure, exact A/B/C

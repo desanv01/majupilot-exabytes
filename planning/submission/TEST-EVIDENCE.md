@@ -3,6 +3,8 @@
 Date: 18 September 2026 (Asia/Kuala_Lumpur)
 Environment: Windows local checkout; Node.js 24.x; npm 11.x; Next.js production mode for Stage 07 browser evidence; model credentials intentionally absent.
 
+Reviewed deployment: <https://sme-growth-twin.vercel.app> (`dpl_6UcGRsMhFfhKQyN339CLsn8zbfcB`, Vercel `READY`, Next.js 16.3.5). GitHub PR #6 quality-gate run 15 passed for reviewed implementation commit `1a6ac740ac903f5fe7e8c634ef4411ee38bec412`.
+
 ## Frozen golden outputs
 
 | Case | Digital / AI | Recommendation order (`status`) | Selected scenario | First-year cost low/base/high | Operational value low/base/high | Net value low/base/high | Payback best/base/worst |
@@ -48,4 +50,11 @@ Final local browser result:
 - Production headers passed: CSP with `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, strict-origin referrer policy, and restrictive permissions policy.
 - Console errors: 0. Failed same-origin fetch/XHR requests: 0. Framework error overlays: 0.
 
-Known limitations: axe is automated coverage rather than a full assistive-technology audit; local timings are environment-specific; the hashed-IP limiter and lead store are per-process/per-instance; live Gateway and deployed verification are separate opt-in/external gates.
+Final deployed browser result:
+
+- The same harness ran in external mode against <https://sme-growth-twin.vercel.app> without starting a local server.
+- Cases A, B, and C matched every frozen output, five fallback origins, and 16 Blueprint sections.
+- The keyboard journey completed through Blueprint in 6,481 ms; safe receipt, same-tab home reset, banner reset, scoped-key clearing, unrelated-storage preservation, and reset status all passed.
+- All 12 axe scans and 21 desktop/360 layout checks passed; production headers matched policy; console errors, failed same-origin requests, framework overlays, and Vercel runtime-error clusters were all zero.
+
+Known limitations: axe is automated coverage rather than a full assistive-technology audit; timings are environment-specific; the hashed-IP limiter and lead store are per-process/per-instance; live Gateway execution remains optional and was not required for the verified deterministic fallback release.

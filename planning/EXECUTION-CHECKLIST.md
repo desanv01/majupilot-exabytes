@@ -95,9 +95,9 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 - [x] Numeric logic works without the model
 - [x] Model timeout has a finite fallback
 - [x] No indefinite loading state
-- [ ] Analysis has a cost/token cap
+- [x] Analysis has a cost/token cap
 - [x] Contact data is not written to logs
-- [ ] Rate limits exist on expensive and lead endpoints
+- [x] Rate limits exist on expensive and lead endpoints
 
 ## Gate 8 - Testing
 
@@ -108,16 +108,16 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 - [x] ROI fixture tests pass
 - [x] Consent tests pass
 - [x] Case A passes end-to-end
-- [ ] Case B passes end-to-end
-- [ ] Case C passes end-to-end
+- [x] Case B passes end-to-end
+- [x] Case C passes end-to-end
 - [x] Mobile viewport passes
-- [ ] Keyboard-only flow passes
-- [ ] Critical accessibility issues equal zero
-- [ ] Full flow completes under five minutes
+- [x] Keyboard-only flow passes
+- [x] Critical accessibility issues equal zero
+- [x] Full flow completes under five minutes
 
 ## Gate 9 - Video and submission
 
-- [ ] Final script fits 6-10 minutes
+- [x] Final script fits 6-10 minutes
 - [ ] Problem and objectives are clear
 - [ ] Innovation is demonstrated
 - [ ] Architecture is shown
@@ -133,10 +133,10 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 ## Gate 10 - Final presentation
 
 - [ ] Live build is frozen 48 hours early
-- [ ] Offline/local fallback works
-- [ ] Demo data can be reset
+- [x] Offline/local fallback works
+- [x] Demo data can be reset
 - [ ] Five user tests completed
 - [ ] Product catalogue reviewed
 - [ ] Judge Q&A rehearsed
 - [ ] Backup laptop/browser plan prepared
-- [ ] Final report and architecture artifacts available locally
+- [x] Final report and architecture artifacts available locally
