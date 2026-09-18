@@ -3,12 +3,12 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 import { POST } from "../../src/app/api/leads/route";
-import { CONSENT_WORDING_VERSION } from "../../src/domain/leads";
+import { EXABYTES_CONSULTATION_POLICY } from "../../src/domain-packs/exabytes/consultation-rules";
 import { processLocalLeadStore } from "../../src/infrastructure/leads/process-local-lead-store";
 import { leadRateLimiter } from "../../src/infrastructure/leads/rate-limit";
 import { stage05CaseA } from "./stage05-fixtures";
 
-function payload(index = 1) { return { submissionId: `fd492b2c-190a-49b8-b93b-${String(index).padStart(12, "0")}`, contact: { name: "Aiman Rahman", businessName: "Kopi Kita Café Group", email: "private@example.test", phone: "+60 12 345 6789", urgency: "within_30_days" }, consent: { accepted: true, wordingVersion: CONSENT_WORDING_VERSION }, honeypot: "", blueprint: stage05CaseA().blueprint }; }
+function payload(index = 1) { return { submissionId: `fd492b2c-190a-49b8-b93b-${String(index).padStart(12, "0")}`, contact: { name: "Aiman Rahman", businessName: "Kopi Kita Café Group", email: "private@example.test", phone: "+60 12 345 6789", urgency: "within_30_days" }, consent: { accepted: true, wordingVersion: EXABYTES_CONSULTATION_POLICY.consentWordingVersion }, honeypot: "", blueprint: stage05CaseA().blueprint }; }
 function apiRequest(body: unknown, headers: Record<string, string> = {}) { return new Request("http://localhost/api/leads", { method: "POST", headers: { "Content-Type": "application/json", "x-forwarded-for": "198.51.100.50", ...headers }, body: JSON.stringify(body) }); }
 
 describe("Stage 06 lead API", () => {
@@ -25,7 +25,7 @@ describe("Stage 06 lead API", () => {
   it("rejects changed payload reuse, false consent, honeypots, unknown fields, content type, malformed and oversized JSON with safe errors", async () => {
     const input = payload(); expect((await POST(apiRequest(input))).status).toBe(201);
     expect((await POST(apiRequest({ ...input, contact: { ...input.contact, businessName: "Changed business" } }))).status).toBe(400);
-    for (const consent of [{ accepted: false, wordingVersion: CONSENT_WORDING_VERSION }, { wordingVersion: CONSENT_WORDING_VERSION }, { accepted: true, wordingVersion: "old" }]) { processLocalLeadStore.resetForTests(); const response = await POST(apiRequest({ ...input, consent })); expect(response.status).toBe(422); expect(await response.json()).toEqual({ error: "consent_required" }); expect(processLocalLeadStore.countForTests()).toBe(0); }
+    for (const consent of [{ accepted: false, wordingVersion: EXABYTES_CONSULTATION_POLICY.consentWordingVersion }, { wordingVersion: EXABYTES_CONSULTATION_POLICY.consentWordingVersion }, { accepted: true, wordingVersion: "old" }]) { processLocalLeadStore.resetForTests(); const response = await POST(apiRequest({ ...input, consent })); expect(response.status).toBe(422); expect(await response.json()).toEqual({ error: "consent_required" }); expect(processLocalLeadStore.countForTests()).toBe(0); }
     expect((await POST(apiRequest({ ...input, honeypot: "bot" }))).status).toBe(400); expect((await POST(apiRequest({ ...input, extra: true }))).status).toBe(400);
     expect((await POST(new Request("http://localhost/api/leads", { method: "POST", headers: { "Content-Type": "text/plain" }, body: "{}" }))).status).toBe(400);
     expect((await POST(new Request("http://localhost/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{" }))).status).toBe(400);

@@ -1,7 +1,7 @@
 # Stage 06 Design Review
 
-Status: **Accepted with bounded adaptation**  
-Source: 12ui Branch run `crt-7f5e51a81e997db719878d30c307b74d58419c35`  
+Status: **Accepted with bounded adaptation**
+Source: 12ui Branch run `crt-7f5e51a81e997db719878d30c307b74d58419c35`
 Reviewed: **18 September 2026**
 
 ## Accepted targets
@@ -60,4 +60,3 @@ targets for implementation and later browser comparison.
 When a visual contains copy or behavior that conflicts with
 `STAGE-06-CONSULTATION-FULL-UX.md`, the frozen stage contract wins. The images
 govern composition, hierarchy, density, spacing, and visual character only.
-

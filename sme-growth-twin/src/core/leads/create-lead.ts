@@ -1,14 +1,12 @@
 import type { Blueprint } from "@/domain/blueprint";
 import {
-  CONSENT_WORDING,
-  CONSENT_WORDING_VERSION,
-  INITIAL_LEAD_STATUS,
   LEAD_MODEL_VERSION,
-  LEAD_SOURCE_CAMPAIGN,
   LEAD_STORAGE_VERSION,
+  leadPolicySchema,
   leadSchema,
   type CreateLeadRequest,
   type Lead,
+  type LeadPolicy,
 } from "@/domain/leads";
 
 export class ConsentRequiredError extends Error {
@@ -62,16 +60,17 @@ function consultantSummary(blueprint: Blueprint) {
   };
 }
 
-export function createLead(request: CreateLeadRequest, factories: LeadFactories): Lead {
-  if (request.consent.accepted !== true || request.consent.wordingVersion !== CONSENT_WORDING_VERSION) throw new ConsentRequiredError();
+export function createLead(request: CreateLeadRequest, policyInput: LeadPolicy, factories: LeadFactories): Lead {
+  const policy = leadPolicySchema.parse(policyInput);
+  if (request.consent.accepted !== true || request.consent.wordingVersion !== policy.consentWordingVersion) throw new ConsentRequiredError();
   const now = factories.now();
   const blueprint = clone(request.blueprint);
   const lead = leadSchema.parse({
     id: factories.leadId(), modelVersion: LEAD_MODEL_VERSION, storageVersion: LEAD_STORAGE_VERSION,
-    submissionId: request.submissionId, createdAt: now, updatedAt: now, status: INITIAL_LEAD_STATUS,
-    sourceCampaign: LEAD_SOURCE_CAMPAIGN, contact: clone(request.contact), blueprintId: blueprint.id, blueprint,
+    submissionId: request.submissionId, createdAt: now, updatedAt: now, status: policy.initialStatus,
+    sourceCampaign: policy.sourceCampaign, contact: clone(request.contact), blueprintId: blueprint.id, blueprint,
     consent: {
-      id: factories.consentId(), wordingVersion: CONSENT_WORDING_VERSION, wording: CONSENT_WORDING,
+      id: factories.consentId(), wordingVersion: policy.consentWordingVersion, wording: policy.consentWording,
       consentedAt: now, submissionId: request.submissionId, blueprintId: blueprint.id,
       blueprintModelVersion: blueprint.modelVersion, blueprintSourceIdentity: clone(blueprint.sourceIdentity),
     },

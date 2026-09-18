@@ -1,7 +1,7 @@
 # Stage 06 — Consultation and Full UX
 
-Status: **Frozen for implementation**  
-Authority: `MASTER-GAMEPLAN.md`, the approved execution orchestration, and the accepted Stage 05 source chain  
+Status: **Frozen for implementation**
+Authority: `MASTER-GAMEPLAN.md`, the approved execution orchestration, and the accepted Stage 05 source chain
 Branch: `codex/stage-06-consultation-full-ux`
 
 ## 1. Objective
@@ -269,4 +269,3 @@ Stage 06 is accepted only when the main task independently verifies the diff,
 all required commands, the browser journey, security/privacy behavior, and CI.
 Acceptance evidence is recorded in `STAGE-LEDGER.md`. Stage 07 remains locked
 until then.
-

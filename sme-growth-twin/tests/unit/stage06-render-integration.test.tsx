@@ -16,6 +16,7 @@ describe("Stage 06 consultation render and browser persistence", () => {
     const html = renderToStaticMarkup(<ConsultationView blueprint={blueprint} />);
     for (const text of ["Request an evidence-ready consultation.", "Kopi Kita Café Group", blueprint.id, "Balanced Growth", "37.5 /100", "42.5 /100", "Contact name", "Business name", "Email address", "Phone number", "Consultation urgency", "What will be shared", "Contact details are not sent to the model", "Explicit choice", "process-local"]) expect(html).toContain(text);
     expect(html).toContain('type="checkbox"'); expect(html).not.toContain('type="checkbox" checked'); expect(html).toContain('autoComplete="name"'); expect(html).toContain('autoComplete="organization"'); expect(html).toContain('autoComplete="email"'); expect(html).toContain('autoComplete="tel"');
+    for (const limit of [100, 140, 254, 32]) expect(html).toContain(`maxLength="${limit}"`);
   });
 
   it("renders a safe responsive success receipt without contact details or delivery claims", () => {

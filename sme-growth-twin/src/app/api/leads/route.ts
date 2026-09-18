@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 
 import { createLead, ConsentRequiredError } from "@/core/leads/create-lead";
 import { createLeadRequestSchema, leadReceiptSchema, type Lead } from "@/domain/leads";
+import { EXABYTES_CONSULTATION_POLICY } from "@/domain-packs/exabytes/consultation-rules";
 import { processLocalLeadStore } from "@/infrastructure/leads/process-local-lead-store";
 import { leadRateLimiter } from "@/infrastructure/leads/rate-limit";
 
@@ -42,7 +43,7 @@ export async function POST(request: Request) {
   if (!body.ok) return json({ error: "invalid_request" }, 400);
   const parsed = createLeadRequestSchema.safeParse(body.value);
   if (!parsed.success || parsed.data.honeypot !== "") return json({ error: "invalid_request" }, 400);
-  if (parsed.data.consent.accepted !== true || parsed.data.consent.wordingVersion !== "consultation-consent-1.0.0") return json({ error: "consent_required" }, 422);
+  if (parsed.data.consent.accepted !== true || parsed.data.consent.wordingVersion !== EXABYTES_CONSULTATION_POLICY.consentWordingVersion) return json({ error: "consent_required" }, 422);
 
   const fingerprint = createHash("sha256").update(JSON.stringify(parsed.data)).digest("hex");
   try {
@@ -55,7 +56,7 @@ export async function POST(request: Request) {
     const rate = leadRateLimiter.check(forwarded || request.headers.get("x-real-ip") || "unidentified-client");
     if (!rate.allowed) return json({ error: "rate_limited" }, 429, { "Retry-After": String(rate.retryAfterSeconds) });
 
-    const lead = createLead(parsed.data, { leadId: () => generatedId("lead"), consentId: () => generatedId("consent"), now: () => new Date().toISOString() });
+    const lead = createLead(parsed.data, EXABYTES_CONSULTATION_POLICY, { leadId: () => generatedId("lead"), consentId: () => generatedId("consent"), now: () => new Date().toISOString() });
     const stored = await processLocalLeadStore.createIdempotently({ fingerprint, lead });
     if (stored.status === "conflict") return json({ error: "invalid_request" }, 400);
     return json(receipt(stored.lead, stored.status === "replayed"), stored.status === "created" ? 201 : 200);

@@ -53,6 +53,11 @@ timestamps, and returns only a safe receipt. Idempotency is keyed by a
 client-generated submission UUID: identical material replays the original lead,
 while changed-payload reuse fails closed.
 
+Consent wording/version, campaign, and initial status enter the generic core
+through a versioned `LeadPolicy`. The frozen Exabytes consultation policy lives
+in the Exabytes domain pack and is supplied only by API/UI composition roots;
+the reusable lead domain and core contain no provider or campaign identifiers.
+
 `LeadStore` is a server-only port. Its current process-local adapter atomically
 creates or replays records and retains the exact immutable Blueprint plus a
 derived consultant summary. A separate bounded process-local rate limiter stores
