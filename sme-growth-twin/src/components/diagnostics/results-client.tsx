@@ -134,7 +134,17 @@ function DimensionPanel({ title, metric, tone }: { title: string; metric: Metric
         {metric.dimensions.map((dimension) => (
           <div className="dimension-row" key={dimension.id}>
             <div><strong>{dimension.label}</strong><small>{dimension.score === null ? "Unavailable" : `${Math.round(dimension.confidence * 100)}% evidence confidence`}</small></div>
-            <div className="score-track" aria-label={`${dimension.label}: ${dimension.score ?? "unavailable"} out of 100`}><span style={{ width: `${dimension.score ?? 0}%` }} /></div>
+            <div
+              className="score-track"
+              role="progressbar"
+              aria-label={dimension.label}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={dimension.score ?? undefined}
+              aria-valuetext={dimension.score === null ? "Unavailable" : `${dimension.score} out of 100`}
+            >
+              <span style={{ width: `${dimension.score ?? 0}%` }} />
+            </div>
             <b>{dimension.score ?? "—"}</b>
           </div>
         ))}

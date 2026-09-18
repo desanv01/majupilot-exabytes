@@ -4,7 +4,7 @@ import { createHash, randomBytes } from "node:crypto";
 
 interface WindowRecord { count: number; resetsAt: number }
 
-export class ProcessLocalLeadRateLimiter {
+export class ProcessLocalHashedRateLimiter {
   private readonly records = new Map<string, WindowRecord>();
   private readonly salt = randomBytes(24).toString("hex");
   constructor(private readonly limit = 5, private readonly windowMs = 10 * 60_000, private readonly maxKeys = 2_000) {}
@@ -28,6 +28,10 @@ export class ProcessLocalLeadRateLimiter {
   }
 
   resetForTests() { this.records.clear(); }
+  hashedKeysForTests() { return [...this.records.keys()]; }
 }
 
+export class ProcessLocalLeadRateLimiter extends ProcessLocalHashedRateLimiter {}
+
 export const leadRateLimiter = new ProcessLocalLeadRateLimiter();
+export const advisorRateLimiter = new ProcessLocalHashedRateLimiter(3, 10 * 60_000, 2_000);
