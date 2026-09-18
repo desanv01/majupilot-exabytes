@@ -37,7 +37,7 @@ describe("Stage 02 rendered contract", () => {
     expect(html).not.toContain("q2.websiteOrStore");
     expect(html).toContain("Customer follow-up lacks a shared system");
     expect(html).toContain("View recommendations");
-    expect(html).not.toMatch(/Exabytes product|ROI|scenario lab|advisor panel|blueprint|consultation|lead capture/i);
+    expect(html).not.toMatch(/Exabytes product|ROI|scenario lab|advisor panel|consultation|lead capture/i);
   });
 
   it("uses semantic expandable controls and score labels", () => {

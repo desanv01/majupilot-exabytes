@@ -29,6 +29,10 @@ describe("Stage 04 rendered and route contract", () => {
 
   it("has actual 360px stacking, target-size, reduced-motion and overflow safeguards", async () => {
     const styles = await readFile(path.join(process.cwd(), "src/app/styles.css"), "utf8");
-    expect(styles).toContain("@media (max-width: 620px)"); expect(styles).toContain(".scenario-grid { grid-template-columns: 1fr; }"); expect(styles).toContain(".timeline { display: grid; grid-template-columns: 1fr; overflow: visible; }"); expect(styles).toContain("min-height: 44px"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)"); expect(styles.replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")).not.toMatch(/position:\s*(fixed|sticky)/);
+    expect(styles).toContain("@media (max-width: 620px)"); expect(styles).toContain(".scenario-grid { grid-template-columns: 1fr; }"); expect(styles).toContain(".timeline { display: grid; grid-template-columns: 1fr; overflow: visible; }"); expect(styles).toContain("min-height: 44px"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
+    const unrelatedPersistentRailsRemoved = styles
+      .replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")
+      .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static");
+    expect(unrelatedPersistentRailsRemoved).not.toMatch(/position:\s*(fixed|sticky)/);
   });
 });

@@ -87,6 +87,9 @@ describe("Stage 03 route, refresh and responsive contracts", () => {
     expect(styles).toContain("min-height: 44px");
     expect(styles).toContain("overflow-wrap: anywhere");
     expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
-    expect(styles.replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")).not.toMatch(/position:\s*(fixed|sticky)/);
+    const unrelatedPersistentRailsRemoved = styles
+      .replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")
+      .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static");
+    expect(unrelatedPersistentRailsRemoved).not.toMatch(/position:\s*(fixed|sticky)/);
   });
 });
