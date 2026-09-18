@@ -47,7 +47,7 @@ function SynthesisPanel({ blueprint }: { blueprint: Blueprint }) {
   const groups = [
     ["Agreement", blueprint.synthesis.agreement, "agreement"], ["Disagreement", blueprint.synthesis.disagreement, "disagreement"], ["Conditions", blueprint.synthesis.conditions, "conditions"], ["Open questions", blueprint.synthesis.openQuestions, "questions"],
   ] as const;
-  return <div className="synthesis-grid">{groups.map(([label, items, className]) => <section className={`synthesis-panel ${className}`} key={label}><h3>{label}</h3>{items.length ? <ul>{items.map((item) => <li key={item.topic}><strong>{title(item.topic)}</strong><p>{item.statement}</p><small>{item.advisorIds.map(title).join(" · ")}</small><Evidence refs={item.evidenceRefs} /></li>)}</ul> : <p className="empty-state">{label === "Disagreement" ? "No material disagreement detected" : `No ${label.toLowerCase()} recorded.`}</p>}</section>)}</div>;
+  return <div className="synthesis-grid">{groups.map(([label, items, className]) => <section className={`synthesis-panel ${className}`} key={label}><h3>{label}</h3>{items.length ? <ul>{items.map((item) => <li key={item.topic}><strong>{title(item.topic)}</strong><ul className="synthesis-perspectives">{item.perspectives.map((perspective, index) => <li key={`${perspective.kind}-${perspective.statement}-${index}`}><span>{title(perspective.kind)}</span><p>{perspective.statement}</p><small>{perspective.advisorIds.map(title).join(" · ")}</small><Evidence refs={perspective.evidenceRefs} /></li>)}</ul></li>)}</ul> : <p className="empty-state">{label === "Disagreement" ? "No material disagreement detected" : `No ${label.toLowerCase()} recorded.`}</p>}</section>)}</div>;
 }
 
 function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
@@ -86,15 +86,20 @@ export function BlueprintView({ sources, initialBlueprint, initialNotice, onPers
   const [statuses, setStatuses] = useState<Record<string, AdvisorStatus>>(() => Object.fromEntries(EXABYTES_ADVISORS_1_0_0.map((item) => [item.id, "ready"])));
   const generate = async () => {
     setBusy(true); setNotice(undefined); setStatuses(Object.fromEntries(EXABYTES_ADVISORS_1_0_0.map((item) => [item.id, "reviewing"])));
-    const context = buildAdvisorReviewContext(sources.twin, sources.diagnostic, sources.recommendations, sources.comparison);
-    let panel: AdvisorPanelResponse;
+    const controller = new AbortController(); const timeout = window.setTimeout(() => controller.abort(), 20_000);
     try {
-      const response = await fetch("/api/advisors/review", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ context, advisorIds: EXABYTES_ADVISORS_1_0_0.map((item) => item.id) }) });
-      if (!response.ok) throw new Error("review_unavailable"); panel = advisorPanelResponseSchema.parse(await response.json());
-    } catch { panel = fallbackPanel(sources); setNotice("Live review was unavailable. Every role completed with the deterministic fallback."); }
-    setStatuses(Object.fromEntries(panel.reviews.map((review) => [review.advisor, review.origin === "model" ? "live" : "fallback"])));
-    const next = buildBlueprint({ ...sources, panel }, { id: () => id("blueprint"), now: () => new Date().toISOString() });
-    setBlueprint(next); onPersist?.(next); setBusy(false);
+      const context = buildAdvisorReviewContext(sources.twin, sources.diagnostic, sources.recommendations, sources.comparison); let panel: AdvisorPanelResponse;
+      try {
+        const response = await fetch("/api/advisors/review", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ context, advisorIds: EXABYTES_ADVISORS_1_0_0.map((item) => item.id) }), signal: controller.signal });
+        if (!response.ok) throw new Error("review_unavailable"); panel = advisorPanelResponseSchema.parse(await response.json());
+      } catch { panel = fallbackPanel(sources); setNotice("Live review was unavailable. Every role completed with the deterministic fallback."); }
+      setStatuses(Object.fromEntries(panel.reviews.map((review) => [review.advisor, review.origin === "model" ? "live" : "fallback"])));
+      const next = buildBlueprint({ ...sources, panel }, { id: () => id("blueprint"), now: () => new Date().toISOString() });
+      setBlueprint(next); onPersist?.(next);
+    } catch {
+      setStatuses(Object.fromEntries(EXABYTES_ADVISORS_1_0_0.map((item) => [item.id, "failed-safe"])));
+      setNotice("The Blueprint could not be saved safely. Your upstream records were not changed; retry when ready.");
+    } finally { window.clearTimeout(timeout); setBusy(false); }
   };
   return <><header className="topbar no-print"><Brand /><span className="save-status">✓ Saved on this device</span></header><JourneyRail /><main className="blueprint-shell"><header className="blueprint-hero no-print"><div><p className="eyebrow">{sources.twin.identity.businessName} · Advisor Panel</p><h1>Challenge the plan. Preserve the evidence.</h1><p>Five bounded advisors review the explicitly selected scenario. Live model review is optional; all numeric results remain deterministic.</p></div><div className="blueprint-toolbar"><Link className="button secondary" href="/scenarios">Back to scenarios</Link><button className="button secondary" type="button" onClick={generate} disabled={busy}>{blueprint ? "Regenerate review" : "Generate advisor review"}</button><button className="button primary" type="button" disabled={!blueprint || busy} onClick={() => window.print()}>Print / save as PDF</button></div></header>
     <section className="advisor-progress no-print" aria-live="polite"><h2>{busy ? "Advisor review in progress" : blueprint ? "Advisor review complete" : "Ready for advisor review"}</h2><p>Each role resolves to live or deterministic fallback in finite time.</p><ol>{EXABYTES_ADVISORS_1_0_0.map((advisor) => <li key={advisor.id}><span>{advisor.label}</span><strong className={statuses[advisor.id]}>{title(statuses[advisor.id])}</strong></li>)}</ol>{notice ? <p className="status-notice">{notice}</p> : null}</section>

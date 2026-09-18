@@ -6,7 +6,8 @@ export const ADVISOR_MODEL_VERSION = "1.0.0" as const;
 export const ADVISOR_PROMPT_VERSION = "1.0.0" as const;
 export const ADVISOR_SCHEMA_VERSION = "1.0.0" as const;
 
-export const advisorIdSchema = z.enum(["growth", "operations", "finance", "cybersecurity", "change"]);
+export const FROZEN_ADVISOR_ORDER = ["growth", "operations", "finance", "cybersecurity", "change"] as const;
+export const advisorIdSchema = z.enum(FROZEN_ADVISOR_ORDER);
 export const advisorPositionSchema = z.enum(["support", "support_with_conditions", "oppose", "insufficient_evidence"]);
 export const claimSourceSchema = z.enum(["model_interpretation", "deterministic_fallback"]);
 
@@ -55,21 +56,36 @@ export const advisorReviewSchema = z.object({
   }
 });
 
+const boundedRef = z.string().trim().min(1).max(160);
+const boundedText = z.string().trim().min(1).max(500);
+const contextRangeSchema = z.object({ low: z.number().finite(), base: z.number().finite(), high: z.number().finite() }).strict();
+const reviewValueStreamSchema = z.discriminatedUnion("status", [
+  z.object({ status: z.literal("estimated"), range: contextRangeSchema, formula: boundedText }).strict(),
+  z.object({ status: z.literal("not_estimated"), missingFields: z.array(boundedText).min(1).max(12), formula: boundedText }).strict(),
+]);
+const reviewPaybackSchema = z.discriminatedUnion("status", [
+  z.object({ status: z.literal("estimated"), best: z.number().finite().nonnegative(), base: z.number().finite().nonnegative(), worst: z.number().finite().nonnegative() }).strict(),
+  z.object({ status: z.literal("not_estimated") }).strict(),
+]);
+
 export const advisorReviewContextSchema = z.object({
-  business: z.object({ sector: z.string().min(1), businessModel: z.string().min(1), employeeBand: z.string().min(1), objective: z.string().min(1), constraints: z.array(z.string()), readiness: z.record(z.string(), z.number().nullable()) }).strict(),
-  scores: z.object({ digitalMaturity: z.number().nullable(), aiReadiness: z.number().nullable() }).strict(),
-  painPoints: z.array(z.object({ id: z.string().min(1), title: z.string().min(1), priority: z.number(), evidenceRefs: z.array(z.string()) }).strict()),
-  recommendations: z.array(z.object({ capabilityId: z.string().min(1), title: z.string().min(1), status: z.string().min(1), evidenceRefs: z.array(z.string()) }).strict()),
-  selectedScenario: z.object({
-    id: z.string().min(1), title: z.string().min(1), intent: z.string().min(1), budgetFit: z.string().min(1),
-    firstYearCost: z.object({ low: z.number(), base: z.number(), high: z.number() }).strict(),
-    operationalValue: z.object({ status: z.string(), low: z.number().optional(), base: z.number().optional(), high: z.number().optional() }).strict(),
-    payback: z.object({ status: z.string(), best: z.number().optional(), base: z.number().optional(), worst: z.number().optional() }).strict(),
-    revenueStatus: z.string().min(1), avoidedRiskStatus: z.string().min(1),
-    interventions: z.array(z.object({ capabilityId: z.string(), title: z.string(), commitment: z.string(), status: z.string(), startMonth: z.number(), completionMonth: z.number(), dependencies: z.array(z.string()) }).strict()),
-    warnings: z.array(z.string()), exclusions: z.array(z.string()), assumptionRefs: z.array(z.string()),
+  business: z.object({
+    sector: boundedText, businessModel: boundedText, employeeBand: boundedText, objective: boundedText,
+    constraints: z.array(boundedText).max(12),
+    readiness: z.record(z.string().min(1).max(60), z.number().finite().min(1).max(5).nullable()).refine((value) => Object.keys(value).length <= 10, "Too many readiness fields"),
   }).strict(),
-  evidenceAllowList: z.array(z.string().min(1)).min(1),
+  scores: z.object({ digitalMaturity: z.number().finite().min(0).max(100).nullable(), aiReadiness: z.number().finite().min(0).max(100).nullable() }).strict(),
+  painPoints: z.array(z.object({ id: boundedRef, title: boundedText, priority: z.number().finite().min(0).max(100), evidenceRefs: z.array(boundedRef).max(10) }).strict()).max(5),
+  recommendations: z.array(z.object({ capabilityId: boundedRef, title: boundedText, status: boundedText, evidenceRefs: z.array(boundedRef).max(30) }).strict()).max(20),
+  selectedScenario: z.object({
+    id: boundedRef, title: boundedText, intent: boundedText, budgetFit: boundedText,
+    firstYearCost: contextRangeSchema,
+    values: z.object({ operational: reviewValueStreamSchema, revenue: reviewValueStreamSchema, avoidedRisk: reviewValueStreamSchema, gross: reviewValueStreamSchema, net: reviewValueStreamSchema }).strict(),
+    payback: reviewPaybackSchema,
+    interventions: z.array(z.object({ capabilityId: boundedRef, title: boundedText, commitment: boundedText, status: boundedText, startMonth: z.number().int().min(1).max(12), completionMonth: z.number().int().min(1).max(24), dependencies: z.array(boundedRef).max(12) }).strict()).max(20),
+    warnings: z.array(boundedText).max(30), exclusions: z.array(boundedText).max(30), assumptionRefs: z.array(boundedRef).max(40),
+  }).strict(),
+  evidenceAllowList: z.array(boundedRef).min(1).max(250),
 }).strict();
 
 export const modelCallRecordSchema = z.object({
@@ -90,11 +106,24 @@ export const advisorPanelResponseSchema = z.object({
   reviews: z.array(advisorReviewSchema).length(5),
   modelCalls: z.array(modelCallRecordSchema).length(5),
 }).strict().superRefine((panel, context) => {
-  const roles = panel.reviews.map((item) => item.advisor);
-  if (new Set(roles).size !== roles.length) context.addIssue({ code: "custom", path: ["reviews"], message: "Advisor roles must be unique" });
+  const reviewRoles = panel.reviews.map((item) => item.advisor);
+  const callRoles = panel.modelCalls.map((item) => item.advisor);
+  if (new Set(reviewRoles).size !== reviewRoles.length) context.addIssue({ code: "custom", path: ["reviews"], message: "Advisor roles must be unique" });
+  if (new Set(callRoles).size !== callRoles.length) context.addIssue({ code: "custom", path: ["modelCalls"], message: "Model-call roles must be unique" });
+  for (const [index, expected] of FROZEN_ADVISOR_ORDER.entries()) {
+    const review = panel.reviews[index]; const call = panel.modelCalls[index];
+    if (review?.advisor !== expected) context.addIssue({ code: "custom", path: ["reviews", index, "advisor"], message: "Reviews must use the frozen role order" });
+    if (call?.advisor !== expected) context.addIssue({ code: "custom", path: ["modelCalls", index, "advisor"], message: "Model calls must use the frozen role order" });
+    if (review && call && review.advisor !== call.advisor) context.addIssue({ code: "custom", path: ["modelCalls", index, "advisor"], message: "Review and model-call roles must align" });
+    if (review && call && ((call.status === "success") !== (review.origin === "model"))) context.addIssue({ code: "custom", path: ["modelCalls", index, "status"], message: "Model success must align with model review origin" });
+  }
 });
 
-export const synthesisEntrySchema = z.object({ topic: z.string().min(1), statement: z.string().min(1), advisorIds: z.array(advisorIdSchema).min(1), evidenceRefs: z.array(z.string().min(1)).min(1) }).strict();
+export const synthesisPerspectiveSchema = z.object({
+  kind: z.enum(["support", "concern", "condition", "missing_evidence"]),
+  statement: z.string().min(1), advisorIds: z.array(advisorIdSchema).min(1), evidenceRefs: z.array(z.string().min(1)).min(1),
+}).strict();
+export const synthesisEntrySchema = z.object({ topic: z.string().min(1), perspectives: z.array(synthesisPerspectiveSchema).min(1) }).strict();
 export const advisorSynthesisSchema = z.object({
   modelVersion: z.literal(ADVISOR_MODEL_VERSION),
   decision: z.enum(["proceed", "proceed_with_conditions", "revise", "insufficient_evidence"]),

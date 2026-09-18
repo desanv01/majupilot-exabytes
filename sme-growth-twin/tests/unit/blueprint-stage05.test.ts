@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import { buildBlueprint } from "../../src/core/blueprint/build-blueprint";
+import { buildAdvisorReviewContext } from "../../src/core/blueprint/build-review-context";
+import { calculateScenarioValue } from "../../src/core/roi/calculate-roi";
 import { BLUEPRINT_SECTION_IDS, blueprintSchema } from "../../src/domain/blueprint";
 import { BLUEPRINT_STORAGE_KEY, isBlueprintCurrent, loadBlueprint, saveBlueprint } from "../../src/infrastructure/persistence/local-blueprint-store";
 import { memoryStorage } from "./stage04-fixtures";
@@ -20,6 +22,19 @@ describe("Stage 05 immutable Blueprint", () => {
     expect(selected.value.net.status === "estimated" ? selected.value.net.range : null).toEqual({ low: -25242, base: -11146, high: 6033 });
     expect(selected.value.payback).toEqual({ status: "estimated", best: 7.2, base: 30.4, worst: 140.5 }); expect(selected.budgetFit).toBe("only_low_within");
     expect(selected.value.revenue.status).toBe("not_estimated"); expect(selected.value.avoidedRisk.status).toBe("not_estimated"); expect(Object.isFrozen(blueprint)).toBe(true); expect(Object.isFrozen(blueprint.snapshot.selectedScenario)).toBe(true);
+  });
+
+  it("passes the complete trusted value streams into advisor context for missing and estimated cases", () => {
+    const full = stage05CaseA(); const selected = full.comparison.scenarios[1];
+    const context = buildAdvisorReviewContext(full.twin, full.diagnostic, full.recommendation, full.comparison);
+    expect(context.selectedScenario.values).toEqual({ operational: selected.value.operational, revenue: selected.value.revenue, avoidedRisk: selected.value.avoidedRisk, gross: selected.value.gross, net: selected.value.net });
+    const assumptions = structuredClone(selected.assumptions);
+    assumptions.revenue.addressableRevenue.range = { low: 100000, base: 120000, high: 140000 }; assumptions.revenue.conversionChange.range = { low: .02, base: .03, high: .04 }; assumptions.revenue.grossMargin.range = { low: .3, base: .4, high: .5 };
+    assumptions.avoidedRisk.baselineIncidentProbability.range = { low: .05, base: .1, high: .15 }; assumptions.avoidedRisk.incidentImpact.range = { low: 10000, base: 20000, high: 30000 }; assumptions.avoidedRisk.riskReduction.range = { low: .2, base: .4, high: .6 };
+    const value = calculateScenarioValue(assumptions, selected.costs.firstYear);
+    const comparison = { ...full.comparison, scenarios: full.comparison.scenarios.map((scenario) => scenario.id === selected.id ? { ...scenario, assumptions, value } : scenario) };
+    const estimated = buildAdvisorReviewContext(full.twin, full.diagnostic, full.recommendation, comparison);
+    expect(estimated.selectedScenario.values.revenue).toEqual(value.revenue); expect(estimated.selectedScenario.values.avoidedRisk).toEqual(value.avoidedRisk); expect(estimated.selectedScenario.values.gross).toEqual(value.gross); expect(estimated.selectedScenario.values.net).toEqual(value.net);
   });
 
   it("round-trips and invalidates every upstream identity/version/selection/model dimension", () => {

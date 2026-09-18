@@ -39,4 +39,14 @@ describe("Stage 05 rendered, responsive, and print contract", () => {
     const mixedHtml = renderToStaticMarkup(<BlueprintView sources={{ twin: full.twin, diagnostic: full.diagnostic, recommendations: full.recommendation, comparison: full.comparison }} initialBlueprint={mixed} />);
     expect(mixedHtml).toContain("Live model review"); expect(mixedHtml).toContain("Deterministic fallback"); expect(mixedHtml).toContain("1 live model review(s) and 4 deterministic fallback review(s)");
   });
+
+  it("renders all distinct same-topic synthesis statements with attribution", () => {
+    const panel = structuredClone(full.panel);
+    panel.reviews[0].support[0] = { ...panel.reviews[0].support[0], topic: "shared_tradeoff", statement: "Growth supports a measured pilot." };
+    panel.reviews[1].support[0] = { ...panel.reviews[1].support[0], topic: "shared_tradeoff", statement: "Operations supports a staged rollout." };
+    panel.reviews[2].concerns[0] = { ...panel.reviews[2].concerns[0], topic: "shared_tradeoff", statement: "Finance requires a cash-flow gate." };
+    const blueprint = buildBlueprint({ twin: full.twin, diagnostic: full.diagnostic, recommendations: full.recommendation, comparison: full.comparison, panel }, { id: () => "blueprint_stage0500012", now: () => full.blueprint.generatedAt });
+    const rendered = renderToStaticMarkup(<BlueprintView sources={{ twin: full.twin, diagnostic: full.diagnostic, recommendations: full.recommendation, comparison: full.comparison }} initialBlueprint={blueprint} />);
+    for (const phrase of ["Growth supports a measured pilot.", "Operations supports a staged rollout.", "Finance requires a cash-flow gate.", "Growth", "Operations", "Finance"]) expect(rendered).toContain(phrase);
+  });
 });

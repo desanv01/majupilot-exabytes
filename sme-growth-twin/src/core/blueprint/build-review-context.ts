@@ -15,7 +15,13 @@ export function buildAdvisorReviewContext(twin: BusinessTwin, diagnostic: Diagno
     scores: { digitalMaturity: diagnostic.digitalMaturity.value, aiReadiness: diagnostic.aiReadiness.value },
     painPoints: diagnostic.painPoints.slice(0, 5).map((item) => ({ id: item.id, title: item.title, priority: item.priority, evidenceRefs: item.evidenceIds })),
     recommendations: recommendations.recommendations.map((item) => ({ capabilityId: item.capabilityId, title: item.title, status: item.status, evidenceRefs: item.evidenceIds })),
-    selectedScenario: { id: selected.id, title: selected.title, intent: selected.intent, budgetFit: selected.budgetFit, firstYearCost: selected.costs.firstYear, operationalValue: selected.value.operational.status === "estimated" ? { status: "estimated", ...selected.value.operational.range } : { status: "not_estimated" }, payback: selected.value.payback, revenueStatus: selected.value.revenue.status, avoidedRiskStatus: selected.value.avoidedRisk.status, interventions: selected.interventions.map((item) => ({ capabilityId: item.capabilityId, title: item.title, commitment: item.commitment, status: item.status, startMonth: item.startMonth, completionMonth: item.completionMonth, dependencies: item.dependencyCapabilityIds })), warnings: selected.warnings, exclusions: selected.value.exclusions, assumptionRefs },
+    selectedScenario: {
+      id: selected.id, title: selected.title, intent: selected.intent, budgetFit: selected.budgetFit, firstYearCost: selected.costs.firstYear,
+      values: { operational: selected.value.operational, revenue: selected.value.revenue, avoidedRisk: selected.value.avoidedRisk, gross: selected.value.gross, net: selected.value.net },
+      payback: selected.value.payback,
+      interventions: selected.interventions.map((item) => ({ capabilityId: item.capabilityId, title: item.title, commitment: item.commitment, status: item.status, startMonth: item.startMonth, completionMonth: item.completionMonth, dependencies: item.dependencyCapabilityIds })),
+      warnings: selected.warnings, exclusions: selected.value.exclusions, assumptionRefs,
+    },
     evidenceAllowList: [...new Set(evidenceAllowList)],
   });
 }
