@@ -77,6 +77,20 @@ retention automation, and deletion workflows remain deferred. The model boundary
 and lead boundary remain server-only; credentials and contact data must never be
 introduced into client bundles or logs.
 
+## Stage 07 release boundaries
+
+The Exabytes domain pack owns the schema-validated A/B/C fixture source. Loading
+a fixture creates only a fresh `ready_for_review` assessment draft and a
+fictional-demo marker; every downstream record is recomputed by the accepted
+application flow. A central known-key list scopes reset across local and session
+storage and preserves unrelated origin data.
+
+The advisor API rejects invalid/oversized inputs before model work and applies a
+salted-hash, process-local IP limiter. Five roles run in parallel; each role has
+at most two attempts, 900 output tokens per attempt, and a 12-second total role
+budget. A role failure resolves to its deterministic fallback. Static headers
+are defined in `next.config.ts`; model-provider modules remain server-only.
+
 ## Domain packs
 
 `DomainPack<TKnowledge>` owns domain-specific knowledge and versions independently

@@ -2,7 +2,7 @@
 
 SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–06 are accepted; Stage 07 Hardening and Submission is ready for implementation.
+> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–06 are accepted; Stage 07 is implemented locally and remains pending main-task acceptance and external deployment review.
 
 ## Why this exists
 
@@ -25,6 +25,8 @@ SME Growth Twin converts structured interview evidence into an inspectable busin
 - Stable local persistence and recalculation when upstream evidence changes.
 - Responsive, keyboard-accessible interfaces validated at desktop and 360 px.
 - Offline-friendly deterministic demonstration path.
+- Three schema-validated fictional golden cases with scoped load/reset and persistent disclosure.
+- Production security headers, advisor call budgets, hashed-IP process-local rate limits, and hermetic Stage 07 release evidence.
 
 ## Product flow
 
@@ -89,8 +91,13 @@ Run these from `sme-growth-twin/`:
 | `npm run build` | Produce the release build |
 | `npm run test:stage05:browser` | Verify the complete Stage 05 journey, exact figures, persistence, responsive layout, and print rendering |
 | `npm run test:stage06:browser` | Verify the Blueprint-to-consultation journey, consent and replay safety, privacy boundary, responsive layout, focus order, and print exclusion |
+| `npm run test:stage07:golden` | Freeze exact A/B/C outputs, fallback origins, and Blueprint completeness |
+| `npm run test:stage07:browser` | Run the production axe, keyboard, responsive, duration, header, reset, and A/B/C fallback gate |
+| `npm run test:stage07:security` | Verify advisor budgets/rate limits, scoped reset, secret scan, and server/client boundary |
+| `npm run audit:production` | Fail on high/critical production dependency findings |
+| `npm run release:manifest` | Emit a checksummed manifest outside the worktree by default |
 
-Every pull request runs all four gates in GitHub Actions.
+Every pull request runs the static, unit, Stage 07 golden/security, production-audit, and build gates in GitHub Actions. Windows browser journeys remain explicit local release gates.
 
 ## Repository map
 
@@ -131,7 +138,7 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 - [x] Stage 04 — Scenario and ROI Lab
 - [x] Stage 05 — Advisor Panel and Blueprint
 - [x] Stage 06 — Consultation handoff and full journey
-- [ ] Stage 07 — Hardening, evidence, and submission
+- [ ] Stage 07 — Hardening, evidence, and submission (implementation present; acceptance/deployment pending)
 
 ## Security and data handling
 
@@ -142,6 +149,8 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 - Consultation data is created only after explicit user consent; contact values are not logged, returned by the API, placed in URLs, or persisted in the browser.
 
 See [SECURITY.md](SECURITY.md) for reporting and prototype limitations.
+
+The self-contained demo, deployment, evidence, third-party, and manual-gate package is in [`planning/submission/`](planning/submission/README.md). No external deployment, video upload, competition submission, human study, or official receipt is claimed without real evidence.
 
 ## Reference and originality
 

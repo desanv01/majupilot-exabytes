@@ -3,8 +3,17 @@
 This directory is the canonical Next.js application root. The accepted build
 currently includes the project foundation, discovery interview, Business Twin,
 deterministic diagnostics, capability recommendations, scenario and ROI modeling,
-the immutable Stage 05 advisor-reviewed Transformation Blueprint, and the
-Stage 06 consented consultation handoff.
+the immutable Stage 05 advisor-reviewed Transformation Blueprint, the Stage 06
+consented consultation handoff, and the locally implemented Stage 07 hardening
+package pending main-task acceptance.
+
+Stage 07 adds one production-owned source for three fictional golden cases,
+scoped known-key load/reset controls, a persistent demo disclosure, exact A/B/C
+fallback assertions, advisor cost/rate boundaries, compatible security headers,
+and a hermetic production browser harness with axe, keyboard, 360 px, clean
+console/network, duration, and reset checks. Run `npm run test:stage07:golden`,
+`npm run test:stage07:security`, and `npm run test:stage07:browser` after a clean
+install. `npm run release:manifest` writes outside the worktree by default.
 
 Stage 06 validates the complete current source chain before showing the form,
 requires explicit versioned consent, and records one idempotent consultant-ready
