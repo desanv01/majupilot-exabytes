@@ -1,0 +1,515 @@
+{
+  "environment": {
+    "node": "v24.14.1",
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "baseUrl": "http://127.0.0.1:3025",
+    "mode": "local-production"
+  },
+  "screenshots": [
+    "comparison-1440.png",
+    "focused-detail-1440.png",
+    "conditional-ai-1440.png",
+    "assumptions-1440.png",
+    "valid-edit-1440.png",
+    "invalid-edit-1440.png",
+    "selected-1440.png",
+    "comparison-1024.png",
+    "focused-detail-1024.png",
+    "conditional-ai-1024.png",
+    "assumptions-1024.png",
+    "valid-edit-1024.png",
+    "invalid-edit-1024.png",
+    "selected-1024.png",
+    "comparison-390.png",
+    "focused-detail-390.png",
+    "conditional-ai-390.png",
+    "assumptions-390.png",
+    "valid-edit-390.png",
+    "invalid-edit-390.png",
+    "selected-390.png",
+    "comparison-360.png",
+    "focused-detail-360.png",
+    "conditional-ai-360.png",
+    "assumptions-360.png",
+    "valid-edit-360.png",
+    "invalid-edit-360.png",
+    "selected-360.png"
+  ],
+  "caseAValues": [
+    {
+      "id": "lean_foundation",
+      "cost": {
+        "low": 5640,
+        "base": 11280,
+        "high": 16920
+      },
+      "operational": {
+        "low": 1088,
+        "base": 3778,
+        "high": 8392
+      },
+      "net": {
+        "low": -15832,
+        "base": -7502,
+        "high": 2752
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 8.1,
+        "base": 35.8,
+        "worst": 186.6
+      },
+      "budgetFit": "base_within",
+      "conditional": null
+    },
+    {
+      "id": "balanced_growth",
+      "cost": {
+        "low": 9200,
+        "base": 18400,
+        "high": 27600
+      },
+      "operational": {
+        "low": 2358,
+        "base": 7254,
+        "high": 15233
+      },
+      "net": {
+        "low": -25242,
+        "base": -11146,
+        "high": 6033
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 7.2,
+        "base": 30.4,
+        "worst": 140.5
+      },
+      "budgetFit": "only_low_within",
+      "conditional": null
+    },
+    {
+      "id": "accelerated_ai",
+      "cost": {
+        "low": 10320,
+        "base": 20640,
+        "high": 30960
+      },
+      "operational": {
+        "low": 2327,
+        "base": 8312,
+        "high": 17377
+      },
+      "net": {
+        "low": -28633,
+        "base": -12328,
+        "high": 7057
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 7.1,
+        "base": 29.8,
+        "worst": 159.6
+      },
+      "budgetFit": "only_low_within",
+      "conditional": {
+        "low": 7200,
+        "base": 14400,
+        "high": 21600
+      }
+    }
+  ],
+  "defaultState": {
+    "focused": "balanced_growth",
+    "preferred": false,
+    "blueprint": false,
+    "months": 12,
+    "notEstimated": 9,
+    "conditional": true
+  },
+  "recovery": {
+    "empty": true,
+    "corrupt": true,
+    "incompatible": true,
+    "stale": true
+  },
+  "persistedRestore": {
+    "preferred": true,
+    "value": "30",
+    "source": "user_override",
+    "sourceRef": "scenario-lab-edit",
+    "blueprint": true
+  },
+  "interactions": [
+    {
+      "width": 1440,
+      "conditionalVisible": true,
+      "validEdit": {
+        "value": 30,
+        "source": "user_override",
+        "sourceRef": "scenario-lab-edit",
+        "operational": 8705,
+        "visible": "LIVE RESULT SUMMARY\n\nBalanced Growth\nUpdates after every valid edit\nGross value, base\nRM 8,705\nFirst-year cost, base\nRM 18,400\nNet value, base\n-RM 9,695\nPayback, base\n25.4 months\nConfidence\nMedium\nBudget fit\nOnly low within\nExclusions\nRevenue value - missing addressable revenue, conversion change, gross margin\nAvoided risk - missing baseline incident probability, incident impact, risk reduction"
+      },
+      "invalidEdit": {
+        "operational": 8705,
+        "error": true,
+        "lastValidRetained": true
+      },
+      "reset": {
+        "value": 25,
+        "source": "planning_default",
+        "error": false
+      },
+      "selected": {
+        "selected": "accelerated_ai",
+        "focused": "balanced_growth",
+        "blueprint": true
+      },
+      "timelineColumns": "80.9062px 80.9219px 80.9062px 80.9219px 80.9219px 80.9062px 80.9219px 80.9219px 80.9062px 80.9219px 80.9219px 80.9062px"
+    },
+    {
+      "width": 1024,
+      "conditionalVisible": true,
+      "validEdit": {
+        "value": 30,
+        "source": "user_override",
+        "sourceRef": "scenario-lab-edit",
+        "operational": 8705,
+        "visible": "LIVE RESULT SUMMARY\n\nBalanced Growth\nUpdates after every valid edit\nGross value, base\nRM 8,705\nFirst-year cost, base\nRM 18,400\nNet value, base\n-RM 9,695\nPayback, base\n25.4 months\nConfidence\nMedium\nBudget fit\nOnly low within\nExclusions\nRevenue value - missing addressable revenue, conversion change, gross margin\nAvoided risk - missing baseline incident probability, incident impact, risk reduction"
+      },
+      "invalidEdit": {
+        "operational": 8705,
+        "error": true,
+        "lastValidRetained": true
+      },
+      "reset": {
+        "value": 25,
+        "source": "planning_default",
+        "error": false
+      },
+      "selected": {
+        "selected": "accelerated_ai",
+        "focused": "balanced_growth",
+        "blueprint": true
+      },
+      "timelineColumns": "104.891px 104.891px 104.906px 104.891px 104.891px 104.906px"
+    },
+    {
+      "width": 390,
+      "conditionalVisible": true,
+      "validEdit": {
+        "value": 30,
+        "source": "user_override",
+        "sourceRef": "scenario-lab-edit",
+        "operational": 8705,
+        "visible": "LIVE RESULT SUMMARY\n\nBalanced Growth\nUpdates after every valid edit\nGross value, base\nRM 8,705\nFirst-year cost, base\nRM 18,400\nNet value, base\n-RM 9,695\nPayback, base\n25.4 months\nConfidence\nMedium\nBudget fit\nOnly low within\nExclusions\nRevenue value - missing addressable revenue, conversion change, gross margin\nAvoided risk - missing baseline incident probability, incident impact, risk reduction"
+      },
+      "invalidEdit": {
+        "operational": 8705,
+        "error": true,
+        "lastValidRetained": true
+      },
+      "reset": {
+        "value": 25,
+        "source": "planning_default",
+        "error": false
+      },
+      "selected": {
+        "selected": "accelerated_ai",
+        "focused": "balanced_growth",
+        "blueprint": true
+      },
+      "timelineColumns": "313px"
+    },
+    {
+      "width": 360,
+      "conditionalVisible": true,
+      "validEdit": {
+        "value": 30,
+        "source": "user_override",
+        "sourceRef": "scenario-lab-edit",
+        "operational": 8705,
+        "visible": "LIVE RESULT SUMMARY\n\nBalanced Growth\nUpdates after every valid edit\nGross value, base\nRM 8,705\nFirst-year cost, base\nRM 18,400\nNet value, base\n-RM 9,695\nPayback, base\n25.4 months\nConfidence\nMedium\nBudget fit\nOnly low within\nExclusions\nRevenue value - missing addressable revenue, conversion change, gross margin\nAvoided risk - missing baseline incident probability, incident impact, risk reduction"
+      },
+      "invalidEdit": {
+        "operational": 8705,
+        "error": true,
+        "lastValidRetained": true
+      },
+      "reset": {
+        "value": 25,
+        "source": "planning_default",
+        "error": false
+      },
+      "selected": {
+        "selected": "accelerated_ai",
+        "focused": "balanced_growth",
+        "blueprint": true
+      },
+      "timelineColumns": "283px"
+    }
+  ],
+  "accessibility": [
+    {
+      "state": "comparison desktop",
+      "violations": []
+    },
+    {
+      "state": "expanded assumptions desktop",
+      "violations": []
+    },
+    {
+      "state": "invalid edit desktop",
+      "violations": []
+    },
+    {
+      "state": "selected mobile",
+      "violations": []
+    },
+    {
+      "state": "expanded assumptions mobile",
+      "violations": []
+    }
+  ],
+  "layoutChecks": [
+    {
+      "state": "comparison",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "lean focused detail",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "conditional AI detail",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "assumptions expanded",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "valid edit",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "invalid edit",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "selected path",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "comparison",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "lean focused detail",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "conditional AI detail",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "assumptions expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "valid edit",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "invalid edit",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "selected path",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "comparison",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "lean focused detail",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "conditional AI detail",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "assumptions expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "valid edit",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "invalid edit",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "selected path",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "comparison",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "lean focused detail",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "conditional AI detail",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "assumptions expanded",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "valid edit",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "invalid edit",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    },
+    {
+      "state": "selected path",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false
+    }
+  ],
+  "keyboard": {
+    "disclosureOpened": true,
+    "blueprintReached": true,
+    "focusStyle": {
+      "tag": "SUMMARY",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  "reducedMotion": true,
+  "printSafe": true,
+  "consoleErrors": [],
+  "failedRequests": [],
+  "overlay": false
+}
