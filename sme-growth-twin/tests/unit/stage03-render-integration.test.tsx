@@ -39,7 +39,7 @@ describe("Stage 03 rendered contract", () => {
     for (const label of ["Why now", "Next", "Why later", "Pain-point fit", "Prerequisite readiness", "Budget fit", "Time to value", "Risk fit", "Data readiness"]) expect(html).toContain(label);
     expect(html).toContain("CRM");
     expect(html).toContain("Messaging apps");
-    expect(html).toContain("11–20 hours");
+    expect(html).toContain("11-20 hours");
     expect(html).toContain("Affected employees");
     expect(html).toContain("Usable data readiness of at least 3");
     expect(html).toContain("Unlock:");
@@ -83,7 +83,7 @@ describe("Stage 03 route, refresh and responsive contracts", () => {
   it("has actual 360px one-column, target-size, overflow and reduced-motion safeguards", async () => {
     const styles = await readFile(path.join(process.cwd(), "src/app/styles.css"), "utf8");
     expect(styles).toContain("@media (max-width: 620px)");
-    expect(styles).toContain(".recommendation-groups { grid-template-columns: 1fr; }");
+    expect(styles).toContain('grid-template-areas: "rank copy" ". fit" ". phase" "inspect inspect";');
     expect(styles).toContain("min-height: 44px");
     expect(styles).toContain("overflow-wrap: anywhere");
     expect(styles).toContain("@media (prefers-reduced-motion: reduce)");

@@ -17,83 +17,273 @@ import { loadAssessmentDraft } from "@/infrastructure/persistence/local-assessme
 import { loadDiagnosticResult } from "@/infrastructure/persistence/local-diagnostic-store";
 import { loadRecommendationResult, saveRecommendationResult } from "@/infrastructure/persistence/local-recommendation-store";
 
-import { Brand } from "../assessment/brand";
-import { Progress } from "../assessment/progress";
+import { PostAssessmentShell } from "../diagnostics/post-assessment-shell";
 
 const statusLabels = { why_now: "Why now", next: "Next", why_later: "Why later" } as const;
-const componentLabels = { painPointFit: "Pain-point fit", prerequisiteReadiness: "Prerequisite readiness", budgetFit: "Budget fit", timeToValue: "Time to value", riskFit: "Risk fit", dataReadiness: "Data readiness" } as const;
+const componentLabels = {
+  painPointFit: "Pain-point fit",
+  prerequisiteReadiness: "Prerequisite readiness",
+  budgetFit: "Budget fit",
+  timeToValue: "Time to value",
+  riskFit: "Risk fit",
+  dataReadiness: "Data readiness",
+} as const;
 const evidenceLabels: Record<string, string> = {
-  "q2.websiteOrStore": "Website or online store", "q2.businessEmail": "Business email", "q2.cloudProductivity": "Cloud productivity", "q2.crm": "CRM",
-  "q2.digitalMarketingAnalytics": "Digital marketing and analytics", "q2.backup": "Backup", "q2.cybersecurityControls": "Cybersecurity controls", "q2.aiTools": "AI tools",
-  "q3.biggestChallenge": "Biggest challenge", "q3.manualHoursPerWeek": "Manual hours per week", "q3.affectedEmployees": "Affected employees", "q3.urgency": "Urgency",
-  "q4.primaryObjective": "Primary objective", "q4.implementationPace": "Implementation pace", "q4.highestConcern": "Highest concern",
-  "q5.leadershipSponsorship": "Leadership sponsorship", "q5.usableData": "Usable data", "q5.employeeDigitalSkills": "Employee digital skills", "q5.processConsistency": "Process consistency",
-  fu_manual_hours: "Estimated manual-work hours", fu_customer_records: "Customer-record location", fu_backup_frequency: "Backup frequency",
+  "q2.websiteOrStore": "Website or online store",
+  "q2.businessEmail": "Business email",
+  "q2.cloudProductivity": "Cloud productivity",
+  "q2.crm": "CRM",
+  "q2.digitalMarketingAnalytics": "Digital marketing and analytics",
+  "q2.backup": "Backup",
+  "q2.cybersecurityControls": "Cybersecurity controls",
+  "q2.aiTools": "AI tools",
+  "q3.biggestChallenge": "Biggest challenge",
+  "q3.manualHoursPerWeek": "Manual hours per week",
+  "q3.affectedEmployees": "Affected employees",
+  "q3.urgency": "Urgency",
+  "q4.primaryObjective": "Primary objective",
+  "q4.implementationPace": "Implementation pace",
+  "q4.highestConcern": "Highest concern",
+  "q5.leadershipSponsorship": "Leadership sponsorship",
+  "q5.usableData": "Usable data",
+  "q5.employeeDigitalSkills": "Employee digital skills",
+  "q5.processConsistency": "Process consistency",
+  fu_manual_hours: "Estimated manual-work hours",
+  fu_customer_records: "Customer-record location",
+  fu_backup_frequency: "Backup frequency",
 };
-const valueLabels: Record<string, string> = { not_used: "Not used", informal: "Informal", active: "Active", unknown: "Not sure", messaging_apps: "Messaging apps", "11_20": "11–20 hours", none: "None", increase_revenue: "Increase revenue", customer_management: "Customer management", cost: "Cost" };
-const formatValue = (value: unknown) => value === null || value === undefined ? "Not sure" : Array.isArray(value) ? value.join(", ") : typeof value === "number" ? String(value) : valueLabels[String(value)] ?? String(value).replaceAll("_", " ");
-const titleCase = (value: string) => value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+const valueLabels: Record<string, string> = {
+  not_used: "Not used",
+  informal: "Informal",
+  active: "Active",
+  unknown: "Not sure",
+  messaging_apps: "Messaging apps",
+  "11_20": "11-20 hours",
+  none: "None",
+  increase_revenue: "Increase revenue",
+  customer_management: "Customer management",
+  cost: "Cost",
+};
+
+const displayText = (value: string) => value.replaceAll("–", "-").replaceAll("—", "-");
+const formatValue = (value: unknown) => value === null || value === undefined
+  ? "Not sure"
+  : Array.isArray(value)
+    ? value.map((item) => displayText(String(item))).join(", ")
+    : typeof value === "number"
+      ? String(value)
+      : displayText(valueLabels[String(value)] ?? String(value).replaceAll("_", " "));
+const titleCase = (value: string) => displayText(value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase()));
 const offeringName = (id: string) => EXABYTES_CATALOGUE_1_0_0.offerings.find((item) => item.id === id)?.name ?? titleCase(id);
 const formatVerifiedDate = (value: string) => new Intl.DateTimeFormat("en-MY", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`));
+const scoreValue = (value: number | null) => value === null ? "Not available" : value.toFixed(1);
 
 function EvidenceList({ twin, ids }: { twin: BusinessTwin; ids: readonly string[] }) {
   const wanted = new Set(ids);
   const evidence = twin.evidence.filter((item) => wanted.has(item.id));
-  return evidence.length ? <ul className="recommendation-evidence">{evidence.map((item: Evidence) => <li key={item.id}><span>{evidenceLabels[item.sourceRef] ?? "Recorded business fact"}</span><strong>{formatValue(item.normalizedValue)}</strong><code>{item.id}</code></li>)}</ul> : <p>No supporting evidence is available.</p>;
+  return evidence.length ? (
+    <ul className="recommendation-evidence">
+      {evidence.map((item: Evidence) => (
+        <li key={item.id}>
+          <span>{evidenceLabels[item.sourceRef] ?? "Recorded business fact"}</span>
+          <strong>{formatValue(item.normalizedValue)}</strong>
+          <code>{displayText(item.id)}</code>
+        </li>
+      ))}
+    </ul>
+  ) : <p>No supporting evidence is available.</p>;
 }
 
 function OfferingDetails({ recommendation }: { recommendation: CapabilityRecommendation }) {
   const offering = recommendation.mappedOffering;
-  if (!offering) return <section className="mapping-unavailable"><h4>Current offering fit</h4><p>Consult Exabytes for a current fit. The capability advice remains valid, but catalogue mapping failed closed.</p></section>;
-  return <section className="offering-detail" aria-label={`${offering.name} catalogue evidence`}>
-    <div className="offering-heading"><div><p className="micro-label">{offering.futureFit ? "Future-fit catalogue option" : "Supported by"}</p><h4>{offering.name}</h4><p>{offering.provider}: {offering.name}</p></div><span>Catalogue entry active</span></div>
-    <p><strong>Why it maps:</strong> {offering.mappingReason}</p>
-    <p><strong>Approved fact summary:</strong> {offering.approvedFactSummary}</p>
-    <dl className="catalogue-meta"><div><dt>Catalogue</dt><dd>{offering.catalogueVersion}</dd></div><div><dt>Source checked</dt><dd>{formatVerifiedDate(offering.verifiedAt)}</dd></div><div><dt>Pricing</dt><dd>Verify current quote with Exabytes</dd></div></dl>
-    <a className="button secondary source-link" href={offering.sourceUrl} target="_blank" rel="noopener noreferrer">Open official source ↗</a>
-    {recommendation.alternativeOfferingIds.length ? <p className="alternatives"><strong>Consultant-validated alternatives:</strong> {recommendation.alternativeOfferingIds.map(offeringName).join(", ")}. These are not ranked claims.</p> : null}
-    <p className="limitation"><strong>Consultation limitation:</strong> Final suitability, plan details, availability, and terms require confirmation with Exabytes. This is not a purchase recommendation.</p>
-  </section>;
+  if (!offering) {
+    return (
+      <section className="mapping-unavailable" aria-label="Catalogue mapping unavailable">
+        <p className="detail-kicker">Catalogue mapping</p>
+        <h4>Capability guidance remains available</h4>
+        <p>The capability decision is still valid, but no current catalogue offering passed the mapping rules. Consult Exabytes to confirm a suitable product.</p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="offering-detail" aria-label={`${offering.name} catalogue provenance`}>
+      <header className="offering-heading">
+        <div>
+          <p className="detail-kicker">{offering.futureFit ? "Future-fit" : "Supported by"}</p>
+          <h4>{displayText(offering.name)}</h4>
+          <p>{displayText(offering.provider)}: {displayText(offering.name)}</p>
+        </div>
+        <span>Catalogue entry active</span>
+      </header>
+      <p className="catalogue-status-note">Active means this entry is available in Catalogue 1.0.0. It is not a certification or endorsement.</p>
+      <div className="catalogue-copy">
+        <p><strong>Why it maps</strong>{displayText(offering.mappingReason)}</p>
+        <p><strong>Approved fact summary</strong>{displayText(offering.approvedFactSummary)}</p>
+      </div>
+      <dl className="catalogue-meta">
+        <div><dt>Catalogue version</dt><dd>{offering.catalogueVersion}</dd></div>
+        <div><dt>Official source checked</dt><dd>{formatVerifiedDate(offering.verifiedAt)}</dd></div>
+        <div><dt>Relative price</dt><dd>Tier {offering.relativeCostTier} of 4</dd></div>
+        <div><dt>Quote notice</dt><dd>Verify current quote with Exabytes</dd></div>
+        <div><dt>Offering ID</dt><dd>{offering.id}</dd></div>
+        <div><dt>Selection rule</dt><dd>{offering.selectionRuleId}</dd></div>
+      </dl>
+      <div className="catalogue-source">
+        <strong>{displayText(offering.sourceLabel)}</strong>
+        <a href={offering.sourceUrl} target="_blank" rel="noopener noreferrer"><span>{displayText(offering.sourceUrl)}</span><b>Open official source</b></a>
+      </div>
+      {recommendation.alternativeOfferingIds.length ? (
+        <p className="alternatives"><strong>Consultant-validated alternatives:</strong> {recommendation.alternativeOfferingIds.map(offeringName).join(", ")}. These catalogue entries are not ranked claims.</p>
+      ) : <p className="alternatives"><strong>Catalogue alternatives:</strong> No active alternative is named by Catalogue 1.0.0 for this mapping.</p>}
+      <p className="limitation"><strong>Consultation limitation:</strong> Final suitability, plan details, availability, and terms require confirmation with Exabytes. This is not a purchase recommendation.</p>
+    </section>
+  );
 }
 
-function RecommendationDetail({ recommendation, twin, diagnostic }: { recommendation: CapabilityRecommendation; twin: BusinessTwin; diagnostic: DiagnosticResult }) {
+function RecommendationDisclosure({ recommendation, twin, diagnostic, featured = false }: { recommendation: CapabilityRecommendation; twin: BusinessTwin; diagnostic: DiagnosticResult; featured?: boolean }) {
   const pains = diagnostic.painPoints.filter((pain) => recommendation.addressedPainPointIds.includes(pain.id));
-  return <details className={`recommendation-card ${recommendation.status}`}>
-    <summary>
-      <span className="rank">{recommendation.rank}</span>
-      <span className="recommendation-summary"><span className="status-chip">{statusLabels[recommendation.status]}</span><strong>{recommendation.title}</strong><span>{recommendation.outcome}</span>{recommendation.mappedOffering ? <small>{recommendation.mappedOffering.futureFit ? "Future-fit" : "Supported by"} · {recommendation.mappedOffering.name}</small> : <small>Offering mapping unavailable</small>}</span>
-      <span className="fit"><strong>{recommendation.fitScore.toFixed(1)}</strong><small>fit</small></span>
-      <span className="disclosure-label">Details</span>
-    </summary>
-    <div className="recommendation-detail">
-      <section className="decision-explanation"><div><h3>Why selected</h3><p>{recommendation.whySelected}</p></div><div><h3>{statusLabels[recommendation.status]}</h3><p>{recommendation.whyNowOrLater}</p></div></section>
-      <section><h3>Six fit components</h3><p className="section-note">Fit = pain 30% + prerequisites 20% + budget 15% + time 15% + risk 10% + data 10%.</p><dl className="fit-components">{Object.entries(recommendation.componentScores).map(([key, score]) => <div key={key}><dt>{componentLabels[key as keyof typeof componentLabels]}</dt><dd>{score.toFixed(1)}</dd><span className="component-track"><i style={{ width: `${score}%` }} /></span></div>)}</dl></section>
-      <div className="decision-meta"><div><span>Roadmap phase</span><strong>{recommendation.roadmapPhase}</strong></div><div><span>Effort tier</span><strong>{recommendation.effortTier} of 4</strong></div><div><span>Relative cost tier</span><strong>{recommendation.relativeCostTier} of 4</strong></div><div><span>Time-to-value tier</span><strong>{recommendation.timeToValueTier} of 4</strong></div></div>
-      <section><h3>Prerequisite checks</h3>{recommendation.prerequisites.length ? <ul className="prerequisite-list">{recommendation.prerequisites.map((check) => <li className={check.status} key={check.ruleId}><strong>{check.status === "met" ? "✓" : "!"} {check.label}</strong><span>{check.explanation}</span>{check.status !== "met" ? <em>Unlock: {check.unlockAction}</em> : null}</li>)}</ul> : <p>No hard prerequisite is configured for this capability.</p>}</section>
-      <section><h3>Addressed pain and expected impact</h3>{pains.length ? <ul>{pains.map((pain) => <li key={pain.id}><strong>{pain.title}</strong> — {pain.mechanism}</li>)}</ul> : <p>This was selected from a directly assessed gap.</p>}<p><strong>Expected impact:</strong> {recommendation.expectedImpact}</p><p><strong>Risks to manage:</strong> {recommendation.risks.join(", ")}.</p></section>
-      <section><h3>Current supporting evidence</h3><EvidenceList twin={twin} ids={recommendation.evidenceIds} /></section>
-      <OfferingDetails recommendation={recommendation} />
-    </div>
-  </details>;
+  const offering = recommendation.mappedOffering;
+  return (
+    <details className={`recommendation-record ${recommendation.status}${featured ? " featured" : ""}`} data-capability-id={recommendation.capabilityId}>
+      <summary>
+        <span className="recommendation-rank"><small>Rank</small><strong>{recommendation.rank}</strong></span>
+        <span className="recommendation-summary-copy">
+          <span className="recommendation-status">{statusLabels[recommendation.status]}</span>
+          <strong>{displayText(recommendation.title)}</strong>
+          <span>{displayText(recommendation.outcome)}</span>
+          {offering ? <small>{offering.futureFit ? "Future-fit" : "Supported by"}: {displayText(offering.name)}</small> : <small>Catalogue mapping unavailable</small>}
+        </span>
+        <span className="recommendation-fit"><strong>{recommendation.fitScore.toFixed(1)}</strong><small>Exact fit</small></span>
+        <span className="recommendation-phase"><small>Roadmap phase</small><strong>{displayText(recommendation.roadmapPhase)}</strong></span>
+        <span className="recommendation-inspect">Inspect decision</span>
+      </summary>
+      <div className="recommendation-detail">
+        <section className="decision-explanation">
+          <div><p className="detail-kicker">Why selected</p><h3>What the evidence supports</h3><p>{displayText(recommendation.whySelected)}</p></div>
+          <div><p className="detail-kicker">{statusLabels[recommendation.status]}</p><h3>Why this timing</h3><p>{displayText(recommendation.whyNowOrLater)}</p></div>
+        </section>
+
+        <section className="fit-section">
+          <header><div><p className="detail-kicker">Calculation</p><h3>Six exact fit components</h3></div><strong>{recommendation.fitScore.toFixed(1)} fit</strong></header>
+          <code className="formula">fit = pain_point_fit * 0.30 + prerequisite_readiness * 0.20 + budget_fit * 0.15 + time_to_value * 0.15 + risk_fit * 0.10 + data_readiness * 0.10</code>
+          <dl className="fit-components">
+            {Object.entries(recommendation.componentScores).map(([key, score]) => (
+              <div key={key}><dt>{componentLabels[key as keyof typeof componentLabels]}</dt><dd>{score.toFixed(1)} <span>out of 100</span></dd></div>
+            ))}
+          </dl>
+        </section>
+
+        <dl className="decision-meta" aria-label="Delivery profile">
+          <div><dt>Roadmap phase</dt><dd>{displayText(recommendation.roadmapPhase)}</dd></div>
+          <div><dt>Effort tier</dt><dd>{recommendation.effortTier} of 4</dd></div>
+          <div><dt>Relative cost tier</dt><dd>{recommendation.relativeCostTier} of 4</dd></div>
+          <div><dt>Time-to-value tier</dt><dd>{recommendation.timeToValueTier} of 4</dd></div>
+        </dl>
+
+        <section>
+          <p className="detail-kicker">Readiness gate</p>
+          <h3>Prerequisite checks</h3>
+          {recommendation.prerequisites.length ? (
+            <ul className="prerequisite-list">
+              {recommendation.prerequisites.map((check) => (
+                <li className={check.status} key={check.ruleId}>
+                  <span className="prerequisite-state">{titleCase(check.status)}</span>
+                  <div><strong>{displayText(check.label)}</strong><span>{displayText(check.explanation)}</span>{check.status !== "met" ? <em>Unlock: {displayText(check.unlockAction)}</em> : null}</div>
+                </li>
+              ))}
+            </ul>
+          ) : <p>No hard prerequisite is configured for this capability.</p>}
+        </section>
+
+        <section className="impact-evidence-grid">
+          <div>
+            <p className="detail-kicker">Business case</p>
+            <h3>Addressed pain and expected impact</h3>
+            {pains.length ? <ul className="addressed-pains">{pains.map((pain) => <li key={pain.id}><strong>{displayText(pain.title)}</strong><span>{displayText(pain.mechanism)}</span></li>)}</ul> : <p>This capability was selected from a directly assessed gap.</p>}
+            <p><strong>Expected impact:</strong> {displayText(recommendation.expectedImpact)}</p>
+            <p><strong>Risks to manage:</strong> {recommendation.risks.map(displayText).join(", ")}.</p>
+          </div>
+          <div>
+            <p className="detail-kicker">Current evidence</p>
+            <h3>Recorded facts used</h3>
+            <EvidenceList twin={twin} ids={recommendation.evidenceIds} />
+          </div>
+        </section>
+
+        <OfferingDetails recommendation={recommendation} />
+      </div>
+    </details>
+  );
 }
 
 export function RecommendationsView({ result, twin, diagnostic }: { result: RecommendationResult; twin: BusinessTwin; diagnostic: DiagnosticResult }) {
-  const groups = (["why_now", "next", "why_later"] as const).map((status) => ({ status, items: result.recommendations.filter((item) => item.status === status) }));
-  return <>
-    <header className="topbar"><Brand /><span className="save-status">✓ Saved on this device</span></header>
-    <Progress step={5} />
-    <main className="recommendations-shell">
-      <header className="recommendations-hero"><div><p className="eyebrow">{twin.identity.businessName} · capability decisions</p><h1>Your Recommendations</h1><p className="lead">A capability-first sequence based on your assessment evidence, diagnostic rules, capacity, and readiness.</p></div><div className="snapshot" aria-label="Assessment snapshot"><p>Assessment snapshot</p><div><span><strong>{diagnostic.digitalMaturity.value ?? "—"}</strong><small>Digital maturity</small></span><span><strong>{diagnostic.aiReadiness.value ?? "—"}</strong><small>AI readiness</small></span><span><strong>{diagnostic.digitalMaturity.confidenceBand}</strong><small>Confidence · {diagnostic.digitalMaturity.confidence.toFixed(2)}</small></span></div></div></header>
-      <section className="sequence-intro"><div><p className="eyebrow">Recommended capability decisions</p><h2>Act in the right order</h2><p>Products appear only after the underlying business capability is selected and ranked.</p></div><p className="version-badge">Recommendation {result.recommendationModelVersion}<br />Catalogue {result.catalogueVersion}</p></section>
-      <div className="recommendation-groups">{groups.map((group) => <section className={`recommendation-group ${group.status}`} key={group.status} aria-labelledby={`${group.status}-title`}><header><div><p className="group-kicker">{group.status === "why_now" ? "Start here" : group.status === "next" ? "Build next" : "Keep visible"}</p><h2 id={`${group.status}-title`}>{statusLabels[group.status]}</h2></div><span>{group.items.length} {group.items.length === 1 ? "decision" : "decisions"}</span></header>{group.items.length ? group.items.map((item) => <RecommendationDetail key={item.capabilityId} recommendation={item} twin={twin} diagnostic={diagnostic} />) : <p className="empty-group">No capability falls in this group for the current evidence.</p>}</section>)}</div>
-      <section className="stage-four-panel"><div><p className="eyebrow">Next step</p><h2>Compare transformation scenarios</h2><p>Explore three evidence-backed paths, inspect the assumptions behind their ROI ranges, and choose a preferred direction.</p></div><div className="inline-actions"><Link className="button secondary" href="/results">Back to results</Link><Link className="button primary" href="/scenarios">Compare transformation scenarios</Link></div></section>
-    </main>
-  </>;
+  const first = result.recommendations.find((item) => item.status === "why_now");
+  const remaining = result.recommendations.filter((item) => item.capabilityId !== first?.capabilityId);
+  const statusCounts = result.recommendations.reduce((counts, item) => ({ ...counts, [item.status]: counts[item.status] + 1 }), { why_now: 0, next: 0, why_later: 0 });
+
+  return (
+    <PostAssessmentShell businessName={twin.identity.businessName} context="recommendations">
+      <main className="recommendations-shell">
+        <header className="recommendations-heading">
+          <div><p className="eyebrow">Capability decisions</p><h1>Your recommended sequence.</h1><p className="lead">Start with the strongest supported capability, then keep later work visible in the order the rules produced.</p></div>
+          <Link className="recommendations-results-link" href="/results">Review full diagnosis</Link>
+        </header>
+
+        <section className="recommendations-snapshot" aria-label="Diagnostic handoff">
+          <div><span>Digital maturity</span><strong>{scoreValue(diagnostic.digitalMaturity.value)}</strong><small>{diagnostic.digitalMaturity.bandLabel}</small></div>
+          <div><span>AI readiness</span><strong>{scoreValue(diagnostic.aiReadiness.value)}</strong><small>{diagnostic.aiReadiness.bandLabel}</small></div>
+          <div><span>Evidence confidence</span><strong>{diagnostic.digitalMaturity.confidence.toFixed(2)}</strong><small>{diagnostic.digitalMaturity.confidenceBand}</small></div>
+          <p>Diagnostic context only. Products are shown after capabilities are ranked.</p>
+        </section>
+
+        {first ? (
+          <section className="first-move" aria-labelledby="first-move-title">
+            <header><div><p className="eyebrow">First move</p><h2 id="first-move-title">Lead with the highest-ranked decision.</h2></div><p>{statusCounts.why_now} Why now, {statusCounts.next} Next, {statusCounts.why_later} Why later</p></header>
+            <RecommendationDisclosure recommendation={first} twin={twin} diagnostic={diagnostic} featured />
+            <p className="capability-before-product">The capability is the recommendation. Any product mapping is subordinate catalogue evidence.</p>
+          </section>
+        ) : (
+          <section className="recommendations-empty"><p className="eyebrow">No ranked decision</p><h2>More diagnostic evidence is needed.</h2><p>No capability decision was produced from the current evidence. Return to results before comparing scenarios.</p></section>
+        )}
+
+        {remaining.length ? (
+          <section className="ordered-sequence" aria-labelledby="ordered-sequence-title">
+            <header><p className="eyebrow">Ordered capability ledger</p><h2 id="ordered-sequence-title">Continue in canonical rule order.</h2><p>Every deferred capability stays visible with its blockers and unlock actions.</p></header>
+            <ol start={2}>
+              {remaining.map((recommendation, index) => {
+                const previous = index === 0 ? first?.status : remaining[index - 1].status;
+                const showStatusHeading = recommendation.status !== previous;
+                return (
+                  <li key={recommendation.capabilityId} value={recommendation.rank}>
+                    {showStatusHeading ? <div className={`ledger-status-heading ${recommendation.status}`}><span>{statusLabels[recommendation.status]}</span><small>{recommendation.status === "next" ? "Build after the first moves" : "Keep visible until readiness improves"}</small></div> : null}
+                    <RecommendationDisclosure recommendation={recommendation} twin={twin} diagnostic={diagnostic} />
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ) : null}
+
+        <section className="catalogue-method" aria-label="Recommendation provenance">
+          <div><p className="eyebrow">Decision provenance</p><h2>Rules first. Catalogue second.</h2></div>
+          <dl><div><dt>Recommendation model</dt><dd>{result.recommendationModelVersion}</dd></div><div><dt>Catalogue</dt><dd>{result.catalogueVersion}</dd></div></dl>
+          <p>The sequence comes from deterministic assessment and diagnostic rules. Catalogue entries only support an already-selected capability.</p>
+        </section>
+
+        {result.recommendations.length ? <section className="stage-four-panel">
+          <div><p className="eyebrow">Compare next</p><h2>Compare transformation scenarios</h2><p>Compare Lean, Balanced, and Accelerated paths with explicit assumptions and ROI ranges. No scenario value is shown here.</p></div>
+          <div className="inline-actions"><Link className="button secondary" href="/results">Back to results</Link><Link className="button primary" href="/scenarios">Compare transformation scenarios</Link></div>
+        </section> : null}
+      </main>
+    </PostAssessmentShell>
+  );
 }
 
 export function RecommendationsClient() {
   const router = useRouter();
   const [state, setState] = useState<{ twin: BusinessTwin; diagnostic: DiagnosticResult; result: RecommendationResult }>();
+
   useEffect(() => {
     const assessment = loadAssessmentDraft(localStorage);
     if (assessment.status !== "ok" || assessment.draft.status !== "ready_for_review") { router.replace("/assessment"); return; }
@@ -102,11 +292,19 @@ export function RecommendationsClient() {
       const diagnosticLoad = loadDiagnosticResult(localStorage, twin);
       if (diagnosticLoad.status !== "ok") { router.replace("/assessment/analysis"); return; }
       const saved = loadRecommendationResult(localStorage, twin, diagnosticLoad.result);
-      const result = saved.status === "ok" ? saved.result : buildRecommendationResult(twin, diagnosticLoad.result, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0, EXABYTES_CATALOGUE_1_0_0, EXABYTES_OFFERING_SELECTION_1_0_0, { now: () => new Date().toISOString(), id: () => `recommendation_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}` });
+      const result = saved.status === "ok" ? saved.result : buildRecommendationResult(
+        twin,
+        diagnosticLoad.result,
+        EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0,
+        EXABYTES_CATALOGUE_1_0_0,
+        EXABYTES_OFFERING_SELECTION_1_0_0,
+        { now: () => new Date().toISOString(), id: () => `recommendation_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}` },
+      );
       if (saved.status !== "ok") saveRecommendationResult(localStorage, result);
       setState({ twin, diagnostic: diagnosticLoad.result, result });
     } catch { router.replace("/results"); }
   }, [router]);
-  if (!state) return <main className="loading">Preparing your capability sequence…</main>;
+
+  if (!state) return <PostAssessmentShell context="restoring"><main className="recommendations-restoring"><p className="eyebrow">Restoring decisions</p><h1>Preparing your capability sequence.</h1><p>Your current Business Twin, diagnosis, and saved recommendation are being checked locally.</p></main></PostAssessmentShell>;
   return <RecommendationsView {...state} />;
 }

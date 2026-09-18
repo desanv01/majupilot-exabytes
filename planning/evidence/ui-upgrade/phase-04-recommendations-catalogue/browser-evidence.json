@@ -1,0 +1,318 @@
+{
+  "environment": {
+    "node": "v24.14.1",
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "baseUrl": "http://127.0.0.1:3024",
+    "mode": "local-production"
+  },
+  "screenshots": [
+    "recommendations-overview-1440.png",
+    "first-decision-expanded-1440.png",
+    "catalogue-evidence-expanded-1440.png",
+    "why-later-expanded-1440.png",
+    "recommendations-overview-1024.png",
+    "first-decision-expanded-1024.png",
+    "catalogue-evidence-expanded-1024.png",
+    "why-later-expanded-1024.png",
+    "recommendations-overview-390.png",
+    "first-decision-expanded-390.png",
+    "catalogue-evidence-expanded-390.png",
+    "why-later-expanded-390.png",
+    "recommendations-overview-360.png",
+    "first-decision-expanded-360.png",
+    "catalogue-evidence-expanded-360.png",
+    "why-later-expanded-360.png"
+  ],
+  "caseA": {
+    "sequence": [
+      {
+        "id": "shared_customer_operations",
+        "status": "why_now",
+        "fit": 93.5
+      },
+      {
+        "id": "professional_team_collaboration",
+        "status": "why_now",
+        "fit": 92.9
+      },
+      {
+        "id": "protected_business_continuity",
+        "status": "why_now",
+        "fit": 92.9
+      },
+      {
+        "id": "protected_web_presence",
+        "status": "next",
+        "fit": 92.9
+      },
+      {
+        "id": "governed_ai_automation",
+        "status": "why_later",
+        "fit": 54.2
+      }
+    ],
+    "firstComponents": {
+      "painPointFit": 95,
+      "prerequisiteReadiness": 100,
+      "budgetFit": 100,
+      "timeToValue": 100,
+      "riskFit": 100,
+      "dataReadiness": 50
+    },
+    "firstMapping": "Freshsales CRM"
+  },
+  "sequences": {
+    "caseB": [
+      {
+        "id": "professional_team_collaboration",
+        "status": "why_now",
+        "fit": "100.0"
+      },
+      {
+        "id": "measurable_digital_growth",
+        "status": "why_now",
+        "fit": "86.9"
+      },
+      {
+        "id": "shared_customer_operations",
+        "status": "why_now",
+        "fit": "85.9"
+      },
+      {
+        "id": "protected_business_continuity",
+        "status": "next",
+        "fit": "82.0"
+      },
+      {
+        "id": "governed_ai_automation",
+        "status": "why_later",
+        "fit": "54.3"
+      }
+    ],
+    "caseC": [
+      {
+        "id": "shared_customer_operations",
+        "status": "why_now",
+        "fit": "84.8"
+      },
+      {
+        "id": "governed_ai_automation",
+        "status": "why_now",
+        "fit": "83.4"
+      },
+      {
+        "id": "scalable_cloud_operations",
+        "status": "why_now",
+        "fit": "76.2"
+      }
+    ]
+  },
+  "recovery": {
+    "empty": true,
+    "corrupt": true,
+    "incompatible": true,
+    "stale": true
+  },
+  "fixtures": {
+    "unmappedFailClosed": true,
+    "unknownPrerequisite": true,
+    "unknownRendered": true,
+    "unknownChecks": [
+      {
+        "ruleId": "ai_readiness_60",
+        "label": "AI readiness of at least 60",
+        "status": "unknown",
+        "hard": true,
+        "explanation": "AI readiness of at least 60 is unknown, so the rule fails closed.",
+        "unlockAction": "Raise the assessed AI readiness score to at least 60.",
+        "evidenceIds": [
+          "evidence_current0026",
+          "evidence_current0027",
+          "evidence_current0028",
+          "evidence_current0029"
+        ]
+      },
+      {
+        "ruleId": "data_3",
+        "label": "Usable data readiness of at least 3",
+        "status": "unknown",
+        "hard": true,
+        "explanation": "Usable data readiness of at least 3 is unknown, so the rule fails closed.",
+        "unlockAction": "Improve and reassess usable data readiness to at least 3 of 5.",
+        "evidenceIds": [
+          "evidence_current0027"
+        ]
+      },
+      {
+        "ruleId": "process_3",
+        "label": "Process consistency of at least 3",
+        "status": "unknown",
+        "hard": true,
+        "explanation": "Process consistency of at least 3 is unknown, so the rule fails closed.",
+        "unlockAction": "Standardise the target process and reassess it at 3 of 5 or higher.",
+        "evidenceIds": [
+          "evidence_current0029"
+        ]
+      },
+      {
+        "ruleId": "leadership_3",
+        "label": "Leadership sponsorship of at least 3",
+        "status": "unknown",
+        "hard": true,
+        "explanation": "Leadership sponsorship of at least 3 is unknown, so the rule fails closed.",
+        "unlockAction": "Confirm accountable leadership sponsorship at 3 of 5 or higher.",
+        "evidenceIds": [
+          "evidence_current0026"
+        ]
+      }
+    ],
+    "unknownRecommendationCount": 5
+  },
+  "accessibility": [
+    {
+      "state": "collapsed desktop",
+      "violations": []
+    },
+    {
+      "state": "expanded desktop",
+      "violations": []
+    },
+    {
+      "state": "expanded mobile",
+      "violations": []
+    }
+  ],
+  "layoutChecks": [
+    {
+      "state": "overview",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "first decision expanded",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
+      "width": 1440,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "overview",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "first decision expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "overview",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "first decision expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "overview",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "first decision expanded",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "expanded mobile",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    }
+  ],
+  "keyboard": {
+    "disclosureOpened": true,
+    "scenarioActionReached": true,
+    "focusStyle": {
+      "tag": "SUMMARY",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  "reducedMotion": true,
+  "safeCatalogueLinks": true,
+  "consoleErrors": [],
+  "failedRequests": [],
+  "overlay": false
+}
