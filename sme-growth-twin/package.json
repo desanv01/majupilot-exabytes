@@ -13,7 +13,8 @@
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:stage05:browser": "node scripts/stage05-browser-check.mjs"
+    "test:stage05:browser": "node scripts/stage05-browser-check.mjs",
+    "test:stage05:gateway-live": "node scripts/stage05-live-gateway-check.mjs"
   },
   "dependencies": {
     "ai": "^7.0.105",

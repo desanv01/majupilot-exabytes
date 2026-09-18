@@ -23,6 +23,15 @@ function callRecord(definition: AdvisorDefinition, model: string, started: numbe
   return { id: identifier("modelcall") as ModelCallRecord["id"], advisor: definition.id, provider: model === "not_configured" ? "unavailable" : "vercel_ai_gateway", model, promptVersion: ADVISOR_PROMPT_VERSION, schemaVersion: ADVISOR_SCHEMA_VERSION, latencyMs: Math.max(0, Date.now() - started), retryCount, status, evidenceIds, ...(errorCategory ? { errorCategory } : {}) };
 }
 
+function classifyHttpFailure(error: unknown): AdvisorModelAttemptError | undefined {
+  if (typeof error !== "object" || error === null || !("statusCode" in error)) return undefined;
+  const statusCode = (error as { statusCode?: unknown }).statusCode;
+  if (typeof statusCode !== "number" || !Number.isInteger(statusCode) || statusCode < 400 || statusCode > 599) return undefined;
+  if (statusCode === 408) return new AdvisorModelAttemptError("timeout", "timeout", true);
+  if (statusCode === 409 || statusCode === 429 || statusCode >= 500) return new AdvisorModelAttemptError("provider_error", "provider", true);
+  return new AdvisorModelAttemptError("provider_error", "provider", false);
+}
+
 export async function reviewWithConfiguredModel(definition: AdvisorDefinition, context: AdvisorReviewContext): Promise<LiveReviewResult> {
   const started = Date.now(); const model = process.env.AI_GATEWAY_MODEL;
   const credentialAvailable = Boolean(process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN);
@@ -39,6 +48,7 @@ export async function reviewWithConfiguredModel(definition: AdvisorDefinition, c
       const review = validateAdvisorReview(candidate, definition, context);
       return { review, evidenceIds: [...new Set([...review.support, ...review.concerns, ...review.missingEvidence, ...review.adjustments].flatMap((item) => item.evidenceRefs))] };
     } catch (error) {
+      const httpFailure = classifyHttpFailure(error); if (httpFailure) throw httpFailure;
       const message = error instanceof Error ? `${error.name}:${error.message}`.toLowerCase() : "provider_error";
       if (message.includes("invalid_evidence")) throw new AdvisorModelAttemptError("invalid_evidence", "evidence", false);
       if (NoObjectGeneratedError.isInstance(error) || NoOutputGeneratedError.isInstance(error) || error instanceof z.ZodError || message.includes("advisor_mismatch")) throw new AdvisorModelAttemptError("invalid_output", "validation", false);
