@@ -55,3 +55,22 @@ Retain the deep-ink desktop context rail, calm warm-paper work area, clear five-
 - move `Start over` into a clearly separated secondary-danger area with confirmation, not the primary action row;
 - keep every stable field, value code, follow-up rule, validation message, edit path, and persistence behavior;
 - extend the same language to Business Twin review as an editable evidence record, with facts and unknowns but no scores or recommendations.
+
+## Selected analysis and results direction
+
+Phase 03 uses corrected 12ui Candidate D, selected on 18 September 2026:
+
+- primary reference: `planning/design/ui-upgrade/phase-03-results/selected-results-d.png`;
+- state references: `planning/design/ui-upgrade/phase-03-results/states/`;
+- implementation contract: `planning/ui-upgrade/PHASE-03-ANALYSIS-RESULTS.md`.
+
+Retain the two-score hierarchy, compact dimension breakdowns, asymmetric gaps and pain-point column, evidence disclosure, visible edit action, and capability-recommendation handoff. Apply these mandatory corrections:
+
+- use the real brand and remove generated leaf logos, botanical rails, illustrations, and decorative assets;
+- use the accepted Discover, Diagnose, Compare, Blueprint journey rail;
+- bind every value and label to the canonical Stage 02 result and Business Twin;
+- omit generated dates, source counts, target gaps, taxonomies, evidence, and external-data claims;
+- keep score and confidence visually and semantically separate;
+- expose score and pain evidence through accessible disclosures on `/results`, not invented routes;
+- preserve the finite local calculation and bounded error path without provisional results;
+- keep mobile a true single-column application layout, not a phone mockup.
