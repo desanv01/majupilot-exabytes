@@ -11,8 +11,17 @@
     "catalogue-evidence-expanded-1440.png",
     "why-later-expanded-1440.png",
     "recommendations-overview-1024.png",
+    "first-decision-expanded-1024.png",
+    "catalogue-evidence-expanded-1024.png",
+    "why-later-expanded-1024.png",
     "recommendations-overview-390.png",
-    "recommendations-overview-360.png"
+    "first-decision-expanded-390.png",
+    "catalogue-evidence-expanded-390.png",
+    "why-later-expanded-390.png",
+    "recommendations-overview-360.png",
+    "first-decision-expanded-360.png",
+    "catalogue-evidence-expanded-360.png",
+    "why-later-expanded-360.png"
   ],
   "caseA": {
     "sequence": [
@@ -211,6 +220,24 @@
       "sourceWrap": true
     },
     {
+      "state": "first decision expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
+      "width": 1024,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
       "state": "overview",
       "width": 390,
       "overflow": false,
@@ -220,7 +247,43 @@
       "sourceWrap": true
     },
     {
+      "state": "first decision expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
+      "width": 390,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
       "state": "overview",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "first decision expanded",
+      "width": 360,
+      "overflow": false,
+      "overlay": false,
+      "undersized": [],
+      "visibleDashes": false,
+      "sourceWrap": true
+    },
+    {
+      "state": "why later expanded",
       "width": 360,
       "overflow": false,
       "overlay": false,
