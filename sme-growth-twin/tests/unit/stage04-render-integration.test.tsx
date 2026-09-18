@@ -11,12 +11,12 @@ describe("Stage 04 rendered and route contract", () => {
   const html = renderToStaticMarkup(<ScenariosView initialResult={full.comparison} twin={full.twin} diagnostic={full.diagnostic} recommendations={full.recommendation} />);
 
   it("renders three comparable paths, exact default values and distinct conditional AI", () => {
-    for (const label of ["Lean Foundation", "Balanced Growth", "Accelerated AI", "RM 5,640 / RM 11,280 / RM 16,920", "RM 9,200 / RM 18,400 / RM 27,600", "RM 10,320 / RM 20,640 / RM 30,960", "Revenue", "Avoided risk", "Not estimated", "Conditional · excluded from committed ROI", "RM 7,200 / RM 14,400 / RM 21,600", "Planning assumptions — not an Exabytes quote"] ) expect(html).toContain(label);
+    for (const label of ["Lean Foundation", "Balanced Growth", "Accelerated AI", "RM 5,640", "RM 11,280", "RM 16,920", "RM 9,200", "RM 18,400", "RM 27,600", "RM 10,320", "RM 20,640", "RM 30,960", "Revenue", "Avoided risk", "Not estimated", "Conditional scope, outside committed economics", "RM 7,200", "RM 14,400", "RM 21,600", "Planning assumptions, not an Exabytes quote"] ) expect(html).toContain(label);
     expect(html).not.toContain("Recommended"); expect(html).not.toContain("12 min left");
   });
 
   it("renders all assumption groups, sources, formulas, exclusions and honest next stage", () => {
-    for (const label of ["Costs", "Operational value", "Revenue value", "Avoided risk", "Sensitivity trace", "Derived User Fact", "Planning Default", "Reset all assumptions to Model 1.0.0", "Confidence", "Exclusions", "weekly hours saved × 52 × loaded hourly cost", "Advisor review and Blueprint", "Select a preferred path before generating a Blueprint"] ) expect(html).toContain(label);
+    for (const label of ["Costs", "Operational value", "Revenue", "Avoided risk", "Sensitivity trace", "Derived user fact", "Planning default", "Reset focused path assumptions", "Confidence", "Exclusions", "weekly hours saved × 52 × loaded hourly cost", "Advisor review and Blueprint", "Select a preferred path before continuing to Blueprint"] ) expect(html).toContain(label);
     for (const accessibleName of ["Implementation Low", "Implementation Base", "Implementation High", "Manual hours per week Low", "Loaded hourly cost Base", "Adoption High"]) expect(html).toContain(`aria-label="${accessibleName}"`);
     expect(html).not.toMatch(/submit consultation|guaranteed|vendor quote|model request/i);
   });
@@ -29,7 +29,7 @@ describe("Stage 04 rendered and route contract", () => {
 
   it("has actual 360px stacking, target-size, reduced-motion and overflow safeguards", async () => {
     const styles = await readFile(path.join(process.cwd(), "src/app/styles.css"), "utf8");
-    expect(styles).toContain("@media (max-width: 620px)"); expect(styles).toContain(".scenario-grid { grid-template-columns: 1fr; }"); expect(styles).toContain(".timeline { display: grid; grid-template-columns: 1fr; overflow: visible; }"); expect(styles).toContain("min-height: 44px"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
+    expect(styles).toContain("@media (max-width: 620px)"); expect(styles).toContain(".scenario-command-grid { grid-template-columns: 1fr; }"); expect(styles).toContain(".scenario-timeline { grid-template-columns: 1fr; border: 0; }"); expect(styles).toContain("min-height: 48px"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
     const unrelatedPersistentRailsRemoved = styles
       .replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")
       .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static");
