@@ -704,3 +704,87 @@ select:focus-visible, textarea:focus-visible {
     animation: none !important;
   }
 }
+
+/* Stage 05 — Advisor Panel and Blueprint */
+.button.disabled { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 18px; border: 1px solid #c7d3da; border-radius: 8px; color: #64727e; background: #eef2f4; font-weight: 800; }
+.blueprint-shell { max-width: 1440px; margin: 0 auto; padding: 0 44px 80px; }
+.blueprint-hero { min-height: 210px; padding: 36px 40px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 32px; border-radius: 22px; color: white; background: linear-gradient(135deg, #082d49, #0c4660); }
+.blueprint-hero h1 { max-width: 760px; margin: 3px 0 12px; font: 700 clamp(38px, 5vw, 62px)/.98 Georgia, serif; }
+.blueprint-hero p:not(.eyebrow) { max-width: 700px; margin: 0; color: #d4e6ed; font-size: 17px; line-height: 1.55; }
+.blueprint-toolbar { width: 230px; display: grid; gap: 9px; }
+.blueprint-toolbar .button { width: 100%; min-height: 44px; }
+.blueprint-toolbar .secondary { border-color: #75cfc4; color: white; background: transparent; }
+.advisor-progress { margin-top: 18px; padding: 20px 24px; border: 1px solid #cfe2e4; border-radius: 16px; background: white; }
+.advisor-progress h2 { margin: 0; font: 700 24px Georgia, serif; }
+.advisor-progress > p { margin: 5px 0 14px; color: var(--muted); }
+.advisor-progress ol { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; list-style: none; }
+.advisor-progress li { min-width: 0; min-height: 58px; padding: 9px 11px; display: flex; flex-direction: column; justify-content: center; border-radius: 9px; background: #f2f7f7; }
+.advisor-progress li span { font-size: 12px; font-weight: 800; }
+.advisor-progress li strong { margin-top: 4px; color: #66737a; font-size: 11px; text-transform: uppercase; }
+.advisor-progress li strong.live { color: #087568; }.advisor-progress li strong.fallback { color: #a05b0b; }.advisor-progress li strong.reviewing { color: #176591; }
+.advisor-progress .status-notice { margin: 14px 0 0; padding: 10px 12px; border-left: 4px solid #df9d3d; color: #70420b; background: #fff8eb; }
+.blueprint-empty { margin-top: 18px; padding: 42px; border: 1px dashed #9bb8bd; border-radius: 18px; text-align: center; background: #f8fcfc; }
+.blueprint-empty h2 { margin: 0; font: 700 30px Georgia, serif; }.blueprint-empty p { max-width: 680px; margin: 10px auto 20px; color: var(--muted); }
+.blueprint-layout { margin-top: 24px; display: grid; grid-template-columns: 220px minmax(0, 1fr); align-items: start; gap: 24px; }
+.contents-rail { padding: 18px 12px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.contents-rail > strong { display: block; padding: 0 8px 10px; color: var(--navy); font: 700 17px Georgia, serif; }
+.contents-rail nav { display: grid; }
+.contents-rail a { min-height: 44px; padding: 7px 8px; display: grid; grid-template-columns: 24px 1fr; align-items: center; gap: 4px; border-radius: 7px; color: #48606e; font-size: 11px; text-decoration: none; }
+.contents-rail a:hover, .contents-rail a:focus-visible { color: var(--teal); background: #edf7f5; }
+.contents-rail a span { color: #84949c; font-size: 9px; }
+.blueprint-report { min-width: 0; border: 1px solid var(--line); border-radius: 18px; background: white; box-shadow: 0 18px 48px rgba(7, 35, 52, .09); overflow: hidden; }
+.blueprint-report > section { padding: 38px 44px; border-bottom: 1px solid #dce7e9; overflow-wrap: anywhere; }
+.blueprint-report > section > h2 { margin: 0 0 16px; color: var(--navy); font: 700 31px/1.1 Georgia, serif; }
+.blueprint-report > section > h3 { color: var(--navy); font: 700 21px Georgia, serif; }
+.section-number { margin: 0 0 7px; color: var(--teal); font-size: 11px; font-weight: 900; letter-spacing: .14em; }
+.report-cover { min-height: 430px; display: flex; flex-direction: column; justify-content: center; color: white; background: linear-gradient(145deg, #062b45 20%, #0b5961); }
+.report-cover h1 { max-width: 720px; margin: 7px 0 12px; font: 700 clamp(44px, 6vw, 76px)/.98 Georgia, serif; }
+.report-cover > p:not(.eyebrow) { font-size: 21px; color: #cfe7e7; }
+.report-cover dl { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.report-cover dt { color: #9bc7ca; font-size: 10px; text-transform: uppercase; }.report-cover dd { margin: 5px 0 0; font-size: 12px; overflow-wrap: anywhere; }
+.provenance { margin: 4px 4px 4px 0; padding: 4px 8px; display: inline-block; border-radius: 999px; color: #16495d; background: #e9f3f6; font-size: 10px; font-weight: 900; letter-spacing: .03em; text-transform: uppercase; }
+.provenance.catalogue_fact { color: #126052; background: #e8f5ef; }.provenance.scenario_assumption { color: #80500f; background: #fff3d9; }.provenance.human_note { color: #635374; background: #f1eefa; }
+.report-grid, .versions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.report-grid div, .versions div { min-width: 0; padding: 14px; border-radius: 9px; background: #f3f8f8; }
+.report-grid dt, .versions dt { color: var(--muted); font-size: 10px; text-transform: uppercase; }.report-grid dd, .versions dd { margin: 5px 0 0; font-weight: 800; overflow-wrap: anywhere; }
+.score-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.score-pair article { padding: 22px; display: flex; align-items: center; gap: 16px; border-radius: 12px; background: #edf7f6; }
+.score-pair strong { color: var(--teal); font: 700 46px Georgia, serif; }.score-pair span { color: var(--navy); font-weight: 800; }
+.report-list { padding-left: 22px; }.report-list li { padding: 10px 0; border-bottom: 1px solid var(--line); }.report-list li > span { float: right; color: var(--teal); font-weight: 800; }.report-list p { margin: 6px 0; color: var(--muted); }
+.evidence-refs { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.evidence-refs code { max-width: 100%; padding: 3px 6px; border-radius: 4px; color: #425b66; background: #edf2f3; font-size: 9px; overflow-wrap: anywhere; white-space: normal; }
+.capability-list { display: grid; gap: 9px; }.capability-list article { padding: 16px; border-left: 4px solid #5cb7aa; border-radius: 8px; background: #f6faf9; }.capability-list header { display: flex; justify-content: space-between; gap: 12px; }.capability-list header span { color: var(--teal); font-size: 11px; font-weight: 900; }.capability-list p { margin: 7px 0; }
+.report-scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }.report-scenarios article { padding: 18px; border: 1px solid #d6e3e5; border-radius: 11px; }.report-scenarios h3 { margin: 0; font: 700 20px Georgia, serif; }.report-scenarios article > p { color: var(--teal); font-weight: 900; }.report-scenarios dl div { padding: 5px 0; display: flex; justify-content: space-between; gap: 8px; font-size: 11px; }.report-scenarios dd { margin: 0; text-align: right; }
+.roi-highlight { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }.roi-highlight div { padding: 15px; border-radius: 9px; background: #f5f8fa; }.roi-highlight span, .roi-highlight strong { display: block; }.roi-highlight span { color: var(--muted); font-size: 10px; }.roi-highlight strong { margin-top: 5px; color: var(--navy); }
+.blueprint-report details { margin-top: 12px; }.blueprint-report summary { min-height: 44px; display: flex; align-items: center; color: var(--teal); font-weight: 900; cursor: pointer; }
+.blueprint-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }.blueprint-timeline article { min-height: 105px; padding: 12px; border-top: 4px solid #5ab2a6; border-radius: 8px; background: #f4f9f8; }.blueprint-timeline strong, .blueprint-timeline small { display: block; }.blueprint-timeline p { margin: 7px 0; font-size: 11px; }.blueprint-timeline small { color: var(--muted); font-size: 9px; }
+.advisor-grid { display: grid; gap: 14px; }.advisor-card { padding: 22px; border: 1px solid #d6e4e6; border-left: 5px solid #3e9c91; border-radius: 13px; background: #fbfdfd; }.advisor-card.advisor-finance { border-left-color: #d89a3e; }.advisor-card.advisor-cybersecurity { border-left-color: #477da1; }.advisor-card.advisor-change { border-left-color: #8b72a6; }
+.advisor-card > header { display: flex; justify-content: space-between; gap: 16px; }.advisor-role { margin: 0 0 5px; color: var(--teal); font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }.advisor-card h3 { margin: 0; font: 700 21px Georgia, serif; }.advisor-card h4 { margin: 16px 0 5px; font-size: 12px; text-transform: uppercase; }.advisor-card ul { margin: 0; padding-left: 19px; }.advisor-card li p { margin: 6px 0; }.advisor-badges { min-width: 145px; display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }.advisor-badges span { padding: 4px 7px; border-radius: 999px; color: #425864; background: #eaf0f2; font-size: 9px; font-weight: 900; text-transform: uppercase; }.advisor-badges .model { color: #075e54; background: #dff5ee; }.advisor-badges .deterministic_fallback { color: #87520d; background: #fff0d4; }.confidence { color: var(--muted); font-size: 11px; }.empty-state { color: var(--muted); font-style: italic; }
+.synthesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }.synthesis-panel { padding: 18px; border-radius: 11px; background: #eef7f5; }.synthesis-panel.disagreement { background: #fff3ed; }.synthesis-panel.conditions { background: #fff8e9; }.synthesis-panel.questions { background: #f1f5fa; }.synthesis-panel h3 { margin: 0 0 9px; font: 700 20px Georgia, serif; }.synthesis-panel ul { margin: 0; padding-left: 18px; }.synthesis-panel p { margin: 5px 0; }.synthesis-panel small { color: var(--muted); }
+.empty-notes { min-height: 100px; padding: 20px; border: 1px dashed #aebfc4; border-radius: 10px; color: var(--muted); background: #fafcfc; }
+.report-footer { padding: 18px 44px; color: #d9e8ec; background: var(--navy); font-size: 10px; overflow-wrap: anywhere; }
+.missing-preference { max-width: 680px; margin: 100px auto; padding: 38px; border: 1px solid var(--line); border-radius: 18px; background: white; text-align: center; }.missing-preference h1 { font: 700 38px Georgia, serif; }.missing-preference p { color: var(--muted); }
+
+@media (max-width: 900px) {
+  .blueprint-shell { padding-top: 0; }.blueprint-hero { grid-template-columns: 1fr; }.blueprint-toolbar { width: 100%; grid-template-columns: repeat(3, 1fr); }.blueprint-layout { grid-template-columns: 1fr; }.contents-rail nav { grid-template-columns: repeat(4, 1fr); }.advisor-progress ol { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 620px) {
+  .blueprint-shell { padding: 0 16px 52px; }.blueprint-hero { padding: 26px 18px; }.blueprint-hero h1 { font-size: 38px; }.blueprint-toolbar { grid-template-columns: 1fr; }.advisor-progress { padding: 16px 13px; }.advisor-progress ol { grid-template-columns: 1fr; }.blueprint-empty { padding: 26px 15px; }.contents-rail nav { grid-template-columns: 1fr 1fr; }.contents-rail a { min-height: 44px; }.blueprint-report > section { padding: 28px 17px; }.report-cover { min-height: 390px; }.report-cover h1 { font-size: 44px; }.report-cover dl, .report-grid, .versions, .score-pair, .report-scenarios, .roi-highlight, .blueprint-timeline, .synthesis-grid { grid-template-columns: 1fr; }.advisor-card { padding: 17px 13px; }.advisor-card > header { display: block; }.advisor-badges { margin-top: 12px; min-width: 0; align-items: flex-start; }.capability-list header { display: block; }.report-list li > span { float: none; display: block; }.blueprint-report, .evidence-refs code, .versions dd { max-width: 100%; overflow-wrap: anywhere; }.blueprint-report p, .blueprint-report li, .blueprint-report dd { font-size: 16px; line-height: 1.55; }.blueprint-report dt, .blueprint-report small, .blueprint-report code, .section-number, .advisor-role { font-size: 14px; }.report-footer { padding: 16px; font-size: 12px; }
+}
+
+@media print {
+  @page { size: A4; margin: 14mm 13mm 16mm; }
+  html, body { color: #111; background: white !important; font-size: 10pt; }
+  .no-print, .topbar, .journey-rail, .advisor-progress, .blueprint-hero, .contents-rail { display: none !important; }
+  .blueprint-shell, .blueprint-layout { max-width: none; margin: 0; padding: 0; display: block; }
+  .blueprint-report { border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+  .blueprint-report > section { padding: 8mm 0; border-color: #bbb; break-inside: auto; }
+  .blueprint-report > section > h2, .blueprint-report h3, .advisor-card header { break-after: avoid; }
+  .report-cover { min-height: 230mm; padding: 24mm 12mm !important; color: #111; background: white !important; border: 2px solid #123b52; break-after: page; }
+  .report-cover > p:not(.eyebrow), .report-cover dt { color: #333; }
+  .advisor-card, .synthesis-panel, .capability-list article, .report-scenarios article, .blueprint-timeline article, .score-pair article, .roi-highlight div, .report-grid div, .versions div { color: #111; background: white !important; box-shadow: none; break-inside: avoid; }
+  .report-scenarios, .blueprint-timeline { grid-template-columns: 1fr 1fr; }
+  .advisor-badges span, .provenance, .evidence-refs code { color: #111 !important; background: white !important; border: 1px solid #aaa; }
+  .blueprint-report details { display: block; }.blueprint-report details > * { display: block !important; }
+  a { color: #111; text-decoration: none; }.report-footer { padding: 5mm 0; color: #111; background: white; border-top: 1px solid #333; }
+}

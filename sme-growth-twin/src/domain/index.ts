@@ -1,4 +1,6 @@
 export * from "./assessment";
+export * from "./advisors";
+export * from "./blueprint";
 export * from "./business-twin";
 export * from "./domain-pack";
 export * from "./ids";
