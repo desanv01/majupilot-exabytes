@@ -74,3 +74,38 @@ Retain the two-score hierarchy, compact dimension breakdowns, asymmetric gaps an
 - expose score and pain evidence through accessible disclosures on `/results`, not invented routes;
 - preserve the finite local calculation and bounded error path without provisional results;
 - keep mobile a true single-column application layout, not a phone mockup.
+
+## Selected recommendations and catalogue direction
+
+Phase 04 uses the corrected approved Stage 03 recommendation family inside the
+accepted Phase 03 post-assessment shell:
+
+- overview reference: `planning/design/stage-03/branch/branch/screens/a.png`;
+- capability detail: `planning/design/stage-03/branch/branch/screens/b.png`;
+- catalogue provenance: `planning/design/stage-03/branch/branch/screens/c.png`;
+- mobile hierarchy: `planning/design/stage-03/branch/branch/screens/d.png`;
+- implementation contract:
+  `planning/ui-upgrade/PHASE-04-RECOMMENDATIONS-CATALOGUE.md`.
+
+The desktop composition must not reproduce the generated three-column card grid.
+Use one dominant first move followed by one ordered capability ledger, with Why
+now, Next, and Why later expressed as meaningful sequence states. Apply these
+mandatory corrections:
+
+- use the real brand, shared Discover/Diagnose/Compare/Blueprint shell, DM Sans,
+  Libre Baskerville, deep ink, warm paper, evidence teal, and restrained coral;
+- bind all rank, status, fit, explanation, prerequisite, evidence, and catalogue
+  content to the canonical Stage 03 result;
+- keep the capability title and outcome above any mapped product;
+- treat catalogue mapping as provenance, not a sales or pricing card;
+- use one accessible disclosure per recommendation, with the six components,
+  exact formula, prerequisites, evidence, mapping, source, and limitations;
+- remove generated images, claims, targets, prices, time ranges, team sizes,
+  unsupported alternatives, and visible em dashes or en dashes;
+- keep actual 360px mobile behavior single-column, non-duplicative, keyboard
+  operable, and free of sticky-action collisions.
+
+A fresh Phase 04 12ui draft was attempted on 18 September 2026 and stopped before
+image generation because the connected account had no remaining free allowance
+or prepaid balance. No generated candidate or prototype is claimed. Do not repeat
+or purchase that run; the approved references above remain authoritative.
