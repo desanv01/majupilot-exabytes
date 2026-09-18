@@ -39,7 +39,7 @@ describe("Stage 03 rendered contract", () => {
     for (const label of ["Why now", "Next", "Why later", "Pain-point fit", "Prerequisite readiness", "Budget fit", "Time to value", "Risk fit", "Data readiness"]) expect(html).toContain(label);
     expect(html).toContain("CRM");
     expect(html).toContain("Messaging apps");
-    expect(html).toContain("11–20 hours");
+    expect(html).toContain("11-20 hours");
     expect(html).toContain("Affected employees");
     expect(html).toContain("Usable data readiness of at least 3");
     expect(html).toContain("Unlock:");

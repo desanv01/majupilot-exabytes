@@ -11,22 +11,24 @@ export function PostAssessmentShell({
 }: {
   businessName?: string;
   children: ReactNode;
-  context: "analysis" | "results" | "restoring";
+  context: "analysis" | "results" | "recommendations" | "restoring";
 }) {
-  const contextCopy = context === "analysis"
-    ? "Local calculations from your recorded answers"
+  const contextContent = context === "analysis"
+    ? { kicker: "Evidence-led diagnosis", heading: "See what the facts support.", summary: "Local calculations from your recorded answers", note: "No live model call is needed for this diagnosis." }
     : context === "results"
-      ? "Deterministic results with inspectable evidence"
-      : "Restoring your saved diagnosis";
+      ? { kicker: "Evidence-led diagnosis", heading: "See what the facts support.", summary: "Deterministic results with inspectable evidence", note: "No live model call is needed for this diagnosis." }
+      : context === "recommendations"
+        ? { kicker: "Capability decisions", heading: "Turn diagnosis into an ordered first move.", summary: "Capabilities ranked before catalogue products", note: "Capabilities are ranked first. Catalogue products are supporting provenance." }
+        : { kicker: "Evidence-led diagnosis", heading: "Restore your saved diagnosis.", summary: "Restoring your saved diagnosis", note: "Saved records stay on this device." };
 
   return (
     <div className="diagnostic-page">
       <aside className="diagnostic-rail" aria-label="Post-assessment journey">
         <Brand />
         <div className="diagnostic-rail-copy">
-          <p>Evidence-led diagnosis</p>
-          <h2>See what the facts support.</h2>
-          <span>{contextCopy}</span>
+          <p>{contextContent.kicker}</p>
+          <h2>{contextContent.heading}</h2>
+          <span>{contextContent.summary}</span>
         </div>
         <nav aria-label="Transformation journey">
           <ol>
@@ -46,7 +48,7 @@ export function PostAssessmentShell({
         </nav>
         <div className="diagnostic-rail-note">
           <strong>{businessName || "Your Business Twin"}</strong>
-          <span>No live model call is needed for this diagnosis.</span>
+          <span>{contextContent.note}</span>
         </div>
       </aside>
 
