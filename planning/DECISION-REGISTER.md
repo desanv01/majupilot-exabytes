@@ -34,6 +34,7 @@
 | D-030 | Use corrected 12ui Candidate D as the starting direction with DM Sans, Libre Baskerville, deep ink, warm paper, and evidence teal | Frozen | It provides the strongest distinctive identity while the correction list removes stock imagery, generated copy errors, tiny typography, and misleading preview content |
 | D-031 | Use corrected 12ui Candidate B as the Phase 02 assessment shell, with a functional deep-ink context rail and no generated botanical or logo assets | Frozen | The rail creates a focused advisory workspace consistent with the new homepage while preserving space for real save, trust, progress, and help information |
 | D-032 | Use corrected 12ui Candidate D as the Phase 03 analysis and results direction, with canonical data, accessible evidence disclosure, and no generated botanical or fabricated content | Frozen | It provides the clearest score-to-dimension-to-gap-to-pain scan hierarchy while the correction contract protects Stage 02 formulas, provenance, recovery, and route boundaries |
+| D-033 | Use the corrected approved Stage 03 recommendation screen family within the accepted Phase 03 application system for Phase 04, with a dominant first move and one ordered capability ledger instead of three equal columns | Frozen | It preserves the already reviewed capability-detail and catalogue-provenance concepts while creating a clearer capability-first decision sequence; a new 12ui draft could not start because the connected account had no remaining allowance or prepaid balance |
 
 ## Change template
 
