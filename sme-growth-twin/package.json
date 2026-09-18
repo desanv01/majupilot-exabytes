@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:phase02:browser": "node scripts/phase02-browser-check.mjs",
     "test:stage05:browser": "node scripts/stage05-browser-check.mjs",
     "test:stage05:gateway-live": "node scripts/stage05-live-gateway-check.mjs",
     "test:stage06:browser": "node scripts/stage06-browser-check.mjs",

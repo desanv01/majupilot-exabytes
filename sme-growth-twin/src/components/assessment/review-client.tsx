@@ -1,28 +1,22 @@
 "use client";
 
 /* eslint-disable react-hooks/set-state-in-effect -- persisted draft restoration is client-only */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { beginTwinEdit } from "@/core/assessment/follow-ups";
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
-import {
-  clearDiagnosticResult,
-} from "@/infrastructure/persistence/local-diagnostic-store";
-import {
-  coreAnswersSchema,
-  type AssessmentDraft,
-} from "@/domain/assessment";
+import { coreAnswersSchema, type AssessmentDraft } from "@/domain/assessment";
 import type { BusinessTwin } from "@/domain/business-twin";
+import { clearDiagnosticResult } from "@/infrastructure/persistence/local-diagnostic-store";
 import {
   clearAssessmentDraft,
   loadAssessmentDraft,
   saveAssessmentDraft,
 } from "@/infrastructure/persistence/local-assessment-store";
 
-import { Brand } from "./brand";
-import { Progress } from "./progress";
+import { AssessmentFrame, type SaveState } from "./assessment-frame";
 
 const capabilityLabels: Record<string, string> = {
   websiteOrStore: "Website or online store",
@@ -47,10 +41,10 @@ const valueLabels: Record<string, string> = {
   b2b: "B2B",
   b2c: "B2C",
   hybrid: "Hybrid",
-  "1_9": "1–9",
-  "10_24": "10–24",
-  "25_49": "25–49",
-  "50_99": "50–99",
+  "1_9": "1-9",
+  "10_24": "10-24",
+  "25_49": "25-49",
+  "50_99": "50-99",
   "100_plus": "100+",
   increase_revenue: "Increase revenue",
   acquire_customers: "Acquire customers",
@@ -60,13 +54,13 @@ const valueLabels: Record<string, string> = {
   strengthen_resilience: "Strengthen resilience",
   launch_ai_capability: "Launch an AI capability",
   under_5k: "Under RM5k",
-  "5k_15k": "RM5k–15k",
-  "15k_50k": "RM15k–50k",
+  "5k_15k": "RM5k-15k",
+  "15k_50k": "RM15k-50k",
   "50k_plus": "RM50k+",
   within_30_days: "Within 30 days",
-  "1_3_months": "1–3 months",
-  "3_6_months": "3–6 months",
-  "6_12_months": "6–12 months",
+  "1_3_months": "1-3 months",
+  "3_6_months": "3-6 months",
+  "6_12_months": "6-12 months",
   not_used: "Not used",
   informal: "Informal",
   active: "Active",
@@ -78,22 +72,11 @@ const valueLabels: Record<string, string> = {
   disruption: "Disruption",
 };
 
-type ReviewRow = {
-  label: string;
-  value: string;
-  unknown?: boolean;
-};
-
-type ReviewCard = {
-  title: string;
-  step: number;
-  rows: ReviewRow[];
-};
+type ReviewRow = { label: string; value: string; unknown?: boolean };
+type ReviewCard = { title: string; step: number; rows: ReviewRow[] };
 
 function formatValue(value: unknown): string {
-  if (value === null || value === undefined || value === "unknown") {
-    return "Not sure";
-  }
+  if (value === null || value === undefined || value === "unknown") return "Not sure";
   const text = String(value);
   return valueLabels[text] ?? text;
 }
@@ -104,6 +87,24 @@ function row(label: string, value: unknown): ReviewRow {
     value: formatValue(value),
     unknown: value === null || value === undefined || value === "unknown",
   };
+}
+
+function getBrowserStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+function saveSafely(storage: Storage | null, draft: AssessmentDraft) {
+  if (!storage) return false;
+  try {
+    saveAssessmentDraft(storage, draft);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function buildReviewCards(twin: BusinessTwin): ReviewCard[] {
@@ -130,17 +131,14 @@ export function buildReviewCards(twin: BusinessTwin): ReviewCard[] {
       ],
     },
     {
-      title: "Digital capabilities",
+      title: "Capabilities",
       step: 2,
       rows: twin.capabilities.map((capability) =>
-        row(
-          capabilityLabels[capability.capabilityId] ?? capability.capabilityId,
-          capability.currentState,
-        ),
+        row(capabilityLabels[capability.capabilityId] ?? capability.capabilityId, capability.currentState),
       ),
     },
     {
-      title: "Process friction",
+      title: "Process Friction",
       step: 3,
       rows: [
         row("Manual workflow", process.name),
@@ -157,7 +155,7 @@ export function buildReviewCards(twin: BusinessTwin): ReviewCard[] {
       ],
     },
     {
-      title: "Readiness facts",
+      title: "Readiness",
       step: 5,
       rows: [
         row("Leadership sponsorship", twin.readiness.leadership),
@@ -165,44 +163,50 @@ export function buildReviewCards(twin: BusinessTwin): ReviewCard[] {
         row("Employee digital skills", twin.readiness.skills),
         row("Process consistency", twin.readiness.process),
         row("Change willingness", twin.readiness.changeWillingness),
-      ].map((item) => ({
-        ...item,
-        value: item.unknown ? item.value : `${item.value} of 5`,
-      })),
+      ].map((item) => ({ ...item, value: item.unknown ? item.value : `${item.value} of 5` })),
     },
     {
       title: "Evidence",
       step: 1,
       rows: [
         row("Recorded user facts", `${twin.evidence.length} evidence records`),
-        row("Assumptions", "None added"),
-        row(
-          "Explicit unknowns",
-          `${twin.evidence.filter((item) => item.confidence < 1).length} recorded`,
-        ),
+        row("Assumptions", twin.assumptions.length === 0 ? "None added" : twin.assumptions.length),
+        row("Explicit unknowns", `${twin.evidence.filter((item) => item.confidence < 1).length} recorded`),
         row("Twin revision", twin.revision),
       ],
     },
   ];
 }
 
-export function BusinessTwinReviewCards({
-  twin,
-  onEdit,
-}: {
-  twin: BusinessTwin;
-  onEdit: (step: number) => void;
-}) {
+function EvidenceDetails({ twin }: { twin: BusinessTwin }) {
+  return (
+    <details className="evidence-details">
+      <summary>View technical evidence references</summary>
+      <p>These references connect each saved answer to this Business Twin. They are shown for traceability and are not a score.</p>
+      <ul>
+        {twin.evidence.map((item) => (
+          <li key={item.id}>
+            <span>{item.questionId ?? "Assessment record"}</span>
+            <code>{item.id}</code>
+            <small>Source: {item.source.replaceAll("_", " ")} / Reference: {item.sourceRef}</small>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+export function BusinessTwinReviewCards({ twin, onEdit }: { twin: BusinessTwin; onEdit: (step: number) => void }) {
   return (
     <div className="review-grid">
-      {buildReviewCards(twin).map((card) => (
+      {buildReviewCards(twin).map((card, index) => (
         <section className="review-card" key={card.title}>
           <header>
-            <h2>{card.title}</h2>
-            <Link
-              href={`/assessment?step=${card.step}`}
-              onClick={() => onEdit(card.step)}
-            >
+            <div>
+              <span className="review-section-index">{String(index + 1).padStart(2, "0")}</span>
+              <h2>{card.title}</h2>
+            </div>
+            <Link className="review-edit" href={`/assessment?step=${card.step}`} onClick={() => onEdit(card.step)} aria-label={`Edit ${card.title}`}>
               Edit
             </Link>
           </header>
@@ -210,10 +214,14 @@ export function BusinessTwinReviewCards({
             {card.rows.map((item) => (
               <div key={item.label} className={item.unknown ? "unknown" : ""}>
                 <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
+                <dd>
+                  <span>{item.value}</span>
+                  <span className="fact-state">{item.unknown ? "Not sure" : "Recorded fact"}</span>
+                </dd>
               </div>
             ))}
           </dl>
+          {card.title === "Evidence" ? <EvidenceDetails twin={twin} /> : null}
         </section>
       ))}
     </div>
@@ -224,78 +232,117 @@ export function ReviewClient() {
   const router = useRouter();
   const [draft, setDraft] = useState<AssessmentDraft>();
   const [twin, setTwin] = useState<BusinessTwin>();
+  const [loadError, setLoadError] = useState("");
+  const [saveState, setSaveState] = useState<SaveState>("restoring");
+  const storage = useRef<Storage | null>(null);
 
   useEffect(() => {
-    const restored = loadAssessmentDraft(localStorage);
+    storage.current = getBrowserStorage();
+    if (!storage.current) {
+      setLoadError("This browser is blocking the saved draft, so the Business Twin cannot be rebuilt here.");
+      setSaveState("unavailable");
+      return;
+    }
+    let restored: ReturnType<typeof loadAssessmentDraft>;
+    try {
+      restored = loadAssessmentDraft(storage.current);
+    } catch {
+      setLoadError("The saved draft could not be read. Return to the assessment to continue in this browser.");
+      setSaveState("unavailable");
+      return;
+    }
     if (restored.status !== "ok") {
-      router.replace("/assessment");
+      setLoadError("There is no completed assessment to review yet.");
+      setSaveState("unavailable");
       return;
     }
     const answers = coreAnswersSchema.safeParse(restored.draft.answers);
     if (!answers.success || restored.draft.status !== "ready_for_review") {
-      router.replace("/assessment");
+      setLoadError("Complete the remaining assessment questions before review.");
+      setSaveState("saved");
       return;
     }
-
     setDraft(restored.draft);
     setTwin(rebuildCurrentTwin(restored.draft));
-  }, [router]);
-
-  if (!draft || !twin) {
-    return <main className="loading">Building your review from saved facts…</main>;
-  }
+    setSaveState("saved");
+  }, []);
 
   const edit = (step: number) => {
+    if (!draft) return;
     const edited = beginTwinEdit(draft, step, new Date().toISOString());
-    saveAssessmentDraft(localStorage, edited);
-    clearDiagnosticResult(localStorage);
+    setSaveState("saving");
+    setSaveState(saveSafely(storage.current, edited) ? "saved" : "unavailable");
+    if (storage.current) {
+      try {
+        clearDiagnosticResult(storage.current);
+      } catch {
+        setSaveState("unavailable");
+      }
+    }
     setDraft(edited);
   };
 
   const startOver = () => {
-    if (
-      confirm(
-        "Start over and permanently remove this saved draft from this device?",
-      )
-    ) {
-      clearAssessmentDraft(localStorage);
+    if (confirm("Start over and permanently remove this saved draft from this device?")) {
+      if (storage.current) {
+        try {
+          clearAssessmentDraft(storage.current);
+        } catch {
+          setSaveState("unavailable");
+        }
+      }
       router.push("/");
     }
   };
 
+  if (!draft || !twin) {
+    return (
+      <AssessmentFrame step={5} currentTopic="Business Twin review" mode="review" saveState={saveState}>
+        <main className="review-shell loading-state" aria-live="polite">
+          <p className="eyebrow">Review your Business Twin</p>
+          <h1>{loadError ? "Your review is not ready yet" : "Building your evidence review"}</h1>
+          <p className="lead">{loadError || "We are rebuilding your Business Twin from the facts saved on this device."}</p>
+          {loadError ? <Link className="button primary" href="/assessment">Return to assessment</Link> : null}
+        </main>
+      </AssessmentFrame>
+    );
+  }
+
   return (
-    <>
-      <header className="topbar">
-        <Brand />
-        <span className="save-status">✓ Saved on this device</span>
-      </header>
-      <Progress step={5} />
+    <AssessmentFrame step={5} currentTopic="Business Twin review" mode="review" saveState={saveState}>
       <main className="review-shell">
-        <p className="eyebrow">Review your Business Twin</p>
-        <h1>Check the facts before analysis</h1>
-        <p className="lead">
-          Everything below comes from your answers. Unknowns remain visible,
-          and no score, diagnosis, or recommendation has been calculated.
-        </p>
+        <header className="review-heading">
+          <div>
+            <p className="eyebrow">Review your Business Twin</p>
+            <h1>Check the facts before analysis</h1>
+            <p className="lead">Everything below comes from your answers. Unknowns remain visible, and no score, diagnosis, or recommendation has been calculated.</p>
+          </div>
+          <aside className="review-trust-note">
+            <strong>Your approval matters</strong>
+            <p>Confirm only when this record accurately reflects the business today.</p>
+          </aside>
+        </header>
         <BusinessTwinReviewCards twin={twin} onEdit={edit} />
-        <div className="actions">
-          <Link className="button secondary" href="/assessment">
-            ← Back to assessment
-          </Link>
+        <nav className="actions review-actions" aria-label="Business Twin review actions">
+          <Link className="button secondary" href="/assessment">Back to assessment</Link>
           <button
             className="button primary"
             onClick={() => {
-              saveAssessmentDraft(localStorage, draft);
-              router.push("/assessment/analysis");
+              if (saveSafely(storage.current, draft)) router.push("/assessment/analysis");
+              else setSaveState("unavailable");
             }}
           >
-            Confirm Business Twin →
+            Confirm Business Twin
           </button>
-        </div>
-        <button className="start-over" onClick={startOver}>
-          Start over
-        </button>
+        </nav>
+        <aside className="assessment-danger-zone" aria-label="Start over">
+          <div>
+            <strong>Need a clean start?</strong>
+            <p>This permanently removes the saved draft from this device.</p>
+          </div>
+          <button className="start-over" onClick={startOver}>Start over</button>
+        </aside>
       </main>
-    </>
+    </AssessmentFrame>
   );
 }

@@ -32,8 +32,7 @@ import {
   saveAssessmentDraft,
 } from "@/infrastructure/persistence/local-assessment-store";
 
-import { Brand } from "./brand";
-import { Progress } from "./progress";
+import { AssessmentFrame, type SaveState } from "./assessment-frame";
 
 const stepSchemas = [q1Schema, q2Schema, q3Schema, q4Schema, q5Schema];
 const firstFields = [
@@ -56,6 +55,13 @@ const intros = [
   "Help us understand the workflow that costs the most time or attention.",
   "Set the practical boundaries for your next 12 months.",
   "Rate each area from 1 (very limited) to 5 (strong), or choose Not sure.",
+];
+const timeCues = [
+  "About 2 to 3 minutes",
+  "About 2 minutes left",
+  "About 1 to 2 minutes left",
+  "About 1 minute left",
+  "Less than 1 minute left",
 ];
 
 const emptyDraft: AssessmentDraft = {
@@ -89,10 +95,10 @@ const choices: Record<string, [string, string][]> = {
     ["hybrid", "Hybrid"],
   ],
   employeeBand: [
-    ["1_9", "1–9"],
-    ["10_24", "10–24"],
-    ["25_49", "25–49"],
-    ["50_99", "50–99"],
+    ["1_9", "1-9"],
+    ["10_24", "10-24"],
+    ["25_49", "25-49"],
+    ["50_99", "50-99"],
     ["100_plus", "100+"],
   ],
   biggestChallenge: [
@@ -116,16 +122,16 @@ const choices: Record<string, [string, string][]> = {
   ],
   budgetBand: [
     ["under_5k", "Under RM5k"],
-    ["5k_15k", "RM5k–15k"],
-    ["15k_50k", "RM15k–50k"],
+    ["5k_15k", "RM5k-15k"],
+    ["15k_50k", "RM15k-50k"],
     ["50k_plus", "RM50k+"],
     ["unknown", "Not sure"],
   ],
   implementationPace: [
     ["within_30_days", "Within 30 days"],
-    ["1_3_months", "1–3 months"],
-    ["3_6_months", "3–6 months"],
-    ["6_12_months", "6–12 months"],
+    ["1_3_months", "1-3 months"],
+    ["3_6_months", "3-6 months"],
+    ["6_12_months", "6-12 months"],
   ],
   highestConcern: [
     ["cost", "Cost"],
@@ -157,9 +163,9 @@ const stateChoices: [string, string, string][] = [
 const followUpOptions: Record<FollowUpId, [string, string][]> = {
   fu_manual_hours: [
     ["under_5", "Under 5"],
-    ["5_10", "5–10"],
-    ["11_20", "11–20"],
-    ["21_40", "21–40"],
+    ["5_10", "5-10"],
+    ["11_20", "11-20"],
+    ["21_40", "21-40"],
     ["over_40", "Over 40"],
     ["unknown", "Not sure"],
   ],
@@ -225,6 +231,39 @@ type StepProps = {
   errors: Errors;
 };
 
+const fieldLabels: Record<string, string> = {
+  businessName: "Business name",
+  industry: "Industry",
+  industryOther: "Your industry",
+  businessModel: "Business model",
+  employeeBand: "Employee count",
+  description: "Short business description",
+  websiteOrStore: capabilityLabels.websiteOrStore,
+  businessEmail: capabilityLabels.businessEmail,
+  cloudProductivity: capabilityLabels.cloudProductivity,
+  crm: capabilityLabels.crm,
+  digitalMarketingAnalytics: capabilityLabels.digitalMarketingAnalytics,
+  backup: capabilityLabels.backup,
+  cybersecurityControls: capabilityLabels.cybersecurityControls,
+  aiTools: capabilityLabels.aiTools,
+  biggestChallenge: "Biggest current challenge",
+  challengeOther: "Describe the challenge",
+  manualWorkflow: "Most manual workflow",
+  manualHoursPerWeek: "Manual hours per week",
+  affectedEmployees: "Affected employees",
+  urgency: "Urgency",
+  primaryObjective: "Primary 12-month objective",
+  budgetBand: "Budget band",
+  implementationPace: "Desired implementation pace",
+  highestConcern: "Highest concern",
+  leadershipSponsorship: "Leadership sponsorship",
+  usableData: "Usable data",
+  employeeDigitalSkills: "Employee digital skills",
+  processConsistency: "Process consistency",
+  changeWillingness: "Willingness to train and change",
+  ...followUpTitles,
+};
+
 function now() {
   return new Date().toISOString();
 }
@@ -243,14 +282,63 @@ function errorId(name: string) {
   return `${name}-error`;
 }
 
-function focusFirstError(errors: Errors) {
-  const first = Object.keys(errors)[0];
-  if (!first) return;
+function cleanVisibleText(value: string) {
+  return value.replace(/[–—]/g, "-");
+}
+
+function focusValidationSummary() {
   requestAnimationFrame(() => {
-    document
-      .querySelector<HTMLElement>(`[data-error-field="${first}"]`)
-      ?.focus();
+    document.querySelector<HTMLElement>("#assessment-errors")?.focus();
   });
+}
+
+function getBrowserStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+function persistDraft(storage: Storage | null, draft: AssessmentDraft) {
+  if (!storage) return false;
+  try {
+    saveAssessmentDraft(storage, draft);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function ValidationSummary({ errors }: { errors: Errors }) {
+  const entries = Object.entries(errors);
+  if (entries.length === 0) return null;
+
+  return (
+    <section
+      id="assessment-errors"
+      className="validation-summary"
+      role="alert"
+      tabIndex={-1}
+    >
+      <p className="validation-kicker">
+        {entries.length === 1
+          ? "One answer needs attention"
+          : `${entries.length} answers need attention`}
+      </p>
+      <h2>Check the highlighted {entries.length === 1 ? "answer" : "answers"}.</h2>
+      <ul>
+        {entries.map(([name, error]) => (
+          <li key={name}>
+            <a href={`#${name}`}>
+              <strong>{fieldLabels[name] ?? "Required answer"}:</strong>{" "}
+              {cleanVisibleText(error)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
 
 export function AssessmentClient() {
@@ -260,22 +348,57 @@ export function AssessmentClient() {
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Errors>({});
+  const [saveState, setSaveState] = useState<SaveState>("restoring");
+  const storage = useRef<Storage | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
+    storage.current = getBrowserStorage();
+    const localStorage = storage.current;
+    if (!localStorage) {
+      setDraft(makeDraft());
+      setMessage(
+        "This browser is blocking local storage. You can continue on this page, but review requires browser storage.",
+      );
+      setSaveState("unavailable");
+      setReady(true);
+      return;
+    }
+
     if (params.get("new") === "1") {
-      clearAssessmentDraft(localStorage);
+      try {
+        clearAssessmentDraft(localStorage);
+      } catch {
+        storage.current = null;
+      }
       const fresh = makeDraft();
-      saveAssessmentDraft(localStorage, fresh);
+      const saved = persistDraft(storage.current, fresh);
       setDraft(fresh);
+      setSaveState(saved ? "saved" : "unavailable");
       history.replaceState(null, "", "/assessment");
     } else {
-      const restored = loadAssessmentDraft(localStorage);
+      let restored: ReturnType<typeof loadAssessmentDraft>;
+      try {
+        restored = loadAssessmentDraft(localStorage);
+      } catch {
+        storage.current = null;
+        const fresh = makeDraft();
+        setDraft(fresh);
+        setMessage(
+          "This browser is blocking local storage. You can continue on this page, but review requires browser storage.",
+        );
+        setSaveState("unavailable");
+        setReady(true);
+        return;
+      }
       if (restored.status === "ok") {
         setDraft(restored.draft);
+        setMessage(`Your saved draft was restored at step ${Math.min(restored.draft.currentStep, 5)}.`);
+        setSaveState("saved");
       } else {
         const fresh = makeDraft();
         setDraft(fresh);
+        setSaveState(persistDraft(storage.current, fresh) ? "saved" : "unavailable");
         if (restored.status === "discarded") {
           setMessage(
             "We found an unreadable or incompatible saved draft. It was safely discarded, so you can start again.",
@@ -288,7 +411,8 @@ export function AssessmentClient() {
 
   useEffect(() => {
     if (ready && draft.sessionId !== emptyDraft.sessionId) {
-      saveAssessmentDraft(localStorage, draft);
+      const saved = persistDraft(storage.current, draft);
+      setSaveState(saved ? "saved" : "unavailable");
     }
   }, [draft, ready]);
 
@@ -297,6 +421,13 @@ export function AssessmentClient() {
   }, [draft.currentStep]);
 
   const update: UpdateAnswer = (section, key, value) => {
+    setErrors((current) => {
+      if (!current[key]) return current;
+      const next = { ...current };
+      delete next[key];
+      return next;
+    });
+    if (storage.current) setSaveState("saving");
     setDraft((current) => ({
       ...current,
       status: "in_progress",
@@ -323,11 +454,16 @@ export function AssessmentClient() {
           [missing[0]]: "Choose an answer, including Not sure if needed.",
         };
         setErrors(nextErrors);
-        focusFirstError(nextErrors);
+        focusValidationSummary();
         return;
       }
       const completed = completeFollowUps(draft, now());
-      saveAssessmentDraft(localStorage, completed);
+      if (!persistDraft(storage.current, completed)) {
+        setDraft(completed);
+        setSaveState("unavailable");
+        setMessage("Review cannot open until this browser allows local storage. Your answers remain on this page for now.");
+        return;
+      }
       setDraft(completed);
       router.push("/assessment/review");
       return;
@@ -357,7 +493,7 @@ export function AssessmentClient() {
           : "Complete this step before continuing.";
       });
       setErrors(nextErrors);
-      focusFirstError(nextErrors);
+      focusValidationSummary();
       return;
     }
 
@@ -366,9 +502,14 @@ export function AssessmentClient() {
     if (draft.currentStep === 5) {
       const validatedAnswers = coreAnswersSchema.parse(answers);
       const completedCore = completeCoreAssessment(draft, validatedAnswers, now());
-      saveAssessmentDraft(localStorage, completedCore);
+      const saved = persistDraft(storage.current, completedCore);
       setDraft(completedCore);
       if (completedCore.status === "ready_for_review") {
+        if (!saved) {
+          setSaveState("unavailable");
+          setMessage("Review cannot open until this browser allows local storage. Your answers remain on this page for now.");
+          return;
+        }
         router.push("/assessment/review");
       }
       return;
@@ -399,52 +540,71 @@ export function AssessmentClient() {
         "Start over and permanently remove this saved draft from this device?",
       )
     ) {
-      clearAssessmentDraft(localStorage);
+      if (storage.current) {
+        try {
+          clearAssessmentDraft(storage.current);
+        } catch {
+          storage.current = null;
+        }
+      }
       const fresh = makeDraft();
-      saveAssessmentDraft(localStorage, fresh);
+      const saved = persistDraft(storage.current, fresh);
       setDraft(fresh);
       setErrors({});
       setMessage("Your previous draft was removed.");
+      setSaveState(saved ? "saved" : "unavailable");
     }
   };
 
   if (!ready) {
     return (
-      <main className="loading" aria-live="polite">
-        Restoring your saved assessment…
-      </main>
+      <AssessmentFrame
+        step={1}
+        currentTopic="Business context"
+        saveState="restoring"
+      >
+        <main className="assessment-shell loading" aria-live="polite">
+          Restoring your saved assessment...
+        </main>
+      </AssessmentFrame>
     );
   }
 
   const isFollowUp = draft.currentStep === 6;
   return (
-    <>
-      <header className="topbar">
-        <Brand />
-        <span className="save-status">✓ Saved on this device</span>
-      </header>
-      <Progress step={draft.currentStep} />
+    <AssessmentFrame
+      step={draft.currentStep}
+      saveState={saveState}
+      mode="assessment"
+      currentTopic={isFollowUp ? "Useful follow-ups" : titles[draft.currentStep - 1]}
+    >
       <main className="assessment-shell">
         {message ? (
           <div className="notice" role="status">
             {message}
           </div>
         ) : null}
-        <p className="eyebrow">
-          {isFollowUp
-            ? "A few useful follow-ups"
-            : `Step ${draft.currentStep} of 5`}
-        </p>
-        <h1 tabIndex={-1} ref={heading}>
-          {isFollowUp
-            ? "Help us clarify what matters"
-            : titles[draft.currentStep - 1]}
-        </h1>
-        <p className="lead">
-          {isFollowUp
-            ? "We ask only questions that can change a later decision. You can always choose Not sure."
-            : intros[draft.currentStep - 1]}
-        </p>
+        <header className="assessment-heading">
+          <div>
+            <p className="eyebrow">
+              {isFollowUp ? "Useful follow-ups" : `Step ${draft.currentStep} of 5`}
+            </p>
+            <h1 tabIndex={-1} ref={heading}>
+              {isFollowUp
+                ? "Help us clarify what matters"
+                : titles[draft.currentStep - 1]}
+            </h1>
+            <p className="lead">
+              {isFollowUp
+                ? "We ask only questions that can change a later decision. You can always choose Not sure."
+                : intros[draft.currentStep - 1]}
+            </p>
+          </div>
+          <p className="time-cue">
+            {isFollowUp ? "Less than 1 minute" : timeCues[draft.currentStep - 1]}
+          </p>
+        </header>
+        <ValidationSummary errors={errors} />
         <section className="form-card">
           <AssessmentStepContent
             draft={draft}
@@ -453,19 +613,25 @@ export function AssessmentClient() {
             errors={errors}
           />
         </section>
-        <div className="actions">
+        <nav className="actions" aria-label="Assessment steps">
           <button className="button secondary" onClick={goBack}>
-            ← Back
+            Back
           </button>
           <button className="button primary" onClick={continueAssessment}>
-            {isFollowUp ? "Review Business Twin" : "Continue"} →
+            {isFollowUp ? "Review Business Twin" : "Continue"}
           </button>
-        </div>
-        <button className="start-over" onClick={startOver}>
-          Start over
-        </button>
+        </nav>
+        <aside className="assessment-danger-zone" aria-label="Start over">
+          <div>
+            <strong>Need a clean start?</strong>
+            <p>This permanently removes the saved draft from this device.</p>
+          </div>
+          <button className="start-over" onClick={startOver}>
+            Start over
+          </button>
+        </aside>
       </main>
-    </>
+    </AssessmentFrame>
   );
 }
 
@@ -500,6 +666,8 @@ function Field({
   onChange,
   error,
   type = "text",
+  optional = false,
+  help,
 }: {
   label: string;
   name: string;
@@ -507,10 +675,17 @@ function Field({
   onChange: (value: unknown) => void;
   error?: string;
   type?: string;
+  optional?: boolean;
+  help?: string;
 }) {
+  const describedBy = [help ? `${name}-help` : "", error ? errorId(name) : ""]
+    .filter(Boolean)
+    .join(" ") || undefined;
   return (
     <label className="field" htmlFor={name}>
-      {label}
+      <span className="field-label">
+        {label} <span className="field-requirement">{optional ? "Optional" : "Required"}</span>
+      </span>
       <input
         id={name}
         name={name}
@@ -526,12 +701,14 @@ function Field({
           )
         }
         aria-invalid={Boolean(error)}
-        aria-describedby={error ? errorId(name) : undefined}
+        aria-describedby={describedBy}
+        required={!optional}
         data-error-field={name}
       />
+      {help ? <small id={`${name}-help`}>{help}</small> : null}
       {error ? (
-        <span id={errorId(name)} className="error">
-          {error}
+        <span id={errorId(name)} className="error" role="alert">
+          {cleanVisibleText(error)}
         </span>
       ) : null}
     </label>
@@ -553,7 +730,9 @@ function SelectField({
 }) {
   return (
     <label className="field" htmlFor={name}>
-      {label}
+      <span className="field-label">
+        {label} <span className="field-requirement">Required</span>
+      </span>
       <select
         id={name}
         name={name}
@@ -561,6 +740,7 @@ function SelectField({
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId(name) : undefined}
+        required
         data-error-field={name}
       >
         <option value="">Select an option</option>
@@ -571,8 +751,8 @@ function SelectField({
         ))}
       </select>
       {error ? (
-        <span id={errorId(name)} className="error">
-          {error}
+        <span id={errorId(name)} className="error" role="alert">
+          {cleanVisibleText(error)}
         </span>
       ) : null}
     </label>
@@ -620,7 +800,9 @@ function Q1({ value = {}, update, errors }: StepProps) {
         error={errors.employeeBand}
       />
       <label className="field full" htmlFor="description">
-        Short business description
+        <span className="field-label">
+          Short business description <span className="field-requirement">Required</span>
+        </span>
         <textarea
           id="description"
           value={String(value.description ?? "")}
@@ -632,10 +814,11 @@ function Q1({ value = {}, update, errors }: StepProps) {
             errors.description ? errorId("description") : undefined
           }
           data-error-field="description"
+          required
         />
         {errors.description ? (
-          <span id={errorId("description")} className="error">
-            {errors.description}
+          <span id={errorId("description")} className="error" role="alert">
+            {cleanVisibleText(errors.description)}
           </span>
         ) : null}
       </label>
@@ -650,16 +833,19 @@ function Q2({ value = {}, update, errors }: StepProps) {
         const error = errors[key];
         return (
           <fieldset
-            className="choice-card"
+            className="choice-card required-field"
             key={key}
             aria-invalid={Boolean(error)}
             aria-describedby={error ? errorId(key) : undefined}
           >
-            <legend>{label}</legend>
+            <legend>
+              {label} <span className="field-requirement">Required</span>
+            </legend>
             <div className="segmented">
               {stateChoices.map(([optionValue, optionLabel, help], index) => (
                 <label key={optionValue} title={help}>
                   <input
+                    id={index === 0 ? key : `${key}-${optionValue}`}
                     type="radio"
                     name={key}
                     value={optionValue}
@@ -676,8 +862,8 @@ function Q2({ value = {}, update, errors }: StepProps) {
               ))}
             </div>
             {error ? (
-              <span id={errorId(key)} className="error">
-                {error}
+              <span id={errorId(key)} className="error" role="alert">
+                {cleanVisibleText(error)}
               </span>
             ) : null}
           </fieldset>
@@ -717,6 +903,8 @@ function Q3({ value = {}, update, errors }: StepProps) {
         label="Manual hours per week (leave blank if not sure)"
         name="manualHoursPerWeek"
         type="number"
+        optional
+        help="Leave blank if you are not sure."
         value={value.manualHoursPerWeek}
         onChange={(next) => update("q3", "manualHoursPerWeek", next)}
         error={errors.manualHoursPerWeek}
@@ -725,6 +913,8 @@ function Q3({ value = {}, update, errors }: StepProps) {
         label="Affected employees (leave blank if not sure)"
         name="affectedEmployees"
         type="number"
+        optional
+        help="Leave blank if you are not sure."
         value={value.affectedEmployees}
         onChange={(next) => update("q3", "affectedEmployees", next)}
         error={errors.affectedEmployees}
@@ -805,15 +995,18 @@ function Range({
 }) {
   return (
     <fieldset
-      className="range"
+      className="range required-field"
       aria-invalid={Boolean(error)}
       aria-describedby={error ? errorId(name) : undefined}
     >
-      <legend>{label}</legend>
+      <legend>
+        {label} <span className="field-requirement">Required</span>
+      </legend>
       <div>
         {[1, 2, 3, 4, 5].map((number, index) => (
           <label key={number}>
             <input
+              id={index === 0 ? name : `${name}-${number}`}
               type="radio"
               name={name}
               checked={value === number}
@@ -839,10 +1032,10 @@ function Range({
           </label>
         ) : null}
       </div>
-      <small>1 = very limited · 3 = developing · 5 = strong</small>
+      <small>1 = very limited, 3 = developing, 5 = strong</small>
       {error ? (
-        <span id={errorId(name)} className="error">
-          {error}
+        <span id={errorId(name)} className="error" role="alert">
+          {cleanVisibleText(error)}
         </span>
       ) : null}
     </fieldset>
@@ -864,12 +1057,14 @@ function FollowUps({
         const error = errors[id];
         return (
           <fieldset
-            className="followup-card"
+            className="followup-card required-field"
             key={id}
             aria-invalid={Boolean(error)}
             aria-describedby={error ? errorId(id) : undefined}
           >
-            <legend>{followUpTitles[id]}</legend>
+            <legend>
+              {followUpTitles[id]} <span className="field-requirement">Required</span>
+            </legend>
             <p className="why">
               <strong>Why we ask:</strong> {FOLLOW_UPS[id].whyWeAsk}
             </p>
@@ -884,6 +1079,7 @@ function FollowUps({
                 return (
                   <label key={optionValue}>
                     <input
+                      id={index === 0 ? id : `${id}-${optionValue}`}
                       type={id === "fu_ai_usage" ? "checkbox" : "radio"}
                       name={id}
                       checked={checked}
@@ -919,8 +1115,8 @@ function FollowUps({
               })}
             </div>
             {error ? (
-              <span id={errorId(id)} className="error">
-                {error}
+              <span id={errorId(id)} className="error" role="alert">
+                {cleanVisibleText(error)}
               </span>
             ) : null}
           </fieldset>
