@@ -43,5 +43,14 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Stage 07 golden cases
+        run: npm run test:stage07:golden
+
+      - name: Stage 07 security boundary
+        run: npm run test:stage07:security
+
+      - name: Production dependency audit
+        run: npm run audit:production
+
       - name: Build
         run: npm run build

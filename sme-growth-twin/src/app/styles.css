@@ -125,6 +125,55 @@ a { color: inherit; }
 }
 .privacy { margin: 26px 0 0; color: var(--muted); }
 
+/* Stage 07 — fictional demo launcher and persistent disclosure */
+.demo-launcher {
+  margin-top: 58px;
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid #cfe5e3;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgb(255 255 255 / 96%), #f2fbf8);
+  box-shadow: 0 16px 45px rgb(18 54 87 / 6%);
+}
+.demo-launcher-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; }
+.demo-launcher-heading h2 { margin: 0; font: 700 clamp(28px, 3vw, 38px)/1.12 Georgia, serif; }
+.demo-launcher-heading p:not(.eyebrow) { max-width: 720px; color: var(--muted); }
+.reset-demo, .demo-banner button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #d99891;
+  border-radius: 9px;
+  color: #8b3732;
+  background: white;
+  font-weight: 750;
+  cursor: pointer;
+}
+.demo-case-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.demo-case { min-width: 0; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: white; }
+.demo-case h3 { margin: 14px 0 4px; font: 700 23px/1.15 Georgia, serif; }
+.demo-case p { color: var(--muted); }
+.demo-case .demo-sector { margin: 0; color: var(--teal); font-size: 13px; font-weight: 800; }
+.demo-case .button { width: 100%; margin-top: 8px; border-radius: 9px; }
+.demo-case-labels { display: flex; flex-wrap: wrap; gap: 7px; }
+.demo-case-labels span, .demo-case-labels strong { padding: 5px 8px; border-radius: 999px; font-size: 11px; text-transform: uppercase; }
+.demo-case-labels span { color: #6c4c15; background: #fff1d6; }
+.demo-case-labels strong { color: #075b52; background: #dff5ee; }
+.reliability-strip { margin-top: 20px; padding: 14px 18px; display: flex; flex-wrap: wrap; gap: 12px 26px; border-radius: 12px; color: #1d5b60; background: #def3ee; font-size: 13px; font-weight: 800; }
+.reliability-strip span::before { content: "✓"; margin-right: 8px; color: var(--teal); }
+.reset-status { min-height: 24px; margin: 12px 0 0; color: var(--teal); font-weight: 750; }
+.demo-banner { position: relative; z-index: 10; min-height: 52px; padding: 8px clamp(20px, 5vw, 72px); display: flex; align-items: center; justify-content: center; gap: 24px; color: #593d0c; background: #fff0cf; border-bottom: 1px solid #e9c77e; }
+.demo-banner p { margin: 0; overflow-wrap: anywhere; }
+.demo-banner button { min-height: 44px; flex: none; border-color: #b78a32; color: #593d0c; background: #fffaf0; }
+
+@media (max-width: 900px) {
+  .demo-case-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .demo-launcher-heading, .demo-banner { align-items: stretch; flex-direction: column; }
+  .demo-launcher-heading { gap: 12px; }
+  .demo-banner { gap: 8px; }
+  .demo-banner button, .reset-demo { width: 100%; }
+}
+
 .progress { max-width: 760px; margin: -66px auto 48px; }
 .progress ol {
   position: relative;
@@ -210,7 +259,9 @@ a { color: inherit; }
 .segmented label, .option-grid label, .range label { cursor: pointer; }
 .segmented input, .option-grid input, .range input { position: absolute; opacity: 0; }
 .segmented span, .option-grid span, .range label span {
-  display: block;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   padding: 9px 12px;
   border: 1px solid #e6edef;
   border-radius: 999px;
@@ -242,6 +293,8 @@ select:focus-visible, textarea:focus-visible {
 .handoff { display: flex; flex-direction: column; border-color: #aadfd2; background: #eaf8f4; }
 .actions { justify-content: space-between; }
 .start-over {
+  min-height: 44px;
+  padding: 8px 12px;
   display: block;
   margin: 24px auto 0;
   border: 0;
@@ -732,7 +785,7 @@ select:focus-visible, textarea:focus-visible {
 .contents-rail nav { display: grid; }
 .contents-rail a { min-height: 44px; padding: 7px 8px; display: grid; grid-template-columns: 24px 1fr; align-items: center; gap: 4px; border-radius: 7px; color: #48606e; font-size: 11px; text-decoration: none; }
 .contents-rail a:hover, .contents-rail a:focus-visible { color: var(--teal); background: #edf7f5; }
-.contents-rail a span { color: #84949c; font-size: 9px; }
+.contents-rail a span { color: #526d78; font-size: 9px; }
 .blueprint-report { min-width: 0; border: 1px solid var(--line); border-radius: 18px; background: white; box-shadow: 0 18px 48px rgba(7, 35, 52, .09); overflow: hidden; }
 .blueprint-report > section { padding: 38px 44px; border-bottom: 1px solid #dce7e9; overflow-wrap: anywhere; }
 .blueprint-report > section > h2 { margin: 0 0 16px; color: var(--navy); font: 700 31px/1.1 Georgia, serif; }

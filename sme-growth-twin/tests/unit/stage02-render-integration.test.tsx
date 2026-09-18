@@ -43,7 +43,8 @@ describe("Stage 02 rendered contract", () => {
   it("uses semantic expandable controls and score labels", () => {
     const html = renderToStaticMarkup(<ResultsView result={result} twin={twin} onEdit={() => undefined} />);
     expect(html.match(/<details/g)?.length).toBeGreaterThanOrEqual(7);
-    expect(html).toContain("aria-label=\"Website and commerce: 100 out of 100\"");
+    expect(html).toContain('role="progressbar" aria-label="Website and commerce"');
+    expect(html).toContain('aria-valuetext="100 out of 100"');
     expect(html).toContain("Edit Business Twin");
   });
 });

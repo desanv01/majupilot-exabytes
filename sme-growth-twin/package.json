@@ -15,7 +15,13 @@
     "test:watch": "vitest",
     "test:stage05:browser": "node scripts/stage05-browser-check.mjs",
     "test:stage05:gateway-live": "node scripts/stage05-live-gateway-check.mjs",
-    "test:stage06:browser": "node scripts/stage06-browser-check.mjs"
+    "test:stage06:browser": "node scripts/stage06-browser-check.mjs",
+    "test:stage07:golden": "vitest run tests/unit/stage07-golden.test.ts",
+    "test:stage07:browser": "npm run build && node scripts/stage07-browser-check.mjs",
+    "test:stage07:security": "vitest run tests/unit/stage07-security.test.ts && node scripts/stage07-security-check.mjs",
+    "release:manifest": "node scripts/release-manifest.mjs",
+    "release:offline": "npm run test:stage07:browser",
+    "audit:production": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
     "ai": "^7.0.105",
@@ -28,6 +34,7 @@
     "@types/node": "22.20.3",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "axe-core": "4.10.3",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.5",
     "typescript": "6.0.3",
