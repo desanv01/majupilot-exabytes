@@ -1,6 +1,6 @@
 # Stage 05 - Advisor Panel and Blueprint
 
-Status: **Ready for implementation**
+Status: **Dispatched**
 Implementer profile: **GPT-5.6 Sol, medium reasoning**
 Prerequisite: **Stage 04 accepted and published**
 Gate owner: **Main task**
