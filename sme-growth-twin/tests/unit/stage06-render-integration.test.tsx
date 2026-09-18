@@ -36,4 +36,14 @@ describe("Stage 06 consultation render and browser persistence", () => {
     const css = await readFile(path.join(process.cwd(), "src/app/styles.css"), "utf8");
     expect(css).toContain(".consultation-grid { display: grid; grid-template-columns:"); expect(css).toContain(".consultation-aside { position: sticky"); expect(css).toContain("@media (max-width: 620px)"); expect(css).toContain(".consultation-grid { grid-template-columns: 1fr;"); expect(css).toContain("min-height: 48px"); expect(css).toContain("min-height: 44px"); expect(css).toContain("overflow-wrap: anywhere");
   });
+
+  it("keeps browser screenshots temporary by default with an explicit artifact override", async () => {
+    const harness = await readFile(path.join(process.cwd(), "scripts/stage06-browser-check.mjs"), "utf8");
+    expect(harness).toContain("process.env.STAGE06_ARTIFACT_DIR");
+    expect(harness).toContain('mkdtemp(path.join(tmpdir(), "sme-growth-twin-stage06-artifacts-"))');
+    expect(harness).toContain('mkdtemp(path.join(tmpdir(), "sme-growth-twin-stage06-profile-"))');
+    expect(harness).toContain("if (!configuredArtifactDir && artifacts) await rm(artifacts, { recursive: true, force: true })");
+    expect(harness).toContain("if (profile) await rm(profile, { recursive: true, force: true })");
+    expect(harness).not.toContain('path.resolve("artifacts")');
+  });
 });

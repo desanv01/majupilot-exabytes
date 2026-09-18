@@ -1,24 +1,26 @@
 import { execFileSync, spawn } from "node:child_process";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
 const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const appPort = 3016; const debugPort = 9556; const baseUrl = `http://localhost:${appPort}`;
-const artifacts = path.resolve("artifacts"); const profile = path.join(tmpdir(), `sme-growth-twin-stage06-${process.pid}`);
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const stopTree = (child) => { if (!child?.pid) return; try { execFileSync("taskkill", ["/PID", String(child.pid), "/T", "/F"], { stdio: "ignore", windowsHide: true }); } catch { try { child.kill(); } catch {} } };
-await mkdir(artifacts, { recursive: true });
-
-const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--port", String(appPort)], { cwd: process.cwd(), env: { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" }, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
-let serverOutput = ""; server.stdout.on("data", (value) => { serverOutput += value.toString(); }); server.stderr.on("data", (value) => { serverOutput += value.toString(); });
-let ready = false;
-for (let attempt = 0; attempt < 120; attempt += 1) { try { if ((await fetch(baseUrl)).ok) { ready = true; break; } } catch {} await wait(500); }
-if (!ready) { server.kill(); throw new Error(`Next.js did not start: ${serverOutput.slice(-2000)}`); }
-
-const chrome = spawn(chromePath, ["--headless=new", "--disable-gpu", "--no-first-run", "--no-default-browser-check", `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`, "about:blank"], { stdio: "ignore", windowsHide: true });
-let ws;
+const configuredArtifactDir = process.env.STAGE06_ARTIFACT_DIR?.trim();
+let artifacts; let profile; let server; let chrome; let ws;
 try {
+  artifacts = configuredArtifactDir ? path.resolve(configuredArtifactDir) : await mkdtemp(path.join(tmpdir(), "sme-growth-twin-stage06-artifacts-"));
+  profile = await mkdtemp(path.join(tmpdir(), "sme-growth-twin-stage06-profile-"));
+  await mkdir(artifacts, { recursive: true });
+
+  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--port", String(appPort)], { cwd: process.cwd(), env: { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" }, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
+  let serverOutput = ""; server.stdout.on("data", (value) => { serverOutput += value.toString(); }); server.stderr.on("data", (value) => { serverOutput += value.toString(); });
+  let ready = false;
+  for (let attempt = 0; attempt < 120; attempt += 1) { try { if ((await fetch(baseUrl)).ok) { ready = true; break; } } catch {} await wait(500); }
+  if (!ready) throw new Error(`Next.js did not start: ${serverOutput.slice(-2000)}`);
+
+  chrome = spawn(chromePath, ["--headless=new", "--disable-gpu", "--no-first-run", "--no-default-browser-check", `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`, "about:blank"], { stdio: "ignore", windowsHide: true });
   let endpoint;
   for (let attempt = 0; attempt < 50; attempt += 1) { try { const tabs = await fetch(`http://127.0.0.1:${debugPort}/json`).then((response) => response.json()); endpoint = tabs.find((tab) => tab.type === "page")?.webSocketDebuggerUrl; if (endpoint) break; } catch {} await wait(200); }
   if (!endpoint) throw new Error("Chrome DevTools endpoint did not start");
@@ -94,4 +96,6 @@ try {
   await cdp("Browser.close");
 } finally {
   try { ws?.close(); } catch {} stopTree(chrome); stopTree(server);
+  if (profile) await rm(profile, { recursive: true, force: true });
+  if (!configuredArtifactDir && artifacts) await rm(artifacts, { recursive: true, force: true });
 }

@@ -28,7 +28,15 @@ npm run build
 
 # Stage 06 real-browser acceptance (starts and cleans up isolated local processes)
 npm run test:stage06:browser
+
+# Optional: intentionally retain fresh Stage 06 screenshots in a chosen directory
+$env:STAGE06_ARTIFACT_DIR="C:\\temp\\stage06-evidence"
+npm run test:stage06:browser
 ```
+
+Without `STAGE06_ARTIFACT_DIR`, the Stage 06 harness writes screenshots to a
+unique temporary directory and removes both that directory and its isolated
+Chrome profile after success or failure, leaving the repository unchanged.
 
 For the first lockfile creation only, Stage 00 used `npm install`. Fresh
 implementers should use `npm ci` thereafter.
