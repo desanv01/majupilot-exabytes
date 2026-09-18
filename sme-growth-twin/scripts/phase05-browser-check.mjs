@@ -103,12 +103,15 @@ try {
     }
     throw new Error(`Timed out: ${expression}; actual=${JSON.stringify(actual)}`);
   };
+  const settleVisuals = () => evaluate("document.fonts.ready.then(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))");
   const navigate = async (pathname) => {
     await cdp("Page.navigate", { url: `${baseUrl}${pathname}` });
     await poll("document.readyState", "complete");
+    await settleVisuals();
   };
   const viewport = (width, height = 900) => cdp("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile: false });
   const screenshot = async (name, fullPage = true) => {
+    await settleVisuals();
     let params = { format: "png", fromSurface: true, captureBeyondViewport: false };
     if (fullPage) {
       const metrics = await cdp("Page.getLayoutMetrics");

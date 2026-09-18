@@ -60,4 +60,16 @@ describe("Phase 05 Scenario and ROI Lab UI contract", () => {
     expect(source).toContain("recalculateScenarioComparison(");
     expect(source).not.toMatch(/fetch\(|XMLHttpRequest|WebSocket|ModelProvider/);
   });
+
+  it("keeps one authoritative Phase 05 scenario style system", async () => {
+    const styles = await readFile(path.join(process.cwd(), "src/app/styles.css"), "utf8");
+    for (const legacySelector of [
+      ".scenarios-shell {", ".scenarios-hero {", ".comparison-intro {", ".scenario-grid {",
+      ".scenario-card {", ".scenario-metrics {", ".scenario-detail {", ".timeline {",
+      ".assumptions-panel {", ".assumption-groups {", ".assumption-group {", ".stage-five-handoff {",
+    ]) expect(styles).not.toContain(legacySelector);
+    expect(styles.match(/\/\* Phase 05: scenario comparison and ROI decision laboratory \*\//g)).toHaveLength(1);
+    expect(styles.match(/^\.assumption-row \{/gm)).toHaveLength(1);
+    expect(styles.match(/^\.range-inputs \{/gm)).toHaveLength(1);
+  });
 });
