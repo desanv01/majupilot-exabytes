@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { DemoResetControl } from "@/components/demo/demo-reset-control";
+
 import {
   createGoldenAssessmentDraft,
   GOLDEN_FIXTURES,
@@ -22,11 +24,41 @@ import {
   saveDemoSession,
 } from "@/infrastructure/persistence/project-storage";
 
+const demoPathNotes: Record<GoldenFixture["id"], string> = {
+  "case-a": "Shows a broad foundation-first path across customer operations, continuity, and growth.",
+  "case-b": "Shows workflow and data foundations taking priority before AI.",
+  "case-c": "Shows a selective path for a digitally mature team with governed AI readiness.",
+};
+
 export function DemoLauncher() {
   const router = useRouter();
   const [loadingFixtureId, setLoadingFixtureId] = useState<GoldenFixture["id"] | null>(null);
   const [demoAvailable, setDemoAvailable] = useState(true);
+  const [hasProjectRecords, setHasProjectRecords] = useState(false);
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    const refresh = () => {
+      setHasProjectRecords(
+        PROJECT_LOCAL_STORAGE_KEYS.some((key) => localStorage.getItem(key) !== null),
+      );
+
+      const resetStatus = sessionStorage.getItem(RESET_STATUS_SESSION_KEY);
+      if (resetStatus) {
+        sessionStorage.removeItem(RESET_STATUS_SESSION_KEY);
+        setStatus(resetStatus);
+      }
+    };
+
+    try {
+      refresh();
+      window.addEventListener(DEMO_SESSION_CHANGED_EVENT, refresh);
+    } catch {
+      setDemoAvailable(false);
+    }
+
+    return () => window.removeEventListener(DEMO_SESSION_CHANGED_EVENT, refresh);
+  }, []);
 
   const loadFixture = (fixture: GoldenFixture) => {
     setLoadingFixtureId(fixture.id);
@@ -48,6 +80,7 @@ export function DemoLauncher() {
         assessmentSessionId: sessionId,
         loadedAt,
       });
+      setHasProjectRecords(true);
       window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT));
       router.push("/assessment/review");
     } catch {
@@ -59,15 +92,9 @@ export function DemoLauncher() {
 
   const reset = () => {
     try {
-      const hasRecords = PROJECT_LOCAL_STORAGE_KEYS.some((key) => localStorage.getItem(key) !== null);
-      const approved = window.confirm(
-        hasRecords
-          ? "Reset SME Growth Twin demonstration data on this device? Only known project records will be removed."
-          : "Confirm the SME Growth Twin project storage is reset? Other browser data will not be touched.",
-      );
-      if (!approved) return;
       clearKnownProjectStorage(localStorage, sessionStorage);
       window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT));
+      setHasProjectRecords(false);
       setStatus("SME Growth Twin demonstration data was reset. Other browser storage was not changed.");
     } catch {
       setDemoAvailable(false);
@@ -86,9 +113,13 @@ export function DemoLauncher() {
               It does not create consent or a consultation lead.
             </p>
           </div>
-          <button className="reset-demo" type="button" onClick={reset} disabled={!demoAvailable || loadingFixtureId !== null}>
-            Reset demo data
-          </button>
+          {demoAvailable && loadingFixtureId === null ? (
+            <DemoResetControl recordsPresent={hasProjectRecords} onConfirm={reset} />
+          ) : (
+            <button className="reset-demo" type="button" disabled>
+              Reset demo data
+            </button>
+          )}
         </div>
         <div className="demo-case-grid">
           {GOLDEN_FIXTURES.map((fixture, index) => (
@@ -100,10 +131,12 @@ export function DemoLauncher() {
               <h3>{fixture.label}</h3>
               <p className="demo-sector">{fixture.sector}</p>
               <p>{fixture.challengeSummary}</p>
+              <p className="demo-path-note"><strong>Rules path:</strong> {demoPathNotes[fixture.id]}</p>
               <button
                 className="button secondary"
                 data-fixture-id={fixture.id}
                 type="button"
+                aria-label={`Load fictional ${fixture.label} demonstration case`}
                 aria-describedby="demo-disclosure"
                 disabled={!demoAvailable || loadingFixtureId !== null}
                 onClick={() => loadFixture(fixture)}

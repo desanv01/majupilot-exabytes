@@ -106,7 +106,7 @@ try {
     await poll("document.body.innerText.includes('Five advisor reviews')", true, 35_000);
     return evaluate(`(() => { const b=JSON.parse(localStorage.getItem('sme-growth-twin:blueprint:1.0.0')); const s=b.snapshot.selectedScenario; return { name:b.snapshot.twin.identity.businessName,maturity:b.snapshot.diagnostic.digitalMaturity.value,readiness:b.snapshot.diagnostic.aiReadiness.value,recommendations:b.snapshot.recommendations.recommendations.map(r=>r.capabilityId+':'+r.status),scenario:s.templateId,cost:s.costs.firstYear,operational:s.value.operational.range,net:s.value.net.range,payback:s.value.payback,origins:b.advisorReviews.map(r=>r.origin),sections:b.sectionIds.length }; })()`);
   };
-  const resetViaBanner = async () => { await evaluate("window.confirm=()=>true;document.querySelector('.demo-banner button')?.click()"); await poll("location.pathname", "/"); await poll("localStorage.getItem('sme-growth-twin:assessment-draft:1.0.0')", null); };
+  const resetViaBanner = async () => { await evaluate("document.querySelector('.demo-reset-dialog')?.showModal();document.querySelector('.demo-reset-dialog .danger')?.click()"); await poll("location.pathname", "/"); await poll("localStorage.getItem('sme-growth-twin:assessment-draft:1.0.0')", null); };
   const knownLocalKeys = ["sme-growth-twin:assessment-draft:1.0.0", "sme-growth-twin:diagnostic:1.0.0", "sme-growth-twin:recommendations:1.0.0", "sme-growth-twin:scenarios:1.0.0", "sme-growth-twin:blueprint:1.0.0", "sme-growth-twin:demo-session:1.0.0"];
   const knownSessionKeys = ["sme-growth-twin:lead-receipt:1.0.0", "sme-growth-twin:reset-status:1.0.0"];
 
@@ -121,7 +121,7 @@ try {
   await navigate("/");
   await poll("Boolean(document.querySelector('.demo-banner'))", true);
   const homeResetTimeOrigin = await evaluate("performance.timeOrigin");
-  await evaluate(`(() => { const localKeys=${JSON.stringify(knownLocalKeys)}; const sessionKeys=${JSON.stringify(knownSessionKeys)}; for(const key of localKeys)localStorage.setItem(key,'known-project-value'); for(const key of sessionKeys)sessionStorage.setItem(key,'known-project-value'); localStorage.setItem('unrelated-home-reset','keep'); sessionStorage.setItem('unrelated-home-reset-session','keep'); window.confirm=()=>true; document.querySelector('.reset-demo')?.click(); })()`);
+  await evaluate(`(() => { const localKeys=${JSON.stringify(knownLocalKeys)}; const sessionKeys=${JSON.stringify(knownSessionKeys)}; for(const key of localKeys)localStorage.setItem(key,'known-project-value'); for(const key of sessionKeys)sessionStorage.setItem(key,'known-project-value'); localStorage.setItem('unrelated-home-reset','keep'); sessionStorage.setItem('unrelated-home-reset-session','keep'); document.querySelector('.demo-reset-dialog')?.showModal(); document.querySelector('.demo-reset-dialog .danger')?.click(); })()`);
   await poll("Boolean(document.querySelector('.demo-banner'))", false);
   const homeReset = await evaluate(`(() => { const localKeys=${JSON.stringify(knownLocalKeys)}; const sessionKeys=${JSON.stringify(knownSessionKeys)}; return { stayedOnHome:location.pathname==='/'&&performance.timeOrigin===${homeResetTimeOrigin}, bannerRemoved:!document.querySelector('.demo-banner'), knownLocalCleared:localKeys.every(key=>localStorage.getItem(key)===null), knownSessionCleared:sessionKeys.every(key=>sessionStorage.getItem(key)===null), unrelatedPreserved:localStorage.getItem('unrelated-home-reset')==='keep'&&sessionStorage.getItem('unrelated-home-reset-session')==='keep', statusVisible:document.querySelector('.reset-status')?.textContent.includes('demonstration data was reset')??false }; })()`);
 
@@ -137,7 +137,7 @@ try {
   await tabTo("e.getAttribute('name')==='urgency'"); await key("ArrowDown");
   await tabTo("e.getAttribute('name')==='consent'"); await key(" ", "Space");
   await tabTo("e.getAttribute('type')==='submit'"); await key("Enter");
-  await poll("document.body.innerText.includes('Your consultation request has been recorded.')", true, 15_000);
+  await poll("document.body.innerText.includes('Request recorded.')", true, 15_000);
   accessibility.push(await axe("consultation success")); await checkLayout("/consultation success", 1440);
   const receiptSafe = await evaluate(`(() => { const raw=sessionStorage.getItem('sme-growth-twin:lead-receipt:1.0.0'); const lower=(raw||'').toLowerCase(); return Boolean(raw)&&!['aiman','example.test','+60','email','phone','contact'].some(value=>lower.includes(value)); })()`);
   await evaluate("localStorage.setItem('unrelated-stage07','preserve-me');sessionStorage.setItem('unrelated-stage07-session','preserve-me')");

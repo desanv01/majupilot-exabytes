@@ -795,6 +795,106 @@ select:focus-visible, textarea:focus-visible {
   }
 }
 
+/* UI upgrade Phase 07: consultation, demonstration controls, and release polish */
+.demo-reset-dialog {
+  width: min(520px, calc(100% - 32px));
+  max-width: none;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: 0 28px 80px rgb(8 45 63 / 28%);
+}
+.demo-reset-dialog::backdrop { background: rgb(8 45 63 / 58%); }
+.demo-reset-dialog-body { padding: 28px; }
+.demo-reset-dialog h2 { margin: 0; color: var(--color-ink-800); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 30px; line-height: 1.2; }
+.demo-reset-dialog p:not(.eyebrow) { margin: 14px 0 0; color: var(--color-text-muted); line-height: 1.6; }
+.demo-reset-dialog-actions { margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px; }
+.demo-reset-dialog .button { min-height: 48px; margin: 0; padding: 11px 18px; border-radius: 9px; }
+.demo-reset-dialog .button.danger { border: 1px solid #c77d76; color: #7b2b25; background: var(--color-coral-100); }
+.demo-reset-dialog .button.danger:hover { background: #f8d8d4; }
+.demo-reset-dialog :focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.demo-banner-reset { min-height: 44px; flex: none; border: 1px solid #b78a32; border-radius: 8px; color: #593d0c; background: #fffaf0; font: inherit; font-weight: 700; cursor: pointer; }
+
+.consultation-loading { width: min(760px, calc(100% - 32px)); min-height: 72dvh; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; }
+.consultation-loading h1 { margin: 28px 0 8px; color: var(--color-ink-800); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: clamp(34px, 5vw, 54px); }
+.consultation-loading p { margin: 0; color: var(--color-text-muted); font-size: 17px; }
+.consultation-loading-shape { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 10px; }
+.consultation-loading-shape span { height: 9px; border-radius: 99px; background: var(--color-teal-100); }
+
+.consultation-hero { background: linear-gradient(132deg, var(--color-ink-950), #075f63); }
+.consultation-hero h1,
+.consultation-success-hero h1 { text-wrap: balance; }
+.consultation-context span { text-transform: none; letter-spacing: .01em; font-size: 13px; }
+.consultation-context strong { font-size: 15px; line-height: 1.35; }
+.consultation-form { overflow: hidden; }
+.consultation-form > section:first-of-type { padding-top: 30px; }
+.consultation-field-key { margin: 16px 0 0; padding: 11px 13px; border-left: 3px solid var(--color-teal-500); color: var(--color-text-muted); background: var(--color-teal-100); font-size: 14px; }
+.consultation-fields { align-items: start; }
+.consultation-fields > div { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.consultation-fields > div.full { grid-column: 1 / -1; }
+.consultation-fields label { display: block; color: var(--color-ink-800); font-size: 14px; font-weight: 750; }
+.consultation-fields label b { color: var(--color-coral-700); font-size: 13px; }
+.consultation-fields input,
+.consultation-fields select { font: inherit; font-size: 16px; }
+.consultation-fields small { min-height: 18px; line-height: 1.45; }
+.consultation-fields .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.consultation-error-summary { margin: 24px 28px 0; padding: 20px 22px; border: 1px solid #d59a94; border-left: 5px solid var(--color-coral-700); border-radius: 10px; background: var(--color-coral-100); }
+.consultation-error-summary:focus { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.consultation-error-summary h2 { margin: 0; color: #782d27; font-family: var(--font-dm-sans), ui-sans-serif, sans-serif; font-size: 20px; }
+.consultation-error-summary p { margin: 8px 0 0; color: #782d27; }
+.consultation-error-summary ul { margin: 12px 0 0; padding-left: 20px; }
+.consultation-error-summary a { min-height: 44px; display: inline-flex; align-items: center; color: #6e2621; font-weight: 700; text-underline-offset: 3px; }
+.consent-card.invalid span > small { color: #405b6a; }
+.consent-card label { min-height: 48px; }
+.consultation-submit { min-height: 54px; }
+.consultation-submit:disabled { opacity: .72; }
+.consultation-submit:disabled::before { content: ""; width: 14px; height: 14px; margin-right: 9px; display: inline-block; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; vertical-align: -2px; animation: phase07-submit-spin .8s linear infinite; }
+@keyframes phase07-submit-spin { to { transform: rotate(360deg); } }
+
+.consultation-success-hero { background: linear-gradient(132deg, var(--color-ink-950), #076b69); }
+.consultation-success-hero h1:focus { outline: 3px solid var(--color-focus); outline-offset: 5px; }
+.receipt-heading-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.receipt-heading-row h2 { margin: 3px 0 0; color: var(--color-ink-800); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 30px; }
+.receipt-status { min-height: 36px; padding: 8px 12px; border-radius: 999px; color: var(--color-teal-800); background: var(--color-teal-100); font-size: 13px; font-weight: 800; white-space: nowrap; }
+.receipt-card dl { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; }
+.receipt-card dl div { grid-column: span 2; }
+.receipt-card dl div:nth-child(4),
+.receipt-card dl div:nth-child(5) { grid-column: span 3; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+.receipt-card dl div:nth-child(3),
+.receipt-card dl div:nth-child(5) { border-right: 0; }
+.receipt-card dd { font-size: 18px; }
+.receipt-boundary { margin-top: 22px; padding: 26px 30px; border: 1px solid #e8c47f; border-radius: 14px; background: var(--color-amber-100); }
+.receipt-boundary h2 { margin: 0; color: #714807; font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 25px; }
+.receipt-boundary p { max-width: 900px; margin: 10px 0 0; color: #65491c; }
+
+@media (max-width: 900px) {
+  .receipt-card dl { grid-template-columns: 1fr; }
+  .receipt-card dl div,
+  .receipt-card dl div:nth-child(4),
+  .receipt-card dl div:nth-child(5) { grid-column: auto; margin: 0; padding: 16px 0; border-right: 0; border-top: 0; border-bottom: 1px solid var(--color-border); }
+  .receipt-card dl div:last-child { border-bottom: 0; }
+}
+
+@media (max-width: 620px) {
+  .demo-reset-dialog-body { padding: 22px 18px; }
+  .demo-reset-dialog h2 { font-size: 26px; }
+  .demo-reset-dialog-actions { align-items: stretch; flex-direction: column-reverse; }
+  .demo-reset-dialog .button { width: 100%; }
+  .consultation-error-summary { margin: 18px 17px 0; padding: 18px 16px; }
+  .consultation-fields > div.full { grid-column: auto; }
+  .consultation-context strong { font-size: 16px; }
+  .receipt-heading-row { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .receipt-status { min-height: 34px; }
+  .receipt-boundary { padding: 22px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consultation-submit:disabled::before { animation: none; border-right-color: currentColor; }
+  .demo-reset-dialog { scroll-behavior: auto; }
+}
+
 /* Stage 05 — Advisor Panel and Blueprint */
 .button.disabled { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 18px; border: 1px solid #c7d3da; border-radius: 8px; color: #64727e; background: #eef2f4; font-weight: 800; }
 .blueprint-shell { max-width: 1440px; margin: 0 auto; padding: 0 44px 80px; }
@@ -3088,4 +3188,298 @@ a { color: inherit; }
   .demo-launcher-heading { gap: 12px; }
   .demo-banner { gap: 8px; }
   .demo-banner button, .reset-demo { width: 100%; }
+}
+
+/* Phase 07 final cascade: these rules intentionally follow the accepted stage styles. */
+.consultation-section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.consultation-section-heading > div > p { margin: 8px 0 0; color: var(--color-text-muted); }
+.consultation-section-heading > span { max-width: 170px; color: var(--color-coral-700); font-size: 13px; font-weight: 700; text-align: right; }
+.consultation-error-summary { margin: 24px 28px 0; padding: 20px 22px; border: 1px solid #d59a94; border-left: 5px solid var(--color-coral-700); border-radius: 10px; background: var(--color-coral-100); }
+.consultation-error-summary:focus { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.consultation-error-summary h2 { margin: 0; color: #782d27; font-family: var(--font-dm-sans), ui-sans-serif, sans-serif; font-size: 20px; }
+.consultation-error-summary p { margin: 8px 0 0; color: #782d27; }
+.consultation-error-summary ul { margin: 10px 0 0; padding-left: 20px; }
+.consultation-error-summary a { min-height: 44px; display: inline-flex; align-items: center; color: #6e2621; font-weight: 700; text-underline-offset: 3px; }
+.submission-status { margin: 20px 28px 0; padding: 13px 15px; border-left: 4px solid var(--color-teal-700); color: var(--color-teal-800); background: var(--color-teal-100); }
+.consultation-form[aria-busy="true"] .consultation-submit::before { content: ""; width: 14px; height: 14px; margin-right: 9px; display: inline-block; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; vertical-align: -2px; animation: phase07-submit-spin .8s linear infinite; }
+.receipt-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.receipt-card-heading h2 { margin: 3px 0 0; color: var(--color-ink-800); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 30px; }
+.receipt-replay { margin: 0; padding: 8px 12px; border-radius: 999px; color: var(--color-teal-800); background: var(--color-teal-100); font-size: 13px; font-weight: 800; white-space: nowrap; }
+.receipt-card dl { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.receipt-card dl div { grid-column: span 2; }
+.receipt-card dl div:nth-child(4), .receipt-card dl div:nth-child(5) { grid-column: span 3; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+.receipt-card dl div:nth-child(3), .receipt-card dl div:nth-child(5) { border-right: 0; }
+.receipt-boundary { margin-top: 22px; padding: 26px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; border: 1px solid #e8c47f; border-radius: 14px; background: var(--color-amber-100); }
+.receipt-boundary h2 { margin: 0; color: #714807; font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 25px; }
+.receipt-boundary p { margin: 8px 0 0; color: #65491c; }
+.consultation-loading { width: min(760px, calc(100% - 32px)); min-height: 72dvh; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; }
+.consultation-loading h1 { margin: 12px 0 8px; color: var(--color-ink-800); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: clamp(34px, 5vw, 54px); }
+.consultation-loading > p:last-child { margin: 0; color: var(--color-text-muted); font-size: 17px; }
+.consultation-loading-shape { margin-bottom: 26px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 10px; }
+.consultation-loading-shape span { height: 9px; border-radius: 99px; background: var(--color-teal-100); }
+
+@media (max-width: 900px) {
+  .receipt-card dl { grid-template-columns: 1fr; }
+  .receipt-card dl div, .receipt-card dl div:nth-child(4), .receipt-card dl div:nth-child(5) { grid-column: auto; margin: 0; padding: 16px 0; border-right: 0; border-top: 0; border-bottom: 1px solid var(--color-border); }
+  .receipt-boundary { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .consultation-section-heading, .receipt-card-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .consultation-section-heading > span { max-width: none; text-align: left; }
+  .consultation-error-summary { margin: 18px 17px 0; padding: 18px 16px; }
+  .receipt-boundary { padding: 22px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .consultation-form[aria-busy="true"] .consultation-submit::before { animation: none; border-right-color: currentColor; }
+}
+
+/* UI upgrade Phase 07: consultation, demo, and release states */
+.consultation-topbar {
+  max-width: 1440px;
+  height: 68px;
+  padding-inline: clamp(18px, 4vw, 56px);
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(255 253 248 / 96%);
+}
+.consultation-journey { max-width: 1240px; margin: 24px auto 28px; padding-inline: 34px; }
+.consultation-shell { max-width: 1240px; padding-bottom: 96px; }
+.consultation-hero {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(34px, 5vw, 58px) clamp(24px, 5vw, 64px);
+  border: 1px solid rgb(191 234 227 / 24%);
+  border-radius: 16px;
+  background: var(--color-ink-950);
+  overflow: hidden;
+}
+.consultation-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: 38%;
+  background: linear-gradient(145deg, transparent, rgb(19 162 155 / 24%));
+  pointer-events: none;
+}
+.consultation-hero .eyebrow,
+.consultation-success-hero .eyebrow { color: var(--color-teal-200); }
+.consultation-hero h1,
+.consultation-success-hero h1 {
+  max-width: 740px;
+  font-family: var(--font-libre-baskerville), Georgia, serif;
+  font-size: clamp(38px, 4.8vw, 58px);
+  line-height: 1.08;
+}
+.consultation-hero > p:last-child,
+.consultation-success-hero > div > p:last-child { max-width: 650px; color: #d5e4e7; font-size: 17px; line-height: 1.6; }
+.consultation-context {
+  margin: 20px 0 24px;
+  border-color: var(--color-border);
+  border-radius: 16px;
+  box-shadow: none;
+}
+.consultation-context div { padding: 17px 18px; border-color: var(--color-border); }
+.consultation-context span { color: var(--color-text-muted); font-size: 12px; letter-spacing: .03em; text-transform: none; }
+.consultation-context strong { color: var(--color-ink-950); line-height: 1.35; }
+.consultation-grid { grid-template-columns: minmax(0, 1.5fr) minmax(290px, .72fr); gap: 24px; }
+.consultation-form,
+.consultation-aside,
+.receipt-card,
+.receipt-boundary { border-color: var(--color-border); border-radius: 16px; box-shadow: none; }
+.consultation-form { background: var(--color-surface); }
+.consultation-form > section { padding: 30px; border-color: var(--color-border); }
+.consultation-form h2,
+.consultation-aside h2,
+.receipt-card h2,
+.receipt-boundary h2 {
+  color: var(--color-ink-950);
+  font-family: var(--font-libre-baskerville), Georgia, serif;
+  font-size: 27px;
+  line-height: 1.2;
+}
+.consultation-section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.consultation-section-heading p { margin: 7px 0 0; color: var(--color-text-muted); }
+.consultation-section-heading > span { max-width: 170px; color: var(--color-text-muted); font-size: 13px; text-align: right; }
+.consultation-fields { margin-top: 24px; gap: 22px 20px; }
+.consultation-fields label > span { color: var(--color-ink-950); font-size: 15px; }
+.consultation-fields b { color: var(--color-coral-700); font-weight: 600; }
+.consultation-fields input,
+.consultation-fields select {
+  min-height: 50px;
+  border-color: #9fb8bd;
+  color: var(--color-ink-950);
+  font-size: 16px;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.consultation-fields input:hover,
+.consultation-fields select:hover { border-color: var(--color-teal-700); }
+.consultation-fields small { font-size: 14px; line-height: 1.45; }
+.consultation-form input:focus-visible,
+.consultation-form select:focus-visible,
+.consultation-form button:focus-visible,
+.consultation-form a:focus-visible,
+.consultation-aside a:focus-visible,
+.success-actions :focus-visible,
+.demo-reset-dialog button:focus-visible,
+.reset-demo:focus-visible,
+.demo-banner-reset:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+.consultation-error-summary {
+  margin: 24px 30px 0;
+  padding: 20px 22px;
+  border: 1px solid var(--color-coral-700);
+  border-left-width: 5px;
+  border-radius: 12px;
+  background: var(--color-coral-100);
+}
+.consultation-error-summary:focus { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.consultation-error-summary h2 { font-size: 22px; }
+.consultation-error-summary p { margin: 6px 0 10px; color: #71332d; }
+.consultation-error-summary ul { margin: 0; padding-left: 20px; }
+.consultation-error-summary a { min-height: 44px; display: inline-flex; align-items: center; color: #7e2f29; font-weight: 700; }
+.share-disclosure { background: var(--color-teal-100); }
+.share-disclosure li { margin: 9px 0; }
+.consultation-form > .consent-card { padding: 24px 30px; }
+.consent-card label { min-height: 48px; }
+.consent-card input { width: 24px; height: 24px; }
+.consent-card span > small { font-size: 14px; line-height: 1.55; }
+.consent-card.invalid { background: var(--color-coral-100); }
+.submission-error,
+.submission-status { margin: 20px 30px 0; padding: 14px 16px; border-radius: 8px; }
+.submission-error { border-left: 4px solid var(--color-coral-700); color: #71332d; background: var(--color-coral-100); }
+.submission-status { border-left: 4px solid var(--color-teal-700); color: var(--color-teal-800); background: var(--color-teal-100); }
+.consultation-submit { width: calc(100% - 60px); min-height: 52px; margin: 20px 30px 30px; border-radius: 10px; }
+.consultation-aside { top: 18px; padding: 30px; background: var(--color-paper-100); }
+.consultation-aside li { padding-left: 0; }
+.consultation-aside li::before { content: none; }
+.consultation-aside strong { color: var(--color-ink-950); }
+.consultation-aside a { color: var(--color-teal-800); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+.consultation-success-hero {
+  padding: clamp(34px, 5vw, 58px) clamp(24px, 5vw, 58px);
+  gap: 26px;
+  border-radius: 16px;
+  background: var(--color-ink-950);
+}
+.success-check { width: 76px; height: 76px; color: var(--color-ink-950); background: var(--color-teal-200); font-size: 42px; }
+.consultation-success-hero h1:focus { outline: none; }
+.receipt-card { margin-top: 24px; padding: 30px; background: var(--color-surface); }
+.receipt-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.receipt-card-heading .eyebrow { margin-bottom: 6px; }
+.receipt-card-heading h2 { margin: 0; }
+.receipt-replay { margin: 0; padding: 8px 12px; border-radius: 999px; color: var(--color-teal-800); background: var(--color-teal-100); font-size: 13px; font-weight: 700; }
+.receipt-card dl { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; }
+.receipt-card dl div { grid-column: span 2; padding: 14px 22px; }
+.receipt-card dl div:nth-child(4),
+.receipt-card dl div:nth-child(5) { grid-column: span 3; margin-top: 18px; border-top: 1px solid var(--color-border); }
+.receipt-card dl div:nth-child(3),
+.receipt-card dl div:nth-child(5) { border-right: 0; }
+.receipt-card dd { color: var(--color-teal-800); font-size: 18px; }
+.receipt-boundary {
+  margin-top: 22px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .8fr);
+  gap: 48px;
+  background: var(--color-paper-100);
+}
+.receipt-boundary p { margin: 8px 0 0; color: var(--color-text-muted); line-height: 1.6; }
+.success-actions { justify-content: flex-start; }
+.success-actions .button { min-width: 230px; min-height: 50px; border-radius: 10px; }
+
+.consultation-loading {
+  width: min(680px, calc(100% - 32px));
+  min-height: 60dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.consultation-loading h1 { max-width: 560px; margin: 0; color: var(--color-ink-950); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: clamp(36px, 6vw, 56px); }
+.consultation-loading > p:last-child { color: var(--color-text-muted); font-size: 17px; }
+.consultation-loading-shape { margin-bottom: 26px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 10px; }
+.consultation-loading-shape span { min-height: 18px; border-radius: 8px; background: var(--color-paper-100); }
+.consultation-loading-shape span:first-child { grid-column: 1 / -1; min-height: 90px; }
+
+.home-page .demo-case-grid {
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+  grid-template-areas: "primary secondary" "primary tertiary";
+}
+.home-page .demo-case:nth-child(1) { grid-area: primary; display: flex; flex-direction: column; justify-content: center; }
+.home-page .demo-case:nth-child(2) { grid-area: secondary; }
+.home-page .demo-case:nth-child(3) { grid-area: tertiary; }
+.home-page .demo-case:nth-child(1) .button { max-width: 260px; }
+.home-page .demo-path-note { padding-top: 14px; border-top: 1px solid var(--color-border); font-size: 14px; }
+.home-page .demo-path-note strong { color: var(--color-ink-950); }
+
+.demo-reset-dialog {
+  width: min(520px, calc(100% - 32px));
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: 0 28px 80px rgb(8 45 63 / 28%);
+}
+.demo-reset-dialog::backdrop { background: rgb(8 45 63 / 62%); }
+.demo-reset-dialog-body { padding: 28px; }
+.demo-reset-dialog h2 { margin: 0; color: var(--color-ink-950); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 28px; }
+.demo-reset-dialog-body > p:last-of-type { color: var(--color-text-muted); line-height: 1.6; }
+.demo-reset-dialog-actions { margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px; }
+.demo-reset-dialog-actions .button { min-height: 48px; }
+.button.danger { border-color: var(--color-coral-700); color: var(--color-surface); background: var(--color-coral-700); }
+.button.danger:hover { background: #85312b; }
+
+@media (max-width: 900px) {
+  .consultation-grid,
+  .receipt-boundary { grid-template-columns: 1fr; }
+  .consultation-aside { position: static; }
+  .receipt-card dl { grid-template-columns: 1fr 1fr; }
+  .receipt-card dl div,
+  .receipt-card dl div:nth-child(4),
+  .receipt-card dl div:nth-child(5) { grid-column: auto; margin-top: 0; border-top: 0; }
+  .receipt-card dl div:nth-child(odd) { padding-left: 0; }
+  .receipt-card dl div:nth-child(even) { border-right: 0; }
+}
+
+@media (max-width: 620px) {
+  .consultation-topbar { height: 64px; padding-inline: 16px; }
+  .consultation-journey { margin: 16px auto 20px; padding-inline: 16px; }
+  .consultation-shell { padding: 0 16px 56px; }
+  .consultation-hero { padding: 28px 20px; }
+  .consultation-hero h1,
+  .consultation-success-hero h1 { font-size: clamp(34px, 10vw, 40px); }
+  .consultation-section-heading,
+  .receipt-card-heading { display: block; }
+  .consultation-section-heading > span { display: block; max-width: none; margin-top: 8px; text-align: left; }
+  .consultation-form > section,
+  .consultation-form > .consent-card,
+  .consultation-aside { padding: 22px 18px; }
+  .consultation-error-summary { margin: 18px 18px 0; padding: 18px; }
+  .submission-error,
+  .submission-status { margin: 18px 18px 0; }
+  .consultation-submit { width: calc(100% - 36px); margin: 18px; }
+  .consultation-success-hero { padding: 28px 20px; }
+  .receipt-card,
+  .receipt-boundary { padding: 22px 18px; }
+  .receipt-card dl { grid-template-columns: 1fr; }
+  .receipt-card dl div,
+  .receipt-card dl div:nth-child(4),
+  .receipt-card dl div:nth-child(5) { padding: 16px 0; border-right: 0; border-bottom: 1px solid var(--color-border); }
+  .receipt-replay { display: inline-flex; margin-top: 12px; }
+  .receipt-boundary { gap: 18px; }
+  .success-actions { align-items: stretch; }
+  .home-page .demo-case-grid { grid-template-columns: 1fr; grid-template-areas: "primary" "secondary" "tertiary"; }
+  .home-page .demo-case:nth-child(1) .button { max-width: none; }
+  .demo-reset-dialog-body { padding: 22px 18px; }
+  .demo-reset-dialog-actions { align-items: stretch; flex-direction: column-reverse; }
+  .demo-reset-dialog-actions .button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consultation-fields input,
+  .consultation-fields select { transition: none; }
+  .consultation-loading-shape span { animation: none; }
 }

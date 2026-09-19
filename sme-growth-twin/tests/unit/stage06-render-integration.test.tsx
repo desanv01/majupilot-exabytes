@@ -22,7 +22,7 @@ describe("Stage 06 consultation render and browser persistence", () => {
   it("renders a safe responsive success receipt without contact details or delivery claims", () => {
     const receipt = { leadReference: "lead_stage060000000000000001", submittedAt: "2026-09-18T14:30:00+08:00", blueprintId: blueprint.id, status: "new" as const, replayed: false };
     const html = renderToStaticMarkup(<ConsultationView blueprint={blueprint} initialReceipt={receipt} />);
-    for (const text of ["request has been recorded", receipt.leadReference, receipt.blueprintId, "Return to Blueprint", "Start a new assessment", "No email, CRM delivery, or human review is claimed"]) expect(html).toContain(text);
+    for (const text of ["Request recorded.", receipt.leadReference, receipt.blueprintId, "Kopi Kita Café Group", "Balanced Growth", "Return to Blueprint", "Start a new assessment", "No email, CRM delivery, durable production storage, or human response is claimed"]) expect(html).toContain(text);
     expect(html).not.toMatch(/private@example|\+60 12/);
   });
 
