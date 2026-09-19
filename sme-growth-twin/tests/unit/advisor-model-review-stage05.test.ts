@@ -8,6 +8,7 @@ import { stage05CaseA } from "./stage05-fixtures";
 const generateTextMock = vi.hoisted(() => vi.fn());
 vi.mock("server-only", () => ({}));
 vi.mock("ai", async (importOriginal) => ({ ...(await importOriginal<typeof import("ai")>()), generateText: generateTextMock }));
+vi.mock("@/infrastructure/model-provider/gateway-catalogue", () => ({ preflightModel: vi.fn(async () => ({ id: "provider/runtime-model" })) }));
 
 const apiError = (statusCode: number, secret: string) => new APICallError({
   message: secret, url: "https://ai-gateway.vercel.sh/v1/ai/language-model", requestBodyValues: { secret }, statusCode,
@@ -15,14 +16,15 @@ const apiError = (statusCode: number, secret: string) => new APICallError({
 });
 
 describe("Stage 05 advisor Gateway HTTP classification", () => {
-  const previous = { model: process.env.AI_GATEWAY_MODEL, key: process.env.AI_GATEWAY_API_KEY, oidc: process.env.VERCEL_OIDC_TOKEN };
+  const previous = { mode: process.env.AI_EXECUTION_MODE, model: process.env.AI_GATEWAY_MODEL, key: process.env.AI_GATEWAY_API_KEY, oidc: process.env.VERCEL_OIDC_TOKEN };
   const full = stage05CaseA(); const context = buildAdvisorReviewContext(full.twin, full.diagnostic, full.recommendation, full.comparison);
 
-  beforeEach(() => { generateTextMock.mockReset(); process.env.AI_GATEWAY_MODEL = "provider/runtime-model"; process.env.AI_GATEWAY_API_KEY = "test-key-never-logged"; delete process.env.VERCEL_OIDC_TOKEN; });
+  beforeEach(() => { generateTextMock.mockReset(); process.env.AI_EXECUTION_MODE = "preferred"; process.env.AI_GATEWAY_MODEL = "provider/runtime-model"; process.env.AI_GATEWAY_API_KEY = "test-key-never-logged"; delete process.env.VERCEL_OIDC_TOKEN; });
   afterEach(() => {
     if (previous.model === undefined) delete process.env.AI_GATEWAY_MODEL; else process.env.AI_GATEWAY_MODEL = previous.model;
     if (previous.key === undefined) delete process.env.AI_GATEWAY_API_KEY; else process.env.AI_GATEWAY_API_KEY = previous.key;
     if (previous.oidc === undefined) delete process.env.VERCEL_OIDC_TOKEN; else process.env.VERCEL_OIDC_TOKEN = previous.oidc;
+    if (previous.mode === undefined) delete process.env.AI_EXECUTION_MODE; else process.env.AI_EXECUTION_MODE = previous.mode;
   });
 
   it.each([401, 402, 403, 404, 422])("treats HTTP %i as a terminal redacted provider fallback", async (statusCode) => {

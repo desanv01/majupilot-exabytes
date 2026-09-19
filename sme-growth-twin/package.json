@@ -14,6 +14,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:phase-b:smoke": "node scripts/phase-b-api-smoke.mjs",
+    "test:phase-c:smoke": "node scripts/phase-c-api-smoke.mjs",
     "test:phase02:browser": "node scripts/phase02-browser-check.mjs",
     "test:phase03:browser": "node scripts/phase03-browser-check.mjs",
     "test:phase04:browser": "node scripts/phase04-browser-check.mjs",
