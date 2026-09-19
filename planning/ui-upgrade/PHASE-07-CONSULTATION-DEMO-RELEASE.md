@@ -1,6 +1,6 @@
 # UI Upgrade Phase 07 - Consultation, Demo, and Release Hardening
 
-Status: **Ready for implementation**
+Status: **Accepted on 2026-09-19**
 Implementation profile: **GPT-5.6 Sol Medium with medium reasoning**
 Gate owner: **Main planning and integration task**
 Prerequisite: **UI Upgrade Phase 06 accepted at `33addcc`**
@@ -265,3 +265,15 @@ The main task accepts Phase 07 only when:
 The implementation task reports completion but does not merge or mark the phase
 accepted. The main task owns correction cycles, independent verification,
 deployment review, merge, production verification, and final ledger state.
+
+## 13. Acceptance record
+
+Accepted by the main planning and integration task on 19 September 2026 after
+PR #20 merged at `a115c88`. Focused verification passed TypeScript checking,
+the four Phase 07 UI unit tests, all eight Stage 07 security tests, the
+production build, and the Phase 07 browser journey. The committed browser
+evidence contains 35 screenshots across 1440, 1024, 390, and 360 px with no
+overflow, serious or critical accessibility findings, console errors, or
+failed requests. Scoped reset preserves unrelated browser storage and visibly
+confirms completion. GitHub validation and Vercel deployment passed, and the
+public home and consultation routes returned HTTP 200 after production release.
