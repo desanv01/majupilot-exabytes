@@ -17,6 +17,7 @@
     "test:phase03:browser": "node scripts/phase03-browser-check.mjs",
     "test:phase04:browser": "node scripts/phase04-browser-check.mjs",
     "test:phase05:browser": "node scripts/phase05-browser-check.mjs",
+    "test:phase06:browser": "node scripts/phase06-browser-check.mjs",
     "test:stage05:browser": "node scripts/stage05-browser-check.mjs",
     "test:stage05:gateway-live": "node scripts/stage05-live-gateway-check.mjs",
     "test:stage06:browser": "node scripts/stage06-browser-check.mjs",

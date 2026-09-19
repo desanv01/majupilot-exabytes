@@ -4,7 +4,15 @@ import { Brand } from "../assessment/brand";
 
 const journey = ["Discover", "Diagnose", "Compare", "Blueprint"] as const;
 
-type ShellContext = "analysis" | "results" | "recommendations" | "restoring" | "scenarios" | "restoring-scenarios";
+type ShellContext =
+  | "analysis"
+  | "results"
+  | "recommendations"
+  | "restoring"
+  | "scenarios"
+  | "restoring-scenarios"
+  | "blueprint"
+  | "restoring-blueprint";
 
 const contextDetails: Record<ShellContext, { kicker: string; heading: string; summary: string; note: string; currentIndex: number }> = {
   analysis: { kicker: "Evidence-led diagnosis", heading: "See what the facts support.", summary: "Local calculations from your recorded answers", note: "No live model call is needed for this diagnosis.", currentIndex: 1 },
@@ -13,6 +21,8 @@ const contextDetails: Record<ShellContext, { kicker: string; heading: string; su
   restoring: { kicker: "Evidence-led diagnosis", heading: "Restore your saved diagnosis.", summary: "Restoring your saved diagnosis", note: "Saved records stay on this device.", currentIndex: 1 },
   scenarios: { kicker: "Decision laboratory", heading: "Compare paths before you commit.", summary: "Three paths, one inspectable decision", note: "Inspection focus is not a saved preference.", currentIndex: 2 },
   "restoring-scenarios": { kicker: "Decision laboratory", heading: "Restore your scenario comparison.", summary: "Checking saved paths and assumptions", note: "Saved records stay on this device.", currentIndex: 2 },
+  blueprint: { kicker: "Executive Blueprint", heading: "Review the decision and its evidence.", summary: "Five specialist lenses, one immutable report", note: "Advisor interpretation never changes deterministic facts.", currentIndex: 3 },
+  "restoring-blueprint": { kicker: "Executive Blueprint", heading: "Restore your evidence-linked report.", summary: "Checking the selected path and source chain", note: "Saved records stay on this device.", currentIndex: 3 },
 };
 
 export function PostAssessmentShell({

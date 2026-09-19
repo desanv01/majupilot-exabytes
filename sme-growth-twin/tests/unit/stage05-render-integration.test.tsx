@@ -12,18 +12,18 @@ describe("Stage 05 rendered, responsive, and print contract", () => {
   const html = renderToStaticMarkup(<BlueprintView sources={{ twin: full.twin, diagnostic: full.diagnostic, recommendations: full.recommendation, comparison: full.comparison }} initialBlueprint={full.blueprint} />);
 
   it("renders the handoff, five distinct reviews, origin, confidence, evidence and adjustment", () => {
-    for (const label of ["Back to scenarios", "Regenerate review", "Print / save as PDF", "Growth advisor", "Operations advisor", "Finance advisor", "Cybersecurity advisor", "Change advisor", "Deterministic fallback", "Confidence", "Evidence references", "Advisory adjustments"]) expect(html).toContain(label);
-    expect(html.match(/class="advisor-card /g)).toHaveLength(5); expect(html).toContain("No material disagreement detected");
+    for (const label of ["Back to scenarios", "Regenerate review", "Print or save as PDF", "Growth advisor", "Operations advisor", "Finance advisor", "Cybersecurity advisor", "Change advisor", "Deterministic fallback", "Confidence", "Evidence references", "Advisory adjustments"]) expect(html).toContain(label);
+    expect(html.match(/class="phase06-advisor-card /g)).toHaveLength(5); expect(html).toContain("No material disagreement detected");
   });
 
   it("renders all required sections, exact Case A values, provenance, limitations and active consultation handoff", () => {
-    for (const label of ["Executive summary", "Business profile", "Digital maturity and AI readiness", "Top five pain points", "Recommended capabilities and mapped offerings", "Three-scenario comparison", "Selected transformation plan", "ROI assumptions, ranges, formulas, and exclusions", "Month-by-month roadmap", "Risks, warnings, and prerequisites", "Five advisor reviews", "Consultant notes", "Claim provenance", "Model-call disclosure", "Consultation handoff", "Request consultation", "RM 9,200 / RM 18,400 / RM 27,600", "30.4 months", "Not Estimated"]) expect(html).toContain(label);
+    for (const label of ["Executive summary", "Business profile", "Digital maturity and AI readiness", "Top five pain points", "Recommended capabilities and mapped offerings", "Three-scenario comparison", "Selected transformation plan", "ROI assumptions, ranges, formulas, and exclusions", "Month-by-month roadmap", "Risks, warnings, and prerequisites", "Five advisor reviews", "Consultant notes", "claim provenance", "model-call disclosure", "Consultation handoff", "Request consultation", "RM 9,200", "RM 18,400", "RM 27,600", "30.4 months", "Not Estimated"]) expect(html).toContain(label);
     expect(html).not.toMatch(/name=["'](?:email|phone|contact)|consent checkbox|submit consultation|send to exabytes/i);
   });
 
   it("has 360px stacking, wrapping, 44px controls, reduced motion and print expansion/hiding", async () => {
     const styles = await readFile(path.join(process.cwd(), "src/app/styles.css"), "utf8");
-    expect(styles).toContain("@media (max-width: 620px)"); expect(styles).toContain(".report-cover dl, .report-grid, .versions, .score-pair, .report-scenarios, .roi-highlight, .blueprint-timeline, .synthesis-grid { grid-template-columns: 1fr; }"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("min-height: 44px"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)"); expect(styles).toContain("@media print"); expect(styles).toContain(".no-print, .topbar, .journey-rail, .advisor-progress, .blueprint-hero, .contents-rail { display: none !important; }"); expect(styles).toContain("details > * { display: block !important; }");
+    expect(styles).toContain("@media (max-width: 700px)"); expect(styles).toContain(".phase06-synthesis-grid.synthesis-grid,"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("min-height: 44px"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)"); expect(styles).toContain("@media print"); expect(styles).toContain(".phase06-report .no-print,"); expect(styles).toContain("details:not([open]) > *:not(summary) { display: block !important; }");
   });
 
   it("keeps live model access server-only and uses current structured-output API", async () => {
@@ -37,7 +37,7 @@ describe("Stage 05 rendered, responsive, and print contract", () => {
     panel.modelCalls[0] = { ...panel.modelCalls[0], provider: "vercel_ai_gateway", model: "configured-at-runtime", status: "success", errorCategory: "none" };
     const mixed = buildBlueprint({ twin: full.twin, diagnostic: full.diagnostic, recommendations: full.recommendation, comparison: full.comparison, panel }, { id: () => "blueprint_stage0500011", now: () => full.blueprint.generatedAt });
     const mixedHtml = renderToStaticMarkup(<BlueprintView sources={{ twin: full.twin, diagnostic: full.diagnostic, recommendations: full.recommendation, comparison: full.comparison }} initialBlueprint={mixed} />);
-    expect(mixedHtml).toContain("Live model review"); expect(mixedHtml).toContain("Deterministic fallback"); expect(mixedHtml).toContain("1 live model review(s) and 4 deterministic fallback review(s)");
+    expect(mixedHtml).toContain("Live model review"); expect(mixedHtml).toContain("Deterministic fallback"); expect(mixedHtml).toContain("1 live, 4 fallback");
   });
 
   it("renders all distinct same-topic synthesis statements with attribution", () => {
