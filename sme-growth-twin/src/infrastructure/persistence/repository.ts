@@ -1,5 +1,7 @@
 import type { ArtifactWrite, AssessmentAnswerRecord, ConsentAppend, DataRequest, GuestSessionReceipt, OwnershipContext } from "@/domain/persistence";
 import type { ModelCallTelemetry } from "@/domain/ai-execution";
+import type { RecommendationExplanationContext } from "@/domain/recommendation-explanations";
+import type { CapabilityId } from "@/domain/recommendations";
 
 export interface PersistenceRepository {
   issueGuest(tokenDigest: string): Promise<GuestSessionReceipt>;
@@ -19,4 +21,5 @@ export interface PersistenceRepository {
   assertAssessmentAccess(owner: OwnershipContext, assessmentSessionId: string): Promise<void>;
   assertEvidenceReferences(owner: OwnershipContext, assessmentSessionId: string, evidenceRefs: string[]): Promise<void>;
   countDeliveredFollowUps(owner: OwnershipContext, assessmentSessionId: string): Promise<number>;
+  loadRecommendationForExplanation(owner: OwnershipContext, assessmentSessionId: string, recommendationRunId: string, capabilityId: CapabilityId, evidenceRefs: string[]): Promise<Omit<RecommendationExplanationContext, "catalogueSources">>;
 }

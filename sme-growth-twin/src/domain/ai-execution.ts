@@ -74,7 +74,7 @@ export const modelCallTelemetrySchema = z
   .object({
     id: persistenceUuidSchema,
     assessmentSessionId: persistenceUuidSchema,
-    operation: z.enum(["assessment_follow_up", "advisor_review", "ai_preflight"]),
+    operation: z.enum(["assessment_follow_up", "recommendation_explanation", "advisor_review", "ai_preflight"]),
     provider: z.enum(["vercel_ai_gateway", "none"]),
     model: z.string().min(1).max(160),
     schemaVersion: z.string().min(1).max(64),
