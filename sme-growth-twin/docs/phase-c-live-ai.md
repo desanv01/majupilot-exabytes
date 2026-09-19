@@ -31,4 +31,10 @@ npm run lint
 npm run test:phase-c:smoke
 ```
 
-The smoke starts isolated development servers for disabled, preferred, and required preflight behavior and sends a schema-invalid follow-up request. A real required-mode model call is a separate external gate and must only be claimed when usable Gateway credentials are present.
+The smoke starts isolated development servers for disabled, preferred, and required preflight behavior and sends a schema-invalid follow-up request. The real required-mode model call is executed separately by the credential-gated live harness below.
+
+## Required-mode live exit evidence
+
+On 20 September 2026 (MYT), `scripts/phase-c-live-gateway-proof.mjs` made one real `POST /api/v2/assessment/follow-up` call against the local Supabase stack with `AI_EXECUTION_MODE=required` and exact Gateway model `deepseek/deepseek-v4.1-flash`.
+
+The response state was `live`. The corresponding redacted `model_calls` row recorded `outcome=success`, `provider=vercel_ai_gateway`, 523 input tokens, 154 output tokens, estimated cost USD 0.000342, latency 1,955 ms, and zero retries. The harness queried the complete stored row and verified that it contained only the frozen telemetry columns, no unexpected payload column, and none of the synthetic marker embedded in the submitted business answers. Credentials, cookies, raw prompts, raw answers, and provider payloads were neither printed nor committed.
