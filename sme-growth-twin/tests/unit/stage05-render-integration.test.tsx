@@ -27,8 +27,8 @@ describe("Stage 05 rendered, responsive, and print contract", () => {
   });
 
   it("keeps live model access server-only and uses current structured-output API", async () => {
-    const adapter = await readFile(path.join(process.cwd(), "src/infrastructure/model-provider/advisor-model-review.ts"), "utf8"); const route = await readFile(path.join(process.cwd(), "src/app/api/advisors/review/route.ts"), "utf8");
-    expect(adapter).toContain('import "server-only"'); expect(adapter).toContain("generateText"); expect(adapter).toContain("Output.object"); expect(adapter).not.toContain("generateObject"); expect(adapter).toContain("process.env.AI_GATEWAY_MODEL"); expect(adapter).not.toMatch(/model:\s*["'][^"']+\//); expect(route).not.toMatch(/process\.env|AI_GATEWAY_API_KEY/);
+    const adapter = await readFile(path.join(process.cwd(), "src/infrastructure/model-provider/advisor-model-review.ts"), "utf8"); const policy = await readFile(path.join(process.cwd(), "src/infrastructure/model-provider/ai-execution-policy.ts"), "utf8"); const route = await readFile(path.join(process.cwd(), "src/app/api/advisors/review/route.ts"), "utf8");
+    expect(adapter).toContain('import "server-only"'); expect(adapter).toContain("generateText"); expect(adapter).toContain("Output.object"); expect(adapter).not.toContain("generateObject"); expect(policy).toContain("process.env.AI_GATEWAY_MODEL"); expect(adapter).not.toMatch(/model:\s*["'][^"']+\//); expect(route).not.toMatch(/process\.env|AI_GATEWAY_API_KEY/);
   });
 
   it("discloses mixed live and fallback origins without changing the report", () => {

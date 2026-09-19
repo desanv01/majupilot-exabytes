@@ -44,6 +44,7 @@ function request(ip: string) {
 describe("Stage 07 advisor security and budgets", () => {
   beforeEach(() => {
     advisorRateLimiter.resetForTests();
+    vi.stubEnv("AI_EXECUTION_MODE", "disabled");
     vi.stubEnv("AI_GATEWAY_MODEL", "");
     vi.stubEnv("AI_GATEWAY_API_KEY", "");
     vi.stubEnv("VERCEL_OIDC_TOKEN", "");
