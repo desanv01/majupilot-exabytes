@@ -120,28 +120,35 @@ describe("Phase D recommendation explanations", () => {
     const recommendation = current.recommendations.find((item) => item.capabilityId === "shared_customer_operations")!;
     const recommendationId = uuid(8);
     const evidenceId = uuid(9);
+    const secondEvidenceId = uuid(10);
     const context = {
       recommendationId,
       recommendation,
-      evidence: [{ id: evidenceId, sourceRef: "q3.biggestChallenge", normalizedValue: "customer_management" }],
+      evidence: [
+        { id: evidenceId, sourceRef: "q3.biggestChallenge", normalizedValue: "customer_management" },
+        { id: secondEvidenceId, sourceRef: "q2.crm", normalizedValue: "not_used" },
+      ],
       catalogueSources: EXABYTES_CATALOGUE_2_0_0.offerings
         .filter((item) => [recommendation.mappedOffering?.id, ...recommendation.alternativeOfferingIds].includes(item.id))
         .map(({ id, name, sourceReferenceId, approvedFactSummary }) => ({ id, name, sourceReferenceId, approvedFactSummary })),
     };
-    const text = `Here is the requested object:\n\`\`\`json\n${JSON.stringify({
+    const draft = {
       rationale: "A shared workflow addresses the recorded customer management gap.",
-      observedEvidence: ["Customer management is the recorded operating challenge."],
+      observedEvidence: Array.from({ length: 15 }, (_, index) => index === 0 ? "Customer management is the recorded operating challenge." : index === 1 ? "A shared CRM is not currently used." : `Surplus observation ${index + 1} is not authoritative.`),
       expectedOperationalChange: "Customer handoffs move into one governed workflow.",
       timing: "The deterministic sequence places this capability in the current group.",
       adoptionRisk: "Inconsistent team use is the main adoption risk to validate.",
       firstSuccessMeasure: "Track consistent use of the agreed customer handoff workflow.",
       consultantValidationQuestion: "Which customer handoff should the consultant validate first?",
       counterfactualAlternative: "Freshdesk remains an unselected alternative for a support-led workflow.",
-    })}\n\`\`\``;
+    };
+    const text = `Here is the requested object:\n\`\`\`json\n${JSON.stringify(draft)}\n\`\`\``;
     const explanation = validateRecommendationExplanation(buildDeepSeekCompatibleExplanation(text, context), context);
     expect(explanation).toMatchObject({ recommendationId, capabilityId: "shared_customer_operations", timing: { status: recommendation.status } });
     expect(explanation.observedEvidence[0]).toMatchObject({ evidenceId, citations: [{ type: "evidence", id: evidenceId }] });
+    expect(explanation.observedEvidence).toHaveLength(2);
+    expect(JSON.stringify(explanation)).not.toContain("Surplus observation 3");
     expect(explanation.counterfactualAlternative.explanation.citations).toContainEqual({ type: "catalogue_source", id: "EXB-FRESHDESK" });
-    expect(() => buildDeepSeekCompatibleExplanation(text.replace('"observedEvidence":["Customer management is the recorded operating challenge."]', '"observedEvidence":[]'), context)).toThrow();
+    expect(() => buildDeepSeekCompatibleExplanation(JSON.stringify({ ...draft, observedEvidence: draft.observedEvidence.slice(0, 1) }), context)).toThrow("missing_compatible_evidence_observation");
   });
 });

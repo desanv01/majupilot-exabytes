@@ -31,7 +31,7 @@ export interface RecommendationExplanationDependencies {
 
 const compatibleExplanationDraftSchema = z.object({
   rationale: z.string().trim().min(8).max(420),
-  observedEvidence: z.array(z.string().trim().min(3).max(280)).min(1).max(12),
+  observedEvidence: z.array(z.string().trim().min(3).max(280)).min(1).max(24),
   expectedOperationalChange: z.string().trim().min(8).max(420),
   timing: z.string().trim().min(8).max(420),
   adoptionRisk: z.string().trim().min(8).max(420),
@@ -63,7 +63,7 @@ function parseJsonObject(text: string): unknown {
 export function buildDeepSeekCompatibleExplanation(text: string, context: RecommendationExplanationContext): unknown {
   const draft = compatibleExplanationDraftSchema.parse(parseJsonObject(text));
   const evidence = context.evidence.slice(0, 6);
-  if (draft.observedEvidence.length !== evidence.length) throw new Error("missing_compatible_evidence_observation");
+  if (draft.observedEvidence.length < evidence.length) throw new Error("missing_compatible_evidence_observation");
   const recommendationCitation = { type: "recommendation" as const, id: context.recommendationId };
   const sourceCitations = context.catalogueSources.map((source) => ({ type: "catalogue_source" as const, id: source.sourceReferenceId }));
   const evidenceCitations = evidence.map((item) => ({ type: "evidence" as const, id: item.id }));
