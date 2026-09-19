@@ -1,10 +1,12 @@
 import { PersistenceError, type ArtifactWrite, type AssessmentAnswerRecord, type ConsentAppend, type DataRequest, type GuestSessionReceipt, type OwnershipContext } from "@/domain/persistence";
 import type { PersistenceRepository } from "./repository";
+import type { ModelCallTelemetry } from "@/domain/ai-execution";
 
 type Guest = { id:string; digest:string; assessmentSessionId:string; expiresAt:string; revoked:boolean; claimed?:{userId:string;organizationId:string} };
 export class LocalFixturePersistenceRepository implements PersistenceRepository {
   readonly transaction="local-fixture" as const; private guests=new Map<string,Guest>(); private memberships=new Map<string,OwnershipContext>();
   readonly answers=new Map<string,AssessmentAnswerRecord>(); readonly artifacts=new Map<string,ArtifactWrite>(); readonly consents=new Map<string,ConsentAppend>(); readonly requests=new Map<string,Record<string,unknown>>();
+  readonly modelCalls: Array<{owner:OwnershipContext;record:ModelCallTelemetry}>=[];
   addMembership(owner:Extract<OwnershipContext,{kind:"organization"}>){this.memberships.set(`${owner.userId}:${owner.organizationId}`,owner);}
   async issueGuest(tokenDigest:string){const guestSessionId=crypto.randomUUID(),assessmentSessionId=crypto.randomUUID(),expiresAt=new Date(Date.now()+86400000).toISOString(),absoluteExpiresAt=new Date(Date.now()+2592000000).toISOString();this.guests.set(tokenDigest,{id:guestSessionId,digest:tokenDigest,assessmentSessionId,expiresAt,revoked:false});return{guestSessionId,assessmentSessionId,expiresAt,absoluteExpiresAt};}
   async resumeGuest(tokenDigest:string,newDigest:string){const g=this.guests.get(tokenDigest);if(!g||g.revoked)throw new PersistenceError("UNAUTHENTICATED",401);if(Date.parse(g.expiresAt)<=Date.now())throw new PersistenceError("SESSION_EXPIRED",401);this.guests.delete(tokenDigest);g.digest=newDigest;g.expiresAt=new Date(Date.now()+86400000).toISOString();this.guests.set(newDigest,g);return{guestSessionId:g.id,assessmentSessionId:g.assessmentSessionId,expiresAt:g.expiresAt};}
@@ -16,4 +18,9 @@ export class LocalFixturePersistenceRepository implements PersistenceRepository 
   async createExport(_owner:OwnershipContext,r:DataRequest){this.requests.set(r.id,{id:r.id,status:"pending",created_at:new Date().toISOString(),updated_at:new Date().toISOString()});return r.id;}
   async createDeletion(_owner:OwnershipContext,r:DataRequest){const receipt=crypto.randomUUID();this.requests.set(r.id,{id:r.id,status:"pending",safe_receipt:receipt,created_at:new Date().toISOString(),updated_at:new Date().toISOString()});return receipt;}
   async getDataRequest(_owner:OwnershipContext,_kind:"export"|"deletion",id:string){const value=this.requests.get(id);if(!value)throw new PersistenceError("NOT_FOUND",404);return value;}
+  async assertAssessmentAccess(owner:OwnershipContext,assessmentSessionId:string){const allowed=[...this.guests.values()].some((guest)=>guest.assessmentSessionId===assessmentSessionId&&(owner.kind==="guest"?guest.id===owner.guestSessionId:guest.claimed?.organizationId===owner.organizationId));if(!allowed)throw new PersistenceError("NOT_FOUND",404);}
+  async assertEvidenceReferences(owner:OwnershipContext,assessmentSessionId:string,evidenceRefs:string[]){await this.assertAssessmentAccess(owner,assessmentSessionId);const known=new Set([...this.artifacts.values()].filter((artifact)=>artifact.kind==="evidence_items"&&artifact.assessmentSessionId===assessmentSessionId).map((artifact)=>artifact.id));if(evidenceRefs.some((id)=>!known.has(id)))throw new PersistenceError("NOT_FOUND",404);}
+  async countDeliveredFollowUps(owner:OwnershipContext,assessmentSessionId:string){await this.assertAssessmentAccess(owner,assessmentSessionId);return this.modelCalls.filter((entry)=>entry.record.assessmentSessionId===assessmentSessionId&&entry.record.operation==="assessment_follow_up"&&["success","deterministic_fallback","ai_disabled"].includes(entry.record.outcome)).length;}
+  async appendModelCall(owner:OwnershipContext,record:ModelCallTelemetry){await this.assertAssessmentAccess(owner,record.assessmentSessionId);this.modelCalls.push({owner,record});}
+  async getDailyModelSpend(owner:OwnershipContext){const since=Date.now()-86_400_000;return this.modelCalls.filter((entry)=>JSON.stringify(entry.owner)===JSON.stringify(owner)&&Date.parse(entry.record.startedAt)>=since).reduce((sum,entry)=>sum+(entry.record.estimatedCost??0),0);}
 }

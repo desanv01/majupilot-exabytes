@@ -11,7 +11,7 @@ const expectedHeadings = ["Executive summary", "Business profile", "Digital matu
 const expectedFigures = { costs: { low: 9200, base: 18400, high: 27600 }, operational: { status: "estimated", range: { low: 2358, base: 7254, high: 15233 }, formula: "weekly hours saved × 52 × loaded hourly cost" }, net: { status: "estimated", range: { low: -25242, base: -11146, high: 6033 }, formula: "low gross − high cost; base gross − base cost; high gross − low cost" }, payback: { status: "estimated", best: 7.2, base: 30.4, worst: 140.5 }, budgetFit: "only_low_within", revenue: "not_estimated", avoidedRisk: "not_estimated", committed: 4 };
 const equal = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 await mkdir(artifacts, { recursive: true });
-const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--port", String(appPort)], { cwd: process.cwd(), env: { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" }, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
+const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--port", String(appPort)], { cwd: process.cwd(), env: { ...process.env, AI_EXECUTION_MODE: "disabled", AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" }, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
 let serverOutput = ""; server.stdout.on("data", (value) => { serverOutput += value.toString(); }); server.stderr.on("data", (value) => { serverOutput += value.toString(); });
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 let ready = false;

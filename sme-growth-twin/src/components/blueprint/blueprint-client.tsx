@@ -184,6 +184,7 @@ export function BlueprintView({
       const context = buildAdvisorReviewContext(sources.twin, sources.diagnostic, sources.recommendations, sources.comparison);
       let panel: AdvisorPanelResponse;
       let fallbackUsed = false;
+      let requiredFailure = false;
 
       try {
         const response = await fetch("/api/advisors/review", {
@@ -192,9 +193,14 @@ export function BlueprintView({
           body: JSON.stringify({ context, advisorIds: EXABYTES_ADVISORS_1_0_0.map((advisor) => advisor.id) }),
           signal: controller.signal,
         });
-        if (!response.ok) throw new Error("review_unavailable");
+        if (!response.ok) {
+          const body = await response.json().catch(() => null) as { error?: { code?: string } } | null;
+          requiredFailure = Boolean(body?.error?.code?.startsWith("AI_"));
+          throw new Error(body?.error?.code ?? "review_unavailable");
+        }
         panel = advisorPanelResponseSchema.parse(await response.json());
-      } catch {
+      } catch (error) {
+        if (requiredFailure) throw error;
         panel = fallbackPanel(sources);
         fallbackUsed = true;
       }
