@@ -42,6 +42,13 @@ const compatibleExplanationDraftSchema = z.object({
 
 const DEEPSEEK_JSON_CONTRACT = `Return exactly one JSON object with these keys and no markdown: {"rationale":"...","observedEvidence":["..."],"expectedOperationalChange":"...","timing":"...","adoptionRisk":"...","firstSuccessMeasure":"...","consultantValidationQuestion":"...?","counterfactualAlternative":"..."}. Return one observedEvidence string for each of the first six supplied evidence items, in the same order. Keep every string under 280 characters. Do not include IDs, citations, URLs, prices, percentages, durations, or guarantees. Do not name a product outside counterfactualAlternative.`;
 
+export function deepSeekRecommendationCallOptions() {
+  return {
+    reasoning: "none" as const,
+    providerOptions: { gateway: { only: ["deepseek"] } },
+  };
+}
+
 function parseJsonObject(text: string): unknown {
   const stripped = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
   try { return JSON.parse(stripped); }
@@ -85,6 +92,7 @@ const defaultProvider = async (input: { model: string; prompt: string; context: 
   if (input.model.startsWith("deepseek/")) {
     const result = await generateText({
       model: input.model,
+      ...deepSeekRecommendationCallOptions(),
       maxRetries: 0,
       timeout: { totalMs: input.timeoutMs },
       maxOutputTokens: input.maxOutputTokens,

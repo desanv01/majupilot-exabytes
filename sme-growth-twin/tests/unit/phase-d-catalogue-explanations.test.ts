@@ -12,7 +12,7 @@ import { EXABYTES_CATALOGUE_1_0_0, EXABYTES_CATALOGUE_2_0_0 } from "@/domain-pac
 import { goldenFixtureById } from "@/domain-packs/exabytes/golden-fixtures";
 import { EXABYTES_OFFERING_SELECTION_1_0_0, EXABYTES_OFFERING_SELECTION_2_0_0 } from "@/domain-packs/exabytes/offering-selection";
 import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "@/domain-packs/exabytes/recommendation-rules";
-import { buildDeepSeekCompatibleExplanation, runRecommendationExplanation } from "@/infrastructure/model-provider/recommendation-explanation-model";
+import { buildDeepSeekCompatibleExplanation, deepSeekRecommendationCallOptions, runRecommendationExplanation } from "@/infrastructure/model-provider/recommendation-explanation-model";
 import { LocalFixturePersistenceRepository } from "@/infrastructure/persistence/local-fixture-repository";
 
 const uuid = (n: number) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -115,6 +115,7 @@ describe("Phase D recommendation explanations", () => {
   });
 
   it("adapts DeepSeek text JSON into an authoritative, strictly validated explanation", () => {
+    expect(deepSeekRecommendationCallOptions()).toEqual({ reasoning: "none", providerOptions: { gateway: { only: ["deepseek"] } } });
     const { current } = recommendations();
     const recommendation = current.recommendations.find((item) => item.capabilityId === "shared_customer_operations")!;
     const recommendationId = uuid(8);
