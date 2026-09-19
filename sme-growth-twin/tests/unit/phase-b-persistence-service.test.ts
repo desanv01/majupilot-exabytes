@@ -1,0 +1,5 @@
+import { describe,expect,it,vi } from "vitest";vi.mock("server-only",()=>({}));import { PersistenceService } from "@/core/persistence/persistence-service";import type { PersistenceRepository } from "@/infrastructure/persistence/repository";
+const u=(n:number)=>`00000000-0000-4000-8000-${String(n).padStart(12,"0")}`;
+const repository={saveAnswer:vi.fn(),saveArtifact:vi.fn(),appendConsent:vi.fn(),createExport:vi.fn(),createDeletion:vi.fn()} as unknown as PersistenceRepository;
+const owner={kind:"guest" as const,guestSessionId:u(9)};
+describe("Phase B persistence service",()=>{it("validates before calling an adapter",()=>{const service=new PersistenceService(repository);expect(()=>service.saveAnswer(owner,{id:"bad"})).toThrow();expect(repository.saveAnswer).not.toHaveBeenCalled();});it("passes a valid typed answer to the repository",async()=>{const service=new PersistenceService(repository);const answer={id:u(1),assessmentSessionId:u(2),answerKey:"q1",revision:1,value:{ok:true},evidenceState:"confirmed",schemaVersion:"1"};await service.saveAnswer(owner,answer);expect(repository.saveAnswer).toHaveBeenCalledWith(owner,answer);});});
