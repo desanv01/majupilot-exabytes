@@ -8,7 +8,7 @@ import {
   scenarioComparisonIdSchema,
   scenarioEventIdSchema,
 } from "./ids";
-import { capabilityIdSchema, RECOMMENDATION_CATALOGUE_VERSION, RECOMMENDATION_MODEL_VERSION, type CapabilityId, type RoadmapPhase } from "./recommendations";
+import { capabilityIdSchema, catalogueVersionSchema, RECOMMENDATION_MODEL_VERSION, type CapabilityId, type RoadmapPhase } from "./recommendations";
 import { PAIN_MODEL_VERSION, SCORE_MODEL_VERSION } from "./scoring";
 
 export const SCENARIO_MODEL_VERSION = "1.0.0" as const;
@@ -105,7 +105,7 @@ export const scenarioResultSchema = z.object({
 
 export const scenarioComparisonSchema = z.object({
   id: scenarioComparisonIdSchema, assessmentSessionId: assessmentSessionIdSchema, businessTwinId: businessTwinIdSchema, twinRevision: z.number().int().positive(), diagnosticResultId: diagnosticResultIdSchema, recommendationResultId: recommendationResultIdSchema,
-  sourceScoreModelVersion: z.literal(SCORE_MODEL_VERSION), sourcePainModelVersion: z.literal(PAIN_MODEL_VERSION), sourceRecommendationModelVersion: z.literal(RECOMMENDATION_MODEL_VERSION), sourceCatalogueVersion: z.literal(RECOMMENDATION_CATALOGUE_VERSION),
+  sourceScoreModelVersion: z.literal(SCORE_MODEL_VERSION), sourcePainModelVersion: z.literal(PAIN_MODEL_VERSION), sourceRecommendationModelVersion: z.literal(RECOMMENDATION_MODEL_VERSION), sourceCatalogueVersion: catalogueVersionSchema,
   scenarioModelVersion: z.literal(SCENARIO_MODEL_VERSION), roiModelVersion: z.literal(ROI_MODEL_VERSION), createdAt: z.iso.datetime({ offset: true }), updatedAt: z.iso.datetime({ offset: true }), selectedScenarioId: z.string().optional(), scenarios: z.array(scenarioResultSchema).length(3),
 }).strict().superRefine((comparison, context) => {
   if (comparison.selectedScenarioId && !comparison.scenarios.some((scenario) => scenario.id === comparison.selectedScenarioId)) context.addIssue({ code: "custom", path: ["selectedScenarioId"], message: "Selected scenario must belong to this comparison" });

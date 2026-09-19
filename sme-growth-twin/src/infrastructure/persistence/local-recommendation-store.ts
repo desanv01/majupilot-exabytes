@@ -36,6 +36,9 @@ export function loadRecommendationResult(storage: RecommendationStorage, twin?: 
     const incompatible = record.recommendationModelVersion !== RECOMMENDATION_MODEL_VERSION || record.catalogueVersion !== RECOMMENDATION_CATALOGUE_VERSION || record.sourceScoreModelVersion !== SCORE_MODEL_VERSION || record.sourcePainModelVersion !== PAIN_MODEL_VERSION;
     return { status: "discarded", reason: incompatible ? "incompatible" : "corrupt" };
   }
+  if (parsed.data.recommendationModelVersion !== RECOMMENDATION_MODEL_VERSION || parsed.data.catalogueVersion !== RECOMMENDATION_CATALOGUE_VERSION || parsed.data.sourceScoreModelVersion !== SCORE_MODEL_VERSION || parsed.data.sourcePainModelVersion !== PAIN_MODEL_VERSION) {
+    clearRecommendationResult(storage); return { status: "discarded", reason: "incompatible" };
+  }
   if (twin && diagnostic && !isRecommendationCurrent(parsed.data, twin, diagnostic)) {
     clearRecommendationResult(storage); return { status: "discarded", reason: "stale" };
   }

@@ -1,6 +1,7 @@
 import type { BusinessTwin } from "@/domain/business-twin";
 import type { RecommendationResultId } from "@/domain/ids";
 import {
+  catalogueSchema,
   RECOMMENDATION_CATALOGUE_VERSION,
   RECOMMENDATION_MODEL_VERSION,
   recommendationResultSchema,
@@ -22,6 +23,7 @@ export function buildRecommendationResult(
   offeringSelectionPolicy: unknown,
   factories: RecommendationFactories,
 ): RecommendationResult {
+  const parsedCatalogue = catalogueSchema.safeParse(catalogue);
   const selected = selectCapabilityRecommendations(twin, diagnostic, recommendationRulePack);
   const mapped = mapOfferingsAfterSelection(selected, twin, catalogue, offeringSelectionPolicy);
   return recommendationResultSchema.parse({
@@ -33,7 +35,7 @@ export function buildRecommendationResult(
     sourceScoreModelVersion: diagnostic.scoreModelVersion,
     sourcePainModelVersion: diagnostic.painModelVersion,
     recommendationModelVersion: RECOMMENDATION_MODEL_VERSION,
-    catalogueVersion: RECOMMENDATION_CATALOGUE_VERSION,
+    catalogueVersion: parsedCatalogue.success ? parsedCatalogue.data.version : RECOMMENDATION_CATALOGUE_VERSION,
     generatedAt: factories.now(),
     recommendations: mapped,
   });
