@@ -1,7 +1,7 @@
 # UI Upgrade Phase 06 - Blueprint and Advisor Experience
 
-Status: **Ready for implementation**  
-Implementation profile: **GPT-5.6 Sol High**  
+Status: **Accepted on 2026-09-19**
+Implementation profile: **GPT-5.6 Sol High; final correction directed under the owner's Sol Medium override**
 Gate owner: **Main planning and integration task**  
 Prerequisite: **UI Upgrade Phase 05 accepted**
 
@@ -299,3 +299,10 @@ The main task accepts Phase 06 only when:
 
 The implementation task reports completion but does not merge or mark this
 phase accepted. The main task owns review, correction, merge, and ledger state.
+
+## 11. Acceptance record
+
+Accepted by the main planning and integration task on 19 September 2026 after
+independent code, browser, accessibility, responsive, regression, and all-page
+PDF review. PR #18 merged at `33addcc`. The acceptance cycle corrected real
+1440 px overflow and a fragmented print version block before merge.

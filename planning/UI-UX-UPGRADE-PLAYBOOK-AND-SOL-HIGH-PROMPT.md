@@ -921,6 +921,11 @@ Exit gate:
 
 **Goal:** complete the user journey and make the demo reliable.
 
+**Owner execution override (19 September 2026):** use GPT-5.6 Sol Medium with
+medium reasoning for Phase 7 planning, implementation, review, and correction
+tasks. This phase-specific instruction supersedes the earlier Sol High profile
+in sections 9 and 10 without changing any quality gate.
+
 Tasks:
 
 - refine consultation form and success receipt;
