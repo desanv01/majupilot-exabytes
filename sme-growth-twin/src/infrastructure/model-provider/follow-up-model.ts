@@ -89,9 +89,10 @@ export async function runDynamicFollowUp(
   owner: OwnershipContext,
   repository: PersistenceRepository,
   clientKey: string,
+  deliveredProposalCount: number,
   dependencies: FollowUpModelDependencies = {},
 ): Promise<FollowUpResponse> {
-  const authoritative = request.automaticFollowUpCount >= 3 ? null : selectHighestImpactUnknown(request.answers, request.answeredIntents, request.evidenceRefs);
+  const authoritative = deliveredProposalCount >= 3 ? null : selectHighestImpactUnknown(request.answers, request.answeredIntents, request.evidenceRefs);
   if (!authoritative) return { state: "complete", proposal: null, requiresConfirmation: true };
   const policy = operationPolicy("assessment_follow_up");
   const now = dependencies.now ?? Date.now;

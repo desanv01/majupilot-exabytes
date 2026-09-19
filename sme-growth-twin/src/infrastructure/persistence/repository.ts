@@ -17,4 +17,6 @@ export interface PersistenceRepository {
   appendModelCall(owner: OwnershipContext, record: ModelCallTelemetry): Promise<void>;
   getDailyModelSpend(owner: OwnershipContext): Promise<number>;
   assertAssessmentAccess(owner: OwnershipContext, assessmentSessionId: string): Promise<void>;
+  assertEvidenceReferences(owner: OwnershipContext, assessmentSessionId: string, evidenceRefs: string[]): Promise<void>;
+  countDeliveredFollowUps(owner: OwnershipContext, assessmentSessionId: string): Promise<number>;
 }

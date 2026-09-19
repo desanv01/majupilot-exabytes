@@ -55,7 +55,6 @@ export const followUpRequestSchema = z
     assessmentSessionId: persistenceUuidSchema,
     answers: coreAnswersSchema,
     answeredIntents: z.array(followUpIntentSchema).max(8).default([]),
-    automaticFollowUpCount: z.number().int().min(0).max(3),
     evidenceRefs: z.array(persistenceUuidSchema).max(24).default([]),
   })
   .strict();

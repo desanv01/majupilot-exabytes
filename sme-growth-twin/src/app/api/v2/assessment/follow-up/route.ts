@@ -11,9 +11,11 @@ export async function POST(request: Request) {
     const owner = await resolveOwner(request, input.organizationId);
     const store = repository();
     await store.assertAssessmentAccess(owner, input.assessmentSessionId);
+    await store.assertEvidenceReferences(owner, input.assessmentSessionId, input.evidenceRefs);
+    const deliveredProposalCount = await store.countDeliveredFollowUps(owner, input.assessmentSessionId);
     const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
     const clientKey = (forwarded || request.headers.get("x-real-ip") || "unidentified-client").slice(0, 128);
-    const result = followUpResponseSchema.parse(await runDynamicFollowUp(input, owner, store, clientKey));
+    const result = followUpResponseSchema.parse(await runDynamicFollowUp(input, owner, store, clientKey, deliveredProposalCount));
     return response({ data: result }, 200, requestId);
   } catch (error) {
     if (error instanceof AiExecutionError) return response({ error: { code: error.code, requestId, retryable: error.retryable } }, error.httpStatus, requestId);

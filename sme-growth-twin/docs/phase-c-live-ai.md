@@ -1,6 +1,6 @@
 # Phase C live AI and dynamic follow-up
 
-Phase C adds one bounded live-AI operation without changing the deterministic decision kernel. `POST /api/v2/assessment/follow-up` revalidates guest or organization ownership, deterministically selects the highest-impact unanswered intent, and permits the model to phrase exactly that one question. The server rejects a changed intent, answer type, choice set, or unsupported evidence reference. Responses always require confirmation; this route does not write an answer or recalculate a score.
+Phase C adds one bounded live-AI operation without changing the deterministic decision kernel. `POST /api/v2/assessment/follow-up` revalidates guest or organization ownership, verifies every evidence UUID belongs to that assessment, deterministically selects the highest-impact unanswered intent, and permits the model to phrase exactly that one question. The server rejects a changed intent, answer type, choice set, or unsupported evidence reference. The automatic-follow-up count comes only from persisted delivered `model_calls` outcomes, never client input, and stops at three. Responses always require confirmation; this route does not write an answer or recalculate a score.
 
 ## Execution policy
 
@@ -25,7 +25,7 @@ The existing advisor evidence validator remains authoritative. Its model route n
 Run:
 
 ```text
-npm run test -- tests/unit/phase-c-ai-policy.test.ts tests/unit/phase-c-follow-up.test.ts tests/unit/phase-c-routes.test.ts
+npm run test -- tests/unit/phase-c-ai-policy.test.ts tests/unit/phase-c-follow-up.test.ts tests/unit/phase-c-persistence.test.ts tests/unit/phase-c-routes.test.ts
 npm run type-check
 npm run lint
 npm run test:phase-c:smoke

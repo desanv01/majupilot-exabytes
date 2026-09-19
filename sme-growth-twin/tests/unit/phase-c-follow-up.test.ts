@@ -16,7 +16,7 @@ const answers = {
   q4: { primaryObjective: "reduce_cost" as const, budgetBand: "5k_15k" as const, implementationPace: "1_3_months" as const, highestConcern: "cost" as const },
   q5: { leadershipSponsorship: 4, usableData: 4, employeeDigitalSkills: 4, processConsistency: 4, changeWillingness: 4 },
 };
-const request: FollowUpRequest = { assessmentSessionId: uuid(1), answers, answeredIntents: [], automaticFollowUpCount: 0, evidenceRefs: [uuid(2)] };
+const request: FollowUpRequest = { assessmentSessionId: uuid(1), answers, answeredIntents: [], evidenceRefs: [uuid(2)] };
 const owner: OwnershipContext = { kind: "guest", guestSessionId: uuid(3) };
 const records: ModelCallTelemetry[] = [];
 const repository = {
@@ -52,7 +52,7 @@ describe("Phase C live execution modes", () => {
   it("disabled performs no preflight or provider call and records no prompt", async () => {
     process.env.AI_EXECUTION_MODE = "disabled";
     const provider = vi.fn(); const preflight = vi.fn();
-    const result = await runDynamicFollowUp(request, owner, repository, "test", { callProvider: provider, preflight, id: () => uuid(4) });
+    const result = await runDynamicFollowUp(request, owner, repository, "test", 0, { callProvider: provider, preflight, id: () => uuid(4) });
     expect(result.state).toBe("ai_disabled"); expect(provider).not.toHaveBeenCalled(); expect(preflight).not.toHaveBeenCalled();
     expect(records[0]).toMatchObject({ outcome: "ai_disabled", model: "disabled", evidenceRefs: [uuid(2)] });
     expect(JSON.stringify(records[0])).not.toContain(answers.q3.manualWorkflow);
@@ -60,23 +60,32 @@ describe("Phase C live execution modes", () => {
 
   it("preferred discloses deterministic fallback for invalid structured output", async () => {
     process.env.AI_EXECUTION_MODE = "preferred";
-    const result = await runDynamicFollowUp(request, owner, repository, "test", { preflight: vi.fn(async () => model), callProvider: vi.fn(async () => ({ output: { nope: true }, inputTokens: 10, outputTokens: 5 })), id: () => uuid(5) });
+    const result = await runDynamicFollowUp(request, owner, repository, "test", 0, { preflight: vi.fn(async () => model), callProvider: vi.fn(async () => ({ output: { nope: true }, inputTokens: 10, outputTokens: 5 })), id: () => uuid(5) });
     expect(result).toMatchObject({ state: "deterministic_fallback", proposal: { intent: "manual_hours" } });
     expect(records[0]).toMatchObject({ outcome: "deterministic_fallback", fallbackReason: "AI_INVALID_OUTPUT" });
   });
 
   it("required returns a stable invalid-output error and never falls back", async () => {
     process.env.AI_EXECUTION_MODE = "required";
-    await expect(runDynamicFollowUp(request, owner, repository, "test", { preflight: vi.fn(async () => model), callProvider: vi.fn(async () => ({ output: { nope: true }, inputTokens: 10, outputTokens: 5 })), id: () => uuid(6) })).rejects.toMatchObject<Partial<AiExecutionError>>({ code: "AI_INVALID_OUTPUT" });
+    await expect(runDynamicFollowUp(request, owner, repository, "test", 0, { preflight: vi.fn(async () => model), callProvider: vi.fn(async () => ({ output: { nope: true }, inputTokens: 10, outputTokens: 5 })), id: () => uuid(6) })).rejects.toMatchObject<Partial<AiExecutionError>>({ code: "AI_INVALID_OUTPUT" });
     expect(records[0]).toMatchObject({ outcome: "failed", fallbackReason: "AI_INVALID_OUTPUT" });
   });
 
   it("accepts exactly one live schema-valid proposal and records usage/cost", async () => {
     process.env.AI_EXECUTION_MODE = "required";
     const proposal = selectHighestImpactUnknown(answers, [], [uuid(2)])!;
-    const result = await runDynamicFollowUp(request, owner, repository, "test", { preflight: vi.fn(async () => model), callProvider: vi.fn(async () => ({ output: { ...proposal, question: "Approximately how many staff hours does this take each week?" }, inputTokens: 100, outputTokens: 40 })), id: () => uuid(7) });
+    const result = await runDynamicFollowUp(request, owner, repository, "test", 0, { preflight: vi.fn(async () => model), callProvider: vi.fn(async () => ({ output: { ...proposal, question: "Approximately how many staff hours does this take each week?" }, inputTokens: 100, outputTokens: 40 })), id: () => uuid(7) });
     expect(result).toMatchObject({ state: "live", proposal: { intent: "manual_hours" }, model: model.id });
     expect(records[0]).toMatchObject({ outcome: "success", inputTokens: 100, outputTokens: 40, retryCount: 0 });
     expect(records[0].estimatedCost).toBeGreaterThan(0);
+  });
+
+  it("uses the persisted delivered count and cannot be forged into a fourth proposal", async () => {
+    process.env.AI_EXECUTION_MODE = "required";
+    const provider = vi.fn(); const preflight = vi.fn();
+    const forged = { ...request, automaticFollowUpCount: 0 } as FollowUpRequest & { automaticFollowUpCount: number };
+    const result = await runDynamicFollowUp(forged, owner, repository, "test", 3, { callProvider: provider, preflight, id: () => uuid(8) });
+    expect(result).toEqual({ state: "complete", proposal: null, requiresConfirmation: true });
+    expect(provider).not.toHaveBeenCalled(); expect(preflight).not.toHaveBeenCalled(); expect(repository.appendModelCall).not.toHaveBeenCalled();
   });
 });
