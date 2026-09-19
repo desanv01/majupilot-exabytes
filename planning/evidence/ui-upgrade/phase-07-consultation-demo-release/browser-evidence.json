@@ -1,0 +1,250 @@
+{
+  "contract": "UI Upgrade Phase 07",
+  "goldenOutputs": "Recorded by npm run test:stage07:golden and npm run test:stage07:browser",
+  "responsive": [
+    {
+      "state": "home-pristine",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "home-pristine",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "home-pristine",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 44,
+      "overlay": false
+    },
+    {
+      "state": "home-pristine",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 44,
+      "overlay": false
+    },
+    {
+      "state": "consultation-idle",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-validation",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-idle",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-validation",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-idle",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-validation",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-idle",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-validation",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "home-demo",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "reset-confirmation",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "home-demo",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "reset-confirmation",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "home-demo",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 44,
+      "overlay": false
+    },
+    {
+      "state": "reset-confirmation",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 44,
+      "overlay": false
+    },
+    {
+      "state": "home-demo",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 44,
+      "overlay": false
+    },
+    {
+      "state": "reset-confirmation",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 44,
+      "overlay": false
+    },
+    {
+      "state": "consultation-api-error",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-api-error",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-api-error",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-api-error",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-success",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-success",
+      "width": 1024,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-success",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    },
+    {
+      "state": "consultation-success",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "overlay": false
+    }
+  ],
+  "accessibility": [
+    {
+      "state": "home pristine",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation idle",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation validation",
+      "criticalSerious": 0
+    },
+    {
+      "state": "reset confirmation",
+      "criticalSerious": 0
+    },
+    {
+      "state": "demo home",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation API error",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation rate limit",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation success",
+      "criticalSerious": 0
+    }
+  ],
+  "reset": {
+    "unrelatedLocal": "preserve",
+    "unrelatedSession": "preserve",
+    "status": "SME Growth Twin demonstration data was reset. Other browser storage was not changed."
+  },
+  "missingContextDestination": "/assessment",
+  "reducedMotion": true,
+  "consoleErrors": [],
+  "failedRequests": [],
+  "screenshots": 35,
+  "volatileFields": [
+    "lead reference",
+    "recorded time"
+  ]
+}

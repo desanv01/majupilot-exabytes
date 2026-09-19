@@ -3,6 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { DemoResetControl } from "@/components/demo/demo-reset-control";
+
 import type { DemoSession } from "@/infrastructure/persistence/project-storage";
 import {
   clearKnownProjectStorage,
@@ -15,6 +17,7 @@ export function DemoBanner() {
   const router = useRouter();
   const pathname = usePathname();
   const [demo, setDemo] = useState<DemoSession>();
+  const [resetStatus, setResetStatus] = useState("");
 
   useEffect(() => {
     const refresh = () => setDemo(loadDemoSession(localStorage));
@@ -23,33 +26,31 @@ export function DemoBanner() {
     return () => window.removeEventListener(DEMO_SESSION_CHANGED_EVENT, refresh);
   }, [pathname]);
 
-  if (!demo) return null;
-
   const reset = () => {
-    if (
-      !window.confirm(
-        "Reset this fictional demonstration? Only known SME Growth Twin records will be removed.",
-      )
-    ) {
-      return;
-    }
+    const confirmation =
+      "SME Growth Twin demonstration data was reset. Other browser storage was not changed.";
     clearKnownProjectStorage(localStorage, sessionStorage);
-    sessionStorage.setItem(
-      RESET_STATUS_SESSION_KEY,
-      "SME Growth Twin demonstration data was reset. Other browser storage was not changed.",
-    );
+    sessionStorage.setItem(RESET_STATUS_SESSION_KEY, confirmation);
+    window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT));
     setDemo(undefined);
+    setResetStatus(confirmation);
     router.push("/");
   };
+
+  if (!demo) {
+    return resetStatus ? (
+      <aside className="demo-banner demo-banner-cleared" aria-label="Demonstration reset status">
+        <p role="status" aria-live="polite">{resetStatus}</p>
+      </aside>
+    ) : null;
+  }
 
   return (
     <aside className="demo-banner" aria-label="Fictional demonstration status">
       <p>
-        <strong>Fictional demonstration:</strong> {demo.label} · fixture {demo.fixtureVersion}
+        <strong>Fictional demonstration:</strong> {demo.label}. Fixture {demo.fixtureVersion}.
       </p>
-      <button type="button" onClick={reset}>
-        Reset demo data
-      </button>
+      <DemoResetControl compact onConfirm={reset} />
     </aside>
   );
 }

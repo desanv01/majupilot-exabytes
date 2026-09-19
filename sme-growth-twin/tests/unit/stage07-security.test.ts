@@ -127,7 +127,8 @@ describe("Stage 07 scoped reset", () => {
       path.resolve(process.cwd(), "src/components/assessment/home-actions.tsx"),
       "utf8",
     );
-    const resetBody = source.slice(source.indexOf("const reset = () =>"), source.indexOf("return ("));
+    const resetStart = source.indexOf("const reset = () =>");
+    const resetBody = source.slice(resetStart, source.indexOf("\n  return (", resetStart));
     expect(resetBody).toContain("clearKnownProjectStorage(localStorage, sessionStorage)");
     expect(resetBody).toContain("window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT))");
   });
