@@ -2,7 +2,7 @@ import "server-only";
 
 import { aiExecutionModeSchema, AiExecutionError, type AiExecutionMode } from "@/domain/ai-execution";
 
-export type AiOperation = "assessment_follow_up" | "advisor_review";
+export type AiOperation = "assessment_follow_up" | "recommendation_explanation" | "advisor_review";
 
 export interface AiOperationPolicy {
   operation: AiOperation;
@@ -41,19 +41,20 @@ export function executionMode(): AiExecutionMode {
 }
 
 export function operationPolicy(operation: AiOperation): AiOperationPolicy {
-  const suffix = operation === "assessment_follow_up" ? "FOLLOW_UP" : "ADVISOR_REVIEW";
+  const suffix = operation === "assessment_follow_up" ? "FOLLOW_UP" : operation === "recommendation_explanation" ? "RECOMMENDATION_EXPLANATION" : "ADVISOR_REVIEW";
   const mode = executionMode();
+  const explanation = operation === "recommendation_explanation";
   return {
     operation,
     mode,
     model: process.env[`AI_GATEWAY_MODEL_${suffix}`] || process.env.AI_GATEWAY_MODEL || null,
-    timeoutMs: integerEnv(`AI_TIMEOUT_MS_${suffix}`, operation === "assessment_follow_up" ? 20_000 : 30_000, 1_000, 60_000),
-    maxOutputTokens: integerEnv(`AI_MAX_OUTPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 320 : 1_200, 64, 4_096),
-    maxInputTokens: integerEnv(`AI_MAX_INPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 1_200 : 8_000, 256, 32_000),
+    timeoutMs: integerEnv(`AI_TIMEOUT_MS_${suffix}`, operation === "assessment_follow_up" ? 20_000 : explanation ? 25_000 : 30_000, 1_000, 60_000),
+    maxOutputTokens: integerEnv(`AI_MAX_OUTPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 320 : explanation ? 1_000 : 1_200, 64, 4_096),
+    maxInputTokens: integerEnv(`AI_MAX_INPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 1_200 : explanation ? 5_000 : 8_000, 256, 32_000),
     maxRetries: integerEnv(`AI_MAX_RETRIES_${suffix}`, 1, 0, 1) as 0 | 1,
-    perMinuteLimit: integerEnv(`AI_RATE_LIMIT_PER_MINUTE_${suffix}`, operation === "assessment_follow_up" ? 6 : 10, 1, 60),
+    perMinuteLimit: integerEnv(`AI_RATE_LIMIT_PER_MINUTE_${suffix}`, operation === "assessment_follow_up" ? 6 : explanation ? 8 : 10, 1, 60),
     dailyCostUsd: moneyEnv("AI_DAILY_COST_USD", 2),
-    perCallCostUsd: moneyEnv(`AI_MAX_COST_USD_${suffix}`, operation === "assessment_follow_up" ? 0.02 : 0.08),
+    perCallCostUsd: moneyEnv(`AI_MAX_COST_USD_${suffix}`, operation === "assessment_follow_up" ? 0.02 : explanation ? 0.05 : 0.08),
   };
 }
 

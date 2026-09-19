@@ -47,7 +47,7 @@ describe("Stage 03 rendered contract", () => {
   });
 
   it("renders only approved catalogue facts, safe official links, provenance, alternatives and limitations", () => {
-    expect(html).toContain("Exabytes catalogue offering: Freshsales CRM");
+    expect(html).toContain("Freshworks via Exabytes: Freshsales CRM");
     expect(html).toContain("Centralises customer information and interactions");
     expect(html).toContain("Verify current quote with Exabytes");
     expect(html).toContain("Catalogue entry active");

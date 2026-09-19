@@ -12,7 +12,26 @@ import type { DiagnosticResult } from "./scoring";
 import type { BusinessTwin } from "./business-twin";
 
 export const RECOMMENDATION_MODEL_VERSION = "1.0.0" as const;
-export const RECOMMENDATION_CATALOGUE_VERSION = "1.0.0" as const;
+export const RECOMMENDATION_CATALOGUE_VERSION = "2.0.0" as const;
+export const catalogueVersionSchema = z.string().regex(/^\d+\.\d+\.\d+$/);
+
+export const offeringClassificationSchema = z.enum([
+  "Exabytes product",
+  "partner/resold product",
+  "supported path",
+  "third-party alternative",
+  "consultation-only",
+  "unavailable/unverified",
+]);
+export const offeringCommercialStatusSchema = z.enum([
+  "self_serve",
+  "quote_required",
+  "consultation_only",
+  "register_interest",
+  "unavailable",
+]);
+export const catalogueReviewStateSchema = z.enum(["draft", "reviewed", "active", "retired"]);
+export const offeringReviewStateSchema = z.enum(["approved", "disabled", "unavailable"]);
 
 export const capabilityIdSchema = z.enum([
   "shared_customer_operations",
@@ -65,20 +84,36 @@ export const capabilityDefinitionSchema = z.object({
   defaultRoadmapPhase: roadmapPhaseSchema,
 }).strict();
 
-export const offeringSchema = z.object({
+const offeringBaseSchema = z.object({
   id: z.string().regex(/^[a-z0-9][a-z0-9_]+$/),
   provider: z.string().min(1),
   name: z.string().min(1),
   active: z.boolean(),
+  classification: offeringClassificationSchema,
+  commercialStatus: offeringCommercialStatusSchema,
+  reviewState: offeringReviewStateSchema,
   capabilityIds: z.array(capabilityIdSchema).min(1),
   approvedFactSummary: z.string().min(1),
   relativeCostTier: tierSchema,
   pricingTreatment: z.literal("verify_current_quote"),
-  sourceUrl: z.url().refine((value) => value.startsWith("https://"), "Expected an HTTPS source"),
+  sourceReferenceId: z.string().regex(/^[A-Z0-9][A-Z0-9_-]+$/),
+  sourceUrl: z.url().refine((value) => value.startsWith("https://"), "Expected an HTTPS source").nullable(),
   sourceLabel: z.string().min(1),
   verifiedAt: z.iso.date(),
-  catalogueVersion: z.literal(RECOMMENDATION_CATALOGUE_VERSION),
+  reviewedBy: z.string().min(1),
+  prerequisites: z.array(z.string().min(1)).max(12),
+  caveats: z.array(z.string().min(1)).max(12),
+  catalogueVersion: catalogueVersionSchema,
 }).strict();
+
+export const offeringSchema = offeringBaseSchema.superRefine((offering, context) => {
+  if (offering.active && (offering.reviewState !== "approved" || offering.classification === "unavailable/unverified" || offering.commercialStatus === "unavailable" || !offering.sourceUrl)) {
+    context.addIssue({ code: "custom", path: ["active"], message: "Only approved, sourced, available offerings may be active" });
+  }
+  if (offering.classification === "unavailable/unverified" && (offering.active || offering.reviewState !== "unavailable" || offering.commercialStatus !== "unavailable")) {
+    context.addIssue({ code: "custom", path: ["classification"], message: "Unavailable offerings must fail closed" });
+  }
+});
 
 export const offeringMappingSchema = z.object({
   capabilityId: capabilityIdSchema,
@@ -126,13 +161,16 @@ export const offeringSelectionPolicySchema = z.object({
 });
 
 export const catalogueSchema = z.object({
-  version: z.literal(RECOMMENDATION_CATALOGUE_VERSION),
+  version: catalogueVersionSchema,
+  reviewState: catalogueReviewStateSchema,
+  verifiedAt: z.iso.date(),
   offerings: z.array(offeringSchema),
   mappings: z.array(offeringMappingSchema),
 }).strict().superRefine((catalogue, context) => {
   const ids = new Set<string>();
   for (const [index, offering] of catalogue.offerings.entries()) {
     if (ids.has(offering.id)) context.addIssue({ code: "custom", path: ["offerings", index, "id"], message: "Offering IDs must be unique" });
+    if (offering.catalogueVersion !== catalogue.version) context.addIssue({ code: "custom", path: ["offerings", index, "catalogueVersion"], message: "Offering version must match catalogue version" });
     ids.add(offering.id);
   }
   for (const [index, mapping] of catalogue.mappings.entries()) {
@@ -162,18 +200,23 @@ export const prerequisiteResultSchema = z.object({
   evidenceIds: z.array(evidenceIdSchema),
 }).strict();
 
-export const mappedOfferingSchema = offeringSchema.pick({
+export const mappedOfferingSchema = offeringBaseSchema.pick({
   id: true,
   provider: true,
   name: true,
   approvedFactSummary: true,
   relativeCostTier: true,
   pricingTreatment: true,
-  sourceUrl: true,
   sourceLabel: true,
+  sourceReferenceId: true,
   verifiedAt: true,
+  classification: true,
+  commercialStatus: true,
+  prerequisites: true,
+  caveats: true,
   catalogueVersion: true,
 }).extend({
+  sourceUrl: z.url().refine((value) => value.startsWith("https://"), "Expected an HTTPS source"),
   selectionRuleId: z.string().min(1),
   mappingReason: z.string().min(1),
   futureFit: z.boolean(),
@@ -211,7 +254,7 @@ export const recommendationResultSchema = z.object({
   sourceScoreModelVersion: z.literal(SCORE_MODEL_VERSION),
   sourcePainModelVersion: z.literal(PAIN_MODEL_VERSION),
   recommendationModelVersion: z.literal(RECOMMENDATION_MODEL_VERSION),
-  catalogueVersion: z.literal(RECOMMENDATION_CATALOGUE_VERSION),
+  catalogueVersion: catalogueVersionSchema,
   generatedAt: z.iso.datetime({ offset: true }),
   recommendations: z.array(capabilityRecommendationSchema),
 }).strict();

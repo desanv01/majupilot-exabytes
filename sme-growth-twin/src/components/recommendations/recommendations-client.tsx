@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
 import { buildRecommendationResult } from "@/core/recommendations/build-recommendations";
-import { EXABYTES_CATALOGUE_1_0_0 } from "@/domain-packs/exabytes/catalogue";
-import { EXABYTES_OFFERING_SELECTION_1_0_0 } from "@/domain-packs/exabytes/offering-selection";
+import { EXABYTES_CATALOGUE_CURRENT } from "@/domain-packs/exabytes/catalogue";
+import { EXABYTES_OFFERING_SELECTION_CURRENT } from "@/domain-packs/exabytes/offering-selection";
 import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "@/domain-packs/exabytes/recommendation-rules";
 import type { BusinessTwin, Evidence } from "@/domain/business-twin";
 import type { CapabilityRecommendation, RecommendationResult } from "@/domain/recommendations";
@@ -74,7 +74,7 @@ const formatValue = (value: unknown) => value === null || value === undefined
       ? String(value)
       : displayText(valueLabels[String(value)] ?? String(value).replaceAll("_", " "));
 const titleCase = (value: string) => displayText(value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase()));
-const offeringName = (id: string) => EXABYTES_CATALOGUE_1_0_0.offerings.find((item) => item.id === id)?.name ?? titleCase(id);
+const offeringName = (id: string) => EXABYTES_CATALOGUE_CURRENT.offerings.find((item) => item.id === id)?.name ?? titleCase(id);
 const formatVerifiedDate = (value: string) => new Intl.DateTimeFormat("en-MY", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`));
 const scoreValue = (value: number | null) => value === null ? "Not available" : value.toFixed(1);
 
@@ -116,7 +116,7 @@ function OfferingDetails({ recommendation }: { recommendation: CapabilityRecomme
         </div>
         <span>Catalogue entry active</span>
       </header>
-      <p className="catalogue-status-note">Active means this entry is available in Catalogue 1.0.0. It is not a certification or endorsement.</p>
+      <p className="catalogue-status-note">Active means this entry passed the current catalogue review. It is not a certification or endorsement.</p>
       <div className="catalogue-copy">
         <p><strong>Why it maps</strong>{displayText(offering.mappingReason)}</p>
         <p><strong>Approved fact summary</strong>{displayText(offering.approvedFactSummary)}</p>
@@ -127,6 +127,8 @@ function OfferingDetails({ recommendation }: { recommendation: CapabilityRecomme
         <div><dt>Relative price</dt><dd>Tier {offering.relativeCostTier} of 4</dd></div>
         <div><dt>Quote notice</dt><dd>Verify current quote with Exabytes</dd></div>
         <div><dt>Offering ID</dt><dd>{offering.id}</dd></div>
+        <div><dt>Classification</dt><dd>{offering.classification}</dd></div>
+        <div><dt>Commercial path</dt><dd>{titleCase(offering.commercialStatus)}</dd></div>
         <div><dt>Selection rule</dt><dd>{offering.selectionRuleId}</dd></div>
       </dl>
       <div className="catalogue-source">
@@ -135,7 +137,7 @@ function OfferingDetails({ recommendation }: { recommendation: CapabilityRecomme
       </div>
       {recommendation.alternativeOfferingIds.length ? (
         <p className="alternatives"><strong>Consultant-validated alternatives:</strong> {recommendation.alternativeOfferingIds.map(offeringName).join(", ")}. These catalogue entries are not ranked claims.</p>
-      ) : <p className="alternatives"><strong>Catalogue alternatives:</strong> No active alternative is named by Catalogue 1.0.0 for this mapping.</p>}
+      ) : <p className="alternatives"><strong>Catalogue alternatives:</strong> No active alternative is named by Catalogue {offering.catalogueVersion} for this mapping.</p>}
       <p className="limitation"><strong>Consultation limitation:</strong> Final suitability, plan details, availability, and terms require confirmation with Exabytes. This is not a purchase recommendation.</p>
     </section>
   );
@@ -296,8 +298,8 @@ export function RecommendationsClient() {
         twin,
         diagnosticLoad.result,
         EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0,
-        EXABYTES_CATALOGUE_1_0_0,
-        EXABYTES_OFFERING_SELECTION_1_0_0,
+        EXABYTES_CATALOGUE_CURRENT,
+        EXABYTES_OFFERING_SELECTION_CURRENT,
         { now: () => new Date().toISOString(), id: () => `recommendation_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}` },
       );
       if (saved.status !== "ok") saveRecommendationResult(localStorage, result);

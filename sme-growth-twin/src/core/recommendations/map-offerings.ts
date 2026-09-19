@@ -47,17 +47,19 @@ export function mapOfferingsAfterSelection(
   return selected.map((recommendation) => {
     const selection = selectionFor(recommendation, twin, policy.data.rules);
     if (!selection) return { ...recommendation, mappedOffering: undefined, alternativeOfferingIds: [] };
-    const offering = catalogue.offerings.find((item) => item.id === selection.offeringId && item.active && item.capabilityIds.includes(recommendation.capabilityId));
+    const offering = catalogue.offerings.find((item) => item.id === selection.offeringId && item.active && item.reviewState === "approved" && item.sourceUrl && item.capabilityIds.includes(recommendation.capabilityId));
     const mapping = catalogue.mappings.find((item) => item.capabilityId === recommendation.capabilityId && item.offeringId === selection.offeringId);
     if (!offering || !mapping) return { ...recommendation, mappedOffering: undefined, alternativeOfferingIds: [] };
-    const validAlternatives = selection.alternativeOfferingIds.filter((id) => catalogue.offerings.some((item) => item.id === id && item.active && item.capabilityIds.includes(recommendation.capabilityId)));
+    const validAlternatives = selection.alternativeOfferingIds.filter((id) => catalogue.offerings.some((item) => item.id === id && item.active && item.reviewState === "approved" && item.sourceUrl && item.capabilityIds.includes(recommendation.capabilityId)));
     return {
       ...recommendation,
       mappedOffering: {
         id: offering.id, provider: offering.provider, name: offering.name,
         approvedFactSummary: offering.approvedFactSummary, relativeCostTier: offering.relativeCostTier,
-        pricingTreatment: offering.pricingTreatment, sourceUrl: offering.sourceUrl, sourceLabel: offering.sourceLabel,
-        verifiedAt: offering.verifiedAt, catalogueVersion: offering.catalogueVersion,
+        pricingTreatment: offering.pricingTreatment, sourceUrl: offering.sourceUrl!, sourceLabel: offering.sourceLabel,
+        sourceReferenceId: offering.sourceReferenceId, verifiedAt: offering.verifiedAt,
+        classification: offering.classification, commercialStatus: offering.commercialStatus,
+        prerequisites: offering.prerequisites, caveats: offering.caveats, catalogueVersion: offering.catalogueVersion,
         selectionRuleId: mapping.selectionRuleId, mappingReason: mapping.mappingReason,
         futureFit: recommendation.status === "why_later",
       },

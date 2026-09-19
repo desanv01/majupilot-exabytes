@@ -15,8 +15,8 @@ import {
 } from "../../src/core/recommendations/capability-rules";
 import { mapOfferingsAfterSelection } from "../../src/core/recommendations/map-offerings";
 import { buildDiagnosticResult } from "../../src/core/scoring/build-diagnostic";
-import { EXABYTES_CATALOGUE_1_0_0 } from "../../src/domain-packs/exabytes/catalogue";
-import { EXABYTES_OFFERING_SELECTION_1_0_0 } from "../../src/domain-packs/exabytes/offering-selection";
+import { EXABYTES_CATALOGUE_CURRENT as EXABYTES_CATALOGUE_1_0_0 } from "../../src/domain-packs/exabytes/catalogue";
+import { EXABYTES_OFFERING_SELECTION_CURRENT as EXABYTES_OFFERING_SELECTION_1_0_0 } from "../../src/domain-packs/exabytes/offering-selection";
 import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "../../src/domain-packs/exabytes/recommendation-rules";
 import type { CoreAnswers, FollowUpAnswers, FollowUpId } from "../../src/domain/assessment";
 import { assessmentSessionIdSchema } from "../../src/domain/ids";
@@ -192,12 +192,14 @@ describe("frozen cases and capability-first catalogue mapping", () => {
     const { twin: value, diagnostic } = fullCase();
     const selected = selectCapabilityRecommendations(value, diagnostic, EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0).filter((item) => item.capabilityId === "shared_customer_operations");
     const syntheticCatalogue = {
-      version: "1.0.0",
+      version: "2.0.0", reviewState: "active", verifiedAt: "2026-09-20",
       offerings: [{
         id: "vendor_customer_hub", provider: "Example Systems", name: "Customer Hub", active: true,
+        classification: "third-party alternative", commercialStatus: "quote_required", reviewState: "approved",
         capabilityIds: ["shared_customer_operations"], approvedFactSummary: "Maintains a shared customer record and follow-up workflow.",
         relativeCostTier: 2, pricingTreatment: "verify_current_quote", sourceUrl: "https://example.com/customer-hub",
-        sourceLabel: "Official example source", verifiedAt: "2026-09-17", catalogueVersion: "1.0.0",
+        sourceReferenceId: "EXAMPLE-CUSTOMER-HUB", sourceLabel: "Official example source", verifiedAt: "2026-09-20", reviewedBy: "Test reviewer",
+        prerequisites: [], caveats: [], catalogueVersion: "2.0.0",
       }],
       mappings: [{ capabilityId: "shared_customer_operations", offeringId: "vendor_customer_hub", selectionRuleId: "synthetic_mapping", mappingReason: "Synthetic capability mapping for the generic-core contract." }],
     };
@@ -215,7 +217,7 @@ describe("frozen cases and capability-first catalogue mapping", () => {
     const first = fullCase().recommendation;
     const second = fullCase().recommendation;
     expect(first).toEqual(second);
-    const allowed = ["id", "provider", "name", "approvedFactSummary", "relativeCostTier", "pricingTreatment", "sourceUrl", "sourceLabel", "verifiedAt", "catalogueVersion", "selectionRuleId", "mappingReason", "futureFit"].sort();
+    const allowed = ["id", "provider", "name", "approvedFactSummary", "relativeCostTier", "pricingTreatment", "sourceUrl", "sourceLabel", "sourceReferenceId", "verifiedAt", "classification", "commercialStatus", "prerequisites", "caveats", "catalogueVersion", "selectionRuleId", "mappingReason", "futureFit"].sort();
     for (const item of first.recommendations.filter((entry) => entry.mappedOffering)) expect(Object.keys(item.mappedOffering!).sort()).toEqual(allowed);
     expect(JSON.stringify(first)).not.toMatch(/RM\s*\d|guarantee|savings/i);
   });

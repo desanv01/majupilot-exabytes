@@ -37,8 +37,8 @@ describe("Phase 04 recommendation decision workspace", () => {
     const full = caseAFull();
     const html = renderToStaticMarkup(<RecommendationsView result={full.recommendation} twin={full.twin} diagnostic={full.diagnostic} />);
 
-    expect(html).toContain("Exabytes catalogue offering: Freshsales CRM");
-    expect(html).toContain("Active means this entry is available in Catalogue 1.0.0");
+    expect(html).toContain("Freshworks via Exabytes: Freshsales CRM");
+    expect(html).toContain("Active means this entry passed the current catalogue review");
     expect(html).toContain("It is not a certification or endorsement");
     expect(html).toContain("Offering ID");
     expect(html).toContain("Selection rule");
