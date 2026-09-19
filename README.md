@@ -1,8 +1,21 @@
-# SME Growth Twin
+# MajuPilot
 
-SME Growth Twin turns a short business interview into an explainable digital-maturity diagnosis, evidence-linked capability recommendations, and a practical transformation blueprint for Malaysian SMEs.
+MajuPilot is the V2 evolution of SME Growth Twin: an evidence-backed Digital and AI Transformation advisor for Malaysian SMEs and the Exabytes advisory workflow.
 
-> Project status: active AI Horizon Solution Challenge 2026 build. Stages 00–07 are accepted. The reviewed release candidate is live at <https://sme-growth-twin.vercel.app>; human rehearsal, video/YouTube, competition submission, and receipt gates remain pending.
+> Project status: V2 backend, live-AI, reporting, Copilot, and sales-workflow development. The accepted V1 product remains intact at [desanv01/sme-growth-twin](https://github.com/desanv01/sme-growth-twin) and <https://sme-growth-twin.vercel.app/>.
+
+## V2 development boundary
+
+This repository preserves the complete accepted V1 history at tag `v1.0.0-baseline` and develops V2 independently. V2 adds:
+
+- durable Supabase persistence, ownership, roles, and RLS;
+- required-mode live AI with structured outputs, budgets, and telemetry;
+- bounded dynamic follow-up questions and evidence-grounded explanations;
+- a synchronized Transformation Copilot with typed tools;
+- canonical private PDF reports with signed downloads;
+- durable consent, leads, salesperson assignment, consultant context, and outbox delivery.
+
+The accepted V1 UI is a stable presentation boundary. V2 changes it only where minimal integration is necessary.
 
 ## Why this exists
 
@@ -71,8 +84,8 @@ The provider-neutral core cannot import or mention Exabytes-specific identifiers
 Prerequisites: Node.js 22.12 or newer and npm.
 
 ```bash
-git clone https://github.com/desanv01/sme-growth-twin.git
-cd sme-growth-twin/sme-growth-twin
+git clone https://github.com/desanv01/majupilot-exabytes.git
+cd majupilot-exabytes/sme-growth-twin
 npm ci
 npm run dev
 ```
@@ -131,14 +144,17 @@ Stages 00–03 were completed before this repository was initialised. Their firs
 
 ## Roadmap
 
-- [x] Stage 00 — Foundation and provider-neutral contracts
-- [x] Stage 01 — Discovery and Business Twin
-- [x] Stage 02 — Deterministic diagnostics and pain analysis
-- [x] Stage 03 — Capability recommendations and Exabytes catalogue
-- [x] Stage 04 — Scenario and ROI Lab
-- [x] Stage 05 — Advisor Panel and Blueprint
-- [x] Stage 06 — Consultation handoff and full journey
-- [x] Stage 07 — Hardening, evidence, and submission
+- [x] V1 baseline - accepted deterministic product and UI phases 00-07
+- [x] V2 Phase 00 - repository and baseline isolation
+- [ ] V2 Phase A - contract and source audit
+- [ ] V2 Phase B - durable persistence and authorization
+- [ ] V2 Phase C - live AI and dynamic follow-up
+- [ ] V2 Phase D - catalogue and recommendation completion
+- [ ] V2 Phase E - canonical PDF and consultant notes
+- [ ] V2 Phase F - durable lead and salesperson core
+- [ ] V2 Phase G - Transformation Copilot
+- [ ] V2 Phase H - outbox and minimal application integration
+- [ ] V2 Phase I - final challenge and release proof
 
 ## Security and data handling
 
