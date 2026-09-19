@@ -89,7 +89,8 @@ describe("Stage 03 route, refresh and responsive contracts", () => {
     expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
     const unrelatedPersistentRailsRemoved = styles
       .replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")
-      .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static");
+      .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static")
+      .replace(/\.phase06-contents-rail\s*\{\s*position:\s*sticky/, ".phase06-contents-rail { position: static");
     expect(unrelatedPersistentRailsRemoved).not.toMatch(/position:\s*(fixed|sticky)/);
   });
 });

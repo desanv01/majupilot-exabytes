@@ -1,0 +1,207 @@
+{
+  "environment": {
+    "node": "v24.14.1",
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "baseUrl": "http://localhost:3026",
+    "mode": "local-production"
+  },
+  "design": {
+    "designVariance": 7,
+    "motionIntensity": 3,
+    "visualDensity": 5
+  },
+  "caseA": {
+    "figures": {
+      "maturity": 37.5,
+      "readiness": 42.5,
+      "selectedPath": "Balanced Growth",
+      "costs": {
+        "low": 9200,
+        "base": 18400,
+        "high": 27600
+      },
+      "operational": {
+        "low": 2358,
+        "base": 7254,
+        "high": 15233
+      },
+      "net": {
+        "low": -25242,
+        "base": -11146,
+        "high": 6033
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 7.2,
+        "base": 30.4,
+        "worst": 140.5
+      }
+    },
+    "roles": [
+      "growth",
+      "operations",
+      "finance",
+      "cybersecurity",
+      "change"
+    ],
+    "origins": [
+      "deterministic_fallback",
+      "deterministic_fallback",
+      "deterministic_fallback",
+      "deterministic_fallback",
+      "deterministic_fallback"
+    ],
+    "sectionIds": [
+      "cover",
+      "executive-summary",
+      "business-profile",
+      "maturity-readiness",
+      "pain-points",
+      "recommendations",
+      "scenario-comparison",
+      "selected-plan",
+      "roi",
+      "roadmap",
+      "risks",
+      "advisor-reviews",
+      "synthesis",
+      "consultant-notes",
+      "methodology",
+      "consultation-preview"
+    ],
+    "synthesisDecision": "proceed_with_conditions"
+  },
+  "identity": {
+    "initial": "blueprint_57fcdeb54af84d7cbc14",
+    "restored": "blueprint_57fcdeb54af84d7cbc14",
+    "stableAfterReload": true,
+    "regeneration": {
+      "changedId": true,
+      "sourceIdentityStable": true,
+      "upstreamSelectedScenarioStable": true
+    }
+  },
+  "states": {
+    "ready": true,
+    "reviewing": true,
+    "allFallback": true,
+    "mixedOriginCoveredByRenderTest": true,
+    "failedSafe": {
+      "count": 5,
+      "notice": "The Blueprint could not be saved safely. Upstream records were not changed. Retry when ready.",
+      "persistedId": "blueprint_62d2e6bd6c6347eb8cb4"
+    },
+    "recoveryNotice": "The previous Blueprint was corrupt and was safely discarded. Generate a new review when ready.",
+    "missingPreference": true
+  },
+  "contentEvidence": {
+    "advisorCount": 5,
+    "sectionCount": 16,
+    "evidenceRefs": 173,
+    "provenance": 12,
+    "formulas": true,
+    "exclusions": true,
+    "limitations": true,
+    "modelCalls": true,
+    "noHiddenDisagreement": true
+  },
+  "keyboard": {
+    "generationFocusVisible": true,
+    "disclosureFocusVisible": true,
+    "contentsKeyboard": true
+  },
+  "responsive": [
+    {
+      "label": "complete",
+      "width": 1440,
+      "overflow": false,
+      "widths": {
+        "document": 1425,
+        "body": 1425,
+        "client": 1425
+      },
+      "overflowElements": [],
+      "minTarget": 44,
+      "overlay": false,
+      "visibleDash": false
+    },
+    {
+      "label": "complete",
+      "width": 1024,
+      "overflow": false,
+      "widths": {
+        "document": 1009,
+        "body": 1009,
+        "client": 1009
+      },
+      "overflowElements": [],
+      "minTarget": 44,
+      "overlay": false,
+      "visibleDash": false
+    },
+    {
+      "label": "complete",
+      "width": 390,
+      "overflow": false,
+      "widths": {
+        "document": 390,
+        "body": 390,
+        "client": 390
+      },
+      "overflowElements": [],
+      "minTarget": 44,
+      "overlay": false,
+      "visibleDash": false
+    },
+    {
+      "label": "complete",
+      "width": 360,
+      "overflow": false,
+      "widths": {
+        "document": 360,
+        "body": 360,
+        "client": 360
+      },
+      "overflowElements": [],
+      "minTarget": 44,
+      "overlay": false,
+      "visibleDash": false
+    },
+    {
+      "label": "expanded-advisor",
+      "width": 390,
+      "overflow": false,
+      "widths": {
+        "document": 390,
+        "body": 390,
+        "client": 390
+      },
+      "overflowElements": [],
+      "minTarget": 44,
+      "overlay": false,
+      "visibleDash": false
+    }
+  ],
+  "accessibility": {
+    "readyDesktop": [],
+    "readyMobile": [],
+    "reviewingDesktop": [],
+    "expandedAdvisorDesktop": [],
+    "expandedAdvisorMobile": [],
+    "synthesisDesktop": [],
+    "synthesisMobile": []
+  },
+  "print": {
+    "controlsHidden": true,
+    "sectionCount": 16,
+    "advisorCount": 5,
+    "detailExpanded": true,
+    "interpretationContext": true
+  },
+  "reducedMotion": {
+    "preferenceActive": true,
+    "animationDuration": "1e-05s"
+  },
+  "consoleErrors": [],
+  "failedRequests": []
+}

@@ -32,7 +32,8 @@ describe("Stage 04 rendered and route contract", () => {
     expect(styles).toContain("@media (max-width: 620px)"); expect(styles).toContain(".scenario-command-grid { grid-template-columns: 1fr; }"); expect(styles).toContain(".scenario-timeline { grid-template-columns: 1fr; border: 0; }"); expect(styles).toContain("min-height: 48px"); expect(styles).toContain("overflow-wrap: anywhere"); expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
     const unrelatedPersistentRailsRemoved = styles
       .replace(".consultation-aside { position: sticky", ".consultation-aside { position: static")
-      .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static");
+      .replace(/\.diagnostic-rail\s*\{\s*position:\s*sticky/, ".diagnostic-rail { position: static")
+      .replace(/\.phase06-contents-rail\s*\{\s*position:\s*sticky/, ".phase06-contents-rail { position: static");
     expect(unrelatedPersistentRailsRemoved).not.toMatch(/position:\s*(fixed|sticky)/);
   });
 });
