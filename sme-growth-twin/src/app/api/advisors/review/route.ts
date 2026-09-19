@@ -4,6 +4,7 @@ import { advisorIdSchema, advisorPanelResponseSchema, advisorReviewContextSchema
 import { EXABYTES_ADVISORS_1_0_0, buildExabytesFallbackReview } from "@/domain-packs/exabytes/advisor-rules";
 import { advisorRateLimiter } from "@/infrastructure/leads/rate-limit";
 import { reviewWithConfiguredModel } from "@/infrastructure/model-provider/advisor-model-review";
+import { executionMode } from "@/infrastructure/model-provider/ai-execution-policy";
 
 export const runtime = "nodejs";
 const MAX_REQUEST_BYTES = 256 * 1024;
@@ -47,6 +48,11 @@ export async function POST(request: Request) {
   const rate = advisorRateLimiter.check(rawClientKey);
   if (!rate.allowed) return json({ error: "rate_limited" }, 429, { "Retry-After": String(rate.retryAfterSeconds) });
   const outcomes = await Promise.all(EXABYTES_ADVISORS_1_0_0.map((definition) => reviewWithConfiguredModel(definition, parsed.data.context)));
+  if (executionMode() === "required" && outcomes.some((outcome) => outcome.status === "fallback")) {
+    const calls = outcomes.map((outcome) => outcome.call);
+    const code = calls.some((call) => call.status === "timeout") ? "AI_TIMEOUT" : calls.some((call) => call.status === "invalid_output" || call.status === "invalid_evidence") ? "AI_INVALID_OUTPUT" : "AI_REQUIRED_UNAVAILABLE";
+    return json({ error: { code, requestId: crypto.randomUUID() } }, code === "AI_TIMEOUT" ? 504 : code === "AI_INVALID_OUTPUT" ? 502 : 503);
+  }
   const response = advisorPanelResponseSchema.safeParse({
     reviews: outcomes.map((outcome, index) => outcome.status === "success" ? outcome.review : buildExabytesFallbackReview(EXABYTES_ADVISORS_1_0_0[index], parsed.data.context, id("advisor"))),
     modelCalls: outcomes.map((outcome) => outcome.call),

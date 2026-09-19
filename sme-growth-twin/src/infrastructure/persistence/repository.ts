@@ -1,4 +1,5 @@
 import type { ArtifactWrite, AssessmentAnswerRecord, ConsentAppend, DataRequest, GuestSessionReceipt, OwnershipContext } from "@/domain/persistence";
+import type { ModelCallTelemetry } from "@/domain/ai-execution";
 
 export interface PersistenceRepository {
   issueGuest(tokenDigest: string): Promise<GuestSessionReceipt>;
@@ -13,4 +14,7 @@ export interface PersistenceRepository {
   createExport(owner: OwnershipContext, request: DataRequest): Promise<string>;
   createDeletion(owner: OwnershipContext, request: DataRequest): Promise<string>;
   getDataRequest(owner: OwnershipContext, kind: "export" | "deletion", id: string): Promise<Record<string, unknown>>;
+  appendModelCall(owner: OwnershipContext, record: ModelCallTelemetry): Promise<void>;
+  getDailyModelSpend(owner: OwnershipContext): Promise<number>;
+  assertAssessmentAccess(owner: OwnershipContext, assessmentSessionId: string): Promise<void>;
 }

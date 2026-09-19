@@ -1,5 +1,6 @@
 export * from "./assessment";
 export * from "./advisors";
+export * from "./ai-execution";
 export * from "./blueprint";
 export * from "./business-twin";
 export * from "./domain-pack";

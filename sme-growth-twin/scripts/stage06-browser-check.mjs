@@ -14,7 +14,7 @@ try {
   profile = await mkdtemp(path.join(tmpdir(), "sme-growth-twin-stage06-profile-"));
   await mkdir(artifacts, { recursive: true });
 
-  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--port", String(appPort)], { cwd: process.cwd(), env: { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" }, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
+  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "--port", String(appPort)], { cwd: process.cwd(), env: { ...process.env, AI_EXECUTION_MODE: "disabled", AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" }, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
   let serverOutput = ""; server.stdout.on("data", (value) => { serverOutput += value.toString(); }); server.stderr.on("data", (value) => { serverOutput += value.toString(); });
   let ready = false;
   for (let attempt = 0; attempt < 120; attempt += 1) { try { if ((await fetch(baseUrl)).ok) { ready = true; break; } } catch {} await wait(500); }

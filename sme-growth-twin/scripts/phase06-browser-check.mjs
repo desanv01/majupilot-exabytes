@@ -54,7 +54,7 @@ try {
   profile = await mkdtemp(path.join(tmpdir(), "sme-growth-twin-phase06-"));
   server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--port", String(appPort)], {
     cwd: process.cwd(),
-    env: { ...process.env, AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" },
+    env: { ...process.env, AI_EXECUTION_MODE: "disabled", AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" },
     stdio: ["ignore", "pipe", "pipe"],
     windowsHide: true,
   });
