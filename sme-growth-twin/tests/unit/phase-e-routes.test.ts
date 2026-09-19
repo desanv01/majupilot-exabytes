@@ -7,7 +7,7 @@ vi.mock("@/infrastructure/persistence/api", async (importOriginal) => {
   return { ...original, resolveOwner: mocks.resolveOwner, correlationId: () => "request_phase_e", response: (body: unknown, status: number) => Response.json(body, { status }) };
 });
 vi.mock("@/infrastructure/reports/supabase-report-repository", () => ({ SupabaseReportRepository: class {} }));
-vi.mock("@/core/reports/report-service", () => ({ ReportService: class { signedDownload(...args: unknown[]) { return mocks.signedDownload(...args); } } }));
+vi.mock("@/infrastructure/reports/report-service", () => ({ ReportService: class { signedDownload(...args: unknown[]) { return mocks.signedDownload(...args); } } }));
 vi.mock("@/infrastructure/consultant-notes/supabase-consultant-note-repository", () => ({ SupabaseConsultantNoteRepository: class { acceptDraft(...args: unknown[]) { return mocks.acceptDraft(...args); } } }));
 
 const uuid = (n: number) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ReportService } from "@/core/reports/report-service";
+import { ReportService } from "@/infrastructure/reports/report-service";
 import { correlationId, errorResponse, resolveOwner, response } from "@/infrastructure/persistence/api";
 import { SupabaseReportRepository } from "@/infrastructure/reports/supabase-report-repository";
 

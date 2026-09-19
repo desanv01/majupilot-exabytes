@@ -3,7 +3,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 
 import { canonicalJson } from "@/core/reports/canonical-json";
-import { renderBlueprintPdf } from "@/core/reports/render-blueprint-pdf";
+import { renderBlueprintPdf } from "@/infrastructure/reports/render-blueprint-pdf";
 import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import {
   generateReportRequestSchema,

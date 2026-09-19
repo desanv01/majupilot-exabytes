@@ -6,8 +6,8 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { ReportService } from "@/core/reports/report-service";
-import { renderBlueprintPdf } from "@/core/reports/render-blueprint-pdf";
+import { ReportService } from "@/infrastructure/reports/report-service";
+import { renderBlueprintPdf } from "@/infrastructure/reports/render-blueprint-pdf";
 import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import { REPORT_RENDERER_VERSION, REPORT_TEMPLATE_VERSION, type GenerateReportRequest, type ReportArtifact, type ReportGenerationSource } from "@/domain/reports";
 import type { ReportRepository, ReserveReportInput } from "@/infrastructure/reports/report-repository";
