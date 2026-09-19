@@ -12,7 +12,7 @@ import { EXABYTES_CATALOGUE_1_0_0, EXABYTES_CATALOGUE_2_0_0 } from "@/domain-pac
 import { goldenFixtureById } from "@/domain-packs/exabytes/golden-fixtures";
 import { EXABYTES_OFFERING_SELECTION_1_0_0, EXABYTES_OFFERING_SELECTION_2_0_0 } from "@/domain-packs/exabytes/offering-selection";
 import { EXABYTES_RECOMMENDATION_RULE_PACK_1_0_0 } from "@/domain-packs/exabytes/recommendation-rules";
-import { runRecommendationExplanation } from "@/infrastructure/model-provider/recommendation-explanation-model";
+import { buildDeepSeekCompatibleExplanation, runRecommendationExplanation } from "@/infrastructure/model-provider/recommendation-explanation-model";
 import { LocalFixturePersistenceRepository } from "@/infrastructure/persistence/local-fixture-repository";
 
 const uuid = (n: number) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -112,5 +112,35 @@ describe("Phase D recommendation explanations", () => {
     expect(repository.modelCalls).toHaveLength(1);
     expect(repository.modelCalls[0].record).toMatchObject({ operation: "recommendation_explanation", outcome: "success", evidenceRefs: [evidenceId] });
     expect(JSON.stringify(repository.modelCalls[0])).not.toContain("customer_management");
+  });
+
+  it("adapts DeepSeek text JSON into an authoritative, strictly validated explanation", () => {
+    const { current } = recommendations();
+    const recommendation = current.recommendations.find((item) => item.capabilityId === "shared_customer_operations")!;
+    const recommendationId = uuid(8);
+    const evidenceId = uuid(9);
+    const context = {
+      recommendationId,
+      recommendation,
+      evidence: [{ id: evidenceId, sourceRef: "q3.biggestChallenge", normalizedValue: "customer_management" }],
+      catalogueSources: EXABYTES_CATALOGUE_2_0_0.offerings
+        .filter((item) => [recommendation.mappedOffering?.id, ...recommendation.alternativeOfferingIds].includes(item.id))
+        .map(({ id, name, sourceReferenceId, approvedFactSummary }) => ({ id, name, sourceReferenceId, approvedFactSummary })),
+    };
+    const text = `Here is the requested object:\n\`\`\`json\n${JSON.stringify({
+      rationale: "A shared workflow addresses the recorded customer management gap.",
+      observedEvidence: ["Customer management is the recorded operating challenge."],
+      expectedOperationalChange: "Customer handoffs move into one governed workflow.",
+      timing: "The deterministic sequence places this capability in the current group.",
+      adoptionRisk: "Inconsistent team use is the main adoption risk to validate.",
+      firstSuccessMeasure: "Track consistent use of the agreed customer handoff workflow.",
+      consultantValidationQuestion: "Which customer handoff should the consultant validate first?",
+      counterfactualAlternative: "Freshdesk remains an unselected alternative for a support-led workflow.",
+    })}\n\`\`\``;
+    const explanation = validateRecommendationExplanation(buildDeepSeekCompatibleExplanation(text, context), context);
+    expect(explanation).toMatchObject({ recommendationId, capabilityId: "shared_customer_operations", timing: { status: recommendation.status } });
+    expect(explanation.observedEvidence[0]).toMatchObject({ evidenceId, citations: [{ type: "evidence", id: evidenceId }] });
+    expect(explanation.counterfactualAlternative.explanation.citations).toContainEqual({ type: "catalogue_source", id: "EXB-FRESHDESK" });
+    expect(() => buildDeepSeekCompatibleExplanation(text.replace('"observedEvidence":["Customer management is the recorded operating challenge."]', '"observedEvidence":[]'), context)).toThrow();
   });
 });
