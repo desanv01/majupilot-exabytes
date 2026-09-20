@@ -72,9 +72,20 @@
     "currentOfficialModelListingVerified": true,
     "officialModelUrl": "https://vercel.com/ai-gateway/models/deepseek-v4.1-flash",
     "requiredModeFailureContract": "passed",
-    "phaseILiveCall": "environment_gated",
-    "gate": "Neither AI_GATEWAY_API_KEY nor VERCEL_OIDC_TOKEN is available in this managed worktree. No live call was claimed.",
-    "acceptedPriorEvidence": "The V2 ledger records successful required-mode Phase C, D, and G live proofs with this exact model."
+    "phaseILiveCall": "passed",
+    "proof": {
+      "operation": "assessment_follow_up",
+      "outcome": "success",
+      "provider": "vercel_ai_gateway",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "inputTokens": 523,
+      "outputTokens": 107,
+      "estimatedCostUsd": 0.000285,
+      "latencyMs": 1297,
+      "retryCount": 0,
+      "rawPayloadPersisted": false
+    },
+    "acceptedPriorEvidence": "The V2 ledger also records successful required-mode Phase C, D, and G live proofs with this exact model."
   },
   "hostedEnvironment": {
     "supabase": {

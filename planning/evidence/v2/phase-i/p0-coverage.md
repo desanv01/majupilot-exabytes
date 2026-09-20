@@ -8,7 +8,7 @@ Evidence keys used below:
 - **API-B** — guest restart/resume and revoked-cookie denial smoke.
 - **API-G** — Copilot typed read, replay, disclosure, injection/tool/session denial, and restart history smoke.
 - **MODE** — disabled/preferred/required API smoke; required mode failed visibly with `503 AI_REQUIRED_UNAVAILABLE` when credentials were absent.
-- **MODEL** — current official Vercel listing for `deepseek/deepseek-v4.1-flash`, plus accepted live Phase C/D/G records in the V2 ledger.
+- **MODEL** — current official Vercel listing for `deepseek/deepseek-v4.1-flash`, the fresh Phase I required-mode live proof, and accepted live Phase C/D/G records in the V2 ledger.
 - **GATE** — exact unavailable hosted credential/resource is disclosed in `release-proof.json`; no hosted outcome is claimed.
 
 | ID | Final state | Evidence or truthful disclosure |
@@ -25,7 +25,7 @@ Evidence keys used below:
 | MC-10 | Pass | BROWSER unready CASE A/B defer AI and ready CASE C selects it; UNIT catalogue source/classification gates. |
 | MC-11 | Pass | UNIT explanation schemas require evidence/recommendation IDs and reject invalid citations. |
 | MC-12 | Pass | BROWSER consultation completion and safe receipt; RLS-F durable/idempotent transaction. |
-| DYN-01 | Prior live proof; fresh call gated | MODEL records accepted required-mode live Phase C proof. Fresh Phase I credentials are absent; MODE proves visible required failure. |
+| DYN-01 | Pass | MODEL records the fresh Phase I required-mode live proof and prior accepted Phase C/D/G proofs. MODE also proves visible required failure. |
 | DYN-02 | Pass | MODE returns `422` for invalid structured input; UNIT covers intent/type limits and maximum follow-up policy. |
 | ROI-01 | Pass | BROWSER exact low/base/high operational ranges; UNIT deterministic formula tests. |
 | ROI-02 | Pass | UNIT accepts confirmed revenue input only and preserves unestimated state otherwise. |
@@ -62,7 +62,7 @@ Evidence keys used below:
 | SALES-09 | Pass | RLS-F append-only assignment/status/delivery event timeline and immutable identity. |
 | SALES-10 | Pass locally; external receipt gated | RLS-H/UNIT retry, idempotency, reclaim, dead-letter, replay, HMAC, and SSRF proof. No approved webhook credential exists, so external delivery is GATE. |
 | SAAS-01 | Pass locally; hosted gate disclosed | RLS-B/E/F/G/H covers guest, tenant, consultant, salesperson, manager, admin, revocation, cross-tenant denial, private Storage, and direct-grant denial. Hosted V2 Supabase is GATE. |
-| AI-01 | Prior live proof; fresh call gated | MODEL confirms current exact slug and prior accepted paid/current telemetry. MODE proves required failure is visible. Fresh Phase I Gateway credential is GATE. |
+| AI-01 | Pass | MODEL confirms the current exact slug and fresh paid/current Phase I telemetry without persisted raw payload. MODE proves required failure is visible. |
 | CHAT-01 | Pass locally; prior live proof | API-G typed authorized read, truthful disclosure, injection/unknown-tool/cross-session rejection, replay and restart. RLS-G proves pending-only confirmation and idempotent explicit execution identity; UNIT covers the complete typed tool allowlist. Prior accepted live Copilot proof is recorded in the ledger. |
 
 All 51 P0 rows are represented. The frozen P1 `RAG-01` row is deliberately excluded from P0 completion and remains deferred.

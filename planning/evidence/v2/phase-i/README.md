@@ -44,11 +44,12 @@ This pack records the final achievable release gate without claiming hosted succ
 | `npm run test:stage07:browser` | PASS after correcting the proof selector to distinguish the cleared-status banner from an active fictional-demo banner |
 | `npm run audit:production` | PASS — zero vulnerabilities |
 
-## Truthful remaining environment gates
+## Live Gateway proof and remaining environment gates
 
-1. **Fresh Phase I live Gateway call:** the exact configured model remains current in Vercel's official catalogue, and prior accepted Phase C/D/G live proofs are recorded in the V2 ledger. This worktree has neither `AI_GATEWAY_API_KEY` nor `VERCEL_OIDC_TOKEN`, so no fresh Phase I live call was possible or claimed.
-2. **Hosted V2 Supabase:** no hosted V2 Supabase variables are present. Local migrations, RLS, private Storage, API restart, and workflow proofs passed.
-3. **External webhook receipt:** no approved webhook destination/secret is present. Signing, SSRF rejection, retry, idempotency, dead-letter, and replay behavior passed locally; external delivery is not claimed.
-4. **Separate Vercel deployment:** this worktree has no `.vercel` link, Vercel CLI, or Vercel project/deploy credentials. The local production build passed; no hosted deployment is claimed.
+The fresh Phase I required-mode Gateway call passed with `deepseek/deepseek-v4.1-flash`: 523 input tokens, 107 output tokens, estimated cost USD 0.000285, 1,297 ms latency, zero retries, and no raw prompt/answer payload persisted. The proof harness was updated to recognize the five safe telemetry columns added in Phase G.
+
+1. **Hosted V2 Supabase:** no hosted V2 Supabase variables are present. Local migrations, RLS, private Storage, API restart, and workflow proofs passed.
+2. **External webhook receipt:** no approved webhook destination/secret is present. Signing, SSRF rejection, retry, idempotency, dead-letter, and replay behavior passed locally; external delivery is not claimed.
+3. **Separate Vercel deployment:** this worktree has no `.vercel` link, Vercel CLI, or Vercel project/deploy credentials. The local production build passed; no hosted deployment is claimed.
 
 The locked P1 document-RAG row remains deliberately deferred and is not represented as Phase I work.
