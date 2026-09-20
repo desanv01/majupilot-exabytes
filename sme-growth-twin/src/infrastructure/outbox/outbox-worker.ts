@@ -8,7 +8,7 @@ function webhookConfig() {
   const url = process.env.OUTBOX_WEBHOOK_URL;
   const secret = process.env.OUTBOX_WEBHOOK_SECRET;
   if (!url || !secret) return undefined;
-  return { url, secret, keyId: process.env.OUTBOX_WEBHOOK_KEY_ID, allowedHosts: [new URL(url).hostname] };
+  return { url, secret, keyId: process.env.OUTBOX_WEBHOOK_KEY_ID };
 }
 
 export class OutboxWorker {

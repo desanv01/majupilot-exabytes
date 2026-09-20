@@ -14,10 +14,23 @@ export type WebhookAdapterConfig = {
   url: string;
   secret: string;
   keyId?: string;
-  allowedHosts: readonly string[];
+  allowedHosts?: readonly string[];
   allowInsecureLocalTest?: boolean;
   timeoutMs?: number;
 };
+
+const WEBHOOK_CONFIGURATION_ERROR_CODES = new Set([
+  "WEBHOOK_HTTPS_REQUIRED",
+  "WEBHOOK_CREDENTIALS_FORBIDDEN",
+  "WEBHOOK_HOST_NOT_ALLOWED",
+  "WEBHOOK_PRIVATE_ADDRESS",
+  "WEBHOOK_SECRET_INVALID",
+]);
+
+function redactedConfigurationErrorCode(error: unknown) {
+  if (error instanceof Error && WEBHOOK_CONFIGURATION_ERROR_CODES.has(error.message)) return error.message;
+  return "WEBHOOK_CONFIG_INVALID";
+}
 
 export class SignedWebhookAdapter {
   constructor(private readonly config: WebhookAdapterConfig) {}
@@ -28,7 +41,7 @@ export class SignedWebhookAdapter {
       validated = validateWebhookUrl(this.config.url, this.config.allowedHosts, this.config.allowInsecureLocalTest);
       if (this.config.secret.length < 32) throw new Error("WEBHOOK_SECRET_INVALID");
     } catch (error) {
-      return { outcome: "dead_letter", errorCategory: "configuration", errorCode: error instanceof Error ? error.message : "WEBHOOK_CONFIG_INVALID" };
+      return { outcome: "dead_letter", errorCategory: "configuration", errorCode: redactedConfigurationErrorCode(error) };
     }
 
     const resolved = await lookup(validated.url.hostname, { all: true, verbatim: true }).catch(() => []);

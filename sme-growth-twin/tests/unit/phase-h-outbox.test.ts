@@ -7,8 +7,10 @@ vi.mock("server-only", () => ({}));
 
 import type { ClaimedOutboxItem } from "@/domain/workflow-outbox";
 import { canonicalJson } from "@/core/reports/canonical-json";
+import { OutboxWorker } from "@/infrastructure/outbox/outbox-worker";
 import { deterministicRetryDelaySeconds, parseBoundedRetryAfter } from "@/infrastructure/outbox/retry-policy";
 import { SignedWebhookAdapter } from "@/infrastructure/outbox/signed-webhook-adapter";
+import type { SupabaseOutboxRepository } from "@/infrastructure/outbox/supabase-outbox-repository";
 import { isPublicAddress, validateWebhookUrl } from "@/infrastructure/outbox/webhook-security";
 
 const item: ClaimedOutboxItem = {
@@ -31,7 +33,7 @@ const item: ClaimedOutboxItem = {
 };
 
 let server: Server | undefined;
-afterEach(() => { server?.close(); server = undefined; });
+afterEach(() => { server?.close(); server = undefined; vi.unstubAllEnvs(); });
 
 async function localServer(handler: RequestListener) {
   server = createServer(handler);
@@ -56,6 +58,27 @@ describe("Phase H deterministic outbox policy", () => {
     expect(isPublicAddress("169.254.169.254")).toBe(false);
     expect(isPublicAddress("::ffff:127.0.0.1")).toBe(false);
     expect(isPublicAddress("8.8.8.8")).toBe(true);
+  });
+
+  it("finalizes a malformed configured URL with a redacted terminal failure", async () => {
+    vi.stubEnv("OUTBOX_WEBHOOK_URL", "https://user:password@[::1/hook?token=query-secret");
+    vi.stubEnv("OUTBOX_WEBHOOK_SECRET", "environment-secret-that-must-not-be-exposed");
+    const finish = vi.fn().mockResolvedValue(undefined);
+    const repository = {
+      claim: vi.fn().mockResolvedValue([{ ...item, payload: { confidential: "payload-secret" } }]),
+      finish,
+    } as unknown as SupabaseOutboxRepository;
+
+    const result = await new OutboxWorker(repository).processBatch("test-worker", 1);
+
+    expect(finish).toHaveBeenCalledOnce();
+    expect(finish.mock.calls[0][2]).toEqual({
+      outcome: "dead_letter",
+      errorCategory: "configuration",
+      errorCode: "WEBHOOK_CONFIG_INVALID",
+    });
+    expect(result).toEqual({ claimed: 1, outcomes: [{ eventId: item.id, outcome: "dead_letter" }] });
+    expect(JSON.stringify({ delivery: finish.mock.calls[0][2], result })).not.toMatch(/password|query-secret|environment-secret|payload-secret/);
   });
 
   it("sends a canonical signed envelope and preserves the delivery idempotency key", async () => {

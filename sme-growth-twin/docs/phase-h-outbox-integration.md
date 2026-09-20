@@ -4,7 +4,7 @@ Phase H extends the Phase B `workflow_outbox` table instead of introducing a pro
 
 ## Delivery lifecycle
 
-- `public.claim_workflow_outbox` leases eligible work with `FOR UPDATE SKIP LOCKED`. Expired leases are reclaimable after a worker restart.
+- `public.claim_workflow_outbox` leases eligible work with `FOR UPDATE SKIP LOCKED`. Expired leases are reclaimable after a worker restart only while attempts remain; an expired final lease is atomically dead-lettered with one idempotent lead audit event.
 - Every claim increments `attempt_count` and writes `workflow_outbox_attempts` with a unique provider delivery key.
 - Retry delays use the frozen 1 minute, 5 minute, 15 minute, 30 minute, 1 hour, 2 hour, 6 hour, and 12 hour schedule with deterministic event/attempt-derived jitter.
 - `Retry-After` is accepted only for retryable outcomes and capped at one hour. The total retry horizon is capped at 24 hours from creation.

@@ -18,12 +18,13 @@ export function isPublicAddress(address: string) {
   return false;
 }
 
-export function validateWebhookUrl(raw: string, allowedHosts: readonly string[], allowInsecureLocalTest = false) {
+export function validateWebhookUrl(raw: string, allowedHosts?: readonly string[], allowInsecureLocalTest = false) {
   const url = new URL(raw);
+  const exactAllowedHosts = allowedHosts ?? [url.hostname];
   const localTest = allowInsecureLocalTest && url.protocol === "http:" && ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
   if (url.protocol !== "https:" && !localTest) throw new Error("WEBHOOK_HTTPS_REQUIRED");
   if (url.username || url.password) throw new Error("WEBHOOK_CREDENTIALS_FORBIDDEN");
-  if (!allowedHosts.some((host) => host.toLowerCase() === url.hostname.toLowerCase())) throw new Error("WEBHOOK_HOST_NOT_ALLOWED");
+  if (!exactAllowedHosts.some((host) => host.toLowerCase() === url.hostname.toLowerCase())) throw new Error("WEBHOOK_HOST_NOT_ALLOWED");
   if (isIP(url.hostname) && !isPublicAddress(url.hostname) && !localTest) throw new Error("WEBHOOK_PRIVATE_ADDRESS");
   return { url, localTest };
 }
