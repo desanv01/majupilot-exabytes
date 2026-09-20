@@ -1,0 +1,841 @@
+{
+  "environment": {
+    "node": "v24.14.1",
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "mode": "local-production",
+    "baseUrl": "http://127.0.0.1:3017"
+  },
+  "cases": {
+    "caseA": {
+      "name": "Kopi Kita Café Group",
+      "maturity": 37.5,
+      "readiness": 42.5,
+      "recommendations": [
+        "shared_customer_operations:why_now",
+        "professional_team_collaboration:why_now",
+        "protected_business_continuity:why_now",
+        "protected_web_presence:next",
+        "governed_ai_automation:why_later"
+      ],
+      "scenario": "balanced_growth",
+      "cost": {
+        "low": 9200,
+        "base": 18400,
+        "high": 27600
+      },
+      "operational": {
+        "low": 2358,
+        "base": 7254,
+        "high": 15233
+      },
+      "net": {
+        "low": -25242,
+        "base": -11146,
+        "high": 6033
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 7.2,
+        "base": 30.4,
+        "worst": 140.5
+      },
+      "origins": [
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback"
+      ],
+      "sections": 16
+    },
+    "caseB": {
+      "name": "Precision Parts Manufacturing",
+      "maturity": 23.2,
+      "readiness": 43.8,
+      "recommendations": [
+        "professional_team_collaboration:why_now",
+        "measurable_digital_growth:why_now",
+        "shared_customer_operations:why_now",
+        "protected_business_continuity:next",
+        "governed_ai_automation:why_later"
+      ],
+      "scenario": "balanced_growth",
+      "cost": {
+        "low": 7400,
+        "base": 14800,
+        "high": 22200
+      },
+      "operational": {
+        "low": 2738,
+        "base": 8424,
+        "high": 17690
+      },
+      "net": {
+        "low": -19462,
+        "base": -6376,
+        "high": 10290
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 5,
+        "base": 21.1,
+        "worst": 97.3
+      },
+      "origins": [
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback"
+      ],
+      "sections": 16
+    },
+    "caseC": {
+      "name": "Northstar Digital Studio",
+      "maturity": 79,
+      "readiness": 73.8,
+      "recommendations": [
+        "shared_customer_operations:why_now",
+        "governed_ai_automation:why_now",
+        "scalable_cloud_operations:why_now"
+      ],
+      "scenario": "balanced_growth",
+      "cost": {
+        "low": 22400,
+        "base": 44800,
+        "high": 67200
+      },
+      "operational": {
+        "low": 913,
+        "base": 2808,
+        "high": 5897
+      },
+      "net": {
+        "low": -66287,
+        "base": -41992,
+        "high": -16503
+      },
+      "payback": {
+        "status": "estimated",
+        "best": 45.6,
+        "base": 191.5,
+        "worst": 883.6
+      },
+      "origins": [
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback",
+        "deterministic_fallback"
+      ],
+      "sections": 16
+    }
+  },
+  "accessibility": [
+    {
+      "state": "home",
+      "criticalSerious": 0
+    },
+    {
+      "state": "assessment",
+      "criticalSerious": 0
+    },
+    {
+      "state": "reviewed blueprint",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation",
+      "criticalSerious": 0
+    },
+    {
+      "state": "consultation success",
+      "criticalSerious": 0
+    },
+    {
+      "state": "desktop /assessment/review",
+      "criticalSerious": 0
+    },
+    {
+      "state": "desktop /results",
+      "criticalSerious": 0
+    },
+    {
+      "state": "desktop /recommendations",
+      "criticalSerious": 0
+    },
+    {
+      "state": "desktop /scenarios",
+      "criticalSerious": 0
+    },
+    {
+      "state": "desktop /blueprint",
+      "criticalSerious": 0
+    },
+    {
+      "state": "desktop /consultation",
+      "criticalSerious": 0
+    },
+    {
+      "state": "mobile blueprint",
+      "criticalSerious": 0
+    }
+  ],
+  "responsive": [
+    {
+      "route": "/",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "reset-demo",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "A",
+          "cls": "button primary home-primary-action",
+          "name": null,
+          "text": "Start assessment",
+          "height": 52
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button secondary",
+          "name": null,
+          "text": "Load CASE A",
+          "height": 52
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/assessment",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "start-over",
+          "name": null,
+          "text": "Start over",
+          "height": 46
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "businessName",
+          "text": "",
+          "height": 48
+        },
+        {
+          "tag": "SELECT",
+          "cls": "",
+          "name": "industry",
+          "text": "Select an optionFood & beverageRetail / e-commerce",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/blueprint",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect formulas and exclusions",
+          "height": 52
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect claim provenance",
+          "height": 52
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/consultation",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "name",
+          "text": "",
+          "height": 50
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "businessName",
+          "text": "",
+          "height": 50
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/consultation success",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "A",
+          "cls": "button primary",
+          "name": null,
+          "text": "Return to Blueprint",
+          "height": 52
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button secondary",
+          "name": null,
+          "text": "Start a new assessment",
+          "height": 52
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "reset-demo",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "A",
+          "cls": "button primary home-primary-action",
+          "name": null,
+          "text": "Start assessment",
+          "height": 52
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/assessment",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "name": null,
+          "text": "Content",
+          "height": 46
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "name": null,
+          "text": "Customer support",
+          "height": 46
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/assessment/review",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "start-over",
+          "name": null,
+          "text": "Start over",
+          "height": 46
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "View technical evidence references",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/results",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect digital maturity evidence and calculation",
+          "height": 48
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect ai readiness evidence and calculation",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/recommendations",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "A",
+          "cls": "button secondary",
+          "name": null,
+          "text": "Back to results",
+          "height": 52
+        },
+        {
+          "tag": "A",
+          "cls": "button primary",
+          "name": null,
+          "text": "Compare transformation scenarios",
+          "height": 52
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/scenarios",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button secondary inspect-action",
+          "name": null,
+          "text": "Inspect Lean Foundation",
+          "height": 48
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button select-action",
+          "name": null,
+          "text": "Select as preferred: Lean Foundation",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/blueprint",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect formulas and exclusions",
+          "height": 52
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect claim provenance",
+          "height": 52
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/consultation",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "name",
+          "text": "",
+          "height": 50
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "businessName",
+          "text": "",
+          "height": 50
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 44,
+      "smallest": [
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Menu",
+          "height": 44
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "reset-demo",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/assessment",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "name": null,
+          "text": "Content",
+          "height": 46
+        },
+        {
+          "tag": "SPAN",
+          "cls": "",
+          "name": null,
+          "text": "Customer support",
+          "height": 46
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/assessment/review",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "start-over",
+          "name": null,
+          "text": "Start over",
+          "height": 46
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "View technical evidence references",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/results",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect digital maturity evidence and calculation",
+          "height": 48
+        },
+        {
+          "tag": "SUMMARY",
+          "cls": "",
+          "name": null,
+          "text": "Inspect ai readiness evidence and calculation",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/recommendations",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "A",
+          "cls": "button secondary",
+          "name": null,
+          "text": "Back to results",
+          "height": 52
+        },
+        {
+          "tag": "A",
+          "cls": "button primary",
+          "name": null,
+          "text": "Compare transformation scenarios",
+          "height": 76
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/scenarios",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button secondary inspect-action",
+          "name": null,
+          "text": "Inspect Lean Foundation",
+          "height": 48
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button select-action",
+          "name": null,
+          "text": "Select as preferred: Lean Foundation",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/blueprint",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "A",
+          "cls": "button secondary",
+          "name": null,
+          "text": "Back to scenarios",
+          "height": 48
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "button secondary",
+          "name": null,
+          "text": "Regenerate review",
+          "height": 48
+        }
+      ],
+      "overlay": false
+    },
+    {
+      "route": "/consultation",
+      "width": 360,
+      "overflow": false,
+      "minTarget": 46,
+      "smallest": [
+        {
+          "tag": "BUTTON",
+          "cls": "demo-banner-reset",
+          "name": null,
+          "text": "Reset demo data",
+          "height": 46
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "name",
+          "text": "",
+          "height": 50
+        },
+        {
+          "tag": "INPUT",
+          "cls": "",
+          "name": "businessName",
+          "text": "",
+          "height": 50
+        }
+      ],
+      "overlay": false
+    }
+  ],
+  "keyboardJourney": {
+    "completed": true,
+    "receiptSafe": true,
+    "blueprintDurationMs": 3284,
+    "underFiveMinutes": true
+  },
+  "homeReset": {
+    "stayedOnHome": true,
+    "bannerRemoved": true,
+    "knownLocalCleared": true,
+    "knownSessionCleared": true,
+    "unrelatedPreserved": true,
+    "statusVisible": true
+  },
+  "scopedReset": true,
+  "securityHeaders": {
+    "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+    "x-frame-options": "DENY",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  },
+  "consoleErrors": [],
+  "failedRequests": [],
+  "overlay": false
+}
