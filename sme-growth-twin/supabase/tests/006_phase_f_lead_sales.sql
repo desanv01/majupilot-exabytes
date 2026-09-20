@@ -1,6 +1,6 @@
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(25);
+select plan(26);
 
 insert into auth.users(id,instance_id,aud,role,email,encrypted_password,email_confirmed_at,created_at,updated_at) values
 ('16000000-0000-0000-0000-000000000001','00000000-0000-0000-0000-000000000000','authenticated','authenticated','phase-f-owner@example.invalid','',now(),now(),now()),
@@ -49,7 +49,8 @@ insert into public.consent_records(id,assessment_session_id,organization_id,subj
 select lives_ok($$select * from public.create_phase_f_lead('organization','16000000-0000-0000-0000-000000000001','26000000-0000-0000-0000-000000000001','16000000-0000-0000-0000-000000000001','36000000-0000-0000-0000-000000000001','46000000-0000-0000-0000-000000000006',1,'46000000-0000-0000-0000-000000000007',repeat('c',64),'56000000-0000-0000-0000-000000000001','56000000-0000-0000-0000-000000000002','phase-f-create-0001',repeat('e',64),'{"name":"Owner User","businessName":"Phase F SME","email":"owner@example.invalid","urgency":"within_30_days"}','Central','English',array['productivity'],'demo-roster-1.0.0','deterministic-roster-load-1.0.0','request-create-0001','correlation-create-0001')$$,'valid consent and report create a lead');
 select is((select count(*)::integer from public.leads where assessment_session_id='36000000-0000-0000-0000-000000000001'),1,'one durable lead exists');
 select is((select roster_key from public.lead_assignments where sequence=1),'demo_sales_aina','deterministic matching selects the expected fictional salesperson');
-select is((select count(*)::integer from public.lead_events),4,'creation appends the four required audit events');
+select is((select count(*)::integer from public.lead_events),5,'creation appends the four lead events and durable delivery enqueue event');
+select is((select count(*)::integer from public.workflow_outbox),1,'lead and provider-neutral delivery work commit together');
 select is((select consent_snapshot->>'version' from public.leads limit 1),'phase-f-consent-snapshot-1.0.0','lead stores an explicit versioned consent snapshot');
 select is((select report_content_sha256 from public.leads limit 1),repeat('c',64),'lead stores the exact canonical report hash');
 select is((select replayed from public.create_phase_f_lead('organization','16000000-0000-0000-0000-000000000001','26000000-0000-0000-0000-000000000001','16000000-0000-0000-0000-000000000001','36000000-0000-0000-0000-000000000001','46000000-0000-0000-0000-000000000006',1,'46000000-0000-0000-0000-000000000007',repeat('c',64),'56000000-0000-0000-0000-000000000001','56000000-0000-0000-0000-000000000002','phase-f-create-0001',repeat('e',64),'{"name":"Owner User","businessName":"Phase F SME","email":"owner@example.invalid","urgency":"within_30_days"}','Central','English',array['productivity'],'demo-roster-1.0.0','deterministic-roster-load-1.0.0','request-create-0001','correlation-create-0001')),true,'same request replays');
