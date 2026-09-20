@@ -28,9 +28,11 @@ export type ArtifactWrite = z.infer<typeof artifactWriteSchema>;
 
 export const consentAppendSchema = z.object({
   id: persistenceUuidSchema, assessmentSessionId: persistenceUuidSchema, organizationId: persistenceUuidSchema.optional(),
+  blueprintId: persistenceUuidSchema.optional(), reportArtifactId: persistenceUuidSchema.optional(), validUntil: z.iso.datetime({ offset: true }).optional(),
   purpose: z.enum(["consultation_contact", "report_share_with_sales", "product_updates"]), action: z.enum(["granted", "withdrawn", "superseded"]),
   consentVersion: z.string().min(1).max(64), policyVersion: z.string().min(1).max(64), textHash: z.string().regex(/^[a-f0-9]{64}$/), locale: z.string().min(2).max(16),
   presentationSurface: z.string().min(1).max(80), parentConsentId: persistenceUuidSchema.optional(), requestId: z.string().min(8).max(128), channel: z.string().min(1).max(40),
+  snapshot: z.record(z.string(), z.unknown()).default({}),
 }).strict();
 export type ConsentAppend = z.infer<typeof consentAppendSchema>;
 
@@ -38,6 +40,6 @@ export const dataRequestSchema = z.object({ id: persistenceUuidSchema, organizat
 export type DataRequest = z.infer<typeof dataRequestSchema>;
 export const dataRequestStatusSchema = z.object({ id: persistenceUuidSchema, status: z.enum(["pending", "processing", "completed", "failed", "blocked"]), createdAt: z.iso.datetime({ offset: true }), updatedAt: z.iso.datetime({ offset: true }), expiresAt: z.iso.datetime({ offset: true }).nullable().optional(), downloadedAt: z.iso.datetime({ offset: true }).nullable().optional(), blockedReason: z.string().nullable().optional() });
 
-export const persistenceErrorCodeSchema = z.enum(["UNAUTHENTICATED","SESSION_EXPIRED","FORBIDDEN","NOT_FOUND","CLAIM_CONFLICT","CONSENT_REQUIRED","RETENTION_HOLD","VALIDATION_FAILED","IDEMPOTENCY_CONFLICT","INTERNAL_RETRYABLE"]);
+export const persistenceErrorCodeSchema = z.enum(["UNAUTHENTICATED","SESSION_EXPIRED","FORBIDDEN","NOT_FOUND","BLUEPRINT_NOT_FOUND","REPORT_NOT_READY","CLAIM_CONFLICT","CONSENT_REQUIRED","RETENTION_HOLD","VALIDATION_FAILED","IDEMPOTENCY_CONFLICT","ASSIGNMENT_UNAVAILABLE","INTERNAL_RETRYABLE"]);
 export type PersistenceErrorCode = z.infer<typeof persistenceErrorCodeSchema>;
 export class PersistenceError extends Error { constructor(readonly code: PersistenceErrorCode, readonly httpStatus: number, options?: { cause?: unknown }) { super(code, options); this.name = "PersistenceError"; } }
