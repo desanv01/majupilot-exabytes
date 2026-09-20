@@ -9,6 +9,7 @@
 /coverage/
 /playwright-report/
 /test-results/
+/supabase/.temp/
 
 # Local package-manager cache
 /.npm-cache/
