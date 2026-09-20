@@ -1,0 +1,371 @@
+<template>
+  <div data-hf-id="hf-6kwn" id="root" data-composition-id="15-demo-blueprint" data-duration="55" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf8;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f15-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #082d3f;
+      }
+      [data-f15-role="capture-frame"] {
+        position: absolute;
+        top: 78px;
+        right: 72px;
+        width: 1348px;
+        height: 758px;
+        overflow: hidden;
+        border: 3px solid #56747f;
+        border-radius: 18px;
+        background: #0e3a4b;
+        box-shadow: 0 28px 68px rgba(0,0,0,.3);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f15-role="world"] {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+      [data-f15-role="world"] video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #0e3a4b;
+      }
+      [data-f15-role="spotlight"] {
+        --yt-hl-x: 50%;
+        --yt-hl-y: 30%;
+        --yt-hl-rx: 33%;
+        --yt-hl-ry: 18%;
+        --yt-hl-dim: .48;
+        position: absolute;
+        z-index: 5;
+        inset: 0;
+        opacity: 0;
+        background: rgba(6,8,12,var(--yt-hl-dim));
+        -webkit-mask-image: radial-gradient(ellipse var(--yt-hl-rx) var(--yt-hl-ry) at var(--yt-hl-x) var(--yt-hl-y), transparent 0%, transparent 52%, black 88%);
+        mask-image: radial-gradient(ellipse var(--yt-hl-rx) var(--yt-hl-ry) at var(--yt-hl-x) var(--yt-hl-y), transparent 0%, transparent 52%, black 88%);
+        will-change: opacity;
+      }
+      [data-f15-role="ledger"] {
+        --dof: 0px;
+        position: absolute;
+        top: 78px;
+        left: 72px;
+        width: 400px;
+        height: 758px;
+        padding: 24px 24px 22px;
+        overflow: hidden;
+        border: 2px solid #56747f;
+        border-radius: 18px;
+        background: #0e3a4b;
+        filter: blur(var(--dof));
+        will-change: filter, opacity;
+      }
+      [data-f15-role="route"] {
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f15-role="identity"] {
+        margin-top: 8px;
+        color: #fffdf8;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 39px;
+        font-weight: 700;
+        line-height: .92;
+      }
+      [data-f15-role="advisor-label"] {
+        margin-top: 18px;
+        color: #b9cbd2;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+      [data-f15-role="advisor-rail"] {
+        margin-top: 9px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 7px;
+      }
+      [data-f15-role="advisor"] {
+        height: 35px;
+        display: grid;
+        place-items: center;
+        border: 2px solid #365c69;
+        border-radius: 999px;
+        color: #78929d;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f15-role="advisor"][data-state="active"] { border-color: #13a29b; background: #e4f5f1; color: #087c79; }
+      [data-f15-role="advisor"][data-state="done"] { border-color: #087c79; background: #123f5b; color: #8ee2d3; }
+      [data-f15-role="section-count"] {
+        margin-top: 18px;
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        color: #fffdf8;
+      }
+      [data-f15-role="section-count"] strong {
+        color: #8ee2d3;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 70px;
+        font-weight: 700;
+        line-height: .8;
+        font-variant-numeric: tabular-nums;
+      }
+      [data-f15-role="section-count"] span {
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f15-role="index"] {
+        position: relative;
+        margin-top: 18px;
+        display: grid;
+      }
+      [data-f15-role="index-svg"] {
+        position: absolute;
+        top: 0;
+        left: 2px;
+        width: 30px;
+        height: 236px;
+        overflow: visible;
+      }
+      [data-f15-role="index-path-base"], [data-f15-role="index-path"] {
+        fill: none;
+        stroke-width: 5;
+        stroke-linecap: round;
+      }
+      [data-f15-role="index-path-base"] { stroke: #365c69; }
+      [data-f15-role="index-path"] { stroke: #13a29b; }
+      [data-f15-role="index-row"] {
+        position: relative;
+        z-index: 2;
+        min-height: 47px;
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        align-items: center;
+        padding: 0 10px 0 14px;
+        border-top: 1px solid #365c69;
+        color: #b9cbd2;
+      }
+      [data-f15-role="index-row"][data-state="active"] { background: #e4f5f1; color: #087c79; }
+      [data-f15-role="index-row"][data-state="done"] { color: #78929d; }
+      [data-f15-role="index-row"] b {
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      [data-f15-role="index-row"] span { font-size: 18px; font-weight: 700; }
+      [data-f15-role="proofs"] {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      [data-f15-role="proof"] {
+        padding: 8px 11px;
+        border: 1px solid #56747f;
+        border-radius: 999px;
+        color: #b9cbd2;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .03em;
+        text-transform: uppercase;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f15-proof="evidence"] { border-color: #087c79; color: #8ee2d3; }
+      [data-f15-proof="empty"] { border-color: #f2a43a; background: #123f5b; color: #f2d7; }
+      [data-f15-proof="human"] { border-color: #a63e36; background: #3c2930; color: #fce9e6; }
+      [data-f15-role="landing"] {
+        margin-top: 15px;
+        padding-top: 13px;
+        border-top: 2px solid #56747f;
+        color: #fffdf8;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 1.05;
+      }
+      [data-f15-role="capture-register"] {
+        position: absolute;
+        z-index: 7;
+        top: 98px;
+        right: 98px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(8,45,63,.92);
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+    </style>
+
+    <div data-hf-id="hf-7y5w" id="f15-track-1" class="clip" data-f15-layer="background" data-start="0" data-duration="55" data-track-index="0"></div>
+
+    <div data-hf-id="hf-cjbt" data-f15-layer="capture">
+      <div data-hf-id="hf-5kx2" id="f15-demo-blueprint-frame" data-f15-role="capture-frame">
+        <div data-hf-id="hf-5ju2" id="f15-demo-blueprint-world" data-f15-role="world" data-layout-allow-overflow="">
+          <video data-hf-id="hf-gw24" id="f15-authentic-capture" class="clip" data-start="0" data-track-index="1" data-media-start="1" data-duration="55" muted playsinline preload="auto" src="assets/capture/frame-15-blueprint-specialists.mp4"></video>
+        </div>
+        <div data-hf-id="hf-flmb" id="f15-demo-blueprint-spotlight" data-f15-role="spotlight"></div>
+      </div>
+    </div>
+
+    <div data-hf-id="hf-fvft" id="f15-track-2" class="clip" data-f15-layer="overlay" data-start="0" data-duration="55" data-track-index="2">
+      <aside data-hf-id="hf-k4pa" id="f15-demo-blueprint-ledger" data-f15-role="ledger">
+        <div data-hf-id="hf-3j5j" data-f15-role="route">/blueprint</div>
+        <div data-hf-id="hf-vxay" data-f15-role="identity">Source-linked<br data-hf-id="hf-x5px">Blueprint</div>
+        <div data-hf-id="hf-298n" data-f15-role="advisor-label">Five specialist reviews · same facts</div>
+        <div data-hf-id="hf-8h01" data-f15-role="advisor-rail">
+          <span data-hf-id="hf-jstd" id="f15-demo-blueprint-advisor-0" data-f15-role="advisor" data-state="active">01</span>
+          <span data-hf-id="hf-bswu" id="f15-demo-blueprint-advisor-1" data-f15-role="advisor" data-state="pending">02</span>
+          <span data-hf-id="hf-5yum" id="f15-demo-blueprint-advisor-2" data-f15-role="advisor" data-state="pending">03</span>
+          <span data-hf-id="hf-npee" id="f15-demo-blueprint-advisor-3" data-f15-role="advisor" data-state="pending">04</span>
+          <span data-hf-id="hf-868e" id="f15-demo-blueprint-advisor-4" data-f15-role="advisor" data-state="pending">05</span>
+        </div>
+        <div data-hf-id="hf-f4tj" id="f15-demo-blueprint-section-count" data-f15-role="section-count"><strong data-hf-id="hf-np11">16</strong><span data-hf-id="hf-bip5">sections</span></div>
+        <div data-hf-id="hf-2spk" data-f15-role="index">
+          <svg data-hf-id="hf-yp8i" data-f15-role="index-svg" viewBox="0 0 30 236" aria-hidden="true"><path data-hf-id="hf-xrs4" data-f15-role="index-path-base" d="M 15 18 L 15 218" /><path data-hf-id="hf-46o3" id="f15-demo-blueprint-index-path" data-f15-role="index-path" d="M 15 18 L 15 218" /></svg>
+          <div data-hf-id="hf-iljh" id="f15-demo-blueprint-index-0" data-f15-role="index-row" data-state="pending"><b data-hf-id="hf-27a2">01</b><span data-hf-id="hf-0i54">Executive overview</span></div>
+          <div data-hf-id="hf-htvo" id="f15-demo-blueprint-index-1" data-f15-role="index-row" data-state="pending"><b data-hf-id="hf-3si6">05</b><span data-hf-id="hf-eawz">Selected plan</span></div>
+          <div data-hf-id="hf-qhrj" id="f15-demo-blueprint-index-2" data-f15-role="index-row" data-state="pending"><b data-hf-id="hf-9fpe">09</b><span data-hf-id="hf-9sc7">Roadmap</span></div>
+          <div data-hf-id="hf-mjni" id="f15-demo-blueprint-index-3" data-f15-role="index-row" data-state="pending"><b data-hf-id="hf-irkt">13</b><span data-hf-id="hf-0sji">Advisor reviews</span></div>
+          <div data-hf-id="hf-v7jd" id="f15-demo-blueprint-index-4" data-f15-role="index-row" data-state="pending"><b data-hf-id="hf-kr3y">16</b><span data-hf-id="hf-8pr0">Methodology</span></div>
+        </div>
+        <div data-hf-id="hf-rmfd" data-f15-role="proofs">
+          <span data-hf-id="hf-tgda" data-f15-role="proof" data-f15-proof="evidence">Evidence attached</span>
+          <span data-hf-id="hf-s8cb" data-f15-role="proof">Risks</span>
+          <span data-hf-id="hf-novp" data-f15-role="proof">Synthesis</span>
+          <span data-hf-id="hf-aaut" data-f15-role="proof" data-f15-proof="empty">Consultant notes · empty</span>
+          <span data-hf-id="hf-7qmu" data-f15-role="proof" data-f15-proof="human">No human acceptance</span>
+        </div>
+        <div data-hf-id="hf-9kxp" id="f15-demo-blueprint-landing" data-f15-role="landing">Reviewable package,<br data-hf-id="hf-rsrt">not automatic decision.</div>
+      </aside>
+      <div data-hf-id="hf-97ep" data-f15-role="capture-register">Authentic capture · source-linked</div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "15-demo-blueprint";
+        var root = document.getElementById("root");
+        var frame = document.getElementById("f15-demo-blueprint-frame");
+        var world = document.getElementById("f15-demo-blueprint-world");
+        var spotlight = document.getElementById("f15-demo-blueprint-spotlight");
+        var ledger = document.getElementById("f15-demo-blueprint-ledger");
+        var path = document.getElementById("f15-demo-blueprint-index-path");
+        var sectionCount = document.getElementById("f15-demo-blueprint-section-count");
+        var landing = document.getElementById("f15-demo-blueprint-landing");
+        var advisors = [];
+        var indexRows = [];
+        for (var i = 0; i < 5; i += 1) {
+          advisors.push(document.getElementById("f15-demo-blueprint-advisor-" + i));
+          indexRows.push(document.getElementById("f15-demo-blueprint-index-" + i));
+        }
+        var proofs = root.querySelectorAll('[data-f15-role="proof"]');
+        var pathLength = path.getTotalLength();
+        path.style.strokeDasharray = String(pathLength);
+        path.style.strokeDashoffset = String(pathLength);
+
+        var cam = { s: 1, x: 0, y: 0 };
+        function applyCamera() {
+          world.style.transform = "translate(" + cam.x + "%," + cam.y + "%) scale(" + cam.s + ")";
+        }
+        applyCamera();
+        gsap.set(spotlight, { opacity: 0 });
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(frame, { opacity: 0.82, y: 22, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.72, ease: "power3.out" }, 0.02);
+        tl.fromTo(ledger, { opacity: 0, x: -32 }, { opacity: 1, x: 0, duration: 0.62, ease: "power3.out" }, 0.08);
+        tl.fromTo(root.querySelector('[data-f15-role="capture-register"]'), { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.18);
+
+        var advisorCues = [0.45, 1.25, 2.05, 2.85, 3.65];
+        advisorCues.forEach(function (cue, index) {
+          if (index > 0) tl.set(advisors[index - 1], { attr: { "data-state": "done" } }, cue);
+          tl.set(advisors[index], { attr: { "data-state": "active" } }, cue);
+          tl.fromTo(advisors[index], { opacity: 0, scale: 0.72 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, cue);
+        });
+        tl.set(advisors[4], { attr: { "data-state": "done" } }, 4.55);
+        tl.fromTo(sectionCount, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.58, ease: "power3.out" }, 5.4);
+        tl.to(path, { strokeDashoffset: 0, duration: 36.0, ease: "none" }, 6.2);
+
+        var rowCues = [9.8, 14.6, 23.2, 29.4, 37.2];
+        rowCues.forEach(function (cue, index) {
+          if (index > 0) tl.set(indexRows[index - 1], { attr: { "data-state": "done" } }, cue);
+          tl.set(indexRows[index], { attr: { "data-state": "active" } }, cue);
+          tl.fromTo(indexRows[index], { x: -10 }, { x: 0, duration: 0.42, ease: "power3.out" }, cue);
+        });
+
+        tl.set(spotlight, { "--yt-hl-x": "50%", "--yt-hl-y": "30%", "--yt-hl-rx": "34%", "--yt-hl-ry": "18%" }, 9.8);
+        tl.to(spotlight, { opacity: 1, duration: 0.5, ease: "power2.out" }, 9.8);
+        tl.to(spotlight, { "--yt-hl-x": "53%", "--yt-hl-y": "55%", "--yt-hl-rx": "35%", "--yt-hl-ry": "19%", duration: 0.9, ease: "power2.inOut" }, 23.2);
+        tl.to(spotlight, { "--yt-hl-x": "55%", "--yt-hl-y": "76%", "--yt-hl-rx": "36%", "--yt-hl-ry": "17%", duration: 0.9, ease: "power2.inOut" }, 37.2);
+
+        tl.to(cam, { s: 1.07, x: -2.2, y: -2.7, duration: 1.0, ease: "power2.inOut", onUpdate: applyCamera }, 37.2);
+        tl.to(ledger, { "--dof": "3px", opacity: 0.68, duration: 1.0, ease: "power2.inOut" }, 37.2);
+        tl.fromTo(proofs, { opacity: 0, scale: 0.82 }, { opacity: 1, scale: 1, duration: 0.46, stagger: 1.2, ease: "power3.out" }, 42.0);
+        tl.to(cam, { s: 1, x: 0, y: 0, duration: 1.0, ease: "power2.inOut", onUpdate: applyCamera }, 48.0);
+        tl.to(ledger, { "--dof": "0px", opacity: 1, duration: 1.0, ease: "power2.inOut" }, 48.0);
+        tl.to(spotlight, { opacity: 0, duration: 0.45, ease: "power2.in" }, 48.0);
+        tl.fromTo(landing, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 49.2);
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

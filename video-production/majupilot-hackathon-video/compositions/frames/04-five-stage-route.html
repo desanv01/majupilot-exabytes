@@ -1,0 +1,313 @@
+<template>
+  <div data-hf-id="hf-60ow" id="root" data-composition-id="04-five-stage-route" data-duration="18" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf8;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f04-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #082d3f;
+      }
+      [data-f04-layer="background"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(191,234,227,.055) 1px, transparent 1px),
+          linear-gradient(rgba(191,234,227,.04) 1px, transparent 1px);
+        background-size: 120px 120px;
+      }
+      [data-f04-role="header"] {
+        position: absolute;
+        z-index: 5;
+        top: 92px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      [data-f04-role="chapter"], [data-f04-role="register"] {
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      [data-f04-role="chapter"] { color: #8ee2d3; }
+      [data-f04-role="register"] { color: #b9cbd2; text-align: right; }
+      [data-f04-role="rule"] {
+        display: block;
+        width: 132px;
+        height: 4px;
+        margin-top: 18px;
+        border-radius: 4px;
+        background: #13a29b;
+      }
+      [data-f04-role="viewport"] {
+        position: absolute;
+        inset: 190px 0 184px;
+        overflow: hidden;
+      }
+      [data-f04-role="world"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3880px;
+        height: 706px;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+      [data-f04-role="route-svg"] {
+        position: absolute;
+        inset: 0;
+        width: 3880px;
+        height: 706px;
+        overflow: visible;
+      }
+      [data-f04-role="route-path"] {
+        fill: none;
+        stroke: #13a29b;
+        stroke-width: 12;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: drop-shadow(0 0 10px rgba(19,162,155,.24));
+      }
+      [data-f04-role="route-shadow"] {
+        fill: none;
+        stroke: #123f5b;
+        stroke-width: 34;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      [data-f04-role="station"] {
+        position: absolute;
+        width: 320px;
+        min-height: 184px;
+        padding: 34px 32px 30px;
+        display: grid;
+        align-content: center;
+        gap: 14px;
+        border: 3px solid #56747f;
+        border-radius: 18px;
+        background: #0e3a4b;
+        color: #b9cbd2;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f04-role="station"][data-state="pending"] {
+        border-color: #56747f;
+        background: #0e3a4b;
+        color: #b9cbd2;
+      }
+      [data-f04-role="station"][data-state="active"] {
+        border-color: #13a29b;
+        background: #e4f5f1;
+        color: #087c79;
+      }
+      [data-f04-role="station"][data-state="done"] {
+        border-color: #365c69;
+        background: #0b3445;
+        color: #78929d;
+      }
+      [data-f04-role="station-index"] {
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: .12em;
+      }
+      [data-f04-role="station-label"] {
+        font-size: 35px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: .015em;
+      }
+      [data-f04-role="dot"] {
+        position: absolute;
+        left: 50%;
+        bottom: -49px;
+        width: 24px;
+        height: 24px;
+        margin-left: -12px;
+        border: 5px solid #082d3f;
+        border-radius: 50%;
+        background: #56747f;
+        box-shadow: 0 0 0 3px #56747f;
+      }
+      [data-state="active"] [data-f04-role="dot"] {
+        background: #13a29b;
+        box-shadow: 0 0 0 3px #8ee2d3, 0 0 24px rgba(19,162,155,.6);
+      }
+      [data-state="done"] [data-f04-role="dot"] {
+        background: #087c79;
+        box-shadow: 0 0 0 3px #087c79;
+      }
+      [data-f04-role="verb"] {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        top: 214px;
+        padding: 14px 18px;
+        border-left: 4px solid #13a29b;
+        background: #123f5b;
+        color: #fffdf8;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        transform-origin: 0% 0%;
+        will-change: transform, opacity;
+      }
+      [data-f04-role="progress"] {
+        position: absolute;
+        z-index: 5;
+        left: 120px;
+        right: 120px;
+        top: 794px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: #b9cbd2;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f04-role="progress-line"] {
+        position: relative;
+        flex: 1;
+        height: 4px;
+        overflow: hidden;
+        background: #365c69;
+      }
+      [data-f04-role="progress-fill"] {
+        position: absolute;
+        inset: 0;
+        background: #13a29b;
+        transform-origin: 0% 50%;
+      }
+    </style>
+
+    <div data-hf-id="hf-ybxv" id="f04-track-1" class="clip" data-f04-layer="background" data-start="0" data-duration="18" data-track-index="0"></div>
+
+    <div data-hf-id="hf-mtes" id="f04-track-2" class="clip" data-f04-layer="content" data-start="0" data-duration="18" data-track-index="1">
+      <div data-hf-id="hf-yg2x" data-f04-role="header">
+        <div data-hf-id="hf-yeow">
+          <div data-hf-id="hf-fukq" data-f04-role="chapter">02 — Proposed Solution</div>
+          <span data-hf-id="hf-i3t9" data-f04-role="rule"></span>
+        </div>
+        <div data-hf-id="hf-6q42" data-f04-role="register">Evidence route · 05 stages</div>
+      </div>
+
+      <div data-hf-id="hf-e0rg" data-f04-role="viewport">
+        <div data-hf-id="hf-brdo" id="f04-five-stage-route-world" data-f04-role="world" data-layout-allow-overflow="">
+          <svg data-hf-id="hf-isz5" data-f04-role="route-svg" viewBox="0 0 3880 706" aria-hidden="true">
+            <path data-hf-id="hf-tktn" data-f04-role="route-shadow" d="M 420 424 C 620 424 700 374 900 374 S 1180 476 1380 476 S 1660 384 1860 384 S 2140 448 2340 448 S 2700 404 3220 404" />
+            <path data-hf-id="hf-f45i" id="f04-five-stage-route-path" data-f04-role="route-path" d="M 420 424 C 620 424 700 374 900 374 S 1180 476 1380 476 S 1660 384 1860 384 S 2140 448 2340 448 S 2700 404 3220 404" />
+          </svg>
+
+          <div data-hf-id="hf-0de2" id="f04-five-stage-route-answer" data-f04-role="station" data-state="active" data-layout-allow-overflow="" style="left:260px;top:190px">
+            <span data-hf-id="hf-wd6z" data-f04-role="station-index">01 / 05</span><strong data-hf-id="hf-54nb" data-f04-role="station-label">ANSWER</strong><span data-hf-id="hf-g2as" data-f04-role="dot"></span><span data-hf-id="hf-p26w" data-f04-role="verb">Ground the question</span>
+          </div>
+          <div data-hf-id="hf-wmvf" id="f04-five-stage-route-diagnose" data-f04-role="station" data-state="pending" data-layout-allow-overflow="" style="left:740px;top:140px">
+            <span data-hf-id="hf-lods" data-f04-role="station-index">02 / 05</span><strong data-hf-id="hf-gvwl" data-f04-role="station-label">DIAGNOSE</strong><span data-hf-id="hf-wfvg" data-f04-role="dot"></span><span data-hf-id="hf-lja0" data-f04-role="verb">Read the evidence</span>
+          </div>
+          <div data-hf-id="hf-ywi2" id="f04-five-stage-route-compare" data-f04-role="station" data-state="pending" style="left:1220px;top:242px">
+            <span data-hf-id="hf-i87p" data-f04-role="station-index">03 / 05</span><strong data-hf-id="hf-jekc" data-f04-role="station-label">COMPARE</strong><span data-hf-id="hf-v8yd" data-f04-role="dot"></span><span data-hf-id="hf-10wp" data-f04-role="verb">Test the options</span>
+          </div>
+          <div data-hf-id="hf-hqwz" id="f04-five-stage-route-blueprint" data-f04-role="station" data-state="pending" style="left:1700px;top:150px">
+            <span data-hf-id="hf-a436" data-f04-role="station-index">04 / 05</span><strong data-hf-id="hf-8xiw" data-f04-role="station-label">BLUEPRINT</strong><span data-hf-id="hf-vn9e" data-f04-role="dot"></span><span data-hf-id="hf-ga5w" data-f04-role="verb">Make the plan</span>
+          </div>
+          <div data-hf-id="hf-390i" id="f04-five-stage-route-handoff" data-f04-role="station" data-state="pending" data-layout-allow-overflow="" style="left:3060px;top:170px">
+            <span data-hf-id="hf-zkfz" data-f04-role="station-index">05 / 05</span><strong data-hf-id="hf-lpul" data-f04-role="station-label">HANDOFF</strong><span data-hf-id="hf-xmsj" data-f04-role="dot"></span><span data-hf-id="hf-izl6" data-f04-role="verb">Share by decision</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-2587" data-f04-role="progress"><span data-hf-id="hf-bb03">Answer</span><div data-hf-id="hf-w7ym" data-f04-role="progress-line"><div data-hf-id="hf-ool5" id="f04-five-stage-route-progress-fill" data-f04-role="progress-fill"></div></div><span data-hf-id="hf-ms1t">Handoff</span></div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "04-five-stage-route";
+        var root = document.getElementById("root");
+        var world = document.getElementById("f04-five-stage-route-world");
+        var path = document.getElementById("f04-five-stage-route-path");
+        var stations = [
+          document.getElementById("f04-five-stage-route-answer"),
+          document.getElementById("f04-five-stage-route-diagnose"),
+          document.getElementById("f04-five-stage-route-compare"),
+          document.getElementById("f04-five-stage-route-blueprint"),
+          document.getElementById("f04-five-stage-route-handoff")
+        ];
+        var verbs = stations.map(function (station) { return station.querySelector('[data-f04-role="verb"]'); });
+        var pathLength = path.getTotalLength();
+        path.style.strokeDasharray = String(pathLength);
+        path.style.strokeDashoffset = String(pathLength);
+
+        var cam = { x: 620, y: 0, scale: 1 };
+        function applyCamera() {
+          world.style.transform = "translate(" + cam.x + "px," + cam.y + "px) scale(" + cam.scale + ")";
+        }
+        applyCamera();
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector('[data-f04-role="header"]'), { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.05);
+        tl.fromTo(stations[0], { opacity: 0, scale: 0.78 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" }, 0.05);
+        tl.fromTo(verbs[0], { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.34);
+        tl.fromTo(root.querySelector('[data-f04-role="progress"]'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.35);
+        tl.fromTo(document.getElementById("f04-five-stage-route-progress-fill"), { scaleX: 0 }, { scaleX: 1, duration: 16.3, ease: "none" }, 0.7);
+        tl.to(path, { strokeDashoffset: 0, duration: 16.4, ease: "none" }, 0.45);
+
+        var cameraStops = [-20, -500, -980, -1460, -2420];
+        var cueTimes = [0.0, 3.15, 6.45, 9.8, 13.55];
+        var moveDurations = [1.2, 2.0, 2.05, 2.0, 2.55];
+        cueTimes.forEach(function (cue, index) {
+          tl.to(cam, { x: cameraStops[index], duration: moveDurations[index], ease: index === 0 ? "power2.out" : "power3.inOut", onUpdate: applyCamera }, cue);
+          if (index > 0) {
+            tl.set(stations[index - 1], { attr: { "data-state": "done" } }, cue + moveDurations[index] * 0.72);
+            tl.set(stations[index], { attr: { "data-state": "active" } }, cue + moveDurations[index] * 0.72);
+            tl.fromTo(stations[index], { opacity: 0.62, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, cue + moveDurations[index] * 0.72);
+            tl.fromTo(verbs[index], { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" }, cue + moveDurations[index] * 0.72 + 0.18);
+          }
+        });
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -1,0 +1,340 @@
+<template>
+  <div data-hf-id="hf-swx4" id="root" data-composition-id="24-no-promises" data-duration="15" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf8;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f24-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #082d3f;
+      }
+      [data-f24-role="header"] {
+        position: absolute;
+        top: 72px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f24-role="header"] span:last-child { color: #b9cbd2; }
+      [data-f24-role="anchor"] {
+        position: absolute;
+        top: 178px;
+        left: 120px;
+        width: 664px;
+        height: 592px;
+        display: grid;
+        align-content: center;
+        padding: 58px;
+        border: 3px solid #087c79;
+        border-radius: 22px;
+        background: #0e3a4b;
+      }
+      [data-f24-role="kicker"] {
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f24-role="anchor-title"] {
+        margin: 26px 0 28px;
+        color: #fffdf8;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 94px;
+        font-weight: 700;
+        line-height: .84;
+        letter-spacing: -.035em;
+      }
+      [data-f24-role="anchor-sub"] {
+        max-width: 500px;
+        color: #b9cbd2;
+        font-size: 31px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      [data-f24-role="divider"] {
+        position: absolute;
+        top: 160px;
+        left: 840px;
+        width: 4px;
+        height: 628px;
+        background: #13a29b;
+      }
+      [data-f24-role="cycle"] {
+        position: absolute;
+        top: 178px;
+        left: 900px;
+        width: 900px;
+        height: 592px;
+      }
+      [data-f24-role="cycle-head"] {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #b9cbd2;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f24-role="cycle-head"] strong { color: #fce9e6; }
+      [data-f24-role="skin"] {
+        position: absolute;
+        inset: 58px 0 0;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+      }
+      [data-f24-skin="0"] { opacity: 1; }
+      [data-f24-role="boundary-card"] {
+        position: relative;
+        width: 100%;
+        min-height: 330px;
+        display: grid;
+        place-items: center;
+        padding: 60px 54px;
+        overflow: hidden;
+        border: 3px solid #a63e36;
+        border-radius: 22px;
+        background: #3c2930;
+        color: #fffdf8;
+        text-align: center;
+      }
+      [data-f24-skin="1"] [data-f24-role="boundary-card"] { background: #432b2f; }
+      [data-f24-skin="2"] [data-f24-role="boundary-card"] { background: #3a2d35; }
+      [data-f24-skin="3"] [data-f24-role="boundary-card"] { background: #422a35; }
+      [data-f24-skin="4"] [data-f24-role="boundary-card"] { background: #3c2930; }
+      [data-f24-role="boundary-label"] {
+        position: relative;
+        z-index: 2;
+        max-width: 750px;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 66px;
+        font-weight: 700;
+        line-height: .95;
+        letter-spacing: -.025em;
+      }
+      [data-f24-role="boundary-state"] {
+        position: absolute;
+        z-index: 3;
+        right: 28px;
+        bottom: 26px;
+        padding: 11px 16px;
+        border: 2px solid #a63e36;
+        border-radius: 999px;
+        background: #fce9e6;
+        color: #a63e36;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f24-role="strike-svg"] {
+        position: absolute;
+        z-index: 4;
+        left: 60px;
+        right: 60px;
+        top: 50%;
+        width: calc(100% - 120px);
+        height: 38px;
+        margin-top: -19px;
+        overflow: visible;
+      }
+      [data-f24-role="strike"] {
+        fill: none;
+        stroke: #f27b70;
+        stroke-width: 9;
+        stroke-linecap: round;
+      }
+      [data-f24-skin="final"] {
+        align-items: start;
+        padding-top: 0;
+      }
+      [data-f24-role="register"] {
+        width: 100%;
+        display: grid;
+      }
+      [data-f24-role="row"] {
+        position: relative;
+        min-height: 91px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 24px;
+        padding: 0 24px;
+        border-top: 2px solid #56747f;
+        color: #fffdf8;
+        font-size: 22px;
+        font-weight: 700;
+      }
+      [data-f24-role="row"] strong {
+        color: #fce9e6;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 16px;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+      [data-f24-role="row"] svg {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 50%;
+        width: calc(100% - 40px);
+        height: 24px;
+        margin-top: -12px;
+      }
+      [data-f24-role="row"] [data-f24-role="strike"] { stroke-width: 5; }
+      [data-f24-role="final-band"] {
+        margin-top: 18px;
+        padding: 14px 18px;
+        border: 2px solid #a63e36;
+        border-radius: 12px;
+        background: #3c2930;
+        color: #fce9e6;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    </style>
+
+    <div data-hf-id="hf-6pjs" id="f24-track-1" class="clip" data-f24-layer="background" data-start="0" data-duration="15" data-track-index="0"></div>
+
+    <div data-hf-id="hf-y1p9" id="f24-track-2" class="clip" data-f24-layer="content" data-start="0" data-duration="15" data-track-index="1">
+      <div data-hf-id="hf-98s7" data-f24-role="header"><span data-hf-id="hf-0rik">06 — Industry Value / Future Potential</span><span data-hf-id="hf-gys0">Current boundary</span></div>
+      <section data-hf-id="hf-u1zr" data-f24-role="anchor">
+        <div data-hf-id="hf-xm5s" data-f24-role="kicker">What remains true</div>
+        <h1 data-hf-id="hf-cm68" data-f24-role="anchor-title">Deployable<br data-hf-id="hf-x5px">workflow.</h1>
+        <div data-hf-id="hf-ruwe" data-f24-role="anchor-sub">Inspectable decision package.</div>
+      </section>
+      <div data-hf-id="hf-ruwz" data-f24-role="divider"></div>
+
+      <section data-hf-id="hf-yo3q" data-f24-role="cycle">
+        <div data-hf-id="hf-d219" data-f24-role="cycle-head"><span data-hf-id="hf-emdg">Boundary register</span><strong data-hf-id="hf-ez02" id="f24-no-promises-readout">01 / 05</strong></div>
+
+        <div data-hf-id="hf-vucd" id="f24-no-promises-skin-0" data-f24-role="skin" data-f24-skin="0">
+          <div data-hf-id="hf-a76x" data-f24-role="boundary-card"><span data-hf-id="hf-v8p9" data-f24-role="boundary-label">Business outcomes</span><span data-hf-id="hf-apd9" data-f24-role="boundary-state">No promise</span><svg data-hf-id="hf-xzr0" data-f24-role="strike-svg" viewBox="0 0 780 38" aria-hidden="true"><path data-hf-id="hf-9xn5" data-f24-role="strike" d="M8 27 C210 7 520 34 772 10" /></svg></div>
+        </div>
+        <div data-hf-id="hf-9hjh" id="f24-no-promises-skin-1" data-f24-role="skin" data-f24-skin="1">
+          <div data-hf-id="hf-wa1p" data-f24-role="boundary-card"><span data-hf-id="hf-lptw" data-f24-role="boundary-label">Vendor fulfilment /<br data-hf-id="hf-rsrt">guaranteed availability</span><span data-hf-id="hf-v4pt" data-f24-role="boundary-state">No promise</span><svg data-hf-id="hf-uj04" data-f24-role="strike-svg" viewBox="0 0 780 38" aria-hidden="true"><path data-hf-id="hf-v2f9" data-f24-role="strike" d="M8 27 C210 7 520 34 772 10" /></svg></div>
+        </div>
+        <div data-hf-id="hf-spd1" id="f24-no-promises-skin-2" data-f24-role="skin" data-f24-skin="2">
+          <div data-hf-id="hf-xgys" data-f24-role="boundary-card"><span data-hf-id="hf-rulu" data-f24-role="boundary-label">Human response</span><span data-hf-id="hf-wbmw" data-f24-role="boundary-state">No promise</span><svg data-hf-id="hf-tc31" data-f24-role="strike-svg" viewBox="0 0 780 38" aria-hidden="true"><path data-hf-id="hf-w9cc" data-f24-role="strike" d="M8 27 C210 7 520 34 772 10" /></svg></div>
+        </div>
+        <div data-hf-id="hf-i00t" id="f24-no-promises-skin-3" data-f24-role="skin" data-f24-skin="3">
+          <div data-hf-id="hf-x2nr" data-f24-role="boundary-card"><span data-hf-id="hf-0pzp" data-f24-role="boundary-label">Automatic CRM<br data-hf-id="hf-szow">record creation</span><span data-hf-id="hf-vxbv" data-f24-role="boundary-state">No promise</span><svg data-hf-id="hf-tqe2" data-f24-role="strike-svg" viewBox="0 0 780 38" aria-hidden="true"><path data-hf-id="hf-vv1b" data-f24-role="strike" d="M8 27 C210 7 520 34 772 10" /></svg></div>
+        </div>
+        <div data-hf-id="hf-7ozh" id="f24-no-promises-skin-4" data-f24-role="skin" data-f24-skin="4">
+          <div data-hf-id="hf-y9ku" data-f24-role="boundary-card"><span data-hf-id="hf-6hf8" data-f24-role="boundary-label">Completed customer<br data-hf-id="hf-sldv">transformation</span><span data-hf-id="hf-m679" data-f24-role="boundary-state">Not claimed</span><svg data-hf-id="hf-vpx7" data-f24-role="strike-svg" viewBox="0 0 780 38" aria-hidden="true"><path data-hf-id="hf-x1ye" data-f24-role="strike" d="M8 27 C210 7 520 34 772 10" /></svg></div>
+        </div>
+
+        <div data-hf-id="hf-rcqd" id="f24-no-promises-skin-final" data-f24-role="skin" data-f24-skin="final">
+          <div data-hf-id="hf-4503" data-f24-role="register">
+            <div data-hf-id="hf-cj5w" data-f24-role="row"><span data-hf-id="hf-wj54">Business outcomes</span><strong data-hf-id="hf-5re0">No promise</strong><svg data-hf-id="hf-rc88" viewBox="0 0 860 24" aria-hidden="true"><path data-hf-id="hf-k100" data-f24-role="strike" d="M6 17 C230 4 610 24 854 8" /></svg></div>
+            <div data-hf-id="hf-ww1o" data-f24-role="row"><span data-hf-id="hf-3b9b">Vendor fulfilment / guaranteed availability</span><strong data-hf-id="hf-dalc">No promise</strong><svg data-hf-id="hf-dv34" viewBox="0 0 860 24" aria-hidden="true"><path data-hf-id="hf-48vc" data-f24-role="strike" d="M6 17 C230 4 610 24 854 8" /></svg></div>
+            <div data-hf-id="hf-vp4l" data-f24-role="row"><span data-hf-id="hf-k1n9">Human response</span><strong data-hf-id="hf-c3o9">No promise</strong><svg data-hf-id="hf-co61" viewBox="0 0 860 24" aria-hidden="true"><path data-hf-id="hf-31y9" data-f24-role="strike" d="M6 17 C230 4 610 24 854 8" /></svg></div>
+            <div data-hf-id="hf-w3fm" data-f24-role="row"><span data-hf-id="hf-xb4a">Automatic CRM record creation</span><strong data-hf-id="hf-chza">No promise</strong><svg data-hf-id="hf-d2h2" viewBox="0 0 860 24" aria-hidden="true"><path data-hf-id="hf-3g9a" data-f24-role="strike" d="M6 17 C230 4 610 24 854 8" /></svg></div>
+            <div data-hf-id="hf-y2yr" data-f24-role="row"><span data-hf-id="hf-gtaf">Completed customer transformation</span><strong data-hf-id="hf-vkta">Not claimed</strong><svg data-hf-id="hf-bvjz" viewBox="0 0 860 24" aria-hidden="true"><path data-hf-id="hf-29c7" data-f24-role="strike" d="M6 17 C230 4 610 24 854 8" /></svg></div>
+            <div data-hf-id="hf-nxuc" data-f24-role="final-band">No submitted handoff implied</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "24-no-promises";
+        var root = document.getElementById("root");
+        var readout = document.getElementById("f24-no-promises-readout");
+        var skins = [
+          document.getElementById("f24-no-promises-skin-0"),
+          document.getElementById("f24-no-promises-skin-1"),
+          document.getElementById("f24-no-promises-skin-2"),
+          document.getElementById("f24-no-promises-skin-3"),
+          document.getElementById("f24-no-promises-skin-4"),
+          document.getElementById("f24-no-promises-skin-final")
+        ];
+        var strikePaths = root.querySelectorAll('[data-f24-role="strike"]');
+        strikePaths.forEach(function (path) {
+          var length = path.getTotalLength();
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        });
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector('[data-f24-role="header"]'), { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.46, ease: "power3.out" }, 0.02);
+        tl.to(skins[0].querySelector('[data-f24-role="strike"]'), { strokeDashoffset: 0, duration: 0.58, ease: "power2.out" }, 0.2);
+
+        var boundaries = [2.15, 4.05, 5.85, 7.55];
+        boundaries.forEach(function (at, index) {
+          tl.fromTo(skins[index + 1], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.inOut" }, at);
+          tl.to(skins[index], { opacity: 0, duration: 0.3, ease: "power2.inOut" }, at);
+          tl.set(readout, { textContent: "0" + (index + 2) + " / 05" }, at);
+          tl.to(skins[index + 1].querySelector('[data-f24-role="strike"]'), { strokeDashoffset: 0, duration: 0.56, ease: "power2.out" }, at + 0.12);
+        });
+
+        tl.fromTo(skins[5], { opacity: 0 }, { opacity: 1, duration: 0.32, ease: "power2.inOut" }, 10.15);
+        tl.to(skins[4], { opacity: 0, duration: 0.32, ease: "power2.inOut" }, 10.15);
+        tl.set(readout, { textContent: "ALL 5" }, 10.15);
+        skins[5].querySelectorAll('[data-f24-role="strike"]').forEach(function (path, index) {
+          tl.to(path, { strokeDashoffset: 0, duration: 0.48, ease: "power2.out" }, 10.32 + index * 0.34);
+        });
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

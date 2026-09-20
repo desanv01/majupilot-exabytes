@@ -1,0 +1,349 @@
+<template>
+  <div data-hf-id="hf-24n8" id="root" data-composition-id="06-truth-boundary" data-duration="17" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #17394b;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f06-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #fffdf8;
+      }
+      [data-f06-layer="background"]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 184px;
+        left: 0;
+        width: 62.5%;
+        background: #f7f4ec;
+      }
+      [data-f06-layer="background"]::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 184px;
+        left: 62.5%;
+        width: 3px;
+        background: #d8e4e2;
+      }
+      [data-f06-role="header"] {
+        position: absolute;
+        z-index: 6;
+        top: 76px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #5b7181;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f06-role="header"] strong { color: #087c79; }
+      [data-f06-role="stage"] {
+        position: absolute;
+        top: 154px;
+        left: 120px;
+        width: 1680px;
+        height: 676px;
+        perspective: 1800px;
+        transform-style: preserve-3d;
+      }
+      [data-f06-role="card"] {
+        position: absolute;
+        top: 0;
+        height: 652px;
+        overflow: hidden;
+        border: 3px solid #d8e4e2;
+        border-radius: 22px;
+        background: #ffffff;
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+      }
+      [data-f06-card="truth"] {
+        left: 0;
+        width: 985px;
+        padding: 54px 58px;
+        border-color: #087c79;
+        box-shadow: -20px 26px 54px rgba(8,45,63,.11);
+      }
+      [data-f06-card="interpretation"] {
+        right: 0;
+        width: 585px;
+        padding: 54px 50px;
+        border-color: #f2a43a;
+        background: #f2d7;
+        box-shadow: 20px 26px 54px rgba(154,100,20,.12);
+      }
+      [data-f06-role="eyebrow"] {
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      [data-f06-card="interpretation"] [data-f06-role="eyebrow"] { color: #9a6414; }
+      [data-f06-role="title"] {
+        margin: 18px 0 34px;
+        color: #082d3f;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 84px;
+        font-weight: 700;
+        line-height: .87;
+        letter-spacing: -.035em;
+      }
+      [data-f06-card="interpretation"] [data-f06-role="title"] { margin-top: 30px; font-size: 72px; line-height: .96; }
+      [data-f06-role="ledger"] { display: grid; gap: 4px; }
+      [data-f06-role="row"] {
+        min-height: 78px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 28px;
+        padding: 0 22px;
+        border-top: 2px solid #d8e4e2;
+        background: #fffdf8;
+        will-change: transform, opacity;
+      }
+      [data-f06-role="row"] b {
+        color: #082d3f;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 23px;
+        font-weight: 700;
+        letter-spacing: .08em;
+      }
+      [data-f06-role="row"] span { color: #5b7181; font-size: 24px; }
+      [data-f06-role="seal"] {
+        margin-top: 26px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 18px;
+        border: 2px solid #087c79;
+        border-radius: 999px;
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        transform-origin: 0% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f06-role="seal-icon"] { width: 18px; height: 18px; }
+      [data-f06-role="claim"] {
+        margin: 34px 0 0;
+        color: #17394b;
+        font-size: 31px;
+        line-height: 1.32;
+      }
+      [data-f06-role="claim"] strong {
+        display: inline-block;
+        margin-top: 13px;
+        color: #a63e36;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 25px;
+        letter-spacing: .04em;
+        text-decoration: line-through;
+        text-decoration-thickness: 3px;
+      }
+      [data-f06-role="model-chip"] {
+        margin-top: 34px;
+        padding: 18px 20px;
+        border-left: 6px solid #f2a43a;
+        background: rgba(255,255,255,.7);
+        color: #9a6414;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+      }
+      [data-f06-role="bridge"] {
+        position: absolute;
+        z-index: 8;
+        top: 274px;
+        left: 1049px;
+        width: 288px;
+        height: 74px;
+        margin-left: -144px;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        border: 3px solid #087c79;
+        border-radius: 18px;
+        background: #082d3f;
+        box-shadow: 0 18px 40px rgba(8,45,63,.2);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f06-role="bridge-old"], [data-f06-role="bridge-new"] {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+      [data-f06-role="bridge-old"] svg { width: 34px; height: 42px; }
+      [data-f06-role="bridge-new"] {
+        color: #fffdf8;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        opacity: 0;
+      }
+      [data-f06-role="boundary-line"] {
+        position: absolute;
+        z-index: 7;
+        top: 0;
+        left: 1049px;
+        width: 3px;
+        height: 652px;
+        background: #087c79;
+        transform-origin: 50% 0%;
+      }
+      [data-f06-role="proofs"] {
+        position: absolute;
+        z-index: 8;
+        left: 1015px;
+        bottom: 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      [data-f06-role="proof-chip"] {
+        padding: 11px 16px;
+        border: 2px solid #a63e36;
+        border-radius: 999px;
+        background: #fce9e6;
+        color: #a63e36;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+    </style>
+
+    <div data-hf-id="hf-4hp2" id="f06-track-1" class="clip" data-f06-layer="background" data-start="0" data-duration="17" data-track-index="0"></div>
+
+    <div data-hf-id="hf-9t2f" id="f06-track-2" class="clip" data-f06-layer="content" data-start="0" data-duration="17" data-track-index="1">
+      <div data-hf-id="hf-rocv" data-f06-role="header"><strong data-hf-id="hf-0kjh">02 — Proposed Solution</strong><span data-hf-id="hf-hbin">Authority / interpretation boundary</span></div>
+
+      <div data-hf-id="hf-x59u" data-f06-role="stage">
+        <div data-hf-id="hf-sylh" id="f06-truth-boundary-left" data-f06-role="card" data-f06-card="truth">
+          <div data-hf-id="hf-h854" data-f06-role="eyebrow">Authoritative</div>
+          <h2 data-hf-id="hf-jyz0" data-f06-role="title">Deterministic<br data-hf-id="hf-x5px">truth</h2>
+          <div data-hf-id="hf-rg7f" data-f06-role="ledger">
+            <div data-hf-id="hf-ef1o" data-f06-role="row"><b data-hf-id="hf-cza7">FACT</b><span data-hf-id="hf-bq4b">captured</span></div>
+            <div data-hf-id="hf-wuv8" data-f06-role="row"><b data-hf-id="hf-e6om">CALCULATION</b><span data-hf-id="hf-inuy">versioned</span></div>
+            <div data-hf-id="hf-vny5" data-f06-role="row"><b data-hf-id="hf-rdu2">ASSUMPTION</b><span data-hf-id="hf-wv4u">labelled</span></div>
+          </div>
+          <div data-hf-id="hf-s1n4" id="f06-truth-boundary-seal" data-f06-role="seal"><svg data-hf-id="hf-x3o4" data-f06-role="seal-icon" viewBox="0 0 24 24" aria-hidden="true"><path data-hf-id="hf-igtk" d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>numeric truth locked</div>
+        </div>
+
+        <div data-hf-id="hf-1j9j" id="f06-truth-boundary-right" data-f06-role="card" data-f06-card="interpretation" data-layout-allow-overlap="">
+          <div data-hf-id="hf-72bq" data-f06-role="eyebrow">Bounded</div>
+          <h2 data-hf-id="hf-dq9t" data-f06-role="title">Interpretation</h2>
+          <p data-hf-id="hf-zljg" data-f06-role="claim">Can explain.<br data-hf-id="hf-rsrt"><strong data-hf-id="hf-ksvt" data-layout-allow-occlusion="">Cannot overwrite.</strong></p>
+          <div data-hf-id="hf-e2tg" data-f06-role="model-chip">Optional AI<br data-hf-id="hf-szow">interpretation only</div>
+        </div>
+
+        <div data-hf-id="hf-trrb" id="f06-truth-boundary-line" data-f06-role="boundary-line"></div>
+        <div data-hf-id="hf-ufoq" id="f06-truth-boundary-bridge" data-f06-role="bridge" data-layout-allow-occlusion="">
+          <div data-hf-id="hf-1ozo" id="f06-truth-boundary-bridge-old" data-f06-role="bridge-old"><svg data-hf-id="hf-0v9g" viewBox="0 0 40 48" aria-hidden="true"><path data-hf-id="hf-5qz1" d="M10 21v-7a10 10 0 0 1 20 0v7M6 21h28v22H6z" fill="none" stroke="#8ee2d3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+          <div data-hf-id="hf-82wc" id="f06-truth-boundary-bridge-new" data-f06-role="bridge-new">Cannot overwrite</div>
+        </div>
+        <div data-hf-id="hf-vbhh" data-f06-role="proofs">
+          <span data-hf-id="hf-qfu6" data-f06-role="proof-chip">Fictional demonstration</span>
+          <span data-hf-id="hf-yksa" data-f06-role="proof-chip">No automatic consent</span>
+          <span data-hf-id="hf-65hz" data-f06-role="proof-chip">No lead created</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "06-truth-boundary";
+        var root = document.getElementById("root");
+        var left = document.getElementById("f06-truth-boundary-left");
+        var right = document.getElementById("f06-truth-boundary-right");
+        var bridge = document.getElementById("f06-truth-boundary-bridge");
+        var bridgeOld = document.getElementById("f06-truth-boundary-bridge-old");
+        var bridgeNew = document.getElementById("f06-truth-boundary-bridge-new");
+        var boundaryLine = document.getElementById("f06-truth-boundary-line");
+        var seal = document.getElementById("f06-truth-boundary-seal");
+        var rows = left.querySelectorAll('[data-f06-role="row"]');
+        var proofs = root.querySelectorAll('[data-f06-role="proof-chip"]');
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector('[data-f06-role="header"]'), { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+        tl.fromTo(left, { x: -360, rotateY: 22, scale: 0.9, opacity: 0 }, { x: 0, rotateY: 11, scale: 1, opacity: 1, duration: 1.05, ease: "power3.out" }, 0.05);
+        tl.fromTo(left.querySelectorAll('[data-f06-role="eyebrow"], [data-f06-role="title"]'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.09, ease: "power2.out" }, 0.34);
+        tl.fromTo(rows, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45, stagger: 0.48, ease: "power3.out" }, 1.0);
+        tl.fromTo(seal, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, 2.85);
+        tl.fromTo(boundaryLine, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power2.out", immediateRender: false }, 3.2);
+
+        tl.addLabel("bounded-entry", 4.25);
+        tl.fromTo(right, { x: 420, rotateY: -22, scale: 0.9, opacity: 0 }, { x: 0, rotateY: -11, scale: 1, opacity: 1, duration: 1.15, ease: "power3.out" }, "bounded-entry");
+        tl.fromTo(bridge, { opacity: 0, scale: 0.62 }, { opacity: 1, scale: 0.82, duration: 1.15, ease: "power3.out" }, "bounded-entry");
+        tl.fromTo(right.querySelectorAll('[data-f06-role="eyebrow"], [data-f06-role="title"], [data-f06-role="claim"]'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.48, stagger: 0.14, ease: "power2.out" }, 4.72);
+        tl.fromTo(right.querySelector('[data-f06-role="model-chip"]'), { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, 6.4);
+
+        tl.to(bridge, { scale: 1, borderRadius: 37, backgroundColor: "#082d3f", boxShadow: "0 20px 46px rgba(8,45,63,.26)", duration: 0.9, ease: "power2.inOut" }, 8.15);
+        tl.to(bridgeOld, { opacity: 0, duration: 0.36, ease: "power1.in" }, 8.15);
+        tl.to(bridgeNew, { opacity: 1, duration: 0.36, ease: "power1.out" }, 8.69);
+
+        tl.fromTo(proofs, { opacity: 0, scale: 0.78 }, { opacity: 1, scale: 1, duration: 0.5, stagger: 1.25, ease: "power3.out" }, 10.15);
+        tl.fromTo(boundaryLine, { backgroundColor: "#087c79" }, { backgroundColor: "#13a29b", duration: 1.1, ease: "power1.inOut", immediateRender: false }, 14.25);
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

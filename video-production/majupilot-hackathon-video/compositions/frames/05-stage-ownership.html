@@ -1,0 +1,349 @@
+<template>
+  <div data-hf-id="hf-0eua" id="root" data-composition-id="05-stage-ownership" data-duration="25" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #17394b;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f05-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #fffdf8;
+      }
+      [data-f05-layer="background"]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 184px;
+        left: 74px;
+        width: 310px;
+        background: #e4f5f1;
+      }
+      [data-f05-layer="background"]::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 120px;
+        height: 896px;
+        background: #f7f4ec;
+      }
+      [data-f05-role="header"] {
+        position: absolute;
+        top: 78px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      [data-f05-role="headline"] {
+        margin: 0;
+        max-width: 1120px;
+        color: #082d3f;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 78px;
+        font-weight: 700;
+        line-height: .95;
+        letter-spacing: -.025em;
+      }
+      [data-f05-role="register"] {
+        padding-bottom: 8px;
+        color: #5b7181;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f05-role="stack-wrap"] {
+        position: absolute;
+        top: 205px;
+        left: 120px;
+        width: 1680px;
+        height: 635px;
+      }
+      [data-f05-role="rail-svg"] {
+        position: absolute;
+        top: 12px;
+        left: 0;
+        width: 64px;
+        height: 588px;
+        overflow: visible;
+      }
+      [data-f05-role="rail-base"] {
+        fill: none;
+        stroke: #d8e4e2;
+        stroke-width: 10;
+        stroke-linecap: round;
+      }
+      [data-f05-role="rail-active"] {
+        fill: none;
+        stroke: #13a29b;
+        stroke-width: 10;
+        stroke-linecap: round;
+      }
+      [data-f05-role="stack"] {
+        position: absolute;
+        top: 0;
+        left: 86px;
+        right: 0;
+      }
+      [data-f05-role="expander"] { position: relative; }
+      [data-f05-role="station-head"] {
+        position: relative;
+        z-index: 2;
+        height: 88px;
+        display: grid;
+        grid-template-columns: 250px 1fr 64px;
+        align-items: center;
+        border-top: 2px solid #d8e4e2;
+        background: #fffdf8;
+        color: #17394b;
+        transform-origin: 0% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f05-role="station-head"][data-state="active"] {
+        border-top-color: #087c79;
+        background: #e4f5f1;
+        color: #087c79;
+      }
+      [data-f05-role="station-head"][data-state="done"] {
+        color: #5b7181;
+      }
+      [data-f05-role="station-name"] {
+        padding-left: 28px;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: .08em;
+      }
+      [data-f05-role="station-boundary"] {
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 1.1;
+      }
+      [data-f05-role="station-marker"] {
+        width: 20px;
+        height: 20px;
+        justify-self: center;
+        border: 4px solid #d8e4e2;
+        border-radius: 50%;
+        background: #fffdf8;
+      }
+      [data-state="active"] [data-f05-role="station-marker"] {
+        border-color: #087c79;
+        background: #13a29b;
+        box-shadow: 0 0 0 8px rgba(19,162,155,.16);
+      }
+      [data-state="done"] [data-f05-role="station-marker"] {
+        border-color: #087c79;
+        background: #087c79;
+      }
+      [data-f05-role="mask"] {
+        position: relative;
+        height: 112px;
+        overflow: hidden;
+        transform-origin: 50% 0%;
+        will-change: transform;
+      }
+      [data-f05-role="sheet"] {
+        height: 112px;
+        display: grid;
+        grid-template-columns: 250px 1fr auto;
+        align-items: center;
+        gap: 24px;
+        padding: 18px 28px;
+        border: 2px solid #bfeae3;
+        border-top: 0;
+        border-radius: 0 0 14px 14px;
+        background: #ffffff;
+        transform-origin: 50% 0%;
+        will-change: transform, opacity;
+      }
+      [data-f05-role="ownership-noun"] {
+        color: #082d3f;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 54px;
+        font-weight: 700;
+        line-height: .95;
+        letter-spacing: -.02em;
+      }
+      [data-f05-role="ownership-detail"] {
+        color: #5b7181;
+        font-size: 24px;
+        line-height: 1.25;
+      }
+      [data-f05-role="evidence-chip"] {
+        padding: 13px 16px;
+        border: 2px solid #087c79;
+        border-radius: 999px;
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      [data-f05-role="below"] { position: relative; will-change: transform; }
+      [data-f05-role="legend"] {
+        position: absolute;
+        left: 120px;
+        top: 851px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: #5b7181;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f05-role="legend-key"] { display: flex; align-items: center; gap: 8px; }
+      [data-f05-role="legend-dot"] { width: 12px; height: 12px; border-radius: 50%; background: #d8e4e2; }
+      [data-f05-state="active"] [data-f05-role="legend-dot"] { background: #13a29b; }
+      [data-f05-state="done"] [data-f05-role="legend-dot"] { background: #087c79; }
+    </style>
+
+    <div data-hf-id="hf-lb83" id="f05-track-1" class="clip" data-f05-layer="background" data-start="0" data-duration="25" data-track-index="0"></div>
+
+    <div data-hf-id="hf-2y0u" id="f05-track-2" class="clip" data-f05-layer="content" data-start="0" data-duration="25" data-track-index="1">
+      <div data-hf-id="hf-6dcw" data-f05-role="header">
+        <h1 data-hf-id="hf-gnhv" data-f05-role="headline">Each stage owns one boundary</h1>
+        <div data-hf-id="hf-7j0v" data-f05-role="register">02 — Proposed Solution</div>
+      </div>
+
+      <div data-hf-id="hf-j1ti" data-f05-role="stack-wrap">
+        <svg data-hf-id="hf-i7z8" data-f05-role="rail-svg" viewBox="0 0 64 588" aria-hidden="true">
+          <path data-hf-id="hf-gh84" data-f05-role="rail-base" d="M 32 30 L 32 558" />
+          <path data-hf-id="hf-slb8" id="f05-stage-ownership-rail" data-f05-role="rail-active" d="M 32 30 L 32 558" />
+        </svg>
+
+        <div data-hf-id="hf-18ct" data-f05-role="stack">
+          <div data-hf-id="hf-7e9i" data-f05-role="expander" data-f05-index="0">
+            <div data-hf-id="hf-r9cx" id="f05-stage-ownership-head-0" data-f05-role="station-head" data-state="active"><strong data-hf-id="hf-qbcz" data-f05-role="station-name">ANSWER</strong><span data-hf-id="hf-tnxi" data-f05-role="station-boundary">evidence before scoring</span><span data-hf-id="hf-i0b1" data-f05-role="station-marker"></span></div>
+            <div data-hf-id="hf-onwm" id="f05-stage-ownership-mask-0" data-f05-role="mask" data-layout-allow-overflow="" data-layout-allow-occlusion=""><div data-hf-id="hf-v985" id="f05-stage-ownership-sheet-0" data-f05-role="sheet" data-layout-allow-occlusion=""><strong data-hf-id="hf-9lqc" data-f05-role="ownership-noun">Evidence</strong><span data-hf-id="hf-4f5p" data-f05-role="ownership-detail">Captured · confirmed · then scored</span><span data-hf-id="hf-kjrv" data-f05-role="evidence-chip">confirmed first</span></div></div>
+            <div data-hf-id="hf-nfp9" id="f05-stage-ownership-below-0" data-f05-role="below">
+              <div data-hf-id="hf-65pl" data-f05-role="expander" data-f05-index="1">
+                <div data-hf-id="hf-9l8d" id="f05-stage-ownership-head-1" data-f05-role="station-head" data-state="pending"><strong data-hf-id="hf-celd" data-f05-role="station-name">DIAGNOSE</strong><span data-hf-id="hf-jbq9" data-f05-role="station-boundary">deterministic scores + findings</span><span data-hf-id="hf-21xd" data-f05-role="station-marker"></span></div>
+                <div data-hf-id="hf-sm0n" id="f05-stage-ownership-mask-1" data-f05-role="mask" data-layout-allow-overflow="" data-layout-allow-occlusion=""><div data-hf-id="hf-uhkc" id="f05-stage-ownership-sheet-1" data-f05-role="sheet" data-layout-allow-occlusion=""><strong data-hf-id="hf-7iio" data-f05-role="ownership-noun">Rules</strong><span data-hf-id="hf-mvwk" data-f05-role="ownership-detail">Maturity · readiness · pain findings</span><span data-hf-id="hf-h5da" data-f05-role="evidence-chip">deterministic</span></div></div>
+                <div data-hf-id="hf-mo1g" id="f05-stage-ownership-below-1" data-f05-role="below">
+                  <div data-hf-id="hf-dcys" data-f05-role="expander" data-f05-index="2">
+                    <div data-hf-id="hf-djce" id="f05-stage-ownership-head-2" data-f05-role="station-head" data-state="pending"><strong data-hf-id="hf-n2n4" data-f05-role="station-name">COMPARE</strong><span data-hf-id="hf-987i" data-f05-role="station-boundary">assumptions + ranges + schedule</span><span data-hf-id="hf-7atk" data-f05-role="station-marker"></span></div>
+                    <div data-hf-id="hf-e80i" id="f05-stage-ownership-mask-2" data-f05-role="mask" data-layout-allow-overflow=""><div data-hf-id="hf-eyrf" id="f05-stage-ownership-sheet-2" data-f05-role="sheet"><strong data-hf-id="hf-3wyb" data-f05-role="ownership-noun">Ranges</strong><span data-hf-id="hf-nemx" data-f05-role="ownership-detail">Schedule · cost · operational value · net value · payback</span><span data-hf-id="hf-vhsn" data-f05-role="evidence-chip">side by side</span></div></div>
+                    <div data-hf-id="hf-vbxb" id="f05-stage-ownership-below-2" data-f05-role="below">
+                      <div data-hf-id="hf-3cb3" data-f05-role="expander" data-f05-index="3">
+                        <div data-hf-id="hf-hhgf" id="f05-stage-ownership-head-3" data-f05-role="station-head" data-state="pending"><strong data-hf-id="hf-comk" data-f05-role="station-name">BLUEPRINT</strong><span data-hf-id="hf-vt3z" data-f05-role="station-boundary">plan + risks + evidence + five reviews</span><span data-hf-id="hf-2ujf" data-f05-role="station-marker"></span></div>
+                        <div data-hf-id="hf-i64j" id="f05-stage-ownership-mask-3" data-f05-role="mask" data-layout-allow-overflow=""><div data-hf-id="hf-8t1m" id="f05-stage-ownership-sheet-3" data-f05-role="sheet"><strong data-hf-id="hf-mfpn" data-f05-role="ownership-noun">Report</strong><span data-hf-id="hf-4cgz" data-f05-role="ownership-detail">Selected path · risks · open questions · evidence links</span><span data-hf-id="hf-et7u" data-f05-role="evidence-chip">5 reviews</span></div></div>
+                        <div data-hf-id="hf-rdta" id="f05-stage-ownership-below-3" data-f05-role="below">
+                          <div data-hf-id="hf-yz0q" data-f05-role="expander" data-f05-index="4">
+                            <div data-hf-id="hf-lfkg" id="f05-stage-ownership-head-4" data-f05-role="station-head" data-state="pending"><strong data-hf-id="hf-tw1d" data-f05-role="station-name">HANDOFF</strong><span data-hf-id="hf-6vbr" data-f05-role="station-boundary">verified Blueprint + sharing decision</span><span data-hf-id="hf-0v0a" data-f05-role="station-marker"></span></div>
+                            <div data-hf-id="hf-uon0" id="f05-stage-ownership-mask-4" data-f05-role="mask" data-layout-allow-overflow=""><div data-hf-id="hf-s8xp" id="f05-stage-ownership-sheet-4" data-f05-role="sheet"><strong data-hf-id="hf-6259" data-f05-role="ownership-noun">Consent</strong><span data-hf-id="hf-61lu" data-f05-role="ownership-detail">Verified Blueprint · person-selected sharing</span><span data-hf-id="hf-dz6e" data-f05-role="evidence-chip">explicit decision</span></div></div>
+                            <div data-hf-id="hf-01p5" id="f05-stage-ownership-below-4" data-f05-role="below"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-qxak" data-f05-role="legend"><span data-hf-id="hf-209s" data-f05-role="legend-key" data-f05-state="done"><i data-hf-id="hf-i30m" data-f05-role="legend-dot"></i>done</span><span data-hf-id="hf-uqxj" data-f05-role="legend-key" data-f05-state="active"><i data-hf-id="hf-lwp6" data-f05-role="legend-dot"></i>active owner</span><span data-hf-id="hf-bk2u" data-f05-role="legend-key"><i data-hf-id="hf-mb07" data-f05-role="legend-dot"></i>pending</span></div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "05-stage-ownership";
+        var root = document.getElementById("root");
+        var rail = document.getElementById("f05-stage-ownership-rail");
+        var heads = [];
+        var masks = [];
+        var sheets = [];
+        var belows = [];
+        for (var i = 0; i < 5; i += 1) {
+          heads.push(document.getElementById("f05-stage-ownership-head-" + i));
+          masks.push(document.getElementById("f05-stage-ownership-mask-" + i));
+          sheets.push(document.getElementById("f05-stage-ownership-sheet-" + i));
+          belows.push(document.getElementById("f05-stage-ownership-below-" + i));
+        }
+
+        var BODY_H = 112;
+        function renderExpand(index, progress) {
+          var s = Math.max(progress, 0.0001);
+          gsap.set(masks[index], { scaleY: s, transformOrigin: "50% 0%" });
+          gsap.set(sheets[index], { scaleY: 1 / s, transformOrigin: "50% 0%" });
+          gsap.set(belows[index], { y: BODY_H * progress - BODY_H });
+        }
+        for (var j = 0; j < 5; j += 1) renderExpand(j, j === 0 ? 1 : 0);
+
+        var railLength = rail.getTotalLength();
+        rail.style.strokeDasharray = String(railLength);
+        rail.style.strokeDashoffset = String(railLength);
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector('[data-f05-role="header"]'), { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.05);
+        tl.fromTo(root.querySelector('[data-f05-role="stack-wrap"]'), { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.58, ease: "power3.out" }, 0.12);
+        tl.fromTo(root.querySelector('[data-f05-role="legend"]'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.38);
+        tl.fromTo(heads[0], { scaleX: 0.94 }, { scaleX: 1, duration: 0.55, ease: "power3.out" }, 0.12);
+        tl.fromTo(sheets[0].children, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.32, stagger: 0.06, ease: "power2.out" }, 0.32);
+        tl.to(rail, { strokeDashoffset: 0, duration: 21.8, ease: "none" }, 0.2);
+
+        var cues = [3.7, 8.15, 13.65, 19.15];
+        cues.forEach(function (cue, offset) {
+          var previous = offset;
+          var next = offset + 1;
+          var closeState = { v: 1 };
+          var openState = { v: 0 };
+          tl.addLabel("ownership-" + next, cue);
+          tl.to(closeState, { v: 0, duration: 0.34, ease: "power3.in", onUpdate: function () { renderExpand(previous, closeState.v); } }, "ownership-" + next);
+          tl.set(heads[previous], { attr: { "data-state": "done" } }, cue + 0.3);
+          tl.set(heads[next], { attr: { "data-state": "active" } }, cue + 0.3);
+          tl.fromTo(heads[next], { scaleX: 0.965 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, cue + 0.3);
+          tl.to(openState, { v: 1, duration: 0.58, ease: "power3.out", onUpdate: function () { renderExpand(next, openState.v); } }, cue + 0.32);
+          tl.fromTo(sheets[next].children, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.06, ease: "power2.out" }, cue + 0.46);
+        });
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

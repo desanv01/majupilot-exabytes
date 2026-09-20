@@ -1,0 +1,248 @@
+<template>
+  <div data-hf-id="hf-3dh5" id="root" data-composition-id="13-demo-recommendations" data-duration="27" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf8;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f13-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #082d3f;
+      }
+      [data-f13-layer="background"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(191,234,227,.05) 1px, transparent 1px);
+        background-size: 120px 100%;
+      }
+      [id="f13-demo-recommendations-capture"] {
+        position: absolute;
+        top: 78px;
+        left: 72px;
+        width: 1398px;
+        height: 786px;
+        object-fit: contain;
+        object-position: center;
+        border: 3px solid #56747f;
+        border-radius: 18px;
+        background: #0e3a4b;
+        box-shadow: 0 28px 68px rgba(0,0,0,.28);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f13-role="sidecar"] {
+        position: absolute;
+        top: 78px;
+        right: 72px;
+        width: 330px;
+        height: 786px;
+        display: flex;
+        flex-direction: column;
+        padding: 28px 26px;
+        border: 2px solid #56747f;
+        border-radius: 18px;
+        background: #0e3a4b;
+      }
+      [data-f13-role="route"] {
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f13-role="catalogue"] {
+        margin-top: 12px;
+        color: #fffdf8;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 42px;
+        font-weight: 700;
+        line-height: .94;
+      }
+      [data-f13-role="rail"] {
+        margin-top: 28px;
+        display: grid;
+        gap: 12px;
+      }
+      [data-f13-role="state"] {
+        position: relative;
+        min-height: 118px;
+        display: grid;
+        grid-template-columns: 68px 1fr;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 18px;
+        overflow: hidden;
+        border: 2px solid #365c69;
+        border-radius: 14px;
+        color: #b9cbd2;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f13-role="state"][data-state="active"] {
+        border-color: #13a29b;
+        background: #e4f5f1;
+        color: #082d3f;
+      }
+      [data-f13-role="state"][data-state="done"] {
+        border-color: #365c69;
+        background: #0b3445;
+        color: #b9cbd2;
+      }
+      [data-f13-state="later"][data-state="active"] {
+        border-color: #f2a43a;
+        background: #f2d7;
+        color: #9a6414;
+      }
+      [data-f13-role="count"] {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      [data-f13-role="state-copy"] {
+        display: grid;
+        gap: 7px;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+      [data-f13-role="state-copy"] small { font: 700 15px/1.2 "Inter", Arial, sans-serif; letter-spacing: 0; text-transform: none; }
+      [data-f13-role="fill"] {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 7px;
+        background: #13a29b;
+        transform-origin: 0% 50%;
+      }
+      [data-f13-state="later"] [data-f13-role="fill"] { background: #f2a43a; }
+      [data-f13-role="provenance"] {
+        margin-top: auto;
+        padding: 16px 17px;
+        border: 2px solid #f2a43a;
+        border-radius: 999px;
+        background: #123f5b;
+        color: #f2d7;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: .04em;
+        text-align: center;
+        text-transform: uppercase;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+    </style>
+
+    <div data-hf-id="hf-qdp9" id="f13-track-1" class="clip" data-f13-layer="background" data-start="0" data-duration="27" data-track-index="0"></div>
+
+    <video data-hf-id="hf-k5oe" id="f13-demo-recommendations-capture" class="clip" data-start="0" data-duration="27" data-track-index="1" data-media-start="1" muted playsinline preload="auto" src="assets/capture/frame-13-recommendations.mp4"></video>
+
+    <div data-hf-id="hf-y29i" id="f13-track-2" class="clip" data-f13-layer="overlay" data-start="0" data-duration="27" data-track-index="2">
+      <aside data-hf-id="hf-vsou" data-f13-role="sidecar">
+        <div data-hf-id="hf-7n3u" data-f13-role="route">/recommendations</div>
+        <div data-hf-id="hf-3oc0" data-f13-role="catalogue">Catalogue<br data-hf-id="hf-x5px">2.0.0</div>
+        <div data-hf-id="hf-e9le" data-f13-role="rail">
+          <div data-hf-id="hf-dn74" id="f13-demo-recommendations-now" data-f13-role="state" data-state="active">
+            <strong data-hf-id="hf-422y" data-f13-role="count">3</strong><span data-hf-id="hf-8pjq" data-f13-role="state-copy">Why now<small data-hf-id="hf-745w">capability first</small></span><i data-hf-id="hf-f029" data-f13-role="fill"></i>
+          </div>
+          <div data-hf-id="hf-jwje" id="f13-demo-recommendations-next" data-f13-role="state" data-state="pending">
+            <strong data-hf-id="hf-4up0" data-f13-role="count">1</strong><span data-hf-id="hf-sk61" data-f13-role="state-copy">Next<small data-hf-id="hf-jtbo">sequenced move</small></span><i data-hf-id="hf-7ssl" data-f13-role="fill"></i>
+          </div>
+          <div data-hf-id="hf-owt5" id="f13-demo-recommendations-later" data-f13-role="state" data-f13-state="later" data-state="pending">
+            <strong data-hf-id="hf-l2jg" data-f13-role="count">1</strong><span data-hf-id="hf-z2a0" data-f13-role="state-copy">Why later<small data-hf-id="hf-mcrc">governed AI</small></span><i data-hf-id="hf-8zpo" data-f13-role="fill"></i>
+          </div>
+        </div>
+        <div data-hf-id="hf-aj7j" id="f13-demo-recommendations-provenance" data-f13-role="provenance">Provenance · not live quote or availability</div>
+      </aside>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "13-demo-recommendations";
+        var root = document.getElementById("root");
+        var capture = document.getElementById("f13-demo-recommendations-capture");
+        var sidecar = root.querySelector('[data-f13-role="sidecar"]');
+        var states = [
+          document.getElementById("f13-demo-recommendations-now"),
+          document.getElementById("f13-demo-recommendations-next"),
+          document.getElementById("f13-demo-recommendations-later")
+        ];
+        var fills = states.map(function (state) { return state.querySelector('[data-f13-role="fill"]'); });
+        var provenance = document.getElementById("f13-demo-recommendations-provenance");
+
+        gsap.set(states, { opacity: 0 });
+        gsap.set(fills, { scaleX: 0 });
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(capture, { opacity: 0.82, scale: 1.018 }, { opacity: 1, scale: 1, duration: 0.72, ease: "power3.out" }, 0.02);
+        tl.fromTo(sidecar, { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.62, ease: "power3.out" }, 0.16);
+
+        var entryStarts = [0.62, 0.79, 0.93];
+        var entryY = [72, 48, 38];
+        var entryDur = [0.19, 0.15, 0.12];
+        states.forEach(function (state, index) {
+          tl.set(state, { opacity: 1, y: entryY[index] }, entryStarts[index]);
+          tl.to(state, { y: 0, duration: entryDur[index], ease: "power4.out" }, entryStarts[index]);
+        });
+
+        tl.to(fills[0], { scaleX: 1, duration: 1.0, ease: "power2.out" }, 2.0);
+        tl.set(states[0], { attr: { "data-state": "done" } }, 8.9);
+        tl.set(states[1], { attr: { "data-state": "active" } }, 8.9);
+        tl.fromTo(states[1], { scale: 0.92 }, { scale: 1, duration: 0.5, ease: "power3.out" }, 8.9);
+        tl.to(fills[1], { scaleX: 1, duration: 1.0, ease: "power2.out" }, 9.05);
+
+        tl.set(states[1], { attr: { "data-state": "done" } }, 15.0);
+        tl.set(states[2], { attr: { "data-state": "active" } }, 15.0);
+        tl.fromTo(states[2], { scale: 0.92 }, { scale: 1, duration: 0.5, ease: "power3.out" }, 15.0);
+        tl.to(fills[2], { scaleX: 1, duration: 1.0, ease: "power2.out" }, 15.15);
+
+        tl.fromTo(provenance, { opacity: 0, scale: 0.78 }, { opacity: 1, scale: 1, duration: 0.58, ease: "power3.out" }, 19.6);
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

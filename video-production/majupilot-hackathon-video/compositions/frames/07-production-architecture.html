@@ -1,0 +1,102 @@
+<template>
+  <div data-hf-id="hf-okzs" id="root" data-composition-id="07-production-architecture" data-duration="26" data-fps="30" data-width="1920" data-height="1080">
+    <style>
+      @font-face { font-family: "MP Garamond"; src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; isolation: isolate; color: #fffdf8; }
+      .f07-bg { position: absolute; inset: 0; background-color: #082d3f; background-image: linear-gradient(rgba(191,234,227,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(191,234,227,.055) 1px, transparent 1px); background-size: 48px 48px; }
+      .f07-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 52% 44%, rgba(19,162,155,.14), transparent 37%); }
+      .f07-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f07-world { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+      .f07-frame-no { position: absolute; top: 82px; right: 118px; color: #bfeae3; font: 700 24px/1 "MP Mono"; letter-spacing: .14em; }
+      .f07-time { position: absolute; top: 120px; right: 118px; color: rgba(255,253,248,.55); font: 400 18px/1 "MP Mono"; letter-spacing: .08em; }
+      .f07-architecture { position: absolute; left: 120px; top: 230px; width: 1680px; height: 520px; }
+      .f07-connectors { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+      .f07-connector { fill: none; stroke: #13a29b; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .f07-connector-dim { stroke: rgba(191,234,227,.68); }
+      .f07-node { position: absolute; width: 300px; height: 150px; display: grid; place-content: center; gap: 10px; text-align: center; border: 2px solid rgba(191,234,227,.46); border-radius: 14px; background: #123f5b; color: #fffdf8; font: 700 31px/1.12 "MP Inter"; box-shadow: 0 20px 42px rgba(1,20,30,.2); transform-origin: 50% 50%; will-change: transform, opacity; }
+      .f07-node small { display: inline-flex; justify-self: center; padding: 8px 13px; border-radius: 999px; color: #082d3f; background: #bfeae3; font: 700 17px/1 "MP Mono"; letter-spacing: .09em; text-transform: uppercase; }
+      .f07-node-core { left: 690px; top: 0; border: 3px solid #13a29b; background: #e4f5f1; color: #082d3f; box-shadow: 0 0 0 10px rgba(19,162,155,.09); }
+      .f07-node-ui { left: 0; top: 0; }
+      .f07-node-routes { left: 345px; top: 0; }
+      .f07-node-domain { left: 1035px; top: 0; }
+      .f07-node-supabase { left: 345px; top: 300px; }
+      .f07-node-gateway { left: 690px; top: 300px; }
+      .f07-node-outbox { left: 1035px; top: 300px; }
+      .f07-core-label { position: absolute; left: 742px; top: 172px; color: #13a29b; font: 700 18px/1 "MP Mono"; letter-spacing: .12em; text-transform: uppercase; }
+      .f07-footer { position: absolute; left: 120px; top: 824px; display: flex; align-items: center; gap: 18px; color: #bfeae3; font: 700 21px/1 "MP Mono"; letter-spacing: .08em; text-transform: uppercase; }
+      .f07-footer::before { content: ""; width: 70px; height: 4px; background: #13a29b; }
+    </style>
+    <div data-hf-id="hf-9wjq" id="f07-track-1" class="clip f07-bg" data-start="0" data-duration="26" data-track-index="0"></div>
+    <div data-hf-id="hf-bo0n" id="f07-track-2" class="clip f07-scene" data-start="0" data-duration="26" data-track-index="1">
+      <div data-hf-id="hf-w20l" id="f07-production-architecture-world" class="f07-world" data-layout-allow-overflow="">
+        <div data-hf-id="hf-cpfm" class="f07-frame-no">07</div>
+        <div data-hf-id="hf-ue50" class="f07-time">02:05—02:31</div>
+        <div data-hf-id="hf-qnef" class="f07-architecture">
+          <svg data-hf-id="hf-5hnl" class="f07-connectors" viewBox="0 0 1680 520" aria-hidden="true">
+            <path data-hf-id="hf-klmr" id="f07-production-architecture-path-1" class="f07-connector" d="M300 75 H345" />
+            <path data-hf-id="hf-oour" id="f07-production-architecture-path-2" class="f07-connector" d="M645 75 H690" />
+            <path data-hf-id="hf-y0wz" id="f07-production-architecture-path-3" class="f07-connector" d="M990 75 H1035" />
+            <path data-hf-id="hf-xzzs" id="f07-production-architecture-path-4" class="f07-connector f07-connector-dim" d="M840 150 V220 H495 V300" />
+            <path data-hf-id="hf-0ew5" id="f07-production-architecture-path-5" class="f07-connector f07-connector-dim" d="M840 150 V300" />
+            <path data-hf-id="hf-knjd" id="f07-production-architecture-path-6" class="f07-connector f07-connector-dim" d="M1185 150 V300" />
+          </svg>
+          <div data-hf-id="hf-krl3" id="f07-production-architecture-ui" class="f07-node f07-node-ui">Next.js<br data-hf-id="hf-x5px">UI</div>
+          <div data-hf-id="hf-w2yw" id="f07-production-architecture-routes" class="f07-node f07-node-routes">Versioned<br data-hf-id="hf-rsrt">routes</div>
+          <div data-hf-id="hf-msy6" id="f07-production-architecture-core" class="f07-node f07-node-core">Deterministic<br data-hf-id="hf-szow">core</div>
+          <div data-hf-id="hf-zdvb" id="f07-production-architecture-domain" class="f07-node f07-node-domain">Exabytes<br data-hf-id="hf-sldv">domain pack</div>
+          <div data-hf-id="hf-c357" id="f07-production-architecture-supabase" class="f07-node f07-node-supabase">Supabase<small data-hf-id="hf-tkzj">private</small></div>
+          <div data-hf-id="hf-gie1" id="f07-production-architecture-gateway" class="f07-node f07-node-gateway">AI Gateway<small data-hf-id="hf-g1g8">optional</small></div>
+          <div data-hf-id="hf-l9ud" id="f07-production-architecture-outbox" class="f07-node f07-node-outbox">Durable<br data-hf-id="hf-qluq">outbox</div>
+          <div data-hf-id="hf-8a0l" id="f07-production-architecture-core-label" class="f07-core-label" style="color:#8ee2d3">authoritative center</div>
+        </div>
+        <div data-hf-id="hf-stac" class="f07-footer">03 — Production architecture · roles, not secrets</div>
+      </div>
+    </div>
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "07-production-architecture";
+        var root = document.querySelector('[data-composition-id="07-production-architecture"]');
+        var world = root.querySelector(".f07-world");
+        var paths = Array.from(root.querySelectorAll(".f07-connector"));
+        paths.forEach(function (path) {
+          var length = path.getTotalLength();
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        });
+        var cam = { x: 20, y: 0, scale: 1 };
+        function applyCamera() {
+          world.style.transform = "translate(" + cam.x + "px," + cam.y + "px) scale(" + cam.scale + ")";
+        }
+        applyCamera();
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo('[id="f07-production-architecture-core"]', { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: .45, ease: "power3.out", immediateRender: false }, .05);
+        tl.fromTo('[id="f07-production-architecture-ui"]', { opacity: 0, x: -34 }, { opacity: 1, x: 0, duration: .65, ease: "power3.out" }, .22);
+        tl.to('[id="f07-production-architecture-path-1"]', { strokeDashoffset: 0, duration: .75, ease: "power2.out" }, 2.1);
+        tl.fromTo('[id="f07-production-architecture-routes"]', { opacity: 0, scale: .82, x: -22 }, { opacity: 1, scale: 1, x: 0, duration: .75, ease: "power3.out" }, 4.4);
+        tl.to('[id="f07-production-architecture-path-2"]', { strokeDashoffset: 0, duration: .75, ease: "power2.out" }, 6.3);
+        tl.fromTo('[id="f07-production-architecture-core-label"]', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .55, ease: "power2.out" }, 8.3);
+        tl.fromTo('[id="f07-production-architecture-core"]', { boxShadow: "0 0 0 10px rgba(19,162,155,.09)" }, { boxShadow: "0 0 0 18px rgba(19,162,155,.18)", duration: .7, ease: "power2.out", immediateRender: false }, 8.3);
+        tl.to('[id="f07-production-architecture-path-3"]', { strokeDashoffset: 0, duration: .75, ease: "power2.out" }, 12.4);
+        tl.fromTo('[id="f07-production-architecture-domain"]', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .7, ease: "power3.out" }, 13.4);
+        tl.to('[id="f07-production-architecture-path-4"]', { strokeDashoffset: 0, duration: .8, ease: "power2.out" }, 16.0);
+        tl.fromTo('[id="f07-production-architecture-supabase"]', { opacity: 0, x: 345, y: -225, scale: .68 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.15, ease: "power3.out" }, 16.8);
+        tl.to('[id="f07-production-architecture-path-5"]', { strokeDashoffset: 0, duration: .8, ease: "power2.out" }, 19.2);
+        tl.fromTo('[id="f07-production-architecture-gateway"]', { opacity: 0, y: -225, scale: .68 }, { opacity: 1, y: 0, scale: 1, duration: 1.15, ease: "power3.out" }, 20.0);
+        tl.to('[id="f07-production-architecture-path-6"]', { strokeDashoffset: 0, duration: .8, ease: "power2.out" }, 22.2);
+        tl.fromTo('[id="f07-production-architecture-outbox"]', { opacity: 0, x: -345, y: -225, scale: .68 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.15, ease: "power3.out" }, 23.0);
+        tl.to(cam, { x: -20, duration: 21.5, ease: "sine.inOut", onUpdate: applyCamera }, .5);
+        tl.to(cam, { x: 0, duration: 3.5, ease: "power2.out", onUpdate: applyCamera }, 22.0);
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

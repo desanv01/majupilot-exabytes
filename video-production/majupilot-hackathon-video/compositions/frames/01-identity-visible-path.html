@@ -1,0 +1,96 @@
+<template>
+  <div data-hf-id="hf-sqaq" id="root" data-composition-id="01-identity-visible-path" data-duration="20" data-fps="30" data-width="1920" data-height="1080">
+    <style>
+      @font-face { font-family: "MP Display"; src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "MP Sans"; src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "MP Sans"; src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; isolation: isolate; color: #fffdf8; font-family: "MP Sans", Arial, sans-serif; pointer-events: none; }
+      .f01-bg { position: absolute; inset: 0; overflow: hidden; background: #082d3f; }
+      .f01-register { position: absolute; inset: 68px 72px auto; height: 768px; border: 1px solid rgba(191,234,227,.20); }
+      .f01-register::before, .f01-register::after { content: ""; position: absolute; top: -1px; width: 112px; height: 8px; background: #13a29b; }
+      .f01-register::before { left: -1px; }
+      .f01-register::after { right: -1px; }
+      .f01-content { position: absolute; inset: 0; overflow: hidden; }
+      .f01-frame-no, .f01-timecode { position: absolute; top: 88px; z-index: 3; font: 700 26px/1 "MP Mono", monospace; letter-spacing: .12em; }
+      .f01-frame-no { left: 120px; color: #8ee2d3; }
+      .f01-timecode { right: 120px; color: #b9cbd2; font-size: 22px; letter-spacing: .04em; }
+      .f01-identity-layout { position: absolute; top: 164px; left: 120px; right: 120px; height: 650px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 58px; align-items: center; }
+      .f01-copy { min-width: 0; padding-left: 4px; }
+      .f01-kicker { margin-bottom: 20px; color: #8ee2d3; font: 700 25px/1.2 "MP Mono", monospace; letter-spacing: .10em; text-transform: uppercase; }
+      .f01-name { margin: 0; color: #fffdf8; font: 700 112px/.90 "MP Display", Georgia, serif; letter-spacing: -.035em; }
+      .f01-body { margin: 24px 0 0; max-width: 770px; color: #c9d8dc; font: 400 32px/1.4 "MP Sans", Arial, sans-serif; }
+      .f01-evidence-line { display: block; width: 75%; height: 18px; margin: 34px 0 18px; overflow: visible; }
+      .f01-evidence-line path { fill: none; stroke: #13a29b; stroke-width: 8; stroke-linecap: square; }
+      .f01-thesis { color: #fffdf8; font-weight: 700; }
+      .f01-portrait-wrap { position: relative; height: 634px; transform-origin: 50% 50%; }
+      .f01-portrait { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%; border: 8px solid #13a29b; border-radius: 34px; background: #fffdf8; }
+      .f01-portrait-wrap::before { content: ""; position: absolute; z-index: -1; inset: 20px -18px -18px 20px; border: 2px solid rgba(142,226,211,.44); border-radius: 34px; }
+      .f01-proof-dot { fill: #13a29b; transform-box: fill-box; transform-origin: 50% 50%; }
+    </style>
+
+    <div data-hf-id="hf-n01q" id="f01-track-1" class="f01-bg clip" data-start="0" data-duration="20" data-track-index="0">
+      <div data-hf-id="hf-570j" class="f01-register"></div>
+    </div>
+    <div data-hf-id="hf-ebtk" id="f01-track-2" class="f01-content clip" data-start="0" data-duration="20" data-track-index="1">
+      <span data-hf-id="hf-ifej" class="f01-frame-no">01</span>
+      <span data-hf-id="hf-bqg6" class="f01-timecode">00:00–00:20</span>
+      <div data-hf-id="hf-w0pp" class="f01-identity-layout">
+        <div data-hf-id="hf-mpwv" class="f01-copy">
+          <div data-hf-id="hf-ag27" class="f01-kicker">MajuPilot · creator identity</div>
+          <h2 data-hf-id="hf-rpe8" class="f01-name">Desan<br data-hf-id="hf-x5px">Vasu</h2>
+          <p data-hf-id="hf-pzjd" class="f01-body f01-role">Student · USM — Universiti Sains Malaysia</p>
+          <svg data-hf-id="hf-21hx" class="f01-evidence-line" viewBox="0 0 700 18" preserveAspectRatio="none" aria-hidden="true">
+            <path data-hf-id="hf-9rln" id="f01-evidence-path" d="M 2 9 L 698 9" />
+            <circle data-hf-id="hf-970x" class="f01-proof-dot" cx="690" cy="9" r="8" />
+          </svg>
+          <p data-hf-id="hf-zv8k" class="f01-body f01-thesis">Five answers → an inspectable decision path.</p>
+        </div>
+        <div data-hf-id="hf-oeai" class="f01-portrait-wrap">
+          <img data-hf-id="hf-0nbw" class="f01-portrait" src="assets/portrait/desan-vasu.jpg" alt="Portrait of Desan Vasu">
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "01-identity-visible-path";
+        var root = document.getElementById("root");
+        var line = root.querySelector("#f01-evidence-path");
+        var lineLength = line.getTotalLength();
+        line.style.strokeDasharray = String(lineLength);
+        line.style.strokeDashoffset = String(lineLength);
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector(".f01-kicker"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.05);
+        tl.fromTo(root.querySelector(".f01-name"), { opacity: 0, scale: 0.965, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.72, ease: "power3.out" }, 0.10);
+        tl.fromTo(root.querySelector(".f01-portrait-wrap"), { opacity: 0, scale: 0.975, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.72, ease: "power3.out" }, 0.16);
+        tl.to(line, { strokeDashoffset: 0, duration: 0.72, ease: "power2.out" }, 0.18);
+        tl.fromTo(root.querySelector(".f01-role"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 2.85);
+        tl.fromTo(root.querySelector(".f01-thesis"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.70, ease: "power3.out" }, 8.75);
+        tl.fromTo(root.querySelector(".f01-proof-dot"), { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" }, 9.10);
+
+        var phase = { p: 0 };
+        tl.to(phase, {
+          p: Math.PI * 2 * 2.5,
+          duration: 8.5,
+          ease: "none",
+          onUpdate: function () {
+            var t = phase.p / (Math.PI * 2 * 2.5);
+            var envelope = t < 0.78 ? 1 : (1 - t) / 0.22;
+            var s = Math.sin(phase.p) * Math.max(0, envelope);
+            gsap.set(root.querySelector(".f01-proof-dot"), { scale: 1 + s * 0.05 });
+          }
+        }, 9.35);
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

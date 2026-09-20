@@ -1,0 +1,69 @@
+<template>
+  <div data-hf-id="hf-5vmc" id="root" data-composition-id="09-no-current-rag" data-duration="16" data-fps="30" data-width="1920" data-height="1080">
+    <style>
+      @font-face { font-family: "MP Garamond"; src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; isolation: isolate; color: #17394b; }
+      .f09-bg { position: absolute; inset: 0; background: #f2d7; }
+      .f09-bg::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(154,100,20,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(154,100,20,.045) 1px, transparent 1px); background-size: 48px 48px; }
+      .f09-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f09-frame-no { position: absolute; top: 82px; right: 118px; color: #9a6414; font: 700 24px/1 "MP Mono"; letter-spacing: .14em; }
+      .f09-time { position: absolute; top: 120px; right: 118px; color: #9a6414; font: 400 18px/1 "MP Mono"; }
+      .f09-boundary { position: absolute; left: 120px; top: 158px; width: 1600px; height: 660px; will-change: transform; }
+      .f09-register { display: flex; align-items: center; gap: 14px; color: #9a6414; font: 700 21px/1 "MP Mono"; letter-spacing: .11em; text-transform: uppercase; }
+      .f09-chip { padding: 11px 16px; border: 2px solid #d7a34d; border-radius: 999px; background: rgba(255,253,248,.68); }
+      .f09-chip-deferred { background: #fffdf8; }
+      .f09-headline { margin: 54px 0 0; color: #082d3f; font: 700 110px/.92 "MP Garamond"; letter-spacing: -.025em; }
+      .f09-headline span { display: block; margin-top: 22px; color: #a63e36; font-family: "MP Inter"; font-size: 73px; line-height: 1; letter-spacing: .01em; text-transform: uppercase; }
+      .f09-rule { display: block; width: 1180px; height: 18px; margin-top: 48px; overflow: visible; }
+      .f09-rule path { fill: none; stroke: #a63e36; stroke-width: 8; stroke-linecap: round; }
+      .f09-note { max-width: 1450px; margin: 39px 0 0; color: #17394b; font: 400 31px/1.35 "MP Inter"; }
+      .f09-note strong { color: #a63e36; font-weight: 700; }
+    </style>
+    <div data-hf-id="hf-0gnt" id="f09-track-1" class="clip f09-bg" data-start="0" data-duration="16" data-track-index="0"></div>
+    <div data-hf-id="hf-uxyk" id="f09-track-2" class="clip f09-scene" data-start="0" data-duration="16" data-track-index="1">
+      <div data-hf-id="hf-y8lu" class="f09-frame-no">09</div>
+      <div data-hf-id="hf-ed0o" class="f09-time">02:59—03:15</div>
+      <div data-hf-id="hf-j5qz" id="f09-no-current-rag-boundary" class="f09-boundary">
+        <div data-hf-id="hf-o4l7" class="f09-register"><span data-hf-id="hf-wuda" class="f09-chip">Current boundary</span><span data-hf-id="hf-1bmq">·</span><span data-hf-id="hf-2s6t" class="f09-chip f09-chip-deferred">Deferred P1</span></div>
+        <h2 data-hf-id="hf-5y94" class="f09-headline">Document RAG<span data-hf-id="hf-uxbq">NOT IMPLEMENTED NOW</span></h2>
+        <svg data-hf-id="hf-osno" class="f09-rule" viewBox="0 0 1180 18" preserveAspectRatio="none" aria-hidden="true"><path data-hf-id="hf-a01y" id="f09-no-current-rag-rule" d="M4 9 H1176" /></svg>
+        <p data-hf-id="hf-ugqo" class="f09-note">No arbitrary document ingestion. <strong data-hf-id="hf-vckx">Source of truth:</strong> the live, labelled, fictional journey.</p>
+      </div>
+    </div>
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "09-no-current-rag";
+        var root = document.querySelector('[data-composition-id="09-no-current-rag"]');
+        var boundary = root.querySelector(".f09-boundary");
+        var rule = root.querySelector('[id="f09-no-current-rag-rule"]');
+        var length = rule.getTotalLength();
+        rule.style.strokeDasharray = String(length);
+        rule.style.strokeDashoffset = String(length);
+        var tl = gsap.timeline({ paused: true });
+        tl.to(rule, { strokeDashoffset: 0, duration: 1.05, ease: "power2.out" }, .2);
+        var phase = { p: 0 };
+        tl.to(phase, {
+          p: Math.PI * 6,
+          duration: 8.4,
+          ease: "none",
+          onUpdate: function () {
+            var progress = phase.p / (Math.PI * 6);
+            var envelope = progress < .78 ? 1 : (1 - progress) / .22;
+            var wave = Math.sin(phase.p);
+            boundary.style.transform = "translateY(" + (wave * 1.4 * envelope) + "px) scale(" + (1 + wave * .0035 * envelope) + ")";
+          }
+        }, 1.6);
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -9,5 +9,52 @@
   "media": {
     "autoProxy": true
   },
-  "authoringSkill": "general-video"
+  "authoringSkill": "general-video",
+  "registryItems": [
+    {
+      "name": "directional-wipe",
+      "type": "hyperframes:component",
+      "target": "compositions/components/directional-wipe.html"
+    },
+    {
+      "name": "fade-through",
+      "type": "hyperframes:component",
+      "target": "compositions/components/fade-through.html"
+    },
+    {
+      "name": "simulated-cursor",
+      "type": "hyperframes:component",
+      "target": "compositions/components/simulated-cursor.html"
+    },
+    {
+      "name": "yt-feather-highlight",
+      "type": "hyperframes:component",
+      "target": "compositions/components/yt-feather-highlight.html"
+    },
+    {
+      "name": "ui-focus-zoom",
+      "type": "hyperframes:component",
+      "target": "compositions/components/ui-focus-zoom.html"
+    },
+    {
+      "name": "count-up",
+      "type": "hyperframes:component",
+      "target": "compositions/components/count-up.html"
+    },
+    {
+      "name": "mk-progress-stat",
+      "type": "hyperframes:block",
+      "target": "compositions/mk-progress-stat.html"
+    },
+    {
+      "name": "state-chip-rail",
+      "type": "hyperframes:component",
+      "target": "compositions/components/state-chip-rail.html"
+    },
+    {
+      "name": "mk-specs-list",
+      "type": "hyperframes:block",
+      "target": "compositions/mk-specs-list.html"
+    }
+  ]
 }

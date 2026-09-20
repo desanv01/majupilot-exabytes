@@ -1,0 +1,101 @@
+<template>
+  <div data-hf-id="hf-wuuy" id="root" data-composition-id="08-provenance-specialists" data-duration="28" data-fps="30" data-width="1920" data-height="1080">
+    <style>
+      @font-face { font-family: "MP Garamond"; src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; isolation: isolate; color: #17394b; }
+      .f08-bg { position: absolute; inset: 0; background: #f7f4ec; }
+      .f08-bg::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(8,124,121,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(8,124,121,.045) 1px, transparent 1px); background-size: 48px 48px; }
+      .f08-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f08-frame-no { position: absolute; top: 80px; right: 118px; color: #087c79; font: 700 24px/1 "MP Mono"; letter-spacing: .14em; }
+      .f08-time { position: absolute; top: 118px; right: 118px; color: #5b7181; font: 400 18px/1 "MP Mono"; }
+      .f08-layout { position: absolute; left: 120px; top: 92px; width: 1680px; height: 770px; }
+      .f08-kicker { color: #087c79; font: 700 22px/1.2 "MP Mono"; letter-spacing: .12em; text-transform: uppercase; }
+      .f08-chain { position: absolute; left: 0; top: 80px; width: 1680px; height: 205px; display: grid; grid-template-columns: 1fr 150px 1fr 150px 1fr; align-items: center; }
+      .f08-chain-lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+      .f08-chain-path { fill: none; stroke: #087c79; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .f08-node { position: relative; z-index: 1; min-height: 152px; display: grid; place-content: center; padding: 24px; border: 2px solid #d8e4e2; border-radius: 14px; background: #fff; text-align: center; color: #17394b; font: 700 28px/1.15 "MP Inter"; box-shadow: 0 14px 28px rgba(8,45,63,.07); transform-origin: 50% 50%; will-change: transform, opacity; }
+      .f08-node-active { border: 3px solid #087c79; background: #e4f5f1; color: #082d3f; }
+      .f08-node span { display: block; margin-top: 13px; color: #5b7181; font: 700 17px/1 "MP Mono"; letter-spacing: .08em; text-transform: uppercase; }
+      .f08-advisors { position: absolute; left: 0; top: 345px; width: 1680px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+      .f08-advisor { min-height: 178px; padding: 28px 22px 22px; border: 2px solid #d8e4e2; border-top: 5px solid #087c79; border-radius: 14px; background: #fff; transform-origin: 50% 100%; will-change: transform, opacity; }
+      .f08-advisor strong { display: block; color: #082d3f; font: 700 27px/1.1 "MP Inter"; }
+      .f08-state { display: flex; align-items: center; gap: 10px; width: max-content; margin-top: 28px; padding: 10px 14px; border: 2px solid #d8e4e2; border-radius: 999px; color: #5b7181; font: 700 16px/1 "MP Mono"; letter-spacing: .08em; text-transform: uppercase; transform-origin: 0 50%; }
+      .f08-state::before { content: ""; width: 10px; height: 10px; border: 2px solid #087c79; border-radius: 50%; }
+      .f08-state[data-state="active"] { border-color: #87cdc7; background: #e4f5f1; color: #087c79; }
+      .f08-state[data-state="active"]::before { background: #087c79; }
+      .f08-fallback { position: absolute; left: 0; top: 575px; display: inline-flex; align-items: center; gap: 14px; padding: 16px 22px; border: 2px solid #e3bb75; border-radius: 999px; background: #f2d7; color: #9a6414; font: 700 19px/1 "MP Mono"; letter-spacing: .08em; text-transform: uppercase; transform-origin: 0 50%; }
+      .f08-fallback::before { content: ""; width: 18px; height: 18px; border: 3px solid #9a6414; border-radius: 50%; }
+      .f08-footer { position: absolute; left: 0; top: 712px; display: flex; align-items: center; gap: 16px; color: #5b7181; font: 700 18px/1 "MP Mono"; letter-spacing: .08em; text-transform: uppercase; }
+      .f08-footer::before { content: ""; width: 66px; height: 4px; background: #087c79; }
+    </style>
+    <div data-hf-id="hf-gix2" id="f08-track-1" class="clip f08-bg" data-start="0" data-duration="28" data-track-index="0"></div>
+    <div data-hf-id="hf-yajh" id="f08-track-2" class="clip f08-scene" data-start="0" data-duration="28" data-track-index="1">
+      <div data-hf-id="hf-vljm" class="f08-frame-no">08</div>
+      <div data-hf-id="hf-01ve" class="f08-time">02:31—02:59</div>
+      <div data-hf-id="hf-07d1" class="f08-layout">
+        <div data-hf-id="hf-i4aj" class="f08-kicker">Trace output back to source</div>
+        <div data-hf-id="hf-1z56" class="f08-chain">
+          <svg data-hf-id="hf-huhr" class="f08-chain-lines" viewBox="0 0 1680 205" aria-hidden="true">
+            <path data-hf-id="hf-kmoz" id="f08-provenance-specialists-path-1" class="f08-chain-path" d="M460 102 H610 L584 84 M610 102 L584 120" />
+            <path data-hf-id="hf-dhfy" id="f08-provenance-specialists-path-2" class="f08-chain-path" d="M1070 102 H1220 L1194 84 M1220 102 L1194 120" />
+          </svg>
+          <div data-hf-id="hf-q8c1" id="f08-provenance-specialists-claim" class="f08-node f08-node-active">CLAIM<span data-hf-id="hf-4qu5">selected output</span></div>
+          <div data-hf-id="hf-yeow"></div>
+          <div data-hf-id="hf-oo0r" id="f08-provenance-specialists-calc" class="f08-node">CALC v.<span data-hf-id="hf-z7zf">versioned record</span></div>
+          <div data-hf-id="hf-y7yw"></div>
+          <div data-hf-id="hf-e269" id="f08-provenance-specialists-evidence" class="f08-node">BUSINESS TWIN<br data-hf-id="hf-x5px">EVIDENCE<span data-hf-id="hf-0srr">labelled source</span></div>
+        </div>
+        <div data-hf-id="hf-yx6w" class="f08-advisors">
+          <div data-hf-id="hf-7xmh" class="f08-advisor"><strong data-hf-id="hf-1axv">Strategy</strong><div data-hf-id="hf-dsd9" class="f08-state">bounded review</div></div>
+          <div data-hf-id="hf-18el" class="f08-advisor"><strong data-hf-id="hf-0m8k">Finance</strong><div data-hf-id="hf-p9m9" class="f08-state">bounded review</div></div>
+          <div data-hf-id="hf-2fbo" class="f08-advisor"><strong data-hf-id="hf-osx7">Cyber</strong><div data-hf-id="hf-qgjc" class="f08-state">bounded review</div></div>
+          <div data-hf-id="hf-210n" class="f08-advisor"><strong data-hf-id="hf-2fzy">Change</strong><div data-hf-id="hf-q28b" class="f08-state">bounded review</div></div>
+          <div data-hf-id="hf-37xq" class="f08-advisor"><strong data-hf-id="hf-spfm">Delivery</strong><div data-hf-id="hf-o2p6" class="f08-state">bounded review</div></div>
+        </div>
+        <div data-hf-id="hf-17pb" id="f08-provenance-specialists-fallback" class="f08-fallback">Bounded fallback per role</div>
+        <div data-hf-id="hf-3k8p" class="f08-footer">Evidence-linked · inspectable stages</div>
+      </div>
+    </div>
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "08-provenance-specialists";
+        var root = document.querySelector('[data-composition-id="08-provenance-specialists"]');
+        var paths = Array.from(root.querySelectorAll(".f08-chain-path"));
+        paths.forEach(function (path) {
+          var length = path.getTotalLength();
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        });
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo('[id="f08-provenance-specialists-claim"]', { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: .45, ease: "power3.out" }, .05);
+        tl.to('[id="f08-provenance-specialists-path-1"]', { strokeDashoffset: 0, duration: .8, ease: "power2.out" }, 1.3);
+        tl.fromTo('[id="f08-provenance-specialists-calc"]', { opacity: 0, x: -28, scale: .92 }, { opacity: 1, x: 0, scale: 1, duration: .7, ease: "power3.out" }, 3.2);
+        tl.to('[id="f08-provenance-specialists-path-2"]', { strokeDashoffset: 0, duration: .8, ease: "power2.out" }, 5.3);
+        tl.fromTo('[id="f08-provenance-specialists-evidence"]', { opacity: 0, x: -28, scale: .92 }, { opacity: 1, x: 0, scale: 1, duration: .75, ease: "power3.out" }, 7.3);
+        var advisors = Array.from(root.querySelectorAll(".f08-advisor"));
+        var states = Array.from(root.querySelectorAll(".f08-state"));
+        advisors.forEach(function (advisor) {
+          gsap.set(advisor, { opacity: 0, y: 70, scale: .88 });
+        });
+        advisors.forEach(function (advisor, index) {
+          var start = 12.4 + index * 1.65;
+          tl.set(advisor, { opacity: 1 }, start);
+          tl.to(advisor, { y: 0, scale: 1, duration: index === 0 ? .2 : .15, ease: "power4.out" }, start);
+          tl.fromTo(states[index], { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: .45, ease: "power3.out" }, start + .42);
+          tl.set(states[index], { attr: { "data-state": "active" } }, 20.7 + index * .42);
+        });
+        tl.fromTo('[id="f08-provenance-specialists-fallback"]', { opacity: 0, scale: 0, y: 18 }, { opacity: 1, scale: 1, y: 0, duration: .62, ease: "power3.out" }, 23.1);
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

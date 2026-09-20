@@ -1,0 +1,284 @@
+<template>
+  <div data-hf-id="hf-pchm" id="root" data-composition-id="23-owner-advisor-value" data-duration="32" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #17394b;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f23-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #fffdf8;
+      }
+      [data-f23-layer="background"]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 184px;
+        left: 0;
+        width: 50%;
+        background: #f7f4ec;
+      }
+      [data-f23-role="header"] {
+        position: absolute;
+        top: 72px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f23-role="header"] span:last-child { color: #5b7181; }
+      [data-f23-role="stage"] {
+        position: absolute;
+        top: 124px;
+        left: 120px;
+        width: 1680px;
+        height: 720px;
+        perspective: 1800px;
+        transform-style: preserve-3d;
+      }
+      [data-f23-role="path-svg"] {
+        position: absolute;
+        inset: 0;
+        width: 1680px;
+        height: 720px;
+        overflow: visible;
+      }
+      [data-f23-role="path-base"], [data-f23-role="path-live"] {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      [data-f23-role="path-base"] { stroke: #d8e4e2; stroke-width: 17; }
+      [data-f23-role="path-live"] { stroke: #13a29b; stroke-width: 7; }
+      [data-f23-role="source"] {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 680px;
+        width: 320px;
+        height: 68px;
+        display: grid;
+        place-items: center;
+        border: 3px solid #087c79;
+        border-radius: 999px;
+        background: #e4f5f1;
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+      }
+      [data-f23-role="card"] {
+        position: absolute;
+        z-index: 2;
+        top: 124px;
+        width: 760px;
+        height: 438px;
+        padding: 50px 54px;
+        border: 3px solid #d8e4e2;
+        border-radius: 22px;
+        background: #ffffff;
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+      }
+      [data-f23-card="owner"] {
+        left: 0;
+        border-color: #087c79;
+        box-shadow: -20px 28px 56px rgba(8,45,63,.1);
+      }
+      [data-f23-card="advisor"] {
+        right: 0;
+        border-color: #f2a43a;
+        box-shadow: 20px 28px 56px rgba(154,100,20,.1);
+      }
+      [data-f23-role="eyebrow"] {
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f23-card="advisor"] [data-f23-role="eyebrow"] { color: #9a6414; }
+      [data-f23-role="claim"] {
+        margin: 22px 0 28px;
+        color: #082d3f;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 76px;
+        font-weight: 700;
+        line-height: .86;
+        letter-spacing: -.03em;
+      }
+      [data-f23-role="evidence"] {
+        max-width: 620px;
+        color: #5b7181;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.36;
+      }
+      [data-f23-role="badge"] {
+        position: absolute;
+        z-index: 5;
+        top: 514px;
+        min-width: 236px;
+        padding: 15px 20px;
+        border-radius: 999px;
+        color: #fffdf8;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-align: center;
+        text-transform: uppercase;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f23-badge="owner"] { left: 520px; background: #087c79; }
+      [data-f23-badge="advisor"] { right: 520px; background: #9a6414; }
+      [data-f23-role="consent"] {
+        position: absolute;
+        z-index: 4;
+        left: 658px;
+        top: 633px;
+        width: 364px;
+        height: 72px;
+        display: grid;
+        place-items: center;
+        border: 3px solid #a63e36;
+        border-radius: 999px;
+        background: #fce9e6;
+        color: #a63e36;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+    </style>
+
+    <div data-hf-id="hf-t033" id="f23-track-1" class="clip" data-f23-layer="background" data-start="0" data-duration="32" data-track-index="0"></div>
+
+    <div data-hf-id="hf-wzhu" id="f23-track-2" class="clip" data-f23-layer="content" data-start="0" data-duration="32" data-track-index="1">
+      <div data-hf-id="hf-4qf0" data-f23-role="header"><span data-hf-id="hf-0rik">06 — Industry Value / Future Potential</span><span data-hf-id="hf-6wne">One evidence path · two viewpoints</span></div>
+      <div data-hf-id="hf-dvzf" data-f23-role="stage">
+        <svg data-hf-id="hf-vo7g" data-f23-role="path-svg" viewBox="0 0 1680 720" aria-hidden="true">
+          <path data-hf-id="hf-o3u0" data-f23-role="path-base" d="M840 66 L840 98 M840 98 C720 98 560 104 380 124 M840 98 C960 98 1120 104 1300 124 M380 562 C470 612 620 642 840 668 M1300 562 C1210 612 1060 642 840 668" />
+          <path data-hf-id="hf-qvyj" id="f23-owner-advisor-value-top-left" data-f23-role="path-live" d="M840 66 L840 98 C720 98 560 104 380 124" />
+          <path data-hf-id="hf-gnwy" id="f23-owner-advisor-value-top-right" data-f23-role="path-live" d="M840 98 C960 98 1120 104 1300 124" />
+          <path data-hf-id="hf-g0bu" id="f23-owner-advisor-value-bottom-left" data-f23-role="path-live" d="M380 562 C470 612 620 642 840 668" />
+          <path data-hf-id="hf-mrre" id="f23-owner-advisor-value-bottom-right" data-f23-role="path-live" d="M1300 562 C1210 612 1060 642 840 668" />
+        </svg>
+
+        <div data-hf-id="hf-32qh" data-f23-role="source">Shared evidence path</div>
+
+        <article data-hf-id="hf-uft3" id="f23-owner-advisor-value-owner" data-f23-role="card" data-f23-card="owner">
+          <div data-hf-id="hf-1ze8" data-f23-role="eyebrow">SME owner</div>
+          <h1 data-hf-id="hf-3z3b" data-f23-role="claim">A clearer<br data-hf-id="hf-x5px">conversation.</h1>
+          <div data-hf-id="hf-eyuw" data-f23-role="evidence">Five answers · reviewed start · visible assumptions · preserved rationale</div>
+        </article>
+
+        <article data-hf-id="hf-n4ej" id="f23-owner-advisor-value-advisor" data-f23-role="card" data-f23-card="advisor">
+          <div data-hf-id="hf-6848" data-f23-role="eyebrow">Advisor</div>
+          <h1 data-hf-id="hf-q6ol" data-f23-role="claim">A structured<br data-hf-id="hf-rsrt">handoff.</h1>
+          <div data-hf-id="hf-4fpg" data-f23-role="evidence">Less repeated discovery potential · consent stays explicit</div>
+        </article>
+
+        <div data-hf-id="hf-9z6l" id="f23-owner-advisor-value-owner-badge" data-f23-role="badge" data-f23-badge="owner">Inspectable rationale</div>
+        <div data-hf-id="hf-3m72" id="f23-owner-advisor-value-advisor-badge" data-f23-role="badge" data-f23-badge="advisor">Structured context</div>
+        <div data-hf-id="hf-5h2a" id="f23-owner-advisor-value-consent" data-f23-role="consent">Explicit consent</div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "23-owner-advisor-value";
+        var root = document.getElementById("root");
+        var owner = document.getElementById("f23-owner-advisor-value-owner");
+        var advisor = document.getElementById("f23-owner-advisor-value-advisor");
+        var ownerBadge = document.getElementById("f23-owner-advisor-value-owner-badge");
+        var advisorBadge = document.getElementById("f23-owner-advisor-value-advisor-badge");
+        var consent = document.getElementById("f23-owner-advisor-value-consent");
+        var paths = [
+          document.getElementById("f23-owner-advisor-value-top-left"),
+          document.getElementById("f23-owner-advisor-value-top-right"),
+          document.getElementById("f23-owner-advisor-value-bottom-left"),
+          document.getElementById("f23-owner-advisor-value-bottom-right")
+        ];
+        paths.forEach(function (path) {
+          var length = path.getTotalLength();
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        });
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector('[data-f23-role="header"]'), { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.02);
+        tl.fromTo(root.querySelector('[data-f23-role="source"]'), { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.06);
+
+        tl.addLabel("owner-view", 0.42);
+        tl.to(paths[0], { strokeDashoffset: 0, duration: 0.78, ease: "power2.out" }, "owner-view");
+        tl.fromTo(owner, { x: -360, rotateY: 22, scale: 0.88, opacity: 0 }, { x: 0, rotateY: 11, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" }, "owner-view");
+        tl.fromTo(owner.querySelectorAll('[data-f23-role="eyebrow"], [data-f23-role="claim"]'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "power2.out", immediateRender: false }, 1.05);
+        tl.fromTo(owner.querySelector('[data-f23-role="evidence"]'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", immediateRender: false }, 6.2);
+        tl.fromTo(ownerBadge, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.52, ease: "power3.out" }, 10.2);
+
+        tl.addLabel("advisor-view", 13.2);
+        tl.to(paths[1], { strokeDashoffset: 0, duration: 0.78, ease: "power2.out" }, "advisor-view");
+        tl.fromTo(advisor, { x: 360, rotateY: -22, scale: 0.88, opacity: 0 }, { x: 0, rotateY: -11, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" }, "advisor-view");
+        tl.fromTo(advisor.querySelectorAll('[data-f23-role="eyebrow"], [data-f23-role="claim"]'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "power2.out", immediateRender: false }, 13.82);
+        tl.fromTo(advisor.querySelector('[data-f23-role="evidence"]'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", immediateRender: false }, 18.7);
+        tl.fromTo(advisorBadge, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.52, ease: "power3.out" }, 22.1);
+
+        tl.addLabel("consent-reconnect", 25.0);
+        tl.to(paths[2], { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, "consent-reconnect");
+        tl.to(paths[3], { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, "consent-reconnect");
+        tl.fromTo(consent, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }, "consent-reconnect");
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

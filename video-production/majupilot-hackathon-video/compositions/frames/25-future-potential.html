@@ -1,0 +1,364 @@
+<template>
+  <div data-hf-id="hf-vqsm" id="root" data-composition-id="25-future-potential" data-duration="23" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #17394b;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f25-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #f2d7;
+      }
+      [data-f25-layer="background"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(154, 100, 20, .06) 1px, transparent 1px),
+          linear-gradient(rgba(154, 100, 20, .045) 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: .72;
+      }
+      [data-f25-role="world"] {
+        position: absolute;
+        inset: 0;
+        will-change: transform;
+      }
+      [data-f25-role="header"] {
+        position: absolute;
+        top: 76px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #9a6414;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+      }
+      [data-f25-role="header"] span:last-child { color: #5b7181; }
+      [data-f25-role="current"] {
+        position: absolute;
+        top: 230px;
+        left: 120px;
+        width: 664px;
+        height: 438px;
+        padding: 52px 54px;
+        border: 4px solid #087c79;
+        border-radius: 22px;
+        background: #fffdf8;
+        box-shadow: 0 18px 0 rgba(8, 45, 63, .08);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f25-role="eyebrow"] {
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f25-role="current-title"] {
+        margin: 22px 0 0;
+        color: #082d3f;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 78px;
+        font-weight: 700;
+        line-height: .92;
+        letter-spacing: -.035em;
+      }
+      [data-f25-role="current-copy"] {
+        margin: 28px 0 0;
+        color: #5b7181;
+        font-size: 25px;
+        line-height: 1.42;
+      }
+      [data-f25-role="anchors"] {
+        position: absolute;
+        left: 54px;
+        right: 54px;
+        bottom: 42px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      [data-f25-role="anchor"] {
+        padding: 9px 13px;
+        border: 2px solid #bfeae3;
+        border-radius: 999px;
+        background: #e4f5f1;
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .045em;
+        text-transform: uppercase;
+      }
+      [data-f25-role="boundary"] {
+        position: absolute;
+        top: 178px;
+        left: 920px;
+        width: 74px;
+        height: 586px;
+      }
+      [data-f25-role="boundary-line"] {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 36px;
+        width: 4px;
+        background: #9a6414;
+        transform-origin: 50% 0%;
+        will-change: transform;
+      }
+      [data-f25-role="boundary-label"] {
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        width: 312px;
+        color: #9a6414;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+        transform: translate(-128px, -50%) rotate(-90deg);
+        transform-origin: 50% 50%;
+        text-align: center;
+        background: #f2d7;
+      }
+      [data-f25-role="future"] {
+        position: absolute;
+        top: 174px;
+        left: 1014px;
+        width: 786px;
+        height: 606px;
+      }
+      [data-f25-role="branch-svg"] {
+        position: absolute;
+        inset: 0;
+        width: 786px;
+        height: 606px;
+        overflow: visible;
+      }
+      [data-f25-role="branch-path"] {
+        fill: none;
+        stroke: #9a6414;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      [data-f25-role="origin"] {
+        position: absolute;
+        left: 18px;
+        top: 292px;
+        width: 16px;
+        height: 16px;
+        border: 3px solid #9a6414;
+        border-radius: 50%;
+        background: #f2d7;
+        transform: translate(-50%, -50%);
+        will-change: transform, opacity;
+      }
+      [data-f25-role="branch-stack"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 666px;
+        display: grid;
+        gap: 14px;
+      }
+      [data-f25-role="branch"] {
+        min-height: 136px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 24px;
+        padding: 24px 28px;
+        border: 3px solid #9a6414;
+        border-radius: 18px;
+        background: transparent;
+        color: #17394b;
+        transform-origin: 0 50%;
+        will-change: transform, opacity;
+      }
+      [data-f25-role="branch"][data-deferred="true"] {
+        border-style: dashed;
+        background: transparent;
+        color: #9a6414;
+      }
+      [data-f25-role="branch-title"] {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 38px;
+        font-weight: 700;
+        line-height: .98;
+        letter-spacing: -.02em;
+      }
+      [data-f25-role="stamp"] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 178px;
+        padding: 9px 12px;
+        border: 2px solid #9a6414;
+        border-radius: 999px;
+        color: #9a6414;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .055em;
+        line-height: 1.2;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      [data-f25-role="deferred-copy"] {
+        display: block;
+        margin-top: 8px;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+      }
+      [data-f25-role="current-rail"] {
+        position: absolute;
+        top: 444px;
+        left: 784px;
+        width: 136px;
+        height: 6px;
+        background: #13a29b;
+        transform-origin: 0 50%;
+        will-change: transform;
+      }
+    </style>
+
+    <div data-hf-id="hf-3j81" id="f25-track-1" class="clip" data-f25-layer="background" data-start="0" data-duration="23" data-track-index="0"></div>
+
+    <div data-hf-id="hf-5vr8" id="f25-track-2" class="clip" data-f25-layer="content" data-start="0" data-duration="23" data-track-index="1">
+      <div data-hf-id="hf-jdmr" data-f25-role="world">
+        <div data-hf-id="hf-ce8e" data-f25-role="header"><span data-hf-id="hf-nrad">Future / deferred — after boundary validation</span><span data-hf-id="hf-bu97">Opportunity outline · no release date</span></div>
+
+        <section data-hf-id="hf-tkqc" data-f25-role="current" aria-label="Current validated boundary">
+          <div data-hf-id="hf-zn1m" data-f25-role="eyebrow">Current · validated boundary</div>
+          <h1 data-hf-id="hf-nzyu" data-f25-role="current-title">Current<br data-hf-id="hf-x5px">boundary</h1>
+          <p data-hf-id="hf-qnp3" data-f25-role="current-copy">The evidence path remains solid only where the workflow is already inspectable.</p>
+          <div data-hf-id="hf-7t21" data-f25-role="anchors">
+            <span data-hf-id="hf-covk" data-f25-role="anchor">Provenance</span>
+            <span data-hf-id="hf-mfu3" data-f25-role="anchor">Consent</span>
+            <span data-hf-id="hf-qlmu" data-f25-role="anchor">Deterministic ownership</span>
+          </div>
+        </section>
+
+        <div data-hf-id="hf-nbkp" data-f25-role="current-rail"></div>
+        <div data-hf-id="hf-i67r" data-f25-role="boundary">
+          <span data-hf-id="hf-vt9l" data-f25-role="boundary-line"></span>
+          <span data-hf-id="hf-t1su" data-f25-role="boundary-label">Validated-boundary rule</span>
+        </div>
+
+        <section data-hf-id="hf-orkx" data-f25-role="future" aria-label="Future opportunities">
+          <svg data-hf-id="hf-xxpu" data-f25-role="branch-svg" viewBox="0 0 786 606" aria-hidden="true">
+            <path data-hf-id="hf-gj0y" data-f25-role="branch-path" d="M 18 292 L 62 292 L 62 68 L 120 68 M 62 292 L 62 218 L 120 218 M 62 292 L 62 368 L 120 368 M 62 292 L 62 518 L 120 518" />
+          </svg>
+          <span data-hf-id="hf-up4t" data-f25-role="origin" aria-hidden="true"></span>
+          <div data-hf-id="hf-cfu6" data-f25-role="branch-stack">
+            <div data-hf-id="hf-ap3t" data-f25-role="branch">
+              <span data-hf-id="hf-audz" data-f25-role="branch-title">Domain packs</span>
+              <span data-hf-id="hf-cvyz" data-f25-role="stamp">Future opportunity</span>
+            </div>
+            <div data-hf-id="hf-ye0d" data-f25-role="branch">
+              <span data-hf-id="hf-ttwe" data-f25-role="branch-title">Evidence sources</span>
+              <span data-hf-id="hf-5t7f" data-f25-role="stamp">Future opportunity</span>
+            </div>
+            <div data-hf-id="hf-zkxg" data-f25-role="branch">
+              <span data-hf-id="hf-bhhs" data-f25-role="branch-title">Integrations +<br data-hf-id="hf-rsrt">consultant workflows</span>
+              <span data-hf-id="hf-5ewe" data-f25-role="stamp">Future opportunity</span>
+            </div>
+            <div data-hf-id="hf-p4co" data-f25-role="branch" data-deferred="true">
+              <span data-hf-id="hf-u8gy" data-f25-role="branch-title">Document RAG<span data-hf-id="hf-27z6" data-f25-role="deferred-copy">Not implemented now</span></span>
+              <span data-hf-id="hf-jqd4" data-f25-role="stamp">Deferred P1<br data-hf-id="hf-szow">future potential</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "25-future-potential";
+        var root = document.getElementById("root");
+        var world = root.querySelector('[data-f25-role="world"]');
+        var current = root.querySelector('[data-f25-role="current"]');
+        var currentRail = root.querySelector('[data-f25-role="current-rail"]');
+        var boundaryLine = root.querySelector('[data-f25-role="boundary-line"]');
+        var origin = root.querySelector('[data-f25-role="origin"]');
+        var path = root.querySelector('[data-f25-role="branch-path"]');
+        var branches = root.querySelectorAll('[data-f25-role="branch"]');
+        var pathLength = path.getTotalLength();
+        path.style.strokeDasharray = String(pathLength);
+        path.style.strokeDashoffset = String(pathLength);
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(world, { x: 20 }, { x: 0, duration: 3.8, ease: "power1.out" }, 0);
+        tl.fromTo(root.querySelector('[data-f25-role="header"]'), { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.02);
+        tl.fromTo(current, { opacity: 0, scale: 0.975 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" }, 0.02);
+        tl.fromTo(currentRail, { scaleX: 0 }, { scaleX: 1, duration: 1.15, ease: "power2.out" }, 0.35);
+        tl.fromTo(boundaryLine, { scaleY: 0 }, { scaleY: 1, duration: 0.82, ease: "power3.out" }, 0.62);
+        tl.fromTo(root.querySelector('[data-f25-role="boundary-label"]'), { opacity: 0 }, { opacity: 1, duration: 0.36, ease: "power2.out" }, 1.02);
+        tl.fromTo(origin, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.42, ease: "power3.out" }, 1.3);
+        tl.to(path, { strokeDashoffset: 0, duration: 4.6, ease: "power2.out" }, 1.5);
+
+        branches.forEach(function (branch, index) {
+          var originRect = origin.getBoundingClientRect();
+          var branchRect = branch.getBoundingClientRect();
+          var dx = originRect.left - branchRect.left;
+          var dy = originRect.top - branchRect.top;
+          tl.fromTo(branch,
+            { opacity: 0, x: dx, y: dy, scale: 0.38 },
+            { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.74, ease: "power3.out" },
+            3.15 + index * 3.5
+          );
+        });
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

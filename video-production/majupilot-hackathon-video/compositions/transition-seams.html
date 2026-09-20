@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"></head>
+<body>
+  <template>
+    <style>
+      #root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;pointer-events:none}
+      .seam-plane{position:absolute;inset:0;opacity:0;will-change:transform,opacity,clip-path}
+      #related-wipe{background:#0f766e;clip-path:inset(0 100% 0 0)}
+      #quiet-fade{background:#f4efe6}
+      #chapter-push{background:#102f2d;transform:translateY(100%)}
+    </style>
+    <div data-hf-id="hf-qtaf" id="root" data-composition-id="transition-seams" data-duration="580" data-width="1920" data-height="1080" data-fps="30">
+      <div data-hf-id="hf-xa7e" id="related-wipe" class="seam-plane"></div>
+      <div data-hf-id="hf-5bv6" id="quiet-fade" class="seam-plane"></div>
+      <div data-hf-id="hf-zzoh" id="chapter-push" class="seam-plane"></div>
+    </div>
+    <script>
+      const tl=gsap.timeline({paused:true});
+      const relatedSeams=[20,42,83,108,151,179,208,230,258,285,325,380,415,439,459,478,490,527,542,565];
+      const chapterSeams=[65,125,195,412,495];
+      relatedSeams.forEach((at)=>{tl.set("#related-wipe",{opacity:1,clipPath:"inset(0 100% 0 0)"},at-.2).to("#related-wipe",{clipPath:"inset(0 0% 0 0)",duration:.2,ease:"power2.inOut"},at-.2).to("#related-wipe",{clipPath:"inset(0 0 0 100%)",duration:.2,ease:"power2.inOut"},at).set("#related-wipe",{opacity:0},at+.2)});
+      chapterSeams.forEach((at)=>{tl.set("#chapter-push",{opacity:1,yPercent:100},at-.225).to("#chapter-push",{yPercent:0,duration:.225,ease:"power2.inOut"},at-.225).to("#chapter-push",{yPercent:-100,duration:.225,ease:"power2.inOut"},at).set("#chapter-push",{opacity:0},at+.225)});
+      window.__timelines["transition-seams"]=tl;
+      tl.seek(0);
+    </script>
+  </template>
+</body>
+</html>

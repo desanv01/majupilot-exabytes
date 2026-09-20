@@ -1,0 +1,222 @@
+<template>
+  <div data-hf-id="hf-j0rg" id="root" data-composition-id="22-bounded-model-path" data-duration="5" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf8;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f22-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #082d3f;
+      }
+      [data-f22-layer="background"]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 184px;
+        left: 120px;
+        width: 2px;
+        background: #123f5b;
+      }
+      [data-f22-role="header"] {
+        position: absolute;
+        top: 82px;
+        left: 120px;
+        right: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f22-role="header"] span:last-child { color: #b9cbd2; }
+      [data-f22-role="receipt"] {
+        position: absolute;
+        top: 174px;
+        left: 120px;
+        width: 1680px;
+        height: 426px;
+        display: grid;
+        grid-template-columns: 1fr 410px;
+        align-items: center;
+        gap: 56px;
+        padding: 58px 64px;
+        border: 3px solid #087c79;
+        border-radius: 22px;
+        background: #0e3a4b;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f22-role="kicker"] {
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      [data-f22-role="model"] {
+        margin: 24px 0 0;
+        max-width: 980px;
+        color: #fffdf8;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 92px;
+        font-weight: 700;
+        line-height: .86;
+        letter-spacing: -.03em;
+        overflow-wrap: anywhere;
+      }
+      [data-f22-role="gateway"] {
+        align-self: stretch;
+        display: grid;
+        place-content: center;
+        gap: 18px;
+        padding: 34px;
+        border-left: 3px solid #13a29b;
+        background: #123f5b;
+      }
+      [data-f22-role="lock"] { width: 58px; height: 70px; color: #8ee2d3; }
+      [data-f22-role="gateway"] strong {
+        color: #fffdf8;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+      [data-f22-role="privacy"] {
+        position: absolute;
+        top: 645px;
+        left: 120px;
+        width: 1680px;
+      }
+      [data-f22-role="privacy-svg"] {
+        position: absolute;
+        top: -34px;
+        left: 0;
+        width: 1680px;
+        height: 78px;
+        overflow: visible;
+      }
+      [data-f22-role="privacy-path"] {
+        fill: none;
+        stroke: #13a29b;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      [data-f22-role="privacy-grid"] {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      [data-f22-role="privacy-chip"] {
+        min-height: 104px;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        border: 2px solid #a63e36;
+        border-radius: 999px;
+        background: #3c2930;
+        color: #fce9e6;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .05em;
+        text-align: center;
+        text-transform: uppercase;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+    </style>
+
+    <div data-hf-id="hf-wikd" id="f22-track-1" class="clip" data-f22-layer="background" data-start="0" data-duration="5" data-track-index="0"></div>
+
+    <div data-hf-id="hf-wb7u" id="f22-track-2" class="clip" data-f22-layer="content" data-start="0" data-duration="5" data-track-index="1">
+      <div data-hf-id="hf-fyrp" data-f22-role="header"><span data-hf-id="hf-05s2">05 — Testing / Validation</span><span data-hf-id="hf-md0v">Hosted model receipt</span></div>
+      <div data-hf-id="hf-2sup" id="f22-bounded-model-path-receipt" data-f22-role="receipt">
+        <div data-hf-id="hf-yeow">
+          <div data-hf-id="hf-5m8s" data-f22-role="kicker">Observed hosted model path</div>
+          <h1 data-hf-id="hf-4ryz" data-f22-role="model">deepseek/deepseek-v4.1-flash</h1>
+        </div>
+        <div data-hf-id="hf-7bk0" data-f22-role="gateway">
+          <svg data-hf-id="hf-huol" data-f22-role="lock" viewBox="0 0 56 68" aria-hidden="true"><path data-hf-id="hf-llp9" d="M14 29V19a14 14 0 0 1 28 0v10M8 29h40v32H8z" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <strong data-hf-id="hf-wqab">Behind bounded<br data-hf-id="hf-x5px">Gateway controls</strong>
+        </div>
+      </div>
+      <div data-hf-id="hf-1xsi" data-f22-role="privacy">
+        <svg data-hf-id="hf-ctze" data-f22-role="privacy-svg" viewBox="0 0 1680 78" aria-hidden="true"><path data-hf-id="hf-2d51" id="f22-bounded-model-path-line" data-f22-role="privacy-path" d="M 840 0 L 840 28 M 210 28 L 1470 28 M 210 28 L 210 62 M 630 28 L 630 62 M 1050 28 L 1050 62 M 1470 28 L 1470 62" /></svg>
+        <div data-hf-id="hf-98zr" data-f22-role="privacy-grid">
+          <span data-hf-id="hf-d6kh" data-f22-role="privacy-chip">No credentials</span>
+          <span data-hf-id="hf-2nnq" data-f22-role="privacy-chip">No raw prompts</span>
+          <span data-hf-id="hf-ndrp" data-f22-role="privacy-chip">No private links</span>
+          <span data-hf-id="hf-3xly" data-f22-role="privacy-chip">No model reasoning</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "22-bounded-model-path";
+        var root = document.getElementById("root");
+        var receipt = document.getElementById("f22-bounded-model-path-receipt");
+        var line = document.getElementById("f22-bounded-model-path-line");
+        var chips = root.querySelectorAll('[data-f22-role="privacy-chip"]');
+        var lineLength = line.getTotalLength();
+        line.style.strokeDasharray = String(lineLength);
+        line.style.strokeDashoffset = String(lineLength);
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector('[data-f22-role="header"]'), { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.02);
+        tl.fromTo(receipt, { opacity: 0, scale: 0.965 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" }, 0.02);
+        tl.to(line, { strokeDashoffset: 0, duration: 0.78, ease: "power2.out" }, 0.46);
+        chips.forEach(function (chip, index) {
+          tl.fromTo(chip, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 0.88 + index * 0.16);
+        });
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

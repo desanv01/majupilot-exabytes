@@ -1,0 +1,74 @@
+<template>
+  <div data-hf-id="hf-xz81" id="root" data-composition-id="17-testing-chapter" data-duration="3" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face { font-family: "MP Garamond"; src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Inter"; src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; isolation: isolate; color: #fffdf8; }
+      .f17-bg { position: absolute; inset: 0; background: #082d3f; }
+      .f17-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 34% 45%, rgba(19,162,155,.15), transparent 38%); }
+      .f17-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f17-frame-no { position: absolute; top: 82px; right: 118px; color: #bfeae3; font: 700 24px/1 "MP Mono"; letter-spacing: .14em; }
+      .f17-boundary { position: absolute; left: 120px; top: 150px; width: 1680px; height: 690px; }
+      .f17-kicker { color: #bfeae3; font: 700 24px/1 "MP Mono"; letter-spacing: .12em; text-transform: uppercase; }
+      .f17-title { margin: 46px 0 0; max-width: 1040px; color: #fffdf8; font: 700 116px/1.02 "MP Garamond"; letter-spacing: -.025em; }
+      .f17-title span { display: inline-block; }
+      .f17-rail { position: absolute; left: 0; top: 378px; width: 1050px; height: 210px; }
+      .f17-rail svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .f17-rail path { fill: none; stroke: #13a29b; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .f17-label { position: absolute; top: 128px; min-width: 350px; padding: 20px 24px; border: 2px solid #13a29b; border-radius: 999px; background: #123f5b; color: #fffdf8; text-align: center; font: 700 22px/1 "MP Mono"; letter-spacing: .1em; text-transform: uppercase; transform-origin: 50% 50%; }
+      .f17-hosted { left: 0; }
+      .f17-local { left: 690px; border-color: #d7a34d; color: #f2d7; }
+    </style>
+    <div data-hf-id="hf-1x3d" id="f17-track-1" class="clip f17-bg" data-start="0" data-duration="3" data-track-index="0"></div>
+    <div data-hf-id="hf-crv4" id="f17-track-2" class="clip f17-scene" data-start="0" data-duration="3" data-track-index="1">
+      <div data-hf-id="hf-iafa" class="f17-frame-no">17 · 06:52—06:55</div>
+      <div data-hf-id="hf-sfhx" class="f17-boundary">
+        <div data-hf-id="hf-nutc" id="f17-testing-chapter-kicker" class="f17-kicker">05 — Testing / Validation</div>
+        <h2 data-hf-id="hf-26o4" class="f17-title" data-layout-allow-overlap=""><span data-hf-id="hf-v6vv" id="f17-testing-chapter-word-1" data-layout-allow-overlap="">Two evidence</span><br data-hf-id="hf-x5px"><span data-hf-id="hf-znad" id="f17-testing-chapter-word-2" data-layout-allow-overlap="">layers.</span></h2>
+        <div data-hf-id="hf-50hn" class="f17-rail">
+          <svg data-hf-id="hf-b9yd" viewBox="0 0 1050 210" aria-hidden="true">
+            <path data-hf-id="hf-1muo" id="f17-testing-chapter-trunk" d="M525 0 V58" />
+            <path data-hf-id="hf-4i28" id="f17-testing-chapter-left-rail" d="M525 58 H175 V128" />
+            <path data-hf-id="hf-0ppl" id="f17-testing-chapter-right-rail" d="M525 58 H865 V128" />
+          </svg>
+          <div data-hf-id="hf-5ee2" id="f17-testing-chapter-hosted" class="f17-label f17-hosted">Accepted hosted</div>
+          <div data-hf-id="hf-2goz" id="f17-testing-chapter-local" class="f17-label f17-local">Phase I local</div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "17-testing-chapter";
+        var root = document.querySelector('[data-composition-id="17-testing-chapter"]');
+        var paths = Array.from(root.querySelectorAll(".f17-rail path"));
+        paths.forEach(function (path) {
+          var length = path.getTotalLength();
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        });
+        ['[id="f17-testing-chapter-kicker"]', '[id="f17-testing-chapter-word-1"]', '[id="f17-testing-chapter-word-2"]'].forEach(function (selector) {
+          gsap.set(selector, { opacity: 0, y: 64 });
+        });
+        var tl = gsap.timeline({ paused: true });
+        tl.to('[id="f17-testing-chapter-trunk"]', { strokeDashoffset: 0, duration: .34, ease: "power2.out" }, .04);
+        tl.set('[id="f17-testing-chapter-kicker"]', { opacity: 1 }, .09);
+        tl.to('[id="f17-testing-chapter-kicker"]', { y: 0, duration: .18, ease: "power4.out" }, .09);
+        tl.set('[id="f17-testing-chapter-word-1"]', { opacity: 1 }, .22);
+        tl.to('[id="f17-testing-chapter-word-1"]', { y: 0, duration: .19, ease: "power4.out" }, .22);
+        tl.set('[id="f17-testing-chapter-word-2"]', { opacity: 1 }, .37);
+        tl.to('[id="f17-testing-chapter-word-2"]', { y: 0, duration: .16, ease: "power4.out" }, .37);
+        tl.to('[id="f17-testing-chapter-left-rail"]', { strokeDashoffset: 0, duration: .68, ease: "power2.out" }, .43);
+        tl.to('[id="f17-testing-chapter-right-rail"]', { strokeDashoffset: 0, duration: .68, ease: "power2.out" }, .49);
+        tl.fromTo('[id="f17-testing-chapter-hosted"]', { opacity: 0, scale: .9, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: .42, ease: "power3.out" }, 1.12);
+        tl.fromTo('[id="f17-testing-chapter-local"]', { opacity: 0, scale: .9, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: .42, ease: "power3.out" }, 1.25);
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

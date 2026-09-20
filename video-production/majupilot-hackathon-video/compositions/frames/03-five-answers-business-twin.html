@@ -1,0 +1,157 @@
+<template>
+  <div data-hf-id="hf-70ke" id="root" data-composition-id="03-five-answers-business-twin" data-duration="23" data-fps="30" data-width="1920" data-height="1080">
+    <style>
+      @font-face { font-family: "MP Display"; src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "MP Sans"; src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "MP Sans"; src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "MP Mono"; src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; isolation: isolate; color: #17394b; font-family: "MP Sans", Arial, sans-serif; pointer-events: none; }
+      .f03-bg { position: absolute; inset: 0; overflow: hidden; background: #fffdf8; }
+      .f03-ledger { position: absolute; left: 68px; right: 68px; top: 68px; height: 768px; border: 1px solid rgba(91,113,129,.17); }
+      .f03-ledger::before { content: ""; position: absolute; left: 51%; top: 0; bottom: 0; width: 1px; background: rgba(216,228,226,.62); }
+      .f03-content { position: absolute; inset: 0; overflow: hidden; }
+      .f03-frame-no, .f03-timecode { position: absolute; top: 88px; z-index: 5; font: 700 26px/1 "MP Mono", monospace; letter-spacing: .12em; }
+      .f03-frame-no { left: 120px; color: #087c79; }
+      .f03-timecode { right: 120px; color: #5b7181; font-size: 22px; letter-spacing: .04em; }
+      .f03-twin-layout { position: absolute; top: 190px; left: 120px; right: 120px; height: 626px; display: grid; grid-template-columns: .95fr 1.25fr; gap: 38px; }
+      .f03-left { position: relative; min-width: 0; padding-top: 8px; }
+      .f03-kicker { color: #087c79; font: 700 25px/1.2 "MP Mono", monospace; letter-spacing: .10em; text-transform: uppercase; }
+      .f03-rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 28px; }
+      .f03-state-chip { display: grid; place-items: center; min-height: 96px; border: 3px solid #d8e4e2; border-radius: 999px; background: transparent; color: #5b7181; font: 700 31px/1 "MP Mono", monospace; will-change: transform, opacity; }
+      .f03-state-chip[data-state="active"] { border-color: #087c79; background: #e4f5f1; color: #087c79; }
+      .f03-state-chip[data-state="done"] { border-color: #bfeae3; background: #f7f4ec; color: #087c79; }
+      .f03-state-chip[data-state="pending"] { border-color: #d8e4e2; background: #fffdf8; color: #8aa0aa; }
+      .f03-body { margin: 28px 0 0; max-width: 720px; color: #5b7181; font: 400 31px/1.42 "MP Sans", Arial, sans-serif; }
+      .f03-leaves { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-right: 38px; }
+      .f03-leaf { min-height: 62px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-left: 7px solid #13a29b; background: #fff; box-shadow: 0 8px 24px rgba(8,45,63,.07); color: #17394b; font: 700 20px/1.1 "MP Mono", monospace; text-transform: uppercase; letter-spacing: .04em; will-change: transform, opacity; }
+      .f03-leaf b { color: #087c79; font-variant-numeric: tabular-nums; }
+      .f03-leaf:last-child { grid-column: 1 / -1; width: calc(50% - 6px); }
+      .f03-feed { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+      .f03-feed path { fill: none; stroke: #13a29b; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: .62; vector-effect: non-scaling-stroke; }
+      .f03-card { position: relative; z-index: 2; align-self: stretch; min-width: 0; padding: 38px 42px; border: 6px solid #d8e4e2; border-radius: 24px; background: #fff; transform-origin: 50% 50%; box-shadow: 0 18px 42px rgba(8,45,63,.08); overflow: hidden; }
+      .f03-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: #e4f5f1; }
+      .f03-edit-tab { position: absolute; top: 30px; right: 30px; padding: 11px 15px; border: 2px solid #087c79; border-radius: 8px; color: #087c79; background: #fff; font: 700 18px/1 "MP Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .f03-display { margin: 98px 0 0; max-width: 740px; color: #17394b; font: 700 77px/.98 "MP Display", Georgia, serif; letter-spacing: -.035em; }
+      .f03-chips { display: flex; gap: 14px; margin-top: 36px; }
+      .f03-chip { display: inline-flex; align-items: center; min-height: 54px; padding: 11px 20px; border-radius: 999px; background: #e4f5f1; color: #087c79; font: 700 21px/1 "MP Mono", monospace; text-transform: uppercase; letter-spacing: .06em; transform-origin: 50% 50%; }
+      .f03-chip-unknown { background: #f2d7; color: #9a6414; }
+      .f03-check { position: absolute; right: 40px; bottom: 38px; width: 58px; height: 58px; }
+      .f03-check circle, .f03-check path { fill: none; stroke: #13a29b; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+
+    <div data-hf-id="hf-q5gf" id="f03-track-1" class="f03-bg clip" data-start="0" data-duration="23" data-track-index="0">
+      <div data-hf-id="hf-c8vh" class="f03-ledger"></div>
+    </div>
+    <div data-hf-id="hf-8gql" id="f03-track-2" class="f03-content clip" data-start="0" data-duration="23" data-track-index="1">
+      <span data-hf-id="hf-z5xf" class="f03-frame-no">03</span>
+      <span data-hf-id="hf-lup6" class="f03-timecode">00:42–01:05</span>
+      <div data-hf-id="hf-dx07" class="f03-twin-layout">
+        <div data-hf-id="hf-syrt" class="f03-left">
+          <div data-hf-id="hf-88f9" class="f03-kicker">Five focused questions</div>
+          <div data-hf-id="hf-2wly" class="f03-rail" role="list" aria-label="Five focused questions"></div>
+          <p data-hf-id="hf-ib1g" class="f03-body">Context · objectives · capability · friction · readiness</p>
+          <div data-hf-id="hf-5lgm" class="f03-leaves">
+            <div data-hf-id="hf-c3oe" class="f03-leaf"><b data-hf-id="hf-27a2">01</b><span data-hf-id="hf-khag">Context</span></div>
+            <div data-hf-id="hf-roua" class="f03-leaf"><b data-hf-id="hf-2ll3">02</b><span data-hf-id="hf-9u91">Objectives</span></div>
+            <div data-hf-id="hf-s35b" class="f03-leaf"><b data-hf-id="hf-2zw4">03</b><span data-hf-id="hf-r0r7">Capability</span></div>
+            <div data-hf-id="hf-shgc" class="f03-leaf"><b data-hf-id="hf-3e75">04</b><span data-hf-id="hf-wblz">Friction</span></div>
+            <div data-hf-id="hf-svrd" class="f03-leaf"><b data-hf-id="hf-3si6">05</b><span data-hf-id="hf-xxr7">Readiness</span></div>
+          </div>
+        </div>
+        <svg data-hf-id="hf-por4" class="f03-feed" viewBox="0 0 1680 626" preserveAspectRatio="none" aria-hidden="true">
+          <path data-hf-id="hf-rb7s" d="M 328 333 C 600 333, 690 170, 747 170" />
+          <path data-hf-id="hf-1jrx" d="M 671 333 C 700 333, 710 240, 747 240" />
+          <path data-hf-id="hf-xifk" d="M 328 407 C 610 407, 695 310, 747 310" />
+          <path data-hf-id="hf-br4n" d="M 671 407 C 710 407, 720 380, 747 380" />
+          <path data-hf-id="hf-iuef" d="M 328 481 C 610 481, 700 450, 747 450" />
+        </svg>
+        <div data-hf-id="hf-7vfw" class="f03-card">
+          <div data-hf-id="hf-p96l" class="f03-kicker">Editable Business Twin</div>
+          <span data-hf-id="hf-noxd" class="f03-edit-tab">Edit</span>
+          <h2 data-hf-id="hf-fs14" class="f03-display">Facts stay facts.<br data-hf-id="hf-x5px">Unknowns stay visible.</h2>
+          <div data-hf-id="hf-ca5z" class="f03-chips">
+            <span data-hf-id="hf-r18r" class="f03-chip">Fact</span>
+            <span data-hf-id="hf-ejjs" class="f03-chip f03-chip-unknown">Unknown</span>
+            <span data-hf-id="hf-kbwg" class="f03-chip">Evidence</span>
+          </div>
+          <svg data-hf-id="hf-pyqt" class="f03-check" viewBox="0 0 64 64" aria-hidden="true">
+            <circle data-hf-id="hf-c98m" id="f03-check-ring" cx="32" cy="32" r="27" />
+            <path data-hf-id="hf-7nmy" id="f03-check-mark" d="M 18 33 L 28 43 L 47 22" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "03-five-answers-business-twin";
+        var root = document.getElementById("root");
+        var rail = root.querySelector(".f03-rail");
+        var labels = ["1", "2", "3", "4", "5"];
+
+        // Adapted from the installed state-chip-rail primitive: the rail is a
+        // data-state snap machine whose presentation is driven by CSS and
+        // whose advances are instantaneous timeline attribute flips.
+        var stateChips = labels.map(function (label, index) {
+          var chip = document.createElement("div");
+          chip.className = "f03-state-chip";
+          chip.setAttribute("role", "listitem");
+          chip.setAttribute("data-state", index === 0 ? "active" : "pending");
+          chip.textContent = label;
+          rail.appendChild(chip);
+          return chip;
+        });
+
+        var leaves = root.querySelectorAll(".f03-leaf");
+        var feedPaths = root.querySelectorAll(".f03-feed path");
+        var drawTargets = Array.prototype.slice.call(feedPaths).concat([
+          root.querySelector("#f03-check-ring"),
+          root.querySelector("#f03-check-mark")
+        ]);
+        drawTargets.forEach(function (path) {
+          var length = path.getTotalLength();
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        });
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(root.querySelector(".f03-kicker"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.48, ease: "power3.out" }, 0.04);
+        tl.fromTo(root.querySelector(".f03-card"), { opacity: 0, scale: 0.975, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.72, ease: "power3.out" }, 0.10);
+        tl.fromTo(root.querySelector(".f03-body"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 1.15);
+
+        stateChips.forEach(function (chip, index) {
+          tl.fromTo(chip, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.16 + index * 0.07);
+        });
+
+        var cues = [0.38, 3.45, 6.65, 9.95, 13.25];
+        leaves.forEach(function (leaf, index) {
+          var start = cues[index];
+          tl.set(leaf, { opacity: 1, y: index === 0 ? 72 : 48 }, start);
+          tl.to(leaf, { y: 0, duration: index === 0 ? 0.19 : 0.15, ease: "power4.out" }, start);
+          tl.to(feedPaths[index], { strokeDashoffset: 0, duration: 0.66, ease: "power2.out" }, start + 0.34);
+          if (index > 0) {
+            tl.set(stateChips[index - 1], { attr: { "data-state": "done" } }, start);
+            tl.set(stateChips[index], { attr: { "data-state": "active" } }, start);
+          }
+        });
+
+        tl.fromTo(root.querySelector(".f03-display"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.72, ease: "power3.out" }, 14.55);
+        tl.to(root.querySelector(".f03-card"), { borderColor: "#087c79", duration: 0.45, ease: "power1.out" }, 14.62);
+        tl.to(root.querySelector("#f03-check-ring"), { strokeDashoffset: 0, duration: 0.62, ease: "power2.out" }, 15.05);
+        tl.to(root.querySelector("#f03-check-mark"), { strokeDashoffset: 0, duration: 0.46, ease: "power2.out" }, 15.53);
+        root.querySelectorAll(".f03-chip").forEach(function (chip, index) {
+          tl.fromTo(chip, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power3.out" }, 16.25 + index * 0.78);
+        });
+        tl.fromTo(root.querySelector(".f03-edit-tab"), { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.48, ease: "power3.out" }, 19.15);
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>

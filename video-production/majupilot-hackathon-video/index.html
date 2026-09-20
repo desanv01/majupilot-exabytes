@@ -1,55 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-resolution="landscape">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, height=1080" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
-        overflow: hidden;
-        background: #0a0a0a;
-      }
-      #root {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      }
-      #title {
-        color: #f4f4f5;
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-      }
-    </style>
-  </head>
-  <body>
-    <div
-      id="root"
-      data-composition-id="main"
-      data-start="0"
-      data-duration="10"
-      data-width="1920"
-      data-height="1080"
-    >
-      <h1 id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
-    </div>
-    <script>
-      const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0);
-      window.__timelines["main"] = tl;
-      tl.seek(0);
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+  <style>
+    @font-face{font-family:Inter;src:url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");font-weight:400}
+    @font-face{font-family:Inter;src:url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");font-weight:700}
+    @font-face{font-family:"EB Garamond";src:url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");font-weight:700}
+    @font-face{font-family:"JetBrains Mono";src:url("assets/storyboard-fonts/JetBrainsMono-400.woff2") format("woff2");font-weight:400}
+    *{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#f4efe6}
+    #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#f4efe6;font-family:Inter,sans-serif}
+    .scene-host,#transition-seams,#caption-safe-markers{position:absolute;inset:0;width:1920px;height:1080px}
+    #transition-seams{pointer-events:none;z-index:90;overflow:hidden}
+    #caption-safe-markers{z-index:95;pointer-events:none;border-top:1px solid transparent}
+  </style>
+</head>
+<body>
+  <main data-hf-id="hf-tosj" id="root" data-composition-id="main" data-start="0" data-duration="580" data-width="1920" data-height="1080" data-fps="30">
+    <div data-hf-id="hf-d31i" id="scene-01" data-composition-id="01-identity-visible-path" data-width="1920" data-height="1080" class="clip scene-host" data-start="0" data-duration="20" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/01-identity-visible-path.html"></div>
+    <div data-hf-id="hf-2ynh" id="scene-02" data-composition-id="02-decision-gap" data-width="1920" data-height="1080" class="clip scene-host" data-start="20" data-duration="22" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/02-decision-gap.html"></div>
+    <div data-hf-id="hf-9um7" id="scene-03" data-composition-id="03-five-answers-business-twin" data-width="1920" data-height="1080" class="clip scene-host" data-start="42" data-duration="23" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/03-five-answers-business-twin.html"></div>
+    <div data-hf-id="hf-gwzn" id="scene-04" data-composition-id="04-five-stage-route" data-width="1920" data-height="1080" class="clip scene-host" data-start="65" data-duration="18" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/04-five-stage-route.html"></div>
+    <div data-hf-id="hf-kb0q" id="scene-05" data-composition-id="05-stage-ownership" data-width="1920" data-height="1080" class="clip scene-host" data-start="83" data-duration="25" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/05-stage-ownership.html"></div>
+    <div data-hf-id="hf-5pjg" id="scene-06" data-composition-id="06-truth-boundary" data-width="1920" data-height="1080" class="clip scene-host" data-start="108" data-duration="17" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/06-truth-boundary.html"></div>
+    <div data-hf-id="hf-nrw8" id="scene-07" data-composition-id="07-production-architecture" data-width="1920" data-height="1080" class="clip scene-host" data-start="125" data-duration="26" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/07-production-architecture.html"></div>
+    <div data-hf-id="hf-qo1e" id="scene-08" data-composition-id="08-provenance-specialists" data-width="1920" data-height="1080" class="clip scene-host" data-start="151" data-duration="28" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/08-provenance-specialists.html"></div>
+    <div data-hf-id="hf-1ojw" id="scene-09" data-composition-id="09-no-current-rag" data-width="1920" data-height="1080" class="clip scene-host" data-start="179" data-duration="16" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/09-no-current-rag.html"></div>
+    <div data-hf-id="hf-uhct" id="scene-10" data-composition-id="10-demo-case-a-home" data-width="1920" data-height="1080" class="clip scene-host" data-start="195" data-duration="13" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/10-demo-case-a-home.html"></div>
+    <div data-hf-id="hf-xi2j" id="scene-11" data-composition-id="11-demo-evidence-review" data-width="1920" data-height="1080" class="clip scene-host" data-start="208" data-duration="22" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/11-demo-evidence-review.html"></div>
+    <div data-hf-id="hf-pqlb" id="scene-12" data-composition-id="12-demo-diagnosis" data-width="1920" data-height="1080" class="clip scene-host" data-start="230" data-duration="28" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/12-demo-diagnosis.html"></div>
+    <div data-hf-id="hf-xygf" id="scene-13" data-composition-id="13-demo-recommendations" data-width="1920" data-height="1080" class="clip scene-host" data-start="258" data-duration="27" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/13-demo-recommendations.html"></div>
+    <div data-hf-id="hf-f9l3" id="scene-14" data-composition-id="14-demo-scenarios" data-width="1920" data-height="1080" class="clip scene-host" data-start="285" data-duration="40" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/14-demo-scenarios.html"></div>
+    <div data-hf-id="hf-8hm5" id="scene-15" data-composition-id="15-demo-blueprint" data-width="1920" data-height="1080" class="clip scene-host" data-start="325" data-duration="55" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/15-demo-blueprint.html"></div>
+    <div data-hf-id="hf-vqy0" id="scene-16" data-composition-id="16-demo-consent-boundary" data-width="1920" data-height="1080" class="clip scene-host" data-start="380" data-duration="32" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/16-demo-consent-boundary.html"></div>
+    <div data-hf-id="hf-v6rj" id="scene-17" data-composition-id="17-testing-chapter" data-width="1920" data-height="1080" class="clip scene-host" data-start="412" data-duration="3" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/17-testing-chapter.html"></div>
+    <div data-hf-id="hf-0fmm" id="scene-18" data-composition-id="18-hosted-gates" data-width="1920" data-height="1080" class="clip scene-host" data-start="415" data-duration="24" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/18-hosted-gates.html"></div>
+    <div data-hf-id="hf-qel1" id="scene-19" data-composition-id="19-production-smoke" data-width="1920" data-height="1080" class="clip scene-host" data-start="439" data-duration="20" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/19-production-smoke.html"></div>
+    <div data-hf-id="hf-t5hr" id="scene-20" data-composition-id="20-scoped-environment-evidence" data-width="1920" data-height="1080" class="clip scene-host" data-start="459" data-duration="19" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/20-scoped-environment-evidence.html"></div>
+    <div data-hf-id="hf-8yzo" id="scene-21" data-composition-id="21-local-baseline" data-width="1920" data-height="1080" class="clip scene-host" data-start="478" data-duration="12" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/21-local-baseline.html"></div>
+    <div data-hf-id="hf-yybn" id="scene-22" data-composition-id="22-bounded-model-path" data-width="1920" data-height="1080" class="clip scene-host" data-start="490" data-duration="5" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/22-bounded-model-path.html"></div>
+    <div data-hf-id="hf-pwax" id="scene-23" data-composition-id="23-owner-advisor-value" data-width="1920" data-height="1080" class="clip scene-host" data-start="495" data-duration="32" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/23-owner-advisor-value.html"></div>
+    <div data-hf-id="hf-n5d1" id="scene-24" data-composition-id="24-no-promises" data-width="1920" data-height="1080" class="clip scene-host" data-start="527" data-duration="15" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/24-no-promises.html"></div>
+    <div data-hf-id="hf-56r8" id="scene-25" data-composition-id="25-future-potential" data-width="1920" data-height="1080" class="clip scene-host" data-start="542" data-duration="23" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/25-future-potential.html"></div>
+    <div data-hf-id="hf-tfg5" id="scene-26" data-composition-id="26-visible-path-close" data-width="1920" data-height="1080" class="clip scene-host" data-start="565" data-duration="15" data-track-index="1" data-track-kind="graphics" data-composition-src="compositions/frames/26-visible-path-close.html"></div>
+
+    <div data-hf-id="hf-7kas" id="transition-seams" data-composition-id="transition-seams" data-composition-src="compositions/transition-seams.html" data-width="1920" data-height="1080" class="clip" data-start="0" data-duration="580" data-track-index="30" data-track-kind="graphics" data-label="Transition seams"></div>
+    <div data-hf-id="hf-04t0" id="caption-safe-markers" class="clip" data-start="0" data-duration="580" data-track-index="40" data-track-kind="captions" data-hidden="" data-label="Caption-safe markers — captions deferred to Stage 6"></div>
+
+    <hf-audio-group data-hf-id="hf-ckje" id="voiceover" data-label="Narration placeholders" data-volume="1"></hf-audio-group>
+    <audio data-hf-id="hf-eumz" id="vo-01" src="assets/audio/placeholders/stage5-silence.wav" data-start="0" data-duration="20" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 01 — Identity and credibility"></audio>
+    <audio data-hf-id="hf-8aic" id="vo-02" src="assets/audio/placeholders/stage5-silence.wav" data-start="20" data-duration="22" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 02 — Decision gap"></audio>
+    <audio data-hf-id="hf-yzc1" id="vo-03" src="assets/audio/placeholders/stage5-silence.wav" data-start="42" data-duration="23" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 03 — Business twin"></audio>
+    <audio data-hf-id="hf-wij6" id="vo-04" src="assets/audio/placeholders/stage5-silence.wav" data-start="65" data-duration="18" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 04 — Five-stage route"></audio>
+    <audio data-hf-id="hf-a8rn" id="vo-05" src="assets/audio/placeholders/stage5-silence.wav" data-start="83" data-duration="25" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 05 — Stage ownership"></audio>
+    <audio data-hf-id="hf-jrbu" id="vo-06" src="assets/audio/placeholders/stage5-silence.wav" data-start="108" data-duration="17" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 06 — Truth boundary"></audio>
+    <audio data-hf-id="hf-vj54" id="vo-07" src="assets/audio/placeholders/stage5-silence.wav" data-start="125" data-duration="26" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 07 — Production architecture"></audio>
+    <audio data-hf-id="hf-v3xz" id="vo-08" src="assets/audio/placeholders/stage5-silence.wav" data-start="151" data-duration="28" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 08 — Provenance and specialists"></audio>
+    <audio data-hf-id="hf-109p" id="vo-09" src="assets/audio/placeholders/stage5-silence.wav" data-start="179" data-duration="16" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 09 — No current document RAG"></audio>
+    <audio data-hf-id="hf-qn71" id="vo-10" src="assets/audio/placeholders/stage5-silence.wav" data-start="195" data-duration="13" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 10 — Demo Case A"></audio>
+    <audio data-hf-id="hf-zsup" id="vo-11" src="assets/audio/placeholders/stage5-silence.wav" data-start="208" data-duration="22" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 11 — Evidence review"></audio>
+    <audio data-hf-id="hf-4600" id="vo-12" src="assets/audio/placeholders/stage5-silence.wav" data-start="230" data-duration="28" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 12 — Diagnosis"></audio>
+    <audio data-hf-id="hf-qid0" id="vo-13" src="assets/audio/placeholders/stage5-silence.wav" data-start="258" data-duration="27" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 13 — Recommendations"></audio>
+    <audio data-hf-id="hf-izfs" id="vo-14" src="assets/audio/placeholders/stage5-silence.wav" data-start="285" data-duration="40" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 14 — Scenario comparison"></audio>
+    <audio data-hf-id="hf-zpqm" id="vo-15" src="assets/audio/placeholders/stage5-silence.wav" data-start="325" data-duration="55" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 15 — Blueprint and specialists"></audio>
+    <audio data-hf-id="hf-gseb" id="vo-16" src="assets/audio/placeholders/stage5-silence.wav" data-start="380" data-duration="32" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 16 — Consultation consent boundary"></audio>
+    <audio data-hf-id="hf-0hjx" id="vo-17" src="assets/audio/placeholders/stage5-silence.wav" data-start="412" data-duration="3" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 17 — Intentional silent chapter card"></audio>
+    <audio data-hf-id="hf-9no7" id="vo-18" src="assets/audio/placeholders/stage5-silence.wav" data-start="415" data-duration="24" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 18 — Hosted gates"></audio>
+    <audio data-hf-id="hf-o8hq" id="vo-19" src="assets/audio/placeholders/stage5-silence.wav" data-start="439" data-duration="20" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 19 — Production smoke"></audio>
+    <audio data-hf-id="hf-tph7" id="vo-20" src="assets/audio/placeholders/stage5-silence.wav" data-start="459" data-duration="19" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 20 — Scoped environment"></audio>
+    <audio data-hf-id="hf-02ao" id="vo-21" src="assets/audio/placeholders/stage5-silence.wav" data-start="478" data-duration="12" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 21 — Local historical baseline"></audio>
+    <audio data-hf-id="hf-9j55" id="vo-22" src="assets/audio/placeholders/stage5-silence.wav" data-start="490" data-duration="5" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 22 — Bounded model path"></audio>
+    <audio data-hf-id="hf-rbiy" id="vo-23" src="assets/audio/placeholders/stage5-silence.wav" data-start="495" data-duration="32" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 23 — Owner and advisor value"></audio>
+    <audio data-hf-id="hf-x6n1" id="vo-24" src="assets/audio/placeholders/stage5-silence.wav" data-start="527" data-duration="15" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 24 — No outcome promises"></audio>
+    <audio data-hf-id="hf-fqqd" id="vo-25" src="assets/audio/placeholders/stage5-silence.wav" data-start="542" data-duration="23" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 25 — Future potential"></audio>
+    <audio data-hf-id="hf-vumi" id="vo-26" src="assets/audio/placeholders/stage5-silence.wav" data-start="565" data-duration="15" data-track-index="50" data-track-kind="voiceover" data-audio-group="voiceover" data-volume="0" data-label="VO 26 — Vision close"></audio>
+
+    <hf-audio-group data-hf-id="hf-nuw2" id="music" data-label="BGM placeholder" data-volume="1"></hf-audio-group>
+    <audio data-hf-id="hf-pz83" id="bgm-placeholder" src="assets/audio/placeholders/stage5-silence.wav" data-start="0" data-duration="580" data-track-index="60" data-track-kind="music" data-audio-group="music" data-volume="0" data-label="BGM placeholder — unresolved until Stage 6"></audio>
+    <hf-audio-group data-hf-id="hf-27q1" id="sfx" data-label="Conservative SFX" data-volume="1"></hf-audio-group>
+    <audio data-hf-id="hf-cu99" id="sfx-chapter-04" src=".media/audio/sfx/sfx_001.mp3" data-start="64.7" data-duration="0.6" data-track-index="70" data-track-kind="sfx" data-audio-group="sfx" data-volume="0.08" data-label="Chapter whoosh"></audio>
+    <audio data-hf-id="hf-auh9" id="sfx-chapter-07" src=".media/audio/sfx/sfx_001.mp3" data-start="124.7" data-duration="0.6" data-track-index="70" data-track-kind="sfx" data-audio-group="sfx" data-volume="0.08" data-label="Chapter whoosh"></audio>
+    <audio data-hf-id="hf-6ohb" id="sfx-chapter-10" src=".media/audio/sfx/sfx_001.mp3" data-start="194.7" data-duration="0.6" data-track-index="70" data-track-kind="sfx" data-audio-group="sfx" data-volume="0.08" data-label="Demo chapter whoosh"></audio>
+    <audio data-hf-id="hf-zvfl" id="sfx-chapter-17" src=".media/audio/sfx/sfx_001.mp3" data-start="411.7" data-duration="0.6" data-track-index="70" data-track-kind="sfx" data-audio-group="sfx" data-volume="0.08" data-label="Testing chapter whoosh"></audio>
+    <audio data-hf-id="hf-o8jo" id="sfx-chapter-23" src=".media/audio/sfx/sfx_001.mp3" data-start="494.7" data-duration="0.6" data-track-index="70" data-track-kind="sfx" data-audio-group="sfx" data-volume="0.08" data-label="Value chapter whoosh"></audio>
+    <audio data-hf-id="hf-ddqy" id="sfx-close" src=".media/audio/sfx/sfx_002.mp3" data-start="565" data-duration="2.5" data-track-index="70" data-track-kind="sfx" data-audio-group="sfx" data-volume="0.06" data-label="Closing chime"></audio>
+  </main>
+  <script>
+    const tl=gsap.timeline({paused:true});
+    window.__timelines["main"]=tl;
+    tl.seek(0);
+  </script>
+</body>
 </html>

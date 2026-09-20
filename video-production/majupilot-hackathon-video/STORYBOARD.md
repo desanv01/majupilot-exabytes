@@ -30,7 +30,7 @@ design_truth: frame.md
 - **Brand:** `frame.md` is authoritative. Warm paper, ink navy, teal, amber, coral; editorial serif,
   clean sans, and mono evidence labels; no neon/cyan AI look.
 - **Held frames:** Frame 09 holds the no-current-RAG boundary; Frame 16 holds unchecked consent.
-- **Status convention:** `built` means the Stage 3 static layout exists in `storyboard.html`.
+- **Status convention:** `animated` means the Stage 5 HyperFrames sub-composition and motion sidecar are implemented.
   Every `src` is a reserved Stage 5 target and is intentionally not created in this stage.
 - **Capture truth:** all product UI tiles in the contact sheet are labelled placeholders for
   authentic capture. Stage 5 must use recorded production footage, never a DOM reconstruction.
@@ -48,7 +48,7 @@ install them once before parallel scene work.
 
 ## Frame 01 — Identity / the visible path
 
-- status: built
+- status: animated
 - src: compositions/frames/01-identity-visible-path.html
 - duration: 20s
 - transition_in: cut
@@ -75,7 +75,7 @@ focal point and remains proportionally cropped.
 
 ## Frame 02 — The decision gap
 
-- status: built
+- status: animated
 - src: compositions/frames/02-decision-gap.html
 - duration: 22s
 - transition_in: fade-through
@@ -101,7 +101,7 @@ opens one readable route through the center.
 
 ## Frame 03 — Five answers become a Business Twin
 
-- status: built
+- status: animated
 - src: compositions/frames/03-five-answers-business-twin.html
 - duration: 23s
 - transition_in: directional-wipe
@@ -127,7 +127,7 @@ from implying that input is complete or automatically verified.
 
 ## Frame 04 — The five-stage route
 
-- status: built
+- status: animated
 - src: compositions/frames/04-five-stage-route.html
 - duration: 18s
 - transition_in: vertical-push
@@ -153,7 +153,7 @@ feature inventory.
 
 ## Frame 05 — What each stage owns
 
-- status: built
+- status: animated
 - src: compositions/frames/05-stage-ownership.html
 - duration: 25s
 - transition_in: directional-wipe
@@ -179,7 +179,7 @@ system with explicit ownership rather than five unrelated slides.
 
 ## Frame 06 — Deterministic truth, bounded interpretation
 
-- status: built
+- status: animated
 - src: compositions/frames/06-truth-boundary.html
 - duration: 17s
 - transition_in: directional-wipe
@@ -204,7 +204,7 @@ The two panels are deliberately unequal: deterministic truth receives more area 
 
 ## Frame 07 — Production architecture
 
-- status: built
+- status: animated
 - src: compositions/frames/07-production-architecture.html
 - duration: 26s
 - transition_in: vertical-push
@@ -230,7 +230,7 @@ top-level engine.
 
 ## Frame 08 — Provenance and five specialist lenses
 
-- status: built
+- status: animated
 - src: compositions/frames/08-provenance-specialists.html
 - duration: 28s
 - transition_in: directional-wipe
@@ -256,7 +256,7 @@ than a decorative footnote.
 
 ## Frame 09 — The current boundary
 
-- status: built
+- status: animated
 - src: compositions/frames/09-no-current-rag.html
 - duration: 16s
 - transition_in: fade-through
@@ -282,7 +282,7 @@ read and remembered.
 
 ## Frame 10 — Live demo: fictional Case A
 
-- status: built
+- status: animated
 - src: compositions/frames/10-demo-case-a-home.html
 - duration: 13s
 - transition_in: vertical-push
@@ -307,7 +307,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 
 ## Frame 11 — Live demo: evidence before score
 
-- status: built
+- status: animated
 - src: compositions/frames/11-demo-evidence-review.html
 - duration: 22s
 - transition_in: directional-wipe
@@ -330,7 +330,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 
 ## Frame 12 — Live demo: deterministic diagnosis
 
-- status: built
+- status: animated
 - src: compositions/frames/12-demo-diagnosis.html
 - duration: 28s
 - transition_in: directional-wipe
@@ -353,7 +353,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 
 ## Frame 13 — Live demo: capability-first recommendations
 
-- status: built
+- status: animated
 - src: compositions/frames/13-demo-recommendations.html
 - duration: 27s
 - transition_in: directional-wipe
@@ -376,7 +376,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 
 ## Frame 14 — Live demo: three scenarios, one selected path
 
-- status: built
+- status: animated
 - src: compositions/frames/14-demo-scenarios.html
 - duration: 40s
 - transition_in: directional-wipe
@@ -399,7 +399,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 
 ## Frame 15 — Live demo: the source-linked Blueprint
 
-- status: built
+- status: animated
 - src: compositions/frames/15-demo-blueprint.html
 - duration: 55s
 - transition_in: directional-wipe
@@ -422,7 +422,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 
 ## Frame 16 — Live demo: consent is the boundary
 
-- status: built
+- status: animated
 - src: compositions/frames/16-demo-consent-boundary.html
 - duration: 32s
 - transition_in: fade-through
@@ -447,7 +447,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 17 — Testing / Validation chapter reset
 
-- status: built
+- status: animated
 - src: compositions/frames/17-testing-chapter.html
 - duration: 3s
 - transition_in: vertical-push
@@ -470,7 +470,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 18 — Accepted hosted gates
 
-- status: built
+- status: animated
 - src: compositions/frames/18-hosted-gates.html
 - duration: 24s
 - transition_in: directional-wipe
@@ -493,7 +493,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 19 — Consolidated production smoke
 
-- status: built
+- status: animated
 - src: compositions/frames/19-production-smoke.html
 - duration: 20s
 - transition_in: directional-wipe
@@ -516,7 +516,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 20 — Scoped environment evidence
 
-- status: built
+- status: animated
 - src: compositions/frames/20-scoped-environment-evidence.html
 - duration: 19s
 - transition_in: directional-wipe
@@ -539,7 +539,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 21 — Historical local baseline stays separate
 
-- status: built
+- status: animated
 - src: compositions/frames/21-local-baseline.html
 - duration: 12s
 - transition_in: fade-through
@@ -562,7 +562,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 22 — Bounded hosted model path
 
-- status: built
+- status: animated
 - src: compositions/frames/22-bounded-model-path.html
 - duration: 5s
 - transition_in: fade-through
@@ -585,7 +585,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 23 — Value for owner and advisor
 
-- status: built
+- status: animated
 - src: compositions/frames/23-owner-advisor-value.html
 - duration: 32s
 - transition_in: vertical-push
@@ -608,7 +608,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 24 — What MajuPilot does not promise
 
-- status: built
+- status: animated
 - src: compositions/frames/24-no-promises.html
 - duration: 15s
 - transition_in: directional-wipe
@@ -631,7 +631,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 25 — Future potential remains future
 
-- status: built
+- status: animated
 - src: compositions/frames/25-future-potential.html
 - duration: 23s
 - transition_in: fade-through
@@ -654,7 +654,7 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 
 ## Frame 26 — The path stays visible
 
-- status: built
+- status: animated
 - src: compositions/frames/26-visible-path-close.html
 - duration: 15s
 - transition_in: fade-through

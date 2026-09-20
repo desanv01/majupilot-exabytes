@@ -1,0 +1,316 @@
+<template>
+  <div data-hf-id="hf-jpr6" id="root" data-composition-id="14-demo-scenarios" data-duration="40" data-width="1920" data-height="1080" data-fps="30">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/storyboard-fonts/EBGaramond-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-400.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/storyboard-fonts/Inter-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/storyboard-fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf8;
+        font-family: "Inter", Arial, sans-serif;
+        pointer-events: none;
+      }
+      [data-f14-layer="background"] {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #082d3f;
+      }
+      [data-f14-role="header"] {
+        position: absolute;
+        top: 38px;
+        left: 72px;
+        right: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #8ee2d3;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f14-role="assumption"] {
+        padding: 11px 18px;
+        border: 2px solid #f2a43a;
+        border-radius: 999px;
+        background: #123f5b;
+        color: #f2d7;
+      }
+      [data-f14-role="capture-frame"] {
+        position: absolute;
+        top: 104px;
+        left: 72px;
+        width: 1268px;
+        height: 713px;
+        overflow: hidden;
+        border: 3px solid #56747f;
+        border-radius: 18px;
+        background: #0e3a4b;
+        box-shadow: 0 28px 68px rgba(0,0,0,.28);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f14-role="world"] {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+      [data-f14-role="world"] video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #0e3a4b;
+      }
+      [data-f14-role="halo"] {
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        top: 27%;
+        width: 310px;
+        height: 220px;
+        margin-left: -155px;
+        margin-top: -110px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(19,162,155,.24) 0%, rgba(19,162,155,.11) 42%, transparent 72%);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      [data-f14-role="sidecar"] {
+        position: absolute;
+        top: 104px;
+        right: 72px;
+        width: 436px;
+        height: 713px;
+        padding: 26px 24px;
+        overflow: hidden;
+        border: 2px solid #d8e4e2;
+        border-radius: 18px;
+        background: #fffdf8;
+        color: #17394b;
+      }
+      [data-f14-role="side-kicker"] {
+        color: #087c79;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      [data-f14-role="selection"] {
+        margin: 10px 0 22px;
+        color: #082d3f;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 44px;
+        font-weight: 700;
+        line-height: .95;
+      }
+      [data-f14-role="columns"] {
+        display: grid;
+        grid-template-columns: 78px repeat(3, minmax(0,1fr));
+        gap: 8px;
+        padding: 0 10px 8px;
+        color: #5b7181;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-align: right;
+        text-transform: uppercase;
+      }
+      [data-f14-role="range"] {
+        position: relative;
+        min-height: 101px;
+        display: grid;
+        grid-template-columns: 78px repeat(3, minmax(0,1fr));
+        align-items: center;
+        gap: 8px;
+        padding: 12px 10px;
+        border-top: 2px solid #d8e4e2;
+        font-size: 15px;
+        font-variant-numeric: tabular-nums;
+        will-change: transform, opacity;
+      }
+      [data-f14-role="range"] b {
+        color: #082d3f;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 15px;
+        letter-spacing: .04em;
+      }
+      [data-f14-role="value"] { position: relative; z-index: 2; text-align: right; white-space: nowrap; }
+      [data-f14-role="value"][data-f14-base] { color: #087c79; font-weight: 700; }
+      [data-f14-role="value"][data-f14-negative] { color: #a63e36; font-weight: 700; }
+      [data-f14-role="base-fill"] {
+        position: absolute;
+        z-index: 1;
+        top: 17px;
+        bottom: 17px;
+        left: 192px;
+        width: 94px;
+        border-radius: 8px;
+        background: #e4f5f1;
+        transform-origin: 0% 50%;
+      }
+      [id="f14-demo-scenarios-payback"] [data-f14-role="value"]:last-of-type { white-space: normal; line-height: 1.1; }
+      [data-f14-role="qualifier"] {
+        margin-top: 18px;
+        padding: 13px 16px;
+        border: 2px solid #f2a43a;
+        border-radius: 12px;
+        background: #f2d7;
+        color: #9a6414;
+        font-family: "JetBrains Mono", "Courier New", monospace;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: .04em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      [data-f14-role="cursor"] {
+        --hf-cursor-x: 1110px;
+        --hf-cursor-y: 610px;
+        position: absolute;
+        z-index: 20;
+        left: 0;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        transform: translate3d(var(--hf-cursor-x), var(--hf-cursor-y), 0);
+        filter: drop-shadow(0 8px 18px rgba(0,0,0,.32));
+        pointer-events: none;
+      }
+      [data-f14-role="cursor"] svg { width: 100%; height: 100%; transform-origin: 20px 20px; will-change: transform; }
+      [data-f14-role="pulse"] {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        width: 28px;
+        height: 28px;
+        border: 3px solid #13a29b;
+        border-radius: 50%;
+        opacity: 0;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+    </style>
+
+    <div data-hf-id="hf-wfya" id="f14-track-1" class="clip" data-f14-layer="background" data-start="0" data-duration="40" data-track-index="0"></div>
+
+    <div data-hf-id="hf-gunw" data-f14-layer="capture">
+      <div data-hf-id="hf-ise2" id="f14-demo-scenarios-frame" data-f14-role="capture-frame">
+        <div data-hf-id="hf-65bu" id="f14-demo-scenarios-world" data-f14-role="world" data-layout-allow-overflow="">
+          <video data-hf-id="hf-um20" id="f14-authentic-capture" class="clip" data-start="0" data-track-index="1" data-media-start="1" data-duration="40" muted playsinline preload="auto" src="assets/capture/frame-14-scenario-comparison.mp4"></video>
+          <div data-hf-id="hf-jyxz" id="f14-demo-scenarios-halo" data-f14-role="halo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div data-hf-id="hf-a0tl" id="f14-track-2" class="clip" data-f14-layer="overlay" data-start="0" data-duration="40" data-track-index="2">
+      <div data-hf-id="hf-g3p6" data-f14-role="header"><span data-hf-id="hf-m4up">/scenarios</span><span data-hf-id="hf-wgcy" data-f14-role="assumption">Planning assumptions · not an Exabytes quote</span></div>
+
+      <aside data-hf-id="hf-xsp2" id="f14-demo-scenarios-sidecar" data-f14-role="sidecar">
+        <div data-hf-id="hf-1gke" data-f14-role="side-kicker">Selected path</div>
+        <div data-hf-id="hf-jhnw" data-f14-role="selection">Balanced Growth</div>
+        <div data-hf-id="hf-cw06" data-f14-role="columns"><span data-hf-id="hf-uckh"></span><span data-hf-id="hf-nidp">Low</span><span data-hf-id="hf-unfw">Base</span><span data-hf-id="hf-nx35">High</span></div>
+        <div data-hf-id="hf-03b3" id="f14-demo-scenarios-cost" data-f14-role="range"><i data-hf-id="hf-7oy4" data-f14-role="base-fill"></i><b data-hf-id="hf-griw">COST</b><span data-hf-id="hf-5npf" data-f14-role="value">RM9,200</span><span data-hf-id="hf-ooyu" data-f14-role="value" data-f14-base="">RM18,400</span><span data-hf-id="hf-fitv" data-f14-role="value">RM27,600</span></div>
+        <div data-hf-id="hf-5yc3" id="f14-demo-scenarios-value" data-f14-role="range"><i data-hf-id="hf-4o4k" data-f14-role="base-fill"></i><b data-hf-id="hf-0ykq">VALUE</b><span data-hf-id="hf-h5rg" data-f14-role="value">RM2,358</span><span data-hf-id="hf-u4ir" data-f14-role="value" data-f14-base="">RM7,254</span><span data-hf-id="hf-1j54" data-f14-role="value">RM15,233</span></div>
+        <div data-hf-id="hf-bc4p" id="f14-demo-scenarios-net" data-f14-role="range"><i data-hf-id="hf-3h7h" data-f14-role="base-fill"></i><b data-hf-id="hf-pdqw">NET</b><span data-hf-id="hf-xraf" data-f14-role="value" data-f14-negative="">-RM25,242</span><span data-hf-id="hf-95ww" data-f14-role="value" data-f14-base="" data-f14-negative="">-RM11,146</span><span data-hf-id="hf-wy3m" data-f14-role="value">RM6,033</span></div>
+        <div data-hf-id="hf-dr4f" id="f14-demo-scenarios-payback" data-f14-role="range"><i data-hf-id="hf-3vii" data-f14-role="base-fill"></i><b data-hf-id="hf-smzq">PAYBACK</b><span data-hf-id="hf-1ebb" data-f14-role="value">7.2 months</span><span data-hf-id="hf-0cau" data-f14-role="value" data-f14-base="">30.4 months</span><span data-hf-id="hf-nfbw" data-f14-role="value">More than 60 months</span></div>
+        <div data-hf-id="hf-3jcb" id="f14-demo-scenarios-qualifier" data-f14-role="qualifier">Conditional ranges · not predictions or guarantees</div>
+      </aside>
+
+      <div data-hf-id="hf-zhag" id="f14-demo-scenarios-cursor" data-f14-role="cursor" aria-hidden="true">
+        <div data-hf-id="hf-hpkv" id="f14-demo-scenarios-pulse" data-f14-role="pulse"></div>
+        <svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><path data-hf-id="hf-neps" d="M3 2.8 20.6 14 12.8 15.5 9 22 3 2.8Z" fill="#ffffff" stroke="rgba(0,0,0,.5)" stroke-width="1.4" /></svg>
+      </div>
+    </div>
+
+    <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var compositionId = "14-demo-scenarios";
+        var root = document.getElementById("root");
+        var frame = document.getElementById("f14-demo-scenarios-frame");
+        var world = document.getElementById("f14-demo-scenarios-world");
+        var halo = document.getElementById("f14-demo-scenarios-halo");
+        var sidecar = document.getElementById("f14-demo-scenarios-sidecar");
+        var cursor = document.getElementById("f14-demo-scenarios-cursor");
+        var cursorSvg = cursor.querySelector("svg");
+        var pulse = document.getElementById("f14-demo-scenarios-pulse");
+        var ranges = [
+          document.getElementById("f14-demo-scenarios-cost"),
+          document.getElementById("f14-demo-scenarios-value"),
+          document.getElementById("f14-demo-scenarios-net"),
+          document.getElementById("f14-demo-scenarios-payback")
+        ];
+        var fills = ranges.map(function (range) { return range.querySelector('[data-f14-role="base-fill"]'); });
+
+        var cam = { s: 1, x: 0, y: 0 };
+        function applyCamera() {
+          world.style.transform = "translate(" + cam.x + "%," + cam.y + "%) scale(" + cam.s + ")";
+        }
+        applyCamera();
+        gsap.set(halo, { opacity: 0, scale: 0.55 });
+        gsap.set(pulse, { opacity: 0, scale: 0.2 });
+        gsap.set(fills, { scaleX: 0 });
+
+        var tl = gsap.timeline({ paused: true });
+        tl.fromTo(frame, { opacity: 0.82, y: 24, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.72, ease: "power3.out" }, 0.02);
+        tl.fromTo(root.querySelector('[data-f14-role="header"]'), { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.08);
+        tl.fromTo(sidecar, { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.62, ease: "power3.out" }, 0.18);
+        tl.fromTo(cursor, { opacity: 0 }, { opacity: 1, duration: 0.24, ease: "power1.out" }, 0.3);
+
+        tl.addLabel("select-balanced", 0.7);
+        tl.to(cursor, { "--hf-cursor-x": "682px", "--hf-cursor-y": "260px", duration: 0.82, ease: "power2.inOut" }, "select-balanced");
+        tl.to(cam, { s: 1.12, x: 0, y: 5.8, duration: 0.82, ease: "power2.inOut", onUpdate: applyCamera }, "select-balanced");
+        tl.fromTo(halo, { opacity: 0, scale: 0.55 }, { opacity: 0.88, scale: 1, duration: 0.82, ease: "power2.inOut" }, "select-balanced");
+        tl.to(cursorSvg, { scale: 0.84, duration: 0.09, ease: "power2.in" }, 1.57);
+        tl.to(cursorSvg, { scale: 1, duration: 0.09, ease: "power2.out" }, 1.67);
+        tl.fromTo(pulse, { opacity: 0.82, scale: 0.2 }, { opacity: 0, scale: 3.6, duration: 0.68, ease: "power2.out", immediateRender: false }, 1.6);
+        tl.fromTo(root.querySelector('[data-f14-role="selection"]'), { scale: 0.94, color: "#17394b" }, { scale: 1, color: "#087c79", duration: 0.82, ease: "power2.inOut" }, "select-balanced");
+
+        tl.to(cam, { s: 1, x: 0, y: 0, duration: 1.15, ease: "power2.inOut", onUpdate: applyCamera }, 5.8);
+        tl.to(halo, { opacity: 0, scale: 0.65, duration: 0.7, ease: "power2.out" }, 5.8);
+
+        var revealTimes = [14.0, 19.0, 24.0, 29.0];
+        ranges.forEach(function (range, index) {
+          tl.fromTo(range, { opacity: 0.42, x: 18 }, { opacity: 1, x: 0, duration: 0.56, ease: "power3.out" }, revealTimes[index]);
+          tl.to(fills[index], { scaleX: 1, duration: 0.9, ease: "power2.out" }, revealTimes[index]);
+        });
+        tl.fromTo(document.getElementById("f14-demo-scenarios-qualifier"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.52, ease: "power3.out" }, 34.2);
+
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines[compositionId] = tl;
+      })();
+    </script>
+  </div>
+</template>
