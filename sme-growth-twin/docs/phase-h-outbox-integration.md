@@ -17,11 +17,9 @@ Raw payloads and attempt rows have RLS enabled and no browser-role grants. Opera
 
 The first adapter uses only the approved Phase H variables:
 
-```text
-OUTBOX_WEBHOOK_URL=
-OUTBOX_WEBHOOK_SECRET=
-OUTBOX_WEBHOOK_KEY_ID=
-```
+- `OUTBOX_WEBHOOK_URL`
+- `OUTBOX_WEBHOOK_SECRET`
+- `OUTBOX_WEBHOOK_KEY_ID`
 
 `OUTBOX_WEBHOOK_URL` must be HTTPS and its exact hostname is the destination allowlist. URL credentials are rejected. DNS is resolved before delivery, every result is checked against private, loopback, link-local, reserved, multicast, and mapped-loopback ranges, and the request is pinned to a validated address while TLS continues to verify the configured hostname. Redirects are not followed.
 
