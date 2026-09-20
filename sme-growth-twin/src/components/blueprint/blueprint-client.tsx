@@ -9,6 +9,7 @@ import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
 import { buildAdvisorReviewContext } from "@/core/blueprint/build-review-context";
 import { buildBlueprint } from "@/core/blueprint/build-blueprint";
 import { advisorPanelResponseSchema, type AdvisorPanelResponse } from "@/domain/advisors";
+import type { AssessmentDraft } from "@/domain/assessment";
 import type { Blueprint } from "@/domain/blueprint";
 import type { BusinessTwin } from "@/domain/business-twin";
 import type { RecommendationResult } from "@/domain/recommendations";
@@ -20,6 +21,7 @@ import { loadBlueprint, saveBlueprint } from "@/infrastructure/persistence/local
 import { loadDiagnosticResult } from "@/infrastructure/persistence/local-diagnostic-store";
 import { loadRecommendationResult } from "@/infrastructure/persistence/local-recommendation-store";
 import { loadScenarioComparison } from "@/infrastructure/persistence/local-scenario-store";
+import { syncDurableJourney } from "@/infrastructure/persistence/durable-journey-client";
 
 import { Brand } from "../assessment/brand";
 import { PostAssessmentShell } from "../diagnostics/post-assessment-shell";
@@ -137,11 +139,13 @@ function BlueprintCommandHeader({
 }
 
 export function BlueprintView({
+  assessment,
   sources,
   initialBlueprint,
   initialNotice,
   onPersist,
 }: {
+  assessment?: AssessmentDraft;
   sources: BlueprintSources;
   initialBlueprint?: Blueprint;
   initialNotice?: string;
@@ -150,6 +154,7 @@ export function BlueprintView({
   const [blueprint, setBlueprint] = useState(initialBlueprint);
   const [notice, setNotice] = useState(initialNotice);
   const [busy, setBusy] = useState(false);
+  const [durableNotice, setDurableNotice] = useState<string>();
   const [statuses, setStatuses] = useState<Record<string, AdvisorStatus>>(() =>
     initialBlueprint ? originStatuses(initialBlueprint) : readyStatuses(),
   );
@@ -172,6 +177,16 @@ export function BlueprintView({
       restoreReportDisclosures();
     };
   }, []);
+
+  useEffect(() => {
+    if (!assessment || !blueprint) return;
+    let active = true;
+    setDurableNotice("Securing this Blueprint and its evidence in your MajuPilot workspace...");
+    syncDurableJourney(localStorage, { draft: assessment, ...sources, blueprint })
+      .then(() => { if (active) setDurableNotice("Blueprint and evidence securely synced."); })
+      .catch(() => { if (active) setDurableNotice("Secure sync is temporarily unavailable. Your on-device copy remains intact and can be retried."); });
+    return () => { active = false; };
+  }, [assessment, blueprint, sources]);
 
   const generate = async () => {
     setBusy(true);
@@ -231,6 +246,7 @@ export function BlueprintView({
       <main id="main-content" className="phase06-shell">
         <BlueprintCommandHeader blueprint={blueprint} busy={busy} onGenerate={generate} sources={sources} />
         <AdvisorStatusBoard blueprint={blueprint} busy={busy} notice={notice} statuses={statuses} />
+        {durableNotice ? <p className="phase06-status-notice no-print" role="status">{durableNotice}</p> : null}
         {!blueprint ? (
           <section className="phase06-empty no-print">
             <p className="eyebrow">Ready to review</p>
@@ -256,7 +272,7 @@ export function BlueprintView({
 
 export function BlueprintClient() {
   const router = useRouter();
-  const [loaded, setLoaded] = useState<{ sources: BlueprintSources; blueprint?: Blueprint; notice?: string }>();
+  const [loaded, setLoaded] = useState<{ assessment: AssessmentDraft; sources: BlueprintSources; blueprint?: Blueprint; notice?: string }>();
 
   useEffect(() => {
     const assessment = loadAssessmentDraft(localStorage);
@@ -285,12 +301,13 @@ export function BlueprintClient() {
 
       const sources = { twin, diagnostic: diagnostic.result, recommendations: recommendations.result, comparison: comparison.result };
       if (!comparison.result.selectedScenarioId) {
-        setLoaded({ sources, notice: "Choose a preferred scenario before generating a Blueprint." });
+        setLoaded({ assessment: assessment.draft, sources, notice: "Choose a preferred scenario before generating a Blueprint." });
         return;
       }
 
       const saved = loadBlueprint(localStorage, twin, diagnostic.result, recommendations.result, comparison.result);
       setLoaded({
+        assessment: assessment.draft,
         sources,
         blueprint: saved.status === "ok" ? saved.result : undefined,
         notice:
@@ -332,6 +349,7 @@ export function BlueprintClient() {
 
   return (
     <BlueprintView
+      assessment={loaded.assessment}
       sources={loaded.sources}
       initialBlueprint={loaded.blueprint}
       initialNotice={loaded.notice}

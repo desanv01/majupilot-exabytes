@@ -45,8 +45,8 @@ export function DemoResetControl({
           <h2 id={titleId}>{recordsPresent ? "Reset this demonstration?" : "Confirm a clean demo state?"}</h2>
           <p id={descriptionId}>
             {recordsPresent
-              ? "This removes only known SME Growth Twin prototype records saved in this browser. Other browser storage stays unchanged."
-              : "No known SME Growth Twin records were found. Confirming leaves unrelated browser storage unchanged."}
+              ? "This removes only known MajuPilot demonstration records saved in this browser. Other browser storage stays unchanged."
+              : "No known MajuPilot records were found. Confirming leaves unrelated browser storage unchanged."}
           </p>
           <div className="demo-reset-dialog-actions">
             <button className="button secondary" type="button" onClick={close}>

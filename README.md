@@ -1,182 +1,123 @@
 # MajuPilot
 
-MajuPilot is the V2 evolution of SME Growth Twin: an evidence-backed Digital and AI Transformation advisor for Malaysian SMEs and the Exabytes advisory workflow.
+MajuPilot is an evidence-backed Digital and AI Transformation advisor for Malaysian SMEs and the Exabytes advisory workflow. It turns a structured discovery interview into an inspectable Business Twin, deterministic diagnosis, capability-first recommendations, transformation scenarios, an advisor-reviewed Blueprint, a canonical private PDF, and a consented consultation handoff.
 
-> Project status: V2 backend, live-AI, reporting, Copilot, and sales-workflow development. The accepted V1 product remains intact at [desanv01/sme-growth-twin](https://github.com/desanv01/sme-growth-twin) and <https://sme-growth-twin.vercel.app/>.
+Production: <https://majupilot-exabytes.vercel.app/>
 
-## V2 development boundary
-
-This repository preserves the complete accepted V1 history at tag `v1.0.0-baseline` and develops V2 independently. V2 adds:
-
-- durable Supabase persistence, ownership, roles, and RLS;
-- required-mode live AI with structured outputs, budgets, and telemetry;
-- bounded dynamic follow-up questions and evidence-grounded explanations;
-- a synchronized Transformation Copilot with typed tools;
-- canonical private PDF reports with signed downloads;
-- durable consent, leads, salesperson assignment, consultant context, and outbox delivery.
-
-The accepted V1 UI is a stable presentation boundary. V2 changes it only where minimal integration is necessary.
-
-## Why this exists
-
-SME owners often know they need to digitalise but lack a defensible answer to four connected questions: what should change first, why it matters, what it could cost, and what outcome is realistically possible. Generic chat responses cannot reliably preserve evidence, reproduce scores, enforce prerequisites, or show how a recommendation was reached.
-
-SME Growth Twin converts structured interview evidence into an inspectable business twin and uses deterministic engines for scoring, pain ranking, capability sequencing, catalogue mapping, scenarios, and ROI. AI is reserved for bounded interpretation and advisor perspectives; it does not own arithmetic or product facts.
-
-## Current capabilities
-
-- Five-step SME discovery interview with bounded conditional follow-ups.
-- Editable Business Twin review with evidence and confidence handling.
-- Deterministic digital-maturity and AI-readiness scores.
-- Evidence-linked pain-point ranking and expandable calculation details.
-- Capability-first recommendations with prerequisites and timing.
-- Versioned mapping to a curated Exabytes offering catalogue.
-- Three deterministic transformation scenarios with inspectable costs, value ranges, assumptions, exclusions, and payback.
-- Five evidence-bounded advisor perspectives with per-role deterministic fallback and optional server-only model review.
-- An immutable, source-linked 16-section Transformation Blueprint with responsive browser print/save-as-PDF output.
-- A consented consultation handoff with exact Blueprint verification, idempotent submission, and a privacy-minimizing safe receipt.
-- Stable local persistence and recalculation when upstream evidence changes.
-- Responsive, keyboard-accessible interfaces validated at desktop and 360 px.
-- Offline-friendly deterministic demonstration path.
-- Three schema-validated fictional golden cases with scoped load/reset and persistent disclosure.
-- Production security headers, advisor call budgets, hashed-IP process-local rate limits, and hermetic Stage 07 release evidence.
-
-## Product flow
+## Product journey
 
 ```mermaid
 flowchart LR
-    A[SME interview] --> B[Business Twin]
-    B --> C[Scores and pain points]
-    C --> D[Capability recommendations]
-    D --> E[Transformation scenarios]
+    A[SME discovery] --> B[Business Twin]
+    B --> C[Diagnosis]
+    C --> D[Recommendations]
+    D --> E[Scenarios and ROI]
     E --> F[Advisor review]
-    F --> G[Blueprint]
+    F --> G[Blueprint and private PDF]
     G --> H[Consented consultation]
+    G --> I[Transformation Copilot]
+    H --> J[Assignment and signed delivery]
 ```
+
+## What is implemented
+
+- Five-step SME discovery with bounded, evidence-linked follow-up questions.
+- Editable Business Twin with confidence and source provenance.
+- Deterministic digital-maturity, AI-readiness, pain ranking, scenario, cost, value, and payback engines.
+- Capability-first recommendations mapped to a versioned Exabytes catalogue.
+- Live DeepSeek interpretation through Vercel AI Gateway, with strict schemas, budgets, safe telemetry, and deterministic fallbacks where permitted.
+- Five evidence-bounded advisor perspectives and a 16-section Transformation Blueprint.
+- Deterministic canonical PDF generation, private Supabase Storage, content hashes, and short-lived signed downloads.
+- Immutable accepted consultant notes derived from reviewed drafts.
+- Durable Supabase persistence, guest ownership, organization roles, tenant isolation, RLS, consent records, leads, deterministic assignment, audit events, and export/deletion request contracts.
+- A persisted Transformation Copilot with typed reads and confirmation-gated, idempotent writes.
+- A durable signed-webhook outbox with leasing, bounded retry, dead-letter handling, replay authorization, SSRF protection, and redacted delivery receipts.
+- Responsive, keyboard-accessible interfaces plus three clearly labelled fictional demonstration cases.
+
+Document RAG is intentionally deferred from the P0 hackathon release. Copilot currently answers from the persisted structured Business Twin, diagnosis, recommendations, scenarios, Blueprint, report, lead, and audit records; it does not ingest arbitrary uploaded documents.
 
 ## Architecture
 
 ```mermaid
 flowchart TB
-    UI[Next.js interface] --> Core[Provider-neutral deterministic core]
-    UI --> Store[Persistence adapters]
-    Core --> Domain[Versioned domain contracts]
+    UI[Next.js product interface] --> API[Versioned server routes]
+    API --> Core[Provider-neutral deterministic core]
+    Core --> Domain[Versioned contracts]
     Core --> Pack[Exabytes domain pack]
-    Pack --> Catalogue[Curated offering catalogue]
-    Core -. bounded interpretation .-> Models[Model-provider port]
+    API --> DB[(Supabase Postgres and RLS)]
+    API --> Storage[Private Supabase Storage]
+    API -. bounded generation .-> Gateway[Vercel AI Gateway]
+    API --> Outbox[Durable signed outbox]
+    Outbox --> Receiver[Configured HTTPS receiver]
 ```
 
-The provider-neutral core cannot import or mention Exabytes-specific identifiers. Product-selection policy belongs to the Exabytes domain pack and is protected by architecture tests.
+Models do not own scores, ranks, budgets, prerequisites, catalogue facts, ROI arithmetic, or persistence decisions. Those remain deterministic and versioned. Contact details are never sent to the model.
 
-## Technology
+## Repository layout and the original project
 
-| Layer | Technology |
-|---|---|
-| Application | Next.js 16 App Router, React 19, TypeScript 6 |
-| Validation | Zod 4 |
-| Testing | Vitest 5 |
-| Quality | ESLint 9, TypeScript strict checks, GitHub Actions |
-| Current persistence | Versioned browser-local records plus a process-local prototype lead adapter behind storage ports |
-| Design workflow | 12ui-generated directions, reviewed and corrected against product contracts |
+This repository contains the complete inherited application, not a thin overlay. The accepted original project history is preserved in Git at tag `v1.0.0-baseline`, and the original remote is retained as the read-only `v1` remote. The application directory is still named `sme-growth-twin/` because renaming the internal root would add deployment and history risk without changing the product; all customer-facing surfaces are branded MajuPilot.
 
-## Quick start
+Managed Codex worktrees were temporary isolated checkouts used to implement and review phases safely. Their accepted commits were merged into this repository's `main` branch, so the authoritative current files are here. Large local sizes usually come from generated or ignored directories such as `node_modules/`, `.next/`, browser profiles, and evidence artifacts; Git stores source and required assets, not every generated dependency/cache copy.
 
-Prerequisites: Node.js 22.12 or newer and npm.
+```text
+planning/                       # contracts, source records, stage ledger, release evidence
+sme-growth-twin/               # canonical Next.js application root
+├── docs/                      # architecture and operational notes
+├── scripts/                   # focused verification and release-smoke tools
+├── supabase/                  # migrations, local config, and pgTAP security tests
+├── src/
+│   ├── app/                   # product pages and server routes
+│   ├── components/            # UI by product workflow
+│   ├── core/                  # deterministic engines and services
+│   ├── domain/                # schemas and contracts
+│   ├── domain-packs/exabytes/ # versioned catalogue and provider policy
+│   └── infrastructure/        # Supabase, AI, reports, outbox, persistence
+└── tests/                     # unit, integration, security, and release evidence
+```
 
-```bash
+## Run locally
+
+Prerequisites: Node.js 22.12 or newer, npm, and the configured `sme-growth-twin/.env.local` file.
+
+```powershell
 git clone https://github.com/desanv01/majupilot-exabytes.git
-cd majupilot-exabytes/sme-growth-twin
+cd majupilot-exabytes\sme-growth-twin
 npm ci
 npm run dev
 ```
 
-Open <http://localhost:3000>.
+Open <http://localhost:3000>. Stop the server with `Ctrl+C`. On later runs, open a terminal in `sme-growth-twin/` and run only `npm run dev`; reinstall only when `package-lock.json` changes or `node_modules/` is absent.
 
-## Quality commands
+Never commit `.env.local`. Only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` may be browser-visible; all service, Gateway, webhook, and cron credentials are server-only.
 
-Run these from `sme-growth-twin/`:
+## Focused quality commands
+
+Run from `sme-growth-twin/`:
 
 | Command | Purpose |
 |---|---|
-| `npm run lint` | Check source and test lint rules |
-| `npm run type-check` | Run TypeScript without emitting files |
-| `npm test` | Run deterministic unit and integration tests |
-| `npm run build` | Produce the release build |
-| `npm run test:stage05:browser` | Verify the complete Stage 05 journey, exact figures, persistence, responsive layout, and print rendering |
-| `npm run test:stage06:browser` | Verify the Blueprint-to-consultation journey, consent and replay safety, privacy boundary, responsive layout, focus order, and print exclusion |
-| `npm run test:stage07:golden` | Freeze exact A/B/C outputs, fallback origins, and Blueprint completeness |
-| `npm run test:stage07:browser` | Run the production axe, keyboard, responsive, duration, header, reset, and A/B/C fallback gate |
-| `npm run test:stage07:security` | Verify advisor budgets/rate limits, scoped reset, secret scan, and server/client boundary |
-| `npm run audit:production` | Fail on high/critical production dependency findings |
-| `npm run release:manifest` | Emit a checksummed manifest outside the worktree by default |
+| `npm run lint` | ESLint checks |
+| `npm run type-check` | Strict TypeScript checks |
+| `npm test` | Deterministic unit and integration suite |
+| `npm run build` | Production Next.js build |
+| `npm run test:stage07:golden` | Exact fictional A/B/C outcomes |
+| `npm run test:stage07:security` | Server/client and secret-boundary checks |
+| `npm run audit:production` | High/critical production dependency gate |
 
-Every pull request runs the static, unit, Stage 07 golden/security, production-audit, and build gates in GitHub Actions. Windows browser journeys remain explicit local release gates.
+## Delivery record
 
-## Repository map
+V2 phases A through I are accepted and merged. The authoritative implementation evidence, exact PRs, corrections, live-AI proof, security assertions, and phase acceptance notes are recorded in [the stage ledger](planning/MAJUPILOT-V2-STAGE-LEDGER.md). The original baseline remains reachable at tag `v1.0.0-baseline`.
 
-```text
-planning/                       # authoritative product, stage, design, and decision records
-├── MASTER-GAMEPLAN.md
-├── STAGE-LEDGER.md
-├── catalogue/
-├── design/
-└── stages/
-sme-growth-twin/               # canonical application root
-├── artifacts/                 # accepted local visual-regression evidence
-├── docs/                      # implementation and architecture notes
-├── scripts/                   # deterministic browser checks
-├── src/
-│   ├── app/                   # routes and application shell
-│   ├── components/            # UI components by workflow stage
-│   ├── core/                  # provider-neutral business engines
-│   ├── domain/                # shared schemas and versioned contracts
-│   ├── domain-packs/exabytes/ # catalogue and provider-specific policy
-│   └── infrastructure/        # persistence and model-provider adapters
-└── tests/
-```
+## Security
 
-## Development record
+- Secrets and real customer records must never be committed, logged, or used in demos.
+- Product and benchmark claims require traceable sources.
+- Consent is explicit and immutable; private report access is owner/role scoped.
+- Versioned routes use strict input schemas, bounded bodies, no-store responses, and owner/role checks.
+- Webhook delivery is HTTPS-only, HMAC-signed, DNS/IP constrained, retry-bounded, and receipt-redacted.
 
-The project uses a gated, stage-by-stage workflow. Each stage receives a frozen contract, a dedicated implementation branch, independent review, correction cycles where required, full validation, and an acceptance entry in the [stage ledger](planning/STAGE-LEDGER.md).
+See [SECURITY.md](SECURITY.md) for the supported status, disclosure route, controls, and operational limits.
 
-Stages 00–03 were completed before this repository was initialised. Their first GitHub checkpoints are therefore explicitly recorded as reconstructed snapshots created on 17 September 2026, not as backdated development events. Stage 04 onward uses live branches, pull requests, CI, reviews, and merges.
+## Contributing and license
 
-## Roadmap
-
-- [x] V1 baseline - accepted deterministic product and UI phases 00-07
-- [x] V2 Phase 00 - repository and baseline isolation
-- [ ] V2 Phase A - contract and source audit
-- [ ] V2 Phase B - durable persistence and authorization
-- [ ] V2 Phase C - live AI and dynamic follow-up
-- [ ] V2 Phase D - catalogue and recommendation completion
-- [ ] V2 Phase E - canonical PDF and consultant notes
-- [ ] V2 Phase F - durable lead and salesperson core
-- [ ] V2 Phase G - Transformation Copilot
-- [ ] V2 Phase H - outbox and minimal application integration
-- [ ] V2 Phase I - final challenge and release proof
-
-## Security and data handling
-
-- Secrets belong in local environment files and must never be committed.
-- Scoring, ranking, recommendation, scenario, and ROI arithmetic remain deterministic.
-- Product facts come from a reviewed, versioned catalogue rather than model memory.
-- Missing evidence lowers confidence; it is not silently converted to a negative answer.
-- Consultation data is created only after explicit user consent; contact values are not logged, returned by the API, placed in URLs, or persisted in the browser.
-
-See [SECURITY.md](SECURITY.md) for reporting and prototype limitations.
-
-The self-contained demo, deployment, evidence, third-party, and manual-gate package is in [`planning/submission/`](planning/submission/README.md). A reviewed Vercel deployment is recorded there; no video upload, competition submission, human study, or official receipt is claimed without real evidence.
-
-## Originality
-
-SME Growth Twin is a ground-up implementation with its own domain model, terminology, interfaces, rules, tests, and code.
-
-Exabytes product information is maintained as a separately versioned catalogue with source provenance. Third-party frameworks, models, design tooling, and dependencies are declared rather than presented as original work.
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing contracts or core calculation rules. Pull requests should be focused, explain user impact, and include validation appropriate to the risk.
-
-## License
-
-Licensed under the [MIT License](LICENSE). Third-party names and trademarks remain the property of their respective owners.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing contracts or deterministic rules. MajuPilot is licensed under the [MIT License](LICENSE); third-party names and trademarks remain the property of their respective owners.

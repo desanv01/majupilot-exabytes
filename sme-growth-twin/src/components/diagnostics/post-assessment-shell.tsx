@@ -18,11 +18,11 @@ const contextDetails: Record<ShellContext, { kicker: string; heading: string; su
   analysis: { kicker: "Evidence-led diagnosis", heading: "See what the facts support.", summary: "Local calculations from your recorded answers", note: "No live model call is needed for this diagnosis.", currentIndex: 1 },
   results: { kicker: "Evidence-led diagnosis", heading: "See what the facts support.", summary: "Deterministic results with inspectable evidence", note: "No live model call is needed for this diagnosis.", currentIndex: 1 },
   recommendations: { kicker: "Capability decisions", heading: "Turn diagnosis into an ordered first move.", summary: "Capabilities ranked before catalogue products", note: "Capabilities are ranked first. Catalogue products are supporting provenance.", currentIndex: 1 },
-  restoring: { kicker: "Evidence-led diagnosis", heading: "Restore your saved diagnosis.", summary: "Restoring your saved diagnosis", note: "Saved records stay on this device.", currentIndex: 1 },
+  restoring: { kicker: "Evidence-led diagnosis", heading: "Restore your saved diagnosis.", summary: "Restoring your saved diagnosis", note: "Recovering your secured journey.", currentIndex: 1 },
   scenarios: { kicker: "Decision laboratory", heading: "Compare paths before you commit.", summary: "Three paths, one inspectable decision", note: "Inspection focus is not a saved preference.", currentIndex: 2 },
-  "restoring-scenarios": { kicker: "Decision laboratory", heading: "Restore your scenario comparison.", summary: "Checking saved paths and assumptions", note: "Saved records stay on this device.", currentIndex: 2 },
+  "restoring-scenarios": { kicker: "Decision laboratory", heading: "Restore your scenario comparison.", summary: "Checking saved paths and assumptions", note: "Recovering your secured journey.", currentIndex: 2 },
   blueprint: { kicker: "Executive Blueprint", heading: "Review the decision and its evidence.", summary: "Five specialist lenses, one immutable report", note: "Advisor interpretation never changes deterministic facts.", currentIndex: 3 },
-  "restoring-blueprint": { kicker: "Executive Blueprint", heading: "Restore your evidence-linked report.", summary: "Checking the selected path and source chain", note: "Saved records stay on this device.", currentIndex: 3 },
+  "restoring-blueprint": { kicker: "Executive Blueprint", heading: "Restore your evidence-linked report.", summary: "Checking the selected path and source chain", note: "Recovering your secured journey.", currentIndex: 3 },
 };
 
 export function PostAssessmentShell({

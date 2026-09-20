@@ -78,7 +78,15 @@ export class SignedWebhookAdapter {
           ...(this.config.keyId ? { "x-majupilot-key-id": this.config.keyId } : {}),
           "idempotency-key": item.idempotency_key,
         },
-        lookup: (_hostname, _options, callback) => callback(null, pinned[0], pinned[0].includes(":") ? 6 : 4),
+        lookup: (_hostname, options, callback) => {
+          const address = pinned[0];
+          const family = address.includes(":") ? 6 : 4;
+          if (typeof options === "object" && options.all) {
+            (callback as unknown as (error: NodeJS.ErrnoException | null, addresses: Array<{ address: string; family: number }>) => void)(null, [{ address, family }]);
+            return;
+          }
+          (callback as unknown as (error: NodeJS.ErrnoException | null, resolvedAddress: string, resolvedFamily: number) => void)(null, address, family);
+        },
       }, (response) => {
         response.resume();
         const status = response.statusCode ?? 0;

@@ -1,6 +1,6 @@
 # Contributing
 
-SME Growth Twin is developed through gated stages governed by the planning contracts in `planning/`.
+MajuPilot is developed through gated stages governed by the planning contracts in `planning/`.
 
 ## Workflow
 

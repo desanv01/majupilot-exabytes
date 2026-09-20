@@ -34,7 +34,7 @@ describe("Phase 07 consultation, demo, and release UI", () => {
   it("renders a complete safe receipt and distinguishes an idempotent replay", () => {
     const receipt = { leadReference: "lead_phase070000000000000001", submittedAt: "2026-09-19T09:30:00+08:00", blueprintId: blueprint.id, status: "new" as const, replayed: true };
     const html = renderToStaticMarkup(<ConsultationView blueprint={blueprint} initialReceipt={receipt} />);
-    for (const text of ["Request recorded.", "Safe receipt", "Submitted business", "Consultation focus", "Recorded time", "Blueprint ID", "Same request, same receipt", "No email, CRM delivery, durable production storage, or human response is claimed", "Return to Blueprint", "Start a new assessment"]) expect(html).toContain(text);
+    for (const text of ["Request recorded.", "Safe receipt", "Submitted business", "Consultation focus", "Recorded time", "Blueprint ID", "Same request, same receipt", "A human response time is not guaranteed by this receipt", "Return to Blueprint", "Start a new assessment"]) expect(html).toContain(text);
     expect(html).toContain('data-consultation-state="idempotent-replay"');
     expect(html).not.toMatch(/example\.test|\+60 12/);
   });

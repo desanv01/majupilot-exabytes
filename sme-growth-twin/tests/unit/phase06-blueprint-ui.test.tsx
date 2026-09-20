@@ -106,7 +106,7 @@ describe("UI Upgrade Phase 06 Blueprint contract", () => {
   });
 
   it("has honest consultation copy and no visible en dash or em dash", () => {
-    expect(html).toContain("records a process-local request");
+    expect(html).toContain("creates a durable consultation handoff");
     expect(html).toContain("It does not send email, create a CRM record, promise a human response, or provide vendor fulfilment.");
     const visibleText = html.replace(/<[^>]+>/g, " ");
     expect(visibleText).not.toMatch(/[–—]/);

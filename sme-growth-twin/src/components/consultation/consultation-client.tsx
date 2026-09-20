@@ -7,8 +7,14 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 import { Brand } from "@/components/assessment/brand";
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
+import type { AssessmentDraft } from "@/domain/assessment";
 import type { Blueprint } from "@/domain/blueprint";
+import type { BusinessTwin } from "@/domain/business-twin";
+import type { LeadReceiptV2 } from "@/domain/lead-sales";
 import { contactSchema, leadReceiptSchema, type LeadReceipt } from "@/domain/leads";
+import type { RecommendationResult } from "@/domain/recommendations";
+import type { ScenarioComparison } from "@/domain/scenarios";
+import type { DiagnosticResult } from "@/domain/scoring";
 import { EXABYTES_CONSULTATION_POLICY } from "@/domain-packs/exabytes/consultation-rules";
 import { loadAssessmentDraft } from "@/infrastructure/persistence/local-assessment-store";
 import { loadBlueprint } from "@/infrastructure/persistence/local-blueprint-store";
@@ -16,7 +22,7 @@ import { loadDiagnosticResult } from "@/infrastructure/persistence/local-diagnos
 import { loadRecommendationResult } from "@/infrastructure/persistence/local-recommendation-store";
 import { clearKnownProjectStorage } from "@/infrastructure/persistence/project-storage";
 import { loadScenarioComparison } from "@/infrastructure/persistence/local-scenario-store";
-import { loadLeadReceipt, saveLeadReceipt } from "@/infrastructure/persistence/session-lead-receipt-store";
+import { createDurableConsultation, loadDurableJourney } from "@/infrastructure/persistence/durable-journey-client";
 
 const urgencyLabels = {
   within_30_days: "Within 30 days",
@@ -63,9 +69,21 @@ function JourneyRail() {
 
 const score = (value: number | null) => (value === null ? "Not available" : value.toFixed(1));
 
-function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt: LeadReceipt; onNew: () => void }) {
+type ConsultationJourney = {
+  draft: AssessmentDraft;
+  twin: BusinessTwin;
+  diagnostic: DiagnosticResult;
+  recommendations: RecommendationResult;
+  comparison: ScenarioComparison;
+  blueprint: Blueprint;
+};
+
+type ConsultationReceipt = LeadReceiptV2 | LeadReceipt;
+
+function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt: ConsultationReceipt; onNew: () => void }) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => { headingRef.current?.focus(); }, []);
+  const durable = "receiptId" in receipt;
 
   return (
     <main className="consultation-shell success-shell" data-consultation-state={receipt.replayed ? "idempotent-replay" : "success"}>
@@ -74,7 +92,7 @@ function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt:
         <div>
           <p className="eyebrow">Consultation request</p>
           <h1 id="receipt-title" ref={headingRef} tabIndex={-1}>Request recorded.</h1>
-          <p>Your consultation request has been recorded against the current Blueprint. No email, CRM delivery, durable production storage, or human response is claimed.</p>
+          <p>Your consultation request, consent record, and exact canonical Blueprint report are securely recorded for handoff.</p>
         </div>
       </section>
 
@@ -84,17 +102,19 @@ function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt:
           {receipt.replayed ? <p className="receipt-replay">Same request, same receipt</p> : null}
         </div>
         <dl>
-          <div><dt>Lead reference</dt><dd>{receipt.leadReference}</dd></div>
-          <div><dt>Recorded time</dt><dd>{new Date(receipt.submittedAt).toLocaleString("en-MY", { dateStyle: "medium", timeStyle: "short" })}</dd></div>
+          <div><dt>Receipt reference</dt><dd>{durable ? receipt.receiptId : receipt.leadReference}</dd></div>
+          <div><dt>Lead reference</dt><dd>{durable ? receipt.leadId : receipt.leadReference}</dd></div>
           <div><dt>Submitted business</dt><dd>{blueprint.snapshot.twin.identity.businessName}</dd></div>
           <div><dt>Consultation focus</dt><dd>{blueprint.snapshot.selectedScenario.title}</dd></div>
-          <div><dt>Blueprint ID</dt><dd>{receipt.blueprintId}</dd></div>
+          <div><dt>Blueprint ID</dt><dd>{blueprint.id}</dd></div>
+          <div><dt>Recorded time</dt><dd>{durable ? "Recorded securely" : new Date(receipt.submittedAt).toLocaleString("en-MY", { timeZone: "Asia/Kuala_Lumpur" })}</dd></div>
+          <div><dt>Assignment</dt><dd>{durable && receipt.assignmentState === "assigned" ? "Assigned for follow-up" : "Queued for assignment"}</dd></div>
         </dl>
       </section>
 
       <section className="receipt-boundary" aria-labelledby="receipt-boundary-title">
-        <div><h2 id="receipt-boundary-title">What this receipt proves</h2><p>The consented request and exact Blueprint snapshot were accepted by this running prototype. Keep the lead reference with your Blueprint.</p></div>
-        <p>It does not prove that a consultant was notified. Email, CRM delivery, consultant access, and a guaranteed response remain future production work.</p>
+        <div><h2 id="receipt-boundary-title">What this receipt proves</h2><p>The consented request, immutable report identity, assignment decision, and delivery work were committed together.</p></div>
+        <p>Delivery is retried by MajuPilot&apos;s signed outbox worker. A human response time is not guaranteed by this receipt.</p>
       </section>
 
       <div className="success-actions" aria-label="Receipt actions">
@@ -105,7 +125,8 @@ function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt:
   );
 }
 
-export function ConsultationView({ blueprint, initialReceipt }: { blueprint: Blueprint; initialReceipt?: LeadReceipt }) {
+export function ConsultationView({ journey, blueprint: suppliedBlueprint, initialReceipt }: { journey?: ConsultationJourney; blueprint?: Blueprint; initialReceipt?: ConsultationReceipt }) {
+  const blueprint = journey?.blueprint ?? suppliedBlueprint!;
   const router = useRouter();
   const submissionId = useRef(crypto.randomUUID());
   const errorSummaryRef = useRef<HTMLDivElement>(null);
@@ -147,16 +168,16 @@ export function ConsultationView({ blueprint, initialReceipt }: { blueprint: Blu
     setBusy(true);
     setStatus("Recording the request. Keep this page open.");
     try {
-      const response = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ submissionId: submissionId.current, contact: checked.contact, consent: { accepted: form.consent, wordingVersion: EXABYTES_CONSULTATION_POLICY.consentWordingVersion }, honeypot: form.website, blueprint }) });
-      const payload: unknown = await response.json();
-      if (response.ok) {
-        const safe = leadReceiptSchema.parse(payload);
-        saveLeadReceipt(sessionStorage, safe);
-        setReceipt(safe);
-        return;
+      if (journey) {
+        const durable = await createDurableConsultation(localStorage, journey, checked.contact);
+        if (!durable.lead) throw new Error("lead_unavailable");
+        setReceipt(durable.lead);
+      } else {
+        const response = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ submissionId: submissionId.current, contact: checked.contact, consent: { accepted: form.consent, wordingVersion: EXABYTES_CONSULTATION_POLICY.consentWordingVersion }, honeypot: form.website, blueprint }) });
+        if (!response.ok) throw new Error("lead_unavailable");
+        setReceipt(leadReceiptSchema.parse(await response.json()));
       }
-      const code = payload && typeof payload === "object" && "error" in payload ? String(payload.error) : "lead_unavailable";
-      setStatus(code === "consent_required" ? "Consent is required before this request can be recorded." : code === "rate_limited" ? "Too many new requests were attempted. Wait before trying again. Your entries are still here." : code === "invalid_request" ? "The request could not be validated. Review the fields and try again." : "The request could not be recorded safely. Your entries are still here so you can retry.");
+      return;
     } catch {
       setStatus("The request could not be recorded safely. Your entries are still here so you can retry.");
     } finally {
@@ -221,7 +242,7 @@ export function ConsultationView({ blueprint, initialReceipt }: { blueprint: Blu
           <button className="button primary consultation-submit" type="submit" disabled={busy}>{busy ? "Recording request..." : "Record consultation request"}</button>
         </form>
 
-        <aside className="consultation-aside"><p className="eyebrow">Privacy and handoff</p><h2>Your evidence stays inspectable.</h2><ul><li><strong>Exact Blueprint</strong><span>No replacement or older report is submitted.</span></li><li><strong>Explicit choice</strong><span>Consent starts unchecked and is enforced by the form, API, and core.</span></li><li><strong>Safe receipt</strong><span>Only the lead reference, time, Blueprint ID, and status are kept in this browser session.</span></li><li><strong>Prototype boundary</strong><span>The record is process-local. No email, webhook, CRM, or external send occurs.</span></li></ul><Link href="/blueprint">Return to the same Blueprint</Link></aside>
+        <aside className="consultation-aside"><p className="eyebrow">Privacy and handoff</p><h2>Your evidence stays inspectable.</h2><ul><li><strong>Exact Blueprint</strong><span>A canonical PDF and SHA-256 identity bind the request to this report.</span></li><li><strong>Explicit choice</strong><span>Consent starts unchecked and is enforced before any lead is created.</span></li><li><strong>Durable receipt</strong><span>The lead, assignment, consent snapshot, and delivery event are persisted together.</span></li><li><strong>Signed delivery</strong><span>The outbox worker signs the minimized webhook payload and retries safely.</span></li></ul><Link href="/blueprint">Return to the same Blueprint</Link></aside>
       </div>
     </main>
   );
@@ -229,7 +250,7 @@ export function ConsultationView({ blueprint, initialReceipt }: { blueprint: Blu
 
 export function ConsultationClient() {
   const router = useRouter();
-  const [loaded, setLoaded] = useState<{ blueprint: Blueprint; receipt?: LeadReceipt }>();
+  const [loaded, setLoaded] = useState<{ journey: ConsultationJourney; receipt?: LeadReceiptV2 }>();
 
   useEffect(() => {
     const assessment = loadAssessmentDraft(localStorage);
@@ -244,12 +265,15 @@ export function ConsultationClient() {
       if (comparison.status !== "ok") { router.replace("/blueprint"); return; }
       const blueprint = loadBlueprint(localStorage, twin, diagnostic.result, recommendations.result, comparison.result);
       if (blueprint.status !== "ok") { router.replace("/blueprint"); return; }
-      const saved = loadLeadReceipt(sessionStorage);
-      setLoaded({ blueprint: blueprint.result, receipt: saved?.blueprintId === blueprint.result.id ? saved : undefined });
+      const durable = loadDurableJourney(localStorage);
+      setLoaded({
+        journey: { draft: assessment.draft, twin, diagnostic: diagnostic.result, recommendations: recommendations.result, comparison: comparison.result, blueprint: blueprint.result },
+        receipt: durable?.lead,
+      });
     } catch { router.replace("/blueprint"); }
   }, [router]);
 
   if (!loaded) return <main className="consultation-loading" aria-live="polite"><div className="consultation-loading-shape" aria-hidden="true"><span /><span /><span /></div><p className="eyebrow">Blueprint handoff</p><h1>Validating your current Blueprint.</h1><p>Checking the saved source chain before contact details are requested.</p></main>;
 
-  return <><header className="topbar consultation-topbar"><Brand /><span className="save-status">Blueprint verified</span></header><JourneyRail /><ConsultationView blueprint={loaded.blueprint} initialReceipt={loaded.receipt} /></>;
+  return <><header className="topbar consultation-topbar"><Brand /><span className="save-status">Blueprint verified</span></header><JourneyRail /><ConsultationView journey={loaded.journey} initialReceipt={loaded.receipt} /></>;
 }

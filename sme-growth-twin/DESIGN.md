@@ -1,10 +1,10 @@
-# SME Growth Twin Design Authority
+# MajuPilot Design Authority
 
 Status: approved for implementation on 18 September 2026.
 
 ## Product design read
 
-SME Growth Twin is a trust-first B2B decision product for Malaysian SMEs and Exabytes judges. Its visual language is an editorial evidence cockpit: deep ink, warm paper, calm teal, explicit provenance, restrained motion, and enough density to feel useful without becoming a conventional dashboard.
+MajuPilot is a trust-first B2B decision product for Malaysian SMEs and Exabytes judges. Its visual language is an editorial evidence cockpit: deep ink, warm paper, calm teal, explicit provenance, restrained motion, and enough density to feel useful without becoming a conventional dashboard.
 
 The current work is a product-wide visual overhaul, not a content or contract rewrite. Routes, schemas, deterministic calculations, storage behavior, consent boundaries, and tests are protected unless a phase packet explicitly says otherwise.
 

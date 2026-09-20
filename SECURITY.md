@@ -2,7 +2,7 @@
 
 ## Supported status
 
-SME Growth Twin is currently a hackathon prototype, not a production service. It uses browser-local demonstration persistence and does not yet provide production authentication, tenant isolation, encrypted server-side storage, operational monitoring, or a formal retention system.
+MajuPilot is a hackathon release candidate with hosted Supabase persistence, owner-scoped guest sessions, tenant-aware authorization, row-level security, private report storage, immutable consent and audit records, and durable outbox delivery. It is not a compliance certification or a guarantee of production operational support.
 
 ## Reporting a vulnerability
 
@@ -17,8 +17,8 @@ Do not publish exploit details in a normal issue. Use GitHub's private vulnerabi
 
 ## Current hardening and limits
 
-Static responses deny framing and MIME sniffing, apply a conservative referrer policy and restrictive permissions policy, and use a Next.js-compatible Content Security Policy. The lead and advisor APIs require bounded JSON and strict schemas and return `Cache-Control: no-store`; both have prototype-grade process-local rate limits that retain salted hashes of coarse client identifiers rather than raw IPs or request content.
+Static responses deny framing and MIME sniffing, apply a conservative referrer policy and restrictive permissions policy, and use a Next.js-compatible Content Security Policy. Versioned APIs require bounded JSON and strict schemas, return `Cache-Control: no-store`, enforce owner or role checks, and keep service credentials on the server.
 
 Advisor calls are server-only and bounded to five roles, one retry per role, 900 output tokens per attempt, and 12 seconds per role (ten attempts/9,000 output tokens maximum per request). The deterministic fallback remains available without credentials.
 
-Browser assessment/result/Blueprint records can be removed by the scoped reset. Consultation records and limiter state disappear with the server instance lifecycle. There is no formal production retention/deletion service, authentication, tenant isolation, durable lead storage, monitoring, audit log, backup, encryption claim, or compliance certification.
+Browser drafts can be removed by the scoped reset. Completed evidence, reports, consent, leads, assignments, delivery attempts, and Copilot history use the hosted persistence boundary. Export and deletion request contracts exist, while production operations, backup policy, monitoring coverage, and regulatory certification remain deployment-owner responsibilities.

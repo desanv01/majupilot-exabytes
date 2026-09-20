@@ -1,4 +1,4 @@
-# SME Growth Twin Design System Master
+# MajuPilot Design System Master
 
 Status: curated and approved on 18 September 2026.
 

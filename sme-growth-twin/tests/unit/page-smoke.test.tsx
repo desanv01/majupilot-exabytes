@@ -11,7 +11,8 @@ describe("Stage 01 home page", () => {
   it("renders the assessment start without fabricated results", () => {
     const html = renderToStaticMarkup(<HomePage />);
 
-    expect(html).toContain("SME Growth Twin");
+    expect(html).toContain("MajuPilot");
+    expect(html).not.toContain("SME Growth Twin");
     expect(html).toContain("Start assessment");
     expect(html).not.toMatch(/maturity score|recommended product|scenario result/i);
   });

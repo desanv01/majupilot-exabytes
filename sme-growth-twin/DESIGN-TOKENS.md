@@ -1,4 +1,4 @@
-# SME Growth Twin Design Tokens
+# MajuPilot Design Tokens
 
 These values are the authoritative starting tokens for the redesign. A phase may add semantic aliases, but it must not introduce an unrelated visual system.
 

@@ -504,7 +504,7 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
 
         <section id="consultation-preview">
           <ReportHeading index={16}>Consultation handoff</ReportHeading>
-          <p>The next step reviews the content that will be shared, collects contact details and explicit consent, and records a process-local request.</p>
+          <p>The next step reviews the exact report, collects contact details and explicit consent, and creates a durable consultation handoff.</p>
           <p>It does not send email, create a CRM record, promise a human response, or provide vendor fulfilment.</p>
           <div className="phase06-consultation-action report-consultation-action no-print">
             <Link className="button primary" href="/consultation">Request consultation</Link>

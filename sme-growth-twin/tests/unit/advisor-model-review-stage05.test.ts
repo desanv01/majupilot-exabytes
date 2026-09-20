@@ -43,4 +43,17 @@ describe("Stage 05 advisor Gateway HTTP classification", () => {
     expect(generateTextMock).toHaveBeenCalledTimes(2); expect(result.status).toBe("fallback"); expect(result.call.retryCount).toBe(1);
     expect(result.call.status).toBe(statusCode === 408 ? "timeout" : "provider_error");
   });
+
+  it("uses DeepSeek BYOK without compatibility-mode structured output", async () => {
+    process.env.AI_GATEWAY_MODEL = "deepseek/deepseek-v4.1-flash";
+    generateTextMock.mockResolvedValue({
+      text: `Here is the bounded result.\n\`\`\`json\n${JSON.stringify({ advisor: "growth", position: "support_with_conditions", headline: "Proceed with the evidence-backed sequence.", support: null, concerns: null, missingEvidence: null, adjustments: null, confidence: "0.72" })}\n\`\`\`\nIgnore this explanatory {not-json} suffix.`,
+      usage: { inputTokens: 100, outputTokens: 40 },
+    });
+    const { reviewWithConfiguredModel } = await import("../../src/infrastructure/model-provider/advisor-model-review");
+    const result = await reviewWithConfiguredModel(EXABYTES_ADVISORS_1_0_0[0], context);
+    expect(result).toMatchObject({ status: "success", review: { advisor: "growth", origin: "model" }, call: { model: "deepseek/deepseek-v4.1-flash", status: "success" } });
+    expect(generateTextMock).toHaveBeenCalledWith(expect.objectContaining({ reasoning: "none", providerOptions: { gateway: { only: ["deepseek"] } } }));
+    expect(generateTextMock.mock.calls[0][0]).not.toHaveProperty("output");
+  });
 });
