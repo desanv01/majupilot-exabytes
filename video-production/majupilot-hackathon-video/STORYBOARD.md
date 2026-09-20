@@ -393,7 +393,7 @@ Stage 5 replaces the labelled placeholder with the actual capture described in t
 - rules: control-target-sync; stat-bars-and-fills; cursor-click-ripple
 - registry: simulated-cursor + ui-focus-zoom; data-chart is a reference only, not a replacement for the real UI.
 - layer_plan: BG authentic scenario lab; MG three scenario cards and schedule; FG Balanced Growth selection plus four exact low/base/high registers.
-- truthfulness: Cost RM9,200/RM18,400/RM27,600; value RM2,358/RM7,254/RM15,233; net -RM25,242/-RM11,146/RM6,033; payback 7.2/30.4/140.5 months.
+- truthfulness: Cost RM9,200/RM18,400/RM27,600; value RM2,358/RM7,254/RM15,233; net -RM25,242/-RM11,146/RM6,033; live payback labels 7.2/30.4/More than 60 months, with underlying deterministic worst-case value 140.5 months.
 - constraint: Keep negative net values and planning-assumption/not-quote labels visible; no ROI guarantee.
 - first_motion: Cursor selects Balanced Growth; linked financial ranges highlight in the same beat.
 

@@ -47,7 +47,7 @@ The current visual path showed the fictional Case A banner and the following exa
 - Cost: RM9,200 / RM18,400 / RM27,600 low / base / high.
 - Operational value: RM2,358 / RM7,254 / RM15,233 low / base / high.
 - Net value: -RM25,242 / -RM11,146 / RM6,033 low / base / high.
-- Payback: 7.2 / 30.4 / 140.5 months best / base / worst.
+- Payback: 7.2 / 30.4 / 140.5 months best / base / worst in deterministic data; the current production UI intentionally renders the worst value as `More than 60 months`.
 - Blueprint: 16 sections; consultant notes were visibly empty in the inspected run.
 
 The app labels scenario values as planning assumptions, not an Exabytes quote. Negative
