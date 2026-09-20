@@ -31,4 +31,11 @@ The consolidated smoke runs from a new browser profile and uses only a labelled 
 
 Final local gates: 47 test files passed with 221 tests passed and one intentionally skipped; TypeScript passed; ESLint passed; the production build compiled and generated 38 static pages.
 
-Preview CI/deployment and production promotion are recorded when the release PR is accepted.
+## Release acceptance
+
+- PR [#11](https://github.com/desanv01/majupilot-exabytes/pull/11) merged as `b825ab6` after the required `validate` and Vercel checks passed.
+- The preview deployment completed successfully. Its public URL remained behind Vercel Deployment Protection, so it was not falsely treated as the application surface.
+- The merged commit deployed successfully to `https://majupilot-exabytes.vercel.app/`.
+- The complete consolidated release proof passed against that public production URL.
+- Desktop visual inspection confirmed the branded MajuPilot home and Transformation Copilot surfaces with no legacy brand, no internal phase copy, and no horizontal overflow.
+- Vercel reported no recent production error logs after the proof.
