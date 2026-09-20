@@ -77,7 +77,7 @@ try {
   const database = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SECRET_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: row, error } = await database.from("model_calls").select("*").eq("assessment_session_id", receipt.assessmentSessionId).eq("operation", "assessment_follow_up").order("created_at", { ascending: false }).limit(1).single();
   if (error || !row) throw new Error("Persisted model-call telemetry was not found");
-  const allowedColumns = new Set(["id", "assessment_session_id", "organization_id", "operation", "provider", "model", "schema_version", "prompt_version", "started_at", "completed_at", "latency_ms", "input_tokens", "output_tokens", "estimated_cost", "retry_count", "outcome", "safe_error_code", "evidence_ids", "created_at"]);
+  const allowedColumns = new Set(["id", "assessment_session_id", "organization_id", "operation", "provider", "model", "schema_version", "prompt_version", "started_at", "completed_at", "latency_ms", "input_tokens", "output_tokens", "estimated_cost", "retry_count", "outcome", "safe_error_code", "evidence_ids", "created_at", "chat_session_id", "turn_id", "tool_names", "tool_call_count", "finish_reason"]);
   const unexpectedColumns = Object.keys(row).filter((key) => !allowedColumns.has(key));
   const serialized = JSON.stringify(row);
   if (unexpectedColumns.length || serialized.includes(marker)) throw new Error("Telemetry contains an unexpected or raw payload field");

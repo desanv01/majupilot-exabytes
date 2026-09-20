@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "phase-i-release-proof-1.0.0",
+  "proofDate": "2026-09-20",
+  "baselineCommit": "2ea382b",
+  "branch": "codex/phase-i-final-release-proof",
+  "result": "under_review",
+  "localEvidence": {
+    "productionBuild": {
+      "status": "passed",
+      "framework": "Next.js 16.3.5",
+      "staticPages": 35
+    },
+    "browserJourney": {
+      "status": "passed",
+      "mode": "local-production",
+      "guestFirst": true,
+      "registrationRequired": false,
+      "blueprintDurationMs": 3284,
+      "underFiveMinutes": true,
+      "consultationCompleted": true,
+      "safeReceipt": true,
+      "criticalOrSeriousAccessibilityViolations": 0,
+      "consoleErrors": 0,
+      "failedRequests": 0,
+      "errorOverlay": false,
+      "evidence": "browser/stage-07-browser-evidence.json"
+    },
+    "unitIntegration": {
+      "status": "passed",
+      "testFilesPassed": 47,
+      "testFilesSkipped": 1,
+      "testsPassed": 220,
+      "testsSkipped": 1
+    },
+    "databaseSecurity": {
+      "status": "passed",
+      "pgTapFiles": 8,
+      "assertions": 125,
+      "scope": [
+        "guest and revocation",
+        "tenant and cross-tenant denial",
+        "consultant, salesperson, manager, and system-admin authorization",
+        "private report storage",
+        "consent, lead, assignment, Copilot confirmation, and outbox"
+      ]
+    },
+    "apiJourney": {
+      "status": "passed",
+      "restartResume": true,
+      "revokedGuestDenied": true,
+      "typedCopilotRead": true,
+      "copilotReplayIdempotent": true,
+      "promptInjectionRejected": true,
+      "unknownToolRejected": true,
+      "crossSessionDenied": true,
+      "requiredModeUnavailableIsVisible": true
+    },
+    "typeCheck": "passed",
+    "lint": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 1,
+      "warning": "Existing unused type-only import in report-service.ts; non-blocking and outside the Phase I proof-harness correction."
+    },
+    "productionDependencyAudit": {
+      "status": "passed",
+      "vulnerabilities": 0
+    }
+  },
+  "liveAi": {
+    "configuredModel": "deepseek/deepseek-v4.1-flash",
+    "currentOfficialModelListingVerified": true,
+    "officialModelUrl": "https://vercel.com/ai-gateway/models/deepseek-v4.1-flash",
+    "requiredModeFailureContract": "passed",
+    "phaseILiveCall": "passed",
+    "proof": {
+      "operation": "assessment_follow_up",
+      "outcome": "success",
+      "provider": "vercel_ai_gateway",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "inputTokens": 523,
+      "outputTokens": 107,
+      "estimatedCostUsd": 0.000285,
+      "latencyMs": 1297,
+      "retryCount": 0,
+      "rawPayloadPersisted": false
+    },
+    "acceptedPriorEvidence": "The V2 ledger also records successful required-mode Phase C, D, and G live proofs with this exact model."
+  },
+  "hostedEnvironment": {
+    "supabase": {
+      "status": "environment_gated",
+      "gate": "No hosted V2 Supabase URL, publishable key, or server secret is available; local Supabase proof passed."
+    },
+    "vercelDeployment": {
+      "status": "environment_gated",
+      "gate": "No .vercel project link, Vercel CLI, VERCEL_TOKEN, VERCEL_ORG_ID, or VERCEL_PROJECT_ID is available. No preview or production deployment was claimed."
+    },
+    "webhookDelivery": {
+      "status": "environment_gated",
+      "gate": "No approved OUTBOX_WEBHOOK_URL or OUTBOX_WEBHOOK_SECRET is available. Local signing, retry, deduplication, dead-letter, and replay proofs passed; no external receipt was claimed."
+    }
+  },
+  "privacy": {
+    "credentialsCommitted": false,
+    "rawPromptsCommitted": false,
+    "rawModelReasoningCommitted": false,
+    "privateReportUrlsCommitted": false,
+    "contactPayloadsCommitted": false
+  }
+}
