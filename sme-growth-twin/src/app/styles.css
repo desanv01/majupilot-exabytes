@@ -3483,3 +3483,44 @@ a { color: inherit; }
   .consultation-fields select { transition: none; }
   .consultation-loading-shape span { animation: none; }
 }
+
+/* MajuPilot production shell and Transformation Copilot */
+.copilot-page { min-height: 100dvh; color: var(--color-text); background: var(--color-paper-50); }
+.copilot-topbar { width: 100%; max-width: none; height: 72px; padding: 0 max(24px, calc((100vw - 1280px) / 2)); color: var(--color-paper-50); background: var(--color-ink-950); }
+.copilot-topbar .brand small { color: #b9cbd2; }
+.copilot-topbar nav { display: flex; align-items: center; gap: 28px; }
+.copilot-topbar nav a { min-height: 44px; display: inline-flex; align-items: center; color: #dbe8ea; font-weight: 700; text-decoration: none; }
+.copilot-shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 56px 0 88px; }
+.copilot-intro { padding: clamp(34px, 5vw, 62px); border-radius: 18px; color: var(--color-paper-50); background: radial-gradient(circle at 88% 20%, rgb(19 162 155 / 26%), transparent 34%), var(--color-ink-950); }
+.copilot-intro .eyebrow { color: var(--color-teal-200); }
+.copilot-intro h1 { max-width: 760px; margin: 10px 0 18px; font-family: var(--font-libre-baskerville), Georgia, serif; font-size: clamp(40px, 5.4vw, 68px); line-height: 1.04; letter-spacing: -.035em; }
+.copilot-intro > p:not(.eyebrow) { max-width: 680px; color: #d5e4e7; font-size: 18px; line-height: 1.6; }
+.copilot-live-status { margin-top: 22px; padding: 9px 13px; display: inline-flex; border: 1px solid rgb(191 234 227 / 44%); border-radius: 999px; color: var(--color-teal-200); font-size: 13px; font-weight: 700; }
+.copilot-empty { margin-top: 24px; padding: 38px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.copilot-empty h2 { margin: 0; color: var(--color-ink-950); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 30px; }
+.copilot-empty p { color: var(--color-text-muted); }
+.copilot-workspace { margin-top: 24px; display: grid; grid-template-rows: minmax(360px, 56dvh) auto; border: 1px solid var(--color-border); border-radius: 18px; background: var(--color-surface); overflow: hidden; box-shadow: 0 20px 55px rgb(8 45 63 / 8%); }
+.copilot-log { padding: clamp(22px, 4vw, 40px); display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+.copilot-message { width: min(760px, 88%); padding: 17px 19px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-paper-100); }
+.copilot-message.user { margin-left: auto; color: var(--color-paper-50); background: var(--color-ink-800); border-color: var(--color-ink-800); }
+.copilot-message.status { width: auto; align-self: center; padding: 10px 14px; color: var(--color-teal-800); background: var(--color-teal-100); }
+.copilot-message > span { display: block; margin-bottom: 5px; color: var(--color-teal-700); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.copilot-message.user > span { color: var(--color-teal-200); }
+.copilot-message p { margin: 0; line-height: 1.6; white-space: pre-wrap; }
+.copilot-message .button { margin-top: 14px; }
+.copilot-composer { padding: 22px 24px; border-top: 1px solid var(--color-border); background: var(--color-paper-100); }
+.copilot-composer > label { display: block; margin-bottom: 9px; color: var(--color-ink-950); font-weight: 800; }
+.copilot-composer > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 12px; }
+.copilot-composer textarea { width: 100%; min-height: 88px; resize: vertical; padding: 13px 14px; border: 1px solid #9fb8bd; border-radius: 10px; color: var(--color-ink-950); background: var(--color-surface); font: inherit; }
+.copilot-composer .button { min-width: 118px; min-height: 50px; }
+.copilot-composer small { margin-top: 9px; display: block; color: var(--color-text-muted); }
+
+@media (max-width: 700px) {
+  .copilot-topbar { height: auto; min-height: 72px; padding: 12px 18px; align-items: flex-start; flex-direction: column; }
+  .copilot-topbar nav { width: 100%; gap: 18px; overflow-x: auto; }
+  .copilot-shell { width: min(100% - 28px, 1180px); padding-top: 24px; }
+  .copilot-intro { padding: 30px 22px; }
+  .copilot-message { width: 95%; }
+  .copilot-composer > div { grid-template-columns: 1fr; }
+  .copilot-composer .button { width: 100%; }
+}

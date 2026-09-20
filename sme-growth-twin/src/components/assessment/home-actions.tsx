@@ -95,7 +95,7 @@ export function DemoLauncher() {
       clearKnownProjectStorage(localStorage, sessionStorage);
       window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT));
       setHasProjectRecords(false);
-      setStatus("SME Growth Twin demonstration data was reset. Other browser storage was not changed.");
+      setStatus("MajuPilot demonstration data was reset. Other browser storage was not changed.");
     } catch {
       setDemoAvailable(false);
       setStatus("Demo storage is unavailable in this browser. No other browser data was changed.");
@@ -109,7 +109,7 @@ export function DemoLauncher() {
             <p className="eyebrow">Fictional demonstration cases</p>
             <h2 id="demo-title">Explore the complete journey with sample businesses.</h2>
             <p id="demo-disclosure">
-              Loading a case replaces only this device&apos;s saved prototype records.
+              Loading a case replaces only this device&apos;s saved demonstration records.
               It does not create consent or a consultation lead.
             </p>
           </div>

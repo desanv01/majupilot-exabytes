@@ -18,7 +18,8 @@ describe("Phase 02 assessment UI contract", () => {
       </AssessmentFrame>,
     );
 
-    expect(html).toContain("SME Growth Twin");
+    expect(html).toContain("MajuPilot");
+    expect(html).not.toContain("SME Growth Twin");
     expect(html).toContain("Build your Business Twin");
     expect(html).toContain("Device storage unavailable");
     expect(html).toContain("Not saving");

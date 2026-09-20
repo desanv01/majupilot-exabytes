@@ -28,7 +28,7 @@ export function DemoBanner() {
 
   const reset = () => {
     const confirmation =
-      "SME Growth Twin demonstration data was reset. Other browser storage was not changed.";
+      "MajuPilot demonstration data was reset. Other browser storage was not changed.";
     clearKnownProjectStorage(localStorage, sessionStorage);
     sessionStorage.setItem(RESET_STATUS_SESSION_KEY, confirmation);
     window.dispatchEvent(new Event(DEMO_SESSION_CHANGED_EVENT));

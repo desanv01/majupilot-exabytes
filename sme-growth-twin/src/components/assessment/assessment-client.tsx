@@ -31,6 +31,7 @@ import {
   loadAssessmentDraft,
   saveAssessmentDraft,
 } from "@/infrastructure/persistence/local-assessment-store";
+import { clearKnownProjectStorage } from "@/infrastructure/persistence/project-storage";
 
 import { AssessmentFrame, type SaveState } from "./assessment-frame";
 
@@ -367,7 +368,7 @@ export function AssessmentClient() {
 
     if (params.get("new") === "1") {
       try {
-        clearAssessmentDraft(localStorage);
+        clearKnownProjectStorage(localStorage, sessionStorage);
       } catch {
         storage.current = null;
       }

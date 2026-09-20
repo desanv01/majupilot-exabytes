@@ -26,3 +26,4 @@ Thumbs.db
 # TypeScript build metadata
 *.tsbuildinfo
 next-env.d.ts
+.vercel

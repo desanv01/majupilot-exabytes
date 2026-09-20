@@ -20,9 +20,9 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 export const metadata: Metadata = {
-  title: "SME Growth Twin",
+  title: "MajuPilot",
   description:
-    "An explainable decision system for SME digital and AI transformation planning.",
+    "Evidence-led digital and AI transformation planning for Malaysian SMEs.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

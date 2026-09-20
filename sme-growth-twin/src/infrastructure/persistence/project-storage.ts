@@ -6,6 +6,7 @@ import { DIAGNOSTIC_STORAGE_KEY } from "./local-diagnostic-store";
 import { RECOMMENDATION_STORAGE_KEY } from "./local-recommendation-store";
 import { SCENARIO_STORAGE_KEY } from "./local-scenario-store";
 import { LEAD_RECEIPT_SESSION_KEY } from "./session-lead-receipt-store";
+import { DURABLE_JOURNEY_STORAGE_KEY } from "./durable-journey-client";
 
 export const DEMO_SESSION_STORAGE_KEY = "sme-growth-twin:demo-session:1.0.0";
 export const RESET_STATUS_SESSION_KEY = "sme-growth-twin:reset-status:1.0.0";
@@ -32,6 +33,7 @@ export const PROJECT_LOCAL_STORAGE_KEYS = [
   SCENARIO_STORAGE_KEY,
   BLUEPRINT_STORAGE_KEY,
   DEMO_SESSION_STORAGE_KEY,
+  DURABLE_JOURNEY_STORAGE_KEY,
 ] as const;
 
 export const PROJECT_SESSION_STORAGE_KEYS = [

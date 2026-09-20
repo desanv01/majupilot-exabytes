@@ -1,4 +1,4 @@
-# SME Growth Twin UI Reference Board
+# MajuPilot UI Reference Board
 
 ## Authority order
 
@@ -45,7 +45,7 @@ Phase 02 uses corrected 12ui Candidate B, selected on 18 September 2026:
 
 Retain the deep-ink desktop context rail, calm warm-paper work area, clear five-step progress, strong form hierarchy, and balanced action placement. Apply these mandatory corrections:
 
-- use the existing SME Growth Twin mark and fonts rather than generated leaf branding or Inter;
+- use the existing MajuPilot mark and fonts rather than generated leaf branding or Inter;
 - omit all generated botanical raster assets;
 - use the rail for real product context, saved-on-device status, local privacy, and assistance, never decoration;
 - collapse the rail into a compact header and `Step N of 5` progress treatment below 768px;

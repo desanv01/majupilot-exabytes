@@ -71,7 +71,7 @@ describe("Stage 07 advisor security and budgets", () => {
     }
     const limited = await POST(request(rawIp));
     expect(limited.status).toBe(429);
-    expect(await limited.json()).toEqual({ error: "rate_limited" });
+    expect(await limited.json()).toMatchObject({ error: { code: "AI_BUDGET_EXCEEDED" } });
     expect(Number(limited.headers.get("retry-after"))).toBeGreaterThan(0);
     expect(advisorRateLimiter.hashedKeysForTests()).toHaveLength(1);
     expect(advisorRateLimiter.hashedKeysForTests()[0]).not.toContain(rawIp);

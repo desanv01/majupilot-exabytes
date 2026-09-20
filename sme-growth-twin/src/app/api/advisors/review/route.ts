@@ -46,10 +46,11 @@ export async function POST(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const rawClientKey = (forwarded || request.headers.get("x-real-ip") || "unidentified-client").slice(0, 128);
   const rate = advisorRateLimiter.check(rawClientKey);
-  if (!rate.allowed) return json({ error: "rate_limited" }, 429, { "Retry-After": String(rate.retryAfterSeconds) });
+  if (!rate.allowed) return json({ error: { code: "AI_BUDGET_EXCEEDED", requestId: crypto.randomUUID() } }, 429, { "Retry-After": String(rate.retryAfterSeconds) });
   const outcomes = await Promise.all(EXABYTES_ADVISORS_1_0_0.map((definition) => reviewWithConfiguredModel(definition, parsed.data.context)));
   if (executionMode() === "required" && outcomes.some((outcome) => outcome.status === "fallback")) {
     const calls = outcomes.map((outcome) => outcome.call);
+    console.warn("[advisor-review] required-mode panel rejected", calls.map(({ advisor, status, errorCategory, retryCount }) => ({ advisor, status, errorCategory, retryCount })));
     const code = calls.some((call) => call.status === "timeout") ? "AI_TIMEOUT" : calls.some((call) => call.status === "invalid_output" || call.status === "invalid_evidence") ? "AI_INVALID_OUTPUT" : "AI_REQUIRED_UNAVAILABLE";
     return json({ error: { code, requestId: crypto.randomUUID() } }, code === "AI_TIMEOUT" ? 504 : code === "AI_INVALID_OUTPUT" ? 502 : 503);
   }

@@ -42,7 +42,7 @@ export default function HomePage() {
           <Link href="#how-it-works">How it works</Link>
           <Link href="#assessment-topics">Assessment</Link>
           <Link href="#demo-cases">Demo cases</Link>
-          <Link href="/v2">V2 capabilities</Link>
+          <Link href="/copilot">Copilot</Link>
         </nav>
         <details className="home-mobile-menu">
           <summary>Menu</summary>
@@ -50,7 +50,7 @@ export default function HomePage() {
             <Link href="#how-it-works">How it works</Link>
             <Link href="#assessment-topics">Assessment</Link>
             <Link href="#demo-cases">Demo cases</Link>
-            <Link href="/v2">V2 capabilities</Link>
+            <Link href="/copilot">Copilot</Link>
           </nav>
         </details>
       </header>
@@ -125,7 +125,7 @@ export default function HomePage() {
             ))}
           </ol>
           <p className="home-local-note">
-            <strong>Saved on this device.</strong> Edit answers, resume later, or start over from a clear confirmation.
+            <strong>Saved as you work.</strong> Your browser keeps a recoverable draft; completed evidence is securely synced for reports, Copilot, and consultation.
           </p>
         </section>
 
@@ -150,7 +150,7 @@ export default function HomePage() {
             </div>
             <div>
               <dt>Privacy</dt>
-              <dd>Assessment drafts stay in this browser. Contact details are requested only after explicit consultation consent.</dd>
+              <dd>Drafts remain recoverable in this browser. Completed evidence is stored securely; contact details are requested only after explicit consultation consent.</dd>
             </div>
           </dl>
         </section>
