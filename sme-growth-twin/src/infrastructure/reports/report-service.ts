@@ -12,7 +12,6 @@ import {
   reportArtifactSchema,
   reportGenerationSourceSchema,
   signedReportDownloadSchema,
-  type GenerateReportRequest,
   type ReportArtifact,
 } from "@/domain/reports";
 import type { ReportRepository } from "@/infrastructure/reports/report-repository";
