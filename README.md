@@ -118,7 +118,6 @@ Every pull request runs the static, unit, Stage 07 golden/security, production-a
 planning/                       # authoritative product, stage, design, and decision records
 ├── MASTER-GAMEPLAN.md
 ├── STAGE-LEDGER.md
-├── MIROFISH-REFERENCE-MAP.md
 ├── catalogue/
 ├── design/
 └── stages/
@@ -168,9 +167,9 @@ See [SECURITY.md](SECURITY.md) for reporting and prototype limitations.
 
 The self-contained demo, deployment, evidence, third-party, and manual-gate package is in [`planning/submission/`](planning/submission/README.md). A reviewed Vercel deployment is recorded there; no video upload, competition submission, human study, or official receipt is claimed without real evidence.
 
-## Reference and originality
+## Originality
 
-MiroFish is an important functional and architectural research reference for staged evidence ingestion, structured world models, scenario execution, and investigable reporting. SME Growth Twin is a ground-up implementation with its own domain model, terminology, interfaces, rules, tests, and code. The project records every MiroFish-inspired decision as retain, adapt, replace, or omit in the [reference map](planning/MIROFISH-REFERENCE-MAP.md).
+SME Growth Twin is a ground-up implementation with its own domain model, terminology, interfaces, rules, tests, and code.
 
 Exabytes product information is maintained as a separately versioned catalogue with source provenance. Third-party frameworks, models, design tooling, and dependencies are declared rather than presented as original work.
 

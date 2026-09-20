@@ -28,5 +28,5 @@ npm run build
 - Code owns scores, ranks, budgets, prerequisites, ROI, timelines, and persistence.
 - Models may interpret or critique structured facts but may not invent product facts or perform authoritative arithmetic.
 - Every material output must retain evidence, assumption, formula, and version provenance.
-- Do not mechanically translate or copy MiroFish code, prompts, names, assets, or directory structure.
+- Do not mechanically translate or copy another product's code, prompts, names, assets, or directory structure.
 

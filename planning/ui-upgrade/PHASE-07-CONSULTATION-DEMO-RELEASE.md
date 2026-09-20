@@ -47,8 +47,6 @@ Use the UI/UX Pro Max and Taste design skills for form hierarchy, receipts,
 errors, responsive behavior, accessibility, and cross-route consistency. Use
 the accepted local design references and current product family. The 12ui
 allowance is exhausted: do not purchase, fabricate, or claim a new 12ui result.
-MiroFish remains a functional and architectural inspiration, not a visual or
-source-code template.
 
 ## 4. Frozen contracts
 

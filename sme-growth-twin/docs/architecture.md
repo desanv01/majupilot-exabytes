@@ -98,10 +98,8 @@ from the deterministic core. An eventual Exabytes pack will implement this
 interface; Stage 00 deliberately contains no questions, catalogue entries,
 recommendation rules, scenario templates, or prompts.
 
-## MiroFish reference decision
+## Architecture decision
 
-Read-only inspection of the supplied MiroFish archive confirmed the value of a
-staged lifecycle and explicit module responsibilities. Its Vue/Flask split,
-filesystem project persistence, route names, prompts, and directory structure
-were not adopted. SME Growth Twin uses its own contracts, terminology, Next.js
-architecture, tests, and UI, consistent with the approved reference map.
+SME Growth Twin uses a staged lifecycle with explicit module responsibilities,
+its own contracts and terminology, and a Next.js architecture, tests, and UI
+consistent with the approved project contracts.

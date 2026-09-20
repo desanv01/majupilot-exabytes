@@ -20,14 +20,13 @@ Read completely before editing:
 2. `planning/advisors/ADVISOR-BLUEPRINT-MODEL-1.0.0.md`;
 3. `planning/design/stage-05/DESIGN-CONTRACT.md`;
 4. `planning/DECISION-REGISTER.md`;
-5. `planning/MIROFISH-REFERENCE-MAP.md`;
-6. `planning/EXECUTION-ORCHESTRATION.md`;
-7. all prior stage packets and current code/tests;
-8. installed AI SDK documentation under `node_modules/ai/docs` before using APIs.
+5. `planning/EXECUTION-ORCHESTRATION.md`;
+6. all prior stage packets and current code/tests;
+7. installed AI SDK documentation under `node_modules/ai/docs` before using APIs.
 
-MiroFish may be inspected read-only for bounded personas, report investigation,
-task lifecycle, replay, and fallback ideas. Rebuild through this project's own
-contracts, prompts, terminology, interface, and code.
+Build bounded personas, report investigation, task lifecycle, replay, and
+fallback behavior through this project's own contracts, prompts, terminology,
+interface, and code.
 
 ## 3. In scope
 

@@ -38,4 +38,4 @@ Show `TEST-EVIDENCE.md`: A/B/C golden assertions, zero serious/critical axe find
 
 ## 8:05–8:45 — Impact, originality, limits, reset
 
-Show the architecture diagram and explain the MiroFish-inspired staged responsibility transformed into an original SME domain model. State limitations without qualification, reset known demo keys, and close with the SME/consultant value: an inspectable transformation plan and evidence-ready handoff.
+Show the architecture diagram and explain the staged responsibilities of the original SME domain model. State limitations without qualification, reset known demo keys, and close with the SME/consultant value: an inspectable transformation plan and evidence-ready handoff.

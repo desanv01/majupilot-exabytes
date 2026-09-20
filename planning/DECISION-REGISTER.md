@@ -2,7 +2,7 @@
 
 | ID | Decision | Status | Rationale |
 |---|---|---|---|
-| D-001 | Build the Exabytes advisor as the first domain pack of a MiroFish-inspired reusable platform | Frozen | Delivers immediate value while adapting the evidence-model, actor, simulation, report, and interaction pattern |
+| D-001 | Build the Exabytes advisor as the first domain pack of a reusable scenario-intelligence platform | Frozen | Delivers immediate value while establishing evidence, actor, scenario, report, and interaction contracts |
 | D-002 | Use “SME Growth Twin” as the working name | Frozen | Communicates a structured business model and scenario comparison |
 | D-003 | Use five core questions plus at most three follow-ups | Frozen | Meets the brief while preserving the under-five-minute target |
 | D-004 | Use deterministic scoring and ROI calculations | Frozen | Reproducible, explainable, and testable |
@@ -14,8 +14,8 @@
 | D-010 | Postpone graph databases and full event sourcing until after submission | Frozen | They do not improve the core hackathon proof enough to justify schedule risk |
 | D-011 | Use a curated, versioned Exabytes catalogue | Frozen | Prevents product hallucinations and stale mappings |
 | D-012 | Use Case A, Kopi Kita Café Group, as the primary demonstration | Frozen | Easy to understand and exposes CRM, workflow, backup, and AI sequencing |
-| D-013 | Treat MiroFish as the primary functional, architectural, workflow, and code-level reference | Frozen | Direct inspection is permitted and valuable, while adopted behavior is rebuilt through original requirements, contracts, architecture, terminology, prompts, tests, UI, and code |
-| D-014 | Record every studied MiroFish capability as retain, adapt, replace, or omit | Frozen | Keeps reference use deliberate, traceable, and aligned to the Exabytes and platform goals |
+| D-013 | Implement the product from approved first-party requirements and contracts | Amended | The delivered architecture, terminology, prompts, tests, UI, and code are original to this project |
+| D-014 | Trace every material capability to a requirement, decision, implementation, and test | Amended | Keeps product decisions deliberate, verifiable, and aligned to the Exabytes and platform goals |
 | D-015 | Keep the current main Codex task as planner, architect, integrator, and reviewer | Frozen | Maintains one source of truth and prevents stage tasks from changing scope independently |
 | D-016 | Execute one implementation stage at a time in a separate project task | Frozen | Limits integration risk and gives every stage a verifiable acceptance gate |
 | D-017 | Use GPT-5.6 Sol with medium reasoning for the original Stage 00 to Stage 07 implementation tasks | Superseded by D-028 | Records the completed build policy; the product-wide redesign now requires deeper visual and integration judgment |

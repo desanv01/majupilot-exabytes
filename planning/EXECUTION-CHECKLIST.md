@@ -4,9 +4,8 @@ Use this alongside [MASTER-GAMEPLAN.md](./MASTER-GAMEPLAN.md). A checkbox is com
 
 ## Gate 0 - Specification
 
-- [ ] MiroFish reference and code-inspection mandate approved
-- [ ] MiroFish reference map reviewed
-- [ ] Every studied capability marked retain, adapt, replace, or omit
+- [ ] Ground-up implementation mandate approved
+- [ ] Every planned capability traced to a first-party requirement
 - [ ] Reference observations translated into neutral requirements
 - [ ] Original architecture, terminology, prompts, UI, tests, and module structure confirmed
 - [ ] Product name and pitch approved

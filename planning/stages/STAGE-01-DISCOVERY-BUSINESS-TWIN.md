@@ -22,14 +22,13 @@ Read these files completely before implementation:
 
 1. `planning/MASTER-GAMEPLAN.md`, especially sections 3, 6, 7, 8, 17, 18, 21, 22, 24, 25, and 27;
 2. `planning/DECISION-REGISTER.md`;
-3. `planning/MIROFISH-REFERENCE-MAP.md`;
-4. `planning/EXECUTION-ORCHESTRATION.md`;
-5. `planning/stages/STAGE-00-FOUNDATION.md`;
-6. `sme-growth-twin/docs/architecture.md`;
-7. `planning/design/stage-01/DESIGN-REVIEW.md` and the approved images it references.
+3. `planning/EXECUTION-ORCHESTRATION.md`;
+4. `planning/stages/STAGE-00-FOUNDATION.md`;
+5. `sme-growth-twin/docs/architecture.md`;
+6. `planning/design/stage-01/DESIGN-REVIEW.md` and the approved images it references.
 
-MiroFish may be inspected read-only for staged workflow and lifecycle ideas.
-Do not copy its UI, state-management code, text, prompts, routes, or structure.
+Implement the staged workflow and lifecycle through this project's own
+contracts, UI, state management, prompts, routes, and structure.
 
 ## 3. User journey
 

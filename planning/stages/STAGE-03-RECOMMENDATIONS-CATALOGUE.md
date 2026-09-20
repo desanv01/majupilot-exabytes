@@ -27,16 +27,14 @@ Read completely before implementation:
 
 1. `planning/MASTER-GAMEPLAN.md`, especially sections 8-13, 17-25, and 27-28;
 2. `planning/DECISION-REGISTER.md`;
-3. `planning/MIROFISH-REFERENCE-MAP.md`;
-4. `planning/EXECUTION-ORCHESTRATION.md`;
-5. all prior stage packets;
-6. `planning/catalogue/EXABYTES-CATALOGUE-1.0.0.md`;
-7. `planning/design/stage-03/DESIGN-REVIEW.md` and its approved references;
-8. current domain, assessment, scoring, pain, persistence, UI, and test code.
+3. `planning/EXECUTION-ORCHESTRATION.md`;
+4. all prior stage packets;
+5. `planning/catalogue/EXABYTES-CATALOGUE-1.0.0.md`;
+6. `planning/design/stage-03/DESIGN-REVIEW.md` and its approved references;
+7. current domain, assessment, scoring, pain, persistence, UI, and test code.
 
-MiroFish may be inspected read-only for evidence-to-decision traceability,
-staged report construction, and interaction patterns. Do not copy its UI,
-prompts, routes, terminology, state code, or implementation.
+Implement evidence-to-decision traceability, staged report construction, and
+interaction patterns through this project's own contracts and code.
 
 ## 3. Non-negotiable boundaries
 

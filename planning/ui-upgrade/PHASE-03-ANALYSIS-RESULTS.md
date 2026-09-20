@@ -21,7 +21,6 @@ Redesign the finite local-analysis transition and deterministic diagnostic resul
 - `sme-growth-twin/DESIGN.md`;
 - `sme-growth-twin/DESIGN-TOKENS.md`;
 - `sme-growth-twin/REFERENCE-BOARD.md`;
-- `planning/MIROFISH-REFERENCE-MAP.md`;
 - `sme-growth-twin/AGENTS.md` and the local Next.js documentation it names.
 
 Use the applicable UI/UX, 12ui, Next.js, React, and browser-verification skills. Design Taste is advisory only for the editorial framing because this phase is primarily dense product UI. The Phase 03 12ui exploration is complete. Do not purchase or generate a duplicate run.

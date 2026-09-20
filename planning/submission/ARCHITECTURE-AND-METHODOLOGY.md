@@ -31,9 +31,9 @@ flowchart LR
 
 The advisor ceiling is five frozen roles, at most two attempts per role, 900 output tokens per attempt, and 12 seconds total per role. Therefore one panel has at most ten attempts and 9,000 output tokens. The limiter stores a salted hash of a coarse request IP identifier; no raw IP, prompt, business answer, or contact value is retained in it.
 
-## MiroFish inspiration and originality
+## Original architecture
 
-MiroFish was studied for the responsibility chain from evidence to structured world model, actors, scenarios, report, and investigation. SME Growth Twin adapts that responsibility to a five-question SME assessment, typed Business Twin, capability-first catalogue mapping, deterministic 12-month scenarios, bounded specialist advisors, and an immutable Blueprint. It does not copy MiroFish routes, social environments, prompts, terminology, UI, storage, or code structure. The retain/adapt/replace/omit record is in `planning/MIROFISH-REFERENCE-MAP.md`.
+SME Growth Twin defines a first-party responsibility chain from evidence to a structured Business Twin, scenarios, specialist review, and an immutable Blueprint. It combines a five-question SME assessment, capability-first catalogue mapping, deterministic 12-month scenarios, and bounded specialist advisors through project-owned contracts and code.
 
 ## Failure behavior
 

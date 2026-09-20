@@ -19,13 +19,11 @@ Read these files completely before changing code:
 
 1. `planning/MASTER-GAMEPLAN.md`
 2. `planning/DECISION-REGISTER.md`
-3. `planning/MIROFISH-REFERENCE-MAP.md`
-4. `planning/EXECUTION-ORCHESTRATION.md`
-5. `planning/EXECUTION-CHECKLIST.md`
+3. `planning/EXECUTION-ORCHESTRATION.md`
+4. `planning/EXECUTION-CHECKLIST.md`
 
-Inspect the available MiroFish research and source material read-only where it
-helps validate architectural boundaries. Do not copy its implementation or
-reproduce its directory structure.
+Validate architectural boundaries against the approved project requirements
+and implement the foundation through original project-owned code.
 
 ## 3. Starting conditions
 

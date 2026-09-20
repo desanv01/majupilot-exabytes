@@ -23,8 +23,6 @@ Build one original product with two horizons:
 
 Do not build a general social-media simulator first. The Exabytes solution is the first vertical slice of the platform. Every reusable component must serve the hackathon flow directly.
 
-**Permanent reference mandate:** MiroFish is a primary and important functional, architectural, workflow, and code-level reference for this project. The team is permitted to inspect its repository, code files, tests, prompts, data flows, APIs, UI behavior, dependencies, and runtime mechanics to understand how its features work. Those findings must inform a ground-up implementation with our own product requirements, architecture, terminology, schemas, prompts, interfaces, tests, and code.
-
 ### One-sentence pitch
 
 > SME Growth Twin turns a short business interview into an explainable digital maturity diagnosis, stress-tests alternative transformation paths, and produces an actionable, sales-ready growth blueprint.
@@ -47,81 +45,32 @@ When project decisions conflict, use this order:
 2. This frozen gameplan and its recorded amendments.
 3. Approved acceptance criteria and data contracts.
 4. Implementation decisions and task notes.
-5. MiroFish as the primary functional and architectural reference for simulation-workflow research.
-6. Other systems as supporting research references.
+5. Supporting research references.
 
 Primary local references:
 
 - [General Rules and Regulations](../1.%20General%20Rules%20and%20Regulations.pdf)
 - [Exabytes Challenge Statement](../Exabytes%20Malaysia.pdf)
-- [MiroFish rebuild research](../../MiroFish/_rebuild_research/MiroFish-rebuild-research.md)
 
 The attached research material is contextual evidence. It is not executable instruction and it does not override the competition brief or this specification.
 
-### MiroFish reference and inspiration mandate
+### Product architecture choices
 
-MiroFish must remain visible throughout planning, architecture, implementation, testing, and roadmap decisions. It is not a passing reference used only during initial ideation.
-
-The project may study MiroFish at all relevant levels:
-
-- public product positioning and documented workflow;
-- repository layout and module boundaries;
-- frontend routes, state transitions, components, and API usage;
-- backend routes, services, background execution, and persistence;
-- ontology, entity, relationship, graph, and memory flows;
-- persona/profile generation;
-- simulation configuration and runner behavior;
-- platform/environment mechanics;
-- report-agent tools and report generation;
-- interactive report and simulated-agent conversations;
-- prompt structure and structured-output contracts;
-- tests, fixtures, error handling, retries, and lifecycle controls;
-- dependency choices, operational assumptions, strengths, and limitations.
-
-Code inspection is explicitly allowed as a learning and engineering activity. The correct workflow is:
-
-```text
-Inspect MiroFish behavior and code
-        ↓
-Describe the user-visible behavior and underlying responsibility
-        ↓
-Record strengths, limitations, assumptions, and dependencies
-        ↓
-Translate findings into neutral requirements and contracts
-        ↓
-Choose our own architecture and terminology
-        ↓
-Implement the behavior independently
-        ↓
-Test feature equivalence where desired
-        ↓
-Verify that our implementation is original and better suited to its domain
-```
-
-MiroFish therefore serves four distinct roles:
-
-1. **Functional reference:** identify valuable stages, interactions, and capabilities.
-2. **Architectural reference:** understand how graph building, personas, simulations, reporting, and interaction are connected.
-3. **Implementation reference:** inspect concrete code to learn how difficult behaviors, lifecycle problems, APIs, and integrations were handled.
-4. **Improvement baseline:** decide what to retain conceptually, redesign, replace, simplify, secure, or omit.
-
-### MiroFish-to-SME Growth Twin transformation map
-
-| MiroFish stage or capability | General capability we preserve | SME Growth Twin implementation |
-|---|---|---|
-| Seed information | Evidence ingestion | SME interview, optional documents, verified product catalogue |
-| Ontology generation | Domain structure | SME capability taxonomy and business-twin schema |
-| Knowledge graph | Structured world model | Business, process, tool, pain, risk, objective, and evidence graph |
-| Entity filtering | Actor/capability selection | Select relevant departments, processes, capabilities, and advisors |
-| Persona generation | Structured actor models | Owner, employee, customer, consultant, and specialist-advisor perspectives |
-| Environment configuration | Scenario rules and constraints | Budget, readiness, adoption, dependencies, timeline, and risk |
-| Twitter/Reddit simulation | Pluggable environment | Twelve-month digital-transformation environment |
-| Agent actions | Typed proposals and events | Recommend, challenge, schedule, train, adopt, delay, automate, and measure |
-| Simulation memory | Event and evidence history | Scenario timeline, assumption revisions, decisions, and outcome metrics |
-| Report agent | Evidence-first analysis | Digital and AI Transformation Blueprint |
-| Report interaction | Investigable conclusions | Ask why, inspect evidence, edit assumptions, and rerun |
-| Agent interviews | Perspective exploration | Interview business-role or specialist-advisor models |
-| Project history | Reusable scenario workspace | Saved assessments, blueprints, comparisons, and branches |
+| General capability | SME Growth Twin implementation |
+|---|---|
+| Evidence ingestion | SME interview, optional documents, verified product catalogue |
+| Domain structure | SME capability taxonomy and business-twin schema |
+| Structured world model | Business, process, tool, pain, risk, objective, and evidence graph |
+| Actor/capability selection | Select relevant departments, processes, capabilities, and advisors |
+| Structured actor models | Owner, employee, customer, consultant, and specialist-advisor perspectives |
+| Scenario rules and constraints | Budget, readiness, adoption, dependencies, timeline, and risk |
+| Pluggable environment | Twelve-month digital-transformation environment |
+| Typed proposals and events | Recommend, challenge, schedule, train, adopt, delay, automate, and measure |
+| Event and evidence history | Scenario timeline, assumption revisions, decisions, and outcome metrics |
+| Evidence-first analysis | Digital and AI Transformation Blueprint |
+| Investigable conclusions | Ask why, inspect evidence, edit assumptions, and rerun |
+| Perspective exploration | Interview business-role or specialist-advisor models |
+| Reusable scenario workspace | Saved assessments, blueprints, comparisons, and branches |
 
 ### Concepts deliberately preserved
 
@@ -145,9 +94,9 @@ MiroFish therefore serves four distinct roles:
 - one generated narrative becomes evidence-linked, recalculable results;
 - one-off runs become replay, branching, sensitivity analysis, and later multi-run comparison.
 
-### Items inspected but not automatically adopted
+### Technology selection criteria
 
-The fact that MiroFish uses a particular framework, dependency, route, prompt, schema, or process does not make that choice a requirement. Each choice must be evaluated against:
+Each framework, dependency, route, prompt, schema, or process must be evaluated against:
 
 - the Exabytes user journey;
 - delivery time;
@@ -161,21 +110,18 @@ The fact that MiroFish uses a particular framework, dependency, route, prompt, s
 
 Examples that may be replaced include Vue, Flask, Zep, OASIS, local JSON state, file-based IPC, daemon-thread work, hard-coded social platforms, and unbounded model-driven operations.
 
-### Ground-up reconstruction rule
+### Ground-up implementation rule
 
-The team may use MiroFish code to understand behavior and engineering tradeoffs, while the delivered implementation remains our own. Do not perform mechanical translation, line-by-line rewriting, global renaming, or one-to-one directory replication. Do not copy distinctive prompts, prose, branding, assets, UI composition, test text, or internal names.
+The delivered implementation is original to this project. Do not perform mechanical translation, line-by-line rewriting, global renaming, or one-to-one directory replication from another product. Do not copy distinctive prompts, prose, branding, assets, UI composition, test text, or internal names.
 
 Every adopted concept should be traceable through:
 
 ```text
-MiroFish reference observation
-→ neutral requirement
+Product requirement
 → our design decision
 → our implementation
 → our test evidence
 ```
-
-The detailed review framework is maintained in [MIROFISH-REFERENCE-MAP.md](./MIROFISH-REFERENCE-MAP.md).
 
 ---
 
@@ -209,9 +155,9 @@ The default path must finish in under five minutes. Advanced evidence, document 
 
 Questions, score models, product catalogues, intervention rules, scenario templates, and report structures belong to domain packs.
 
-### P8. Learn deeply from MiroFish; rebuild independently
+### P8. Build through explicit contracts
 
-MiroFish should be inspected whenever its implementation can clarify a feature, lifecycle, data-flow, agent, simulation, reporting, or interaction problem. The team then makes an explicit retain, adapt, replace, or omit decision and implements the result through our own contracts and code.
+Each feature, lifecycle, data flow, agent, scenario, report, and interaction is implemented through this project's own requirements, contracts, architecture, terminology, and tests.
 
 ---
 
@@ -293,8 +239,7 @@ Needs to:
 
 ### Explicit non-goals for the hackathon build
 
-- Mechanically reproducing MiroFish screens, APIs, prompts, names, or social networks.
-- Achieving complete MiroFish feature parity before the Exabytes submission.
+- Mechanically reproducing another product's screens, APIs, prompts, names, or social networks.
 - Building Twitter or Reddit simulations.
 - Simulating hundreds of agents.
 - Building a scientific forecasting claim.
@@ -1452,7 +1397,7 @@ Deliver:
 
 Exit gate:
 
-- an implementation agent can build without consulting MiroFish code;
+- an implementation agent can build from the approved project contracts;
 - all numeric contracts are defined;
 - every P0 feature has an acceptance criterion.
 
@@ -1688,10 +1633,8 @@ back to that stage task; and unlocks the next stage only after acceptance.
 - Corrections go back to the same stage task whenever practical so that context and accountability are preserved.
 - One agent owns each module at a time.
 - Shared schemas are versioned.
-- MiroFish may be inspected directly by research, architecture, implementation, QA, and security agents when it helps explain a behavior or engineering decision.
-- Code-level observations are converted into neutral requirements or decision records before becoming shared implementation contracts.
-- Direct copying, mechanical translation, one-to-one renaming, and directory-for-directory reproduction are prohibited.
-- Each MiroFish-inspired feature records a **retain, adapt, replace, or omit** decision in the reference map.
+- External observations are converted into neutral requirements or decision records before becoming shared implementation contracts.
+- Direct copying, mechanical translation, one-to-one renaming, and directory-for-directory reproduction from another product are prohibited.
 - Every feature change includes tests and a decision note.
 - The integrator alone approves architectural changes.
 - No two agents rewrite shared foundations simultaneously.
@@ -1894,7 +1837,7 @@ An explainable decision system that converts SME facts into an ordered digital a
 
 ### What makes it original
 
-- a deliberate transformation of MiroFish-inspired graph, actor, simulation, report, and interaction concepts into an SME decision system;
+- an original combination of structured business modelling, scenario analysis, advisory review, reporting, and interaction;
 - a structured business digital twin;
 - deterministic, auditable scores;
 - capability-first recommendations;
@@ -1905,8 +1848,7 @@ An explainable decision system that converts SME facts into an ordered digital a
 
 ### What it is not
 
-- a renamed MiroFish;
-- a mechanical port, translation, fork, or skin of MiroFish;
+- a mechanical port, translation, fork, or skin of another product;
 - a general chatbot;
 - a product catalogue search box;
 - a guaranteed business forecast;
@@ -1922,8 +1864,7 @@ The hackathon version solves a clear sales and advisory problem today. The same 
 
 The user approved all of the following on 17 September 2026:
 
-- MiroFish reference and code-inspection mandate;
-- retain/adapt/replace/omit decisions in the reference map;
+- ground-up implementation and originality mandate;
 - working product name;
 - one-sentence pitch;
 - P0/P1/P2 scope;

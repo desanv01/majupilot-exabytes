@@ -25,9 +25,8 @@ When instructions appear to conflict, use this order:
 2. `MASTER-GAMEPLAN.md`;
 3. `DECISION-REGISTER.md`;
 4. the current stage packet;
-5. `MIROFISH-REFERENCE-MAP.md`;
-6. `EXECUTION-CHECKLIST.md`;
-7. implementation convenience or an agent's preference.
+5. `EXECUTION-CHECKLIST.md`;
+6. implementation convenience or an agent's preference.
 
 Only the main task may approve a change to levels 2-6. A stage task must stop
 and report a conflict rather than silently reinterpret it.
@@ -102,7 +101,7 @@ The main task independently checks:
 - test quality and meaningful coverage;
 - build, lint, type-check, and relevant end-to-end behavior;
 - security, privacy, error, and fallback behavior proportional to the stage;
-- the applicable retain/adapt/replace/omit decisions from the MiroFish map.
+- the applicable first-party requirements and recorded architecture decisions.
 
 ### CORRECTION LOOP
 
@@ -119,7 +118,7 @@ known deferred items. Only then may it dispatch the next stage.
 ## 4. Global implementation rules
 
 - Build the hackathon P0 path before P1 or P2 features.
-- Use MiroFish as an important reference and inspect it when useful, but rebuild through this project's own domain model, architecture, terminology, UX, prompts, tests, and code.
+- Build through this project's own domain model, architecture, terminology, UX, prompts, tests, and code.
 - Put calculations, rankings, scenario mechanics, and other reproducible rules in deterministic TypeScript modules.
 - Use an LLM only for bounded interpretation, explanation, advisor perspectives, and narrative synthesis.
 - Keep the numeric and navigation core usable when model access is unavailable.

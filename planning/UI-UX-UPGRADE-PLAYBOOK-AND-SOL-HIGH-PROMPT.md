@@ -119,12 +119,8 @@ into:
 8. a printable growth Blueprint;
 9. a consultation-ready recorded lead request.
 
-MiroFish remains a primary functional, architectural, workflow, and code-level
-reference. The team may inspect its public repository, code, tests, prompts,
-data flows, APIs, UI behavior, dependencies, runtime mechanics, and lifecycle
-patterns. The implementation must still be rebuilt from scratch with our own
-requirements, terminology, schemas, prompts, components, tests, and
-architecture. No MiroFish file, route, prompt, or code is copied wholesale.
+The implementation is built from the project's own requirements, terminology,
+schemas, prompts, components, tests, and architecture.
 
 ### 2.1 Authority hierarchy
 
@@ -138,7 +134,6 @@ When a visual idea conflicts with a product rule, use this order:
 5. Accepted local design reviews and screenshots.
 6. This document.
 7. Taste Skill and UI/UX Pro Max recommendations.
-8. MiroFish and other systems as research references.
 
 The design direction must never change a score formula, route contract, field
 name, stable value code, evidence ID, recommendation mapping, ROI formula,
@@ -725,8 +720,7 @@ For every reference, record:
 - accessibility and performance risks.
 
 No reference is permission to copy source code, brand assets, text, or a whole
-layout. MiroFish is a functional and architectural reference, not a visual
-template.
+layout.
 
 ---
 
@@ -982,7 +976,7 @@ The implementation chat must not:
 - expand scope silently;
 - rewrite business logic to match a screenshot;
 - replace the accepted design system without a decision record;
-- copy MiroFish code or visual assets;
+- copy another product's code or visual assets;
 - use ImageKit or Higgsfield MCP;
 - fabricate Exabytes offerings, prices, metrics, or customer data;
 - claim a live AI call, privacy guarantee, security property, or human follow-up
@@ -1068,7 +1062,6 @@ chat silently redefine the product.
 Read these files before planning the first UI phase:
 
 - planning/MASTER-GAMEPLAN.md
-- planning/MIROFISH-REFERENCE-MAP.md
 - planning/EXECUTION-ORCHESTRATION.md
 - planning/STAGE-LEDGER.md
 - planning/design/stage-01/DESIGN-REVIEW.md
@@ -1093,15 +1086,10 @@ redesign auditing. Remember that Taste Skill is not the authority for dense
 dashboards, data tables, or multi-step forms. Do not apply either skill
 blindly. Frozen repository contracts and accepted stage packets win.
 
-MiroFish is a permanent and important functional, architectural, workflow, and
-code-level reference. We are allowed to inspect its repository, code, tests,
-prompts, UI behavior, APIs, dependencies, data flow, simulation lifecycle,
-persona and graph mechanics, report tools, and failure handling. Use it to
-understand useful ideas, then rebuild from scratch with our own product
-requirements, architecture, terminology, schemas, prompts, interfaces, tests,
-and code. Do not copy MiroFish files, routes, prompts, text, UI, or structure
-wholesale. Keep this reference visible in design, implementation, testing, and
-roadmap decisions.
+Build from the project's approved requirements, architecture, terminology,
+schemas, prompts, interfaces, tests, and code. External visual references do
+not override frozen contracts or permit copying files, routes, prompts, text,
+UI, or structure wholesale.
 
 The visual direction is:
 
@@ -1404,7 +1392,7 @@ The UI/UX upgrade is complete only when:
 
 - the accepted product journey still works from Home through consultation;
 - no frozen domain or data contract changed accidentally;
-- MiroFish remains a documented reference and no source was copied wholesale;
+- the implementation remains original and no external source was copied wholesale;
 - Taste Skill and UI/UX Pro Max were used within their scopes;
 - every phase has a reviewed design brief and evidence;
 - the UI works at 1440, 1024, 390, and 360 px;

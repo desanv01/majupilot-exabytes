@@ -9,7 +9,6 @@
 5. Existing stage design reviews and browser evidence.
 6. Current runtime behavior.
 7. Applicable design and framework skills.
-8. MiroFish as a functional and code-level reference, never as copied branding or UI.
 
 ## Selected home direction
 
@@ -36,7 +35,6 @@ The selected image is evidence, not a pixel-perfect mandate:
 
 - Stage design packets and reviews under `planning/stages/` remain behavior references.
 - Stage 07 browser evidence remains the regression baseline for the complete flow.
-- `planning/MIROFISH-REFERENCE-MAP.md` remains the authority for retain, adapt, replace, and omit decisions.
 
 ## Selected assessment direction
 

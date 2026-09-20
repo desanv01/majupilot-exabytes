@@ -27,19 +27,17 @@ Read completely before implementation:
 1. `planning/MASTER-GAMEPLAN.md`, especially sections 3, 8, 9, 10, 17,
    18, 19, 20, 21, 24, 27, and 28;
 2. `planning/DECISION-REGISTER.md`;
-3. `planning/MIROFISH-REFERENCE-MAP.md`;
-4. `planning/EXECUTION-ORCHESTRATION.md`;
-5. `planning/stages/STAGE-00-FOUNDATION.md`;
-6. `planning/stages/STAGE-01-DISCOVERY-BUSINESS-TWIN.md`;
+3. `planning/EXECUTION-ORCHESTRATION.md`;
+4. `planning/stages/STAGE-00-FOUNDATION.md`;
+5. `planning/stages/STAGE-01-DISCOVERY-BUSINESS-TWIN.md`;
 7. `planning/design/stage-01/DESIGN-REVIEW.md` and approved Candidate D assets;
 8. `planning/design/stage-02/DESIGN-REVIEW.md`, its four approved screen
    references, and the responsive results baseline;
 9. `sme-growth-twin/docs/architecture.md`;
 10. the current Stage 01 domain, core, persistence, components, and tests.
 
-MiroFish may be inspected read-only for lifecycle, traceability, staged
-processing, and report-explanation ideas. Do not copy its UI, prompts, routes,
-state code, terminology, or implementation.
+Implement lifecycle, traceability, staged processing, and report explanation
+through this project's own contracts and code.
 
 ## 3. Non-negotiable boundaries
 

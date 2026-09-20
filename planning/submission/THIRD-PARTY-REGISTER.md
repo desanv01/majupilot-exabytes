@@ -15,6 +15,5 @@
 | GitHub Actions | `checkout@v7`, `setup-node@v7` | GitHub terms | CI quality gates | Workflow composition and release gates |
 | 12ui | Stage design workflow; Stage 07 upload blocked | 12ui terms | Earlier accepted visual references | Final UI composition corrected to frozen contracts |
 | Exabytes public product sources | Catalogue references in `planning/catalogue/` | Exabytes/trademark owners | Reviewed product-fact allow-list | Capability-first mapping and claim controls |
-| MiroFish | Supplied reference archive | Original project licence applies | Functional/architectural research reference | Ground-up SME-specific contracts, code, UI, and tests |
 
 Transitive npm dependencies and exact integrity hashes are recorded in `sme-growth-twin/package-lock.json`. Third-party names and trademarks remain with their owners. No framework, model, catalogue fact, or design tool is presented as original team work.

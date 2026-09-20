@@ -27,10 +27,9 @@ Read in full before editing:
 3. `planning/EXECUTION-ORCHESTRATION.md`;
 4. `planning/EXECUTION-CHECKLIST.md`;
 5. `planning/STAGE-LEDGER.md`;
-6. `planning/MIROFISH-REFERENCE-MAP.md`;
-7. this contract;
-8. `planning/design/stage-07/DESIGN-BRIEF.md` and `DESIGN-REVIEW.md`;
-9. `SECURITY.md`, repository `README.md`, and application documentation;
+6. this contract;
+7. `planning/design/stage-07/DESIGN-BRIEF.md` and `DESIGN-REVIEW.md`;
+8. `SECURITY.md`, repository `README.md`, and application documentation;
 10. `sme-growth-twin/AGENTS.md` and the relevant Next.js 16 bundled guides.
 
 Stages 00-06 are immutable accepted prerequisites. Preserve their exact Case A
@@ -236,7 +235,7 @@ Create `planning/submission/` with at least:
   captions so the video remains understandable with sound off;
 - `JUDGE-QA.md` — concise, evidence-backed answers to the master-plan questions;
 - `ARCHITECTURE-AND-METHODOLOGY.md` — Mermaid diagrams plus deterministic-vs-AI
-  boundary, MiroFish inspiration/originality, data flow, fallback, and limits;
+  boundary, original architecture, data flow, fallback, and limits;
 - `THIRD-PARTY-REGISTER.md` — frameworks, libraries, models/providers, 12ui,
   Vercel, GitHub Actions, source catalogue, licences/roles, and what the team
   built itself;

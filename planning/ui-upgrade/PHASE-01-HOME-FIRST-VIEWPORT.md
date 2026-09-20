@@ -17,7 +17,6 @@ Replace the current generic homepage with a distinctive, responsive, trustworthy
 - `sme-growth-twin/DESIGN-TOKENS.md`;
 - `sme-growth-twin/REFERENCE-BOARD.md`;
 - existing Stage 01 packet and design review;
-- `planning/MIROFISH-REFERENCE-MAP.md`;
 - `sme-growth-twin/AGENTS.md` and the local Next.js documentation it names.
 
 Use the applicable UI/UX, Design Taste, 12ui, Next.js, React, and browser-verification skills. Read each selected skill before acting.

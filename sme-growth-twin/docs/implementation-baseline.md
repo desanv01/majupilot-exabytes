@@ -6,8 +6,8 @@ Canonical application root: `sme-growth-twin`
 ## Starting-state inventory
 
 The saved project root contained protected planning documents, four hackathon
-source/reference files (three PDFs, one JPG), a supplied `MiroFish-main.zip`,
-and generated PDF page images under `tmp/pdfs`. The root was not a Git
+source/reference files (three PDFs, one JPG), and generated PDF page images
+under `tmp/pdfs`. The root was not a Git
 repository, matching the Stage 00 packet.
 
 The expected earlier `sme-growth-twin` experimental scaffold was not present.
@@ -29,7 +29,6 @@ or generated web build to audit. Consequently:
 |---|---|---|
 | Planning and challenge files | Keep untouched | Protected sources of truth |
 | `tmp/pdfs` page images | Keep untouched | Pre-existing generated research artifacts outside the app |
-| `MiroFish-main.zip` | Keep read-only | Reference only; no code or structure copied |
 | Missing experimental scaffold | Record discrepancy | Nothing existed to preserve or replace |
 | Canonical app | Create `sme-growth-twin` | Required by the approved Stage 00 packet |
 | Package manager | Use npm with a lockfile | npm 11.19.0 is installed; no prior manager existed |

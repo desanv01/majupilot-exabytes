@@ -23,7 +23,6 @@ navigation contract.
 - `sme-growth-twin/DESIGN.md`;
 - `sme-growth-twin/DESIGN-TOKENS.md`;
 - `sme-growth-twin/REFERENCE-BOARD.md`;
-- `planning/MIROFISH-REFERENCE-MAP.md`;
 - `sme-growth-twin/AGENTS.md` and the local Next.js documentation it names.
 
 Use the applicable UI/UX, 12ui, Next.js, React, and browser-verification skills.

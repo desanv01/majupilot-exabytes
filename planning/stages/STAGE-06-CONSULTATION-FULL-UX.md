@@ -192,11 +192,10 @@ and retention automation are production work and must not be faked.
 - The rate limiter does not use contact information.
 - API and UI use stable safe messages.
 
-## 8. MiroFish reference decision
+## 8. Architecture decision
 
-Retain and adapt MiroFish's staged report-to-interaction responsibility and
-stable project/report identity. Replace its local JSON/filesystem state,
-traceback-style route errors, and implicit security assumptions with typed
+Use a staged report-to-interaction responsibility and stable project/report
+identity. Implement state and security through typed
 versioned Lead/Consent contracts, a storage port, stable safe errors,
 idempotency, and explicit consent. Omit report chat and agent interview from
 this stage.

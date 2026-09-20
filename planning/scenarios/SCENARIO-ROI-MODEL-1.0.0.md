@@ -11,10 +11,10 @@ result into three comparable 12-month transformation paths. It is a planning
 model, not a forecast or quote. Every number must be reproducible from visible
 inputs, versioned rules, and editable assumptions.
 
-The model adapts MiroFish's configurable-environment, typed-event, replay, and
-investigable-report ideas into an SME transformation environment. It replaces
-free-form agent state mutation with validated data, pure calculations, typed
-events, and deterministic reducers.
+The model uses a configurable environment, typed events, replay, and
+investigable reports for SME transformation scenarios. It prevents free-form
+agent state mutation through validated data, pure calculations, typed events,
+and deterministic reducers.
 
 ## 2. Non-negotiable rules
 

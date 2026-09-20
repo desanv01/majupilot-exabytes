@@ -22,16 +22,13 @@ Read completely before implementation:
    and 27–29;
 2. `planning/scenarios/SCENARIO-ROI-MODEL-1.0.0.md`;
 3. `planning/DECISION-REGISTER.md`;
-4. `planning/MIROFISH-REFERENCE-MAP.md`;
-5. `planning/EXECUTION-ORCHESTRATION.md`;
-6. all previous stage packets;
-7. `planning/design/stage-04/DESIGN-REVIEW.md` and approved screen images;
-8. current assessment, diagnostic, recommendation, persistence, and UI code.
+4. `planning/EXECUTION-ORCHESTRATION.md`;
+5. all previous stage packets;
+6. `planning/design/stage-04/DESIGN-REVIEW.md` and approved screen images;
+7. current assessment, diagnostic, recommendation, persistence, and UI code.
 
-MiroFish may be inspected read-only for environment configuration, lifecycle,
-typed actions, task visibility, replay, and report investigation. Translate
-observations into this project's contracts; do not copy code, prompts, routes,
-UI, terminology, or directory structure.
+Implement environment configuration, lifecycle, typed actions, task visibility,
+replay, and report investigation through this project's own contracts.
 
 ## 3. Non-negotiable boundaries
 
