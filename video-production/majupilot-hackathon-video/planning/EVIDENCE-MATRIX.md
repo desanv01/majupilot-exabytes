@@ -57,4 +57,4 @@ claim.
 - No claim that catalogue entries are live quotes, guaranteed availability, or vendor fulfilment.
 - No claim that ROI ranges are predictions, guarantees, or observed customer outcomes.
 - No claim of real customer data, real consultation contact data, or a completed human handoff.
-- No credentials, secrets, private report URLs, raw prompts, raw model reasoning, or personal portrait in the video.
+- No credentials, secrets, private report URLs, raw prompts, or raw model reasoning. The user-authorized portrait may appear only in the opening identity card, not in the product-demo capture.

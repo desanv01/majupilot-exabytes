@@ -33,7 +33,7 @@ phase.
 ## Assets
 
 - `https://majupilot-exabytes.vercel.app/` — authentic branded production app; use fictional demo cases only.
-- `C:\Users\Dv\Desktop\GSEP-RISCV 2026 FILES\PASSPORT AND VISA APPLICATION\photo_2026-06-03_14-04-20.jpg` — user portrait source; inventory only in Phase 1, do not stage, alter, crop, or expose in the video without a later explicit decision.
+- `assets/portrait/desan-vasu.jpg` — user-authorized portrait for the opening identity card only. Preserve the source file, use a respectful non-distorting crop, and never expose the original private filesystem path on screen.
 - No competition logo or university logo is required.
 
 ## Customizations
@@ -45,7 +45,7 @@ phase.
 - Demo window: exactly 3:37 in the capture plan, using fictional Case A / Kopi Kita Café Group.
 - Competition structure: all six required sections must appear as explicit title beats or chapter markers.
 - Evidence discipline: distinguish implemented production behavior from roadmap / future potential in the script, overlays, and final edit.
-- Privacy: do not expose credentials, real customer records, consultation contact data, private report URLs, or the source portrait.
+- Privacy: do not expose credentials, real customer records, consultation contact data, private report URLs, or the portrait's private source path. The staged portrait is authorized only for the opening identity card.
 
 ## Notes
 
