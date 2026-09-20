@@ -126,11 +126,12 @@ try {
 
   if (!(await clickText("Request consultation"))) throw new Error("consultation action is unavailable");
   await poll("location.pathname", "/consultation");
+  await poll("Boolean(document.querySelector('form input[name=\"name\"]'))", true);
   await evaluate(`(() => {
-    const write=(selector,value)=>{const element=document.querySelector(selector);const setter=Object.getOwnPropertyDescriptor(element instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype,'value').set;setter.call(element,value);element.dispatchEvent(new Event('input',{bubbles:true}));};
-    write('[name=name]','Synthetic Release User'); write('[name=businessName]','Synthetic MajuPilot Demo'); write('[name=email]','release-smoke@example.invalid'); write('[name=phone]','+60 10 000 0000');
-    const urgency=document.querySelector('[name=urgency]'); urgency.value='exploring'; urgency.dispatchEvent(new Event('change',{bubbles:true}));
-    document.querySelector('[name=consent]').click(); document.querySelector('form').requestSubmit(); return true;
+    const write=(selector,value)=>{const element=document.querySelector(selector);const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;Reflect.apply(setter,element,[value]);element.dispatchEvent(new Event('input',{bubbles:true}));};
+    write('form input[name="name"]','Synthetic Release User'); write('form input[name="businessName"]','Synthetic MajuPilot Demo'); write('form input[name="email"]','release-smoke@example.invalid'); write('form input[name="phone"]','+60 10 000 0000');
+    const urgency=document.querySelector('form select[name="urgency"]'); urgency.value='exploring'; urgency.dispatchEvent(new Event('change',{bubbles:true}));
+    document.querySelector('form input[name="consent"]').click(); document.querySelector('form').requestSubmit(); return true;
   })()`);
   await poll("document.body.innerText.includes('Request recorded.')", true, 120_000);
   const durable = await evaluate(`(() => { const value=JSON.parse(localStorage.getItem('majupilot:durable-journey:1.0.0')||'null'); return {report:value?.report,lead:value?.lead,raw:JSON.stringify(value)}; })()`);
