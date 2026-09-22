@@ -1,0 +1,357 @@
+{
+  "beat_id": "04a_demo_home",
+  "source": ".media/audio/voice/voice_005.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 13.653313,
+  "duration_after_vad": 12.256,
+  "segments": [
+    {
+      "start": 0.62,
+      "end": 6.02,
+      "text": "Here is the Maju Pilot Production Surface. I'm loading Case A, Kopikita Cafe Group.",
+      "avg_logprob": -0.339774,
+      "no_speech_prob": 0.003332,
+      "words": [
+        {
+          "text": "Here",
+          "start": 0.62,
+          "end": 1.16,
+          "probability": 0.92511
+        },
+        {
+          "text": "is",
+          "start": 1.16,
+          "end": 1.4,
+          "probability": 0.96084
+        },
+        {
+          "text": "the",
+          "start": 1.4,
+          "end": 1.62,
+          "probability": 0.975758
+        },
+        {
+          "text": "Maju",
+          "start": 1.62,
+          "end": 1.9,
+          "probability": 0.511699
+        },
+        {
+          "text": "Pilot",
+          "start": 1.9,
+          "end": 2.06,
+          "probability": 0.359879
+        },
+        {
+          "text": "Production",
+          "start": 2.06,
+          "end": 2.6,
+          "probability": 0.501429
+        },
+        {
+          "text": "Surface.",
+          "start": 2.6,
+          "end": 3.04,
+          "probability": 0.582095
+        },
+        {
+          "text": "I'm",
+          "start": 3.5,
+          "end": 3.58,
+          "probability": 0.838065
+        },
+        {
+          "text": "loading",
+          "start": 3.58,
+          "end": 3.86,
+          "probability": 0.998131
+        },
+        {
+          "text": "Case",
+          "start": 3.86,
+          "end": 4.16,
+          "probability": 0.586076
+        },
+        {
+          "text": "A,",
+          "start": 4.16,
+          "end": 4.54,
+          "probability": 0.921311
+        },
+        {
+          "text": "Kopikita",
+          "start": 4.92,
+          "end": 5.44,
+          "probability": 0.596902
+        },
+        {
+          "text": "Cafe",
+          "start": 5.44,
+          "end": 5.72,
+          "probability": 0.703689
+        },
+        {
+          "text": "Group.",
+          "start": 5.72,
+          "end": 6.02,
+          "probability": 0.747626
+        }
+      ]
+    },
+    {
+      "start": 6.56,
+      "end": 12.32,
+      "text": "The banner identifies it as a fictional demonstration using Fixture 1.0.0.",
+      "avg_logprob": -0.339774,
+      "no_speech_prob": 0.003332,
+      "words": [
+        {
+          "text": "The",
+          "start": 6.56,
+          "end": 6.7,
+          "probability": 0.979602
+        },
+        {
+          "text": "banner",
+          "start": 6.7,
+          "end": 6.94,
+          "probability": 0.980125
+        },
+        {
+          "text": "identifies",
+          "start": 6.94,
+          "end": 7.6,
+          "probability": 0.977876
+        },
+        {
+          "text": "it",
+          "start": 7.6,
+          "end": 7.92,
+          "probability": 0.987534
+        },
+        {
+          "text": "as",
+          "start": 7.92,
+          "end": 8.18,
+          "probability": 0.992392
+        },
+        {
+          "text": "a",
+          "start": 8.18,
+          "end": 8.38,
+          "probability": 0.932651
+        },
+        {
+          "text": "fictional",
+          "start": 8.38,
+          "end": 8.68,
+          "probability": 0.914007
+        },
+        {
+          "text": "demonstration",
+          "start": 8.68,
+          "end": 9.34,
+          "probability": 0.980972
+        },
+        {
+          "text": "using",
+          "start": 9.34,
+          "end": 10.02,
+          "probability": 0.943669
+        },
+        {
+          "text": "Fixture",
+          "start": 10.02,
+          "end": 10.5,
+          "probability": 0.879203
+        },
+        {
+          "text": "1",
+          "start": 10.5,
+          "end": 11.0,
+          "probability": 0.915422
+        },
+        {
+          "text": ".0",
+          "start": 11.0,
+          "end": 11.72,
+          "probability": 0.994148
+        },
+        {
+          "text": ".0.",
+          "start": 11.72,
+          "end": 12.32,
+          "probability": 0.993213
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Here",
+      "start": 0.62,
+      "end": 1.16,
+      "probability": 0.92511
+    },
+    {
+      "text": "is",
+      "start": 1.16,
+      "end": 1.4,
+      "probability": 0.96084
+    },
+    {
+      "text": "the",
+      "start": 1.4,
+      "end": 1.62,
+      "probability": 0.975758
+    },
+    {
+      "text": "Maju",
+      "start": 1.62,
+      "end": 1.9,
+      "probability": 0.511699
+    },
+    {
+      "text": "Pilot",
+      "start": 1.9,
+      "end": 2.06,
+      "probability": 0.359879
+    },
+    {
+      "text": "Production",
+      "start": 2.06,
+      "end": 2.6,
+      "probability": 0.501429
+    },
+    {
+      "text": "Surface.",
+      "start": 2.6,
+      "end": 3.04,
+      "probability": 0.582095
+    },
+    {
+      "text": "I'm",
+      "start": 3.5,
+      "end": 3.58,
+      "probability": 0.838065
+    },
+    {
+      "text": "loading",
+      "start": 3.58,
+      "end": 3.86,
+      "probability": 0.998131
+    },
+    {
+      "text": "Case",
+      "start": 3.86,
+      "end": 4.16,
+      "probability": 0.586076
+    },
+    {
+      "text": "A,",
+      "start": 4.16,
+      "end": 4.54,
+      "probability": 0.921311
+    },
+    {
+      "text": "Kopikita",
+      "start": 4.92,
+      "end": 5.44,
+      "probability": 0.596902
+    },
+    {
+      "text": "Cafe",
+      "start": 5.44,
+      "end": 5.72,
+      "probability": 0.703689
+    },
+    {
+      "text": "Group.",
+      "start": 5.72,
+      "end": 6.02,
+      "probability": 0.747626
+    },
+    {
+      "text": "The",
+      "start": 6.56,
+      "end": 6.7,
+      "probability": 0.979602
+    },
+    {
+      "text": "banner",
+      "start": 6.7,
+      "end": 6.94,
+      "probability": 0.980125
+    },
+    {
+      "text": "identifies",
+      "start": 6.94,
+      "end": 7.6,
+      "probability": 0.977876
+    },
+    {
+      "text": "it",
+      "start": 7.6,
+      "end": 7.92,
+      "probability": 0.987534
+    },
+    {
+      "text": "as",
+      "start": 7.92,
+      "end": 8.18,
+      "probability": 0.992392
+    },
+    {
+      "text": "a",
+      "start": 8.18,
+      "end": 8.38,
+      "probability": 0.932651
+    },
+    {
+      "text": "fictional",
+      "start": 8.38,
+      "end": 8.68,
+      "probability": 0.914007
+    },
+    {
+      "text": "demonstration",
+      "start": 8.68,
+      "end": 9.34,
+      "probability": 0.980972
+    },
+    {
+      "text": "using",
+      "start": 9.34,
+      "end": 10.02,
+      "probability": 0.943669
+    },
+    {
+      "text": "Fixture",
+      "start": 10.02,
+      "end": 10.5,
+      "probability": 0.879203
+    },
+    {
+      "text": "1",
+      "start": 10.5,
+      "end": 11.0,
+      "probability": 0.915422
+    },
+    {
+      "text": ".0",
+      "start": 11.0,
+      "end": 11.72,
+      "probability": 0.994148
+    },
+    {
+      "text": ".0.",
+      "start": 11.72,
+      "end": 12.32,
+      "probability": 0.993213
+    }
+  ],
+  "recognized_text": "Here is the Maju Pilot Production Surface. I'm loading Case A, Kopikita Cafe Group. The banner identifies it as a fictional demonstration using Fixture 1.0.0."
+}

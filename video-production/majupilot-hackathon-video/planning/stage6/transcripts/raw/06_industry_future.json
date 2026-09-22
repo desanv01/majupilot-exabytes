@@ -1,0 +1,2130 @@
+{
+  "beat_id": "06_industry_future",
+  "source": ".media/audio/voice/voice_013.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 79.317312,
+  "duration_after_vad": 77.984,
+  "segments": [
+    {
+      "start": 0.75,
+      "end": 4.45,
+      "text": "For an SME owner, the value is not manufactured certainty.",
+      "avg_logprob": -0.238715,
+      "no_speech_prob": 0.010009,
+      "words": [
+        {
+          "text": "For",
+          "start": 0.75,
+          "end": 1.25,
+          "probability": 0.617785
+        },
+        {
+          "text": "an",
+          "start": 1.25,
+          "end": 1.41,
+          "probability": 0.841853
+        },
+        {
+          "text": "SME",
+          "start": 1.41,
+          "end": 1.93,
+          "probability": 0.977685
+        },
+        {
+          "text": "owner,",
+          "start": 1.93,
+          "end": 2.19,
+          "probability": 0.954872
+        },
+        {
+          "text": "the",
+          "start": 2.57,
+          "end": 2.61,
+          "probability": 0.964732
+        },
+        {
+          "text": "value",
+          "start": 2.61,
+          "end": 2.87,
+          "probability": 0.99184
+        },
+        {
+          "text": "is",
+          "start": 2.87,
+          "end": 3.09,
+          "probability": 0.991377
+        },
+        {
+          "text": "not",
+          "start": 3.09,
+          "end": 3.29,
+          "probability": 0.975223
+        },
+        {
+          "text": "manufactured",
+          "start": 3.29,
+          "end": 3.83,
+          "probability": 0.94714
+        },
+        {
+          "text": "certainty.",
+          "start": 3.83,
+          "end": 4.45,
+          "probability": 0.995746
+        }
+      ]
+    },
+    {
+      "start": 4.95,
+      "end": 11.19,
+      "text": "It is a clear conversation which is 5 answers become a review starting point, scenario ranges",
+      "avg_logprob": -0.238715,
+      "no_speech_prob": 0.010009,
+      "words": [
+        {
+          "text": "It",
+          "start": 4.95,
+          "end": 5.01,
+          "probability": 0.947657
+        },
+        {
+          "text": "is",
+          "start": 5.01,
+          "end": 5.15,
+          "probability": 0.965774
+        },
+        {
+          "text": "a",
+          "start": 5.15,
+          "end": 5.33,
+          "probability": 0.974293
+        },
+        {
+          "text": "clear",
+          "start": 5.33,
+          "end": 5.59,
+          "probability": 0.993145
+        },
+        {
+          "text": "conversation",
+          "start": 5.59,
+          "end": 6.11,
+          "probability": 0.984022
+        },
+        {
+          "text": "which",
+          "start": 6.11,
+          "end": 6.49,
+          "probability": 0.602432
+        },
+        {
+          "text": "is",
+          "start": 6.49,
+          "end": 6.85,
+          "probability": 0.951202
+        },
+        {
+          "text": "5",
+          "start": 6.85,
+          "end": 7.51,
+          "probability": 0.311955
+        },
+        {
+          "text": "answers",
+          "start": 7.51,
+          "end": 8.01,
+          "probability": 0.981755
+        },
+        {
+          "text": "become",
+          "start": 8.01,
+          "end": 8.43,
+          "probability": 0.879277
+        },
+        {
+          "text": "a",
+          "start": 8.43,
+          "end": 8.63,
+          "probability": 0.950726
+        },
+        {
+          "text": "review",
+          "start": 8.63,
+          "end": 8.99,
+          "probability": 0.437437
+        },
+        {
+          "text": "starting",
+          "start": 8.99,
+          "end": 9.53,
+          "probability": 0.975519
+        },
+        {
+          "text": "point,",
+          "start": 9.53,
+          "end": 9.99,
+          "probability": 0.972634
+        },
+        {
+          "text": "scenario",
+          "start": 10.55,
+          "end": 10.71,
+          "probability": 0.891647
+        },
+        {
+          "text": "ranges",
+          "start": 10.71,
+          "end": 11.19,
+          "probability": 0.979806
+        }
+      ]
+    },
+    {
+      "start": 11.19,
+      "end": 16.63,
+      "text": "show the consequences of assumptions, and the blueprint preserves why a path was chosen.",
+      "avg_logprob": -0.238715,
+      "no_speech_prob": 0.010009,
+      "words": [
+        {
+          "text": "show",
+          "start": 11.19,
+          "end": 11.59,
+          "probability": 0.947209
+        },
+        {
+          "text": "the",
+          "start": 11.59,
+          "end": 11.79,
+          "probability": 0.950684
+        },
+        {
+          "text": "consequences",
+          "start": 11.79,
+          "end": 12.35,
+          "probability": 0.962273
+        },
+        {
+          "text": "of",
+          "start": 12.35,
+          "end": 12.67,
+          "probability": 0.98681
+        },
+        {
+          "text": "assumptions,",
+          "start": 12.67,
+          "end": 13.23,
+          "probability": 0.968714
+        },
+        {
+          "text": "and",
+          "start": 14.05,
+          "end": 14.07,
+          "probability": 0.932471
+        },
+        {
+          "text": "the",
+          "start": 14.07,
+          "end": 14.17,
+          "probability": 0.876066
+        },
+        {
+          "text": "blueprint",
+          "start": 14.17,
+          "end": 14.51,
+          "probability": 0.957501
+        },
+        {
+          "text": "preserves",
+          "start": 14.51,
+          "end": 15.05,
+          "probability": 0.987033
+        },
+        {
+          "text": "why",
+          "start": 15.05,
+          "end": 15.49,
+          "probability": 0.993107
+        },
+        {
+          "text": "a",
+          "start": 15.49,
+          "end": 15.67,
+          "probability": 0.98927
+        },
+        {
+          "text": "path",
+          "start": 15.67,
+          "end": 15.89,
+          "probability": 0.987548
+        },
+        {
+          "text": "was",
+          "start": 15.89,
+          "end": 16.15,
+          "probability": 0.990587
+        },
+        {
+          "text": "chosen.",
+          "start": 16.15,
+          "end": 16.63,
+          "probability": 0.9986
+        }
+      ]
+    },
+    {
+      "start": 17.17,
+      "end": 22.89,
+      "text": "For an advisor, the same structured handoff can reduce the repeated discovery while keeping",
+      "avg_logprob": -0.238715,
+      "no_speech_prob": 0.010009,
+      "words": [
+        {
+          "text": "For",
+          "start": 17.17,
+          "end": 17.41,
+          "probability": 0.977135
+        },
+        {
+          "text": "an",
+          "start": 17.41,
+          "end": 17.55,
+          "probability": 0.987615
+        },
+        {
+          "text": "advisor,",
+          "start": 17.55,
+          "end": 17.89,
+          "probability": 0.881693
+        },
+        {
+          "text": "the",
+          "start": 18.25,
+          "end": 18.31,
+          "probability": 0.958802
+        },
+        {
+          "text": "same",
+          "start": 18.31,
+          "end": 18.59,
+          "probability": 0.99895
+        },
+        {
+          "text": "structured",
+          "start": 18.59,
+          "end": 19.15,
+          "probability": 0.95051
+        },
+        {
+          "text": "handoff",
+          "start": 19.15,
+          "end": 19.59,
+          "probability": 0.928402
+        },
+        {
+          "text": "can",
+          "start": 19.59,
+          "end": 19.89,
+          "probability": 0.991655
+        },
+        {
+          "text": "reduce",
+          "start": 19.89,
+          "end": 20.53,
+          "probability": 0.983619
+        },
+        {
+          "text": "the",
+          "start": 20.53,
+          "end": 20.91,
+          "probability": 0.406571
+        },
+        {
+          "text": "repeated",
+          "start": 20.91,
+          "end": 21.27,
+          "probability": 0.813139
+        },
+        {
+          "text": "discovery",
+          "start": 21.27,
+          "end": 21.79,
+          "probability": 0.977657
+        },
+        {
+          "text": "while",
+          "start": 21.79,
+          "end": 22.49,
+          "probability": 0.619098
+        },
+        {
+          "text": "keeping",
+          "start": 22.49,
+          "end": 22.89,
+          "probability": 0.988704
+        }
+      ]
+    },
+    {
+      "start": 22.89,
+      "end": 24.17,
+      "text": "the consent explicit.",
+      "avg_logprob": -0.238715,
+      "no_speech_prob": 0.010009,
+      "words": [
+        {
+          "text": "the",
+          "start": 22.89,
+          "end": 23.13,
+          "probability": 0.987073
+        },
+        {
+          "text": "consent",
+          "start": 23.13,
+          "end": 23.55,
+          "probability": 0.800596
+        },
+        {
+          "text": "explicit.",
+          "start": 23.55,
+          "end": 24.17,
+          "probability": 0.99594
+        }
+      ]
+    },
+    {
+      "start": 24.97,
+      "end": 30.17,
+      "text": "The current boundary matters like module pilot does not promise businesses outcomes, vendor",
+      "avg_logprob": -0.238715,
+      "no_speech_prob": 0.010009,
+      "words": [
+        {
+          "text": "The",
+          "start": 24.97,
+          "end": 25.13,
+          "probability": 0.975204
+        },
+        {
+          "text": "current",
+          "start": 25.13,
+          "end": 25.43,
+          "probability": 0.985858
+        },
+        {
+          "text": "boundary",
+          "start": 25.43,
+          "end": 25.79,
+          "probability": 0.985309
+        },
+        {
+          "text": "matters",
+          "start": 25.79,
+          "end": 26.21,
+          "probability": 0.858546
+        },
+        {
+          "text": "like",
+          "start": 26.21,
+          "end": 26.65,
+          "probability": 0.577104
+        },
+        {
+          "text": "module",
+          "start": 26.65,
+          "end": 26.97,
+          "probability": 0.053315
+        },
+        {
+          "text": "pilot",
+          "start": 26.97,
+          "end": 27.29,
+          "probability": 0.9565
+        },
+        {
+          "text": "does",
+          "start": 27.29,
+          "end": 27.53,
+          "probability": 0.985147
+        },
+        {
+          "text": "not",
+          "start": 27.53,
+          "end": 27.77,
+          "probability": 0.994345
+        },
+        {
+          "text": "promise",
+          "start": 27.77,
+          "end": 28.15,
+          "probability": 0.961263
+        },
+        {
+          "text": "businesses",
+          "start": 28.15,
+          "end": 28.79,
+          "probability": 0.574728
+        },
+        {
+          "text": "outcomes,",
+          "start": 28.79,
+          "end": 29.49,
+          "probability": 0.892479
+        },
+        {
+          "text": "vendor",
+          "start": 30.17,
+          "end": 30.17,
+          "probability": 0.988182
+        }
+      ]
+    },
+    {
+      "start": 30.17,
+      "end": 36.75,
+      "text": "fulfillment, guaranteed availability, the human response, or an automated CRM record creation.",
+      "avg_logprob": -0.218872,
+      "no_speech_prob": 0.004298,
+      "words": [
+        {
+          "text": "fulfillment,",
+          "start": 30.17,
+          "end": 30.83,
+          "probability": 0.852094
+        },
+        {
+          "text": "guaranteed",
+          "start": 30.99,
+          "end": 31.35,
+          "probability": 0.947947
+        },
+        {
+          "text": "availability,",
+          "start": 31.35,
+          "end": 32.07,
+          "probability": 0.996479
+        },
+        {
+          "text": "the",
+          "start": 32.95,
+          "end": 33.03,
+          "probability": 0.367804
+        },
+        {
+          "text": "human",
+          "start": 33.03,
+          "end": 33.33,
+          "probability": 0.985567
+        },
+        {
+          "text": "response,",
+          "start": 33.33,
+          "end": 33.87,
+          "probability": 0.985478
+        },
+        {
+          "text": "or",
+          "start": 34.27,
+          "end": 34.29,
+          "probability": 0.894507
+        },
+        {
+          "text": "an",
+          "start": 34.29,
+          "end": 34.51,
+          "probability": 0.857886
+        },
+        {
+          "text": "automated",
+          "start": 34.51,
+          "end": 35.03,
+          "probability": 0.997456
+        },
+        {
+          "text": "CRM",
+          "start": 35.03,
+          "end": 35.63,
+          "probability": 0.990505
+        },
+        {
+          "text": "record",
+          "start": 35.63,
+          "end": 36.05,
+          "probability": 0.932568
+        },
+        {
+          "text": "creation.",
+          "start": 36.05,
+          "end": 36.75,
+          "probability": 0.996331
+        }
+      ]
+    },
+    {
+      "start": 37.33,
+      "end": 43.81,
+      "text": "The prototype shows a deployable workflow and an inspectable decision package, not a completed",
+      "avg_logprob": -0.218872,
+      "no_speech_prob": 0.004298,
+      "words": [
+        {
+          "text": "The",
+          "start": 37.33,
+          "end": 37.49,
+          "probability": 0.975692
+        },
+        {
+          "text": "prototype",
+          "start": 37.49,
+          "end": 37.83,
+          "probability": 0.998704
+        },
+        {
+          "text": "shows",
+          "start": 37.83,
+          "end": 38.23,
+          "probability": 0.98377
+        },
+        {
+          "text": "a",
+          "start": 38.23,
+          "end": 38.47,
+          "probability": 0.952056
+        },
+        {
+          "text": "deployable",
+          "start": 38.47,
+          "end": 39.25,
+          "probability": 0.991451
+        },
+        {
+          "text": "workflow",
+          "start": 39.25,
+          "end": 39.73,
+          "probability": 0.993785
+        },
+        {
+          "text": "and",
+          "start": 39.73,
+          "end": 40.21,
+          "probability": 0.836379
+        },
+        {
+          "text": "an",
+          "start": 40.21,
+          "end": 40.41,
+          "probability": 0.938507
+        },
+        {
+          "text": "inspectable",
+          "start": 40.41,
+          "end": 41.23,
+          "probability": 0.966719
+        },
+        {
+          "text": "decision",
+          "start": 41.23,
+          "end": 41.59,
+          "probability": 0.992903
+        },
+        {
+          "text": "package,",
+          "start": 41.59,
+          "end": 42.21,
+          "probability": 0.980726
+        },
+        {
+          "text": "not",
+          "start": 42.75,
+          "end": 43.07,
+          "probability": 0.978362
+        },
+        {
+          "text": "a",
+          "start": 43.07,
+          "end": 43.23,
+          "probability": 0.974844
+        },
+        {
+          "text": "completed",
+          "start": 43.23,
+          "end": 43.81,
+          "probability": 0.990457
+        }
+      ]
+    },
+    {
+      "start": 43.81,
+      "end": 49.11,
+      "text": "and production-ready customer transformation yet. Future work can extend domain packs,",
+      "avg_logprob": -0.218872,
+      "no_speech_prob": 0.004298,
+      "words": [
+        {
+          "text": "and",
+          "start": 43.81,
+          "end": 44.23,
+          "probability": 0.963722
+        },
+        {
+          "text": "production",
+          "start": 44.23,
+          "end": 44.73,
+          "probability": 0.992714
+        },
+        {
+          "text": "-ready",
+          "start": 44.73,
+          "end": 44.99,
+          "probability": 0.868595
+        },
+        {
+          "text": "customer",
+          "start": 44.99,
+          "end": 45.49,
+          "probability": 0.979371
+        },
+        {
+          "text": "transformation",
+          "start": 45.49,
+          "end": 46.09,
+          "probability": 0.997915
+        },
+        {
+          "text": "yet.",
+          "start": 46.09,
+          "end": 46.61,
+          "probability": 0.953748
+        },
+        {
+          "text": "Future",
+          "start": 47.35,
+          "end": 47.55,
+          "probability": 0.978751
+        },
+        {
+          "text": "work",
+          "start": 47.55,
+          "end": 47.79,
+          "probability": 0.657504
+        },
+        {
+          "text": "can",
+          "start": 47.79,
+          "end": 48.03,
+          "probability": 0.995245
+        },
+        {
+          "text": "extend",
+          "start": 48.03,
+          "end": 48.39,
+          "probability": 0.985007
+        },
+        {
+          "text": "domain",
+          "start": 48.39,
+          "end": 48.75,
+          "probability": 0.992255
+        },
+        {
+          "text": "packs,",
+          "start": 48.75,
+          "end": 49.11,
+          "probability": 0.892512
+        }
+      ]
+    },
+    {
+      "start": 49.33,
+      "end": 54.57,
+      "text": "evidence sources, integrations, and consultant workflows after this boundary is validated.",
+      "avg_logprob": -0.218872,
+      "no_speech_prob": 0.004298,
+      "words": [
+        {
+          "text": "evidence",
+          "start": 49.33,
+          "end": 49.51,
+          "probability": 0.909794
+        },
+        {
+          "text": "sources,",
+          "start": 49.51,
+          "end": 50.05,
+          "probability": 0.984845
+        },
+        {
+          "text": "integrations,",
+          "start": 50.33,
+          "end": 50.97,
+          "probability": 0.878501
+        },
+        {
+          "text": "and",
+          "start": 51.17,
+          "end": 51.31,
+          "probability": 0.996302
+        },
+        {
+          "text": "consultant",
+          "start": 51.31,
+          "end": 51.79,
+          "probability": 0.8079
+        },
+        {
+          "text": "workflows",
+          "start": 51.79,
+          "end": 52.43,
+          "probability": 0.991884
+        },
+        {
+          "text": "after",
+          "start": 52.43,
+          "end": 53.27,
+          "probability": 0.709522
+        },
+        {
+          "text": "this",
+          "start": 53.27,
+          "end": 53.49,
+          "probability": 0.96161
+        },
+        {
+          "text": "boundary",
+          "start": 53.49,
+          "end": 53.81,
+          "probability": 0.994471
+        },
+        {
+          "text": "is",
+          "start": 53.81,
+          "end": 54.07,
+          "probability": 0.994868
+        },
+        {
+          "text": "validated.",
+          "start": 54.07,
+          "end": 54.57,
+          "probability": 0.565109
+        }
+      ]
+    },
+    {
+      "start": 54.57,
+      "end": 61.97,
+      "text": "The Document RAC, Retrieval Augmented Generation and Arbitrary Uploaded Document Injection, may",
+      "avg_logprob": -0.286623,
+      "no_speech_prob": 0.273653,
+      "words": [
+        {
+          "text": "The",
+          "start": 54.57,
+          "end": 55.27,
+          "probability": 0.31241
+        },
+        {
+          "text": "Document",
+          "start": 55.27,
+          "end": 55.81,
+          "probability": 0.309526
+        },
+        {
+          "text": "RAC,",
+          "start": 55.81,
+          "end": 56.71,
+          "probability": 0.528687
+        },
+        {
+          "text": "Retrieval",
+          "start": 57.01,
+          "end": 57.57,
+          "probability": 0.897214
+        },
+        {
+          "text": "Augmented",
+          "start": 57.57,
+          "end": 58.03,
+          "probability": 0.784065
+        },
+        {
+          "text": "Generation",
+          "start": 58.03,
+          "end": 58.47,
+          "probability": 0.957565
+        },
+        {
+          "text": "and",
+          "start": 58.47,
+          "end": 58.87,
+          "probability": 0.766638
+        },
+        {
+          "text": "Arbitrary",
+          "start": 58.87,
+          "end": 59.39,
+          "probability": 0.919622
+        },
+        {
+          "text": "Uploaded",
+          "start": 59.39,
+          "end": 60.63,
+          "probability": 0.900847
+        },
+        {
+          "text": "Document",
+          "start": 60.63,
+          "end": 60.63,
+          "probability": 0.961967
+        },
+        {
+          "text": "Injection,",
+          "start": 60.63,
+          "end": 61.13,
+          "probability": 0.77944
+        },
+        {
+          "text": "may",
+          "start": 61.71,
+          "end": 61.97,
+          "probability": 0.83577
+        }
+      ]
+    },
+    {
+      "start": 61.97,
+      "end": 65.99,
+      "text": "be explored later as a future upgrade or future improvement.",
+      "avg_logprob": -0.286623,
+      "no_speech_prob": 0.273653,
+      "words": [
+        {
+          "text": "be",
+          "start": 61.97,
+          "end": 62.09,
+          "probability": 0.996538
+        },
+        {
+          "text": "explored",
+          "start": 62.09,
+          "end": 62.47,
+          "probability": 0.826131
+        },
+        {
+          "text": "later",
+          "start": 62.47,
+          "end": 62.87,
+          "probability": 0.98552
+        },
+        {
+          "text": "as",
+          "start": 62.87,
+          "end": 63.63,
+          "probability": 0.964935
+        },
+        {
+          "text": "a",
+          "start": 63.63,
+          "end": 63.93,
+          "probability": 0.903112
+        },
+        {
+          "text": "future",
+          "start": 63.93,
+          "end": 64.29,
+          "probability": 0.940736
+        },
+        {
+          "text": "upgrade",
+          "start": 64.29,
+          "end": 64.79,
+          "probability": 0.779167
+        },
+        {
+          "text": "or",
+          "start": 64.79,
+          "end": 65.23,
+          "probability": 0.730495
+        },
+        {
+          "text": "future",
+          "start": 65.23,
+          "end": 65.55,
+          "probability": 0.888508
+        },
+        {
+          "text": "improvement.",
+          "start": 65.55,
+          "end": 65.99,
+          "probability": 0.985381
+        }
+      ]
+    },
+    {
+      "start": 66.83,
+      "end": 68.29,
+      "text": "They are not implemented now.",
+      "avg_logprob": -0.286623,
+      "no_speech_prob": 0.273653,
+      "words": [
+        {
+          "text": "They",
+          "start": 66.83,
+          "end": 67.09,
+          "probability": 0.964702
+        },
+        {
+          "text": "are",
+          "start": 67.09,
+          "end": 67.17,
+          "probability": 0.976569
+        },
+        {
+          "text": "not",
+          "start": 67.17,
+          "end": 67.31,
+          "probability": 0.985599
+        },
+        {
+          "text": "implemented",
+          "start": 67.31,
+          "end": 67.83,
+          "probability": 0.999163
+        },
+        {
+          "text": "now.",
+          "start": 67.83,
+          "end": 68.29,
+          "probability": 0.967198
+        }
+      ]
+    },
+    {
+      "start": 69.15,
+      "end": 74.41,
+      "text": "The opportunity is to broaden the evidence available to the system without weakening the",
+      "avg_logprob": -0.286623,
+      "no_speech_prob": 0.273653,
+      "words": [
+        {
+          "text": "The",
+          "start": 69.15,
+          "end": 69.17,
+          "probability": 0.969208
+        },
+        {
+          "text": "opportunity",
+          "start": 69.17,
+          "end": 69.95,
+          "probability": 0.98651
+        },
+        {
+          "text": "is",
+          "start": 69.95,
+          "end": 70.39,
+          "probability": 0.987105
+        },
+        {
+          "text": "to",
+          "start": 70.39,
+          "end": 70.55,
+          "probability": 0.995036
+        },
+        {
+          "text": "broaden",
+          "start": 70.55,
+          "end": 70.85,
+          "probability": 0.997204
+        },
+        {
+          "text": "the",
+          "start": 70.85,
+          "end": 71.11,
+          "probability": 0.991052
+        },
+        {
+          "text": "evidence",
+          "start": 71.11,
+          "end": 71.53,
+          "probability": 0.997478
+        },
+        {
+          "text": "available",
+          "start": 71.53,
+          "end": 71.93,
+          "probability": 0.996861
+        },
+        {
+          "text": "to",
+          "start": 71.93,
+          "end": 72.37,
+          "probability": 0.994351
+        },
+        {
+          "text": "the",
+          "start": 72.37,
+          "end": 72.55,
+          "probability": 0.990877
+        },
+        {
+          "text": "system",
+          "start": 72.55,
+          "end": 72.91,
+          "probability": 0.984121
+        },
+        {
+          "text": "without",
+          "start": 72.91,
+          "end": 73.49,
+          "probability": 0.90486
+        },
+        {
+          "text": "weakening",
+          "start": 73.49,
+          "end": 74.03,
+          "probability": 0.998723
+        },
+        {
+          "text": "the",
+          "start": 74.03,
+          "end": 74.41,
+          "probability": 0.959443
+        }
+      ]
+    },
+    {
+      "start": 75.35,
+      "end": 78.11,
+      "text": "provenance, consent or deterministic ownership.",
+      "avg_logprob": -0.343129,
+      "no_speech_prob": 0.029932,
+      "words": [
+        {
+          "text": "provenance,",
+          "start": 75.35,
+          "end": 76.11,
+          "probability": 0.834055
+        },
+        {
+          "text": "consent",
+          "start": 76.37,
+          "end": 76.65,
+          "probability": 0.933049
+        },
+        {
+          "text": "or",
+          "start": 76.65,
+          "end": 77.01,
+          "probability": 0.574988
+        },
+        {
+          "text": "deterministic",
+          "start": 77.01,
+          "end": 77.73,
+          "probability": 0.992688
+        },
+        {
+          "text": "ownership.",
+          "start": 77.73,
+          "end": 78.11,
+          "probability": 0.999084
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "For",
+      "start": 0.75,
+      "end": 1.25,
+      "probability": 0.617785
+    },
+    {
+      "text": "an",
+      "start": 1.25,
+      "end": 1.41,
+      "probability": 0.841853
+    },
+    {
+      "text": "SME",
+      "start": 1.41,
+      "end": 1.93,
+      "probability": 0.977685
+    },
+    {
+      "text": "owner,",
+      "start": 1.93,
+      "end": 2.19,
+      "probability": 0.954872
+    },
+    {
+      "text": "the",
+      "start": 2.57,
+      "end": 2.61,
+      "probability": 0.964732
+    },
+    {
+      "text": "value",
+      "start": 2.61,
+      "end": 2.87,
+      "probability": 0.99184
+    },
+    {
+      "text": "is",
+      "start": 2.87,
+      "end": 3.09,
+      "probability": 0.991377
+    },
+    {
+      "text": "not",
+      "start": 3.09,
+      "end": 3.29,
+      "probability": 0.975223
+    },
+    {
+      "text": "manufactured",
+      "start": 3.29,
+      "end": 3.83,
+      "probability": 0.94714
+    },
+    {
+      "text": "certainty.",
+      "start": 3.83,
+      "end": 4.45,
+      "probability": 0.995746
+    },
+    {
+      "text": "It",
+      "start": 4.95,
+      "end": 5.01,
+      "probability": 0.947657
+    },
+    {
+      "text": "is",
+      "start": 5.01,
+      "end": 5.15,
+      "probability": 0.965774
+    },
+    {
+      "text": "a",
+      "start": 5.15,
+      "end": 5.33,
+      "probability": 0.974293
+    },
+    {
+      "text": "clear",
+      "start": 5.33,
+      "end": 5.59,
+      "probability": 0.993145
+    },
+    {
+      "text": "conversation",
+      "start": 5.59,
+      "end": 6.11,
+      "probability": 0.984022
+    },
+    {
+      "text": "which",
+      "start": 6.11,
+      "end": 6.49,
+      "probability": 0.602432
+    },
+    {
+      "text": "is",
+      "start": 6.49,
+      "end": 6.85,
+      "probability": 0.951202
+    },
+    {
+      "text": "5",
+      "start": 6.85,
+      "end": 7.51,
+      "probability": 0.311955
+    },
+    {
+      "text": "answers",
+      "start": 7.51,
+      "end": 8.01,
+      "probability": 0.981755
+    },
+    {
+      "text": "become",
+      "start": 8.01,
+      "end": 8.43,
+      "probability": 0.879277
+    },
+    {
+      "text": "a",
+      "start": 8.43,
+      "end": 8.63,
+      "probability": 0.950726
+    },
+    {
+      "text": "review",
+      "start": 8.63,
+      "end": 8.99,
+      "probability": 0.437437
+    },
+    {
+      "text": "starting",
+      "start": 8.99,
+      "end": 9.53,
+      "probability": 0.975519
+    },
+    {
+      "text": "point,",
+      "start": 9.53,
+      "end": 9.99,
+      "probability": 0.972634
+    },
+    {
+      "text": "scenario",
+      "start": 10.55,
+      "end": 10.71,
+      "probability": 0.891647
+    },
+    {
+      "text": "ranges",
+      "start": 10.71,
+      "end": 11.19,
+      "probability": 0.979806
+    },
+    {
+      "text": "show",
+      "start": 11.19,
+      "end": 11.59,
+      "probability": 0.947209
+    },
+    {
+      "text": "the",
+      "start": 11.59,
+      "end": 11.79,
+      "probability": 0.950684
+    },
+    {
+      "text": "consequences",
+      "start": 11.79,
+      "end": 12.35,
+      "probability": 0.962273
+    },
+    {
+      "text": "of",
+      "start": 12.35,
+      "end": 12.67,
+      "probability": 0.98681
+    },
+    {
+      "text": "assumptions,",
+      "start": 12.67,
+      "end": 13.23,
+      "probability": 0.968714
+    },
+    {
+      "text": "and",
+      "start": 14.05,
+      "end": 14.07,
+      "probability": 0.932471
+    },
+    {
+      "text": "the",
+      "start": 14.07,
+      "end": 14.17,
+      "probability": 0.876066
+    },
+    {
+      "text": "blueprint",
+      "start": 14.17,
+      "end": 14.51,
+      "probability": 0.957501
+    },
+    {
+      "text": "preserves",
+      "start": 14.51,
+      "end": 15.05,
+      "probability": 0.987033
+    },
+    {
+      "text": "why",
+      "start": 15.05,
+      "end": 15.49,
+      "probability": 0.993107
+    },
+    {
+      "text": "a",
+      "start": 15.49,
+      "end": 15.67,
+      "probability": 0.98927
+    },
+    {
+      "text": "path",
+      "start": 15.67,
+      "end": 15.89,
+      "probability": 0.987548
+    },
+    {
+      "text": "was",
+      "start": 15.89,
+      "end": 16.15,
+      "probability": 0.990587
+    },
+    {
+      "text": "chosen.",
+      "start": 16.15,
+      "end": 16.63,
+      "probability": 0.9986
+    },
+    {
+      "text": "For",
+      "start": 17.17,
+      "end": 17.41,
+      "probability": 0.977135
+    },
+    {
+      "text": "an",
+      "start": 17.41,
+      "end": 17.55,
+      "probability": 0.987615
+    },
+    {
+      "text": "advisor,",
+      "start": 17.55,
+      "end": 17.89,
+      "probability": 0.881693
+    },
+    {
+      "text": "the",
+      "start": 18.25,
+      "end": 18.31,
+      "probability": 0.958802
+    },
+    {
+      "text": "same",
+      "start": 18.31,
+      "end": 18.59,
+      "probability": 0.99895
+    },
+    {
+      "text": "structured",
+      "start": 18.59,
+      "end": 19.15,
+      "probability": 0.95051
+    },
+    {
+      "text": "handoff",
+      "start": 19.15,
+      "end": 19.59,
+      "probability": 0.928402
+    },
+    {
+      "text": "can",
+      "start": 19.59,
+      "end": 19.89,
+      "probability": 0.991655
+    },
+    {
+      "text": "reduce",
+      "start": 19.89,
+      "end": 20.53,
+      "probability": 0.983619
+    },
+    {
+      "text": "the",
+      "start": 20.53,
+      "end": 20.91,
+      "probability": 0.406571
+    },
+    {
+      "text": "repeated",
+      "start": 20.91,
+      "end": 21.27,
+      "probability": 0.813139
+    },
+    {
+      "text": "discovery",
+      "start": 21.27,
+      "end": 21.79,
+      "probability": 0.977657
+    },
+    {
+      "text": "while",
+      "start": 21.79,
+      "end": 22.49,
+      "probability": 0.619098
+    },
+    {
+      "text": "keeping",
+      "start": 22.49,
+      "end": 22.89,
+      "probability": 0.988704
+    },
+    {
+      "text": "the",
+      "start": 22.89,
+      "end": 23.13,
+      "probability": 0.987073
+    },
+    {
+      "text": "consent",
+      "start": 23.13,
+      "end": 23.55,
+      "probability": 0.800596
+    },
+    {
+      "text": "explicit.",
+      "start": 23.55,
+      "end": 24.17,
+      "probability": 0.99594
+    },
+    {
+      "text": "The",
+      "start": 24.97,
+      "end": 25.13,
+      "probability": 0.975204
+    },
+    {
+      "text": "current",
+      "start": 25.13,
+      "end": 25.43,
+      "probability": 0.985858
+    },
+    {
+      "text": "boundary",
+      "start": 25.43,
+      "end": 25.79,
+      "probability": 0.985309
+    },
+    {
+      "text": "matters",
+      "start": 25.79,
+      "end": 26.21,
+      "probability": 0.858546
+    },
+    {
+      "text": "like",
+      "start": 26.21,
+      "end": 26.65,
+      "probability": 0.577104
+    },
+    {
+      "text": "module",
+      "start": 26.65,
+      "end": 26.97,
+      "probability": 0.053315
+    },
+    {
+      "text": "pilot",
+      "start": 26.97,
+      "end": 27.29,
+      "probability": 0.9565
+    },
+    {
+      "text": "does",
+      "start": 27.29,
+      "end": 27.53,
+      "probability": 0.985147
+    },
+    {
+      "text": "not",
+      "start": 27.53,
+      "end": 27.77,
+      "probability": 0.994345
+    },
+    {
+      "text": "promise",
+      "start": 27.77,
+      "end": 28.15,
+      "probability": 0.961263
+    },
+    {
+      "text": "businesses",
+      "start": 28.15,
+      "end": 28.79,
+      "probability": 0.574728
+    },
+    {
+      "text": "outcomes,",
+      "start": 28.79,
+      "end": 29.49,
+      "probability": 0.892479
+    },
+    {
+      "text": "vendor",
+      "start": 30.17,
+      "end": 30.17,
+      "probability": 0.988182
+    },
+    {
+      "text": "fulfillment,",
+      "start": 30.17,
+      "end": 30.83,
+      "probability": 0.852094
+    },
+    {
+      "text": "guaranteed",
+      "start": 30.99,
+      "end": 31.35,
+      "probability": 0.947947
+    },
+    {
+      "text": "availability,",
+      "start": 31.35,
+      "end": 32.07,
+      "probability": 0.996479
+    },
+    {
+      "text": "the",
+      "start": 32.95,
+      "end": 33.03,
+      "probability": 0.367804
+    },
+    {
+      "text": "human",
+      "start": 33.03,
+      "end": 33.33,
+      "probability": 0.985567
+    },
+    {
+      "text": "response,",
+      "start": 33.33,
+      "end": 33.87,
+      "probability": 0.985478
+    },
+    {
+      "text": "or",
+      "start": 34.27,
+      "end": 34.29,
+      "probability": 0.894507
+    },
+    {
+      "text": "an",
+      "start": 34.29,
+      "end": 34.51,
+      "probability": 0.857886
+    },
+    {
+      "text": "automated",
+      "start": 34.51,
+      "end": 35.03,
+      "probability": 0.997456
+    },
+    {
+      "text": "CRM",
+      "start": 35.03,
+      "end": 35.63,
+      "probability": 0.990505
+    },
+    {
+      "text": "record",
+      "start": 35.63,
+      "end": 36.05,
+      "probability": 0.932568
+    },
+    {
+      "text": "creation.",
+      "start": 36.05,
+      "end": 36.75,
+      "probability": 0.996331
+    },
+    {
+      "text": "The",
+      "start": 37.33,
+      "end": 37.49,
+      "probability": 0.975692
+    },
+    {
+      "text": "prototype",
+      "start": 37.49,
+      "end": 37.83,
+      "probability": 0.998704
+    },
+    {
+      "text": "shows",
+      "start": 37.83,
+      "end": 38.23,
+      "probability": 0.98377
+    },
+    {
+      "text": "a",
+      "start": 38.23,
+      "end": 38.47,
+      "probability": 0.952056
+    },
+    {
+      "text": "deployable",
+      "start": 38.47,
+      "end": 39.25,
+      "probability": 0.991451
+    },
+    {
+      "text": "workflow",
+      "start": 39.25,
+      "end": 39.73,
+      "probability": 0.993785
+    },
+    {
+      "text": "and",
+      "start": 39.73,
+      "end": 40.21,
+      "probability": 0.836379
+    },
+    {
+      "text": "an",
+      "start": 40.21,
+      "end": 40.41,
+      "probability": 0.938507
+    },
+    {
+      "text": "inspectable",
+      "start": 40.41,
+      "end": 41.23,
+      "probability": 0.966719
+    },
+    {
+      "text": "decision",
+      "start": 41.23,
+      "end": 41.59,
+      "probability": 0.992903
+    },
+    {
+      "text": "package,",
+      "start": 41.59,
+      "end": 42.21,
+      "probability": 0.980726
+    },
+    {
+      "text": "not",
+      "start": 42.75,
+      "end": 43.07,
+      "probability": 0.978362
+    },
+    {
+      "text": "a",
+      "start": 43.07,
+      "end": 43.23,
+      "probability": 0.974844
+    },
+    {
+      "text": "completed",
+      "start": 43.23,
+      "end": 43.81,
+      "probability": 0.990457
+    },
+    {
+      "text": "and",
+      "start": 43.81,
+      "end": 44.23,
+      "probability": 0.963722
+    },
+    {
+      "text": "production",
+      "start": 44.23,
+      "end": 44.73,
+      "probability": 0.992714
+    },
+    {
+      "text": "-ready",
+      "start": 44.73,
+      "end": 44.99,
+      "probability": 0.868595
+    },
+    {
+      "text": "customer",
+      "start": 44.99,
+      "end": 45.49,
+      "probability": 0.979371
+    },
+    {
+      "text": "transformation",
+      "start": 45.49,
+      "end": 46.09,
+      "probability": 0.997915
+    },
+    {
+      "text": "yet.",
+      "start": 46.09,
+      "end": 46.61,
+      "probability": 0.953748
+    },
+    {
+      "text": "Future",
+      "start": 47.35,
+      "end": 47.55,
+      "probability": 0.978751
+    },
+    {
+      "text": "work",
+      "start": 47.55,
+      "end": 47.79,
+      "probability": 0.657504
+    },
+    {
+      "text": "can",
+      "start": 47.79,
+      "end": 48.03,
+      "probability": 0.995245
+    },
+    {
+      "text": "extend",
+      "start": 48.03,
+      "end": 48.39,
+      "probability": 0.985007
+    },
+    {
+      "text": "domain",
+      "start": 48.39,
+      "end": 48.75,
+      "probability": 0.992255
+    },
+    {
+      "text": "packs,",
+      "start": 48.75,
+      "end": 49.11,
+      "probability": 0.892512
+    },
+    {
+      "text": "evidence",
+      "start": 49.33,
+      "end": 49.51,
+      "probability": 0.909794
+    },
+    {
+      "text": "sources,",
+      "start": 49.51,
+      "end": 50.05,
+      "probability": 0.984845
+    },
+    {
+      "text": "integrations,",
+      "start": 50.33,
+      "end": 50.97,
+      "probability": 0.878501
+    },
+    {
+      "text": "and",
+      "start": 51.17,
+      "end": 51.31,
+      "probability": 0.996302
+    },
+    {
+      "text": "consultant",
+      "start": 51.31,
+      "end": 51.79,
+      "probability": 0.8079
+    },
+    {
+      "text": "workflows",
+      "start": 51.79,
+      "end": 52.43,
+      "probability": 0.991884
+    },
+    {
+      "text": "after",
+      "start": 52.43,
+      "end": 53.27,
+      "probability": 0.709522
+    },
+    {
+      "text": "this",
+      "start": 53.27,
+      "end": 53.49,
+      "probability": 0.96161
+    },
+    {
+      "text": "boundary",
+      "start": 53.49,
+      "end": 53.81,
+      "probability": 0.994471
+    },
+    {
+      "text": "is",
+      "start": 53.81,
+      "end": 54.07,
+      "probability": 0.994868
+    },
+    {
+      "text": "validated.",
+      "start": 54.07,
+      "end": 54.57,
+      "probability": 0.565109
+    },
+    {
+      "text": "The",
+      "start": 54.57,
+      "end": 55.27,
+      "probability": 0.31241
+    },
+    {
+      "text": "Document",
+      "start": 55.27,
+      "end": 55.81,
+      "probability": 0.309526
+    },
+    {
+      "text": "RAC,",
+      "start": 55.81,
+      "end": 56.71,
+      "probability": 0.528687
+    },
+    {
+      "text": "Retrieval",
+      "start": 57.01,
+      "end": 57.57,
+      "probability": 0.897214
+    },
+    {
+      "text": "Augmented",
+      "start": 57.57,
+      "end": 58.03,
+      "probability": 0.784065
+    },
+    {
+      "text": "Generation",
+      "start": 58.03,
+      "end": 58.47,
+      "probability": 0.957565
+    },
+    {
+      "text": "and",
+      "start": 58.47,
+      "end": 58.87,
+      "probability": 0.766638
+    },
+    {
+      "text": "Arbitrary",
+      "start": 58.87,
+      "end": 59.39,
+      "probability": 0.919622
+    },
+    {
+      "text": "Uploaded",
+      "start": 59.39,
+      "end": 60.63,
+      "probability": 0.900847
+    },
+    {
+      "text": "Document",
+      "start": 60.63,
+      "end": 60.63,
+      "probability": 0.961967
+    },
+    {
+      "text": "Injection,",
+      "start": 60.63,
+      "end": 61.13,
+      "probability": 0.77944
+    },
+    {
+      "text": "may",
+      "start": 61.71,
+      "end": 61.97,
+      "probability": 0.83577
+    },
+    {
+      "text": "be",
+      "start": 61.97,
+      "end": 62.09,
+      "probability": 0.996538
+    },
+    {
+      "text": "explored",
+      "start": 62.09,
+      "end": 62.47,
+      "probability": 0.826131
+    },
+    {
+      "text": "later",
+      "start": 62.47,
+      "end": 62.87,
+      "probability": 0.98552
+    },
+    {
+      "text": "as",
+      "start": 62.87,
+      "end": 63.63,
+      "probability": 0.964935
+    },
+    {
+      "text": "a",
+      "start": 63.63,
+      "end": 63.93,
+      "probability": 0.903112
+    },
+    {
+      "text": "future",
+      "start": 63.93,
+      "end": 64.29,
+      "probability": 0.940736
+    },
+    {
+      "text": "upgrade",
+      "start": 64.29,
+      "end": 64.79,
+      "probability": 0.779167
+    },
+    {
+      "text": "or",
+      "start": 64.79,
+      "end": 65.23,
+      "probability": 0.730495
+    },
+    {
+      "text": "future",
+      "start": 65.23,
+      "end": 65.55,
+      "probability": 0.888508
+    },
+    {
+      "text": "improvement.",
+      "start": 65.55,
+      "end": 65.99,
+      "probability": 0.985381
+    },
+    {
+      "text": "They",
+      "start": 66.83,
+      "end": 67.09,
+      "probability": 0.964702
+    },
+    {
+      "text": "are",
+      "start": 67.09,
+      "end": 67.17,
+      "probability": 0.976569
+    },
+    {
+      "text": "not",
+      "start": 67.17,
+      "end": 67.31,
+      "probability": 0.985599
+    },
+    {
+      "text": "implemented",
+      "start": 67.31,
+      "end": 67.83,
+      "probability": 0.999163
+    },
+    {
+      "text": "now.",
+      "start": 67.83,
+      "end": 68.29,
+      "probability": 0.967198
+    },
+    {
+      "text": "The",
+      "start": 69.15,
+      "end": 69.17,
+      "probability": 0.969208
+    },
+    {
+      "text": "opportunity",
+      "start": 69.17,
+      "end": 69.95,
+      "probability": 0.98651
+    },
+    {
+      "text": "is",
+      "start": 69.95,
+      "end": 70.39,
+      "probability": 0.987105
+    },
+    {
+      "text": "to",
+      "start": 70.39,
+      "end": 70.55,
+      "probability": 0.995036
+    },
+    {
+      "text": "broaden",
+      "start": 70.55,
+      "end": 70.85,
+      "probability": 0.997204
+    },
+    {
+      "text": "the",
+      "start": 70.85,
+      "end": 71.11,
+      "probability": 0.991052
+    },
+    {
+      "text": "evidence",
+      "start": 71.11,
+      "end": 71.53,
+      "probability": 0.997478
+    },
+    {
+      "text": "available",
+      "start": 71.53,
+      "end": 71.93,
+      "probability": 0.996861
+    },
+    {
+      "text": "to",
+      "start": 71.93,
+      "end": 72.37,
+      "probability": 0.994351
+    },
+    {
+      "text": "the",
+      "start": 72.37,
+      "end": 72.55,
+      "probability": 0.990877
+    },
+    {
+      "text": "system",
+      "start": 72.55,
+      "end": 72.91,
+      "probability": 0.984121
+    },
+    {
+      "text": "without",
+      "start": 72.91,
+      "end": 73.49,
+      "probability": 0.90486
+    },
+    {
+      "text": "weakening",
+      "start": 73.49,
+      "end": 74.03,
+      "probability": 0.998723
+    },
+    {
+      "text": "the",
+      "start": 74.03,
+      "end": 74.41,
+      "probability": 0.959443
+    },
+    {
+      "text": "provenance,",
+      "start": 75.35,
+      "end": 76.11,
+      "probability": 0.834055
+    },
+    {
+      "text": "consent",
+      "start": 76.37,
+      "end": 76.65,
+      "probability": 0.933049
+    },
+    {
+      "text": "or",
+      "start": 76.65,
+      "end": 77.01,
+      "probability": 0.574988
+    },
+    {
+      "text": "deterministic",
+      "start": 77.01,
+      "end": 77.73,
+      "probability": 0.992688
+    },
+    {
+      "text": "ownership.",
+      "start": 77.73,
+      "end": 78.11,
+      "probability": 0.999084
+    }
+  ],
+  "recognized_text": "For an SME owner, the value is not manufactured certainty. It is a clear conversation which is 5 answers become a review starting point, scenario ranges show the consequences of assumptions, and the blueprint preserves why a path was chosen. For an advisor, the same structured handoff can reduce the repeated discovery while keeping the consent explicit. The current boundary matters like module pilot does not promise businesses outcomes, vendor fulfillment, guaranteed availability, the human response, or an automated CRM record creation. The prototype shows a deployable workflow and an inspectable decision package, not a completed and production-ready customer transformation yet. Future work can extend domain packs, evidence sources, integrations, and consultant workflows after this boundary is validated. The Document RAC, Retrieval Augmented Generation and Arbitrary Uploaded Document Injection, may be explored later as a future upgrade or future improvement. They are not implemented now. The opportunity is to broaden the evidence available to the system without weakening the provenance, consent or deterministic ownership."
+}

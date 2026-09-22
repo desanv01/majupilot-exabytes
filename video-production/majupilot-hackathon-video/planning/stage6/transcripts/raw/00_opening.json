@@ -1,0 +1,567 @@
+{
+  "beat_id": "00_opening",
+  "source": ".media/audio/voice/voice_001.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 19.989313,
+  "duration_after_vad": 18.944,
+  "segments": [
+    {
+      "start": 0.53,
+      "end": 7.39,
+      "text": "Hello, I'm Desai Masu, a student at USM, University Science Measure, and this is MajuPilot.",
+      "avg_logprob": -0.32448,
+      "no_speech_prob": 0.021,
+      "words": [
+        {
+          "text": "Hello,",
+          "start": 0.53,
+          "end": 1.07,
+          "probability": 0.918369
+        },
+        {
+          "text": "I'm",
+          "start": 1.19,
+          "end": 1.61,
+          "probability": 0.858922
+        },
+        {
+          "text": "Desai",
+          "start": 1.61,
+          "end": 1.87,
+          "probability": 0.289548
+        },
+        {
+          "text": "Masu,",
+          "start": 1.87,
+          "end": 2.31,
+          "probability": 0.492713
+        },
+        {
+          "text": "a",
+          "start": 2.61,
+          "end": 2.67,
+          "probability": 0.95441
+        },
+        {
+          "text": "student",
+          "start": 2.67,
+          "end": 2.93,
+          "probability": 0.993849
+        },
+        {
+          "text": "at",
+          "start": 2.93,
+          "end": 3.27,
+          "probability": 0.994935
+        },
+        {
+          "text": "USM,",
+          "start": 3.27,
+          "end": 3.93,
+          "probability": 0.969648
+        },
+        {
+          "text": "University",
+          "start": 4.15,
+          "end": 4.41,
+          "probability": 0.598843
+        },
+        {
+          "text": "Science",
+          "start": 4.41,
+          "end": 4.83,
+          "probability": 0.700783
+        },
+        {
+          "text": "Measure,",
+          "start": 4.83,
+          "end": 5.11,
+          "probability": 0.379051
+        },
+        {
+          "text": "and",
+          "start": 6.11,
+          "end": 6.11,
+          "probability": 0.933634
+        },
+        {
+          "text": "this",
+          "start": 6.11,
+          "end": 6.39,
+          "probability": 0.994011
+        },
+        {
+          "text": "is",
+          "start": 6.39,
+          "end": 6.69,
+          "probability": 0.983283
+        },
+        {
+          "text": "MajuPilot.",
+          "start": 6.69,
+          "end": 7.39,
+          "probability": 0.620788
+        }
+      ]
+    },
+    {
+      "start": 7.89,
+      "end": 14.41,
+      "text": "It turns a small set of SME answers into a decision path that people can inspect, question",
+      "avg_logprob": -0.32448,
+      "no_speech_prob": 0.021,
+      "words": [
+        {
+          "text": "It",
+          "start": 7.89,
+          "end": 8.09,
+          "probability": 0.990043
+        },
+        {
+          "text": "turns",
+          "start": 8.09,
+          "end": 8.37,
+          "probability": 0.991811
+        },
+        {
+          "text": "a",
+          "start": 8.37,
+          "end": 8.55,
+          "probability": 0.994083
+        },
+        {
+          "text": "small",
+          "start": 8.55,
+          "end": 8.83,
+          "probability": 0.993858
+        },
+        {
+          "text": "set",
+          "start": 8.83,
+          "end": 9.21,
+          "probability": 0.994756
+        },
+        {
+          "text": "of",
+          "start": 9.21,
+          "end": 9.47,
+          "probability": 0.994751
+        },
+        {
+          "text": "SME",
+          "start": 9.47,
+          "end": 10.01,
+          "probability": 0.953644
+        },
+        {
+          "text": "answers",
+          "start": 10.01,
+          "end": 10.37,
+          "probability": 0.966054
+        },
+        {
+          "text": "into",
+          "start": 10.37,
+          "end": 10.83,
+          "probability": 0.982413
+        },
+        {
+          "text": "a",
+          "start": 10.83,
+          "end": 11.01,
+          "probability": 0.984282
+        },
+        {
+          "text": "decision",
+          "start": 11.01,
+          "end": 11.43,
+          "probability": 0.967406
+        },
+        {
+          "text": "path",
+          "start": 11.43,
+          "end": 11.87,
+          "probability": 0.913843
+        },
+        {
+          "text": "that",
+          "start": 11.87,
+          "end": 12.67,
+          "probability": 0.871159
+        },
+        {
+          "text": "people",
+          "start": 12.67,
+          "end": 12.97,
+          "probability": 0.997133
+        },
+        {
+          "text": "can",
+          "start": 12.97,
+          "end": 13.25,
+          "probability": 0.998599
+        },
+        {
+          "text": "inspect,",
+          "start": 13.25,
+          "end": 13.81,
+          "probability": 0.982787
+        },
+        {
+          "text": "question",
+          "start": 14.19,
+          "end": 14.41,
+          "probability": 0.990584
+        }
+      ]
+    },
+    {
+      "start": 14.41,
+      "end": 16.11,
+      "text": "and carry forward with.",
+      "avg_logprob": -0.32448,
+      "no_speech_prob": 0.021,
+      "words": [
+        {
+          "text": "and",
+          "start": 14.41,
+          "end": 15.09,
+          "probability": 0.529946
+        },
+        {
+          "text": "carry",
+          "start": 15.09,
+          "end": 15.41,
+          "probability": 0.998119
+        },
+        {
+          "text": "forward",
+          "start": 15.41,
+          "end": 15.77,
+          "probability": 0.992495
+        },
+        {
+          "text": "with.",
+          "start": 15.77,
+          "end": 16.11,
+          "probability": 0.99252
+        }
+      ]
+    },
+    {
+      "start": 16.11,
+      "end": 18.85,
+      "text": "The evidence and boundaries are still visible.",
+      "avg_logprob": -0.3525,
+      "no_speech_prob": 0.013611,
+      "words": [
+        {
+          "text": "The",
+          "start": 16.11,
+          "end": 16.75,
+          "probability": 0.710341
+        },
+        {
+          "text": "evidence",
+          "start": 16.75,
+          "end": 17.07,
+          "probability": 0.989968
+        },
+        {
+          "text": "and",
+          "start": 17.07,
+          "end": 17.49,
+          "probability": 0.954581
+        },
+        {
+          "text": "boundaries",
+          "start": 17.49,
+          "end": 17.99,
+          "probability": 0.846735
+        },
+        {
+          "text": "are",
+          "start": 17.99,
+          "end": 18.31,
+          "probability": 0.37249
+        },
+        {
+          "text": "still",
+          "start": 18.31,
+          "end": 18.51,
+          "probability": 0.9872
+        },
+        {
+          "text": "visible.",
+          "start": 18.51,
+          "end": 18.85,
+          "probability": 0.993007
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Hello,",
+      "start": 0.53,
+      "end": 1.07,
+      "probability": 0.918369
+    },
+    {
+      "text": "I'm",
+      "start": 1.19,
+      "end": 1.61,
+      "probability": 0.858922
+    },
+    {
+      "text": "Desai",
+      "start": 1.61,
+      "end": 1.87,
+      "probability": 0.289548
+    },
+    {
+      "text": "Masu,",
+      "start": 1.87,
+      "end": 2.31,
+      "probability": 0.492713
+    },
+    {
+      "text": "a",
+      "start": 2.61,
+      "end": 2.67,
+      "probability": 0.95441
+    },
+    {
+      "text": "student",
+      "start": 2.67,
+      "end": 2.93,
+      "probability": 0.993849
+    },
+    {
+      "text": "at",
+      "start": 2.93,
+      "end": 3.27,
+      "probability": 0.994935
+    },
+    {
+      "text": "USM,",
+      "start": 3.27,
+      "end": 3.93,
+      "probability": 0.969648
+    },
+    {
+      "text": "University",
+      "start": 4.15,
+      "end": 4.41,
+      "probability": 0.598843
+    },
+    {
+      "text": "Science",
+      "start": 4.41,
+      "end": 4.83,
+      "probability": 0.700783
+    },
+    {
+      "text": "Measure,",
+      "start": 4.83,
+      "end": 5.11,
+      "probability": 0.379051
+    },
+    {
+      "text": "and",
+      "start": 6.11,
+      "end": 6.11,
+      "probability": 0.933634
+    },
+    {
+      "text": "this",
+      "start": 6.11,
+      "end": 6.39,
+      "probability": 0.994011
+    },
+    {
+      "text": "is",
+      "start": 6.39,
+      "end": 6.69,
+      "probability": 0.983283
+    },
+    {
+      "text": "MajuPilot.",
+      "start": 6.69,
+      "end": 7.39,
+      "probability": 0.620788
+    },
+    {
+      "text": "It",
+      "start": 7.89,
+      "end": 8.09,
+      "probability": 0.990043
+    },
+    {
+      "text": "turns",
+      "start": 8.09,
+      "end": 8.37,
+      "probability": 0.991811
+    },
+    {
+      "text": "a",
+      "start": 8.37,
+      "end": 8.55,
+      "probability": 0.994083
+    },
+    {
+      "text": "small",
+      "start": 8.55,
+      "end": 8.83,
+      "probability": 0.993858
+    },
+    {
+      "text": "set",
+      "start": 8.83,
+      "end": 9.21,
+      "probability": 0.994756
+    },
+    {
+      "text": "of",
+      "start": 9.21,
+      "end": 9.47,
+      "probability": 0.994751
+    },
+    {
+      "text": "SME",
+      "start": 9.47,
+      "end": 10.01,
+      "probability": 0.953644
+    },
+    {
+      "text": "answers",
+      "start": 10.01,
+      "end": 10.37,
+      "probability": 0.966054
+    },
+    {
+      "text": "into",
+      "start": 10.37,
+      "end": 10.83,
+      "probability": 0.982413
+    },
+    {
+      "text": "a",
+      "start": 10.83,
+      "end": 11.01,
+      "probability": 0.984282
+    },
+    {
+      "text": "decision",
+      "start": 11.01,
+      "end": 11.43,
+      "probability": 0.967406
+    },
+    {
+      "text": "path",
+      "start": 11.43,
+      "end": 11.87,
+      "probability": 0.913843
+    },
+    {
+      "text": "that",
+      "start": 11.87,
+      "end": 12.67,
+      "probability": 0.871159
+    },
+    {
+      "text": "people",
+      "start": 12.67,
+      "end": 12.97,
+      "probability": 0.997133
+    },
+    {
+      "text": "can",
+      "start": 12.97,
+      "end": 13.25,
+      "probability": 0.998599
+    },
+    {
+      "text": "inspect,",
+      "start": 13.25,
+      "end": 13.81,
+      "probability": 0.982787
+    },
+    {
+      "text": "question",
+      "start": 14.19,
+      "end": 14.41,
+      "probability": 0.990584
+    },
+    {
+      "text": "and",
+      "start": 14.41,
+      "end": 15.09,
+      "probability": 0.529946
+    },
+    {
+      "text": "carry",
+      "start": 15.09,
+      "end": 15.41,
+      "probability": 0.998119
+    },
+    {
+      "text": "forward",
+      "start": 15.41,
+      "end": 15.77,
+      "probability": 0.992495
+    },
+    {
+      "text": "with.",
+      "start": 15.77,
+      "end": 16.11,
+      "probability": 0.99252
+    },
+    {
+      "text": "The",
+      "start": 16.11,
+      "end": 16.75,
+      "probability": 0.710341
+    },
+    {
+      "text": "evidence",
+      "start": 16.75,
+      "end": 17.07,
+      "probability": 0.989968
+    },
+    {
+      "text": "and",
+      "start": 17.07,
+      "end": 17.49,
+      "probability": 0.954581
+    },
+    {
+      "text": "boundaries",
+      "start": 17.49,
+      "end": 17.99,
+      "probability": 0.846735
+    },
+    {
+      "text": "are",
+      "start": 17.99,
+      "end": 18.31,
+      "probability": 0.37249
+    },
+    {
+      "text": "still",
+      "start": 18.31,
+      "end": 18.51,
+      "probability": 0.9872
+    },
+    {
+      "text": "visible.",
+      "start": 18.51,
+      "end": 18.85,
+      "probability": 0.993007
+    }
+  ],
+  "recognized_text": "Hello, I'm Desai Masu, a student at USM, University Science Measure, and this is MajuPilot. It turns a small set of SME answers into a decision path that people can inspect, question and carry forward with. The evidence and boundaries are still visible."
+}

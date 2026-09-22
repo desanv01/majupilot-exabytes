@@ -1,0 +1,390 @@
+{
+  "beat_id": "07_close",
+  "source": ".media/audio/voice/voice_014.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 13.482625,
+  "duration_after_vad": 11.136,
+  "segments": [
+    {
+      "start": 0.98,
+      "end": 7.42,
+      "text": "So as a conclusion, MadhuPilot is not a machine that decides for an SME, it makes the path",
+      "avg_logprob": -0.350425,
+      "no_speech_prob": 0.015454,
+      "words": [
+        {
+          "text": "So",
+          "start": 0.98,
+          "end": 1.44,
+          "probability": 0.553389
+        },
+        {
+          "text": "as",
+          "start": 1.44,
+          "end": 1.58,
+          "probability": 0.788474
+        },
+        {
+          "text": "a",
+          "start": 1.58,
+          "end": 1.72,
+          "probability": 0.979091
+        },
+        {
+          "text": "conclusion,",
+          "start": 1.72,
+          "end": 2.24,
+          "probability": 0.992847
+        },
+        {
+          "text": "MadhuPilot",
+          "start": 2.62,
+          "end": 3.0,
+          "probability": 0.505106
+        },
+        {
+          "text": "is",
+          "start": 3.0,
+          "end": 3.28,
+          "probability": 0.973711
+        },
+        {
+          "text": "not",
+          "start": 3.28,
+          "end": 3.64,
+          "probability": 0.956745
+        },
+        {
+          "text": "a",
+          "start": 3.64,
+          "end": 4.0,
+          "probability": 0.975546
+        },
+        {
+          "text": "machine",
+          "start": 4.0,
+          "end": 4.26,
+          "probability": 0.979214
+        },
+        {
+          "text": "that",
+          "start": 4.26,
+          "end": 4.56,
+          "probability": 0.988774
+        },
+        {
+          "text": "decides",
+          "start": 4.56,
+          "end": 5.0,
+          "probability": 0.977663
+        },
+        {
+          "text": "for",
+          "start": 5.0,
+          "end": 5.36,
+          "probability": 0.851784
+        },
+        {
+          "text": "an",
+          "start": 5.36,
+          "end": 5.5,
+          "probability": 0.834983
+        },
+        {
+          "text": "SME,",
+          "start": 5.5,
+          "end": 6.0,
+          "probability": 0.971873
+        },
+        {
+          "text": "it",
+          "start": 6.34,
+          "end": 6.56,
+          "probability": 0.880148
+        },
+        {
+          "text": "makes",
+          "start": 6.56,
+          "end": 6.88,
+          "probability": 0.988618
+        },
+        {
+          "text": "the",
+          "start": 6.88,
+          "end": 7.16,
+          "probability": 0.972269
+        },
+        {
+          "text": "path",
+          "start": 7.16,
+          "end": 7.42,
+          "probability": 0.994009
+        }
+      ]
+    },
+    {
+      "start": 7.42,
+      "end": 9.12,
+      "text": "to a decision visible.",
+      "avg_logprob": -0.350425,
+      "no_speech_prob": 0.015454,
+      "words": [
+        {
+          "text": "to",
+          "start": 7.42,
+          "end": 7.76,
+          "probability": 0.982789
+        },
+        {
+          "text": "a",
+          "start": 7.76,
+          "end": 7.92,
+          "probability": 0.944775
+        },
+        {
+          "text": "decision",
+          "start": 7.92,
+          "end": 8.36,
+          "probability": 0.980449
+        },
+        {
+          "text": "visible.",
+          "start": 8.36,
+          "end": 9.12,
+          "probability": 0.993226
+        }
+      ]
+    },
+    {
+      "start": 10.72,
+      "end": 12.22,
+      "text": "So that's all from me, thank you.",
+      "avg_logprob": -0.350425,
+      "no_speech_prob": 0.015454,
+      "words": [
+        {
+          "text": "So",
+          "start": 10.72,
+          "end": 10.74,
+          "probability": 0.781093
+        },
+        {
+          "text": "that's",
+          "start": 10.74,
+          "end": 11.04,
+          "probability": 0.905419
+        },
+        {
+          "text": "all",
+          "start": 11.04,
+          "end": 11.18,
+          "probability": 0.991787
+        },
+        {
+          "text": "from",
+          "start": 11.18,
+          "end": 11.38,
+          "probability": 0.956875
+        },
+        {
+          "text": "me,",
+          "start": 11.38,
+          "end": 11.62,
+          "probability": 0.996539
+        },
+        {
+          "text": "thank",
+          "start": 11.98,
+          "end": 12.02,
+          "probability": 0.554681
+        },
+        {
+          "text": "you.",
+          "start": 12.02,
+          "end": 12.22,
+          "probability": 0.976916
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "So",
+      "start": 0.98,
+      "end": 1.44,
+      "probability": 0.553389
+    },
+    {
+      "text": "as",
+      "start": 1.44,
+      "end": 1.58,
+      "probability": 0.788474
+    },
+    {
+      "text": "a",
+      "start": 1.58,
+      "end": 1.72,
+      "probability": 0.979091
+    },
+    {
+      "text": "conclusion,",
+      "start": 1.72,
+      "end": 2.24,
+      "probability": 0.992847
+    },
+    {
+      "text": "MadhuPilot",
+      "start": 2.62,
+      "end": 3.0,
+      "probability": 0.505106
+    },
+    {
+      "text": "is",
+      "start": 3.0,
+      "end": 3.28,
+      "probability": 0.973711
+    },
+    {
+      "text": "not",
+      "start": 3.28,
+      "end": 3.64,
+      "probability": 0.956745
+    },
+    {
+      "text": "a",
+      "start": 3.64,
+      "end": 4.0,
+      "probability": 0.975546
+    },
+    {
+      "text": "machine",
+      "start": 4.0,
+      "end": 4.26,
+      "probability": 0.979214
+    },
+    {
+      "text": "that",
+      "start": 4.26,
+      "end": 4.56,
+      "probability": 0.988774
+    },
+    {
+      "text": "decides",
+      "start": 4.56,
+      "end": 5.0,
+      "probability": 0.977663
+    },
+    {
+      "text": "for",
+      "start": 5.0,
+      "end": 5.36,
+      "probability": 0.851784
+    },
+    {
+      "text": "an",
+      "start": 5.36,
+      "end": 5.5,
+      "probability": 0.834983
+    },
+    {
+      "text": "SME,",
+      "start": 5.5,
+      "end": 6.0,
+      "probability": 0.971873
+    },
+    {
+      "text": "it",
+      "start": 6.34,
+      "end": 6.56,
+      "probability": 0.880148
+    },
+    {
+      "text": "makes",
+      "start": 6.56,
+      "end": 6.88,
+      "probability": 0.988618
+    },
+    {
+      "text": "the",
+      "start": 6.88,
+      "end": 7.16,
+      "probability": 0.972269
+    },
+    {
+      "text": "path",
+      "start": 7.16,
+      "end": 7.42,
+      "probability": 0.994009
+    },
+    {
+      "text": "to",
+      "start": 7.42,
+      "end": 7.76,
+      "probability": 0.982789
+    },
+    {
+      "text": "a",
+      "start": 7.76,
+      "end": 7.92,
+      "probability": 0.944775
+    },
+    {
+      "text": "decision",
+      "start": 7.92,
+      "end": 8.36,
+      "probability": 0.980449
+    },
+    {
+      "text": "visible.",
+      "start": 8.36,
+      "end": 9.12,
+      "probability": 0.993226
+    },
+    {
+      "text": "So",
+      "start": 10.72,
+      "end": 10.74,
+      "probability": 0.781093
+    },
+    {
+      "text": "that's",
+      "start": 10.74,
+      "end": 11.04,
+      "probability": 0.905419
+    },
+    {
+      "text": "all",
+      "start": 11.04,
+      "end": 11.18,
+      "probability": 0.991787
+    },
+    {
+      "text": "from",
+      "start": 11.18,
+      "end": 11.38,
+      "probability": 0.956875
+    },
+    {
+      "text": "me,",
+      "start": 11.38,
+      "end": 11.62,
+      "probability": 0.996539
+    },
+    {
+      "text": "thank",
+      "start": 11.98,
+      "end": 12.02,
+      "probability": 0.554681
+    },
+    {
+      "text": "you.",
+      "start": 12.02,
+      "end": 12.22,
+      "probability": 0.976916
+    }
+  ],
+  "recognized_text": "So as a conclusion, MadhuPilot is not a machine that decides for an SME, it makes the path to a decision visible. So that's all from me, thank you."
+}

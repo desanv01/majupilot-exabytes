@@ -1,0 +1,627 @@
+{
+  "beat_id": "04d_demo_recommendations",
+  "source": ".media/audio/voice/voice_008.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 22.826625,
+  "duration_after_vad": 21.504,
+  "segments": [
+    {
+      "start": 0.75,
+      "end": 7.93,
+      "text": "Recommendations are Capability first, so for this case, 3 moves are marked Y now, 1 is next",
+      "avg_logprob": -0.346148,
+      "no_speech_prob": 0.055194,
+      "words": [
+        {
+          "text": "Recommendations",
+          "start": 0.75,
+          "end": 1.91,
+          "probability": 0.786102
+        },
+        {
+          "text": "are",
+          "start": 1.91,
+          "end": 2.13,
+          "probability": 0.962815
+        },
+        {
+          "text": "Capability",
+          "start": 2.13,
+          "end": 2.77,
+          "probability": 0.773962
+        },
+        {
+          "text": "first,",
+          "start": 2.77,
+          "end": 3.11,
+          "probability": 0.829793
+        },
+        {
+          "text": "so",
+          "start": 3.63,
+          "end": 3.77,
+          "probability": 0.659833
+        },
+        {
+          "text": "for",
+          "start": 3.77,
+          "end": 3.99,
+          "probability": 0.936106
+        },
+        {
+          "text": "this",
+          "start": 3.99,
+          "end": 4.27,
+          "probability": 0.878168
+        },
+        {
+          "text": "case,",
+          "start": 4.27,
+          "end": 4.53,
+          "probability": 0.979322
+        },
+        {
+          "text": "3",
+          "start": 4.87,
+          "end": 5.03,
+          "probability": 0.684229
+        },
+        {
+          "text": "moves",
+          "start": 5.03,
+          "end": 5.27,
+          "probability": 0.842972
+        },
+        {
+          "text": "are",
+          "start": 5.27,
+          "end": 5.57,
+          "probability": 0.986396
+        },
+        {
+          "text": "marked",
+          "start": 5.57,
+          "end": 5.81,
+          "probability": 0.942956
+        },
+        {
+          "text": "Y",
+          "start": 5.81,
+          "end": 6.23,
+          "probability": 0.582393
+        },
+        {
+          "text": "now,",
+          "start": 6.23,
+          "end": 6.55,
+          "probability": 0.753821
+        },
+        {
+          "text": "1",
+          "start": 6.97,
+          "end": 7.25,
+          "probability": 0.788726
+        },
+        {
+          "text": "is",
+          "start": 7.25,
+          "end": 7.57,
+          "probability": 0.980913
+        },
+        {
+          "text": "next",
+          "start": 7.57,
+          "end": 7.93,
+          "probability": 0.668641
+        }
+      ]
+    },
+    {
+      "start": 7.93,
+      "end": 10.37,
+      "text": "and governed AI is Y later.",
+      "avg_logprob": -0.346148,
+      "no_speech_prob": 0.055194,
+      "words": [
+        {
+          "text": "and",
+          "start": 7.93,
+          "end": 8.53,
+          "probability": 0.783479
+        },
+        {
+          "text": "governed",
+          "start": 8.53,
+          "end": 8.87,
+          "probability": 0.408304
+        },
+        {
+          "text": "AI",
+          "start": 8.87,
+          "end": 9.29,
+          "probability": 0.862899
+        },
+        {
+          "text": "is",
+          "start": 9.29,
+          "end": 9.61,
+          "probability": 0.99236
+        },
+        {
+          "text": "Y",
+          "start": 9.61,
+          "end": 9.93,
+          "probability": 0.859927
+        },
+        {
+          "text": "later.",
+          "start": 9.93,
+          "end": 10.37,
+          "probability": 0.98384
+        }
+      ]
+    },
+    {
+      "start": 10.99,
+      "end": 17.23,
+      "text": "Catholic version 2.0.0 supports the mapping, but these entries are not live quotations",
+      "avg_logprob": -0.346148,
+      "no_speech_prob": 0.055194,
+      "words": [
+        {
+          "text": "Catholic",
+          "start": 10.99,
+          "end": 11.09,
+          "probability": 0.090079
+        },
+        {
+          "text": "version",
+          "start": 11.09,
+          "end": 11.63,
+          "probability": 0.478774
+        },
+        {
+          "text": "2",
+          "start": 11.63,
+          "end": 12.15,
+          "probability": 0.975469
+        },
+        {
+          "text": ".0",
+          "start": 12.15,
+          "end": 13.01,
+          "probability": 0.995683
+        },
+        {
+          "text": ".0",
+          "start": 13.01,
+          "end": 13.51,
+          "probability": 0.986906
+        },
+        {
+          "text": "supports",
+          "start": 13.51,
+          "end": 13.95,
+          "probability": 0.973153
+        },
+        {
+          "text": "the",
+          "start": 13.95,
+          "end": 14.27,
+          "probability": 0.955971
+        },
+        {
+          "text": "mapping,",
+          "start": 14.27,
+          "end": 14.55,
+          "probability": 0.932579
+        },
+        {
+          "text": "but",
+          "start": 15.21,
+          "end": 15.39,
+          "probability": 0.977784
+        },
+        {
+          "text": "these",
+          "start": 15.39,
+          "end": 15.65,
+          "probability": 0.977916
+        },
+        {
+          "text": "entries",
+          "start": 15.65,
+          "end": 15.99,
+          "probability": 0.996513
+        },
+        {
+          "text": "are",
+          "start": 15.99,
+          "end": 16.23,
+          "probability": 0.99521
+        },
+        {
+          "text": "not",
+          "start": 16.23,
+          "end": 16.43,
+          "probability": 0.988526
+        },
+        {
+          "text": "live",
+          "start": 16.43,
+          "end": 16.73,
+          "probability": 0.307112
+        },
+        {
+          "text": "quotations",
+          "start": 16.73,
+          "end": 17.23,
+          "probability": 0.95768
+        }
+      ]
+    },
+    {
+      "start": 17.23,
+      "end": 21.55,
+      "text": "or guaranteed availability, they are provenance for the decision sequence.",
+      "avg_logprob": -0.346148,
+      "no_speech_prob": 0.055194,
+      "words": [
+        {
+          "text": "or",
+          "start": 17.23,
+          "end": 17.61,
+          "probability": 0.970486
+        },
+        {
+          "text": "guaranteed",
+          "start": 17.61,
+          "end": 18.03,
+          "probability": 0.959174
+        },
+        {
+          "text": "availability,",
+          "start": 18.03,
+          "end": 18.65,
+          "probability": 0.991701
+        },
+        {
+          "text": "they",
+          "start": 19.39,
+          "end": 19.61,
+          "probability": 0.967348
+        },
+        {
+          "text": "are",
+          "start": 19.61,
+          "end": 19.77,
+          "probability": 0.986263
+        },
+        {
+          "text": "provenance",
+          "start": 19.77,
+          "end": 20.31,
+          "probability": 0.989885
+        },
+        {
+          "text": "for",
+          "start": 20.31,
+          "end": 20.51,
+          "probability": 0.98242
+        },
+        {
+          "text": "the",
+          "start": 20.51,
+          "end": 20.71,
+          "probability": 0.922352
+        },
+        {
+          "text": "decision",
+          "start": 20.71,
+          "end": 21.01,
+          "probability": 0.874288
+        },
+        {
+          "text": "sequence.",
+          "start": 21.01,
+          "end": 21.55,
+          "probability": 0.947127
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Recommendations",
+      "start": 0.75,
+      "end": 1.91,
+      "probability": 0.786102
+    },
+    {
+      "text": "are",
+      "start": 1.91,
+      "end": 2.13,
+      "probability": 0.962815
+    },
+    {
+      "text": "Capability",
+      "start": 2.13,
+      "end": 2.77,
+      "probability": 0.773962
+    },
+    {
+      "text": "first,",
+      "start": 2.77,
+      "end": 3.11,
+      "probability": 0.829793
+    },
+    {
+      "text": "so",
+      "start": 3.63,
+      "end": 3.77,
+      "probability": 0.659833
+    },
+    {
+      "text": "for",
+      "start": 3.77,
+      "end": 3.99,
+      "probability": 0.936106
+    },
+    {
+      "text": "this",
+      "start": 3.99,
+      "end": 4.27,
+      "probability": 0.878168
+    },
+    {
+      "text": "case,",
+      "start": 4.27,
+      "end": 4.53,
+      "probability": 0.979322
+    },
+    {
+      "text": "3",
+      "start": 4.87,
+      "end": 5.03,
+      "probability": 0.684229
+    },
+    {
+      "text": "moves",
+      "start": 5.03,
+      "end": 5.27,
+      "probability": 0.842972
+    },
+    {
+      "text": "are",
+      "start": 5.27,
+      "end": 5.57,
+      "probability": 0.986396
+    },
+    {
+      "text": "marked",
+      "start": 5.57,
+      "end": 5.81,
+      "probability": 0.942956
+    },
+    {
+      "text": "Y",
+      "start": 5.81,
+      "end": 6.23,
+      "probability": 0.582393
+    },
+    {
+      "text": "now,",
+      "start": 6.23,
+      "end": 6.55,
+      "probability": 0.753821
+    },
+    {
+      "text": "1",
+      "start": 6.97,
+      "end": 7.25,
+      "probability": 0.788726
+    },
+    {
+      "text": "is",
+      "start": 7.25,
+      "end": 7.57,
+      "probability": 0.980913
+    },
+    {
+      "text": "next",
+      "start": 7.57,
+      "end": 7.93,
+      "probability": 0.668641
+    },
+    {
+      "text": "and",
+      "start": 7.93,
+      "end": 8.53,
+      "probability": 0.783479
+    },
+    {
+      "text": "governed",
+      "start": 8.53,
+      "end": 8.87,
+      "probability": 0.408304
+    },
+    {
+      "text": "AI",
+      "start": 8.87,
+      "end": 9.29,
+      "probability": 0.862899
+    },
+    {
+      "text": "is",
+      "start": 9.29,
+      "end": 9.61,
+      "probability": 0.99236
+    },
+    {
+      "text": "Y",
+      "start": 9.61,
+      "end": 9.93,
+      "probability": 0.859927
+    },
+    {
+      "text": "later.",
+      "start": 9.93,
+      "end": 10.37,
+      "probability": 0.98384
+    },
+    {
+      "text": "Catholic",
+      "start": 10.99,
+      "end": 11.09,
+      "probability": 0.090079
+    },
+    {
+      "text": "version",
+      "start": 11.09,
+      "end": 11.63,
+      "probability": 0.478774
+    },
+    {
+      "text": "2",
+      "start": 11.63,
+      "end": 12.15,
+      "probability": 0.975469
+    },
+    {
+      "text": ".0",
+      "start": 12.15,
+      "end": 13.01,
+      "probability": 0.995683
+    },
+    {
+      "text": ".0",
+      "start": 13.01,
+      "end": 13.51,
+      "probability": 0.986906
+    },
+    {
+      "text": "supports",
+      "start": 13.51,
+      "end": 13.95,
+      "probability": 0.973153
+    },
+    {
+      "text": "the",
+      "start": 13.95,
+      "end": 14.27,
+      "probability": 0.955971
+    },
+    {
+      "text": "mapping,",
+      "start": 14.27,
+      "end": 14.55,
+      "probability": 0.932579
+    },
+    {
+      "text": "but",
+      "start": 15.21,
+      "end": 15.39,
+      "probability": 0.977784
+    },
+    {
+      "text": "these",
+      "start": 15.39,
+      "end": 15.65,
+      "probability": 0.977916
+    },
+    {
+      "text": "entries",
+      "start": 15.65,
+      "end": 15.99,
+      "probability": 0.996513
+    },
+    {
+      "text": "are",
+      "start": 15.99,
+      "end": 16.23,
+      "probability": 0.99521
+    },
+    {
+      "text": "not",
+      "start": 16.23,
+      "end": 16.43,
+      "probability": 0.988526
+    },
+    {
+      "text": "live",
+      "start": 16.43,
+      "end": 16.73,
+      "probability": 0.307112
+    },
+    {
+      "text": "quotations",
+      "start": 16.73,
+      "end": 17.23,
+      "probability": 0.95768
+    },
+    {
+      "text": "or",
+      "start": 17.23,
+      "end": 17.61,
+      "probability": 0.970486
+    },
+    {
+      "text": "guaranteed",
+      "start": 17.61,
+      "end": 18.03,
+      "probability": 0.959174
+    },
+    {
+      "text": "availability,",
+      "start": 18.03,
+      "end": 18.65,
+      "probability": 0.991701
+    },
+    {
+      "text": "they",
+      "start": 19.39,
+      "end": 19.61,
+      "probability": 0.967348
+    },
+    {
+      "text": "are",
+      "start": 19.61,
+      "end": 19.77,
+      "probability": 0.986263
+    },
+    {
+      "text": "provenance",
+      "start": 19.77,
+      "end": 20.31,
+      "probability": 0.989885
+    },
+    {
+      "text": "for",
+      "start": 20.31,
+      "end": 20.51,
+      "probability": 0.98242
+    },
+    {
+      "text": "the",
+      "start": 20.51,
+      "end": 20.71,
+      "probability": 0.922352
+    },
+    {
+      "text": "decision",
+      "start": 20.71,
+      "end": 21.01,
+      "probability": 0.874288
+    },
+    {
+      "text": "sequence.",
+      "start": 21.01,
+      "end": 21.55,
+      "probability": 0.947127
+    }
+  ],
+  "recognized_text": "Recommendations are Capability first, so for this case, 3 moves are marked Y now, 1 is next and governed AI is Y later. Catholic version 2.0.0 supports the mapping, but these entries are not live quotations or guaranteed availability, they are provenance for the decision sequence."
+}

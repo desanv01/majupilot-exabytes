@@ -1,0 +1,9050 @@
+[
+  {
+    "id": "w0",
+    "beat_id": "00_opening",
+    "text": "Hello,",
+    "start": 0.45,
+    "end": 0.99,
+    "confidence": 0.918369
+  },
+  {
+    "id": "w1",
+    "beat_id": "00_opening",
+    "text": "I'm",
+    "start": 1.11,
+    "end": 1.53,
+    "confidence": 0.858922
+  },
+  {
+    "id": "w2",
+    "beat_id": "00_opening",
+    "text": "Desan",
+    "start": 1.53,
+    "end": 1.79,
+    "confidence": 0.289548
+  },
+  {
+    "id": "w3",
+    "beat_id": "00_opening",
+    "text": "Vasu,",
+    "start": 1.79,
+    "end": 2.23,
+    "confidence": 0.492713
+  },
+  {
+    "id": "w4",
+    "beat_id": "00_opening",
+    "text": "a",
+    "start": 2.53,
+    "end": 2.59,
+    "confidence": 0.95441
+  },
+  {
+    "id": "w5",
+    "beat_id": "00_opening",
+    "text": "student",
+    "start": 2.59,
+    "end": 2.85,
+    "confidence": 0.993849
+  },
+  {
+    "id": "w6",
+    "beat_id": "00_opening",
+    "text": "at",
+    "start": 2.85,
+    "end": 3.19,
+    "confidence": 0.994935
+  },
+  {
+    "id": "w7",
+    "beat_id": "00_opening",
+    "text": "USM,",
+    "start": 3.19,
+    "end": 3.85,
+    "confidence": 0.969648
+  },
+  {
+    "id": "w8",
+    "beat_id": "00_opening",
+    "text": "Universiti",
+    "start": 4.07,
+    "end": 4.33,
+    "confidence": 0.598843
+  },
+  {
+    "id": "w9",
+    "beat_id": "00_opening",
+    "text": "Sains",
+    "start": 4.33,
+    "end": 4.75,
+    "confidence": 0.700783
+  },
+  {
+    "id": "w10",
+    "beat_id": "00_opening",
+    "text": "Malaysia,",
+    "start": 4.75,
+    "end": 5.03,
+    "confidence": 0.379051
+  },
+  {
+    "id": "w11",
+    "beat_id": "00_opening",
+    "text": "and",
+    "start": 6.03,
+    "end": 6.03,
+    "confidence": 0.933634
+  },
+  {
+    "id": "w12",
+    "beat_id": "00_opening",
+    "text": "this",
+    "start": 6.03,
+    "end": 6.31,
+    "confidence": 0.994011
+  },
+  {
+    "id": "w13",
+    "beat_id": "00_opening",
+    "text": "is",
+    "start": 6.31,
+    "end": 6.61,
+    "confidence": 0.983283
+  },
+  {
+    "id": "w14",
+    "beat_id": "00_opening",
+    "text": "MajuPilot.",
+    "start": 6.61,
+    "end": 7.31,
+    "confidence": 0.620788
+  },
+  {
+    "id": "w15",
+    "beat_id": "00_opening",
+    "text": "It",
+    "start": 7.81,
+    "end": 8.01,
+    "confidence": 0.990043
+  },
+  {
+    "id": "w16",
+    "beat_id": "00_opening",
+    "text": "turns",
+    "start": 8.01,
+    "end": 8.29,
+    "confidence": 0.991811
+  },
+  {
+    "id": "w17",
+    "beat_id": "00_opening",
+    "text": "a",
+    "start": 8.29,
+    "end": 8.47,
+    "confidence": 0.994083
+  },
+  {
+    "id": "w18",
+    "beat_id": "00_opening",
+    "text": "small",
+    "start": 8.47,
+    "end": 8.75,
+    "confidence": 0.993858
+  },
+  {
+    "id": "w19",
+    "beat_id": "00_opening",
+    "text": "set",
+    "start": 8.75,
+    "end": 9.13,
+    "confidence": 0.994756
+  },
+  {
+    "id": "w20",
+    "beat_id": "00_opening",
+    "text": "of",
+    "start": 9.13,
+    "end": 9.39,
+    "confidence": 0.994751
+  },
+  {
+    "id": "w21",
+    "beat_id": "00_opening",
+    "text": "SME",
+    "start": 9.39,
+    "end": 9.93,
+    "confidence": 0.953644
+  },
+  {
+    "id": "w22",
+    "beat_id": "00_opening",
+    "text": "answers",
+    "start": 9.93,
+    "end": 10.29,
+    "confidence": 0.966054
+  },
+  {
+    "id": "w23",
+    "beat_id": "00_opening",
+    "text": "into",
+    "start": 10.29,
+    "end": 10.75,
+    "confidence": 0.982413
+  },
+  {
+    "id": "w24",
+    "beat_id": "00_opening",
+    "text": "a",
+    "start": 10.75,
+    "end": 10.93,
+    "confidence": 0.984282
+  },
+  {
+    "id": "w25",
+    "beat_id": "00_opening",
+    "text": "decision",
+    "start": 10.93,
+    "end": 11.35,
+    "confidence": 0.967406
+  },
+  {
+    "id": "w26",
+    "beat_id": "00_opening",
+    "text": "path",
+    "start": 11.35,
+    "end": 11.79,
+    "confidence": 0.913843
+  },
+  {
+    "id": "w27",
+    "beat_id": "00_opening",
+    "text": "that",
+    "start": 11.79,
+    "end": 12.59,
+    "confidence": 0.871159
+  },
+  {
+    "id": "w28",
+    "beat_id": "00_opening",
+    "text": "people",
+    "start": 12.59,
+    "end": 12.89,
+    "confidence": 0.997133
+  },
+  {
+    "id": "w29",
+    "beat_id": "00_opening",
+    "text": "can",
+    "start": 12.89,
+    "end": 13.17,
+    "confidence": 0.998599
+  },
+  {
+    "id": "w30",
+    "beat_id": "00_opening",
+    "text": "inspect,",
+    "start": 13.17,
+    "end": 13.73,
+    "confidence": 0.982787
+  },
+  {
+    "id": "w31",
+    "beat_id": "00_opening",
+    "text": "question,",
+    "start": 14.11,
+    "end": 14.33,
+    "confidence": 0.990584
+  },
+  {
+    "id": "w32",
+    "beat_id": "00_opening",
+    "text": "and",
+    "start": 14.33,
+    "end": 15.01,
+    "confidence": 0.529946
+  },
+  {
+    "id": "w33",
+    "beat_id": "00_opening",
+    "text": "carry",
+    "start": 15.01,
+    "end": 15.33,
+    "confidence": 0.998119
+  },
+  {
+    "id": "w34",
+    "beat_id": "00_opening",
+    "text": "forward,",
+    "start": 15.33,
+    "end": 15.69,
+    "confidence": 0.992495
+  },
+  {
+    "id": "w35",
+    "beat_id": "00_opening",
+    "text": "with",
+    "start": 15.69,
+    "end": 16.03,
+    "confidence": 0.99252
+  },
+  {
+    "id": "w36",
+    "beat_id": "00_opening",
+    "text": "the",
+    "start": 16.03,
+    "end": 16.67,
+    "confidence": 0.710341
+  },
+  {
+    "id": "w37",
+    "beat_id": "00_opening",
+    "text": "evidence",
+    "start": 16.67,
+    "end": 16.99,
+    "confidence": 0.989968
+  },
+  {
+    "id": "w38",
+    "beat_id": "00_opening",
+    "text": "and",
+    "start": 16.99,
+    "end": 17.41,
+    "confidence": 0.954581
+  },
+  {
+    "id": "w39",
+    "beat_id": "00_opening",
+    "text": "boundaries",
+    "start": 17.41,
+    "end": 17.91,
+    "confidence": 0.846735
+  },
+  {
+    "id": "w40",
+    "beat_id": "00_opening",
+    "text": "still",
+    "start": 18.23,
+    "end": 18.43,
+    "confidence": 0.9872
+  },
+  {
+    "id": "w41",
+    "beat_id": "00_opening",
+    "text": "visible.",
+    "start": 18.43,
+    "end": 18.77,
+    "confidence": 0.993007
+  },
+  {
+    "id": "w42",
+    "beat_id": "01_problem_objectives",
+    "text": "Small",
+    "start": 20.3,
+    "end": 20.88,
+    "confidence": 0.69019
+  },
+  {
+    "id": "w43",
+    "beat_id": "01_problem_objectives",
+    "text": "and",
+    "start": 20.88,
+    "end": 21.18,
+    "confidence": 0.952874
+  },
+  {
+    "id": "w44",
+    "beat_id": "01_problem_objectives",
+    "text": "medium",
+    "start": 21.18,
+    "end": 21.52,
+    "confidence": 0.892872
+  },
+  {
+    "id": "w45",
+    "beat_id": "01_problem_objectives",
+    "text": "businesses",
+    "start": 21.52,
+    "end": 22.06,
+    "confidence": 0.921472
+  },
+  {
+    "id": "w46",
+    "beat_id": "01_problem_objectives",
+    "text": "are",
+    "start": 22.06,
+    "end": 22.44,
+    "confidence": 0.991069
+  },
+  {
+    "id": "w47",
+    "beat_id": "01_problem_objectives",
+    "text": "told",
+    "start": 22.44,
+    "end": 22.76,
+    "confidence": 0.98394
+  },
+  {
+    "id": "w48",
+    "beat_id": "01_problem_objectives",
+    "text": "to",
+    "start": 22.76,
+    "end": 23.02,
+    "confidence": 0.996489
+  },
+  {
+    "id": "w49",
+    "beat_id": "01_problem_objectives",
+    "text": "digitalise",
+    "start": 23.02,
+    "end": 23.68,
+    "confidence": 0.818238
+  },
+  {
+    "id": "w50",
+    "beat_id": "01_problem_objectives",
+    "text": "before",
+    "start": 23.68,
+    "end": 24.2,
+    "confidence": 0.933528
+  },
+  {
+    "id": "w51",
+    "beat_id": "01_problem_objectives",
+    "text": "they",
+    "start": 24.2,
+    "end": 24.7,
+    "confidence": 0.957907
+  },
+  {
+    "id": "w52",
+    "beat_id": "01_problem_objectives",
+    "text": "have",
+    "start": 24.7,
+    "end": 24.88,
+    "confidence": 0.99388
+  },
+  {
+    "id": "w53",
+    "beat_id": "01_problem_objectives",
+    "text": "a",
+    "start": 24.88,
+    "end": 25.04,
+    "confidence": 0.965122
+  },
+  {
+    "id": "w54",
+    "beat_id": "01_problem_objectives",
+    "text": "clear",
+    "start": 25.04,
+    "end": 25.36,
+    "confidence": 0.985938
+  },
+  {
+    "id": "w55",
+    "beat_id": "01_problem_objectives",
+    "text": "next",
+    "start": 25.36,
+    "end": 25.64,
+    "confidence": 0.978168
+  },
+  {
+    "id": "w56",
+    "beat_id": "01_problem_objectives",
+    "text": "step.",
+    "start": 25.64,
+    "end": 25.98,
+    "confidence": 0.997826
+  },
+  {
+    "id": "w57",
+    "beat_id": "01_problem_objectives",
+    "text": "The",
+    "start": 26.258,
+    "end": 26.398,
+    "confidence": 0.967138
+  },
+  {
+    "id": "w58",
+    "beat_id": "01_problem_objectives",
+    "text": "hard",
+    "start": 26.398,
+    "end": 26.618,
+    "confidence": 0.98456
+  },
+  {
+    "id": "w59",
+    "beat_id": "01_problem_objectives",
+    "text": "part",
+    "start": 26.618,
+    "end": 26.918,
+    "confidence": 0.991961
+  },
+  {
+    "id": "w60",
+    "beat_id": "01_problem_objectives",
+    "text": "isn't",
+    "start": 26.918,
+    "end": 27.478,
+    "confidence": 0.966261
+  },
+  {
+    "id": "w61",
+    "beat_id": "01_problem_objectives",
+    "text": "finding",
+    "start": 27.478,
+    "end": 27.958,
+    "confidence": 0.978753
+  },
+  {
+    "id": "w62",
+    "beat_id": "01_problem_objectives",
+    "text": "another",
+    "start": 27.958,
+    "end": 28.438,
+    "confidence": 0.972732
+  },
+  {
+    "id": "w63",
+    "beat_id": "01_problem_objectives",
+    "text": "idea.",
+    "start": 28.438,
+    "end": 28.918,
+    "confidence": 0.990504
+  },
+  {
+    "id": "w64",
+    "beat_id": "01_problem_objectives",
+    "text": "It's",
+    "start": 29.126,
+    "end": 29.366,
+    "confidence": 0.953774
+  },
+  {
+    "id": "w65",
+    "beat_id": "01_problem_objectives",
+    "text": "deciding",
+    "start": 29.366,
+    "end": 29.886,
+    "confidence": 0.997155
+  },
+  {
+    "id": "w66",
+    "beat_id": "01_problem_objectives",
+    "text": "what",
+    "start": 29.886,
+    "end": 30.246,
+    "confidence": 0.991595
+  },
+  {
+    "id": "w67",
+    "beat_id": "01_problem_objectives",
+    "text": "happens",
+    "start": 30.246,
+    "end": 30.646,
+    "confidence": 0.991384
+  },
+  {
+    "id": "w68",
+    "beat_id": "01_problem_objectives",
+    "text": "first,",
+    "start": 30.646,
+    "end": 31.006,
+    "confidence": 0.993575
+  },
+  {
+    "id": "w69",
+    "beat_id": "01_problem_objectives",
+    "text": "what",
+    "start": 31.294,
+    "end": 31.514,
+    "confidence": 0.986833
+  },
+  {
+    "id": "w70",
+    "beat_id": "01_problem_objectives",
+    "text": "it",
+    "start": 31.514,
+    "end": 31.654,
+    "confidence": 0.989193
+  },
+  {
+    "id": "w71",
+    "beat_id": "01_problem_objectives",
+    "text": "depends",
+    "start": 31.654,
+    "end": 32.034,
+    "confidence": 0.992382
+  },
+  {
+    "id": "w72",
+    "beat_id": "01_problem_objectives",
+    "text": "on,",
+    "start": 32.034,
+    "end": 32.314,
+    "confidence": 0.985011
+  },
+  {
+    "id": "w73",
+    "beat_id": "01_problem_objectives",
+    "text": "what",
+    "start": 32.634,
+    "end": 32.834,
+    "confidence": 0.992423
+  },
+  {
+    "id": "w74",
+    "beat_id": "01_problem_objectives",
+    "text": "it",
+    "start": 32.834,
+    "end": 32.974,
+    "confidence": 0.992733
+  },
+  {
+    "id": "w75",
+    "beat_id": "01_problem_objectives",
+    "text": "may",
+    "start": 32.974,
+    "end": 33.234,
+    "confidence": 0.981487
+  },
+  {
+    "id": "w76",
+    "beat_id": "01_problem_objectives",
+    "text": "cost,",
+    "start": 33.234,
+    "end": 33.594,
+    "confidence": 0.974261
+  },
+  {
+    "id": "w77",
+    "beat_id": "01_problem_objectives",
+    "text": "and",
+    "start": 33.594,
+    "end": 34.134,
+    "confidence": 0.566992
+  },
+  {
+    "id": "w78",
+    "beat_id": "01_problem_objectives",
+    "text": "which",
+    "start": 34.134,
+    "end": 34.894,
+    "confidence": 0.948674
+  },
+  {
+    "id": "w79",
+    "beat_id": "01_problem_objectives",
+    "text": "evidence",
+    "start": 34.894,
+    "end": 35.434,
+    "confidence": 0.985644
+  },
+  {
+    "id": "w80",
+    "beat_id": "01_problem_objectives",
+    "text": "supports",
+    "start": 35.434,
+    "end": 35.934,
+    "confidence": 0.976492
+  },
+  {
+    "id": "w81",
+    "beat_id": "01_problem_objectives",
+    "text": "the",
+    "start": 35.934,
+    "end": 36.234,
+    "confidence": 0.947538
+  },
+  {
+    "id": "w82",
+    "beat_id": "01_problem_objectives",
+    "text": "decision.",
+    "start": 36.234,
+    "end": 36.614,
+    "confidence": 0.95298
+  },
+  {
+    "id": "w83",
+    "beat_id": "01_problem_objectives",
+    "text": "A",
+    "start": 36.936,
+    "end": 37.156,
+    "confidence": 0.971399
+  },
+  {
+    "id": "w84",
+    "beat_id": "01_problem_objectives",
+    "text": "generic",
+    "start": 37.156,
+    "end": 37.536,
+    "confidence": 0.993156
+  },
+  {
+    "id": "w85",
+    "beat_id": "01_problem_objectives",
+    "text": "chat",
+    "start": 37.536,
+    "end": 37.876,
+    "confidence": 0.977702
+  },
+  {
+    "id": "w86",
+    "beat_id": "01_problem_objectives",
+    "text": "answer",
+    "start": 37.876,
+    "end": 38.236,
+    "confidence": 0.89017
+  },
+  {
+    "id": "w87",
+    "beat_id": "01_problem_objectives",
+    "text": "can",
+    "start": 38.236,
+    "end": 38.496,
+    "confidence": 0.993731
+  },
+  {
+    "id": "w88",
+    "beat_id": "01_problem_objectives",
+    "text": "sound",
+    "start": 38.496,
+    "end": 38.796,
+    "confidence": 0.994118
+  },
+  {
+    "id": "w89",
+    "beat_id": "01_problem_objectives",
+    "text": "confident",
+    "start": 38.796,
+    "end": 39.216,
+    "confidence": 0.989813
+  },
+  {
+    "id": "w90",
+    "beat_id": "01_problem_objectives",
+    "text": "and",
+    "start": 39.216,
+    "end": 39.576,
+    "confidence": 0.98729
+  },
+  {
+    "id": "w91",
+    "beat_id": "01_problem_objectives",
+    "text": "still",
+    "start": 39.576,
+    "end": 39.956,
+    "confidence": 0.987759
+  },
+  {
+    "id": "w92",
+    "beat_id": "01_problem_objectives",
+    "text": "leave",
+    "start": 39.956,
+    "end": 40.356,
+    "confidence": 0.875283
+  },
+  {
+    "id": "w93",
+    "beat_id": "01_problem_objectives",
+    "text": "those",
+    "start": 40.356,
+    "end": 40.696,
+    "confidence": 0.952059
+  },
+  {
+    "id": "w94",
+    "beat_id": "01_problem_objectives",
+    "text": "questions",
+    "start": 40.696,
+    "end": 41.156,
+    "confidence": 0.990337
+  },
+  {
+    "id": "w95",
+    "beat_id": "01_problem_objectives",
+    "text": "unresolved.",
+    "start": 41.156,
+    "end": 41.756,
+    "confidence": 0.997073
+  },
+  {
+    "id": "w96",
+    "beat_id": "01_problem_objectives",
+    "text": "So",
+    "start": 42.219,
+    "end": 42.319,
+    "confidence": 0.822558
+  },
+  {
+    "id": "w97",
+    "beat_id": "01_problem_objectives",
+    "text": "MajuPilot",
+    "start": 42.319,
+    "end": 42.919,
+    "confidence": 0.692973
+  },
+  {
+    "id": "w98",
+    "beat_id": "01_problem_objectives",
+    "text": "starts",
+    "start": 42.919,
+    "end": 43.479,
+    "confidence": 0.960391
+  },
+  {
+    "id": "w99",
+    "beat_id": "01_problem_objectives",
+    "text": "with",
+    "start": 43.479,
+    "end": 43.819,
+    "confidence": 0.99178
+  },
+  {
+    "id": "w100",
+    "beat_id": "01_problem_objectives",
+    "text": "five",
+    "start": 43.819,
+    "end": 44.159,
+    "confidence": 0.395078
+  },
+  {
+    "id": "w101",
+    "beat_id": "01_problem_objectives",
+    "text": "focused",
+    "start": 44.159,
+    "end": 44.619,
+    "confidence": 0.917894
+  },
+  {
+    "id": "w102",
+    "beat_id": "01_problem_objectives",
+    "text": "questions.",
+    "start": 44.619,
+    "end": 45.099,
+    "confidence": 0.991722
+  },
+  {
+    "id": "w103",
+    "beat_id": "01_problem_objectives",
+    "text": "Together,",
+    "start": 45.099,
+    "end": 45.799,
+    "confidence": 0.882779
+  },
+  {
+    "id": "w104",
+    "beat_id": "01_problem_objectives",
+    "text": "they",
+    "start": 46.034,
+    "end": 46.074,
+    "confidence": 0.985492
+  },
+  {
+    "id": "w105",
+    "beat_id": "01_problem_objectives",
+    "text": "create",
+    "start": 46.074,
+    "end": 46.354,
+    "confidence": 0.991507
+  },
+  {
+    "id": "w106",
+    "beat_id": "01_problem_objectives",
+    "text": "an",
+    "start": 46.354,
+    "end": 46.614,
+    "confidence": 0.986571
+  },
+  {
+    "id": "w107",
+    "beat_id": "01_problem_objectives",
+    "text": "editable",
+    "start": 46.614,
+    "end": 47.214,
+    "confidence": 0.975287
+  },
+  {
+    "id": "w108",
+    "beat_id": "01_problem_objectives",
+    "text": "Business",
+    "start": 47.214,
+    "end": 47.654,
+    "confidence": 0.943406
+  },
+  {
+    "id": "w109",
+    "beat_id": "01_problem_objectives",
+    "text": "Twin,",
+    "start": 47.654,
+    "end": 47.994,
+    "confidence": 0.974924
+  },
+  {
+    "id": "w110",
+    "beat_id": "01_problem_objectives",
+    "text": "a",
+    "start": 48.255,
+    "end": 48.555,
+    "confidence": 0.979361
+  },
+  {
+    "id": "w111",
+    "beat_id": "01_problem_objectives",
+    "text": "compact",
+    "start": 48.555,
+    "end": 48.995,
+    "confidence": 0.996894
+  },
+  {
+    "id": "w112",
+    "beat_id": "01_problem_objectives",
+    "text": "record",
+    "start": 48.995,
+    "end": 49.495,
+    "confidence": 0.986955
+  },
+  {
+    "id": "w113",
+    "beat_id": "01_problem_objectives",
+    "text": "of",
+    "start": 49.495,
+    "end": 49.835,
+    "confidence": 0.997599
+  },
+  {
+    "id": "w114",
+    "beat_id": "01_problem_objectives",
+    "text": "context,",
+    "start": 49.835,
+    "end": 50.395,
+    "confidence": 0.932292
+  },
+  {
+    "id": "w115",
+    "beat_id": "01_problem_objectives",
+    "text": "objectives,",
+    "start": 50.585,
+    "end": 51.065,
+    "confidence": 0.989106
+  },
+  {
+    "id": "w116",
+    "beat_id": "01_problem_objectives",
+    "text": "capabilities,",
+    "start": 51.317,
+    "end": 51.697,
+    "confidence": 0.986365
+  },
+  {
+    "id": "w117",
+    "beat_id": "01_problem_objectives",
+    "text": "process",
+    "start": 52.011,
+    "end": 52.271,
+    "confidence": 0.977377
+  },
+  {
+    "id": "w118",
+    "beat_id": "01_problem_objectives",
+    "text": "friction,",
+    "start": 52.271,
+    "end": 52.771,
+    "confidence": 0.948266
+  },
+  {
+    "id": "w119",
+    "beat_id": "01_problem_objectives",
+    "text": "constraints,",
+    "start": 53.146,
+    "end": 53.546,
+    "confidence": 0.966755
+  },
+  {
+    "id": "w120",
+    "beat_id": "01_problem_objectives",
+    "text": "readiness,",
+    "start": 53.771,
+    "end": 54.071,
+    "confidence": 0.998548
+  },
+  {
+    "id": "w121",
+    "beat_id": "01_problem_objectives",
+    "text": "and",
+    "start": 54.071,
+    "end": 54.491,
+    "confidence": 0.509483
+  },
+  {
+    "id": "w122",
+    "beat_id": "01_problem_objectives",
+    "text": "evidence.",
+    "start": 54.491,
+    "end": 54.951,
+    "confidence": 0.990838
+  },
+  {
+    "id": "w123",
+    "beat_id": "01_problem_objectives",
+    "text": "Facts",
+    "start": 55.459,
+    "end": 55.519,
+    "confidence": 0.951501
+  },
+  {
+    "id": "w124",
+    "beat_id": "01_problem_objectives",
+    "text": "and",
+    "start": 55.519,
+    "end": 55.799,
+    "confidence": 0.945991
+  },
+  {
+    "id": "w125",
+    "beat_id": "01_problem_objectives",
+    "text": "unknowns",
+    "start": 55.799,
+    "end": 56.459,
+    "confidence": 0.981139
+  },
+  {
+    "id": "w126",
+    "beat_id": "01_problem_objectives",
+    "text": "remain",
+    "start": 56.459,
+    "end": 56.659,
+    "confidence": 0.502924
+  },
+  {
+    "id": "w127",
+    "beat_id": "01_problem_objectives",
+    "text": "visible.",
+    "start": 56.659,
+    "end": 57.199,
+    "confidence": 0.998479
+  },
+  {
+    "id": "w128",
+    "beat_id": "01_problem_objectives",
+    "text": "The",
+    "start": 57.53,
+    "end": 57.57,
+    "confidence": 0.980208
+  },
+  {
+    "id": "w129",
+    "beat_id": "01_problem_objectives",
+    "text": "objective",
+    "start": 57.57,
+    "end": 57.93,
+    "confidence": 0.974484
+  },
+  {
+    "id": "w130",
+    "beat_id": "01_problem_objectives",
+    "text": "is",
+    "start": 57.93,
+    "end": 58.25,
+    "confidence": 0.997921
+  },
+  {
+    "id": "w131",
+    "beat_id": "01_problem_objectives",
+    "text": "practical,",
+    "start": 58.25,
+    "end": 58.85,
+    "confidence": 0.997467
+  },
+  {
+    "id": "w132",
+    "beat_id": "01_problem_objectives",
+    "text": "which",
+    "start": 59.102,
+    "end": 59.442,
+    "confidence": 0.364603
+  },
+  {
+    "id": "w133",
+    "beat_id": "01_problem_objectives",
+    "text": "is",
+    "start": 59.442,
+    "end": 59.562,
+    "confidence": 0.99382
+  },
+  {
+    "id": "w134",
+    "beat_id": "01_problem_objectives",
+    "text": "to",
+    "start": 59.562,
+    "end": 59.802,
+    "confidence": 0.988629
+  },
+  {
+    "id": "w135",
+    "beat_id": "01_problem_objectives",
+    "text": "move",
+    "start": 59.802,
+    "end": 60.142,
+    "confidence": 0.974946
+  },
+  {
+    "id": "w136",
+    "beat_id": "01_problem_objectives",
+    "text": "from",
+    "start": 60.142,
+    "end": 60.502,
+    "confidence": 0.984631
+  },
+  {
+    "id": "w137",
+    "beat_id": "01_problem_objectives",
+    "text": "answers",
+    "start": 60.502,
+    "end": 60.922,
+    "confidence": 0.946622
+  },
+  {
+    "id": "w138",
+    "beat_id": "01_problem_objectives",
+    "text": "to",
+    "start": 60.922,
+    "end": 61.382,
+    "confidence": 0.989256
+  },
+  {
+    "id": "w139",
+    "beat_id": "01_problem_objectives",
+    "text": "an",
+    "start": 61.382,
+    "end": 61.582,
+    "confidence": 0.984232
+  },
+  {
+    "id": "w140",
+    "beat_id": "01_problem_objectives",
+    "text": "inspectable",
+    "start": 61.582,
+    "end": 62.342,
+    "confidence": 0.944038
+  },
+  {
+    "id": "w141",
+    "beat_id": "01_problem_objectives",
+    "text": "path,",
+    "start": 62.342,
+    "end": 62.642,
+    "confidence": 0.974994
+  },
+  {
+    "id": "w142",
+    "beat_id": "01_problem_objectives",
+    "text": "not",
+    "start": 62.85,
+    "end": 63.01,
+    "confidence": 0.995574
+  },
+  {
+    "id": "w143",
+    "beat_id": "01_problem_objectives",
+    "text": "just",
+    "start": 63.01,
+    "end": 63.25,
+    "confidence": 0.992476
+  },
+  {
+    "id": "w144",
+    "beat_id": "01_problem_objectives",
+    "text": "a",
+    "start": 63.25,
+    "end": 63.47,
+    "confidence": 0.693191
+  },
+  {
+    "id": "w145",
+    "beat_id": "01_problem_objectives",
+    "text": "paragraph",
+    "start": 63.47,
+    "end": 63.93,
+    "confidence": 0.790498
+  },
+  {
+    "id": "w146",
+    "beat_id": "01_problem_objectives",
+    "text": "of",
+    "start": 63.93,
+    "end": 64.23,
+    "confidence": 0.988885
+  },
+  {
+    "id": "w147",
+    "beat_id": "01_problem_objectives",
+    "text": "advice.",
+    "start": 64.23,
+    "end": 64.65,
+    "confidence": 0.831751
+  },
+  {
+    "id": "w148",
+    "beat_id": "02_proposed_solution",
+    "text": "MajuPilot",
+    "start": 65.84,
+    "end": 66.3,
+    "confidence": 0.733943
+  },
+  {
+    "id": "w149",
+    "beat_id": "02_proposed_solution",
+    "text": "organizes",
+    "start": 66.3,
+    "end": 66.98,
+    "confidence": 0.910101
+  },
+  {
+    "id": "w150",
+    "beat_id": "02_proposed_solution",
+    "text": "that",
+    "start": 66.98,
+    "end": 67.22,
+    "confidence": 0.940298
+  },
+  {
+    "id": "w151",
+    "beat_id": "02_proposed_solution",
+    "text": "path",
+    "start": 67.22,
+    "end": 67.52,
+    "confidence": 0.927861
+  },
+  {
+    "id": "w152",
+    "beat_id": "02_proposed_solution",
+    "text": "as",
+    "start": 67.52,
+    "end": 67.86,
+    "confidence": 0.931319
+  },
+  {
+    "id": "w153",
+    "beat_id": "02_proposed_solution",
+    "text": "Answer,",
+    "start": 67.86,
+    "end": 68.28,
+    "confidence": 0.628286
+  },
+  {
+    "id": "w154",
+    "beat_id": "02_proposed_solution",
+    "text": "Diagnose,",
+    "start": 68.493,
+    "end": 68.813,
+    "confidence": 0.979429
+  },
+  {
+    "id": "w155",
+    "beat_id": "02_proposed_solution",
+    "text": "Compare,",
+    "start": 68.987,
+    "end": 69.507,
+    "confidence": 0.989719
+  },
+  {
+    "id": "w156",
+    "beat_id": "02_proposed_solution",
+    "text": "Blueprint,",
+    "start": 69.797,
+    "end": 69.937,
+    "confidence": 0.971246
+  },
+  {
+    "id": "w157",
+    "beat_id": "02_proposed_solution",
+    "text": "and",
+    "start": 69.937,
+    "end": 70.477,
+    "confidence": 0.583394
+  },
+  {
+    "id": "w158",
+    "beat_id": "02_proposed_solution",
+    "text": "Handoff.",
+    "start": 70.477,
+    "end": 71.097,
+    "confidence": 0.856544
+  },
+  {
+    "id": "w159",
+    "beat_id": "02_proposed_solution",
+    "text": "Answer",
+    "start": 71.495,
+    "end": 71.495,
+    "confidence": 0.967176
+  },
+  {
+    "id": "w160",
+    "beat_id": "02_proposed_solution",
+    "text": "captures",
+    "start": 71.495,
+    "end": 71.955,
+    "confidence": 0.912007
+  },
+  {
+    "id": "w161",
+    "beat_id": "02_proposed_solution",
+    "text": "evidence",
+    "start": 71.955,
+    "end": 72.395,
+    "confidence": 0.991553
+  },
+  {
+    "id": "w162",
+    "beat_id": "02_proposed_solution",
+    "text": "before",
+    "start": 72.395,
+    "end": 72.795,
+    "confidence": 0.987024
+  },
+  {
+    "id": "w163",
+    "beat_id": "02_proposed_solution",
+    "text": "scoring.",
+    "start": 72.795,
+    "end": 73.275,
+    "confidence": 0.998152
+  },
+  {
+    "id": "w164",
+    "beat_id": "02_proposed_solution",
+    "text": "Diagnose",
+    "start": 73.533,
+    "end": 73.833,
+    "confidence": 0.970586
+  },
+  {
+    "id": "w165",
+    "beat_id": "02_proposed_solution",
+    "text": "applies",
+    "start": 73.833,
+    "end": 74.293,
+    "confidence": 0.994705
+  },
+  {
+    "id": "w166",
+    "beat_id": "02_proposed_solution",
+    "text": "deterministic",
+    "start": 74.293,
+    "end": 74.993,
+    "confidence": 0.988012
+  },
+  {
+    "id": "w167",
+    "beat_id": "02_proposed_solution",
+    "text": "rules",
+    "start": 74.993,
+    "end": 75.453,
+    "confidence": 0.984556
+  },
+  {
+    "id": "w168",
+    "beat_id": "02_proposed_solution",
+    "text": "to",
+    "start": 75.453,
+    "end": 75.753,
+    "confidence": 0.979836
+  },
+  {
+    "id": "w169",
+    "beat_id": "02_proposed_solution",
+    "text": "produce",
+    "start": 75.753,
+    "end": 76.133,
+    "confidence": 0.995693
+  },
+  {
+    "id": "w170",
+    "beat_id": "02_proposed_solution",
+    "text": "maturity,",
+    "start": 76.133,
+    "end": 76.793,
+    "confidence": 0.998052
+  },
+  {
+    "id": "w171",
+    "beat_id": "02_proposed_solution",
+    "text": "readiness,",
+    "start": 76.983,
+    "end": 77.323,
+    "confidence": 0.998759
+  },
+  {
+    "id": "w172",
+    "beat_id": "02_proposed_solution",
+    "text": "and",
+    "start": 77.323,
+    "end": 78.303,
+    "confidence": 0.61156
+  },
+  {
+    "id": "w173",
+    "beat_id": "02_proposed_solution",
+    "text": "pain",
+    "start": 78.303,
+    "end": 78.623,
+    "confidence": 0.817298
+  },
+  {
+    "id": "w174",
+    "beat_id": "02_proposed_solution",
+    "text": "findings.",
+    "start": 78.623,
+    "end": 79.083,
+    "confidence": 0.880497
+  },
+  {
+    "id": "w175",
+    "beat_id": "02_proposed_solution",
+    "text": "Compare",
+    "start": 79.504,
+    "end": 79.504,
+    "confidence": 0.971568
+  },
+  {
+    "id": "w176",
+    "beat_id": "02_proposed_solution",
+    "text": "places",
+    "start": 79.504,
+    "end": 80.024,
+    "confidence": 0.983148
+  },
+  {
+    "id": "w177",
+    "beat_id": "02_proposed_solution",
+    "text": "alternative",
+    "start": 80.229,
+    "end": 80.569,
+    "confidence": 0.921859
+  },
+  {
+    "id": "w178",
+    "beat_id": "02_proposed_solution",
+    "text": "plans",
+    "start": 80.569,
+    "end": 81.349,
+    "confidence": 0.932117
+  },
+  {
+    "id": "w179",
+    "beat_id": "02_proposed_solution",
+    "text": "side",
+    "start": 81.349,
+    "end": 81.809,
+    "confidence": 0.533936
+  },
+  {
+    "id": "w180",
+    "beat_id": "02_proposed_solution",
+    "text": "by",
+    "start": 81.809,
+    "end": 81.989,
+    "confidence": 0.7136
+  },
+  {
+    "id": "w181",
+    "beat_id": "02_proposed_solution",
+    "text": "side",
+    "start": 81.989,
+    "end": 82.309,
+    "confidence": 0.995493
+  },
+  {
+    "id": "w182",
+    "beat_id": "02_proposed_solution",
+    "text": "with",
+    "start": 82.309,
+    "end": 82.609,
+    "confidence": 0.897241
+  },
+  {
+    "id": "w183",
+    "beat_id": "02_proposed_solution",
+    "text": "their",
+    "start": 82.609,
+    "end": 82.829,
+    "confidence": 0.882536
+  },
+  {
+    "id": "w184",
+    "beat_id": "02_proposed_solution",
+    "text": "assumptions,",
+    "start": 82.829,
+    "end": 83.229,
+    "confidence": 0.987939
+  },
+  {
+    "id": "w185",
+    "beat_id": "02_proposed_solution",
+    "text": "schedules,",
+    "start": 83.488,
+    "end": 83.928,
+    "confidence": 0.990961
+  },
+  {
+    "id": "w186",
+    "beat_id": "02_proposed_solution",
+    "text": "costs,",
+    "start": 84.287,
+    "end": 84.427,
+    "confidence": 0.522231
+  },
+  {
+    "id": "w187",
+    "beat_id": "02_proposed_solution",
+    "text": "operational",
+    "start": 84.671,
+    "end": 85.151,
+    "confidence": 0.997828
+  },
+  {
+    "id": "w188",
+    "beat_id": "02_proposed_solution",
+    "text": "value,",
+    "start": 85.151,
+    "end": 85.651,
+    "confidence": 0.963724
+  },
+  {
+    "id": "w189",
+    "beat_id": "02_proposed_solution",
+    "text": "net",
+    "start": 85.887,
+    "end": 86.167,
+    "confidence": 0.99276
+  },
+  {
+    "id": "w190",
+    "beat_id": "02_proposed_solution",
+    "text": "value,",
+    "start": 86.167,
+    "end": 86.567,
+    "confidence": 0.994371
+  },
+  {
+    "id": "w191",
+    "beat_id": "02_proposed_solution",
+    "text": "and",
+    "start": 86.567,
+    "end": 86.867,
+    "confidence": 0.89925
+  },
+  {
+    "id": "w192",
+    "beat_id": "02_proposed_solution",
+    "text": "payback",
+    "start": 86.867,
+    "end": 87.247,
+    "confidence": 0.973644
+  },
+  {
+    "id": "w193",
+    "beat_id": "02_proposed_solution",
+    "text": "ranges.",
+    "start": 87.247,
+    "end": 87.647,
+    "confidence": 0.993649
+  },
+  {
+    "id": "w194",
+    "beat_id": "02_proposed_solution",
+    "text": "Blueprint",
+    "start": 87.647,
+    "end": 88.707,
+    "confidence": 0.537396
+  },
+  {
+    "id": "w195",
+    "beat_id": "02_proposed_solution",
+    "text": "brings",
+    "start": 88.707,
+    "end": 89.327,
+    "confidence": 0.928894
+  },
+  {
+    "id": "w196",
+    "beat_id": "02_proposed_solution",
+    "text": "the",
+    "start": 89.327,
+    "end": 89.607,
+    "confidence": 0.947669
+  },
+  {
+    "id": "w197",
+    "beat_id": "02_proposed_solution",
+    "text": "selected",
+    "start": 89.607,
+    "end": 89.927,
+    "confidence": 0.989103
+  },
+  {
+    "id": "w198",
+    "beat_id": "02_proposed_solution",
+    "text": "path,",
+    "start": 89.927,
+    "end": 90.427,
+    "confidence": 0.911737
+  },
+  {
+    "id": "w199",
+    "beat_id": "02_proposed_solution",
+    "text": "risks,",
+    "start": 90.686,
+    "end": 90.766,
+    "confidence": 0.713313
+  },
+  {
+    "id": "w200",
+    "beat_id": "02_proposed_solution",
+    "text": "open",
+    "start": 91.102,
+    "end": 91.142,
+    "confidence": 0.911301
+  },
+  {
+    "id": "w201",
+    "beat_id": "02_proposed_solution",
+    "text": "questions,",
+    "start": 91.142,
+    "end": 91.682,
+    "confidence": 0.96984
+  },
+  {
+    "id": "w202",
+    "beat_id": "02_proposed_solution",
+    "text": "evidence",
+    "start": 91.987,
+    "end": 92.247,
+    "confidence": 0.977697
+  },
+  {
+    "id": "w203",
+    "beat_id": "02_proposed_solution",
+    "text": "links,",
+    "start": 92.247,
+    "end": 92.867,
+    "confidence": 0.800162
+  },
+  {
+    "id": "w204",
+    "beat_id": "02_proposed_solution",
+    "text": "and",
+    "start": 93.188,
+    "end": 93.268,
+    "confidence": 0.982541
+  },
+  {
+    "id": "w205",
+    "beat_id": "02_proposed_solution",
+    "text": "five",
+    "start": 93.268,
+    "end": 93.548,
+    "confidence": 0.502849
+  },
+  {
+    "id": "w206",
+    "beat_id": "02_proposed_solution",
+    "text": "specialist",
+    "start": 93.548,
+    "end": 94.088,
+    "confidence": 0.700788
+  },
+  {
+    "id": "w207",
+    "beat_id": "02_proposed_solution",
+    "text": "reviews",
+    "start": 94.088,
+    "end": 94.628,
+    "confidence": 0.903344
+  },
+  {
+    "id": "w208",
+    "beat_id": "02_proposed_solution",
+    "text": "into",
+    "start": 94.628,
+    "end": 95.168,
+    "confidence": 0.927032
+  },
+  {
+    "id": "w209",
+    "beat_id": "02_proposed_solution",
+    "text": "one",
+    "start": 95.168,
+    "end": 95.468,
+    "confidence": 0.878661
+  },
+  {
+    "id": "w210",
+    "beat_id": "02_proposed_solution",
+    "text": "full",
+    "start": 95.468,
+    "end": 95.728,
+    "confidence": 0.942528
+  },
+  {
+    "id": "w211",
+    "beat_id": "02_proposed_solution",
+    "text": "report.",
+    "start": 95.728,
+    "end": 96.208,
+    "confidence": 0.993433
+  },
+  {
+    "id": "w212",
+    "beat_id": "02_proposed_solution",
+    "text": "Handoff",
+    "start": 96.536,
+    "end": 96.776,
+    "confidence": 0.893971
+  },
+  {
+    "id": "w213",
+    "beat_id": "02_proposed_solution",
+    "text": "opens",
+    "start": 96.776,
+    "end": 97.176,
+    "confidence": 0.97781
+  },
+  {
+    "id": "w214",
+    "beat_id": "02_proposed_solution",
+    "text": "only",
+    "start": 97.176,
+    "end": 97.636,
+    "confidence": 0.995047
+  },
+  {
+    "id": "w215",
+    "beat_id": "02_proposed_solution",
+    "text": "after",
+    "start": 97.636,
+    "end": 98.016,
+    "confidence": 0.994418
+  },
+  {
+    "id": "w216",
+    "beat_id": "02_proposed_solution",
+    "text": "the",
+    "start": 98.016,
+    "end": 98.196,
+    "confidence": 0.991418
+  },
+  {
+    "id": "w217",
+    "beat_id": "02_proposed_solution",
+    "text": "Blueprint",
+    "start": 98.196,
+    "end": 98.496,
+    "confidence": 0.875515
+  },
+  {
+    "id": "w218",
+    "beat_id": "02_proposed_solution",
+    "text": "is",
+    "start": 98.496,
+    "end": 98.716,
+    "confidence": 0.996435
+  },
+  {
+    "id": "w219",
+    "beat_id": "02_proposed_solution",
+    "text": "verified",
+    "start": 98.716,
+    "end": 99.156,
+    "confidence": 0.997927
+  },
+  {
+    "id": "w220",
+    "beat_id": "02_proposed_solution",
+    "text": "and",
+    "start": 99.156,
+    "end": 99.836,
+    "confidence": 0.663012
+  },
+  {
+    "id": "w221",
+    "beat_id": "02_proposed_solution",
+    "text": "the",
+    "start": 99.836,
+    "end": 99.956,
+    "confidence": 0.98009
+  },
+  {
+    "id": "w222",
+    "beat_id": "02_proposed_solution",
+    "text": "person",
+    "start": 99.956,
+    "end": 100.276,
+    "confidence": 0.997721
+  },
+  {
+    "id": "w223",
+    "beat_id": "02_proposed_solution",
+    "text": "decides",
+    "start": 100.276,
+    "end": 100.776,
+    "confidence": 0.996652
+  },
+  {
+    "id": "w224",
+    "beat_id": "02_proposed_solution",
+    "text": "what",
+    "start": 100.776,
+    "end": 101.236,
+    "confidence": 0.989614
+  },
+  {
+    "id": "w225",
+    "beat_id": "02_proposed_solution",
+    "text": "information",
+    "start": 101.236,
+    "end": 101.676,
+    "confidence": 0.996926
+  },
+  {
+    "id": "w226",
+    "beat_id": "02_proposed_solution",
+    "text": "to",
+    "start": 101.676,
+    "end": 102.036,
+    "confidence": 0.995591
+  },
+  {
+    "id": "w227",
+    "beat_id": "02_proposed_solution",
+    "text": "share.",
+    "start": 102.036,
+    "end": 102.316,
+    "confidence": 0.996758
+  },
+  {
+    "id": "w228",
+    "beat_id": "02_proposed_solution",
+    "text": "Throughout",
+    "start": 102.653,
+    "end": 102.913,
+    "confidence": 0.972113
+  },
+  {
+    "id": "w229",
+    "beat_id": "02_proposed_solution",
+    "text": "the",
+    "start": 102.913,
+    "end": 103.213,
+    "confidence": 0.995671
+  },
+  {
+    "id": "w230",
+    "beat_id": "02_proposed_solution",
+    "text": "journey,",
+    "start": 103.213,
+    "end": 103.533,
+    "confidence": 0.987102
+  },
+  {
+    "id": "w231",
+    "beat_id": "02_proposed_solution",
+    "text": "facts,",
+    "start": 103.737,
+    "end": 104.057,
+    "confidence": 0.967621
+  },
+  {
+    "id": "w232",
+    "beat_id": "02_proposed_solution",
+    "text": "calculations,",
+    "start": 104.262,
+    "end": 104.882,
+    "confidence": 0.988858
+  },
+  {
+    "id": "w233",
+    "beat_id": "02_proposed_solution",
+    "text": "assumptions,",
+    "start": 105.103,
+    "end": 105.603,
+    "confidence": 0.993107
+  },
+  {
+    "id": "w234",
+    "beat_id": "02_proposed_solution",
+    "text": "catalogue",
+    "start": 105.9,
+    "end": 106.1,
+    "confidence": 0.880658
+  },
+  {
+    "id": "w235",
+    "beat_id": "02_proposed_solution",
+    "text": "mappings,",
+    "start": 106.1,
+    "end": 106.68,
+    "confidence": 0.762352
+  },
+  {
+    "id": "w236",
+    "beat_id": "02_proposed_solution",
+    "text": "and",
+    "start": 106.908,
+    "end": 107.008,
+    "confidence": 0.994146
+  },
+  {
+    "id": "w237",
+    "beat_id": "02_proposed_solution",
+    "text": "model",
+    "start": 107.008,
+    "end": 107.348,
+    "confidence": 0.986564
+  },
+  {
+    "id": "w238",
+    "beat_id": "02_proposed_solution",
+    "text": "interpretation",
+    "start": 107.348,
+    "end": 108.008,
+    "confidence": 0.963007
+  },
+  {
+    "id": "w239",
+    "beat_id": "02_proposed_solution",
+    "text": "are",
+    "start": 108.283,
+    "end": 108.703,
+    "confidence": 0.962587
+  },
+  {
+    "id": "w240",
+    "beat_id": "02_proposed_solution",
+    "text": "visibly",
+    "start": 108.703,
+    "end": 109.143,
+    "confidence": 0.980705
+  },
+  {
+    "id": "w241",
+    "beat_id": "02_proposed_solution",
+    "text": "different.",
+    "start": 109.143,
+    "end": 109.623,
+    "confidence": 0.998621
+  },
+  {
+    "id": "w242",
+    "beat_id": "02_proposed_solution",
+    "text": "Deterministic",
+    "start": 109.623,
+    "end": 110.683,
+    "confidence": 0.603454
+  },
+  {
+    "id": "w243",
+    "beat_id": "02_proposed_solution",
+    "text": "values",
+    "start": 110.683,
+    "end": 111.183,
+    "confidence": 0.980046
+  },
+  {
+    "id": "w244",
+    "beat_id": "02_proposed_solution",
+    "text": "remain",
+    "start": 111.183,
+    "end": 111.623,
+    "confidence": 0.96582
+  },
+  {
+    "id": "w245",
+    "beat_id": "02_proposed_solution",
+    "text": "authoritative.",
+    "start": 111.623,
+    "end": 112.463,
+    "confidence": 0.987333
+  },
+  {
+    "id": "w246",
+    "beat_id": "02_proposed_solution",
+    "text": "Optional",
+    "start": 112.969,
+    "end": 113.169,
+    "confidence": 0.885248
+  },
+  {
+    "id": "w247",
+    "beat_id": "02_proposed_solution",
+    "text": "AI",
+    "start": 113.169,
+    "end": 113.489,
+    "confidence": 0.964583
+  },
+  {
+    "id": "w248",
+    "beat_id": "02_proposed_solution",
+    "text": "can",
+    "start": 113.489,
+    "end": 113.809,
+    "confidence": 0.994675
+  },
+  {
+    "id": "w249",
+    "beat_id": "02_proposed_solution",
+    "text": "interpret",
+    "start": 113.809,
+    "end": 114.369,
+    "confidence": 0.937517
+  },
+  {
+    "id": "w250",
+    "beat_id": "02_proposed_solution",
+    "text": "within",
+    "start": 114.369,
+    "end": 114.829,
+    "confidence": 0.837991
+  },
+  {
+    "id": "w251",
+    "beat_id": "02_proposed_solution",
+    "text": "a",
+    "start": 114.829,
+    "end": 114.989,
+    "confidence": 0.950582
+  },
+  {
+    "id": "w252",
+    "beat_id": "02_proposed_solution",
+    "text": "bounded",
+    "start": 114.989,
+    "end": 115.249,
+    "confidence": 0.995488
+  },
+  {
+    "id": "w253",
+    "beat_id": "02_proposed_solution",
+    "text": "role,",
+    "start": 115.249,
+    "end": 115.629,
+    "confidence": 0.919854
+  },
+  {
+    "id": "w254",
+    "beat_id": "02_proposed_solution",
+    "text": "but",
+    "start": 115.629,
+    "end": 116.109,
+    "confidence": 0.494514
+  },
+  {
+    "id": "w255",
+    "beat_id": "02_proposed_solution",
+    "text": "it",
+    "start": 116.109,
+    "end": 116.309,
+    "confidence": 0.95035
+  },
+  {
+    "id": "w256",
+    "beat_id": "02_proposed_solution",
+    "text": "does",
+    "start": 116.309,
+    "end": 116.489,
+    "confidence": 0.983621
+  },
+  {
+    "id": "w257",
+    "beat_id": "02_proposed_solution",
+    "text": "not",
+    "start": 116.489,
+    "end": 116.749,
+    "confidence": 0.995269
+  },
+  {
+    "id": "w258",
+    "beat_id": "02_proposed_solution",
+    "text": "calculate",
+    "start": 116.749,
+    "end": 117.209,
+    "confidence": 0.975614
+  },
+  {
+    "id": "w259",
+    "beat_id": "02_proposed_solution",
+    "text": "or",
+    "start": 117.209,
+    "end": 117.569,
+    "confidence": 0.939313
+  },
+  {
+    "id": "w260",
+    "beat_id": "02_proposed_solution",
+    "text": "overwrite",
+    "start": 117.569,
+    "end": 118.129,
+    "confidence": 0.367428
+  },
+  {
+    "id": "w261",
+    "beat_id": "02_proposed_solution",
+    "text": "numeric",
+    "start": 118.129,
+    "end": 118.829,
+    "confidence": 0.914615
+  },
+  {
+    "id": "w262",
+    "beat_id": "02_proposed_solution",
+    "text": "truth.",
+    "start": 118.829,
+    "end": 119.249,
+    "confidence": 0.738291
+  },
+  {
+    "id": "w263",
+    "beat_id": "02_proposed_solution",
+    "text": "Loading",
+    "start": 119.67,
+    "end": 119.67,
+    "confidence": 0.973828
+  },
+  {
+    "id": "w264",
+    "beat_id": "02_proposed_solution",
+    "text": "a",
+    "start": 119.67,
+    "end": 119.87,
+    "confidence": 0.976682
+  },
+  {
+    "id": "w265",
+    "beat_id": "02_proposed_solution",
+    "text": "fictional",
+    "start": 119.87,
+    "end": 120.23,
+    "confidence": 0.989071
+  },
+  {
+    "id": "w266",
+    "beat_id": "02_proposed_solution",
+    "text": "demonstration",
+    "start": 120.23,
+    "end": 120.91,
+    "confidence": 0.99684
+  },
+  {
+    "id": "w267",
+    "beat_id": "02_proposed_solution",
+    "text": "also",
+    "start": 120.91,
+    "end": 121.49,
+    "confidence": 0.978766
+  },
+  {
+    "id": "w268",
+    "beat_id": "02_proposed_solution",
+    "text": "does",
+    "start": 121.49,
+    "end": 121.73,
+    "confidence": 0.993075
+  },
+  {
+    "id": "w269",
+    "beat_id": "02_proposed_solution",
+    "text": "not",
+    "start": 121.73,
+    "end": 121.97,
+    "confidence": 0.997007
+  },
+  {
+    "id": "w270",
+    "beat_id": "02_proposed_solution",
+    "text": "create",
+    "start": 121.97,
+    "end": 122.25,
+    "confidence": 0.997407
+  },
+  {
+    "id": "w271",
+    "beat_id": "02_proposed_solution",
+    "text": "consent",
+    "start": 122.25,
+    "end": 122.75,
+    "confidence": 0.943162
+  },
+  {
+    "id": "w272",
+    "beat_id": "02_proposed_solution",
+    "text": "or",
+    "start": 122.75,
+    "end": 123.29,
+    "confidence": 0.945626
+  },
+  {
+    "id": "w273",
+    "beat_id": "02_proposed_solution",
+    "text": "a",
+    "start": 123.29,
+    "end": 123.41,
+    "confidence": null
+  },
+  {
+    "id": "w274",
+    "beat_id": "02_proposed_solution",
+    "text": "consultation",
+    "start": 123.29,
+    "end": 124.23,
+    "confidence": 0.774824
+  },
+  {
+    "id": "w275",
+    "beat_id": "02_proposed_solution",
+    "text": "lead.",
+    "start": 124.23,
+    "end": 124.65,
+    "confidence": 0.405991
+  },
+  {
+    "id": "w276",
+    "beat_id": "03_technical_approach",
+    "text": "So,",
+    "start": 125.3,
+    "end": 125.78,
+    "confidence": 0.438057
+  },
+  {
+    "id": "w277",
+    "beat_id": "03_technical_approach",
+    "text": "underneath,",
+    "start": 126.108,
+    "end": 126.108,
+    "confidence": 0.836967
+  },
+  {
+    "id": "w278",
+    "beat_id": "03_technical_approach",
+    "text": "MajuPilot",
+    "start": 126.108,
+    "end": 126.928,
+    "confidence": 0.590538
+  },
+  {
+    "id": "w279",
+    "beat_id": "03_technical_approach",
+    "text": "is",
+    "start": 126.928,
+    "end": 127.268,
+    "confidence": 0.952448
+  },
+  {
+    "id": "w280",
+    "beat_id": "03_technical_approach",
+    "text": "a",
+    "start": 127.268,
+    "end": 127.468,
+    "confidence": 0.890936
+  },
+  {
+    "id": "w281",
+    "beat_id": "03_technical_approach",
+    "text": "Next.js",
+    "start": 127.708,
+    "end": 128.308,
+    "confidence": 0.989173
+  },
+  {
+    "id": "w282",
+    "beat_id": "03_technical_approach",
+    "text": "interface",
+    "start": 128.308,
+    "end": 128.848,
+    "confidence": 0.895739
+  },
+  {
+    "id": "w283",
+    "beat_id": "03_technical_approach",
+    "text": "over",
+    "start": 128.848,
+    "end": 129.388,
+    "confidence": 0.91567
+  },
+  {
+    "id": "w284",
+    "beat_id": "03_technical_approach",
+    "text": "versioned",
+    "start": 129.388,
+    "end": 130.488,
+    "confidence": 0.791536
+  },
+  {
+    "id": "w285",
+    "beat_id": "03_technical_approach",
+    "text": "routes",
+    "start": 130.488,
+    "end": 130.668,
+    "confidence": 0.97952
+  },
+  {
+    "id": "w286",
+    "beat_id": "03_technical_approach",
+    "text": "and",
+    "start": 130.668,
+    "end": 131.088,
+    "confidence": 0.961419
+  },
+  {
+    "id": "w287",
+    "beat_id": "03_technical_approach",
+    "text": "a",
+    "start": 131.088,
+    "end": 131.248,
+    "confidence": 0.711531
+  },
+  {
+    "id": "w288",
+    "beat_id": "03_technical_approach",
+    "text": "deterministic",
+    "start": 131.248,
+    "end": 131.828,
+    "confidence": 0.997779
+  },
+  {
+    "id": "w289",
+    "beat_id": "03_technical_approach",
+    "text": "domain",
+    "start": 131.828,
+    "end": 132.308,
+    "confidence": 0.986392
+  },
+  {
+    "id": "w290",
+    "beat_id": "03_technical_approach",
+    "text": "core.",
+    "start": 132.308,
+    "end": 132.688,
+    "confidence": 0.744022
+  },
+  {
+    "id": "w291",
+    "beat_id": "03_technical_approach",
+    "text": "An",
+    "start": 133.099,
+    "end": 133.219,
+    "confidence": 0.533035
+  },
+  {
+    "id": "w292",
+    "beat_id": "03_technical_approach",
+    "text": "Exabytes",
+    "start": 133.219,
+    "end": 133.699,
+    "confidence": 0.752277
+  },
+  {
+    "id": "w293",
+    "beat_id": "03_technical_approach",
+    "text": "domain",
+    "start": 133.699,
+    "end": 134.159,
+    "confidence": 0.917132
+  },
+  {
+    "id": "w294",
+    "beat_id": "03_technical_approach",
+    "text": "pack",
+    "start": 134.159,
+    "end": 134.539,
+    "confidence": 0.940039
+  },
+  {
+    "id": "w295",
+    "beat_id": "03_technical_approach",
+    "text": "supplies",
+    "start": 134.539,
+    "end": 134.979,
+    "confidence": 0.960574
+  },
+  {
+    "id": "w296",
+    "beat_id": "03_technical_approach",
+    "text": "the",
+    "start": 134.979,
+    "end": 135.259,
+    "confidence": 0.954609
+  },
+  {
+    "id": "w297",
+    "beat_id": "03_technical_approach",
+    "text": "rules",
+    "start": 135.259,
+    "end": 135.519,
+    "confidence": 0.973522
+  },
+  {
+    "id": "w298",
+    "beat_id": "03_technical_approach",
+    "text": "and",
+    "start": 135.519,
+    "end": 135.999,
+    "confidence": 0.958025
+  },
+  {
+    "id": "w299",
+    "beat_id": "03_technical_approach",
+    "text": "catalogue",
+    "start": 135.999,
+    "end": 136.439,
+    "confidence": 0.94082
+  },
+  {
+    "id": "w300",
+    "beat_id": "03_technical_approach",
+    "text": "mappings.",
+    "start": 136.439,
+    "end": 136.879,
+    "confidence": 0.926802
+  },
+  {
+    "id": "w301",
+    "beat_id": "03_technical_approach",
+    "text": "Supabase",
+    "start": 137.404,
+    "end": 137.624,
+    "confidence": 0.889191
+  },
+  {
+    "id": "w302",
+    "beat_id": "03_technical_approach",
+    "text": "supports",
+    "start": 137.624,
+    "end": 138.104,
+    "confidence": 0.984872
+  },
+  {
+    "id": "w303",
+    "beat_id": "03_technical_approach",
+    "text": "persistence",
+    "start": 138.104,
+    "end": 138.784,
+    "confidence": 0.951814
+  },
+  {
+    "id": "w304",
+    "beat_id": "03_technical_approach",
+    "text": "and",
+    "start": 138.784,
+    "end": 139.224,
+    "confidence": 0.987802
+  },
+  {
+    "id": "w305",
+    "beat_id": "03_technical_approach",
+    "text": "private",
+    "start": 139.224,
+    "end": 139.544,
+    "confidence": 0.981348
+  },
+  {
+    "id": "w306",
+    "beat_id": "03_technical_approach",
+    "text": "storage.",
+    "start": 139.544,
+    "end": 140.044,
+    "confidence": 0.998518
+  },
+  {
+    "id": "w307",
+    "beat_id": "03_technical_approach",
+    "text": "Vercel",
+    "start": 140.527,
+    "end": 140.807,
+    "confidence": 0.392148
+  },
+  {
+    "id": "w308",
+    "beat_id": "03_technical_approach",
+    "text": "AI",
+    "start": 140.807,
+    "end": 141.187,
+    "confidence": 0.83397
+  },
+  {
+    "id": "w309",
+    "beat_id": "03_technical_approach",
+    "text": "Gateway",
+    "start": 141.187,
+    "end": 141.487,
+    "confidence": 0.831147
+  },
+  {
+    "id": "w310",
+    "beat_id": "03_technical_approach",
+    "text": "can",
+    "start": 141.487,
+    "end": 141.947,
+    "confidence": 0.986026
+  },
+  {
+    "id": "w311",
+    "beat_id": "03_technical_approach",
+    "text": "provide",
+    "start": 141.947,
+    "end": 142.307,
+    "confidence": 0.99506
+  },
+  {
+    "id": "w312",
+    "beat_id": "03_technical_approach",
+    "text": "the",
+    "start": 142.307,
+    "end": 142.567,
+    "confidence": 0.975652
+  },
+  {
+    "id": "w313",
+    "beat_id": "03_technical_approach",
+    "text": "optional",
+    "start": 142.567,
+    "end": 142.967,
+    "confidence": 0.97124
+  },
+  {
+    "id": "w314",
+    "beat_id": "03_technical_approach",
+    "text": "model",
+    "start": 142.967,
+    "end": 143.267,
+    "confidence": 0.944695
+  },
+  {
+    "id": "w315",
+    "beat_id": "03_technical_approach",
+    "text": "path,",
+    "start": 143.267,
+    "end": 143.687,
+    "confidence": 0.959964
+  },
+  {
+    "id": "w316",
+    "beat_id": "03_technical_approach",
+    "text": "and",
+    "start": 143.687,
+    "end": 144.227,
+    "confidence": 0.540818
+  },
+  {
+    "id": "w317",
+    "beat_id": "03_technical_approach",
+    "text": "a",
+    "start": 144.227,
+    "end": 144.367,
+    "confidence": 0.779685
+  },
+  {
+    "id": "w318",
+    "beat_id": "03_technical_approach",
+    "text": "durable",
+    "start": 144.367,
+    "end": 144.687,
+    "confidence": 0.994341
+  },
+  {
+    "id": "w319",
+    "beat_id": "03_technical_approach",
+    "text": "outbox",
+    "start": 144.687,
+    "end": 145.167,
+    "confidence": 0.581772
+  },
+  {
+    "id": "w320",
+    "beat_id": "03_technical_approach",
+    "text": "supports",
+    "start": 145.167,
+    "end": 145.827,
+    "confidence": 0.890672
+  },
+  {
+    "id": "w321",
+    "beat_id": "03_technical_approach",
+    "text": "controlled",
+    "start": 145.827,
+    "end": 146.447,
+    "confidence": 0.839104
+  },
+  {
+    "id": "w322",
+    "beat_id": "03_technical_approach",
+    "text": "delivery.",
+    "start": 146.447,
+    "end": 146.907,
+    "confidence": 0.995893
+  },
+  {
+    "id": "w323",
+    "beat_id": "03_technical_approach",
+    "text": "This",
+    "start": 147.412,
+    "end": 147.452,
+    "confidence": 0.625737
+  },
+  {
+    "id": "w324",
+    "beat_id": "03_technical_approach",
+    "text": "separation",
+    "start": 147.452,
+    "end": 147.812,
+    "confidence": 0.989163
+  },
+  {
+    "id": "w325",
+    "beat_id": "03_technical_approach",
+    "text": "matters",
+    "start": 147.812,
+    "end": 148.252,
+    "confidence": 0.98976
+  },
+  {
+    "id": "w326",
+    "beat_id": "03_technical_approach",
+    "text": "because",
+    "start": 148.252,
+    "end": 148.712,
+    "confidence": 0.983952
+  },
+  {
+    "id": "w327",
+    "beat_id": "03_technical_approach",
+    "text": "each",
+    "start": 148.712,
+    "end": 149.012,
+    "confidence": 0.996801
+  },
+  {
+    "id": "w328",
+    "beat_id": "03_technical_approach",
+    "text": "stage",
+    "start": 149.012,
+    "end": 149.372,
+    "confidence": 0.975381
+  },
+  {
+    "id": "w329",
+    "beat_id": "03_technical_approach",
+    "text": "can",
+    "start": 149.372,
+    "end": 149.652,
+    "confidence": 0.995842
+  },
+  {
+    "id": "w330",
+    "beat_id": "03_technical_approach",
+    "text": "be",
+    "start": 149.652,
+    "end": 149.812,
+    "confidence": 0.995781
+  },
+  {
+    "id": "w331",
+    "beat_id": "03_technical_approach",
+    "text": "inspected",
+    "start": 149.812,
+    "end": 150.272,
+    "confidence": 0.997502
+  },
+  {
+    "id": "w332",
+    "beat_id": "03_technical_approach",
+    "text": "on",
+    "start": 150.272,
+    "end": 150.552,
+    "confidence": 0.991026
+  },
+  {
+    "id": "w333",
+    "beat_id": "03_technical_approach",
+    "text": "its",
+    "start": 150.552,
+    "end": 150.792,
+    "confidence": 0.974261
+  },
+  {
+    "id": "w334",
+    "beat_id": "03_technical_approach",
+    "text": "own.",
+    "start": 150.792,
+    "end": 151.112,
+    "confidence": 0.998623
+  },
+  {
+    "id": "w335",
+    "beat_id": "03_technical_approach",
+    "text": "Evidence-linked",
+    "start": 152.012,
+    "end": 152.512,
+    "confidence": 0.457681
+  },
+  {
+    "id": "w336",
+    "beat_id": "03_technical_approach",
+    "text": "records",
+    "start": 152.512,
+    "end": 153.352,
+    "confidence": 0.965296
+  },
+  {
+    "id": "w337",
+    "beat_id": "03_technical_approach",
+    "text": "connect",
+    "start": 153.352,
+    "end": 154.072,
+    "confidence": 0.958166
+  },
+  {
+    "id": "w338",
+    "beat_id": "03_technical_approach",
+    "text": "claims",
+    "start": 154.072,
+    "end": 154.532,
+    "confidence": 0.991001
+  },
+  {
+    "id": "w339",
+    "beat_id": "03_technical_approach",
+    "text": "back",
+    "start": 154.532,
+    "end": 155.052,
+    "confidence": 0.989537
+  },
+  {
+    "id": "w340",
+    "beat_id": "03_technical_approach",
+    "text": "to",
+    "start": 155.052,
+    "end": 155.352,
+    "confidence": 0.99656
+  },
+  {
+    "id": "w341",
+    "beat_id": "03_technical_approach",
+    "text": "the",
+    "start": 155.352,
+    "end": 155.472,
+    "confidence": null
+  },
+  {
+    "id": "w342",
+    "beat_id": "03_technical_approach",
+    "text": "Business",
+    "start": 155.352,
+    "end": 155.752,
+    "confidence": 0.781982
+  },
+  {
+    "id": "w343",
+    "beat_id": "03_technical_approach",
+    "text": "Twin",
+    "start": 155.752,
+    "end": 156.052,
+    "confidence": 0.638534
+  },
+  {
+    "id": "w344",
+    "beat_id": "03_technical_approach",
+    "text": "and",
+    "start": 156.052,
+    "end": 156.472,
+    "confidence": 0.930261
+  },
+  {
+    "id": "w345",
+    "beat_id": "03_technical_approach",
+    "text": "calculation",
+    "start": 156.472,
+    "end": 157.012,
+    "confidence": 0.969591
+  },
+  {
+    "id": "w346",
+    "beat_id": "03_technical_approach",
+    "text": "versions.",
+    "start": 157.012,
+    "end": 157.672,
+    "confidence": 0.972307
+  },
+  {
+    "id": "w347",
+    "beat_id": "03_technical_approach",
+    "text": "Once",
+    "start": 158.083,
+    "end": 158.243,
+    "confidence": 0.989233
+  },
+  {
+    "id": "w348",
+    "beat_id": "03_technical_approach",
+    "text": "a",
+    "start": 158.243,
+    "end": 158.423,
+    "confidence": 0.971453
+  },
+  {
+    "id": "w349",
+    "beat_id": "03_technical_approach",
+    "text": "path",
+    "start": 158.423,
+    "end": 158.603,
+    "confidence": 0.887456
+  },
+  {
+    "id": "w350",
+    "beat_id": "03_technical_approach",
+    "text": "is",
+    "start": 158.603,
+    "end": 158.783,
+    "confidence": 0.996531
+  },
+  {
+    "id": "w351",
+    "beat_id": "03_technical_approach",
+    "text": "selected,",
+    "start": 158.783,
+    "end": 159.183,
+    "confidence": 0.997774
+  },
+  {
+    "id": "w352",
+    "beat_id": "03_technical_approach",
+    "text": "five",
+    "start": 159.427,
+    "end": 159.667,
+    "confidence": 0.663015
+  },
+  {
+    "id": "w353",
+    "beat_id": "03_technical_approach",
+    "text": "specialist",
+    "start": 159.667,
+    "end": 160.087,
+    "confidence": 0.523087
+  },
+  {
+    "id": "w354",
+    "beat_id": "03_technical_approach",
+    "text": "lenses",
+    "start": 160.087,
+    "end": 160.907,
+    "confidence": 0.208391
+  },
+  {
+    "id": "w355",
+    "beat_id": "03_technical_approach",
+    "text": "review",
+    "start": 160.907,
+    "end": 161.387,
+    "confidence": 0.966606
+  },
+  {
+    "id": "w356",
+    "beat_id": "03_technical_approach",
+    "text": "it.",
+    "start": 161.387,
+    "end": 161.767,
+    "confidence": 0.982707
+  },
+  {
+    "id": "w357",
+    "beat_id": "03_technical_approach",
+    "text": "If",
+    "start": 162.002,
+    "end": 162.262,
+    "confidence": 0.981249
+  },
+  {
+    "id": "w358",
+    "beat_id": "03_technical_approach",
+    "text": "model",
+    "start": 162.262,
+    "end": 162.582,
+    "confidence": 0.918174
+  },
+  {
+    "id": "w359",
+    "beat_id": "03_technical_approach",
+    "text": "output",
+    "start": 162.582,
+    "end": 162.962,
+    "confidence": 0.991144
+  },
+  {
+    "id": "w360",
+    "beat_id": "03_technical_approach",
+    "text": "is",
+    "start": 162.962,
+    "end": 163.182,
+    "confidence": 0.992607
+  },
+  {
+    "id": "w361",
+    "beat_id": "03_technical_approach",
+    "text": "invalid",
+    "start": 163.182,
+    "end": 163.622,
+    "confidence": 0.997586
+  },
+  {
+    "id": "w362",
+    "beat_id": "03_technical_approach",
+    "text": "or",
+    "start": 163.622,
+    "end": 164.122,
+    "confidence": 0.981195
+  },
+  {
+    "id": "w363",
+    "beat_id": "03_technical_approach",
+    "text": "unavailable,",
+    "start": 164.122,
+    "end": 164.742,
+    "confidence": 0.99361
+  },
+  {
+    "id": "w364",
+    "beat_id": "03_technical_approach",
+    "text": "each",
+    "start": 165.111,
+    "end": 165.411,
+    "confidence": 0.993716
+  },
+  {
+    "id": "w365",
+    "beat_id": "03_technical_approach",
+    "text": "role",
+    "start": 165.411,
+    "end": 165.831,
+    "confidence": 0.722013
+  },
+  {
+    "id": "w366",
+    "beat_id": "03_technical_approach",
+    "text": "falls",
+    "start": 165.831,
+    "end": 166.211,
+    "confidence": 0.98922
+  },
+  {
+    "id": "w367",
+    "beat_id": "03_technical_approach",
+    "text": "back",
+    "start": 166.211,
+    "end": 166.511,
+    "confidence": 0.998449
+  },
+  {
+    "id": "w368",
+    "beat_id": "03_technical_approach",
+    "text": "within",
+    "start": 166.511,
+    "end": 166.851,
+    "confidence": 0.981066
+  },
+  {
+    "id": "w369",
+    "beat_id": "03_technical_approach",
+    "text": "a",
+    "start": 166.851,
+    "end": 167.031,
+    "confidence": 0.981848
+  },
+  {
+    "id": "w370",
+    "beat_id": "03_technical_approach",
+    "text": "bounded",
+    "start": 167.031,
+    "end": 167.271,
+    "confidence": 0.985545
+  },
+  {
+    "id": "w371",
+    "beat_id": "03_technical_approach",
+    "text": "contract,",
+    "start": 167.271,
+    "end": 167.831,
+    "confidence": 0.986588
+  },
+  {
+    "id": "w372",
+    "beat_id": "03_technical_approach",
+    "text": "so",
+    "start": 168.19,
+    "end": 168.29,
+    "confidence": 0.884772
+  },
+  {
+    "id": "w373",
+    "beat_id": "03_technical_approach",
+    "text": "the",
+    "start": 168.29,
+    "end": 168.43,
+    "confidence": 0.675141
+  },
+  {
+    "id": "w374",
+    "beat_id": "03_technical_approach",
+    "text": "workflow",
+    "start": 168.43,
+    "end": 168.81,
+    "confidence": 0.966517
+  },
+  {
+    "id": "w375",
+    "beat_id": "03_technical_approach",
+    "text": "does",
+    "start": 168.81,
+    "end": 169.09,
+    "confidence": 0.992409
+  },
+  {
+    "id": "w376",
+    "beat_id": "03_technical_approach",
+    "text": "not",
+    "start": 169.09,
+    "end": 169.31,
+    "confidence": 0.997649
+  },
+  {
+    "id": "w377",
+    "beat_id": "03_technical_approach",
+    "text": "pretend",
+    "start": 169.31,
+    "end": 169.73,
+    "confidence": 0.995672
+  },
+  {
+    "id": "w378",
+    "beat_id": "03_technical_approach",
+    "text": "that",
+    "start": 169.73,
+    "end": 170.05,
+    "confidence": 0.983248
+  },
+  {
+    "id": "w379",
+    "beat_id": "03_technical_approach",
+    "text": "an",
+    "start": 170.05,
+    "end": 170.29,
+    "confidence": 0.978966
+  },
+  {
+    "id": "w380",
+    "beat_id": "03_technical_approach",
+    "text": "unconstrained",
+    "start": 170.29,
+    "end": 171.15,
+    "confidence": 0.978756
+  },
+  {
+    "id": "w381",
+    "beat_id": "03_technical_approach",
+    "text": "agent",
+    "start": 171.15,
+    "end": 171.51,
+    "confidence": 0.994729
+  },
+  {
+    "id": "w382",
+    "beat_id": "03_technical_approach",
+    "text": "is",
+    "start": 171.51,
+    "end": 171.85,
+    "confidence": 0.990949
+  },
+  {
+    "id": "w383",
+    "beat_id": "03_technical_approach",
+    "text": "making",
+    "start": 171.85,
+    "end": 172.35,
+    "confidence": 0.986217
+  },
+  {
+    "id": "w384",
+    "beat_id": "03_technical_approach",
+    "text": "any",
+    "start": 172.35,
+    "end": 172.77,
+    "confidence": 0.986608
+  },
+  {
+    "id": "w385",
+    "beat_id": "03_technical_approach",
+    "text": "decision.",
+    "start": 172.77,
+    "end": 173.23,
+    "confidence": 0.785439
+  },
+  {
+    "id": "w386",
+    "beat_id": "03_technical_approach",
+    "text": "One",
+    "start": 173.745,
+    "end": 173.965,
+    "confidence": 0.976385
+  },
+  {
+    "id": "w387",
+    "beat_id": "03_technical_approach",
+    "text": "limitation",
+    "start": 173.965,
+    "end": 174.345,
+    "confidence": 0.998258
+  },
+  {
+    "id": "w388",
+    "beat_id": "03_technical_approach",
+    "text": "is",
+    "start": 174.345,
+    "end": 174.705,
+    "confidence": 0.996783
+  },
+  {
+    "id": "w389",
+    "beat_id": "03_technical_approach",
+    "text": "equally",
+    "start": 174.705,
+    "end": 175.045,
+    "confidence": 0.999265
+  },
+  {
+    "id": "w390",
+    "beat_id": "03_technical_approach",
+    "text": "important.",
+    "start": 175.045,
+    "end": 175.625,
+    "confidence": 0.997671
+  },
+  {
+    "id": "w391",
+    "beat_id": "03_technical_approach",
+    "text": "Document",
+    "start": 175.625,
+    "end": 176.725,
+    "confidence": 0.710179
+  },
+  {
+    "id": "w392",
+    "beat_id": "03_technical_approach",
+    "text": "RAG,",
+    "start": 176.725,
+    "end": 177.105,
+    "confidence": 0.16467
+  },
+  {
+    "id": "w393",
+    "beat_id": "03_technical_approach",
+    "text": "or",
+    "start": 177.105,
+    "end": 177.425,
+    "confidence": 0.800188
+  },
+  {
+    "id": "w394",
+    "beat_id": "03_technical_approach",
+    "text": "retrieval-augmented",
+    "start": 178.145,
+    "end": 178.365,
+    "confidence": 0.659816
+  },
+  {
+    "id": "w395",
+    "beat_id": "03_technical_approach",
+    "text": "generation,",
+    "start": 178.365,
+    "end": 179.005,
+    "confidence": 0.871013
+  },
+  {
+    "id": "w396",
+    "beat_id": "03_technical_approach",
+    "text": "and",
+    "start": 179.005,
+    "end": 179.385,
+    "confidence": 0.789212
+  },
+  {
+    "id": "w397",
+    "beat_id": "03_technical_approach",
+    "text": "arbitrary",
+    "start": 179.385,
+    "end": 179.885,
+    "confidence": 0.860094
+  },
+  {
+    "id": "w398",
+    "beat_id": "03_technical_approach",
+    "text": "document",
+    "start": 179.885,
+    "end": 180.445,
+    "confidence": 0.922137
+  },
+  {
+    "id": "w399",
+    "beat_id": "03_technical_approach",
+    "text": "ingestion",
+    "start": 180.445,
+    "end": 181.205,
+    "confidence": 0.979792
+  },
+  {
+    "id": "w400",
+    "beat_id": "03_technical_approach",
+    "text": "are",
+    "start": 181.205,
+    "end": 181.825,
+    "confidence": 0.903808
+  },
+  {
+    "id": "w401",
+    "beat_id": "03_technical_approach",
+    "text": "not",
+    "start": 181.825,
+    "end": 182.105,
+    "confidence": 0.980855
+  },
+  {
+    "id": "w402",
+    "beat_id": "03_technical_approach",
+    "text": "current",
+    "start": 182.105,
+    "end": 182.605,
+    "confidence": 0.976686
+  },
+  {
+    "id": "w403",
+    "beat_id": "03_technical_approach",
+    "text": "product",
+    "start": 182.605,
+    "end": 182.925,
+    "confidence": 0.931173
+  },
+  {
+    "id": "w404",
+    "beat_id": "03_technical_approach",
+    "text": "features,",
+    "start": 182.925,
+    "end": 183.325,
+    "confidence": 0.98563
+  },
+  {
+    "id": "w405",
+    "beat_id": "03_technical_approach",
+    "text": "so",
+    "start": 184.094,
+    "end": 184.134,
+    "confidence": 0.722574
+  },
+  {
+    "id": "w406",
+    "beat_id": "03_technical_approach",
+    "text": "they",
+    "start": 184.134,
+    "end": 184.694,
+    "confidence": 0.712927
+  },
+  {
+    "id": "w407",
+    "beat_id": "03_technical_approach",
+    "text": "can",
+    "start": 184.694,
+    "end": 184.894,
+    "confidence": 0.993372
+  },
+  {
+    "id": "w408",
+    "beat_id": "03_technical_approach",
+    "text": "be",
+    "start": 184.894,
+    "end": 185.074,
+    "confidence": 0.993005
+  },
+  {
+    "id": "w409",
+    "beat_id": "03_technical_approach",
+    "text": "made",
+    "start": 185.074,
+    "end": 185.294,
+    "confidence": 0.9903
+  },
+  {
+    "id": "w410",
+    "beat_id": "03_technical_approach",
+    "text": "as",
+    "start": 185.294,
+    "end": 185.514,
+    "confidence": 0.984302
+  },
+  {
+    "id": "w411",
+    "beat_id": "03_technical_approach",
+    "text": "a",
+    "start": 185.514,
+    "end": 185.854,
+    "confidence": 0.663696
+  },
+  {
+    "id": "w412",
+    "beat_id": "03_technical_approach",
+    "text": "future",
+    "start": 185.854,
+    "end": 186.234,
+    "confidence": 0.852428
+  },
+  {
+    "id": "w413",
+    "beat_id": "03_technical_approach",
+    "text": "upgrade,",
+    "start": 186.562,
+    "end": 186.842,
+    "confidence": 0.934389
+  },
+  {
+    "id": "w414",
+    "beat_id": "03_technical_approach",
+    "text": "future",
+    "start": 186.842,
+    "end": 187.282,
+    "confidence": 0.97657
+  },
+  {
+    "id": "w415",
+    "beat_id": "03_technical_approach",
+    "text": "improvement,",
+    "start": 187.282,
+    "end": 187.742,
+    "confidence": 0.870933
+  },
+  {
+    "id": "w416",
+    "beat_id": "03_technical_approach",
+    "text": "not",
+    "start": 187.997,
+    "end": 188.057,
+    "confidence": 0.975159
+  },
+  {
+    "id": "w417",
+    "beat_id": "03_technical_approach",
+    "text": "something",
+    "start": 188.057,
+    "end": 188.497,
+    "confidence": 0.996081
+  },
+  {
+    "id": "w418",
+    "beat_id": "03_technical_approach",
+    "text": "demonstrated",
+    "start": 188.497,
+    "end": 189.017,
+    "confidence": 0.982574
+  },
+  {
+    "id": "w419",
+    "beat_id": "03_technical_approach",
+    "text": "here.",
+    "start": 189.017,
+    "end": 189.437,
+    "confidence": 0.261657
+  },
+  {
+    "id": "w420",
+    "beat_id": "03_technical_approach",
+    "text": "In",
+    "start": 189.817,
+    "end": 189.897,
+    "confidence": 0.953618
+  },
+  {
+    "id": "w421",
+    "beat_id": "03_technical_approach",
+    "text": "this",
+    "start": 189.897,
+    "end": 190.017,
+    "confidence": 0.991003
+  },
+  {
+    "id": "w422",
+    "beat_id": "03_technical_approach",
+    "text": "video,",
+    "start": 190.017,
+    "end": 190.357,
+    "confidence": 0.997366
+  },
+  {
+    "id": "w423",
+    "beat_id": "03_technical_approach",
+    "text": "the",
+    "start": 190.57,
+    "end": 190.63,
+    "confidence": 0.714144
+  },
+  {
+    "id": "w424",
+    "beat_id": "03_technical_approach",
+    "text": "source",
+    "start": 190.63,
+    "end": 190.79,
+    "confidence": 0.912407
+  },
+  {
+    "id": "w425",
+    "beat_id": "03_technical_approach",
+    "text": "of",
+    "start": 190.79,
+    "end": 191.03,
+    "confidence": 0.992685
+  },
+  {
+    "id": "w426",
+    "beat_id": "03_technical_approach",
+    "text": "truth",
+    "start": 191.03,
+    "end": 191.23,
+    "confidence": 0.987815
+  },
+  {
+    "id": "w427",
+    "beat_id": "03_technical_approach",
+    "text": "is",
+    "start": 191.23,
+    "end": 191.45,
+    "confidence": 0.984698
+  },
+  {
+    "id": "w428",
+    "beat_id": "03_technical_approach",
+    "text": "the",
+    "start": 191.45,
+    "end": 191.65,
+    "confidence": 0.952854
+  },
+  {
+    "id": "w429",
+    "beat_id": "03_technical_approach",
+    "text": "live,",
+    "start": 191.65,
+    "end": 191.87,
+    "confidence": 0.583238
+  },
+  {
+    "id": "w430",
+    "beat_id": "03_technical_approach",
+    "text": "labelled,",
+    "start": 191.87,
+    "end": 192.53,
+    "confidence": 0.651107
+  },
+  {
+    "id": "w431",
+    "beat_id": "03_technical_approach",
+    "text": "fictional",
+    "start": 192.53,
+    "end": 192.95,
+    "confidence": 0.975607
+  },
+  {
+    "id": "w432",
+    "beat_id": "03_technical_approach",
+    "text": "journey",
+    "start": 192.95,
+    "end": 193.49,
+    "confidence": 0.856447
+  },
+  {
+    "id": "w433",
+    "beat_id": "03_technical_approach",
+    "text": "of",
+    "start": 193.49,
+    "end": 193.85,
+    "confidence": 0.982443
+  },
+  {
+    "id": "w434",
+    "beat_id": "03_technical_approach",
+    "text": "this",
+    "start": 193.85,
+    "end": 194.07,
+    "confidence": 0.980149
+  },
+  {
+    "id": "w435",
+    "beat_id": "03_technical_approach",
+    "text": "whole",
+    "start": 194.07,
+    "end": 194.29,
+    "confidence": 0.984474
+  },
+  {
+    "id": "w436",
+    "beat_id": "03_technical_approach",
+    "text": "product.",
+    "start": 194.29,
+    "end": 194.65,
+    "confidence": 0.991538
+  },
+  {
+    "id": "w437",
+    "beat_id": "04a_demo_home",
+    "text": "Here",
+    "start": 195.45,
+    "end": 195.99,
+    "confidence": 0.92511
+  },
+  {
+    "id": "w438",
+    "beat_id": "04a_demo_home",
+    "text": "is",
+    "start": 195.99,
+    "end": 196.23,
+    "confidence": 0.96084
+  },
+  {
+    "id": "w439",
+    "beat_id": "04a_demo_home",
+    "text": "the",
+    "start": 196.23,
+    "end": 196.45,
+    "confidence": 0.975758
+  },
+  {
+    "id": "w440",
+    "beat_id": "04a_demo_home",
+    "text": "MajuPilot",
+    "start": 196.73,
+    "end": 196.89,
+    "confidence": 0.359879
+  },
+  {
+    "id": "w441",
+    "beat_id": "04a_demo_home",
+    "text": "production",
+    "start": 196.89,
+    "end": 197.43,
+    "confidence": 0.501429
+  },
+  {
+    "id": "w442",
+    "beat_id": "04a_demo_home",
+    "text": "surface.",
+    "start": 197.43,
+    "end": 197.87,
+    "confidence": 0.582095
+  },
+  {
+    "id": "w443",
+    "beat_id": "04a_demo_home",
+    "text": "I'm",
+    "start": 198.33,
+    "end": 198.41,
+    "confidence": 0.838065
+  },
+  {
+    "id": "w444",
+    "beat_id": "04a_demo_home",
+    "text": "loading",
+    "start": 198.41,
+    "end": 198.69,
+    "confidence": 0.998131
+  },
+  {
+    "id": "w445",
+    "beat_id": "04a_demo_home",
+    "text": "Case",
+    "start": 198.69,
+    "end": 198.99,
+    "confidence": 0.586076
+  },
+  {
+    "id": "w446",
+    "beat_id": "04a_demo_home",
+    "text": "A,",
+    "start": 198.99,
+    "end": 199.37,
+    "confidence": 0.921311
+  },
+  {
+    "id": "w447",
+    "beat_id": "04a_demo_home",
+    "text": "Kopi",
+    "start": 199.37,
+    "end": 199.75,
+    "confidence": null
+  },
+  {
+    "id": "w448",
+    "beat_id": "04a_demo_home",
+    "text": "Kita",
+    "start": 199.75,
+    "end": 200.27,
+    "confidence": 0.596902
+  },
+  {
+    "id": "w449",
+    "beat_id": "04a_demo_home",
+    "text": "Cafe",
+    "start": 200.27,
+    "end": 200.55,
+    "confidence": 0.703689
+  },
+  {
+    "id": "w450",
+    "beat_id": "04a_demo_home",
+    "text": "Group.",
+    "start": 200.55,
+    "end": 200.85,
+    "confidence": 0.747626
+  },
+  {
+    "id": "w451",
+    "beat_id": "04a_demo_home",
+    "text": "The",
+    "start": 201.39,
+    "end": 201.53,
+    "confidence": 0.979602
+  },
+  {
+    "id": "w452",
+    "beat_id": "04a_demo_home",
+    "text": "banner",
+    "start": 201.53,
+    "end": 201.77,
+    "confidence": 0.980125
+  },
+  {
+    "id": "w453",
+    "beat_id": "04a_demo_home",
+    "text": "identifies",
+    "start": 201.77,
+    "end": 202.43,
+    "confidence": 0.977876
+  },
+  {
+    "id": "w454",
+    "beat_id": "04a_demo_home",
+    "text": "it",
+    "start": 202.43,
+    "end": 202.75,
+    "confidence": 0.987534
+  },
+  {
+    "id": "w455",
+    "beat_id": "04a_demo_home",
+    "text": "as",
+    "start": 202.75,
+    "end": 203.01,
+    "confidence": 0.992392
+  },
+  {
+    "id": "w456",
+    "beat_id": "04a_demo_home",
+    "text": "a",
+    "start": 203.01,
+    "end": 203.21,
+    "confidence": 0.932651
+  },
+  {
+    "id": "w457",
+    "beat_id": "04a_demo_home",
+    "text": "fictional",
+    "start": 203.21,
+    "end": 203.51,
+    "confidence": 0.914007
+  },
+  {
+    "id": "w458",
+    "beat_id": "04a_demo_home",
+    "text": "demonstration",
+    "start": 203.51,
+    "end": 204.17,
+    "confidence": 0.980972
+  },
+  {
+    "id": "w459",
+    "beat_id": "04a_demo_home",
+    "text": "using",
+    "start": 204.17,
+    "end": 204.85,
+    "confidence": 0.943669
+  },
+  {
+    "id": "w460",
+    "beat_id": "04a_demo_home",
+    "text": "fixture",
+    "start": 204.85,
+    "end": 205.33,
+    "confidence": 0.879203
+  },
+  {
+    "id": "w461",
+    "beat_id": "04a_demo_home",
+    "text": "1.0.0.",
+    "start": 206.55,
+    "end": 207.15,
+    "confidence": 0.993213
+  },
+  {
+    "id": "w462",
+    "beat_id": "04b_demo_review",
+    "text": "Before",
+    "start": 208.45,
+    "end": 209.11,
+    "confidence": 0.808557
+  },
+  {
+    "id": "w463",
+    "beat_id": "04b_demo_review",
+    "text": "any",
+    "start": 209.11,
+    "end": 209.53,
+    "confidence": 0.939444
+  },
+  {
+    "id": "w464",
+    "beat_id": "04b_demo_review",
+    "text": "score",
+    "start": 209.53,
+    "end": 209.85,
+    "confidence": 0.96707
+  },
+  {
+    "id": "w465",
+    "beat_id": "04b_demo_review",
+    "text": "appears,",
+    "start": 209.85,
+    "end": 210.27,
+    "confidence": 0.9681
+  },
+  {
+    "id": "w466",
+    "beat_id": "04b_demo_review",
+    "text": "the",
+    "start": 210.69,
+    "end": 210.73,
+    "confidence": 0.949996
+  },
+  {
+    "id": "w467",
+    "beat_id": "04b_demo_review",
+    "text": "review",
+    "start": 210.73,
+    "end": 211.01,
+    "confidence": 0.884235
+  },
+  {
+    "id": "w468",
+    "beat_id": "04b_demo_review",
+    "text": "screen",
+    "start": 211.01,
+    "end": 211.59,
+    "confidence": 0.977112
+  },
+  {
+    "id": "w469",
+    "beat_id": "04b_demo_review",
+    "text": "shows",
+    "start": 211.59,
+    "end": 212.03,
+    "confidence": 0.985697
+  },
+  {
+    "id": "w470",
+    "beat_id": "04b_demo_review",
+    "text": "five",
+    "start": 212.03,
+    "end": 212.53,
+    "confidence": 0.58184
+  },
+  {
+    "id": "w471",
+    "beat_id": "04b_demo_review",
+    "text": "complete",
+    "start": 212.53,
+    "end": 213.13,
+    "confidence": 0.946088
+  },
+  {
+    "id": "w472",
+    "beat_id": "04b_demo_review",
+    "text": "evidence",
+    "start": 213.13,
+    "end": 213.57,
+    "confidence": 0.989962
+  },
+  {
+    "id": "w473",
+    "beat_id": "04b_demo_review",
+    "text": "groups",
+    "start": 213.57,
+    "end": 213.93,
+    "confidence": 0.963314
+  },
+  {
+    "id": "w474",
+    "beat_id": "04b_demo_review",
+    "text": "and",
+    "start": 213.93,
+    "end": 214.53,
+    "confidence": 0.889665
+  },
+  {
+    "id": "w475",
+    "beat_id": "04b_demo_review",
+    "text": "an",
+    "start": 214.53,
+    "end": 214.89,
+    "confidence": 0.956082
+  },
+  {
+    "id": "w476",
+    "beat_id": "04b_demo_review",
+    "text": "explicit",
+    "start": 214.89,
+    "end": 215.35,
+    "confidence": 0.991062
+  },
+  {
+    "id": "w477",
+    "beat_id": "04b_demo_review",
+    "text": "unknown.",
+    "start": 215.35,
+    "end": 215.93,
+    "confidence": 0.871857
+  },
+  {
+    "id": "w478",
+    "beat_id": "04b_demo_review",
+    "text": "The",
+    "start": 216.55,
+    "end": 216.63,
+    "confidence": 0.964682
+  },
+  {
+    "id": "w479",
+    "beat_id": "04b_demo_review",
+    "text": "record",
+    "start": 216.63,
+    "end": 216.87,
+    "confidence": 0.994598
+  },
+  {
+    "id": "w480",
+    "beat_id": "04b_demo_review",
+    "text": "is",
+    "start": 216.87,
+    "end": 217.13,
+    "confidence": 0.99207
+  },
+  {
+    "id": "w481",
+    "beat_id": "04b_demo_review",
+    "text": "still",
+    "start": 217.13,
+    "end": 217.35,
+    "confidence": 0.997637
+  },
+  {
+    "id": "w482",
+    "beat_id": "04b_demo_review",
+    "text": "editable.",
+    "start": 217.35,
+    "end": 217.91,
+    "confidence": 0.992978
+  },
+  {
+    "id": "w483",
+    "beat_id": "04b_demo_review",
+    "text": "Confirm",
+    "start": 218.55,
+    "end": 218.95,
+    "confidence": 0.893785
+  },
+  {
+    "id": "w484",
+    "beat_id": "04b_demo_review",
+    "text": "Business",
+    "start": 218.95,
+    "end": 219.35,
+    "confidence": 0.41275
+  },
+  {
+    "id": "w485",
+    "beat_id": "04b_demo_review",
+    "text": "Twin",
+    "start": 219.35,
+    "end": 219.63,
+    "confidence": 0.914678
+  },
+  {
+    "id": "w486",
+    "beat_id": "04b_demo_review",
+    "text": "is",
+    "start": 219.63,
+    "end": 219.83,
+    "confidence": 0.99151
+  },
+  {
+    "id": "w487",
+    "beat_id": "04b_demo_review",
+    "text": "the",
+    "start": 219.83,
+    "end": 220.01,
+    "confidence": 0.948719
+  },
+  {
+    "id": "w488",
+    "beat_id": "04b_demo_review",
+    "text": "deliberate",
+    "start": 220.01,
+    "end": 220.31,
+    "confidence": 0.984876
+  },
+  {
+    "id": "w489",
+    "beat_id": "04b_demo_review",
+    "text": "handoff",
+    "start": 220.31,
+    "end": 220.87,
+    "confidence": 0.911791
+  },
+  {
+    "id": "w490",
+    "beat_id": "04b_demo_review",
+    "text": "from",
+    "start": 220.87,
+    "end": 221.39,
+    "confidence": 0.908471
+  },
+  {
+    "id": "w491",
+    "beat_id": "04b_demo_review",
+    "text": "captured",
+    "start": 221.39,
+    "end": 221.87,
+    "confidence": 0.854803
+  },
+  {
+    "id": "w492",
+    "beat_id": "04b_demo_review",
+    "text": "evidence",
+    "start": 221.87,
+    "end": 222.31,
+    "confidence": 0.994279
+  },
+  {
+    "id": "w493",
+    "beat_id": "04b_demo_review",
+    "text": "to",
+    "start": 222.31,
+    "end": 222.69,
+    "confidence": 0.987942
+  },
+  {
+    "id": "w494",
+    "beat_id": "04b_demo_review",
+    "text": "calculation.",
+    "start": 222.69,
+    "end": 223.11,
+    "confidence": 0.844685
+  },
+  {
+    "id": "w495",
+    "beat_id": "04c_demo_results",
+    "text": "Now",
+    "start": 230.45,
+    "end": 230.99,
+    "confidence": 0.785342
+  },
+  {
+    "id": "w496",
+    "beat_id": "04c_demo_results",
+    "text": "the",
+    "start": 230.99,
+    "end": 231.27,
+    "confidence": 0.602724
+  },
+  {
+    "id": "w497",
+    "beat_id": "04c_demo_results",
+    "text": "deterministic",
+    "start": 231.27,
+    "end": 231.89,
+    "confidence": 0.97188
+  },
+  {
+    "id": "w498",
+    "beat_id": "04c_demo_results",
+    "text": "diagnosis",
+    "start": 231.89,
+    "end": 232.47,
+    "confidence": 0.977889
+  },
+  {
+    "id": "w499",
+    "beat_id": "04c_demo_results",
+    "text": "is",
+    "start": 232.47,
+    "end": 232.97,
+    "confidence": 0.971444
+  },
+  {
+    "id": "w500",
+    "beat_id": "04c_demo_results",
+    "text": "complete.",
+    "start": 232.97,
+    "end": 233.45,
+    "confidence": 0.9916
+  },
+  {
+    "id": "w501",
+    "beat_id": "04c_demo_results",
+    "text": "Digital",
+    "start": 234.29,
+    "end": 234.29,
+    "confidence": 0.53297
+  },
+  {
+    "id": "w502",
+    "beat_id": "04c_demo_results",
+    "text": "maturity",
+    "start": 234.29,
+    "end": 234.77,
+    "confidence": 0.99132
+  },
+  {
+    "id": "w503",
+    "beat_id": "04c_demo_results",
+    "text": "is",
+    "start": 234.77,
+    "end": 235.21,
+    "confidence": 0.984428
+  },
+  {
+    "id": "w504",
+    "beat_id": "04c_demo_results",
+    "text": "37.5",
+    "start": 236.07,
+    "end": 237.03,
+    "confidence": 0.981792
+  },
+  {
+    "id": "w505",
+    "beat_id": "04c_demo_results",
+    "text": "out",
+    "start": 237.03,
+    "end": 237.61,
+    "confidence": 0.619366
+  },
+  {
+    "id": "w506",
+    "beat_id": "04c_demo_results",
+    "text": "of",
+    "start": 237.61,
+    "end": 237.75,
+    "confidence": 0.994077
+  },
+  {
+    "id": "w507",
+    "beat_id": "04c_demo_results",
+    "text": "100.",
+    "start": 237.75,
+    "end": 238.23,
+    "confidence": 0.993604
+  },
+  {
+    "id": "w508",
+    "beat_id": "04c_demo_results",
+    "text": "AI",
+    "start": 238.91,
+    "end": 239.05,
+    "confidence": 0.951297
+  },
+  {
+    "id": "w509",
+    "beat_id": "04c_demo_results",
+    "text": "readiness",
+    "start": 239.05,
+    "end": 239.33,
+    "confidence": 0.963991
+  },
+  {
+    "id": "w510",
+    "beat_id": "04c_demo_results",
+    "text": "is",
+    "start": 239.33,
+    "end": 239.69,
+    "confidence": 0.979983
+  },
+  {
+    "id": "w511",
+    "beat_id": "04c_demo_results",
+    "text": "42.5.",
+    "start": 240.17,
+    "end": 240.83,
+    "confidence": 0.992457
+  },
+  {
+    "id": "w512",
+    "beat_id": "04c_demo_results",
+    "text": "Six",
+    "start": 241.17,
+    "end": 241.41,
+    "confidence": 0.798069
+  },
+  {
+    "id": "w513",
+    "beat_id": "04c_demo_results",
+    "text": "pain",
+    "start": 241.41,
+    "end": 241.71,
+    "confidence": 0.373663
+  },
+  {
+    "id": "w514",
+    "beat_id": "04c_demo_results",
+    "text": "findings",
+    "start": 241.71,
+    "end": 242.13,
+    "confidence": 0.94399
+  },
+  {
+    "id": "w515",
+    "beat_id": "04c_demo_results",
+    "text": "were",
+    "start": 242.13,
+    "end": 242.41,
+    "confidence": 0.942954
+  },
+  {
+    "id": "w516",
+    "beat_id": "04c_demo_results",
+    "text": "triggered.",
+    "start": 242.41,
+    "end": 242.75,
+    "confidence": 0.996987
+  },
+  {
+    "id": "w517",
+    "beat_id": "04c_demo_results",
+    "text": "I",
+    "start": 243.27,
+    "end": 243.41,
+    "confidence": 0.986239
+  },
+  {
+    "id": "w518",
+    "beat_id": "04c_demo_results",
+    "text": "can",
+    "start": 243.41,
+    "end": 243.53,
+    "confidence": 0.993674
+  },
+  {
+    "id": "w519",
+    "beat_id": "04c_demo_results",
+    "text": "open",
+    "start": 243.53,
+    "end": 243.89,
+    "confidence": 0.994823
+  },
+  {
+    "id": "w520",
+    "beat_id": "04c_demo_results",
+    "text": "a",
+    "start": 243.89,
+    "end": 244.09,
+    "confidence": 0.43295
+  },
+  {
+    "id": "w521",
+    "beat_id": "04c_demo_results",
+    "text": "finding",
+    "start": 244.09,
+    "end": 244.49,
+    "confidence": 0.903998
+  },
+  {
+    "id": "w522",
+    "beat_id": "04c_demo_results",
+    "text": "and",
+    "start": 244.49,
+    "end": 245.05,
+    "confidence": 0.958107
+  },
+  {
+    "id": "w523",
+    "beat_id": "04c_demo_results",
+    "text": "see",
+    "start": 245.05,
+    "end": 245.39,
+    "confidence": 0.993331
+  },
+  {
+    "id": "w524",
+    "beat_id": "04c_demo_results",
+    "text": "the",
+    "start": 245.39,
+    "end": 245.59,
+    "confidence": 0.989113
+  },
+  {
+    "id": "w525",
+    "beat_id": "04c_demo_results",
+    "text": "evidence",
+    "start": 245.59,
+    "end": 245.99,
+    "confidence": 0.988957
+  },
+  {
+    "id": "w526",
+    "beat_id": "04c_demo_results",
+    "text": "and",
+    "start": 245.99,
+    "end": 246.11,
+    "confidence": null
+  },
+  {
+    "id": "w527",
+    "beat_id": "04c_demo_results",
+    "text": "calculation",
+    "start": 245.99,
+    "end": 246.69,
+    "confidence": 0.937433
+  },
+  {
+    "id": "w528",
+    "beat_id": "04c_demo_results",
+    "text": "disclosure",
+    "start": 246.69,
+    "end": 247.25,
+    "confidence": 0.98388
+  },
+  {
+    "id": "w529",
+    "beat_id": "04c_demo_results",
+    "text": "behind",
+    "start": 247.25,
+    "end": 247.79,
+    "confidence": 0.986034
+  },
+  {
+    "id": "w530",
+    "beat_id": "04c_demo_results",
+    "text": "it,",
+    "start": 247.79,
+    "end": 248.29,
+    "confidence": 0.991081
+  },
+  {
+    "id": "w531",
+    "beat_id": "04c_demo_results",
+    "text": "rather",
+    "start": 248.59,
+    "end": 248.81,
+    "confidence": 0.987993
+  },
+  {
+    "id": "w532",
+    "beat_id": "04c_demo_results",
+    "text": "than",
+    "start": 248.81,
+    "end": 249.15,
+    "confidence": 0.959161
+  },
+  {
+    "id": "w533",
+    "beat_id": "04c_demo_results",
+    "text": "accepting",
+    "start": 249.15,
+    "end": 249.65,
+    "confidence": 0.495616
+  },
+  {
+    "id": "w534",
+    "beat_id": "04c_demo_results",
+    "text": "an",
+    "start": 249.65,
+    "end": 250.01,
+    "confidence": 0.892183
+  },
+  {
+    "id": "w535",
+    "beat_id": "04c_demo_results",
+    "text": "unexplained",
+    "start": 250.01,
+    "end": 250.89,
+    "confidence": 0.718975
+  },
+  {
+    "id": "w536",
+    "beat_id": "04c_demo_results",
+    "text": "score.",
+    "start": 250.89,
+    "end": 251.05,
+    "confidence": 0.749936
+  },
+  {
+    "id": "w537",
+    "beat_id": "04d_demo_recommendations",
+    "text": "Recommendations",
+    "start": 258.45,
+    "end": 259.61,
+    "confidence": 0.786102
+  },
+  {
+    "id": "w538",
+    "beat_id": "04d_demo_recommendations",
+    "text": "are",
+    "start": 259.61,
+    "end": 259.83,
+    "confidence": 0.962815
+  },
+  {
+    "id": "w539",
+    "beat_id": "04d_demo_recommendations",
+    "text": "capability-first.",
+    "start": 260.47,
+    "end": 260.81,
+    "confidence": 0.829793
+  },
+  {
+    "id": "w540",
+    "beat_id": "04d_demo_recommendations",
+    "text": "So,",
+    "start": 261.33,
+    "end": 261.47,
+    "confidence": 0.659833
+  },
+  {
+    "id": "w541",
+    "beat_id": "04d_demo_recommendations",
+    "text": "for",
+    "start": 261.47,
+    "end": 261.69,
+    "confidence": 0.936106
+  },
+  {
+    "id": "w542",
+    "beat_id": "04d_demo_recommendations",
+    "text": "this",
+    "start": 261.69,
+    "end": 261.97,
+    "confidence": 0.878168
+  },
+  {
+    "id": "w543",
+    "beat_id": "04d_demo_recommendations",
+    "text": "case,",
+    "start": 261.97,
+    "end": 262.23,
+    "confidence": 0.979322
+  },
+  {
+    "id": "w544",
+    "beat_id": "04d_demo_recommendations",
+    "text": "three",
+    "start": 262.57,
+    "end": 262.73,
+    "confidence": 0.684229
+  },
+  {
+    "id": "w545",
+    "beat_id": "04d_demo_recommendations",
+    "text": "moves",
+    "start": 262.73,
+    "end": 262.97,
+    "confidence": 0.842972
+  },
+  {
+    "id": "w546",
+    "beat_id": "04d_demo_recommendations",
+    "text": "are",
+    "start": 262.97,
+    "end": 263.27,
+    "confidence": 0.986396
+  },
+  {
+    "id": "w547",
+    "beat_id": "04d_demo_recommendations",
+    "text": "marked",
+    "start": 263.27,
+    "end": 263.51,
+    "confidence": 0.942956
+  },
+  {
+    "id": "w548",
+    "beat_id": "04d_demo_recommendations",
+    "text": "Why",
+    "start": 263.51,
+    "end": 263.93,
+    "confidence": 0.582393
+  },
+  {
+    "id": "w549",
+    "beat_id": "04d_demo_recommendations",
+    "text": "now,",
+    "start": 263.93,
+    "end": 264.25,
+    "confidence": 0.753821
+  },
+  {
+    "id": "w550",
+    "beat_id": "04d_demo_recommendations",
+    "text": "one",
+    "start": 264.67,
+    "end": 264.95,
+    "confidence": 0.788726
+  },
+  {
+    "id": "w551",
+    "beat_id": "04d_demo_recommendations",
+    "text": "is",
+    "start": 264.95,
+    "end": 265.27,
+    "confidence": 0.980913
+  },
+  {
+    "id": "w552",
+    "beat_id": "04d_demo_recommendations",
+    "text": "Next,",
+    "start": 265.27,
+    "end": 265.63,
+    "confidence": 0.668641
+  },
+  {
+    "id": "w553",
+    "beat_id": "04d_demo_recommendations",
+    "text": "and",
+    "start": 265.63,
+    "end": 266.23,
+    "confidence": 0.783479
+  },
+  {
+    "id": "w554",
+    "beat_id": "04d_demo_recommendations",
+    "text": "governed",
+    "start": 266.23,
+    "end": 266.57,
+    "confidence": 0.408304
+  },
+  {
+    "id": "w555",
+    "beat_id": "04d_demo_recommendations",
+    "text": "AI",
+    "start": 266.57,
+    "end": 266.99,
+    "confidence": 0.862899
+  },
+  {
+    "id": "w556",
+    "beat_id": "04d_demo_recommendations",
+    "text": "is",
+    "start": 266.99,
+    "end": 267.31,
+    "confidence": 0.99236
+  },
+  {
+    "id": "w557",
+    "beat_id": "04d_demo_recommendations",
+    "text": "Why",
+    "start": 267.31,
+    "end": 267.63,
+    "confidence": 0.859927
+  },
+  {
+    "id": "w558",
+    "beat_id": "04d_demo_recommendations",
+    "text": "later.",
+    "start": 267.63,
+    "end": 268.07,
+    "confidence": 0.98384
+  },
+  {
+    "id": "w559",
+    "beat_id": "04d_demo_recommendations",
+    "text": "Catalogue",
+    "start": 268.69,
+    "end": 268.79,
+    "confidence": 0.090079
+  },
+  {
+    "id": "w560",
+    "beat_id": "04d_demo_recommendations",
+    "text": "version",
+    "start": 268.79,
+    "end": 269.33,
+    "confidence": 0.478774
+  },
+  {
+    "id": "w561",
+    "beat_id": "04d_demo_recommendations",
+    "text": "2.0.0",
+    "start": 270.71,
+    "end": 271.21,
+    "confidence": 0.986906
+  },
+  {
+    "id": "w562",
+    "beat_id": "04d_demo_recommendations",
+    "text": "supports",
+    "start": 271.21,
+    "end": 271.65,
+    "confidence": 0.973153
+  },
+  {
+    "id": "w563",
+    "beat_id": "04d_demo_recommendations",
+    "text": "the",
+    "start": 271.65,
+    "end": 271.97,
+    "confidence": 0.955971
+  },
+  {
+    "id": "w564",
+    "beat_id": "04d_demo_recommendations",
+    "text": "mapping,",
+    "start": 271.97,
+    "end": 272.25,
+    "confidence": 0.932579
+  },
+  {
+    "id": "w565",
+    "beat_id": "04d_demo_recommendations",
+    "text": "but",
+    "start": 272.91,
+    "end": 273.09,
+    "confidence": 0.977784
+  },
+  {
+    "id": "w566",
+    "beat_id": "04d_demo_recommendations",
+    "text": "these",
+    "start": 273.09,
+    "end": 273.35,
+    "confidence": 0.977916
+  },
+  {
+    "id": "w567",
+    "beat_id": "04d_demo_recommendations",
+    "text": "entries",
+    "start": 273.35,
+    "end": 273.69,
+    "confidence": 0.996513
+  },
+  {
+    "id": "w568",
+    "beat_id": "04d_demo_recommendations",
+    "text": "are",
+    "start": 273.69,
+    "end": 273.93,
+    "confidence": 0.99521
+  },
+  {
+    "id": "w569",
+    "beat_id": "04d_demo_recommendations",
+    "text": "not",
+    "start": 273.93,
+    "end": 274.13,
+    "confidence": 0.988526
+  },
+  {
+    "id": "w570",
+    "beat_id": "04d_demo_recommendations",
+    "text": "live",
+    "start": 274.13,
+    "end": 274.43,
+    "confidence": 0.307112
+  },
+  {
+    "id": "w571",
+    "beat_id": "04d_demo_recommendations",
+    "text": "quotations",
+    "start": 274.43,
+    "end": 274.93,
+    "confidence": 0.95768
+  },
+  {
+    "id": "w572",
+    "beat_id": "04d_demo_recommendations",
+    "text": "or",
+    "start": 274.93,
+    "end": 275.31,
+    "confidence": 0.970486
+  },
+  {
+    "id": "w573",
+    "beat_id": "04d_demo_recommendations",
+    "text": "guaranteed",
+    "start": 275.31,
+    "end": 275.73,
+    "confidence": 0.959174
+  },
+  {
+    "id": "w574",
+    "beat_id": "04d_demo_recommendations",
+    "text": "availability.",
+    "start": 275.73,
+    "end": 276.35,
+    "confidence": 0.991701
+  },
+  {
+    "id": "w575",
+    "beat_id": "04d_demo_recommendations",
+    "text": "They",
+    "start": 277.09,
+    "end": 277.31,
+    "confidence": 0.967348
+  },
+  {
+    "id": "w576",
+    "beat_id": "04d_demo_recommendations",
+    "text": "are",
+    "start": 277.31,
+    "end": 277.47,
+    "confidence": 0.986263
+  },
+  {
+    "id": "w577",
+    "beat_id": "04d_demo_recommendations",
+    "text": "provenance",
+    "start": 277.47,
+    "end": 278.01,
+    "confidence": 0.989885
+  },
+  {
+    "id": "w578",
+    "beat_id": "04d_demo_recommendations",
+    "text": "for",
+    "start": 278.01,
+    "end": 278.21,
+    "confidence": 0.98242
+  },
+  {
+    "id": "w579",
+    "beat_id": "04d_demo_recommendations",
+    "text": "the",
+    "start": 278.21,
+    "end": 278.41,
+    "confidence": 0.922352
+  },
+  {
+    "id": "w580",
+    "beat_id": "04d_demo_recommendations",
+    "text": "decision",
+    "start": 278.41,
+    "end": 278.71,
+    "confidence": 0.874288
+  },
+  {
+    "id": "w581",
+    "beat_id": "04d_demo_recommendations",
+    "text": "sequence.",
+    "start": 278.71,
+    "end": 279.25,
+    "confidence": 0.947127
+  },
+  {
+    "id": "w582",
+    "beat_id": "04e_demo_scenarios",
+    "text": "The",
+    "start": 285.3,
+    "end": 285.82,
+    "confidence": 0.712955
+  },
+  {
+    "id": "w583",
+    "beat_id": "04e_demo_scenarios",
+    "text": "scenario",
+    "start": 285.82,
+    "end": 286.18,
+    "confidence": 0.871647
+  },
+  {
+    "id": "w584",
+    "beat_id": "04e_demo_scenarios",
+    "text": "lab",
+    "start": 286.18,
+    "end": 286.5,
+    "confidence": 0.663844
+  },
+  {
+    "id": "w585",
+    "beat_id": "04e_demo_scenarios",
+    "text": "compares",
+    "start": 286.5,
+    "end": 287.0,
+    "confidence": 0.899637
+  },
+  {
+    "id": "w586",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Lean",
+    "start": 287.0,
+    "end": 287.32,
+    "confidence": 0.880442
+  },
+  {
+    "id": "w587",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Foundation,",
+    "start": 287.32,
+    "end": 287.92,
+    "confidence": 0.888899
+  },
+  {
+    "id": "w588",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Balanced",
+    "start": 288.12,
+    "end": 288.34,
+    "confidence": 0.562016
+  },
+  {
+    "id": "w589",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Growth,",
+    "start": 288.34,
+    "end": 288.82,
+    "confidence": 0.992971
+  },
+  {
+    "id": "w590",
+    "beat_id": "04e_demo_scenarios",
+    "text": "and",
+    "start": 288.82,
+    "end": 289.1,
+    "confidence": 0.795416
+  },
+  {
+    "id": "w591",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Accelerated",
+    "start": 289.1,
+    "end": 289.56,
+    "confidence": 0.960064
+  },
+  {
+    "id": "w592",
+    "beat_id": "04e_demo_scenarios",
+    "text": "AI.",
+    "start": 289.56,
+    "end": 290.04,
+    "confidence": 0.909339
+  },
+  {
+    "id": "w593",
+    "beat_id": "04e_demo_scenarios",
+    "text": "I'm",
+    "start": 290.04,
+    "end": 290.84,
+    "confidence": 0.579205
+  },
+  {
+    "id": "w594",
+    "beat_id": "04e_demo_scenarios",
+    "text": "selecting",
+    "start": 290.84,
+    "end": 291.3,
+    "confidence": 0.985625
+  },
+  {
+    "id": "w595",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Balanced",
+    "start": 291.3,
+    "end": 291.78,
+    "confidence": 0.769472
+  },
+  {
+    "id": "w596",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Growth.",
+    "start": 291.78,
+    "end": 292.44,
+    "confidence": 0.988124
+  },
+  {
+    "id": "w597",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Inspection",
+    "start": 292.633,
+    "end": 293.193,
+    "confidence": 0.950056
+  },
+  {
+    "id": "w598",
+    "beat_id": "04e_demo_scenarios",
+    "text": "alone",
+    "start": 293.193,
+    "end": 293.593,
+    "confidence": 0.962807
+  },
+  {
+    "id": "w599",
+    "beat_id": "04e_demo_scenarios",
+    "text": "does",
+    "start": 293.593,
+    "end": 293.893,
+    "confidence": 0.983735
+  },
+  {
+    "id": "w600",
+    "beat_id": "04e_demo_scenarios",
+    "text": "not",
+    "start": 293.893,
+    "end": 294.113,
+    "confidence": 0.996721
+  },
+  {
+    "id": "w601",
+    "beat_id": "04e_demo_scenarios",
+    "text": "save",
+    "start": 294.113,
+    "end": 294.473,
+    "confidence": 0.885504
+  },
+  {
+    "id": "w602",
+    "beat_id": "04e_demo_scenarios",
+    "text": "the",
+    "start": 294.473,
+    "end": 294.773,
+    "confidence": 0.979135
+  },
+  {
+    "id": "w603",
+    "beat_id": "04e_demo_scenarios",
+    "text": "preference.",
+    "start": 294.773,
+    "end": 295.333,
+    "confidence": 0.929469
+  },
+  {
+    "id": "w604",
+    "beat_id": "04e_demo_scenarios",
+    "text": "The",
+    "start": 295.665,
+    "end": 295.825,
+    "confidence": 0.973171
+  },
+  {
+    "id": "w605",
+    "beat_id": "04e_demo_scenarios",
+    "text": "screen",
+    "start": 295.825,
+    "end": 296.165,
+    "confidence": 0.993956
+  },
+  {
+    "id": "w606",
+    "beat_id": "04e_demo_scenarios",
+    "text": "labels",
+    "start": 296.165,
+    "end": 296.585,
+    "confidence": 0.986456
+  },
+  {
+    "id": "w607",
+    "beat_id": "04e_demo_scenarios",
+    "text": "figures",
+    "start": 296.585,
+    "end": 297.045,
+    "confidence": 0.979265
+  },
+  {
+    "id": "w608",
+    "beat_id": "04e_demo_scenarios",
+    "text": "as",
+    "start": 297.045,
+    "end": 297.465,
+    "confidence": 0.993099
+  },
+  {
+    "id": "w609",
+    "beat_id": "04e_demo_scenarios",
+    "text": "planning",
+    "start": 297.465,
+    "end": 297.885,
+    "confidence": 0.867833
+  },
+  {
+    "id": "w610",
+    "beat_id": "04e_demo_scenarios",
+    "text": "assumptions,",
+    "start": 297.885,
+    "end": 298.505,
+    "confidence": 0.985143
+  },
+  {
+    "id": "w611",
+    "beat_id": "04e_demo_scenarios",
+    "text": "not",
+    "start": 298.734,
+    "end": 298.934,
+    "confidence": 0.990227
+  },
+  {
+    "id": "w612",
+    "beat_id": "04e_demo_scenarios",
+    "text": "an",
+    "start": 298.934,
+    "end": 299.374,
+    "confidence": 0.967564
+  },
+  {
+    "id": "w613",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Exabytes",
+    "start": 299.374,
+    "end": 299.934,
+    "confidence": 0.734806
+  },
+  {
+    "id": "w614",
+    "beat_id": "04e_demo_scenarios",
+    "text": "quote.",
+    "start": 299.934,
+    "end": 300.494,
+    "confidence": 0.697985
+  },
+  {
+    "id": "w615",
+    "beat_id": "04e_demo_scenarios",
+    "text": "So,",
+    "start": 301.008,
+    "end": 301.008,
+    "confidence": 0.884306
+  },
+  {
+    "id": "w616",
+    "beat_id": "04e_demo_scenarios",
+    "text": "in",
+    "start": 301.008,
+    "end": 301.208,
+    "confidence": 0.866906
+  },
+  {
+    "id": "w617",
+    "beat_id": "04e_demo_scenarios",
+    "text": "this",
+    "start": 301.208,
+    "end": 301.388,
+    "confidence": 0.995607
+  },
+  {
+    "id": "w618",
+    "beat_id": "04e_demo_scenarios",
+    "text": "base",
+    "start": 301.388,
+    "end": 301.748,
+    "confidence": 0.981309
+  },
+  {
+    "id": "w619",
+    "beat_id": "04e_demo_scenarios",
+    "text": "case,",
+    "start": 301.748,
+    "end": 302.208,
+    "confidence": 0.995445
+  },
+  {
+    "id": "w620",
+    "beat_id": "04e_demo_scenarios",
+    "text": "cost",
+    "start": 302.208,
+    "end": 302.748,
+    "confidence": 0.523253
+  },
+  {
+    "id": "w621",
+    "beat_id": "04e_demo_scenarios",
+    "text": "is",
+    "start": 302.748,
+    "end": 302.988,
+    "confidence": 0.982949
+  },
+  {
+    "id": "w622",
+    "beat_id": "04e_demo_scenarios",
+    "text": "18,400",
+    "start": 303.428,
+    "end": 304.248,
+    "confidence": 0.905578
+  },
+  {
+    "id": "w623",
+    "beat_id": "04e_demo_scenarios",
+    "text": "ringgit,",
+    "start": 304.248,
+    "end": 304.708,
+    "confidence": 0.806135
+  },
+  {
+    "id": "w624",
+    "beat_id": "04e_demo_scenarios",
+    "text": "operational",
+    "start": 304.988,
+    "end": 305.268,
+    "confidence": 0.939136
+  },
+  {
+    "id": "w625",
+    "beat_id": "04e_demo_scenarios",
+    "text": "value",
+    "start": 305.268,
+    "end": 305.688,
+    "confidence": 0.997249
+  },
+  {
+    "id": "w626",
+    "beat_id": "04e_demo_scenarios",
+    "text": "is",
+    "start": 305.688,
+    "end": 305.948,
+    "confidence": 0.995321
+  },
+  {
+    "id": "w627",
+    "beat_id": "04e_demo_scenarios",
+    "text": "7,254",
+    "start": 307.448,
+    "end": 308.608,
+    "confidence": 0.460869
+  },
+  {
+    "id": "w628",
+    "beat_id": "04e_demo_scenarios",
+    "text": "ringgit,",
+    "start": 308.608,
+    "end": 309.068,
+    "confidence": 0.92268
+  },
+  {
+    "id": "w629",
+    "beat_id": "04e_demo_scenarios",
+    "text": "net",
+    "start": 309.254,
+    "end": 309.654,
+    "confidence": 0.930268
+  },
+  {
+    "id": "w630",
+    "beat_id": "04e_demo_scenarios",
+    "text": "value",
+    "start": 309.654,
+    "end": 309.894,
+    "confidence": 0.093916
+  },
+  {
+    "id": "w631",
+    "beat_id": "04e_demo_scenarios",
+    "text": "is",
+    "start": 309.894,
+    "end": 310.254,
+    "confidence": 0.982207
+  },
+  {
+    "id": "w632",
+    "beat_id": "04e_demo_scenarios",
+    "text": "negative",
+    "start": 310.254,
+    "end": 310.574,
+    "confidence": 0.350973
+  },
+  {
+    "id": "w633",
+    "beat_id": "04e_demo_scenarios",
+    "text": "11,146",
+    "start": 311.374,
+    "end": 312.814,
+    "confidence": 0.689827
+  },
+  {
+    "id": "w634",
+    "beat_id": "04e_demo_scenarios",
+    "text": "ringgit,",
+    "start": 312.814,
+    "end": 313.334,
+    "confidence": 0.531459
+  },
+  {
+    "id": "w635",
+    "beat_id": "04e_demo_scenarios",
+    "text": "and",
+    "start": 313.334,
+    "end": 313.754,
+    "confidence": 0.860123
+  },
+  {
+    "id": "w636",
+    "beat_id": "04e_demo_scenarios",
+    "text": "the",
+    "start": 313.754,
+    "end": 313.854,
+    "confidence": 0.961225
+  },
+  {
+    "id": "w637",
+    "beat_id": "04e_demo_scenarios",
+    "text": "payback",
+    "start": 313.854,
+    "end": 314.214,
+    "confidence": 0.953684
+  },
+  {
+    "id": "w638",
+    "beat_id": "04e_demo_scenarios",
+    "text": "is",
+    "start": 314.214,
+    "end": 314.554,
+    "confidence": 0.991794
+  },
+  {
+    "id": "w639",
+    "beat_id": "04e_demo_scenarios",
+    "text": "30.4",
+    "start": 315.234,
+    "end": 316.354,
+    "confidence": 0.942244
+  },
+  {
+    "id": "w640",
+    "beat_id": "04e_demo_scenarios",
+    "text": "months.",
+    "start": 316.354,
+    "end": 316.634,
+    "confidence": 0.967318
+  },
+  {
+    "id": "w641",
+    "beat_id": "04e_demo_scenarios",
+    "text": "Low",
+    "start": 317.089,
+    "end": 317.189,
+    "confidence": 0.961979
+  },
+  {
+    "id": "w642",
+    "beat_id": "04e_demo_scenarios",
+    "text": "and",
+    "start": 317.189,
+    "end": 317.449,
+    "confidence": 0.990669
+  },
+  {
+    "id": "w643",
+    "beat_id": "04e_demo_scenarios",
+    "text": "high",
+    "start": 317.449,
+    "end": 317.669,
+    "confidence": 0.971683
+  },
+  {
+    "id": "w644",
+    "beat_id": "04e_demo_scenarios",
+    "text": "figures",
+    "start": 317.669,
+    "end": 318.109,
+    "confidence": 0.982575
+  },
+  {
+    "id": "w645",
+    "beat_id": "04e_demo_scenarios",
+    "text": "remain",
+    "start": 318.109,
+    "end": 318.549,
+    "confidence": 0.995958
+  },
+  {
+    "id": "w646",
+    "beat_id": "04e_demo_scenarios",
+    "text": "visible,",
+    "start": 318.549,
+    "end": 319.049,
+    "confidence": 0.992859
+  },
+  {
+    "id": "w647",
+    "beat_id": "04e_demo_scenarios",
+    "text": "including",
+    "start": 319.049,
+    "end": 319.569,
+    "confidence": 0.77997
+  },
+  {
+    "id": "w648",
+    "beat_id": "04e_demo_scenarios",
+    "text": "the",
+    "start": 319.569,
+    "end": 320.149,
+    "confidence": 0.943436
+  },
+  {
+    "id": "w649",
+    "beat_id": "04e_demo_scenarios",
+    "text": "negative",
+    "start": 320.149,
+    "end": 320.549,
+    "confidence": 0.996961
+  },
+  {
+    "id": "w650",
+    "beat_id": "04e_demo_scenarios",
+    "text": "outcomes.",
+    "start": 320.549,
+    "end": 321.149,
+    "confidence": 0.965913
+  },
+  {
+    "id": "w651",
+    "beat_id": "04e_demo_scenarios",
+    "text": "These",
+    "start": 321.488,
+    "end": 321.548,
+    "confidence": 0.968835
+  },
+  {
+    "id": "w652",
+    "beat_id": "04e_demo_scenarios",
+    "text": "are",
+    "start": 321.548,
+    "end": 321.748,
+    "confidence": 0.998331
+  },
+  {
+    "id": "w653",
+    "beat_id": "04e_demo_scenarios",
+    "text": "conditional",
+    "start": 321.748,
+    "end": 322.248,
+    "confidence": 0.989947
+  },
+  {
+    "id": "w654",
+    "beat_id": "04e_demo_scenarios",
+    "text": "ranges,",
+    "start": 322.248,
+    "end": 322.708,
+    "confidence": 0.997676
+  },
+  {
+    "id": "w655",
+    "beat_id": "04e_demo_scenarios",
+    "text": "not",
+    "start": 322.93,
+    "end": 322.97,
+    "confidence": 0.992379
+  },
+  {
+    "id": "w656",
+    "beat_id": "04e_demo_scenarios",
+    "text": "predictions",
+    "start": 322.97,
+    "end": 323.53,
+    "confidence": 0.973859
+  },
+  {
+    "id": "w657",
+    "beat_id": "04e_demo_scenarios",
+    "text": "or",
+    "start": 323.53,
+    "end": 323.99,
+    "confidence": 0.979624
+  },
+  {
+    "id": "w658",
+    "beat_id": "04e_demo_scenarios",
+    "text": "guarantees.",
+    "start": 324.33,
+    "end": 324.65,
+    "confidence": 0.701395
+  },
+  {
+    "id": "w659",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Now,",
+    "start": 325.25,
+    "end": 325.81,
+    "confidence": 0.803599
+  },
+  {
+    "id": "w660",
+    "beat_id": "04f_demo_blueprint",
+    "text": "with",
+    "start": 326.025,
+    "end": 326.025,
+    "confidence": 0.959281
+  },
+  {
+    "id": "w661",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 326.025,
+    "end": 326.165,
+    "confidence": 0.950547
+  },
+  {
+    "id": "w662",
+    "beat_id": "04f_demo_blueprint",
+    "text": "path",
+    "start": 326.165,
+    "end": 326.365,
+    "confidence": 0.511637
+  },
+  {
+    "id": "w663",
+    "beat_id": "04f_demo_blueprint",
+    "text": "selected,",
+    "start": 326.365,
+    "end": 326.925,
+    "confidence": 0.96977
+  },
+  {
+    "id": "w664",
+    "beat_id": "04f_demo_blueprint",
+    "text": "MajuPilot",
+    "start": 327.234,
+    "end": 327.654,
+    "confidence": 0.666581
+  },
+  {
+    "id": "w665",
+    "beat_id": "04f_demo_blueprint",
+    "text": "generates",
+    "start": 327.654,
+    "end": 328.174,
+    "confidence": 0.973583
+  },
+  {
+    "id": "w666",
+    "beat_id": "04f_demo_blueprint",
+    "text": "a",
+    "start": 328.174,
+    "end": 328.614,
+    "confidence": 0.967641
+  },
+  {
+    "id": "w667",
+    "beat_id": "04f_demo_blueprint",
+    "text": "source-linked",
+    "start": 329.014,
+    "end": 329.474,
+    "confidence": 0.731515
+  },
+  {
+    "id": "w668",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Blueprint.",
+    "start": 329.474,
+    "end": 329.914,
+    "confidence": 0.787689
+  },
+  {
+    "id": "w669",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Five",
+    "start": 330.506,
+    "end": 330.786,
+    "confidence": 0.480632
+  },
+  {
+    "id": "w670",
+    "beat_id": "04f_demo_blueprint",
+    "text": "specialist",
+    "start": 330.786,
+    "end": 331.266,
+    "confidence": 0.452252
+  },
+  {
+    "id": "w671",
+    "beat_id": "04f_demo_blueprint",
+    "text": "reviews",
+    "start": 331.726,
+    "end": 331.966,
+    "confidence": 0.977731
+  },
+  {
+    "id": "w672",
+    "beat_id": "04f_demo_blueprint",
+    "text": "appear",
+    "start": 331.966,
+    "end": 332.506,
+    "confidence": 0.980522
+  },
+  {
+    "id": "w673",
+    "beat_id": "04f_demo_blueprint",
+    "text": "around",
+    "start": 332.506,
+    "end": 332.806,
+    "confidence": 0.981691
+  },
+  {
+    "id": "w674",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 332.806,
+    "end": 333.006,
+    "confidence": 0.979265
+  },
+  {
+    "id": "w675",
+    "beat_id": "04f_demo_blueprint",
+    "text": "same",
+    "start": 333.006,
+    "end": 333.246,
+    "confidence": 0.998678
+  },
+  {
+    "id": "w676",
+    "beat_id": "04f_demo_blueprint",
+    "text": "deterministic",
+    "start": 333.246,
+    "end": 333.906,
+    "confidence": 0.993397
+  },
+  {
+    "id": "w677",
+    "beat_id": "04f_demo_blueprint",
+    "text": "facts.",
+    "start": 333.906,
+    "end": 334.366,
+    "confidence": 0.987128
+  },
+  {
+    "id": "w678",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Interpretation",
+    "start": 335.016,
+    "end": 335.716,
+    "confidence": 0.94888
+  },
+  {
+    "id": "w679",
+    "beat_id": "04f_demo_blueprint",
+    "text": "does",
+    "start": 335.716,
+    "end": 335.976,
+    "confidence": 0.992044
+  },
+  {
+    "id": "w680",
+    "beat_id": "04f_demo_blueprint",
+    "text": "not",
+    "start": 335.976,
+    "end": 336.196,
+    "confidence": 0.997739
+  },
+  {
+    "id": "w681",
+    "beat_id": "04f_demo_blueprint",
+    "text": "replace",
+    "start": 336.196,
+    "end": 336.536,
+    "confidence": 0.994859
+  },
+  {
+    "id": "w682",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 336.536,
+    "end": 336.796,
+    "confidence": 0.858949
+  },
+  {
+    "id": "w683",
+    "beat_id": "04f_demo_blueprint",
+    "text": "scores,",
+    "start": 336.796,
+    "end": 337.176,
+    "confidence": 0.925985
+  },
+  {
+    "id": "w684",
+    "beat_id": "04f_demo_blueprint",
+    "text": "schedules,",
+    "start": 337.674,
+    "end": 337.854,
+    "confidence": 0.975508
+  },
+  {
+    "id": "w685",
+    "beat_id": "04f_demo_blueprint",
+    "text": "or",
+    "start": 338.333,
+    "end": 338.393,
+    "confidence": 0.983023
+  },
+  {
+    "id": "w686",
+    "beat_id": "04f_demo_blueprint",
+    "text": "financial",
+    "start": 338.393,
+    "end": 338.753,
+    "confidence": 0.972894
+  },
+  {
+    "id": "w687",
+    "beat_id": "04f_demo_blueprint",
+    "text": "range.",
+    "start": 338.753,
+    "end": 339.233,
+    "confidence": 0.83304
+  },
+  {
+    "id": "w688",
+    "beat_id": "04f_demo_blueprint",
+    "text": "The",
+    "start": 339.826,
+    "end": 340.086,
+    "confidence": 0.988869
+  },
+  {
+    "id": "w689",
+    "beat_id": "04f_demo_blueprint",
+    "text": "report",
+    "start": 340.086,
+    "end": 340.426,
+    "confidence": 0.993681
+  },
+  {
+    "id": "w690",
+    "beat_id": "04f_demo_blueprint",
+    "text": "contains",
+    "start": 340.426,
+    "end": 340.966,
+    "confidence": 0.989934
+  },
+  {
+    "id": "w691",
+    "beat_id": "04f_demo_blueprint",
+    "text": "16",
+    "start": 340.966,
+    "end": 341.586,
+    "confidence": 0.89349
+  },
+  {
+    "id": "w692",
+    "beat_id": "04f_demo_blueprint",
+    "text": "sections.",
+    "start": 341.586,
+    "end": 342.106,
+    "confidence": 0.995161
+  },
+  {
+    "id": "w693",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Instead",
+    "start": 342.604,
+    "end": 342.804,
+    "confidence": 0.98974
+  },
+  {
+    "id": "w694",
+    "beat_id": "04f_demo_blueprint",
+    "text": "of",
+    "start": 342.804,
+    "end": 343.004,
+    "confidence": 0.999242
+  },
+  {
+    "id": "w695",
+    "beat_id": "04f_demo_blueprint",
+    "text": "scrolling",
+    "start": 343.004,
+    "end": 343.384,
+    "confidence": 0.997282
+  },
+  {
+    "id": "w696",
+    "beat_id": "04f_demo_blueprint",
+    "text": "through",
+    "start": 343.384,
+    "end": 343.704,
+    "confidence": 0.993257
+  },
+  {
+    "id": "w697",
+    "beat_id": "04f_demo_blueprint",
+    "text": "everything,",
+    "start": 343.704,
+    "end": 344.264,
+    "confidence": 0.994335
+  },
+  {
+    "id": "w698",
+    "beat_id": "04f_demo_blueprint",
+    "text": "I'm",
+    "start": 344.535,
+    "end": 344.655,
+    "confidence": 0.865128
+  },
+  {
+    "id": "w699",
+    "beat_id": "04f_demo_blueprint",
+    "text": "using",
+    "start": 344.655,
+    "end": 344.895,
+    "confidence": 0.998869
+  },
+  {
+    "id": "w700",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 344.895,
+    "end": 345.115,
+    "confidence": 0.982985
+  },
+  {
+    "id": "w701",
+    "beat_id": "04f_demo_blueprint",
+    "text": "index",
+    "start": 345.115,
+    "end": 345.555,
+    "confidence": 0.842279
+  },
+  {
+    "id": "w702",
+    "beat_id": "04f_demo_blueprint",
+    "text": "to",
+    "start": 345.555,
+    "end": 345.995,
+    "confidence": 0.986
+  },
+  {
+    "id": "w703",
+    "beat_id": "04f_demo_blueprint",
+    "text": "show",
+    "start": 345.995,
+    "end": 346.695,
+    "confidence": 0.988777
+  },
+  {
+    "id": "w704",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 346.695,
+    "end": 346.855,
+    "confidence": 0.968963
+  },
+  {
+    "id": "w705",
+    "beat_id": "04f_demo_blueprint",
+    "text": "executive",
+    "start": 346.855,
+    "end": 347.315,
+    "confidence": 0.799693
+  },
+  {
+    "id": "w706",
+    "beat_id": "04f_demo_blueprint",
+    "text": "overview,",
+    "start": 347.315,
+    "end": 347.835,
+    "confidence": 0.999241
+  },
+  {
+    "id": "w707",
+    "beat_id": "04f_demo_blueprint",
+    "text": "selected",
+    "start": 348.756,
+    "end": 348.756,
+    "confidence": 0.890074
+  },
+  {
+    "id": "w708",
+    "beat_id": "04f_demo_blueprint",
+    "text": "plan,",
+    "start": 348.756,
+    "end": 349.176,
+    "confidence": 0.910427
+  },
+  {
+    "id": "w709",
+    "beat_id": "04f_demo_blueprint",
+    "text": "month-by-month",
+    "start": 349.904,
+    "end": 350.184,
+    "confidence": 0.997341
+  },
+  {
+    "id": "w710",
+    "beat_id": "04f_demo_blueprint",
+    "text": "roadmap,",
+    "start": 350.184,
+    "end": 350.684,
+    "confidence": 0.636025
+  },
+  {
+    "id": "w711",
+    "beat_id": "04f_demo_blueprint",
+    "text": "risks,",
+    "start": 351.22,
+    "end": 351.38,
+    "confidence": 0.634188
+  },
+  {
+    "id": "w712",
+    "beat_id": "04f_demo_blueprint",
+    "text": "conditions,",
+    "start": 351.38,
+    "end": 352.18,
+    "confidence": 0.702463
+  },
+  {
+    "id": "w713",
+    "beat_id": "04f_demo_blueprint",
+    "text": "open",
+    "start": 352.886,
+    "end": 353.146,
+    "confidence": 0.958552
+  },
+  {
+    "id": "w714",
+    "beat_id": "04f_demo_blueprint",
+    "text": "questions,",
+    "start": 353.146,
+    "end": 353.686,
+    "confidence": 0.95814
+  },
+  {
+    "id": "w715",
+    "beat_id": "04f_demo_blueprint",
+    "text": "advisor",
+    "start": 354.108,
+    "end": 354.528,
+    "confidence": 0.364533
+  },
+  {
+    "id": "w716",
+    "beat_id": "04f_demo_blueprint",
+    "text": "reviews,",
+    "start": 354.528,
+    "end": 354.928,
+    "confidence": 0.966301
+  },
+  {
+    "id": "w717",
+    "beat_id": "04f_demo_blueprint",
+    "text": "synthesis,",
+    "start": 355.521,
+    "end": 355.781,
+    "confidence": 0.969044
+  },
+  {
+    "id": "w718",
+    "beat_id": "04f_demo_blueprint",
+    "text": "and",
+    "start": 355.781,
+    "end": 356.361,
+    "confidence": 0.854133
+  },
+  {
+    "id": "w719",
+    "beat_id": "04f_demo_blueprint",
+    "text": "also",
+    "start": 356.361,
+    "end": 356.661,
+    "confidence": 0.64664
+  },
+  {
+    "id": "w720",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 356.661,
+    "end": 356.901,
+    "confidence": 0.831001
+  },
+  {
+    "id": "w721",
+    "beat_id": "04f_demo_blueprint",
+    "text": "methodology.",
+    "start": 356.901,
+    "end": 357.401,
+    "confidence": 0.992226
+  },
+  {
+    "id": "w722",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Evidence",
+    "start": 358.201,
+    "end": 358.461,
+    "confidence": 0.892731
+  },
+  {
+    "id": "w723",
+    "beat_id": "04f_demo_blueprint",
+    "text": "references",
+    "start": 358.461,
+    "end": 359.001,
+    "confidence": 0.980576
+  },
+  {
+    "id": "w724",
+    "beat_id": "04f_demo_blueprint",
+    "text": "remain",
+    "start": 359.001,
+    "end": 359.541,
+    "confidence": 0.954963
+  },
+  {
+    "id": "w725",
+    "beat_id": "04f_demo_blueprint",
+    "text": "attached,",
+    "start": 359.541,
+    "end": 360.001,
+    "confidence": 0.986633
+  },
+  {
+    "id": "w726",
+    "beat_id": "04f_demo_blueprint",
+    "text": "and",
+    "start": 360.001,
+    "end": 360.381,
+    "confidence": 0.832501
+  },
+  {
+    "id": "w727",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 360.381,
+    "end": 360.541,
+    "confidence": 0.968365
+  },
+  {
+    "id": "w728",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Blueprint",
+    "start": 360.541,
+    "end": 360.821,
+    "confidence": 0.93519
+  },
+  {
+    "id": "w729",
+    "beat_id": "04f_demo_blueprint",
+    "text": "identity",
+    "start": 360.821,
+    "end": 361.401,
+    "confidence": 0.961479
+  },
+  {
+    "id": "w730",
+    "beat_id": "04f_demo_blueprint",
+    "text": "is",
+    "start": 361.401,
+    "end": 361.801,
+    "confidence": 0.993289
+  },
+  {
+    "id": "w731",
+    "beat_id": "04f_demo_blueprint",
+    "text": "carried",
+    "start": 361.801,
+    "end": 362.121,
+    "confidence": 0.984812
+  },
+  {
+    "id": "w732",
+    "beat_id": "04f_demo_blueprint",
+    "text": "into",
+    "start": 362.121,
+    "end": 362.541,
+    "confidence": 0.923037
+  },
+  {
+    "id": "w733",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 362.541,
+    "end": 362.701,
+    "confidence": 0.960919
+  },
+  {
+    "id": "w734",
+    "beat_id": "04f_demo_blueprint",
+    "text": "handoff.",
+    "start": 362.701,
+    "end": 363.201,
+    "confidence": 0.89931
+  },
+  {
+    "id": "w735",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Notice",
+    "start": 364.512,
+    "end": 364.772,
+    "confidence": 0.928844
+  },
+  {
+    "id": "w736",
+    "beat_id": "04f_demo_blueprint",
+    "text": "what",
+    "start": 364.772,
+    "end": 365.172,
+    "confidence": 0.976731
+  },
+  {
+    "id": "w737",
+    "beat_id": "04f_demo_blueprint",
+    "text": "is",
+    "start": 365.172,
+    "end": 365.332,
+    "confidence": 0.980269
+  },
+  {
+    "id": "w738",
+    "beat_id": "04f_demo_blueprint",
+    "text": "not",
+    "start": 365.332,
+    "end": 365.652,
+    "confidence": 0.971915
+  },
+  {
+    "id": "w739",
+    "beat_id": "04f_demo_blueprint",
+    "text": "being",
+    "start": 365.652,
+    "end": 366.012,
+    "confidence": 0.978416
+  },
+  {
+    "id": "w740",
+    "beat_id": "04f_demo_blueprint",
+    "text": "claimed.",
+    "start": 366.012,
+    "end": 366.452,
+    "confidence": 0.956683
+  },
+  {
+    "id": "w741",
+    "beat_id": "04f_demo_blueprint",
+    "text": "The",
+    "start": 366.837,
+    "end": 366.977,
+    "confidence": 0.969229
+  },
+  {
+    "id": "w742",
+    "beat_id": "04f_demo_blueprint",
+    "text": "advisor",
+    "start": 366.977,
+    "end": 367.497,
+    "confidence": 0.853615
+  },
+  {
+    "id": "w743",
+    "beat_id": "04f_demo_blueprint",
+    "text": "output",
+    "start": 367.497,
+    "end": 367.937,
+    "confidence": 0.988648
+  },
+  {
+    "id": "w744",
+    "beat_id": "04f_demo_blueprint",
+    "text": "is",
+    "start": 367.937,
+    "end": 368.357,
+    "confidence": 0.991326
+  },
+  {
+    "id": "w745",
+    "beat_id": "04f_demo_blueprint",
+    "text": "bounded.",
+    "start": 368.357,
+    "end": 368.957,
+    "confidence": 0.977679
+  },
+  {
+    "id": "w746",
+    "beat_id": "04f_demo_blueprint",
+    "text": "Consultant",
+    "start": 369.758,
+    "end": 370.098,
+    "confidence": 0.853774
+  },
+  {
+    "id": "w747",
+    "beat_id": "04f_demo_blueprint",
+    "text": "notes",
+    "start": 370.098,
+    "end": 370.418,
+    "confidence": 0.955001
+  },
+  {
+    "id": "w748",
+    "beat_id": "04f_demo_blueprint",
+    "text": "are",
+    "start": 370.418,
+    "end": 370.838,
+    "confidence": 0.995305
+  },
+  {
+    "id": "w749",
+    "beat_id": "04f_demo_blueprint",
+    "text": "still",
+    "start": 370.838,
+    "end": 371.078,
+    "confidence": 0.995029
+  },
+  {
+    "id": "w750",
+    "beat_id": "04f_demo_blueprint",
+    "text": "empty",
+    "start": 371.078,
+    "end": 371.418,
+    "confidence": 0.99687
+  },
+  {
+    "id": "w751",
+    "beat_id": "04f_demo_blueprint",
+    "text": "in",
+    "start": 371.418,
+    "end": 371.618,
+    "confidence": 0.970661
+  },
+  {
+    "id": "w752",
+    "beat_id": "04f_demo_blueprint",
+    "text": "this",
+    "start": 371.618,
+    "end": 371.798,
+    "confidence": 0.987928
+  },
+  {
+    "id": "w753",
+    "beat_id": "04f_demo_blueprint",
+    "text": "run,",
+    "start": 371.798,
+    "end": 372.018,
+    "confidence": 0.814916
+  },
+  {
+    "id": "w754",
+    "beat_id": "04f_demo_blueprint",
+    "text": "and",
+    "start": 372.018,
+    "end": 372.658,
+    "confidence": 0.680464
+  },
+  {
+    "id": "w755",
+    "beat_id": "04f_demo_blueprint",
+    "text": "no",
+    "start": 372.658,
+    "end": 372.898,
+    "confidence": 0.989705
+  },
+  {
+    "id": "w756",
+    "beat_id": "04f_demo_blueprint",
+    "text": "human",
+    "start": 372.898,
+    "end": 373.238,
+    "confidence": 0.975181
+  },
+  {
+    "id": "w757",
+    "beat_id": "04f_demo_blueprint",
+    "text": "consultant",
+    "start": 373.238,
+    "end": 373.678,
+    "confidence": 0.99525
+  },
+  {
+    "id": "w758",
+    "beat_id": "04f_demo_blueprint",
+    "text": "has",
+    "start": 373.678,
+    "end": 373.998,
+    "confidence": 0.992055
+  },
+  {
+    "id": "w759",
+    "beat_id": "04f_demo_blueprint",
+    "text": "accepted",
+    "start": 373.998,
+    "end": 374.578,
+    "confidence": 0.860275
+  },
+  {
+    "id": "w760",
+    "beat_id": "04f_demo_blueprint",
+    "text": "the",
+    "start": 374.578,
+    "end": 374.798,
+    "confidence": 0.542686
+  },
+  {
+    "id": "w761",
+    "beat_id": "04f_demo_blueprint",
+    "text": "report.",
+    "start": 374.798,
+    "end": 375.178,
+    "confidence": 0.957778
+  },
+  {
+    "id": "w762",
+    "beat_id": "04f_demo_blueprint",
+    "text": "The",
+    "start": 375.6,
+    "end": 375.82,
+    "confidence": 0.950919
+  },
+  {
+    "id": "w763",
+    "beat_id": "04f_demo_blueprint",
+    "text": "value",
+    "start": 375.82,
+    "end": 376.08,
+    "confidence": 0.993985
+  },
+  {
+    "id": "w764",
+    "beat_id": "04f_demo_blueprint",
+    "text": "here",
+    "start": 376.08,
+    "end": 376.38,
+    "confidence": 0.979635
+  },
+  {
+    "id": "w765",
+    "beat_id": "04f_demo_blueprint",
+    "text": "is",
+    "start": 376.38,
+    "end": 376.58,
+    "confidence": 0.993336
+  },
+  {
+    "id": "w766",
+    "beat_id": "04f_demo_blueprint",
+    "text": "a",
+    "start": 376.58,
+    "end": 376.72,
+    "confidence": 0.917215
+  },
+  {
+    "id": "w767",
+    "beat_id": "04f_demo_blueprint",
+    "text": "reviewable",
+    "start": 376.72,
+    "end": 377.22,
+    "confidence": 0.694759
+  },
+  {
+    "id": "w768",
+    "beat_id": "04f_demo_blueprint",
+    "text": "package,",
+    "start": 377.22,
+    "end": 377.62,
+    "confidence": 0.994359
+  },
+  {
+    "id": "w769",
+    "beat_id": "04f_demo_blueprint",
+    "text": "not",
+    "start": 377.62,
+    "end": 378.02,
+    "confidence": 0.577651
+  },
+  {
+    "id": "w770",
+    "beat_id": "04f_demo_blueprint",
+    "text": "an",
+    "start": 378.02,
+    "end": 378.22,
+    "confidence": 0.980923
+  },
+  {
+    "id": "w771",
+    "beat_id": "04f_demo_blueprint",
+    "text": "automatic",
+    "start": 378.22,
+    "end": 378.68,
+    "confidence": 0.97557
+  },
+  {
+    "id": "w772",
+    "beat_id": "04f_demo_blueprint",
+    "text": "final",
+    "start": 378.68,
+    "end": 379.12,
+    "confidence": 0.984613
+  },
+  {
+    "id": "w773",
+    "beat_id": "04f_demo_blueprint",
+    "text": "decision.",
+    "start": 379.12,
+    "end": 379.5,
+    "confidence": 0.949965
+  },
+  {
+    "id": "w774",
+    "beat_id": "04g_demo_consultation",
+    "text": "The",
+    "start": 380.45,
+    "end": 380.95,
+    "confidence": 0.735439
+  },
+  {
+    "id": "w775",
+    "beat_id": "04g_demo_consultation",
+    "text": "consultation",
+    "start": 380.95,
+    "end": 381.39,
+    "confidence": 0.839299
+  },
+  {
+    "id": "w776",
+    "beat_id": "04g_demo_consultation",
+    "text": "page",
+    "start": 381.39,
+    "end": 382.07,
+    "confidence": 0.987875
+  },
+  {
+    "id": "w777",
+    "beat_id": "04g_demo_consultation",
+    "text": "verifies",
+    "start": 382.07,
+    "end": 382.65,
+    "confidence": 0.985618
+  },
+  {
+    "id": "w778",
+    "beat_id": "04g_demo_consultation",
+    "text": "the",
+    "start": 382.65,
+    "end": 382.89,
+    "confidence": 0.984045
+  },
+  {
+    "id": "w779",
+    "beat_id": "04g_demo_consultation",
+    "text": "Blueprint",
+    "start": 382.89,
+    "end": 383.23,
+    "confidence": 0.884163
+  },
+  {
+    "id": "w780",
+    "beat_id": "04g_demo_consultation",
+    "text": "and",
+    "start": 383.23,
+    "end": 383.95,
+    "confidence": 0.892911
+  },
+  {
+    "id": "w781",
+    "beat_id": "04g_demo_consultation",
+    "text": "summarizes",
+    "start": 383.95,
+    "end": 384.37,
+    "confidence": 0.687174
+  },
+  {
+    "id": "w782",
+    "beat_id": "04g_demo_consultation",
+    "text": "the",
+    "start": 384.37,
+    "end": 384.75,
+    "confidence": 0.988055
+  },
+  {
+    "id": "w783",
+    "beat_id": "04g_demo_consultation",
+    "text": "selected",
+    "start": 384.75,
+    "end": 385.05,
+    "confidence": 0.995928
+  },
+  {
+    "id": "w784",
+    "beat_id": "04g_demo_consultation",
+    "text": "path.",
+    "start": 385.05,
+    "end": 385.43,
+    "confidence": 0.628066
+  },
+  {
+    "id": "w785",
+    "beat_id": "04g_demo_consultation",
+    "text": "It",
+    "start": 386.17,
+    "end": 386.25,
+    "confidence": 0.976965
+  },
+  {
+    "id": "w786",
+    "beat_id": "04g_demo_consultation",
+    "text": "also",
+    "start": 386.25,
+    "end": 386.57,
+    "confidence": 0.995816
+  },
+  {
+    "id": "w787",
+    "beat_id": "04g_demo_consultation",
+    "text": "names",
+    "start": 386.57,
+    "end": 386.87,
+    "confidence": 0.955513
+  },
+  {
+    "id": "w788",
+    "beat_id": "04g_demo_consultation",
+    "text": "the",
+    "start": 386.87,
+    "end": 387.09,
+    "confidence": 0.975125
+  },
+  {
+    "id": "w789",
+    "beat_id": "04g_demo_consultation",
+    "text": "categories",
+    "start": 387.09,
+    "end": 387.49,
+    "confidence": 0.986068
+  },
+  {
+    "id": "w790",
+    "beat_id": "04g_demo_consultation",
+    "text": "that",
+    "start": 387.49,
+    "end": 387.87,
+    "confidence": 0.988686
+  },
+  {
+    "id": "w791",
+    "beat_id": "04g_demo_consultation",
+    "text": "would",
+    "start": 387.87,
+    "end": 387.99,
+    "confidence": null
+  },
+  {
+    "id": "w792",
+    "beat_id": "04g_demo_consultation",
+    "text": "be",
+    "start": 387.87,
+    "end": 388.17,
+    "confidence": 0.580251
+  },
+  {
+    "id": "w793",
+    "beat_id": "04g_demo_consultation",
+    "text": "shared.",
+    "start": 388.17,
+    "end": 388.43,
+    "confidence": 0.9887
+  },
+  {
+    "id": "w794",
+    "beat_id": "04g_demo_consultation",
+    "text": "Contact",
+    "start": 389.19,
+    "end": 389.23,
+    "confidence": 0.833451
+  },
+  {
+    "id": "w795",
+    "beat_id": "04g_demo_consultation",
+    "text": "fields",
+    "start": 389.23,
+    "end": 389.47,
+    "confidence": 0.9406
+  },
+  {
+    "id": "w796",
+    "beat_id": "04g_demo_consultation",
+    "text": "are",
+    "start": 389.47,
+    "end": 389.67,
+    "confidence": 0.995984
+  },
+  {
+    "id": "w797",
+    "beat_id": "04g_demo_consultation",
+    "text": "empty,",
+    "start": 389.67,
+    "end": 390.01,
+    "confidence": 0.992291
+  },
+  {
+    "id": "w798",
+    "beat_id": "04g_demo_consultation",
+    "text": "and",
+    "start": 390.01,
+    "end": 390.65,
+    "confidence": 0.734093
+  },
+  {
+    "id": "w799",
+    "beat_id": "04g_demo_consultation",
+    "text": "consent",
+    "start": 390.65,
+    "end": 391.11,
+    "confidence": 0.393224
+  },
+  {
+    "id": "w800",
+    "beat_id": "04g_demo_consultation",
+    "text": "begins",
+    "start": 391.11,
+    "end": 391.47,
+    "confidence": 0.905626
+  },
+  {
+    "id": "w801",
+    "beat_id": "04g_demo_consultation",
+    "text": "unchecked.",
+    "start": 391.47,
+    "end": 392.03,
+    "confidence": 0.988542
+  },
+  {
+    "id": "w802",
+    "beat_id": "04g_demo_consultation",
+    "text": "I",
+    "start": 392.75,
+    "end": 392.83,
+    "confidence": 0.9366
+  },
+  {
+    "id": "w803",
+    "beat_id": "04g_demo_consultation",
+    "text": "stop",
+    "start": 392.83,
+    "end": 393.05,
+    "confidence": 0.868801
+  },
+  {
+    "id": "w804",
+    "beat_id": "04g_demo_consultation",
+    "text": "here.",
+    "start": 393.05,
+    "end": 393.39,
+    "confidence": 0.988817
+  },
+  {
+    "id": "w805",
+    "beat_id": "04g_demo_consultation",
+    "text": "Nothing",
+    "start": 393.63,
+    "end": 393.79,
+    "confidence": 0.961548
+  },
+  {
+    "id": "w806",
+    "beat_id": "04g_demo_consultation",
+    "text": "is",
+    "start": 393.79,
+    "end": 394.13,
+    "confidence": 0.982747
+  },
+  {
+    "id": "w807",
+    "beat_id": "04g_demo_consultation",
+    "text": "submitted,",
+    "start": 394.13,
+    "end": 394.59,
+    "confidence": 0.997086
+  },
+  {
+    "id": "w808",
+    "beat_id": "04g_demo_consultation",
+    "text": "no",
+    "start": 394.87,
+    "end": 394.95,
+    "confidence": 0.948731
+  },
+  {
+    "id": "w809",
+    "beat_id": "04g_demo_consultation",
+    "text": "real",
+    "start": 394.95,
+    "end": 395.19,
+    "confidence": 0.994641
+  },
+  {
+    "id": "w810",
+    "beat_id": "04g_demo_consultation",
+    "text": "contact",
+    "start": 395.19,
+    "end": 395.63,
+    "confidence": 0.985183
+  },
+  {
+    "id": "w811",
+    "beat_id": "04g_demo_consultation",
+    "text": "data",
+    "start": 395.63,
+    "end": 395.95,
+    "confidence": 0.98809
+  },
+  {
+    "id": "w812",
+    "beat_id": "04g_demo_consultation",
+    "text": "is",
+    "start": 395.95,
+    "end": 396.17,
+    "confidence": 0.99257
+  },
+  {
+    "id": "w813",
+    "beat_id": "04g_demo_consultation",
+    "text": "entered,",
+    "start": 396.17,
+    "end": 396.63,
+    "confidence": 0.995315
+  },
+  {
+    "id": "w814",
+    "beat_id": "04g_demo_consultation",
+    "text": "and",
+    "start": 396.63,
+    "end": 397.41,
+    "confidence": 0.60921
+  },
+  {
+    "id": "w815",
+    "beat_id": "04g_demo_consultation",
+    "text": "the",
+    "start": 397.41,
+    "end": 397.57,
+    "confidence": 0.967055
+  },
+  {
+    "id": "w816",
+    "beat_id": "04g_demo_consultation",
+    "text": "interface",
+    "start": 397.57,
+    "end": 397.99,
+    "confidence": 0.994976
+  },
+  {
+    "id": "w817",
+    "beat_id": "04g_demo_consultation",
+    "text": "does",
+    "start": 397.99,
+    "end": 398.25,
+    "confidence": 0.982492
+  },
+  {
+    "id": "w818",
+    "beat_id": "04g_demo_consultation",
+    "text": "not",
+    "start": 398.25,
+    "end": 398.47,
+    "confidence": 0.997098
+  },
+  {
+    "id": "w819",
+    "beat_id": "04g_demo_consultation",
+    "text": "promise",
+    "start": 398.47,
+    "end": 398.81,
+    "confidence": 0.980161
+  },
+  {
+    "id": "w820",
+    "beat_id": "04g_demo_consultation",
+    "text": "a",
+    "start": 398.81,
+    "end": 399.01,
+    "confidence": 0.947618
+  },
+  {
+    "id": "w821",
+    "beat_id": "04g_demo_consultation",
+    "text": "human",
+    "start": 399.01,
+    "end": 399.33,
+    "confidence": 0.88764
+  },
+  {
+    "id": "w822",
+    "beat_id": "04g_demo_consultation",
+    "text": "response,",
+    "start": 399.33,
+    "end": 399.83,
+    "confidence": 0.987757
+  },
+  {
+    "id": "w823",
+    "beat_id": "04g_demo_consultation",
+    "text": "vendor",
+    "start": 400.19,
+    "end": 400.39,
+    "confidence": 0.971727
+  },
+  {
+    "id": "w824",
+    "beat_id": "04g_demo_consultation",
+    "text": "fulfilment,",
+    "start": 400.39,
+    "end": 400.95,
+    "confidence": 0.854919
+  },
+  {
+    "id": "w825",
+    "beat_id": "04g_demo_consultation",
+    "text": "or",
+    "start": 400.95,
+    "end": 401.75,
+    "confidence": 0.803375
+  },
+  {
+    "id": "w826",
+    "beat_id": "04g_demo_consultation",
+    "text": "automatic",
+    "start": 401.75,
+    "end": 402.35,
+    "confidence": 0.96687
+  },
+  {
+    "id": "w827",
+    "beat_id": "04g_demo_consultation",
+    "text": "CRM",
+    "start": 402.35,
+    "end": 402.95,
+    "confidence": 0.958627
+  },
+  {
+    "id": "w828",
+    "beat_id": "04g_demo_consultation",
+    "text": "record",
+    "start": 402.95,
+    "end": 403.23,
+    "confidence": 0.961679
+  },
+  {
+    "id": "w829",
+    "beat_id": "04g_demo_consultation",
+    "text": "creation.",
+    "start": 403.23,
+    "end": 403.69,
+    "confidence": 0.992859
+  },
+  {
+    "id": "w830",
+    "beat_id": "05_testing_validation",
+    "text": "Validation",
+    "start": 415.45,
+    "end": 416.27,
+    "confidence": 0.898358
+  },
+  {
+    "id": "w831",
+    "beat_id": "05_testing_validation",
+    "text": "is",
+    "start": 416.27,
+    "end": 416.53,
+    "confidence": 0.984088
+  },
+  {
+    "id": "w832",
+    "beat_id": "05_testing_validation",
+    "text": "kept",
+    "start": 416.53,
+    "end": 416.79,
+    "confidence": 0.97833
+  },
+  {
+    "id": "w833",
+    "beat_id": "05_testing_validation",
+    "text": "in",
+    "start": 416.79,
+    "end": 416.91,
+    "confidence": null
+  },
+  {
+    "id": "w834",
+    "beat_id": "05_testing_validation",
+    "text": "two",
+    "start": 416.79,
+    "end": 417.17,
+    "confidence": 0.797911
+  },
+  {
+    "id": "w835",
+    "beat_id": "05_testing_validation",
+    "text": "clearly",
+    "start": 417.17,
+    "end": 417.65,
+    "confidence": 0.902509
+  },
+  {
+    "id": "w836",
+    "beat_id": "05_testing_validation",
+    "text": "labelled",
+    "start": 417.65,
+    "end": 418.03,
+    "confidence": 0.69898
+  },
+  {
+    "id": "w837",
+    "beat_id": "05_testing_validation",
+    "text": "layers.",
+    "start": 418.03,
+    "end": 418.53,
+    "confidence": 0.996347
+  },
+  {
+    "id": "w838",
+    "beat_id": "05_testing_validation",
+    "text": "In",
+    "start": 419.07,
+    "end": 419.15,
+    "confidence": 0.973329
+  },
+  {
+    "id": "w839",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 419.15,
+    "end": 419.27,
+    "confidence": null
+  },
+  {
+    "id": "w840",
+    "beat_id": "05_testing_validation",
+    "text": "accepted",
+    "start": 419.15,
+    "end": 419.59,
+    "confidence": 0.630536
+  },
+  {
+    "id": "w841",
+    "beat_id": "05_testing_validation",
+    "text": "hosted",
+    "start": 419.59,
+    "end": 420.05,
+    "confidence": 0.978173
+  },
+  {
+    "id": "w842",
+    "beat_id": "05_testing_validation",
+    "text": "integration,",
+    "start": 420.05,
+    "end": 420.69,
+    "confidence": 0.942401
+  },
+  {
+    "id": "w843",
+    "beat_id": "05_testing_validation",
+    "text": "47",
+    "start": 421.07,
+    "end": 421.45,
+    "confidence": 0.982716
+  },
+  {
+    "id": "w844",
+    "beat_id": "05_testing_validation",
+    "text": "test",
+    "start": 421.45,
+    "end": 421.87,
+    "confidence": 0.925328
+  },
+  {
+    "id": "w845",
+    "beat_id": "05_testing_validation",
+    "text": "files",
+    "start": 421.87,
+    "end": 422.13,
+    "confidence": 0.98912
+  },
+  {
+    "id": "w846",
+    "beat_id": "05_testing_validation",
+    "text": "ran,",
+    "start": 422.13,
+    "end": 422.47,
+    "confidence": 0.983353
+  },
+  {
+    "id": "w847",
+    "beat_id": "05_testing_validation",
+    "text": "221",
+    "start": 422.97,
+    "end": 423.55,
+    "confidence": 0.966078
+  },
+  {
+    "id": "w848",
+    "beat_id": "05_testing_validation",
+    "text": "tests",
+    "start": 423.55,
+    "end": 424.23,
+    "confidence": 0.904327
+  },
+  {
+    "id": "w849",
+    "beat_id": "05_testing_validation",
+    "text": "passed,",
+    "start": 424.23,
+    "end": 424.63,
+    "confidence": 0.985213
+  },
+  {
+    "id": "w850",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 424.63,
+    "end": 425.07,
+    "confidence": 0.54158
+  },
+  {
+    "id": "w851",
+    "beat_id": "05_testing_validation",
+    "text": "one",
+    "start": 425.07,
+    "end": 425.35,
+    "confidence": 0.569452
+  },
+  {
+    "id": "w852",
+    "beat_id": "05_testing_validation",
+    "text": "test",
+    "start": 425.35,
+    "end": 425.63,
+    "confidence": 0.98714
+  },
+  {
+    "id": "w853",
+    "beat_id": "05_testing_validation",
+    "text": "was",
+    "start": 425.63,
+    "end": 425.83,
+    "confidence": 0.99461
+  },
+  {
+    "id": "w854",
+    "beat_id": "05_testing_validation",
+    "text": "intentionally",
+    "start": 425.83,
+    "end": 426.41,
+    "confidence": 0.994493
+  },
+  {
+    "id": "w855",
+    "beat_id": "05_testing_validation",
+    "text": "skipped.",
+    "start": 426.41,
+    "end": 426.93,
+    "confidence": 0.998166
+  },
+  {
+    "id": "w856",
+    "beat_id": "05_testing_validation",
+    "text": "TypeScript,",
+    "start": 427.57,
+    "end": 427.89,
+    "confidence": 0.698385
+  },
+  {
+    "id": "w857",
+    "beat_id": "05_testing_validation",
+    "text": "ESLint,",
+    "start": 429.29,
+    "end": 429.43,
+    "confidence": 0.629526
+  },
+  {
+    "id": "w858",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 429.43,
+    "end": 429.83,
+    "confidence": 0.740917
+  },
+  {
+    "id": "w859",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 429.83,
+    "end": 430.17,
+    "confidence": 0.506799
+  },
+  {
+    "id": "w860",
+    "beat_id": "05_testing_validation",
+    "text": "build",
+    "start": 430.17,
+    "end": 430.51,
+    "confidence": 0.274521
+  },
+  {
+    "id": "w861",
+    "beat_id": "05_testing_validation",
+    "text": "passed,",
+    "start": 430.51,
+    "end": 430.97,
+    "confidence": 0.502687
+  },
+  {
+    "id": "w862",
+    "beat_id": "05_testing_validation",
+    "text": "generating",
+    "start": 431.55,
+    "end": 431.95,
+    "confidence": 0.98171
+  },
+  {
+    "id": "w863",
+    "beat_id": "05_testing_validation",
+    "text": "38",
+    "start": 431.95,
+    "end": 432.53,
+    "confidence": 0.994239
+  },
+  {
+    "id": "w864",
+    "beat_id": "05_testing_validation",
+    "text": "static",
+    "start": 432.53,
+    "end": 432.91,
+    "confidence": 0.994642
+  },
+  {
+    "id": "w865",
+    "beat_id": "05_testing_validation",
+    "text": "pages.",
+    "start": 432.91,
+    "end": 433.39,
+    "confidence": 0.999245
+  },
+  {
+    "id": "w866",
+    "beat_id": "05_testing_validation",
+    "text": "The",
+    "start": 434.13,
+    "end": 434.23,
+    "confidence": 0.951389
+  },
+  {
+    "id": "w867",
+    "beat_id": "05_testing_validation",
+    "text": "consolidated",
+    "start": 434.23,
+    "end": 434.71,
+    "confidence": 0.916491
+  },
+  {
+    "id": "w868",
+    "beat_id": "05_testing_validation",
+    "text": "smoke",
+    "start": 434.71,
+    "end": 435.29,
+    "confidence": 0.551873
+  },
+  {
+    "id": "w869",
+    "beat_id": "05_testing_validation",
+    "text": "used",
+    "start": 435.29,
+    "end": 435.61,
+    "confidence": 0.844896
+  },
+  {
+    "id": "w870",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 435.61,
+    "end": 435.87,
+    "confidence": 0.866312
+  },
+  {
+    "id": "w871",
+    "beat_id": "05_testing_validation",
+    "text": "labelled",
+    "start": 435.87,
+    "end": 436.21,
+    "confidence": 0.341274
+  },
+  {
+    "id": "w872",
+    "beat_id": "05_testing_validation",
+    "text": "fictional",
+    "start": 436.21,
+    "end": 436.81,
+    "confidence": 0.888177
+  },
+  {
+    "id": "w873",
+    "beat_id": "05_testing_validation",
+    "text": "business",
+    "start": 436.81,
+    "end": 437.37,
+    "confidence": 0.96382
+  },
+  {
+    "id": "w874",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 437.37,
+    "end": 437.65,
+    "confidence": 0.980086
+  },
+  {
+    "id": "w875",
+    "beat_id": "05_testing_validation",
+    "text": "synthetic",
+    "start": 437.65,
+    "end": 438.07,
+    "confidence": 0.976497
+  },
+  {
+    "id": "w876",
+    "beat_id": "05_testing_validation",
+    "text": "contact",
+    "start": 438.07,
+    "end": 438.59,
+    "confidence": 0.952313
+  },
+  {
+    "id": "w877",
+    "beat_id": "05_testing_validation",
+    "text": "details.",
+    "start": 438.59,
+    "end": 439.09,
+    "confidence": 0.997581
+  },
+  {
+    "id": "w878",
+    "beat_id": "05_testing_validation",
+    "text": "It",
+    "start": 439.65,
+    "end": 439.91,
+    "confidence": 0.990885
+  },
+  {
+    "id": "w879",
+    "beat_id": "05_testing_validation",
+    "text": "verified",
+    "start": 439.91,
+    "end": 440.31,
+    "confidence": 0.942024
+  },
+  {
+    "id": "w880",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 440.31,
+    "end": 440.59,
+    "confidence": 0.982268
+  },
+  {
+    "id": "w881",
+    "beat_id": "05_testing_validation",
+    "text": "durable",
+    "start": 440.59,
+    "end": 440.97,
+    "confidence": 0.985829
+  },
+  {
+    "id": "w882",
+    "beat_id": "05_testing_validation",
+    "text": "journey,",
+    "start": 440.97,
+    "end": 441.39,
+    "confidence": 0.991248
+  },
+  {
+    "id": "w883",
+    "beat_id": "05_testing_validation",
+    "text": "private",
+    "start": 441.71,
+    "end": 441.97,
+    "confidence": 0.887578
+  },
+  {
+    "id": "w884",
+    "beat_id": "05_testing_validation",
+    "text": "report",
+    "start": 441.97,
+    "end": 442.39,
+    "confidence": 0.904762
+  },
+  {
+    "id": "w885",
+    "beat_id": "05_testing_validation",
+    "text": "handling,",
+    "start": 442.39,
+    "end": 442.81,
+    "confidence": 0.996356
+  },
+  {
+    "id": "w886",
+    "beat_id": "05_testing_validation",
+    "text": "a",
+    "start": 442.81,
+    "end": 443.21,
+    "confidence": 0.124213
+  },
+  {
+    "id": "w887",
+    "beat_id": "05_testing_validation",
+    "text": "consent",
+    "start": 443.21,
+    "end": 443.85,
+    "confidence": 0.756709
+  },
+  {
+    "id": "w888",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 443.85,
+    "end": 444.23,
+    "confidence": 0.922194
+  },
+  {
+    "id": "w889",
+    "beat_id": "05_testing_validation",
+    "text": "lead",
+    "start": 444.23,
+    "end": 444.49,
+    "confidence": 0.760374
+  },
+  {
+    "id": "w890",
+    "beat_id": "05_testing_validation",
+    "text": "flow,",
+    "start": 444.49,
+    "end": 444.99,
+    "confidence": 0.930899
+  },
+  {
+    "id": "w891",
+    "beat_id": "05_testing_validation",
+    "text": "signed",
+    "start": 445.87,
+    "end": 445.93,
+    "confidence": 0.82427
+  },
+  {
+    "id": "w892",
+    "beat_id": "05_testing_validation",
+    "text": "delivery,",
+    "start": 445.93,
+    "end": 446.51,
+    "confidence": 0.978271
+  },
+  {
+    "id": "w893",
+    "beat_id": "05_testing_validation",
+    "text": "access",
+    "start": 446.87,
+    "end": 446.97,
+    "confidence": 0.822071
+  },
+  {
+    "id": "w894",
+    "beat_id": "05_testing_validation",
+    "text": "denial,",
+    "start": 446.97,
+    "end": 447.37,
+    "confidence": 0.652516
+  },
+  {
+    "id": "w895",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 447.37,
+    "end": 447.93,
+    "confidence": 0.746388
+  },
+  {
+    "id": "w896",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 447.93,
+    "end": 448.23,
+    "confidence": 0.555258
+  },
+  {
+    "id": "w897",
+    "beat_id": "05_testing_validation",
+    "text": "live",
+    "start": 448.23,
+    "end": 448.77,
+    "confidence": 0.753763
+  },
+  {
+    "id": "w898",
+    "beat_id": "05_testing_validation",
+    "text": "copilot",
+    "start": 449.09,
+    "end": 449.41,
+    "confidence": 0.980102
+  },
+  {
+    "id": "w899",
+    "beat_id": "05_testing_validation",
+    "text": "boundary.",
+    "start": 449.41,
+    "end": 449.91,
+    "confidence": 0.386264
+  },
+  {
+    "id": "w900",
+    "beat_id": "05_testing_validation",
+    "text": "Release",
+    "start": 450.91,
+    "end": 450.91,
+    "confidence": 0.906923
+  },
+  {
+    "id": "w901",
+    "beat_id": "05_testing_validation",
+    "text": "evidence",
+    "start": 450.91,
+    "end": 451.29,
+    "confidence": 0.993998
+  },
+  {
+    "id": "w902",
+    "beat_id": "05_testing_validation",
+    "text": "also",
+    "start": 451.29,
+    "end": 451.73,
+    "confidence": 0.964185
+  },
+  {
+    "id": "w903",
+    "beat_id": "05_testing_validation",
+    "text": "recorded",
+    "start": 451.73,
+    "end": 452.21,
+    "confidence": 0.787538
+  },
+  {
+    "id": "w904",
+    "beat_id": "05_testing_validation",
+    "text": "required",
+    "start": 452.21,
+    "end": 452.77,
+    "confidence": 0.98741
+  },
+  {
+    "id": "w905",
+    "beat_id": "05_testing_validation",
+    "text": "security",
+    "start": 452.77,
+    "end": 453.37,
+    "confidence": 0.993375
+  },
+  {
+    "id": "w906",
+    "beat_id": "05_testing_validation",
+    "text": "headers,",
+    "start": 453.37,
+    "end": 453.71,
+    "confidence": 0.989943
+  },
+  {
+    "id": "w907",
+    "beat_id": "05_testing_validation",
+    "text": "no",
+    "start": 454.09,
+    "end": 454.25,
+    "confidence": 0.983511
+  },
+  {
+    "id": "w908",
+    "beat_id": "05_testing_validation",
+    "text": "horizontal",
+    "start": 454.25,
+    "end": 454.69,
+    "confidence": 0.993561
+  },
+  {
+    "id": "w909",
+    "beat_id": "05_testing_validation",
+    "text": "overflow",
+    "start": 454.69,
+    "end": 455.45,
+    "confidence": 0.9741
+  },
+  {
+    "id": "w910",
+    "beat_id": "05_testing_validation",
+    "text": "at",
+    "start": 455.45,
+    "end": 455.69,
+    "confidence": 0.965799
+  },
+  {
+    "id": "w911",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 455.69,
+    "end": 455.83,
+    "confidence": 0.987264
+  },
+  {
+    "id": "w912",
+    "beat_id": "05_testing_validation",
+    "text": "tested",
+    "start": 455.83,
+    "end": 456.31,
+    "confidence": 0.76806
+  },
+  {
+    "id": "w913",
+    "beat_id": "05_testing_validation",
+    "text": "desktop",
+    "start": 456.31,
+    "end": 456.81,
+    "confidence": 0.955548
+  },
+  {
+    "id": "w914",
+    "beat_id": "05_testing_validation",
+    "text": "viewport,",
+    "start": 456.81,
+    "end": 457.39,
+    "confidence": 0.707188
+  },
+  {
+    "id": "w915",
+    "beat_id": "05_testing_validation",
+    "text": "zero",
+    "start": 457.95,
+    "end": 458.29,
+    "confidence": 0.710712
+  },
+  {
+    "id": "w916",
+    "beat_id": "05_testing_validation",
+    "text": "browser",
+    "start": 458.29,
+    "end": 458.73,
+    "confidence": 0.996922
+  },
+  {
+    "id": "w917",
+    "beat_id": "05_testing_validation",
+    "text": "console",
+    "start": 458.73,
+    "end": 459.11,
+    "confidence": 0.992123
+  },
+  {
+    "id": "w918",
+    "beat_id": "05_testing_validation",
+    "text": "errors,",
+    "start": 459.11,
+    "end": 459.39,
+    "confidence": 0.979257
+  },
+  {
+    "id": "w919",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 459.39,
+    "end": 460.09,
+    "confidence": 0.740955
+  },
+  {
+    "id": "w920",
+    "beat_id": "05_testing_validation",
+    "text": "no",
+    "start": 460.09,
+    "end": 460.41,
+    "confidence": 0.975215
+  },
+  {
+    "id": "w921",
+    "beat_id": "05_testing_validation",
+    "text": "recent",
+    "start": 460.41,
+    "end": 460.93,
+    "confidence": 0.568531
+  },
+  {
+    "id": "w922",
+    "beat_id": "05_testing_validation",
+    "text": "Vercel",
+    "start": 460.93,
+    "end": 461.53,
+    "confidence": 0.081259
+  },
+  {
+    "id": "w923",
+    "beat_id": "05_testing_validation",
+    "text": "production",
+    "start": 461.53,
+    "end": 462.21,
+    "confidence": 0.960751
+  },
+  {
+    "id": "w924",
+    "beat_id": "05_testing_validation",
+    "text": "error",
+    "start": 462.21,
+    "end": 462.69,
+    "confidence": 0.994808
+  },
+  {
+    "id": "w925",
+    "beat_id": "05_testing_validation",
+    "text": "logs.",
+    "start": 462.69,
+    "end": 463.09,
+    "confidence": 0.853502
+  },
+  {
+    "id": "w926",
+    "beat_id": "05_testing_validation",
+    "text": "Those",
+    "start": 463.95,
+    "end": 464.17,
+    "confidence": 0.954723
+  },
+  {
+    "id": "w927",
+    "beat_id": "05_testing_validation",
+    "text": "are",
+    "start": 464.17,
+    "end": 464.39,
+    "confidence": 0.997303
+  },
+  {
+    "id": "w928",
+    "beat_id": "05_testing_validation",
+    "text": "scoped",
+    "start": 464.51,
+    "end": 464.75,
+    "confidence": 0.863506
+  },
+  {
+    "id": "w929",
+    "beat_id": "05_testing_validation",
+    "text": "results",
+    "start": 464.75,
+    "end": 465.15,
+    "confidence": 0.99216
+  },
+  {
+    "id": "w930",
+    "beat_id": "05_testing_validation",
+    "text": "from",
+    "start": 465.15,
+    "end": 465.47,
+    "confidence": 0.973822
+  },
+  {
+    "id": "w931",
+    "beat_id": "05_testing_validation",
+    "text": "the",
+    "start": 465.47,
+    "end": 465.61,
+    "confidence": 0.967438
+  },
+  {
+    "id": "w932",
+    "beat_id": "05_testing_validation",
+    "text": "recorded",
+    "start": 465.61,
+    "end": 465.95,
+    "confidence": 0.973985
+  },
+  {
+    "id": "w933",
+    "beat_id": "05_testing_validation",
+    "text": "test",
+    "start": 465.95,
+    "end": 466.33,
+    "confidence": 0.977566
+  },
+  {
+    "id": "w934",
+    "beat_id": "05_testing_validation",
+    "text": "environment,",
+    "start": 466.33,
+    "end": 466.81,
+    "confidence": 0.978836
+  },
+  {
+    "id": "w935",
+    "beat_id": "05_testing_validation",
+    "text": "and",
+    "start": 466.81,
+    "end": 467.77,
+    "confidence": 0.819623
+  },
+  {
+    "id": "w936",
+    "beat_id": "05_testing_validation",
+    "text": "not",
+    "start": 467.77,
+    "end": 467.99,
+    "confidence": 0.796725
+  },
+  {
+    "id": "w937",
+    "beat_id": "05_testing_validation",
+    "text": "a",
+    "start": 467.99,
+    "end": 468.13,
+    "confidence": 0.803961
+  },
+  {
+    "id": "w938",
+    "beat_id": "05_testing_validation",
+    "text": "claim",
+    "start": 468.13,
+    "end": 468.37,
+    "confidence": 0.877974
+  },
+  {
+    "id": "w939",
+    "beat_id": "05_testing_validation",
+    "text": "of",
+    "start": 468.37,
+    "end": 468.59,
+    "confidence": 0.992868
+  },
+  {
+    "id": "w940",
+    "beat_id": "05_testing_validation",
+    "text": "perfect",
+    "start": 468.59,
+    "end": 469.03,
+    "confidence": 0.691937
+  },
+  {
+    "id": "w941",
+    "beat_id": "05_testing_validation",
+    "text": "production",
+    "start": 469.03,
+    "end": 469.65,
+    "confidence": 0.851748
+  },
+  {
+    "id": "w942",
+    "beat_id": "05_testing_validation",
+    "text": "performance",
+    "start": 469.65,
+    "end": 470.61,
+    "confidence": 0.744832
+  },
+  {
+    "id": "w943",
+    "beat_id": "05_testing_validation",
+    "text": "also.",
+    "start": 470.61,
+    "end": 470.97,
+    "confidence": 0.932031
+  },
+  {
+    "id": "w944",
+    "beat_id": "06_industry_future",
+    "text": "For",
+    "start": 495.3,
+    "end": 495.8,
+    "confidence": 0.617785
+  },
+  {
+    "id": "w945",
+    "beat_id": "06_industry_future",
+    "text": "an",
+    "start": 495.8,
+    "end": 495.96,
+    "confidence": 0.841853
+  },
+  {
+    "id": "w946",
+    "beat_id": "06_industry_future",
+    "text": "SME",
+    "start": 495.96,
+    "end": 496.48,
+    "confidence": 0.977685
+  },
+  {
+    "id": "w947",
+    "beat_id": "06_industry_future",
+    "text": "owner,",
+    "start": 496.48,
+    "end": 496.74,
+    "confidence": 0.954872
+  },
+  {
+    "id": "w948",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 496.899,
+    "end": 496.939,
+    "confidence": 0.964732
+  },
+  {
+    "id": "w949",
+    "beat_id": "06_industry_future",
+    "text": "value",
+    "start": 496.939,
+    "end": 497.199,
+    "confidence": 0.99184
+  },
+  {
+    "id": "w950",
+    "beat_id": "06_industry_future",
+    "text": "is",
+    "start": 497.199,
+    "end": 497.419,
+    "confidence": 0.991377
+  },
+  {
+    "id": "w951",
+    "beat_id": "06_industry_future",
+    "text": "not",
+    "start": 497.419,
+    "end": 497.619,
+    "confidence": 0.975223
+  },
+  {
+    "id": "w952",
+    "beat_id": "06_industry_future",
+    "text": "manufactured",
+    "start": 497.619,
+    "end": 498.159,
+    "confidence": 0.94714
+  },
+  {
+    "id": "w953",
+    "beat_id": "06_industry_future",
+    "text": "certainty.",
+    "start": 498.159,
+    "end": 498.779,
+    "confidence": 0.995746
+  },
+  {
+    "id": "w954",
+    "beat_id": "06_industry_future",
+    "text": "It",
+    "start": 498.956,
+    "end": 499.016,
+    "confidence": 0.947657
+  },
+  {
+    "id": "w955",
+    "beat_id": "06_industry_future",
+    "text": "is",
+    "start": 499.016,
+    "end": 499.156,
+    "confidence": 0.965774
+  },
+  {
+    "id": "w956",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 499.156,
+    "end": 499.336,
+    "confidence": 0.974293
+  },
+  {
+    "id": "w957",
+    "beat_id": "06_industry_future",
+    "text": "clear",
+    "start": 499.336,
+    "end": 499.596,
+    "confidence": 0.993145
+  },
+  {
+    "id": "w958",
+    "beat_id": "06_industry_future",
+    "text": "conversation,",
+    "start": 499.596,
+    "end": 500.116,
+    "confidence": 0.984022
+  },
+  {
+    "id": "w959",
+    "beat_id": "06_industry_future",
+    "text": "which",
+    "start": 500.116,
+    "end": 500.496,
+    "confidence": 0.602432
+  },
+  {
+    "id": "w960",
+    "beat_id": "06_industry_future",
+    "text": "is",
+    "start": 500.496,
+    "end": 500.856,
+    "confidence": 0.951202
+  },
+  {
+    "id": "w961",
+    "beat_id": "06_industry_future",
+    "text": "five",
+    "start": 500.856,
+    "end": 501.516,
+    "confidence": 0.311955
+  },
+  {
+    "id": "w962",
+    "beat_id": "06_industry_future",
+    "text": "answers",
+    "start": 501.516,
+    "end": 502.016,
+    "confidence": 0.981755
+  },
+  {
+    "id": "w963",
+    "beat_id": "06_industry_future",
+    "text": "become",
+    "start": 502.016,
+    "end": 502.436,
+    "confidence": 0.879277
+  },
+  {
+    "id": "w964",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 502.436,
+    "end": 502.636,
+    "confidence": 0.950726
+  },
+  {
+    "id": "w965",
+    "beat_id": "06_industry_future",
+    "text": "reviewed",
+    "start": 502.636,
+    "end": 502.996,
+    "confidence": 0.437437
+  },
+  {
+    "id": "w966",
+    "beat_id": "06_industry_future",
+    "text": "starting",
+    "start": 502.996,
+    "end": 503.536,
+    "confidence": 0.975519
+  },
+  {
+    "id": "w967",
+    "beat_id": "06_industry_future",
+    "text": "point,",
+    "start": 503.536,
+    "end": 503.996,
+    "confidence": 0.972634
+  },
+  {
+    "id": "w968",
+    "beat_id": "06_industry_future",
+    "text": "scenario",
+    "start": 504.182,
+    "end": 504.342,
+    "confidence": 0.891647
+  },
+  {
+    "id": "w969",
+    "beat_id": "06_industry_future",
+    "text": "ranges",
+    "start": 504.342,
+    "end": 504.822,
+    "confidence": 0.979806
+  },
+  {
+    "id": "w970",
+    "beat_id": "06_industry_future",
+    "text": "show",
+    "start": 504.822,
+    "end": 505.222,
+    "confidence": 0.947209
+  },
+  {
+    "id": "w971",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 505.222,
+    "end": 505.422,
+    "confidence": 0.950684
+  },
+  {
+    "id": "w972",
+    "beat_id": "06_industry_future",
+    "text": "consequences",
+    "start": 505.422,
+    "end": 505.982,
+    "confidence": 0.962273
+  },
+  {
+    "id": "w973",
+    "beat_id": "06_industry_future",
+    "text": "of",
+    "start": 505.982,
+    "end": 506.302,
+    "confidence": 0.98681
+  },
+  {
+    "id": "w974",
+    "beat_id": "06_industry_future",
+    "text": "assumptions,",
+    "start": 506.302,
+    "end": 506.862,
+    "confidence": 0.968714
+  },
+  {
+    "id": "w975",
+    "beat_id": "06_industry_future",
+    "text": "and",
+    "start": 507.087,
+    "end": 507.107,
+    "confidence": 0.932471
+  },
+  {
+    "id": "w976",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 507.107,
+    "end": 507.207,
+    "confidence": 0.876066
+  },
+  {
+    "id": "w977",
+    "beat_id": "06_industry_future",
+    "text": "Blueprint",
+    "start": 507.207,
+    "end": 507.547,
+    "confidence": 0.957501
+  },
+  {
+    "id": "w978",
+    "beat_id": "06_industry_future",
+    "text": "preserves",
+    "start": 507.547,
+    "end": 508.087,
+    "confidence": 0.987033
+  },
+  {
+    "id": "w979",
+    "beat_id": "06_industry_future",
+    "text": "why",
+    "start": 508.087,
+    "end": 508.527,
+    "confidence": 0.993107
+  },
+  {
+    "id": "w980",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 508.527,
+    "end": 508.707,
+    "confidence": 0.98927
+  },
+  {
+    "id": "w981",
+    "beat_id": "06_industry_future",
+    "text": "path",
+    "start": 508.707,
+    "end": 508.927,
+    "confidence": 0.987548
+  },
+  {
+    "id": "w982",
+    "beat_id": "06_industry_future",
+    "text": "was",
+    "start": 508.927,
+    "end": 509.187,
+    "confidence": 0.990587
+  },
+  {
+    "id": "w983",
+    "beat_id": "06_industry_future",
+    "text": "chosen.",
+    "start": 509.187,
+    "end": 509.667,
+    "confidence": 0.9986
+  },
+  {
+    "id": "w984",
+    "beat_id": "06_industry_future",
+    "text": "For",
+    "start": 509.85,
+    "end": 510.09,
+    "confidence": 0.977135
+  },
+  {
+    "id": "w985",
+    "beat_id": "06_industry_future",
+    "text": "an",
+    "start": 510.09,
+    "end": 510.23,
+    "confidence": 0.987615
+  },
+  {
+    "id": "w986",
+    "beat_id": "06_industry_future",
+    "text": "advisor,",
+    "start": 510.23,
+    "end": 510.57,
+    "confidence": 0.881693
+  },
+  {
+    "id": "w987",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 510.726,
+    "end": 510.786,
+    "confidence": 0.958802
+  },
+  {
+    "id": "w988",
+    "beat_id": "06_industry_future",
+    "text": "same",
+    "start": 510.786,
+    "end": 511.066,
+    "confidence": 0.99895
+  },
+  {
+    "id": "w989",
+    "beat_id": "06_industry_future",
+    "text": "structured",
+    "start": 511.066,
+    "end": 511.626,
+    "confidence": 0.95051
+  },
+  {
+    "id": "w990",
+    "beat_id": "06_industry_future",
+    "text": "handoff",
+    "start": 511.626,
+    "end": 512.066,
+    "confidence": 0.928402
+  },
+  {
+    "id": "w991",
+    "beat_id": "06_industry_future",
+    "text": "can",
+    "start": 512.066,
+    "end": 512.366,
+    "confidence": 0.991655
+  },
+  {
+    "id": "w992",
+    "beat_id": "06_industry_future",
+    "text": "reduce",
+    "start": 512.366,
+    "end": 513.006,
+    "confidence": 0.983619
+  },
+  {
+    "id": "w993",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 513.006,
+    "end": 513.386,
+    "confidence": 0.406571
+  },
+  {
+    "id": "w994",
+    "beat_id": "06_industry_future",
+    "text": "repeated",
+    "start": 513.386,
+    "end": 513.746,
+    "confidence": 0.813139
+  },
+  {
+    "id": "w995",
+    "beat_id": "06_industry_future",
+    "text": "discovery",
+    "start": 513.746,
+    "end": 514.266,
+    "confidence": 0.977657
+  },
+  {
+    "id": "w996",
+    "beat_id": "06_industry_future",
+    "text": "while",
+    "start": 514.266,
+    "end": 514.966,
+    "confidence": 0.619098
+  },
+  {
+    "id": "w997",
+    "beat_id": "06_industry_future",
+    "text": "keeping",
+    "start": 514.966,
+    "end": 515.366,
+    "confidence": 0.988704
+  },
+  {
+    "id": "w998",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 515.366,
+    "end": 515.606,
+    "confidence": 0.987073
+  },
+  {
+    "id": "w999",
+    "beat_id": "06_industry_future",
+    "text": "consent",
+    "start": 515.606,
+    "end": 516.026,
+    "confidence": 0.800596
+  },
+  {
+    "id": "w1000",
+    "beat_id": "06_industry_future",
+    "text": "explicit.",
+    "start": 516.026,
+    "end": 516.646,
+    "confidence": 0.99594
+  },
+  {
+    "id": "w1001",
+    "beat_id": "06_industry_future",
+    "text": "The",
+    "start": 516.868,
+    "end": 517.028,
+    "confidence": 0.975204
+  },
+  {
+    "id": "w1002",
+    "beat_id": "06_industry_future",
+    "text": "current",
+    "start": 517.028,
+    "end": 517.328,
+    "confidence": 0.985858
+  },
+  {
+    "id": "w1003",
+    "beat_id": "06_industry_future",
+    "text": "boundary",
+    "start": 517.328,
+    "end": 517.688,
+    "confidence": 0.985309
+  },
+  {
+    "id": "w1004",
+    "beat_id": "06_industry_future",
+    "text": "matters.",
+    "start": 517.688,
+    "end": 518.108,
+    "confidence": 0.858546
+  },
+  {
+    "id": "w1005",
+    "beat_id": "06_industry_future",
+    "text": "MajuPilot",
+    "start": 518.868,
+    "end": 519.188,
+    "confidence": 0.9565
+  },
+  {
+    "id": "w1006",
+    "beat_id": "06_industry_future",
+    "text": "does",
+    "start": 519.188,
+    "end": 519.428,
+    "confidence": 0.985147
+  },
+  {
+    "id": "w1007",
+    "beat_id": "06_industry_future",
+    "text": "not",
+    "start": 519.428,
+    "end": 519.668,
+    "confidence": 0.994345
+  },
+  {
+    "id": "w1008",
+    "beat_id": "06_industry_future",
+    "text": "promise",
+    "start": 519.668,
+    "end": 520.048,
+    "confidence": 0.961263
+  },
+  {
+    "id": "w1009",
+    "beat_id": "06_industry_future",
+    "text": "business",
+    "start": 520.048,
+    "end": 520.688,
+    "confidence": 0.574728
+  },
+  {
+    "id": "w1010",
+    "beat_id": "06_industry_future",
+    "text": "outcomes,",
+    "start": 520.688,
+    "end": 521.388,
+    "confidence": 0.892479
+  },
+  {
+    "id": "w1011",
+    "beat_id": "06_industry_future",
+    "text": "vendor",
+    "start": 521.592,
+    "end": 521.592,
+    "confidence": 0.988182
+  },
+  {
+    "id": "w1012",
+    "beat_id": "06_industry_future",
+    "text": "fulfilment,",
+    "start": 521.592,
+    "end": 522.252,
+    "confidence": 0.852094
+  },
+  {
+    "id": "w1013",
+    "beat_id": "06_industry_future",
+    "text": "guaranteed",
+    "start": 522.378,
+    "end": 522.738,
+    "confidence": 0.947947
+  },
+  {
+    "id": "w1014",
+    "beat_id": "06_industry_future",
+    "text": "availability,",
+    "start": 522.738,
+    "end": 523.458,
+    "confidence": 0.996479
+  },
+  {
+    "id": "w1015",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 523.692,
+    "end": 523.772,
+    "confidence": 0.367804
+  },
+  {
+    "id": "w1016",
+    "beat_id": "06_industry_future",
+    "text": "human",
+    "start": 523.772,
+    "end": 524.072,
+    "confidence": 0.985567
+  },
+  {
+    "id": "w1017",
+    "beat_id": "06_industry_future",
+    "text": "response,",
+    "start": 524.072,
+    "end": 524.612,
+    "confidence": 0.985478
+  },
+  {
+    "id": "w1018",
+    "beat_id": "06_industry_future",
+    "text": "or",
+    "start": 524.774,
+    "end": 524.794,
+    "confidence": 0.894507
+  },
+  {
+    "id": "w1019",
+    "beat_id": "06_industry_future",
+    "text": "automatic",
+    "start": 525.014,
+    "end": 525.534,
+    "confidence": 0.997456
+  },
+  {
+    "id": "w1020",
+    "beat_id": "06_industry_future",
+    "text": "CRM",
+    "start": 525.534,
+    "end": 526.134,
+    "confidence": 0.990505
+  },
+  {
+    "id": "w1021",
+    "beat_id": "06_industry_future",
+    "text": "record",
+    "start": 526.134,
+    "end": 526.554,
+    "confidence": 0.932568
+  },
+  {
+    "id": "w1022",
+    "beat_id": "06_industry_future",
+    "text": "creation.",
+    "start": 526.554,
+    "end": 527.254,
+    "confidence": 0.996331
+  },
+  {
+    "id": "w1023",
+    "beat_id": "06_industry_future",
+    "text": "The",
+    "start": 527.444,
+    "end": 527.604,
+    "confidence": 0.975692
+  },
+  {
+    "id": "w1024",
+    "beat_id": "06_industry_future",
+    "text": "prototype",
+    "start": 527.604,
+    "end": 527.944,
+    "confidence": 0.998704
+  },
+  {
+    "id": "w1025",
+    "beat_id": "06_industry_future",
+    "text": "shows",
+    "start": 527.944,
+    "end": 528.344,
+    "confidence": 0.98377
+  },
+  {
+    "id": "w1026",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 528.344,
+    "end": 528.584,
+    "confidence": 0.952056
+  },
+  {
+    "id": "w1027",
+    "beat_id": "06_industry_future",
+    "text": "deployable",
+    "start": 528.584,
+    "end": 529.364,
+    "confidence": 0.991451
+  },
+  {
+    "id": "w1028",
+    "beat_id": "06_industry_future",
+    "text": "workflow",
+    "start": 529.364,
+    "end": 529.844,
+    "confidence": 0.993785
+  },
+  {
+    "id": "w1029",
+    "beat_id": "06_industry_future",
+    "text": "and",
+    "start": 529.844,
+    "end": 530.324,
+    "confidence": 0.836379
+  },
+  {
+    "id": "w1030",
+    "beat_id": "06_industry_future",
+    "text": "an",
+    "start": 530.324,
+    "end": 530.524,
+    "confidence": 0.938507
+  },
+  {
+    "id": "w1031",
+    "beat_id": "06_industry_future",
+    "text": "inspectable",
+    "start": 530.524,
+    "end": 531.344,
+    "confidence": 0.966719
+  },
+  {
+    "id": "w1032",
+    "beat_id": "06_industry_future",
+    "text": "decision",
+    "start": 531.344,
+    "end": 531.704,
+    "confidence": 0.992903
+  },
+  {
+    "id": "w1033",
+    "beat_id": "06_industry_future",
+    "text": "package,",
+    "start": 531.704,
+    "end": 532.324,
+    "confidence": 0.980726
+  },
+  {
+    "id": "w1034",
+    "beat_id": "06_industry_future",
+    "text": "not",
+    "start": 532.507,
+    "end": 532.827,
+    "confidence": 0.978362
+  },
+  {
+    "id": "w1035",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 532.827,
+    "end": 532.987,
+    "confidence": 0.974844
+  },
+  {
+    "id": "w1036",
+    "beat_id": "06_industry_future",
+    "text": "completed",
+    "start": 532.987,
+    "end": 533.567,
+    "confidence": 0.990457
+  },
+  {
+    "id": "w1037",
+    "beat_id": "06_industry_future",
+    "text": "and",
+    "start": 533.567,
+    "end": 533.987,
+    "confidence": 0.963722
+  },
+  {
+    "id": "w1038",
+    "beat_id": "06_industry_future",
+    "text": "production-ready",
+    "start": 534.487,
+    "end": 534.747,
+    "confidence": 0.868595
+  },
+  {
+    "id": "w1039",
+    "beat_id": "06_industry_future",
+    "text": "customer",
+    "start": 534.747,
+    "end": 535.247,
+    "confidence": 0.979371
+  },
+  {
+    "id": "w1040",
+    "beat_id": "06_industry_future",
+    "text": "transformation",
+    "start": 535.247,
+    "end": 535.847,
+    "confidence": 0.997915
+  },
+  {
+    "id": "w1041",
+    "beat_id": "06_industry_future",
+    "text": "yet.",
+    "start": 535.847,
+    "end": 536.367,
+    "confidence": 0.953748
+  },
+  {
+    "id": "w1042",
+    "beat_id": "06_industry_future",
+    "text": "Future",
+    "start": 536.58,
+    "end": 536.78,
+    "confidence": 0.978751
+  },
+  {
+    "id": "w1043",
+    "beat_id": "06_industry_future",
+    "text": "work",
+    "start": 536.78,
+    "end": 537.02,
+    "confidence": 0.657504
+  },
+  {
+    "id": "w1044",
+    "beat_id": "06_industry_future",
+    "text": "can",
+    "start": 537.02,
+    "end": 537.26,
+    "confidence": 0.995245
+  },
+  {
+    "id": "w1045",
+    "beat_id": "06_industry_future",
+    "text": "extend",
+    "start": 537.26,
+    "end": 537.62,
+    "confidence": 0.985007
+  },
+  {
+    "id": "w1046",
+    "beat_id": "06_industry_future",
+    "text": "domain",
+    "start": 537.62,
+    "end": 537.98,
+    "confidence": 0.992255
+  },
+  {
+    "id": "w1047",
+    "beat_id": "06_industry_future",
+    "text": "packs,",
+    "start": 537.98,
+    "end": 538.34,
+    "confidence": 0.892512
+  },
+  {
+    "id": "w1048",
+    "beat_id": "06_industry_future",
+    "text": "evidence",
+    "start": 538.475,
+    "end": 538.655,
+    "confidence": 0.909794
+  },
+  {
+    "id": "w1049",
+    "beat_id": "06_industry_future",
+    "text": "sources,",
+    "start": 538.655,
+    "end": 539.195,
+    "confidence": 0.984845
+  },
+  {
+    "id": "w1050",
+    "beat_id": "06_industry_future",
+    "text": "integrations,",
+    "start": 539.339,
+    "end": 539.979,
+    "confidence": 0.878501
+  },
+  {
+    "id": "w1051",
+    "beat_id": "06_industry_future",
+    "text": "and",
+    "start": 540.111,
+    "end": 540.251,
+    "confidence": 0.996302
+  },
+  {
+    "id": "w1052",
+    "beat_id": "06_industry_future",
+    "text": "consultant",
+    "start": 540.251,
+    "end": 540.731,
+    "confidence": 0.8079
+  },
+  {
+    "id": "w1053",
+    "beat_id": "06_industry_future",
+    "text": "workflows",
+    "start": 540.731,
+    "end": 541.371,
+    "confidence": 0.991884
+  },
+  {
+    "id": "w1054",
+    "beat_id": "06_industry_future",
+    "text": "after",
+    "start": 541.371,
+    "end": 542.211,
+    "confidence": 0.709522
+  },
+  {
+    "id": "w1055",
+    "beat_id": "06_industry_future",
+    "text": "this",
+    "start": 542.211,
+    "end": 542.431,
+    "confidence": 0.96161
+  },
+  {
+    "id": "w1056",
+    "beat_id": "06_industry_future",
+    "text": "boundary",
+    "start": 542.431,
+    "end": 542.751,
+    "confidence": 0.994471
+  },
+  {
+    "id": "w1057",
+    "beat_id": "06_industry_future",
+    "text": "is",
+    "start": 542.751,
+    "end": 543.011,
+    "confidence": 0.994868
+  },
+  {
+    "id": "w1058",
+    "beat_id": "06_industry_future",
+    "text": "validated.",
+    "start": 543.011,
+    "end": 543.511,
+    "confidence": 0.565109
+  },
+  {
+    "id": "w1059",
+    "beat_id": "06_industry_future",
+    "text": "Document",
+    "start": 544.211,
+    "end": 544.751,
+    "confidence": 0.309526
+  },
+  {
+    "id": "w1060",
+    "beat_id": "06_industry_future",
+    "text": "RAG,",
+    "start": 545.798,
+    "end": 546.358,
+    "confidence": 0.897214
+  },
+  {
+    "id": "w1061",
+    "beat_id": "06_industry_future",
+    "text": "retrieval-augmented",
+    "start": 546.358,
+    "end": 546.818,
+    "confidence": 0.784065
+  },
+  {
+    "id": "w1062",
+    "beat_id": "06_industry_future",
+    "text": "generation,",
+    "start": 546.818,
+    "end": 547.258,
+    "confidence": 0.957565
+  },
+  {
+    "id": "w1063",
+    "beat_id": "06_industry_future",
+    "text": "and",
+    "start": 547.258,
+    "end": 547.658,
+    "confidence": 0.766638
+  },
+  {
+    "id": "w1064",
+    "beat_id": "06_industry_future",
+    "text": "arbitrary",
+    "start": 547.658,
+    "end": 548.178,
+    "confidence": 0.919622
+  },
+  {
+    "id": "w1065",
+    "beat_id": "06_industry_future",
+    "text": "uploaded-document",
+    "start": 549.418,
+    "end": 549.418,
+    "confidence": 0.961967
+  },
+  {
+    "id": "w1066",
+    "beat_id": "06_industry_future",
+    "text": "ingestion",
+    "start": 549.418,
+    "end": 549.918,
+    "confidence": 0.77944
+  },
+  {
+    "id": "w1067",
+    "beat_id": "06_industry_future",
+    "text": "may",
+    "start": 550.107,
+    "end": 550.367,
+    "confidence": 0.83577
+  },
+  {
+    "id": "w1068",
+    "beat_id": "06_industry_future",
+    "text": "be",
+    "start": 550.367,
+    "end": 550.487,
+    "confidence": 0.996538
+  },
+  {
+    "id": "w1069",
+    "beat_id": "06_industry_future",
+    "text": "explored",
+    "start": 550.487,
+    "end": 550.867,
+    "confidence": 0.826131
+  },
+  {
+    "id": "w1070",
+    "beat_id": "06_industry_future",
+    "text": "later",
+    "start": 550.867,
+    "end": 551.267,
+    "confidence": 0.98552
+  },
+  {
+    "id": "w1071",
+    "beat_id": "06_industry_future",
+    "text": "as",
+    "start": 551.267,
+    "end": 552.027,
+    "confidence": 0.964935
+  },
+  {
+    "id": "w1072",
+    "beat_id": "06_industry_future",
+    "text": "a",
+    "start": 552.027,
+    "end": 552.327,
+    "confidence": 0.903112
+  },
+  {
+    "id": "w1073",
+    "beat_id": "06_industry_future",
+    "text": "future",
+    "start": 552.327,
+    "end": 552.687,
+    "confidence": 0.940736
+  },
+  {
+    "id": "w1074",
+    "beat_id": "06_industry_future",
+    "text": "upgrade",
+    "start": 552.687,
+    "end": 553.187,
+    "confidence": 0.779167
+  },
+  {
+    "id": "w1075",
+    "beat_id": "06_industry_future",
+    "text": "or",
+    "start": 553.187,
+    "end": 553.627,
+    "confidence": 0.730495
+  },
+  {
+    "id": "w1076",
+    "beat_id": "06_industry_future",
+    "text": "future",
+    "start": 553.627,
+    "end": 553.947,
+    "confidence": 0.888508
+  },
+  {
+    "id": "w1077",
+    "beat_id": "06_industry_future",
+    "text": "improvement.",
+    "start": 553.947,
+    "end": 554.387,
+    "confidence": 0.985381
+  },
+  {
+    "id": "w1078",
+    "beat_id": "06_industry_future",
+    "text": "They",
+    "start": 554.615,
+    "end": 554.875,
+    "confidence": 0.964702
+  },
+  {
+    "id": "w1079",
+    "beat_id": "06_industry_future",
+    "text": "are",
+    "start": 554.875,
+    "end": 554.955,
+    "confidence": 0.976569
+  },
+  {
+    "id": "w1080",
+    "beat_id": "06_industry_future",
+    "text": "not",
+    "start": 554.955,
+    "end": 555.095,
+    "confidence": 0.985599
+  },
+  {
+    "id": "w1081",
+    "beat_id": "06_industry_future",
+    "text": "implemented",
+    "start": 555.095,
+    "end": 555.615,
+    "confidence": 0.999163
+  },
+  {
+    "id": "w1082",
+    "beat_id": "06_industry_future",
+    "text": "now.",
+    "start": 555.615,
+    "end": 556.075,
+    "confidence": 0.967198
+  },
+  {
+    "id": "w1083",
+    "beat_id": "06_industry_future",
+    "text": "The",
+    "start": 556.306,
+    "end": 556.326,
+    "confidence": 0.969208
+  },
+  {
+    "id": "w1084",
+    "beat_id": "06_industry_future",
+    "text": "opportunity",
+    "start": 556.326,
+    "end": 557.106,
+    "confidence": 0.98651
+  },
+  {
+    "id": "w1085",
+    "beat_id": "06_industry_future",
+    "text": "is",
+    "start": 557.106,
+    "end": 557.546,
+    "confidence": 0.987105
+  },
+  {
+    "id": "w1086",
+    "beat_id": "06_industry_future",
+    "text": "to",
+    "start": 557.546,
+    "end": 557.706,
+    "confidence": 0.995036
+  },
+  {
+    "id": "w1087",
+    "beat_id": "06_industry_future",
+    "text": "broaden",
+    "start": 557.706,
+    "end": 558.006,
+    "confidence": 0.997204
+  },
+  {
+    "id": "w1088",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 558.006,
+    "end": 558.266,
+    "confidence": 0.991052
+  },
+  {
+    "id": "w1089",
+    "beat_id": "06_industry_future",
+    "text": "evidence",
+    "start": 558.266,
+    "end": 558.686,
+    "confidence": 0.997478
+  },
+  {
+    "id": "w1090",
+    "beat_id": "06_industry_future",
+    "text": "available",
+    "start": 558.686,
+    "end": 559.086,
+    "confidence": 0.996861
+  },
+  {
+    "id": "w1091",
+    "beat_id": "06_industry_future",
+    "text": "to",
+    "start": 559.086,
+    "end": 559.526,
+    "confidence": 0.994351
+  },
+  {
+    "id": "w1092",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 559.526,
+    "end": 559.706,
+    "confidence": 0.990877
+  },
+  {
+    "id": "w1093",
+    "beat_id": "06_industry_future",
+    "text": "system",
+    "start": 559.706,
+    "end": 560.066,
+    "confidence": 0.984121
+  },
+  {
+    "id": "w1094",
+    "beat_id": "06_industry_future",
+    "text": "without",
+    "start": 560.066,
+    "end": 560.646,
+    "confidence": 0.90486
+  },
+  {
+    "id": "w1095",
+    "beat_id": "06_industry_future",
+    "text": "weakening",
+    "start": 560.646,
+    "end": 561.186,
+    "confidence": 0.998723
+  },
+  {
+    "id": "w1096",
+    "beat_id": "06_industry_future",
+    "text": "the",
+    "start": 561.186,
+    "end": 561.566,
+    "confidence": 0.959443
+  },
+  {
+    "id": "w1097",
+    "beat_id": "06_industry_future",
+    "text": "provenance,",
+    "start": 561.809,
+    "end": 562.569,
+    "confidence": 0.834055
+  },
+  {
+    "id": "w1098",
+    "beat_id": "06_industry_future",
+    "text": "consent,",
+    "start": 562.71,
+    "end": 562.99,
+    "confidence": 0.933049
+  },
+  {
+    "id": "w1099",
+    "beat_id": "06_industry_future",
+    "text": "or",
+    "start": 562.99,
+    "end": 563.35,
+    "confidence": 0.574988
+  },
+  {
+    "id": "w1100",
+    "beat_id": "06_industry_future",
+    "text": "deterministic",
+    "start": 563.35,
+    "end": 564.07,
+    "confidence": 0.992688
+  },
+  {
+    "id": "w1101",
+    "beat_id": "06_industry_future",
+    "text": "ownership.",
+    "start": 564.07,
+    "end": 564.45,
+    "confidence": 0.999084
+  },
+  {
+    "id": "w1102",
+    "beat_id": "07_close",
+    "text": "So,",
+    "start": 565.45,
+    "end": 565.91,
+    "confidence": 0.553389
+  },
+  {
+    "id": "w1103",
+    "beat_id": "07_close",
+    "text": "as",
+    "start": 565.91,
+    "end": 566.05,
+    "confidence": 0.788474
+  },
+  {
+    "id": "w1104",
+    "beat_id": "07_close",
+    "text": "a",
+    "start": 566.05,
+    "end": 566.19,
+    "confidence": 0.979091
+  },
+  {
+    "id": "w1105",
+    "beat_id": "07_close",
+    "text": "conclusion,",
+    "start": 566.19,
+    "end": 566.71,
+    "confidence": 0.992847
+  },
+  {
+    "id": "w1106",
+    "beat_id": "07_close",
+    "text": "MajuPilot",
+    "start": 566.855,
+    "end": 567.235,
+    "confidence": 0.505106
+  },
+  {
+    "id": "w1107",
+    "beat_id": "07_close",
+    "text": "is",
+    "start": 567.235,
+    "end": 567.515,
+    "confidence": 0.973711
+  },
+  {
+    "id": "w1108",
+    "beat_id": "07_close",
+    "text": "not",
+    "start": 567.515,
+    "end": 567.875,
+    "confidence": 0.956745
+  },
+  {
+    "id": "w1109",
+    "beat_id": "07_close",
+    "text": "a",
+    "start": 567.875,
+    "end": 568.235,
+    "confidence": 0.975546
+  },
+  {
+    "id": "w1110",
+    "beat_id": "07_close",
+    "text": "machine",
+    "start": 568.235,
+    "end": 568.495,
+    "confidence": 0.979214
+  },
+  {
+    "id": "w1111",
+    "beat_id": "07_close",
+    "text": "that",
+    "start": 568.495,
+    "end": 568.795,
+    "confidence": 0.988774
+  },
+  {
+    "id": "w1112",
+    "beat_id": "07_close",
+    "text": "decides",
+    "start": 568.795,
+    "end": 569.235,
+    "confidence": 0.977663
+  },
+  {
+    "id": "w1113",
+    "beat_id": "07_close",
+    "text": "for",
+    "start": 569.235,
+    "end": 569.595,
+    "confidence": 0.851784
+  },
+  {
+    "id": "w1114",
+    "beat_id": "07_close",
+    "text": "an",
+    "start": 569.595,
+    "end": 569.735,
+    "confidence": 0.834983
+  },
+  {
+    "id": "w1115",
+    "beat_id": "07_close",
+    "text": "SME.",
+    "start": 569.735,
+    "end": 570.235,
+    "confidence": 0.971873
+  },
+  {
+    "id": "w1116",
+    "beat_id": "07_close",
+    "text": "It",
+    "start": 570.376,
+    "end": 570.596,
+    "confidence": 0.880148
+  },
+  {
+    "id": "w1117",
+    "beat_id": "07_close",
+    "text": "makes",
+    "start": 570.596,
+    "end": 570.916,
+    "confidence": 0.988618
+  },
+  {
+    "id": "w1118",
+    "beat_id": "07_close",
+    "text": "the",
+    "start": 570.916,
+    "end": 571.196,
+    "confidence": 0.972269
+  },
+  {
+    "id": "w1119",
+    "beat_id": "07_close",
+    "text": "path",
+    "start": 571.196,
+    "end": 571.456,
+    "confidence": 0.994009
+  },
+  {
+    "id": "w1120",
+    "beat_id": "07_close",
+    "text": "to",
+    "start": 571.456,
+    "end": 571.796,
+    "confidence": 0.982789
+  },
+  {
+    "id": "w1121",
+    "beat_id": "07_close",
+    "text": "a",
+    "start": 571.796,
+    "end": 571.956,
+    "confidence": 0.944775
+  },
+  {
+    "id": "w1122",
+    "beat_id": "07_close",
+    "text": "decision",
+    "start": 571.956,
+    "end": 572.396,
+    "confidence": 0.980449
+  },
+  {
+    "id": "w1123",
+    "beat_id": "07_close",
+    "text": "visible.",
+    "start": 572.396,
+    "end": 573.156,
+    "confidence": 0.993226
+  },
+  {
+    "id": "w1124",
+    "beat_id": "07_close",
+    "text": "So,",
+    "start": 573.417,
+    "end": 573.437,
+    "confidence": 0.781093
+  },
+  {
+    "id": "w1125",
+    "beat_id": "07_close",
+    "text": "that's",
+    "start": 573.437,
+    "end": 573.737,
+    "confidence": 0.905419
+  },
+  {
+    "id": "w1126",
+    "beat_id": "07_close",
+    "text": "all",
+    "start": 573.737,
+    "end": 573.877,
+    "confidence": 0.991787
+  },
+  {
+    "id": "w1127",
+    "beat_id": "07_close",
+    "text": "from",
+    "start": 573.877,
+    "end": 574.077,
+    "confidence": 0.956875
+  },
+  {
+    "id": "w1128",
+    "beat_id": "07_close",
+    "text": "me.",
+    "start": 574.077,
+    "end": 574.317,
+    "confidence": 0.996539
+  },
+  {
+    "id": "w1129",
+    "beat_id": "07_close",
+    "text": "Thank",
+    "start": 574.46,
+    "end": 574.5,
+    "confidence": 0.554681
+  },
+  {
+    "id": "w1130",
+    "beat_id": "07_close",
+    "text": "you.",
+    "start": 574.5,
+    "end": 574.7,
+    "confidence": 0.976916
+  }
+]

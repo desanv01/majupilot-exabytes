@@ -1,0 +1,1398 @@
+{
+  "beat_id": "01_problem_objectives",
+  "source": ".media/audio/voice/voice_002.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 49.6,
+  "duration_after_vad": 48.608,
+  "segments": [
+    {
+      "start": 0.56,
+      "end": 6.24,
+      "text": "Small and medium businesses are told to digitalize before they have a clear next step.",
+      "avg_logprob": -0.200458,
+      "no_speech_prob": 0.030213,
+      "words": [
+        {
+          "text": "Small",
+          "start": 0.56,
+          "end": 1.14,
+          "probability": 0.69019
+        },
+        {
+          "text": "and",
+          "start": 1.14,
+          "end": 1.44,
+          "probability": 0.952874
+        },
+        {
+          "text": "medium",
+          "start": 1.44,
+          "end": 1.78,
+          "probability": 0.892872
+        },
+        {
+          "text": "businesses",
+          "start": 1.78,
+          "end": 2.32,
+          "probability": 0.921472
+        },
+        {
+          "text": "are",
+          "start": 2.32,
+          "end": 2.7,
+          "probability": 0.991069
+        },
+        {
+          "text": "told",
+          "start": 2.7,
+          "end": 3.02,
+          "probability": 0.98394
+        },
+        {
+          "text": "to",
+          "start": 3.02,
+          "end": 3.28,
+          "probability": 0.996489
+        },
+        {
+          "text": "digitalize",
+          "start": 3.28,
+          "end": 3.94,
+          "probability": 0.818238
+        },
+        {
+          "text": "before",
+          "start": 3.94,
+          "end": 4.46,
+          "probability": 0.933528
+        },
+        {
+          "text": "they",
+          "start": 4.46,
+          "end": 4.96,
+          "probability": 0.957907
+        },
+        {
+          "text": "have",
+          "start": 4.96,
+          "end": 5.14,
+          "probability": 0.99388
+        },
+        {
+          "text": "a",
+          "start": 5.14,
+          "end": 5.3,
+          "probability": 0.965122
+        },
+        {
+          "text": "clear",
+          "start": 5.3,
+          "end": 5.62,
+          "probability": 0.985938
+        },
+        {
+          "text": "next",
+          "start": 5.62,
+          "end": 5.9,
+          "probability": 0.978168
+        },
+        {
+          "text": "step.",
+          "start": 5.9,
+          "end": 6.24,
+          "probability": 0.997826
+        }
+      ]
+    },
+    {
+      "start": 6.72,
+      "end": 9.38,
+      "text": "The hard part isn't finding another idea.",
+      "avg_logprob": -0.200458,
+      "no_speech_prob": 0.030213,
+      "words": [
+        {
+          "text": "The",
+          "start": 6.72,
+          "end": 6.86,
+          "probability": 0.967138
+        },
+        {
+          "text": "hard",
+          "start": 6.86,
+          "end": 7.08,
+          "probability": 0.98456
+        },
+        {
+          "text": "part",
+          "start": 7.08,
+          "end": 7.38,
+          "probability": 0.991961
+        },
+        {
+          "text": "isn't",
+          "start": 7.38,
+          "end": 7.94,
+          "probability": 0.966261
+        },
+        {
+          "text": "finding",
+          "start": 7.94,
+          "end": 8.42,
+          "probability": 0.978753
+        },
+        {
+          "text": "another",
+          "start": 8.42,
+          "end": 8.9,
+          "probability": 0.972732
+        },
+        {
+          "text": "idea.",
+          "start": 8.9,
+          "end": 9.38,
+          "probability": 0.990504
+        }
+      ]
+    },
+    {
+      "start": 9.7,
+      "end": 15.68,
+      "text": "It's deciding what happens first, what it depends on and what it may cost and which",
+      "avg_logprob": -0.200458,
+      "no_speech_prob": 0.030213,
+      "words": [
+        {
+          "text": "It's",
+          "start": 9.7,
+          "end": 9.94,
+          "probability": 0.953774
+        },
+        {
+          "text": "deciding",
+          "start": 9.94,
+          "end": 10.46,
+          "probability": 0.997155
+        },
+        {
+          "text": "what",
+          "start": 10.46,
+          "end": 10.82,
+          "probability": 0.991595
+        },
+        {
+          "text": "happens",
+          "start": 10.82,
+          "end": 11.22,
+          "probability": 0.991384
+        },
+        {
+          "text": "first,",
+          "start": 11.22,
+          "end": 11.58,
+          "probability": 0.993575
+        },
+        {
+          "text": "what",
+          "start": 12.08,
+          "end": 12.3,
+          "probability": 0.986833
+        },
+        {
+          "text": "it",
+          "start": 12.3,
+          "end": 12.44,
+          "probability": 0.989193
+        },
+        {
+          "text": "depends",
+          "start": 12.44,
+          "end": 12.82,
+          "probability": 0.992382
+        },
+        {
+          "text": "on",
+          "start": 12.82,
+          "end": 13.1,
+          "probability": 0.985011
+        },
+        {
+          "text": "and",
+          "start": 13.1,
+          "end": 13.42,
+          "probability": 0.825022
+        },
+        {
+          "text": "what",
+          "start": 13.42,
+          "end": 13.62,
+          "probability": 0.992423
+        },
+        {
+          "text": "it",
+          "start": 13.62,
+          "end": 13.76,
+          "probability": 0.992733
+        },
+        {
+          "text": "may",
+          "start": 13.76,
+          "end": 14.02,
+          "probability": 0.981487
+        },
+        {
+          "text": "cost",
+          "start": 14.02,
+          "end": 14.38,
+          "probability": 0.974261
+        },
+        {
+          "text": "and",
+          "start": 14.38,
+          "end": 14.92,
+          "probability": 0.566992
+        },
+        {
+          "text": "which",
+          "start": 14.92,
+          "end": 15.68,
+          "probability": 0.948674
+        }
+      ]
+    },
+    {
+      "start": 15.68,
+      "end": 17.4,
+      "text": "evidence supports the decision.",
+      "avg_logprob": -0.200458,
+      "no_speech_prob": 0.030213,
+      "words": [
+        {
+          "text": "evidence",
+          "start": 15.68,
+          "end": 16.22,
+          "probability": 0.985644
+        },
+        {
+          "text": "supports",
+          "start": 16.22,
+          "end": 16.72,
+          "probability": 0.976492
+        },
+        {
+          "text": "the",
+          "start": 16.72,
+          "end": 17.02,
+          "probability": 0.947538
+        },
+        {
+          "text": "decision.",
+          "start": 17.02,
+          "end": 17.4,
+          "probability": 0.95298
+        }
+      ]
+    },
+    {
+      "start": 17.98,
+      "end": 22.8,
+      "text": "A generic chat answer can sound confident and still leave those questions unresolved.",
+      "avg_logprob": -0.200458,
+      "no_speech_prob": 0.030213,
+      "words": [
+        {
+          "text": "A",
+          "start": 17.98,
+          "end": 18.2,
+          "probability": 0.971399
+        },
+        {
+          "text": "generic",
+          "start": 18.2,
+          "end": 18.58,
+          "probability": 0.993156
+        },
+        {
+          "text": "chat",
+          "start": 18.58,
+          "end": 18.92,
+          "probability": 0.977702
+        },
+        {
+          "text": "answer",
+          "start": 18.92,
+          "end": 19.28,
+          "probability": 0.89017
+        },
+        {
+          "text": "can",
+          "start": 19.28,
+          "end": 19.54,
+          "probability": 0.993731
+        },
+        {
+          "text": "sound",
+          "start": 19.54,
+          "end": 19.84,
+          "probability": 0.994118
+        },
+        {
+          "text": "confident",
+          "start": 19.84,
+          "end": 20.26,
+          "probability": 0.989813
+        },
+        {
+          "text": "and",
+          "start": 20.26,
+          "end": 20.62,
+          "probability": 0.98729
+        },
+        {
+          "text": "still",
+          "start": 20.62,
+          "end": 21.0,
+          "probability": 0.987759
+        },
+        {
+          "text": "leave",
+          "start": 21.0,
+          "end": 21.4,
+          "probability": 0.875283
+        },
+        {
+          "text": "those",
+          "start": 21.4,
+          "end": 21.74,
+          "probability": 0.952059
+        },
+        {
+          "text": "questions",
+          "start": 21.74,
+          "end": 22.2,
+          "probability": 0.990337
+        },
+        {
+          "text": "unresolved.",
+          "start": 22.2,
+          "end": 22.8,
+          "probability": 0.997073
+        }
+      ]
+    },
+    {
+      "start": 23.7,
+      "end": 26.58,
+      "text": "So MagiPilot starts with 5 focused questions.",
+      "avg_logprob": -0.200458,
+      "no_speech_prob": 0.030213,
+      "words": [
+        {
+          "text": "So",
+          "start": 23.7,
+          "end": 23.8,
+          "probability": 0.822558
+        },
+        {
+          "text": "MagiPilot",
+          "start": 23.8,
+          "end": 24.4,
+          "probability": 0.692973
+        },
+        {
+          "text": "starts",
+          "start": 24.4,
+          "end": 24.96,
+          "probability": 0.960391
+        },
+        {
+          "text": "with",
+          "start": 24.96,
+          "end": 25.3,
+          "probability": 0.99178
+        },
+        {
+          "text": "5",
+          "start": 25.3,
+          "end": 25.64,
+          "probability": 0.395078
+        },
+        {
+          "text": "focused",
+          "start": 25.64,
+          "end": 26.1,
+          "probability": 0.917894
+        },
+        {
+          "text": "questions.",
+          "start": 26.1,
+          "end": 26.58,
+          "probability": 0.991722
+        }
+      ]
+    },
+    {
+      "start": 26.58,
+      "end": 32.96,
+      "text": "Together, they create an editable business twin, a compact record of contracts, objectives,",
+      "avg_logprob": -0.226928,
+      "no_speech_prob": 0.05368,
+      "words": [
+        {
+          "text": "Together,",
+          "start": 26.58,
+          "end": 27.28,
+          "probability": 0.882779
+        },
+        {
+          "text": "they",
+          "start": 27.66,
+          "end": 27.7,
+          "probability": 0.985492
+        },
+        {
+          "text": "create",
+          "start": 27.7,
+          "end": 27.98,
+          "probability": 0.991507
+        },
+        {
+          "text": "an",
+          "start": 27.98,
+          "end": 28.24,
+          "probability": 0.986571
+        },
+        {
+          "text": "editable",
+          "start": 28.24,
+          "end": 28.84,
+          "probability": 0.975287
+        },
+        {
+          "text": "business",
+          "start": 28.84,
+          "end": 29.28,
+          "probability": 0.943406
+        },
+        {
+          "text": "twin,",
+          "start": 29.28,
+          "end": 29.62,
+          "probability": 0.974924
+        },
+        {
+          "text": "a",
+          "start": 30.06,
+          "end": 30.36,
+          "probability": 0.979361
+        },
+        {
+          "text": "compact",
+          "start": 30.36,
+          "end": 30.8,
+          "probability": 0.996894
+        },
+        {
+          "text": "record",
+          "start": 30.8,
+          "end": 31.3,
+          "probability": 0.986955
+        },
+        {
+          "text": "of",
+          "start": 31.3,
+          "end": 31.64,
+          "probability": 0.997599
+        },
+        {
+          "text": "contracts,",
+          "start": 31.64,
+          "end": 32.2,
+          "probability": 0.932292
+        },
+        {
+          "text": "objectives,",
+          "start": 32.48,
+          "end": 32.96,
+          "probability": 0.989106
+        }
+      ]
+    },
+    {
+      "start": 33.38,
+      "end": 37.72,
+      "text": "capabilities, process friction, constraints, readiness and evidence.",
+      "avg_logprob": -0.226928,
+      "no_speech_prob": 0.05368,
+      "words": [
+        {
+          "text": "capabilities,",
+          "start": 33.38,
+          "end": 33.76,
+          "probability": 0.986365
+        },
+        {
+          "text": "process",
+          "start": 34.32,
+          "end": 34.58,
+          "probability": 0.977377
+        },
+        {
+          "text": "friction,",
+          "start": 34.58,
+          "end": 35.08,
+          "probability": 0.948266
+        },
+        {
+          "text": "constraints,",
+          "start": 35.78,
+          "end": 36.18,
+          "probability": 0.966755
+        },
+        {
+          "text": "readiness",
+          "start": 36.54,
+          "end": 36.84,
+          "probability": 0.998548
+        },
+        {
+          "text": "and",
+          "start": 36.84,
+          "end": 37.26,
+          "probability": 0.509483
+        },
+        {
+          "text": "evidence.",
+          "start": 37.26,
+          "end": 37.72,
+          "probability": 0.990838
+        }
+      ]
+    },
+    {
+      "start": 38.72,
+      "end": 40.46,
+      "text": "Facts and unknowns remains visible.",
+      "avg_logprob": -0.226928,
+      "no_speech_prob": 0.05368,
+      "words": [
+        {
+          "text": "Facts",
+          "start": 38.72,
+          "end": 38.78,
+          "probability": 0.951501
+        },
+        {
+          "text": "and",
+          "start": 38.78,
+          "end": 39.06,
+          "probability": 0.945991
+        },
+        {
+          "text": "unknowns",
+          "start": 39.06,
+          "end": 39.72,
+          "probability": 0.981139
+        },
+        {
+          "text": "remains",
+          "start": 39.72,
+          "end": 39.92,
+          "probability": 0.502924
+        },
+        {
+          "text": "visible.",
+          "start": 39.92,
+          "end": 40.46,
+          "probability": 0.998479
+        }
+      ]
+    },
+    {
+      "start": 41.06,
+      "end": 47.06,
+      "text": "The objective is practical, which is to move from answers to an inspectable path, not just",
+      "avg_logprob": -0.226928,
+      "no_speech_prob": 0.05368,
+      "words": [
+        {
+          "text": "The",
+          "start": 41.06,
+          "end": 41.1,
+          "probability": 0.980208
+        },
+        {
+          "text": "objective",
+          "start": 41.1,
+          "end": 41.46,
+          "probability": 0.974484
+        },
+        {
+          "text": "is",
+          "start": 41.46,
+          "end": 41.78,
+          "probability": 0.997921
+        },
+        {
+          "text": "practical,",
+          "start": 41.78,
+          "end": 42.38,
+          "probability": 0.997467
+        },
+        {
+          "text": "which",
+          "start": 42.8,
+          "end": 43.14,
+          "probability": 0.364603
+        },
+        {
+          "text": "is",
+          "start": 43.14,
+          "end": 43.26,
+          "probability": 0.99382
+        },
+        {
+          "text": "to",
+          "start": 43.26,
+          "end": 43.5,
+          "probability": 0.988629
+        },
+        {
+          "text": "move",
+          "start": 43.5,
+          "end": 43.84,
+          "probability": 0.974946
+        },
+        {
+          "text": "from",
+          "start": 43.84,
+          "end": 44.2,
+          "probability": 0.984631
+        },
+        {
+          "text": "answers",
+          "start": 44.2,
+          "end": 44.62,
+          "probability": 0.946622
+        },
+        {
+          "text": "to",
+          "start": 44.62,
+          "end": 45.08,
+          "probability": 0.989256
+        },
+        {
+          "text": "an",
+          "start": 45.08,
+          "end": 45.28,
+          "probability": 0.984232
+        },
+        {
+          "text": "inspectable",
+          "start": 45.28,
+          "end": 46.04,
+          "probability": 0.944038
+        },
+        {
+          "text": "path,",
+          "start": 46.04,
+          "end": 46.34,
+          "probability": 0.974994
+        },
+        {
+          "text": "not",
+          "start": 46.66,
+          "end": 46.82,
+          "probability": 0.995574
+        },
+        {
+          "text": "just",
+          "start": 46.82,
+          "end": 47.06,
+          "probability": 0.992476
+        }
+      ]
+    },
+    {
+      "start": 47.06,
+      "end": 48.46,
+      "text": "the paragraph of advice.",
+      "avg_logprob": -0.58336,
+      "no_speech_prob": 0.03596,
+      "words": [
+        {
+          "text": "the",
+          "start": 47.06,
+          "end": 47.28,
+          "probability": 0.693191
+        },
+        {
+          "text": "paragraph",
+          "start": 47.28,
+          "end": 47.74,
+          "probability": 0.790498
+        },
+        {
+          "text": "of",
+          "start": 47.74,
+          "end": 48.04,
+          "probability": 0.988885
+        },
+        {
+          "text": "advice.",
+          "start": 48.04,
+          "end": 48.46,
+          "probability": 0.831751
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Small",
+      "start": 0.56,
+      "end": 1.14,
+      "probability": 0.69019
+    },
+    {
+      "text": "and",
+      "start": 1.14,
+      "end": 1.44,
+      "probability": 0.952874
+    },
+    {
+      "text": "medium",
+      "start": 1.44,
+      "end": 1.78,
+      "probability": 0.892872
+    },
+    {
+      "text": "businesses",
+      "start": 1.78,
+      "end": 2.32,
+      "probability": 0.921472
+    },
+    {
+      "text": "are",
+      "start": 2.32,
+      "end": 2.7,
+      "probability": 0.991069
+    },
+    {
+      "text": "told",
+      "start": 2.7,
+      "end": 3.02,
+      "probability": 0.98394
+    },
+    {
+      "text": "to",
+      "start": 3.02,
+      "end": 3.28,
+      "probability": 0.996489
+    },
+    {
+      "text": "digitalize",
+      "start": 3.28,
+      "end": 3.94,
+      "probability": 0.818238
+    },
+    {
+      "text": "before",
+      "start": 3.94,
+      "end": 4.46,
+      "probability": 0.933528
+    },
+    {
+      "text": "they",
+      "start": 4.46,
+      "end": 4.96,
+      "probability": 0.957907
+    },
+    {
+      "text": "have",
+      "start": 4.96,
+      "end": 5.14,
+      "probability": 0.99388
+    },
+    {
+      "text": "a",
+      "start": 5.14,
+      "end": 5.3,
+      "probability": 0.965122
+    },
+    {
+      "text": "clear",
+      "start": 5.3,
+      "end": 5.62,
+      "probability": 0.985938
+    },
+    {
+      "text": "next",
+      "start": 5.62,
+      "end": 5.9,
+      "probability": 0.978168
+    },
+    {
+      "text": "step.",
+      "start": 5.9,
+      "end": 6.24,
+      "probability": 0.997826
+    },
+    {
+      "text": "The",
+      "start": 6.72,
+      "end": 6.86,
+      "probability": 0.967138
+    },
+    {
+      "text": "hard",
+      "start": 6.86,
+      "end": 7.08,
+      "probability": 0.98456
+    },
+    {
+      "text": "part",
+      "start": 7.08,
+      "end": 7.38,
+      "probability": 0.991961
+    },
+    {
+      "text": "isn't",
+      "start": 7.38,
+      "end": 7.94,
+      "probability": 0.966261
+    },
+    {
+      "text": "finding",
+      "start": 7.94,
+      "end": 8.42,
+      "probability": 0.978753
+    },
+    {
+      "text": "another",
+      "start": 8.42,
+      "end": 8.9,
+      "probability": 0.972732
+    },
+    {
+      "text": "idea.",
+      "start": 8.9,
+      "end": 9.38,
+      "probability": 0.990504
+    },
+    {
+      "text": "It's",
+      "start": 9.7,
+      "end": 9.94,
+      "probability": 0.953774
+    },
+    {
+      "text": "deciding",
+      "start": 9.94,
+      "end": 10.46,
+      "probability": 0.997155
+    },
+    {
+      "text": "what",
+      "start": 10.46,
+      "end": 10.82,
+      "probability": 0.991595
+    },
+    {
+      "text": "happens",
+      "start": 10.82,
+      "end": 11.22,
+      "probability": 0.991384
+    },
+    {
+      "text": "first,",
+      "start": 11.22,
+      "end": 11.58,
+      "probability": 0.993575
+    },
+    {
+      "text": "what",
+      "start": 12.08,
+      "end": 12.3,
+      "probability": 0.986833
+    },
+    {
+      "text": "it",
+      "start": 12.3,
+      "end": 12.44,
+      "probability": 0.989193
+    },
+    {
+      "text": "depends",
+      "start": 12.44,
+      "end": 12.82,
+      "probability": 0.992382
+    },
+    {
+      "text": "on",
+      "start": 12.82,
+      "end": 13.1,
+      "probability": 0.985011
+    },
+    {
+      "text": "and",
+      "start": 13.1,
+      "end": 13.42,
+      "probability": 0.825022
+    },
+    {
+      "text": "what",
+      "start": 13.42,
+      "end": 13.62,
+      "probability": 0.992423
+    },
+    {
+      "text": "it",
+      "start": 13.62,
+      "end": 13.76,
+      "probability": 0.992733
+    },
+    {
+      "text": "may",
+      "start": 13.76,
+      "end": 14.02,
+      "probability": 0.981487
+    },
+    {
+      "text": "cost",
+      "start": 14.02,
+      "end": 14.38,
+      "probability": 0.974261
+    },
+    {
+      "text": "and",
+      "start": 14.38,
+      "end": 14.92,
+      "probability": 0.566992
+    },
+    {
+      "text": "which",
+      "start": 14.92,
+      "end": 15.68,
+      "probability": 0.948674
+    },
+    {
+      "text": "evidence",
+      "start": 15.68,
+      "end": 16.22,
+      "probability": 0.985644
+    },
+    {
+      "text": "supports",
+      "start": 16.22,
+      "end": 16.72,
+      "probability": 0.976492
+    },
+    {
+      "text": "the",
+      "start": 16.72,
+      "end": 17.02,
+      "probability": 0.947538
+    },
+    {
+      "text": "decision.",
+      "start": 17.02,
+      "end": 17.4,
+      "probability": 0.95298
+    },
+    {
+      "text": "A",
+      "start": 17.98,
+      "end": 18.2,
+      "probability": 0.971399
+    },
+    {
+      "text": "generic",
+      "start": 18.2,
+      "end": 18.58,
+      "probability": 0.993156
+    },
+    {
+      "text": "chat",
+      "start": 18.58,
+      "end": 18.92,
+      "probability": 0.977702
+    },
+    {
+      "text": "answer",
+      "start": 18.92,
+      "end": 19.28,
+      "probability": 0.89017
+    },
+    {
+      "text": "can",
+      "start": 19.28,
+      "end": 19.54,
+      "probability": 0.993731
+    },
+    {
+      "text": "sound",
+      "start": 19.54,
+      "end": 19.84,
+      "probability": 0.994118
+    },
+    {
+      "text": "confident",
+      "start": 19.84,
+      "end": 20.26,
+      "probability": 0.989813
+    },
+    {
+      "text": "and",
+      "start": 20.26,
+      "end": 20.62,
+      "probability": 0.98729
+    },
+    {
+      "text": "still",
+      "start": 20.62,
+      "end": 21.0,
+      "probability": 0.987759
+    },
+    {
+      "text": "leave",
+      "start": 21.0,
+      "end": 21.4,
+      "probability": 0.875283
+    },
+    {
+      "text": "those",
+      "start": 21.4,
+      "end": 21.74,
+      "probability": 0.952059
+    },
+    {
+      "text": "questions",
+      "start": 21.74,
+      "end": 22.2,
+      "probability": 0.990337
+    },
+    {
+      "text": "unresolved.",
+      "start": 22.2,
+      "end": 22.8,
+      "probability": 0.997073
+    },
+    {
+      "text": "So",
+      "start": 23.7,
+      "end": 23.8,
+      "probability": 0.822558
+    },
+    {
+      "text": "MagiPilot",
+      "start": 23.8,
+      "end": 24.4,
+      "probability": 0.692973
+    },
+    {
+      "text": "starts",
+      "start": 24.4,
+      "end": 24.96,
+      "probability": 0.960391
+    },
+    {
+      "text": "with",
+      "start": 24.96,
+      "end": 25.3,
+      "probability": 0.99178
+    },
+    {
+      "text": "5",
+      "start": 25.3,
+      "end": 25.64,
+      "probability": 0.395078
+    },
+    {
+      "text": "focused",
+      "start": 25.64,
+      "end": 26.1,
+      "probability": 0.917894
+    },
+    {
+      "text": "questions.",
+      "start": 26.1,
+      "end": 26.58,
+      "probability": 0.991722
+    },
+    {
+      "text": "Together,",
+      "start": 26.58,
+      "end": 27.28,
+      "probability": 0.882779
+    },
+    {
+      "text": "they",
+      "start": 27.66,
+      "end": 27.7,
+      "probability": 0.985492
+    },
+    {
+      "text": "create",
+      "start": 27.7,
+      "end": 27.98,
+      "probability": 0.991507
+    },
+    {
+      "text": "an",
+      "start": 27.98,
+      "end": 28.24,
+      "probability": 0.986571
+    },
+    {
+      "text": "editable",
+      "start": 28.24,
+      "end": 28.84,
+      "probability": 0.975287
+    },
+    {
+      "text": "business",
+      "start": 28.84,
+      "end": 29.28,
+      "probability": 0.943406
+    },
+    {
+      "text": "twin,",
+      "start": 29.28,
+      "end": 29.62,
+      "probability": 0.974924
+    },
+    {
+      "text": "a",
+      "start": 30.06,
+      "end": 30.36,
+      "probability": 0.979361
+    },
+    {
+      "text": "compact",
+      "start": 30.36,
+      "end": 30.8,
+      "probability": 0.996894
+    },
+    {
+      "text": "record",
+      "start": 30.8,
+      "end": 31.3,
+      "probability": 0.986955
+    },
+    {
+      "text": "of",
+      "start": 31.3,
+      "end": 31.64,
+      "probability": 0.997599
+    },
+    {
+      "text": "contracts,",
+      "start": 31.64,
+      "end": 32.2,
+      "probability": 0.932292
+    },
+    {
+      "text": "objectives,",
+      "start": 32.48,
+      "end": 32.96,
+      "probability": 0.989106
+    },
+    {
+      "text": "capabilities,",
+      "start": 33.38,
+      "end": 33.76,
+      "probability": 0.986365
+    },
+    {
+      "text": "process",
+      "start": 34.32,
+      "end": 34.58,
+      "probability": 0.977377
+    },
+    {
+      "text": "friction,",
+      "start": 34.58,
+      "end": 35.08,
+      "probability": 0.948266
+    },
+    {
+      "text": "constraints,",
+      "start": 35.78,
+      "end": 36.18,
+      "probability": 0.966755
+    },
+    {
+      "text": "readiness",
+      "start": 36.54,
+      "end": 36.84,
+      "probability": 0.998548
+    },
+    {
+      "text": "and",
+      "start": 36.84,
+      "end": 37.26,
+      "probability": 0.509483
+    },
+    {
+      "text": "evidence.",
+      "start": 37.26,
+      "end": 37.72,
+      "probability": 0.990838
+    },
+    {
+      "text": "Facts",
+      "start": 38.72,
+      "end": 38.78,
+      "probability": 0.951501
+    },
+    {
+      "text": "and",
+      "start": 38.78,
+      "end": 39.06,
+      "probability": 0.945991
+    },
+    {
+      "text": "unknowns",
+      "start": 39.06,
+      "end": 39.72,
+      "probability": 0.981139
+    },
+    {
+      "text": "remains",
+      "start": 39.72,
+      "end": 39.92,
+      "probability": 0.502924
+    },
+    {
+      "text": "visible.",
+      "start": 39.92,
+      "end": 40.46,
+      "probability": 0.998479
+    },
+    {
+      "text": "The",
+      "start": 41.06,
+      "end": 41.1,
+      "probability": 0.980208
+    },
+    {
+      "text": "objective",
+      "start": 41.1,
+      "end": 41.46,
+      "probability": 0.974484
+    },
+    {
+      "text": "is",
+      "start": 41.46,
+      "end": 41.78,
+      "probability": 0.997921
+    },
+    {
+      "text": "practical,",
+      "start": 41.78,
+      "end": 42.38,
+      "probability": 0.997467
+    },
+    {
+      "text": "which",
+      "start": 42.8,
+      "end": 43.14,
+      "probability": 0.364603
+    },
+    {
+      "text": "is",
+      "start": 43.14,
+      "end": 43.26,
+      "probability": 0.99382
+    },
+    {
+      "text": "to",
+      "start": 43.26,
+      "end": 43.5,
+      "probability": 0.988629
+    },
+    {
+      "text": "move",
+      "start": 43.5,
+      "end": 43.84,
+      "probability": 0.974946
+    },
+    {
+      "text": "from",
+      "start": 43.84,
+      "end": 44.2,
+      "probability": 0.984631
+    },
+    {
+      "text": "answers",
+      "start": 44.2,
+      "end": 44.62,
+      "probability": 0.946622
+    },
+    {
+      "text": "to",
+      "start": 44.62,
+      "end": 45.08,
+      "probability": 0.989256
+    },
+    {
+      "text": "an",
+      "start": 45.08,
+      "end": 45.28,
+      "probability": 0.984232
+    },
+    {
+      "text": "inspectable",
+      "start": 45.28,
+      "end": 46.04,
+      "probability": 0.944038
+    },
+    {
+      "text": "path,",
+      "start": 46.04,
+      "end": 46.34,
+      "probability": 0.974994
+    },
+    {
+      "text": "not",
+      "start": 46.66,
+      "end": 46.82,
+      "probability": 0.995574
+    },
+    {
+      "text": "just",
+      "start": 46.82,
+      "end": 47.06,
+      "probability": 0.992476
+    },
+    {
+      "text": "the",
+      "start": 47.06,
+      "end": 47.28,
+      "probability": 0.693191
+    },
+    {
+      "text": "paragraph",
+      "start": 47.28,
+      "end": 47.74,
+      "probability": 0.790498
+    },
+    {
+      "text": "of",
+      "start": 47.74,
+      "end": 48.04,
+      "probability": 0.988885
+    },
+    {
+      "text": "advice.",
+      "start": 48.04,
+      "end": 48.46,
+      "probability": 0.831751
+    }
+  ],
+  "recognized_text": "Small and medium businesses are told to digitalize before they have a clear next step. The hard part isn't finding another idea. It's deciding what happens first, what it depends on and what it may cost and which evidence supports the decision. A generic chat answer can sound confident and still leave those questions unresolved. So MagiPilot starts with 5 focused questions. Together, they create an editable business twin, a compact record of contracts, objectives, capabilities, process friction, constraints, readiness and evidence. Facts and unknowns remains visible. The objective is practical, which is to move from answers to an inspectable path, not just the paragraph of advice."
+}

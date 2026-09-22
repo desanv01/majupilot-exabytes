@@ -1,0 +1,1095 @@
+{
+  "beat_id": "04e_demo_scenarios",
+  "source": ".media/audio/voice/voice_009.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 44.053312,
+  "duration_after_vad": 42.816,
+  "segments": [
+    {
+      "start": 0.62,
+      "end": 6.76,
+      "text": "The scenario lab compares lean foundation, balanced growth and accelerated AI and selecting",
+      "avg_logprob": -0.255747,
+      "no_speech_prob": 0.01834,
+      "words": [
+        {
+          "text": "The",
+          "start": 0.62,
+          "end": 1.14,
+          "probability": 0.712955
+        },
+        {
+          "text": "scenario",
+          "start": 1.14,
+          "end": 1.5,
+          "probability": 0.871647
+        },
+        {
+          "text": "lab",
+          "start": 1.5,
+          "end": 1.82,
+          "probability": 0.663844
+        },
+        {
+          "text": "compares",
+          "start": 1.82,
+          "end": 2.32,
+          "probability": 0.899637
+        },
+        {
+          "text": "lean",
+          "start": 2.32,
+          "end": 2.64,
+          "probability": 0.880442
+        },
+        {
+          "text": "foundation,",
+          "start": 2.64,
+          "end": 3.24,
+          "probability": 0.888899
+        },
+        {
+          "text": "balanced",
+          "start": 3.58,
+          "end": 3.8,
+          "probability": 0.562016
+        },
+        {
+          "text": "growth",
+          "start": 3.8,
+          "end": 4.28,
+          "probability": 0.992971
+        },
+        {
+          "text": "and",
+          "start": 4.28,
+          "end": 4.56,
+          "probability": 0.795416
+        },
+        {
+          "text": "accelerated",
+          "start": 4.56,
+          "end": 5.02,
+          "probability": 0.960064
+        },
+        {
+          "text": "AI",
+          "start": 5.02,
+          "end": 5.5,
+          "probability": 0.909339
+        },
+        {
+          "text": "and",
+          "start": 5.5,
+          "end": 6.3,
+          "probability": 0.579205
+        },
+        {
+          "text": "selecting",
+          "start": 6.3,
+          "end": 6.76,
+          "probability": 0.985625
+        }
+      ]
+    },
+    {
+      "start": 6.76,
+      "end": 7.9,
+      "text": "balanced growth.",
+      "avg_logprob": -0.255747,
+      "no_speech_prob": 0.01834,
+      "words": [
+        {
+          "text": "balanced",
+          "start": 6.76,
+          "end": 7.24,
+          "probability": 0.769472
+        },
+        {
+          "text": "growth.",
+          "start": 7.24,
+          "end": 7.9,
+          "probability": 0.988124
+        }
+      ]
+    },
+    {
+      "start": 8.22,
+      "end": 10.92,
+      "text": "Inspection alone does not save the preference.",
+      "avg_logprob": -0.255747,
+      "no_speech_prob": 0.01834,
+      "words": [
+        {
+          "text": "Inspection",
+          "start": 8.22,
+          "end": 8.78,
+          "probability": 0.950056
+        },
+        {
+          "text": "alone",
+          "start": 8.78,
+          "end": 9.18,
+          "probability": 0.962807
+        },
+        {
+          "text": "does",
+          "start": 9.18,
+          "end": 9.48,
+          "probability": 0.983735
+        },
+        {
+          "text": "not",
+          "start": 9.48,
+          "end": 9.7,
+          "probability": 0.996721
+        },
+        {
+          "text": "save",
+          "start": 9.7,
+          "end": 10.06,
+          "probability": 0.885504
+        },
+        {
+          "text": "the",
+          "start": 10.06,
+          "end": 10.36,
+          "probability": 0.979135
+        },
+        {
+          "text": "preference.",
+          "start": 10.36,
+          "end": 10.92,
+          "probability": 0.929469
+        }
+      ]
+    },
+    {
+      "start": 11.62,
+      "end": 16.64,
+      "text": "The screen labels figures as planning assumptions, not an exabyte quote.",
+      "avg_logprob": -0.255747,
+      "no_speech_prob": 0.01834,
+      "words": [
+        {
+          "text": "The",
+          "start": 11.62,
+          "end": 11.78,
+          "probability": 0.973171
+        },
+        {
+          "text": "screen",
+          "start": 11.78,
+          "end": 12.12,
+          "probability": 0.993956
+        },
+        {
+          "text": "labels",
+          "start": 12.12,
+          "end": 12.54,
+          "probability": 0.986456
+        },
+        {
+          "text": "figures",
+          "start": 12.54,
+          "end": 13.0,
+          "probability": 0.979265
+        },
+        {
+          "text": "as",
+          "start": 13.0,
+          "end": 13.42,
+          "probability": 0.993099
+        },
+        {
+          "text": "planning",
+          "start": 13.42,
+          "end": 13.84,
+          "probability": 0.867833
+        },
+        {
+          "text": "assumptions,",
+          "start": 13.84,
+          "end": 14.46,
+          "probability": 0.985143
+        },
+        {
+          "text": "not",
+          "start": 14.88,
+          "end": 15.08,
+          "probability": 0.990227
+        },
+        {
+          "text": "an",
+          "start": 15.08,
+          "end": 15.52,
+          "probability": 0.967564
+        },
+        {
+          "text": "exabyte",
+          "start": 15.52,
+          "end": 16.08,
+          "probability": 0.734806
+        },
+        {
+          "text": "quote.",
+          "start": 16.08,
+          "end": 16.64,
+          "probability": 0.697985
+        }
+      ]
+    },
+    {
+      "start": 17.84,
+      "end": 26.88,
+      "text": "So in this base case cost is 18,400 ringgit, operational value is 7,250 for ringgit, net",
+      "avg_logprob": -0.255747,
+      "no_speech_prob": 0.01834,
+      "words": [
+        {
+          "text": "So",
+          "start": 17.84,
+          "end": 17.84,
+          "probability": 0.884306
+        },
+        {
+          "text": "in",
+          "start": 17.84,
+          "end": 18.04,
+          "probability": 0.866906
+        },
+        {
+          "text": "this",
+          "start": 18.04,
+          "end": 18.22,
+          "probability": 0.995607
+        },
+        {
+          "text": "base",
+          "start": 18.22,
+          "end": 18.58,
+          "probability": 0.981309
+        },
+        {
+          "text": "case",
+          "start": 18.58,
+          "end": 19.04,
+          "probability": 0.995445
+        },
+        {
+          "text": "cost",
+          "start": 19.04,
+          "end": 19.58,
+          "probability": 0.523253
+        },
+        {
+          "text": "is",
+          "start": 19.58,
+          "end": 19.82,
+          "probability": 0.982949
+        },
+        {
+          "text": "18",
+          "start": 19.82,
+          "end": 20.26,
+          "probability": 0.845054
+        },
+        {
+          "text": ",400",
+          "start": 20.26,
+          "end": 21.08,
+          "probability": 0.905578
+        },
+        {
+          "text": "ringgit,",
+          "start": 21.08,
+          "end": 21.54,
+          "probability": 0.806135
+        },
+        {
+          "text": "operational",
+          "start": 22.1,
+          "end": 22.38,
+          "probability": 0.939136
+        },
+        {
+          "text": "value",
+          "start": 22.38,
+          "end": 22.8,
+          "probability": 0.997249
+        },
+        {
+          "text": "is",
+          "start": 22.8,
+          "end": 23.06,
+          "probability": 0.995321
+        },
+        {
+          "text": "7",
+          "start": 23.06,
+          "end": 23.48,
+          "probability": 0.949461
+        },
+        {
+          "text": ",250",
+          "start": 23.48,
+          "end": 24.56,
+          "probability": 0.942844
+        },
+        {
+          "text": "for",
+          "start": 24.56,
+          "end": 25.72,
+          "probability": 0.460869
+        },
+        {
+          "text": "ringgit,",
+          "start": 25.72,
+          "end": 26.18,
+          "probability": 0.92268
+        },
+        {
+          "text": "net",
+          "start": 26.48,
+          "end": 26.88,
+          "probability": 0.930268
+        }
+      ]
+    },
+    {
+      "start": 26.88,
+      "end": 36.36,
+      "text": "value is negative 11,146 ringgit and the payback is 30.4 months. Low and high figures remain",
+      "avg_logprob": -0.360422,
+      "no_speech_prob": 0.045526,
+      "words": [
+        {
+          "text": "value",
+          "start": 26.88,
+          "end": 27.12,
+          "probability": 0.093916
+        },
+        {
+          "text": "is",
+          "start": 27.12,
+          "end": 27.48,
+          "probability": 0.982207
+        },
+        {
+          "text": "negative",
+          "start": 27.48,
+          "end": 27.8,
+          "probability": 0.350973
+        },
+        {
+          "text": "11",
+          "start": 27.8,
+          "end": 28.6,
+          "probability": 0.749319
+        },
+        {
+          "text": ",146",
+          "start": 28.6,
+          "end": 30.04,
+          "probability": 0.689827
+        },
+        {
+          "text": "ringgit",
+          "start": 30.04,
+          "end": 30.56,
+          "probability": 0.531459
+        },
+        {
+          "text": "and",
+          "start": 30.56,
+          "end": 30.98,
+          "probability": 0.860123
+        },
+        {
+          "text": "the",
+          "start": 30.98,
+          "end": 31.08,
+          "probability": 0.961225
+        },
+        {
+          "text": "payback",
+          "start": 31.08,
+          "end": 31.44,
+          "probability": 0.953684
+        },
+        {
+          "text": "is",
+          "start": 31.44,
+          "end": 31.78,
+          "probability": 0.991794
+        },
+        {
+          "text": "30",
+          "start": 31.78,
+          "end": 32.46,
+          "probability": 0.964954
+        },
+        {
+          "text": ".4",
+          "start": 32.46,
+          "end": 33.58,
+          "probability": 0.942244
+        },
+        {
+          "text": "months.",
+          "start": 33.58,
+          "end": 33.86,
+          "probability": 0.967318
+        },
+        {
+          "text": "Low",
+          "start": 34.9,
+          "end": 35.0,
+          "probability": 0.961979
+        },
+        {
+          "text": "and",
+          "start": 35.0,
+          "end": 35.26,
+          "probability": 0.990669
+        },
+        {
+          "text": "high",
+          "start": 35.26,
+          "end": 35.48,
+          "probability": 0.971683
+        },
+        {
+          "text": "figures",
+          "start": 35.48,
+          "end": 35.92,
+          "probability": 0.982575
+        },
+        {
+          "text": "remain",
+          "start": 35.92,
+          "end": 36.36,
+          "probability": 0.995958
+        }
+      ]
+    },
+    {
+      "start": 36.36,
+      "end": 42.36,
+      "text": "visible including the negative outcomes. These are conditional ranges, not predictions or",
+      "avg_logprob": -0.360422,
+      "no_speech_prob": 0.045526,
+      "words": [
+        {
+          "text": "visible",
+          "start": 36.36,
+          "end": 36.86,
+          "probability": 0.992859
+        },
+        {
+          "text": "including",
+          "start": 36.86,
+          "end": 37.38,
+          "probability": 0.77997
+        },
+        {
+          "text": "the",
+          "start": 37.38,
+          "end": 37.96,
+          "probability": 0.943436
+        },
+        {
+          "text": "negative",
+          "start": 37.96,
+          "end": 38.36,
+          "probability": 0.996961
+        },
+        {
+          "text": "outcomes.",
+          "start": 38.36,
+          "end": 38.96,
+          "probability": 0.965913
+        },
+        {
+          "text": "These",
+          "start": 39.68,
+          "end": 39.74,
+          "probability": 0.968835
+        },
+        {
+          "text": "are",
+          "start": 39.74,
+          "end": 39.94,
+          "probability": 0.998331
+        },
+        {
+          "text": "conditional",
+          "start": 39.94,
+          "end": 40.44,
+          "probability": 0.989947
+        },
+        {
+          "text": "ranges,",
+          "start": 40.44,
+          "end": 40.9,
+          "probability": 0.997676
+        },
+        {
+          "text": "not",
+          "start": 41.3,
+          "end": 41.34,
+          "probability": 0.992379
+        },
+        {
+          "text": "predictions",
+          "start": 41.34,
+          "end": 41.9,
+          "probability": 0.973859
+        },
+        {
+          "text": "or",
+          "start": 41.9,
+          "end": 42.36,
+          "probability": 0.979624
+        }
+      ]
+    },
+    {
+      "start": 42.36,
+      "end": 43.02,
+      "text": "on getting this.",
+      "avg_logprob": -0.919626,
+      "no_speech_prob": 0.36102,
+      "words": [
+        {
+          "text": "on",
+          "start": 42.36,
+          "end": 42.46,
+          "probability": 0.067095
+        },
+        {
+          "text": "getting",
+          "start": 42.46,
+          "end": 42.7,
+          "probability": 0.823091
+        },
+        {
+          "text": "this.",
+          "start": 42.7,
+          "end": 43.02,
+          "probability": 0.701395
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "The",
+      "start": 0.62,
+      "end": 1.14,
+      "probability": 0.712955
+    },
+    {
+      "text": "scenario",
+      "start": 1.14,
+      "end": 1.5,
+      "probability": 0.871647
+    },
+    {
+      "text": "lab",
+      "start": 1.5,
+      "end": 1.82,
+      "probability": 0.663844
+    },
+    {
+      "text": "compares",
+      "start": 1.82,
+      "end": 2.32,
+      "probability": 0.899637
+    },
+    {
+      "text": "lean",
+      "start": 2.32,
+      "end": 2.64,
+      "probability": 0.880442
+    },
+    {
+      "text": "foundation,",
+      "start": 2.64,
+      "end": 3.24,
+      "probability": 0.888899
+    },
+    {
+      "text": "balanced",
+      "start": 3.58,
+      "end": 3.8,
+      "probability": 0.562016
+    },
+    {
+      "text": "growth",
+      "start": 3.8,
+      "end": 4.28,
+      "probability": 0.992971
+    },
+    {
+      "text": "and",
+      "start": 4.28,
+      "end": 4.56,
+      "probability": 0.795416
+    },
+    {
+      "text": "accelerated",
+      "start": 4.56,
+      "end": 5.02,
+      "probability": 0.960064
+    },
+    {
+      "text": "AI",
+      "start": 5.02,
+      "end": 5.5,
+      "probability": 0.909339
+    },
+    {
+      "text": "and",
+      "start": 5.5,
+      "end": 6.3,
+      "probability": 0.579205
+    },
+    {
+      "text": "selecting",
+      "start": 6.3,
+      "end": 6.76,
+      "probability": 0.985625
+    },
+    {
+      "text": "balanced",
+      "start": 6.76,
+      "end": 7.24,
+      "probability": 0.769472
+    },
+    {
+      "text": "growth.",
+      "start": 7.24,
+      "end": 7.9,
+      "probability": 0.988124
+    },
+    {
+      "text": "Inspection",
+      "start": 8.22,
+      "end": 8.78,
+      "probability": 0.950056
+    },
+    {
+      "text": "alone",
+      "start": 8.78,
+      "end": 9.18,
+      "probability": 0.962807
+    },
+    {
+      "text": "does",
+      "start": 9.18,
+      "end": 9.48,
+      "probability": 0.983735
+    },
+    {
+      "text": "not",
+      "start": 9.48,
+      "end": 9.7,
+      "probability": 0.996721
+    },
+    {
+      "text": "save",
+      "start": 9.7,
+      "end": 10.06,
+      "probability": 0.885504
+    },
+    {
+      "text": "the",
+      "start": 10.06,
+      "end": 10.36,
+      "probability": 0.979135
+    },
+    {
+      "text": "preference.",
+      "start": 10.36,
+      "end": 10.92,
+      "probability": 0.929469
+    },
+    {
+      "text": "The",
+      "start": 11.62,
+      "end": 11.78,
+      "probability": 0.973171
+    },
+    {
+      "text": "screen",
+      "start": 11.78,
+      "end": 12.12,
+      "probability": 0.993956
+    },
+    {
+      "text": "labels",
+      "start": 12.12,
+      "end": 12.54,
+      "probability": 0.986456
+    },
+    {
+      "text": "figures",
+      "start": 12.54,
+      "end": 13.0,
+      "probability": 0.979265
+    },
+    {
+      "text": "as",
+      "start": 13.0,
+      "end": 13.42,
+      "probability": 0.993099
+    },
+    {
+      "text": "planning",
+      "start": 13.42,
+      "end": 13.84,
+      "probability": 0.867833
+    },
+    {
+      "text": "assumptions,",
+      "start": 13.84,
+      "end": 14.46,
+      "probability": 0.985143
+    },
+    {
+      "text": "not",
+      "start": 14.88,
+      "end": 15.08,
+      "probability": 0.990227
+    },
+    {
+      "text": "an",
+      "start": 15.08,
+      "end": 15.52,
+      "probability": 0.967564
+    },
+    {
+      "text": "exabyte",
+      "start": 15.52,
+      "end": 16.08,
+      "probability": 0.734806
+    },
+    {
+      "text": "quote.",
+      "start": 16.08,
+      "end": 16.64,
+      "probability": 0.697985
+    },
+    {
+      "text": "So",
+      "start": 17.84,
+      "end": 17.84,
+      "probability": 0.884306
+    },
+    {
+      "text": "in",
+      "start": 17.84,
+      "end": 18.04,
+      "probability": 0.866906
+    },
+    {
+      "text": "this",
+      "start": 18.04,
+      "end": 18.22,
+      "probability": 0.995607
+    },
+    {
+      "text": "base",
+      "start": 18.22,
+      "end": 18.58,
+      "probability": 0.981309
+    },
+    {
+      "text": "case",
+      "start": 18.58,
+      "end": 19.04,
+      "probability": 0.995445
+    },
+    {
+      "text": "cost",
+      "start": 19.04,
+      "end": 19.58,
+      "probability": 0.523253
+    },
+    {
+      "text": "is",
+      "start": 19.58,
+      "end": 19.82,
+      "probability": 0.982949
+    },
+    {
+      "text": "18",
+      "start": 19.82,
+      "end": 20.26,
+      "probability": 0.845054
+    },
+    {
+      "text": ",400",
+      "start": 20.26,
+      "end": 21.08,
+      "probability": 0.905578
+    },
+    {
+      "text": "ringgit,",
+      "start": 21.08,
+      "end": 21.54,
+      "probability": 0.806135
+    },
+    {
+      "text": "operational",
+      "start": 22.1,
+      "end": 22.38,
+      "probability": 0.939136
+    },
+    {
+      "text": "value",
+      "start": 22.38,
+      "end": 22.8,
+      "probability": 0.997249
+    },
+    {
+      "text": "is",
+      "start": 22.8,
+      "end": 23.06,
+      "probability": 0.995321
+    },
+    {
+      "text": "7",
+      "start": 23.06,
+      "end": 23.48,
+      "probability": 0.949461
+    },
+    {
+      "text": ",250",
+      "start": 23.48,
+      "end": 24.56,
+      "probability": 0.942844
+    },
+    {
+      "text": "for",
+      "start": 24.56,
+      "end": 25.72,
+      "probability": 0.460869
+    },
+    {
+      "text": "ringgit,",
+      "start": 25.72,
+      "end": 26.18,
+      "probability": 0.92268
+    },
+    {
+      "text": "net",
+      "start": 26.48,
+      "end": 26.88,
+      "probability": 0.930268
+    },
+    {
+      "text": "value",
+      "start": 26.88,
+      "end": 27.12,
+      "probability": 0.093916
+    },
+    {
+      "text": "is",
+      "start": 27.12,
+      "end": 27.48,
+      "probability": 0.982207
+    },
+    {
+      "text": "negative",
+      "start": 27.48,
+      "end": 27.8,
+      "probability": 0.350973
+    },
+    {
+      "text": "11",
+      "start": 27.8,
+      "end": 28.6,
+      "probability": 0.749319
+    },
+    {
+      "text": ",146",
+      "start": 28.6,
+      "end": 30.04,
+      "probability": 0.689827
+    },
+    {
+      "text": "ringgit",
+      "start": 30.04,
+      "end": 30.56,
+      "probability": 0.531459
+    },
+    {
+      "text": "and",
+      "start": 30.56,
+      "end": 30.98,
+      "probability": 0.860123
+    },
+    {
+      "text": "the",
+      "start": 30.98,
+      "end": 31.08,
+      "probability": 0.961225
+    },
+    {
+      "text": "payback",
+      "start": 31.08,
+      "end": 31.44,
+      "probability": 0.953684
+    },
+    {
+      "text": "is",
+      "start": 31.44,
+      "end": 31.78,
+      "probability": 0.991794
+    },
+    {
+      "text": "30",
+      "start": 31.78,
+      "end": 32.46,
+      "probability": 0.964954
+    },
+    {
+      "text": ".4",
+      "start": 32.46,
+      "end": 33.58,
+      "probability": 0.942244
+    },
+    {
+      "text": "months.",
+      "start": 33.58,
+      "end": 33.86,
+      "probability": 0.967318
+    },
+    {
+      "text": "Low",
+      "start": 34.9,
+      "end": 35.0,
+      "probability": 0.961979
+    },
+    {
+      "text": "and",
+      "start": 35.0,
+      "end": 35.26,
+      "probability": 0.990669
+    },
+    {
+      "text": "high",
+      "start": 35.26,
+      "end": 35.48,
+      "probability": 0.971683
+    },
+    {
+      "text": "figures",
+      "start": 35.48,
+      "end": 35.92,
+      "probability": 0.982575
+    },
+    {
+      "text": "remain",
+      "start": 35.92,
+      "end": 36.36,
+      "probability": 0.995958
+    },
+    {
+      "text": "visible",
+      "start": 36.36,
+      "end": 36.86,
+      "probability": 0.992859
+    },
+    {
+      "text": "including",
+      "start": 36.86,
+      "end": 37.38,
+      "probability": 0.77997
+    },
+    {
+      "text": "the",
+      "start": 37.38,
+      "end": 37.96,
+      "probability": 0.943436
+    },
+    {
+      "text": "negative",
+      "start": 37.96,
+      "end": 38.36,
+      "probability": 0.996961
+    },
+    {
+      "text": "outcomes.",
+      "start": 38.36,
+      "end": 38.96,
+      "probability": 0.965913
+    },
+    {
+      "text": "These",
+      "start": 39.68,
+      "end": 39.74,
+      "probability": 0.968835
+    },
+    {
+      "text": "are",
+      "start": 39.74,
+      "end": 39.94,
+      "probability": 0.998331
+    },
+    {
+      "text": "conditional",
+      "start": 39.94,
+      "end": 40.44,
+      "probability": 0.989947
+    },
+    {
+      "text": "ranges,",
+      "start": 40.44,
+      "end": 40.9,
+      "probability": 0.997676
+    },
+    {
+      "text": "not",
+      "start": 41.3,
+      "end": 41.34,
+      "probability": 0.992379
+    },
+    {
+      "text": "predictions",
+      "start": 41.34,
+      "end": 41.9,
+      "probability": 0.973859
+    },
+    {
+      "text": "or",
+      "start": 41.9,
+      "end": 42.36,
+      "probability": 0.979624
+    },
+    {
+      "text": "on",
+      "start": 42.36,
+      "end": 42.46,
+      "probability": 0.067095
+    },
+    {
+      "text": "getting",
+      "start": 42.46,
+      "end": 42.7,
+      "probability": 0.823091
+    },
+    {
+      "text": "this.",
+      "start": 42.7,
+      "end": 43.02,
+      "probability": 0.701395
+    }
+  ],
+  "recognized_text": "The scenario lab compares lean foundation, balanced growth and accelerated AI and selecting balanced growth. Inspection alone does not save the preference. The screen labels figures as planning assumptions, not an exabyte quote. So in this base case cost is 18,400 ringgit, operational value is 7,250 for ringgit, net value is negative 11,146 ringgit and the payback is 30.4 months. Low and high figures remain visible including the negative outcomes. These are conditional ranges, not predictions or on getting this."
+}

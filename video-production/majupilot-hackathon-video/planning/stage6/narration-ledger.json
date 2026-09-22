@@ -1,0 +1,1205 @@
+[
+  {
+    "beat_id": "00_opening",
+    "original_filename": "majupilot_vo_desan_v01_00_opening_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_001.wav",
+    "source_sha256": "16adf417f43047c31c66f24d8a57c040d86886c8313927419832464fb3b8d67c",
+    "source_duration_s": 19.989313,
+    "source_analysis": {
+      "integrated_lufs": -45.3,
+      "lra_lu": 3.7,
+      "true_peak_dbfs": -21.1
+    },
+    "trim_in_s": 0.43,
+    "trim_out_s": 0.989313,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-45.35",
+      "input_tp": "-21.06",
+      "input_lra": "2.40",
+      "input_thresh": "-55.52",
+      "output_i": "-24.35",
+      "output_tp": "-3.00",
+      "output_lra": "2.90",
+      "output_thresh": "-34.75",
+      "normalization_type": "dynamic",
+      "target_offset": "0.35"
+    },
+    "program_path": ".media/audio/voice-program/00_opening.wav",
+    "program_sha256": "b5f09e09e771d83a106675f1779acec8921addf6e05c73883eee1eff61347180",
+    "program_duration_s": 18.57,
+    "program_analysis": {
+      "integrated_lufs": -24.1,
+      "lra_lu": 3.4,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 0.35,
+    "placement_end_s": 18.92
+  },
+  {
+    "beat_id": "01_problem_objectives",
+    "original_filename": "majupilot_vo_desan_v01_01_problem_objectives_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_002.wav",
+    "source_sha256": "6214be3816e95ec2dec1c7464b74fe8075e8c1156d65ee6522585f8e4beb7e1a",
+    "source_duration_s": 49.599979,
+    "source_analysis": {
+      "integrated_lufs": -45.5,
+      "lra_lu": 3.0,
+      "true_peak_dbfs": -17.9
+    },
+    "trim_in_s": 0.46,
+    "trim_out_s": 0.989979,
+    "silence_cuts": [
+      {
+        "start_s": 6.379211,
+        "end_s": 6.580789,
+        "removed_s": 0.201577
+      },
+      {
+        "start_s": 9.484006,
+        "end_s": 9.595994,
+        "removed_s": 0.111987
+      },
+      {
+        "start_s": 11.723612,
+        "end_s": 11.936388,
+        "removed_s": 0.212776
+      },
+      {
+        "start_s": 17.561215,
+        "end_s": 17.818785,
+        "removed_s": 0.257571
+      },
+      {
+        "start_s": 23.031625,
+        "end_s": 23.468375,
+        "removed_s": 0.436751
+      },
+      {
+        "start_s": 27.397208,
+        "end_s": 27.542792,
+        "removed_s": 0.145584
+      },
+      {
+        "start_s": 29.75041,
+        "end_s": 29.92959,
+        "removed_s": 0.17918
+      },
+      {
+        "start_s": 32.295205,
+        "end_s": 32.384795,
+        "removed_s": 0.08959
+      },
+      {
+        "start_s": 33.086009,
+        "end_s": 33.253991,
+        "removed_s": 0.167981
+      },
+      {
+        "start_s": 33.916814,
+        "end_s": 34.163186,
+        "removed_s": 0.246372
+      },
+      {
+        "start_s": 35.267618,
+        "end_s": 35.592382,
+        "removed_s": 0.324763
+      },
+      {
+        "start_s": 36.292808,
+        "end_s": 36.427192,
+        "removed_s": 0.134385
+      },
+      {
+        "start_s": 37.973628,
+        "end_s": 38.466372,
+        "removed_s": 0.492744
+      },
+      {
+        "start_s": 40.625615,
+        "end_s": 40.894385,
+        "removed_s": 0.26877
+      },
+      {
+        "start_s": 42.506009,
+        "end_s": 42.673991,
+        "removed_s": 0.167981
+      },
+      {
+        "start_s": 46.444006,
+        "end_s": 46.555994,
+        "removed_s": 0.111987
+      }
+    ],
+    "silence_removed_s": 3.55,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-45.65",
+      "input_tp": "-17.94",
+      "input_lra": "2.90",
+      "input_thresh": "-55.75",
+      "output_i": "-24.45",
+      "output_tp": "-3.00",
+      "output_lra": "2.60",
+      "output_thresh": "-34.59",
+      "normalization_type": "dynamic",
+      "target_offset": "0.45"
+    },
+    "program_path": ".media/audio/voice-program/01_problem_objectives.wav",
+    "program_sha256": "e5233167f03103d2dca385d7323c6db99e8c746681ceab2fb954ef9172569a4d",
+    "program_duration_s": 44.599958,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 2.4,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 20.2,
+    "placement_end_s": 64.799958
+  },
+  {
+    "beat_id": "02_proposed_solution",
+    "original_filename": "majupilot_vo_desan_v01_02_proposed_solution_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_003.wav",
+    "source_sha256": "4ff4a1316b7dde65277d71d41791c9834de549c5ea8c9adfb89ceeb7ae5065f6",
+    "source_duration_s": 68.650646,
+    "source_analysis": {
+      "integrated_lufs": -45.1,
+      "lra_lu": 4.8,
+      "true_peak_dbfs": -21.4
+    },
+    "trim_in_s": 0.65,
+    "trim_out_s": 1.450646,
+    "silence_cuts": [
+      {
+        "start_s": 3.836325,
+        "end_s": 3.983675,
+        "removed_s": 0.14735
+      },
+      {
+        "start_s": 4.497023,
+        "end_s": 4.582977,
+        "removed_s": 0.085954
+      },
+      {
+        "start_s": 5.334929,
+        "end_s": 5.605071,
+        "removed_s": 0.270141
+      },
+      {
+        "start_s": 7.248975,
+        "end_s": 7.691025,
+        "removed_s": 0.442049
+      },
+      {
+        "start_s": 9.799488,
+        "end_s": 10.020512,
+        "removed_s": 0.221025
+      },
+      {
+        "start_s": 13.504744,
+        "end_s": 13.615256,
+        "removed_s": 0.110512
+      },
+      {
+        "start_s": 16.020557,
+        "end_s": 16.499443,
+        "removed_s": 0.478887
+      },
+      {
+        "start_s": 17.332465,
+        "end_s": 17.467535,
+        "removed_s": 0.135071
+      },
+      {
+        "start_s": 20.699488,
+        "end_s": 20.920512,
+        "removed_s": 0.221025
+      },
+      {
+        "start_s": 21.669673,
+        "end_s": 22.050327,
+        "removed_s": 0.380654
+      },
+      {
+        "start_s": 22.491767,
+        "end_s": 22.688233,
+        "removed_s": 0.196466
+      },
+      {
+        "start_s": 23.907906,
+        "end_s": 24.092094,
+        "removed_s": 0.184187
+      },
+      {
+        "start_s": 28.879488,
+        "end_s": 29.100512,
+        "removed_s": 0.221025
+      },
+      {
+        "start_s": 29.478092,
+        "end_s": 29.821908,
+        "removed_s": 0.343816
+      },
+      {
+        "start_s": 30.72265,
+        "end_s": 31.01735,
+        "removed_s": 0.2947
+      },
+      {
+        "start_s": 32.210371,
+        "end_s": 32.529629,
+        "removed_s": 0.319258
+      },
+      {
+        "start_s": 35.874231,
+        "end_s": 36.205769,
+        "removed_s": 0.331537
+      },
+      {
+        "start_s": 42.318092,
+        "end_s": 42.661908,
+        "removed_s": 0.343816
+      },
+      {
+        "start_s": 43.812465,
+        "end_s": 43.947535,
+        "removed_s": 0.135071
+      },
+      {
+        "start_s": 44.472465,
+        "end_s": 44.607535,
+        "removed_s": 0.135071
+      },
+      {
+        "start_s": 45.440186,
+        "end_s": 45.599814,
+        "removed_s": 0.159629
+      },
+      {
+        "start_s": 46.35879,
+        "end_s": 46.64121,
+        "removed_s": 0.28242
+      },
+      {
+        "start_s": 47.684046,
+        "end_s": 47.855954,
+        "removed_s": 0.171908
+      },
+      {
+        "start_s": 49.207208,
+        "end_s": 49.452792,
+        "removed_s": 0.245583
+      },
+      {
+        "start_s": 54.023021,
+        "end_s": 54.636979,
+        "removed_s": 0.613958
+      },
+      {
+        "start_s": 61.380557,
+        "end_s": 61.859443,
+        "removed_s": 0.478887
+      }
+    ],
+    "silence_removed_s": 6.95,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-44.98",
+      "input_tp": "-21.42",
+      "input_lra": "4.70",
+      "input_thresh": "-55.06",
+      "output_i": "-23.60",
+      "output_tp": "-3.00",
+      "output_lra": "3.80",
+      "output_thresh": "-33.74",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.40"
+    },
+    "program_path": ".media/audio/voice-program/02_proposed_solution.wav",
+    "program_sha256": "f6e5b7ac5820e92114f9fb37af13056840ac70b2665f432280bd4436327bb598",
+    "program_duration_s": 59.599917,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 3.8,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 65.2,
+    "placement_end_s": 124.799917
+  },
+  {
+    "beat_id": "03_technical_approach",
+    "original_filename": "majupilot_vo_desan_v01_03_technical_approach_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_004.wav",
+    "source_sha256": "0a67b7e7d614c49804ce5e375e56daa49deba51adaafbeb0b14080f7eb9440aa",
+    "source_duration_s": 75.669333,
+    "source_analysis": {
+      "integrated_lufs": -43.8,
+      "lra_lu": 3.5,
+      "true_peak_dbfs": -19.7
+    },
+    "trim_in_s": 1.07,
+    "trim_out_s": 0.919333,
+    "silence_cuts": [
+      {
+        "start_s": 1.813887,
+        "end_s": 2.006113,
+        "removed_s": 0.192226
+      },
+      {
+        "start_s": 8.955442,
+        "end_s": 9.224558,
+        "removed_s": 0.269117
+      },
+      {
+        "start_s": 13.47258,
+        "end_s": 13.84742,
+        "removed_s": 0.374841
+      },
+      {
+        "start_s": 16.991802,
+        "end_s": 17.328198,
+        "removed_s": 0.336396
+      },
+      {
+        "start_s": 24.202191,
+        "end_s": 24.557809,
+        "removed_s": 0.355618
+      },
+      {
+        "start_s": 35.275442,
+        "end_s": 35.544558,
+        "removed_s": 0.269117
+      },
+      {
+        "start_s": 36.972332,
+        "end_s": 37.087668,
+        "removed_s": 0.115336
+      },
+      {
+        "start_s": 39.667138,
+        "end_s": 39.772862,
+        "removed_s": 0.105724
+      },
+      {
+        "start_s": 42.814664,
+        "end_s": 43.045336,
+        "removed_s": 0.230671
+      },
+      {
+        "start_s": 46.12947,
+        "end_s": 46.35053,
+        "removed_s": 0.22106
+      },
+      {
+        "start_s": 51.827385,
+        "end_s": 52.192615,
+        "removed_s": 0.36523
+      },
+      {
+        "start_s": 62.414647,
+        "end_s": 63.015353,
+        "removed_s": 0.600707
+      },
+      {
+        "start_s": 65.703887,
+        "end_s": 65.896113,
+        "removed_s": 0.192226
+      },
+      {
+        "start_s": 67.367527,
+        "end_s": 67.492473,
+        "removed_s": 0.124947
+      },
+      {
+        "start_s": 69.249859,
+        "end_s": 69.490141,
+        "removed_s": 0.240283
+      },
+      {
+        "start_s": 70.326749,
+        "end_s": 70.413251,
+        "removed_s": 0.086502
+      }
+    ],
+    "silence_removed_s": 4.08,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-43.93",
+      "input_tp": "-19.66",
+      "input_lra": "3.00",
+      "input_thresh": "-54.03",
+      "output_i": "-24.25",
+      "output_tp": "-3.00",
+      "output_lra": "3.00",
+      "output_thresh": "-34.43",
+      "normalization_type": "dynamic",
+      "target_offset": "0.25"
+    },
+    "program_path": ".media/audio/voice-program/03_technical_approach.wav",
+    "program_sha256": "08954e5e0f8909718c5d92edcb1c53057ffc094990aadb9d113818901ce70e79",
+    "program_duration_s": 69.6,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 3.0,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 125.2,
+    "placement_end_s": 194.8
+  },
+  {
+    "beat_id": "04a_demo_home",
+    "original_filename": "majupilot_vo_desan_v01_04a_demo_home_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_005.wav",
+    "source_sha256": "3705ddad3cca4b11b1e7d2c7499d0d78e327d1293d0c7057ace7997e2663a4b8",
+    "source_duration_s": 13.653333,
+    "source_analysis": {
+      "integrated_lufs": -44.5,
+      "lra_lu": 3.5,
+      "true_peak_dbfs": -24.3
+    },
+    "trim_in_s": 0.52,
+    "trim_out_s": 1.183333,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-44.82",
+      "input_tp": "-24.32",
+      "input_lra": "2.00",
+      "input_thresh": "-54.88",
+      "output_i": "-24.85",
+      "output_tp": "-4.47",
+      "output_lra": "2.30",
+      "output_thresh": "-35.04",
+      "normalization_type": "dynamic",
+      "target_offset": "0.85"
+    },
+    "program_path": ".media/audio/voice-program/04a_demo_home.wav",
+    "program_sha256": "1059396ea2a28d4baccb859f91ccf025ccde5650b8ab519ffe4b906f30fd1021",
+    "program_duration_s": 11.95,
+    "program_analysis": {
+      "integrated_lufs": -23.7,
+      "lra_lu": 3.0,
+      "true_peak_dbfs": -3.5
+    },
+    "placement_start_s": 195.35,
+    "placement_end_s": 207.3
+  },
+  {
+    "beat_id": "04b_demo_review",
+    "original_filename": "majupilot_vo_desan_v01_04b_demo_review_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_006.wav",
+    "source_sha256": "7f8bdd79bfc398f3526dbb652b4e461018458ef7f92095963879188f3bb35612",
+    "source_duration_s": 16.149333,
+    "source_analysis": {
+      "integrated_lufs": -45.0,
+      "lra_lu": 2.5,
+      "true_peak_dbfs": -24.0
+    },
+    "trim_in_s": 0.43,
+    "trim_out_s": 0.809333,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-45.09",
+      "input_tp": "-24.01",
+      "input_lra": "2.20",
+      "input_thresh": "-55.22",
+      "output_i": "-24.30",
+      "output_tp": "-3.10",
+      "output_lra": "1.90",
+      "output_thresh": "-34.54",
+      "normalization_type": "dynamic",
+      "target_offset": "0.30"
+    },
+    "program_path": ".media/audio/voice-program/04b_demo_review.wav",
+    "program_sha256": "7ef7989549764f50ad654c2403815ca9d5ee1d6f1db63b145c1c8e14139bda00",
+    "program_duration_s": 14.91,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 2.1,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 208.35,
+    "placement_end_s": 223.26
+  },
+  {
+    "beat_id": "04c_demo_results",
+    "original_filename": "majupilot_vo_desan_v01_04c_demo_results_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_007.wav",
+    "source_sha256": "ef91f5f0da2bff07c539d68843fdf37c65b8c833d0af972166affbe8d259b4a4",
+    "source_duration_s": 22.464,
+    "source_analysis": {
+      "integrated_lufs": -44.1,
+      "lra_lu": 4.1,
+      "true_peak_dbfs": -18.4
+    },
+    "trim_in_s": 0.43,
+    "trim_out_s": 1.184,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-43.78",
+      "input_tp": "-18.44",
+      "input_lra": "3.70",
+      "input_thresh": "-53.99",
+      "output_i": "-24.59",
+      "output_tp": "-3.00",
+      "output_lra": "2.70",
+      "output_thresh": "-35.03",
+      "normalization_type": "dynamic",
+      "target_offset": "0.59"
+    },
+    "program_path": ".media/audio/voice-program/04c_demo_results.wav",
+    "program_sha256": "6fe54da12b5027c0a4b92b8c760e4167e9712278a95ecb25fab77d739d358e1d",
+    "program_duration_s": 20.85,
+    "program_analysis": {
+      "integrated_lufs": -24.1,
+      "lra_lu": 2.9,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 230.35,
+    "placement_end_s": 251.2
+  },
+  {
+    "beat_id": "04d_demo_recommendations",
+    "original_filename": "majupilot_vo_desan_v01_04d_demo_recommendations_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_008.wav",
+    "source_sha256": "bac3469431a69cf4ca62680d644b36ee669eb6bc10ecff4f2cc6b9db0e433cd3",
+    "source_duration_s": 22.826646,
+    "source_analysis": {
+      "integrated_lufs": -43.9,
+      "lra_lu": 3.8,
+      "true_peak_dbfs": -21.1
+    },
+    "trim_in_s": 0.65,
+    "trim_out_s": 1.126646,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-44.14",
+      "input_tp": "-21.06",
+      "input_lra": "3.30",
+      "input_thresh": "-54.41",
+      "output_i": "-24.47",
+      "output_tp": "-3.00",
+      "output_lra": "2.40",
+      "output_thresh": "-34.85",
+      "normalization_type": "dynamic",
+      "target_offset": "0.47"
+    },
+    "program_path": ".media/audio/voice-program/04d_demo_recommendations.wav",
+    "program_sha256": "81dd72d851cf80eb23b3a2a3b7d950e7239dc9e2e8ad1e7923077db8c2a32e08",
+    "program_duration_s": 21.05,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 3.2,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 258.35,
+    "placement_end_s": 279.4
+  },
+  {
+    "beat_id": "04e_demo_scenarios",
+    "original_filename": "majupilot_vo_desan_v01_04e_demo_scenarios_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_009.wav",
+    "source_sha256": "0ada7d705b71e8492fda1bcf4be45d54a06b756dc23fb8baf5b7a83e3c2aa1ae",
+    "source_duration_s": 44.053313,
+    "source_analysis": {
+      "integrated_lufs": -44.1,
+      "lra_lu": 3.9,
+      "true_peak_dbfs": -21.9
+    },
+    "trim_in_s": 0.52,
+    "trim_out_s": 0.883313,
+    "silence_cuts": [
+      {
+        "start_s": 3.340104,
+        "end_s": 3.479896,
+        "removed_s": 0.139792
+      },
+      {
+        "start_s": 7.996458,
+        "end_s": 8.123542,
+        "removed_s": 0.127083
+      },
+      {
+        "start_s": 11.085729,
+        "end_s": 11.454271,
+        "removed_s": 0.368542
+      },
+      {
+        "start_s": 14.574688,
+        "end_s": 14.765313,
+        "removed_s": 0.190625
+      },
+      {
+        "start_s": 16.896875,
+        "end_s": 17.583125,
+        "removed_s": 0.68625
+      },
+      {
+        "start_s": 21.680208,
+        "end_s": 21.959792,
+        "removed_s": 0.279583
+      },
+      {
+        "start_s": 26.272813,
+        "end_s": 26.387187,
+        "removed_s": 0.114375
+      },
+      {
+        "start_s": 34.087708,
+        "end_s": 34.672292,
+        "removed_s": 0.584583
+      },
+      {
+        "start_s": 39.129375,
+        "end_s": 39.510625,
+        "removed_s": 0.38125
+      },
+      {
+        "start_s": 41.011042,
+        "end_s": 41.188958,
+        "removed_s": 0.177917
+      }
+    ],
+    "silence_removed_s": 3.05,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-44.21",
+      "input_tp": "-21.87",
+      "input_lra": "3.50",
+      "input_thresh": "-54.39",
+      "output_i": "-24.30",
+      "output_tp": "-3.00",
+      "output_lra": "3.00",
+      "output_thresh": "-34.52",
+      "normalization_type": "dynamic",
+      "target_offset": "0.30"
+    },
+    "program_path": ".media/audio/voice-program/04e_demo_scenarios.wav",
+    "program_sha256": "79989d97595e53d4e0cce8681b9550ff6307448d36d13ea09bed41f0f1434222",
+    "program_duration_s": 39.6,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 3.1,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 285.2,
+    "placement_end_s": 324.8
+  },
+  {
+    "beat_id": "04f_demo_blueprint",
+    "original_filename": "majupilot_vo_desan_v01_04f_demo_blueprint_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_010.wav",
+    "source_sha256": "e0c5c84dd9015096c748dfdd67b0347422623af55aeaba0a633ff75302eae214",
+    "source_duration_s": 57.109313,
+    "source_analysis": {
+      "integrated_lufs": -43.9,
+      "lra_lu": 4.3,
+      "true_peak_dbfs": -20.3
+    },
+    "trim_in_s": 0.56,
+    "trim_out_s": 1.519313,
+    "silence_cuts": [
+      {
+        "start_s": 1.327262,
+        "end_s": 1.332738,
+        "removed_s": 0.005475
+      },
+      {
+        "start_s": 2.494525,
+        "end_s": 2.505475,
+        "removed_s": 0.01095
+      },
+      {
+        "start_s": 5.636312,
+        "end_s": 5.663688,
+        "removed_s": 0.027376
+      },
+      {
+        "start_s": 6.950145,
+        "end_s": 6.969855,
+        "removed_s": 0.019711
+      },
+      {
+        "start_s": 10.164669,
+        "end_s": 10.195331,
+        "removed_s": 0.030661
+      },
+      {
+        "start_s": 12.92905,
+        "end_s": 12.95095,
+        "removed_s": 0.021901
+      },
+      {
+        "start_s": 13.619597,
+        "end_s": 13.640403,
+        "removed_s": 0.020806
+      },
+      {
+        "start_s": 15.076312,
+        "end_s": 15.103688,
+        "removed_s": 0.027376
+      },
+      {
+        "start_s": 17.92905,
+        "end_s": 17.95095,
+        "removed_s": 0.021901
+      },
+      {
+        "start_s": 19.99562,
+        "end_s": 20.00438,
+        "removed_s": 0.00876
+      },
+      {
+        "start_s": 23.960289,
+        "end_s": 23.999711,
+        "removed_s": 0.039421
+      },
+      {
+        "start_s": 24.983977,
+        "end_s": 24.996023,
+        "removed_s": 0.012045
+      },
+      {
+        "start_s": 26.607955,
+        "end_s": 26.632045,
+        "removed_s": 0.024091
+      },
+      {
+        "start_s": 28.213027,
+        "end_s": 28.246973,
+        "removed_s": 0.033946
+      },
+      {
+        "start_s": 29.61124,
+        "end_s": 29.62876,
+        "removed_s": 0.017521
+      },
+      {
+        "start_s": 30.956312,
+        "end_s": 30.983688,
+        "removed_s": 0.027376
+      },
+      {
+        "start_s": 33.560289,
+        "end_s": 33.599711,
+        "removed_s": 0.039421
+      },
+      {
+        "start_s": 39.655506,
+        "end_s": 39.724494,
+        "removed_s": 0.068988
+      },
+      {
+        "start_s": 42.512335,
+        "end_s": 42.527665,
+        "removed_s": 0.015331
+      },
+      {
+        "start_s": 45.240289,
+        "end_s": 45.279711,
+        "removed_s": 0.039421
+      },
+      {
+        "start_s": 51.31124,
+        "end_s": 51.32876,
+        "removed_s": 0.017521
+      }
+    ],
+    "silence_removed_s": 0.53,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-44.05",
+      "input_tp": "-20.27",
+      "input_lra": "4.40",
+      "input_thresh": "-54.22",
+      "output_i": "-24.37",
+      "output_tp": "-3.00",
+      "output_lra": "3.60",
+      "output_thresh": "-34.74",
+      "normalization_type": "dynamic",
+      "target_offset": "0.37"
+    },
+    "program_path": ".media/audio/voice-program/04f_demo_blueprint.wav",
+    "program_sha256": "f92cde3fb8ef9a6069043b6cc789092dc71e35acab631327931dc129c91ff025",
+    "program_duration_s": 54.500042,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 3.8,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 325.15,
+    "placement_end_s": 379.650042
+  },
+  {
+    "beat_id": "04g_demo_consultation",
+    "original_filename": "majupilot_vo_desan_v01_04g_demo_consultation_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_011.wav",
+    "source_sha256": "b76a15b42e94f714ed3d4e2849a85248c8caea2cfd1dbc7135f4c61ce3f5b8db",
+    "source_duration_s": 25.28,
+    "source_analysis": {
+      "integrated_lufs": -45.5,
+      "lra_lu": 2.8,
+      "true_peak_dbfs": -21.7
+    },
+    "trim_in_s": 0.62,
+    "trim_out_s": 1.17,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-45.48",
+      "input_tp": "-21.71",
+      "input_lra": "2.60",
+      "input_thresh": "-55.62",
+      "output_i": "-24.52",
+      "output_tp": "-3.00",
+      "output_lra": "2.30",
+      "output_thresh": "-34.87",
+      "normalization_type": "dynamic",
+      "target_offset": "0.52"
+    },
+    "program_path": ".media/audio/voice-program/04g_demo_consultation.wav",
+    "program_sha256": "ad2adab3f640e975ad93d909d0ab0b6e1a1686271c3313e9ea5e5e592899314a",
+    "program_duration_s": 23.49,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 2.6,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 380.35,
+    "placement_end_s": 403.84
+  },
+  {
+    "beat_id": "05_testing_validation",
+    "original_filename": "majupilot_vo_desan_v01_05_testing_validation_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_012.wav",
+    "source_sha256": "343ed77183644326dfb149b2219546d072d83351823ad80077082a73c1ca8ef1",
+    "source_duration_s": 57.216,
+    "source_analysis": {
+      "integrated_lufs": -45.3,
+      "lra_lu": 2.9,
+      "true_peak_dbfs": -21.8
+    },
+    "trim_in_s": 0.52,
+    "trim_out_s": 0.926,
+    "silence_cuts": [],
+    "silence_removed_s": 0,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-45.38",
+      "input_tp": "-21.77",
+      "input_lra": "2.30",
+      "input_thresh": "-55.52",
+      "output_i": "-24.13",
+      "output_tp": "-3.00",
+      "output_lra": "2.20",
+      "output_thresh": "-34.51",
+      "normalization_type": "dynamic",
+      "target_offset": "0.13"
+    },
+    "program_path": ".media/audio/voice-program/05_testing_validation.wav",
+    "program_sha256": "feb5399ac7b096c7d77a38f1bb523ba1392f13502b242b484d9ba17debf670ea",
+    "program_duration_s": 55.77,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 2.8,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 415.35,
+    "placement_end_s": 471.12
+  },
+  {
+    "beat_id": "06_industry_future",
+    "original_filename": "majupilot_vo_desan_v01_06_industry_future_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_013.wav",
+    "source_sha256": "8b443d5cf237a5e188c4a7f34baac5f597cf60199d6426c9501b4f25a4a1f18e",
+    "source_duration_s": 79.317313,
+    "source_analysis": {
+      "integrated_lufs": -44.6,
+      "lra_lu": 4.0,
+      "true_peak_dbfs": -20.6
+    },
+    "trim_in_s": 0.65,
+    "trim_out_s": 1.057313,
+    "silence_cuts": [
+      {
+        "start_s": 2.269513,
+        "end_s": 2.490487,
+        "removed_s": 0.220973
+      },
+      {
+        "start_s": 4.53852,
+        "end_s": 4.86148,
+        "removed_s": 0.322961
+      },
+      {
+        "start_s": 10.083023,
+        "end_s": 10.456977,
+        "removed_s": 0.373954
+      },
+      {
+        "start_s": 13.342536,
+        "end_s": 13.937464,
+        "removed_s": 0.594928
+      },
+      {
+        "start_s": 16.721522,
+        "end_s": 17.078478,
+        "removed_s": 0.356957
+      },
+      {
+        "start_s": 17.968012,
+        "end_s": 18.171988,
+        "removed_s": 0.203975
+      },
+      {
+        "start_s": 24.281035,
+        "end_s": 24.858965,
+        "removed_s": 0.57793
+      },
+      {
+        "start_s": 29.592029,
+        "end_s": 30.067971,
+        "removed_s": 0.475942
+      },
+      {
+        "start_s": 30.893002,
+        "end_s": 30.926998,
+        "removed_s": 0.033996
+      },
+      {
+        "start_s": 32.187039,
+        "end_s": 32.832961,
+        "removed_s": 0.645921
+      },
+      {
+        "start_s": 33.951014,
+        "end_s": 34.188986,
+        "removed_s": 0.237971
+      },
+      {
+        "start_s": 36.844524,
+        "end_s": 37.235476,
+        "removed_s": 0.390952
+      },
+      {
+        "start_s": 42.301522,
+        "end_s": 42.658478,
+        "removed_s": 0.356957
+      },
+      {
+        "start_s": 46.716532,
+        "end_s": 47.243468,
+        "removed_s": 0.526936
+      },
+      {
+        "start_s": 49.177505,
+        "end_s": 49.262495,
+        "removed_s": 0.08499
+      },
+      {
+        "start_s": 50.122008,
+        "end_s": 50.257992,
+        "removed_s": 0.135983
+      },
+      {
+        "start_s": 51.036004,
+        "end_s": 51.103996,
+        "removed_s": 0.067992
+      },
+      {
+        "start_s": 56.783509,
+        "end_s": 56.936491,
+        "removed_s": 0.152981
+      },
+      {
+        "start_s": 61.224524,
+        "end_s": 61.615476,
+        "removed_s": 0.390952
+      },
+      {
+        "start_s": 66.104037,
+        "end_s": 66.715963,
+        "removed_s": 0.611925
+      },
+      {
+        "start_s": 68.405538,
+        "end_s": 69.034462,
+        "removed_s": 0.628923
+      },
+      {
+        "start_s": 74.531542,
+        "end_s": 75.228458,
+        "removed_s": 0.696915
+      },
+      {
+        "start_s": 76.180507,
+        "end_s": 76.299493,
+        "removed_s": 0.118986
+      }
+    ],
+    "silence_removed_s": 8.21,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-44.59",
+      "input_tp": "-20.56",
+      "input_lra": "3.10",
+      "input_thresh": "-54.66",
+      "output_i": "-24.25",
+      "output_tp": "-3.00",
+      "output_lra": "3.00",
+      "output_thresh": "-34.35",
+      "normalization_type": "dynamic",
+      "target_offset": "0.25"
+    },
+    "program_path": ".media/audio/voice-program/06_industry_future.wav",
+    "program_sha256": "d13116d8ad1a99bdf8e107f325d3098cd29f28ada15eba4b5f2d2754f019c18f",
+    "program_duration_s": 69.4,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 2.8,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 495.2,
+    "placement_end_s": 564.6
+  },
+  {
+    "beat_id": "07_close",
+    "original_filename": "majupilot_vo_desan_v01_07_close_t01_48k24m.wav",
+    "source_path": ".media/audio/voice/voice_014.wav",
+    "source_sha256": "91fd56e4886f8b0a7513ff68818672601aed1d640583dad27af33e276dc8c8f7",
+    "source_duration_s": 13.482646,
+    "source_analysis": {
+      "integrated_lufs": -45.5,
+      "lra_lu": 4.5,
+      "true_peak_dbfs": -21.7
+    },
+    "trim_in_s": 0.88,
+    "trim_out_s": 1.112646,
+    "silence_cuts": [
+      {
+        "start_s": 2.312409,
+        "end_s": 2.547591,
+        "removed_s": 0.235182
+      },
+      {
+        "start_s": 6.0705,
+        "end_s": 6.2695,
+        "removed_s": 0.199
+      },
+      {
+        "start_s": 9.250636,
+        "end_s": 10.589364,
+        "removed_s": 1.338727
+      },
+      {
+        "start_s": 11.691455,
+        "end_s": 11.908545,
+        "removed_s": 0.217091
+      }
+    ],
+    "silence_removed_s": 1.99,
+    "processing": {
+      "temporal": "silence-only edit; no speech time-stretch or deletion",
+      "loudness": "two-pass FFmpeg loudnorm I=-24.0 LUFS, LRA=7.0 LU, TP=-3.0 dBFS",
+      "tonal": "none",
+      "denoise_gate": "none"
+    },
+    "loudnorm_first_pass": {
+      "input_i": "-45.48",
+      "input_tp": "-21.69",
+      "input_lra": "2.30",
+      "input_thresh": "-55.59",
+      "output_i": "-24.47",
+      "output_tp": "-3.00",
+      "output_lra": "1.50",
+      "output_thresh": "-34.66",
+      "normalization_type": "dynamic",
+      "target_offset": "0.47"
+    },
+    "program_path": ".media/audio/voice-program/07_close.wav",
+    "program_sha256": "a4e1694df84d58686a29d8629a3422037e801078bc474afa0d8e28625cee13e5",
+    "program_duration_s": 9.500042,
+    "program_analysis": {
+      "integrated_lufs": -24.0,
+      "lra_lu": 2.0,
+      "true_peak_dbfs": -3.0
+    },
+    "placement_start_s": 565.35,
+    "placement_end_s": 574.850042
+  }
+]

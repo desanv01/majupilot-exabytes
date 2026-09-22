@@ -1,0 +1,567 @@
+{
+  "beat_id": "04c_demo_results",
+  "source": ".media/audio/voice/voice_007.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 22.464,
+  "duration_after_vad": 21.088,
+  "segments": [
+    {
+      "start": 0.53,
+      "end": 9.41,
+      "text": "Now the deterministic diagnosis is complete, digital maturity is 37.5 out of 100, AI readiness",
+      "avg_logprob": -0.208092,
+      "no_speech_prob": 0.007129,
+      "words": [
+        {
+          "text": "Now",
+          "start": 0.53,
+          "end": 1.07,
+          "probability": 0.785342
+        },
+        {
+          "text": "the",
+          "start": 1.07,
+          "end": 1.35,
+          "probability": 0.602724
+        },
+        {
+          "text": "deterministic",
+          "start": 1.35,
+          "end": 1.97,
+          "probability": 0.97188
+        },
+        {
+          "text": "diagnosis",
+          "start": 1.97,
+          "end": 2.55,
+          "probability": 0.977889
+        },
+        {
+          "text": "is",
+          "start": 2.55,
+          "end": 3.05,
+          "probability": 0.971444
+        },
+        {
+          "text": "complete,",
+          "start": 3.05,
+          "end": 3.53,
+          "probability": 0.9916
+        },
+        {
+          "text": "digital",
+          "start": 4.37,
+          "end": 4.37,
+          "probability": 0.53297
+        },
+        {
+          "text": "maturity",
+          "start": 4.37,
+          "end": 4.85,
+          "probability": 0.99132
+        },
+        {
+          "text": "is",
+          "start": 4.85,
+          "end": 5.29,
+          "probability": 0.984428
+        },
+        {
+          "text": "37",
+          "start": 5.29,
+          "end": 6.15,
+          "probability": 0.966181
+        },
+        {
+          "text": ".5",
+          "start": 6.15,
+          "end": 7.11,
+          "probability": 0.981792
+        },
+        {
+          "text": "out",
+          "start": 7.11,
+          "end": 7.69,
+          "probability": 0.619366
+        },
+        {
+          "text": "of",
+          "start": 7.69,
+          "end": 7.83,
+          "probability": 0.994077
+        },
+        {
+          "text": "100,",
+          "start": 7.83,
+          "end": 8.31,
+          "probability": 0.993604
+        },
+        {
+          "text": "AI",
+          "start": 8.99,
+          "end": 9.13,
+          "probability": 0.951297
+        },
+        {
+          "text": "readiness",
+          "start": 9.13,
+          "end": 9.41,
+          "probability": 0.963991
+        }
+      ]
+    },
+    {
+      "start": 9.41,
+      "end": 12.83,
+      "text": "is 42.5, 6 pain findings were triggered.",
+      "avg_logprob": -0.208092,
+      "no_speech_prob": 0.007129,
+      "words": [
+        {
+          "text": "is",
+          "start": 9.41,
+          "end": 9.77,
+          "probability": 0.979983
+        },
+        {
+          "text": "42",
+          "start": 9.77,
+          "end": 10.25,
+          "probability": 0.996002
+        },
+        {
+          "text": ".5,",
+          "start": 10.25,
+          "end": 10.91,
+          "probability": 0.992457
+        },
+        {
+          "text": "6",
+          "start": 11.25,
+          "end": 11.49,
+          "probability": 0.798069
+        },
+        {
+          "text": "pain",
+          "start": 11.49,
+          "end": 11.79,
+          "probability": 0.373663
+        },
+        {
+          "text": "findings",
+          "start": 11.79,
+          "end": 12.21,
+          "probability": 0.94399
+        },
+        {
+          "text": "were",
+          "start": 12.21,
+          "end": 12.49,
+          "probability": 0.942954
+        },
+        {
+          "text": "triggered.",
+          "start": 12.49,
+          "end": 12.83,
+          "probability": 0.996987
+        }
+      ]
+    },
+    {
+      "start": 13.35,
+      "end": 19.23,
+      "text": "I can open an finding and see the evidence calculation disclosure behind it, rather than",
+      "avg_logprob": -0.208092,
+      "no_speech_prob": 0.007129,
+      "words": [
+        {
+          "text": "I",
+          "start": 13.35,
+          "end": 13.49,
+          "probability": 0.986239
+        },
+        {
+          "text": "can",
+          "start": 13.49,
+          "end": 13.61,
+          "probability": 0.993674
+        },
+        {
+          "text": "open",
+          "start": 13.61,
+          "end": 13.97,
+          "probability": 0.994823
+        },
+        {
+          "text": "an",
+          "start": 13.97,
+          "end": 14.17,
+          "probability": 0.43295
+        },
+        {
+          "text": "finding",
+          "start": 14.17,
+          "end": 14.57,
+          "probability": 0.903998
+        },
+        {
+          "text": "and",
+          "start": 14.57,
+          "end": 15.13,
+          "probability": 0.958107
+        },
+        {
+          "text": "see",
+          "start": 15.13,
+          "end": 15.47,
+          "probability": 0.993331
+        },
+        {
+          "text": "the",
+          "start": 15.47,
+          "end": 15.67,
+          "probability": 0.989113
+        },
+        {
+          "text": "evidence",
+          "start": 15.67,
+          "end": 16.07,
+          "probability": 0.988957
+        },
+        {
+          "text": "calculation",
+          "start": 16.07,
+          "end": 16.77,
+          "probability": 0.937433
+        },
+        {
+          "text": "disclosure",
+          "start": 16.77,
+          "end": 17.33,
+          "probability": 0.98388
+        },
+        {
+          "text": "behind",
+          "start": 17.33,
+          "end": 17.87,
+          "probability": 0.986034
+        },
+        {
+          "text": "it,",
+          "start": 17.87,
+          "end": 18.37,
+          "probability": 0.991081
+        },
+        {
+          "text": "rather",
+          "start": 18.67,
+          "end": 18.89,
+          "probability": 0.987993
+        },
+        {
+          "text": "than",
+          "start": 18.89,
+          "end": 19.23,
+          "probability": 0.959161
+        }
+      ]
+    },
+    {
+      "start": 19.23,
+      "end": 21.13,
+      "text": "accepting an unexplainable score.",
+      "avg_logprob": -0.481083,
+      "no_speech_prob": 0.009381,
+      "words": [
+        {
+          "text": "accepting",
+          "start": 19.23,
+          "end": 19.73,
+          "probability": 0.495616
+        },
+        {
+          "text": "an",
+          "start": 19.73,
+          "end": 20.09,
+          "probability": 0.892183
+        },
+        {
+          "text": "unexplainable",
+          "start": 20.09,
+          "end": 20.97,
+          "probability": 0.718975
+        },
+        {
+          "text": "score.",
+          "start": 20.97,
+          "end": 21.13,
+          "probability": 0.749936
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Now",
+      "start": 0.53,
+      "end": 1.07,
+      "probability": 0.785342
+    },
+    {
+      "text": "the",
+      "start": 1.07,
+      "end": 1.35,
+      "probability": 0.602724
+    },
+    {
+      "text": "deterministic",
+      "start": 1.35,
+      "end": 1.97,
+      "probability": 0.97188
+    },
+    {
+      "text": "diagnosis",
+      "start": 1.97,
+      "end": 2.55,
+      "probability": 0.977889
+    },
+    {
+      "text": "is",
+      "start": 2.55,
+      "end": 3.05,
+      "probability": 0.971444
+    },
+    {
+      "text": "complete,",
+      "start": 3.05,
+      "end": 3.53,
+      "probability": 0.9916
+    },
+    {
+      "text": "digital",
+      "start": 4.37,
+      "end": 4.37,
+      "probability": 0.53297
+    },
+    {
+      "text": "maturity",
+      "start": 4.37,
+      "end": 4.85,
+      "probability": 0.99132
+    },
+    {
+      "text": "is",
+      "start": 4.85,
+      "end": 5.29,
+      "probability": 0.984428
+    },
+    {
+      "text": "37",
+      "start": 5.29,
+      "end": 6.15,
+      "probability": 0.966181
+    },
+    {
+      "text": ".5",
+      "start": 6.15,
+      "end": 7.11,
+      "probability": 0.981792
+    },
+    {
+      "text": "out",
+      "start": 7.11,
+      "end": 7.69,
+      "probability": 0.619366
+    },
+    {
+      "text": "of",
+      "start": 7.69,
+      "end": 7.83,
+      "probability": 0.994077
+    },
+    {
+      "text": "100,",
+      "start": 7.83,
+      "end": 8.31,
+      "probability": 0.993604
+    },
+    {
+      "text": "AI",
+      "start": 8.99,
+      "end": 9.13,
+      "probability": 0.951297
+    },
+    {
+      "text": "readiness",
+      "start": 9.13,
+      "end": 9.41,
+      "probability": 0.963991
+    },
+    {
+      "text": "is",
+      "start": 9.41,
+      "end": 9.77,
+      "probability": 0.979983
+    },
+    {
+      "text": "42",
+      "start": 9.77,
+      "end": 10.25,
+      "probability": 0.996002
+    },
+    {
+      "text": ".5,",
+      "start": 10.25,
+      "end": 10.91,
+      "probability": 0.992457
+    },
+    {
+      "text": "6",
+      "start": 11.25,
+      "end": 11.49,
+      "probability": 0.798069
+    },
+    {
+      "text": "pain",
+      "start": 11.49,
+      "end": 11.79,
+      "probability": 0.373663
+    },
+    {
+      "text": "findings",
+      "start": 11.79,
+      "end": 12.21,
+      "probability": 0.94399
+    },
+    {
+      "text": "were",
+      "start": 12.21,
+      "end": 12.49,
+      "probability": 0.942954
+    },
+    {
+      "text": "triggered.",
+      "start": 12.49,
+      "end": 12.83,
+      "probability": 0.996987
+    },
+    {
+      "text": "I",
+      "start": 13.35,
+      "end": 13.49,
+      "probability": 0.986239
+    },
+    {
+      "text": "can",
+      "start": 13.49,
+      "end": 13.61,
+      "probability": 0.993674
+    },
+    {
+      "text": "open",
+      "start": 13.61,
+      "end": 13.97,
+      "probability": 0.994823
+    },
+    {
+      "text": "an",
+      "start": 13.97,
+      "end": 14.17,
+      "probability": 0.43295
+    },
+    {
+      "text": "finding",
+      "start": 14.17,
+      "end": 14.57,
+      "probability": 0.903998
+    },
+    {
+      "text": "and",
+      "start": 14.57,
+      "end": 15.13,
+      "probability": 0.958107
+    },
+    {
+      "text": "see",
+      "start": 15.13,
+      "end": 15.47,
+      "probability": 0.993331
+    },
+    {
+      "text": "the",
+      "start": 15.47,
+      "end": 15.67,
+      "probability": 0.989113
+    },
+    {
+      "text": "evidence",
+      "start": 15.67,
+      "end": 16.07,
+      "probability": 0.988957
+    },
+    {
+      "text": "calculation",
+      "start": 16.07,
+      "end": 16.77,
+      "probability": 0.937433
+    },
+    {
+      "text": "disclosure",
+      "start": 16.77,
+      "end": 17.33,
+      "probability": 0.98388
+    },
+    {
+      "text": "behind",
+      "start": 17.33,
+      "end": 17.87,
+      "probability": 0.986034
+    },
+    {
+      "text": "it,",
+      "start": 17.87,
+      "end": 18.37,
+      "probability": 0.991081
+    },
+    {
+      "text": "rather",
+      "start": 18.67,
+      "end": 18.89,
+      "probability": 0.987993
+    },
+    {
+      "text": "than",
+      "start": 18.89,
+      "end": 19.23,
+      "probability": 0.959161
+    },
+    {
+      "text": "accepting",
+      "start": 19.23,
+      "end": 19.73,
+      "probability": 0.495616
+    },
+    {
+      "text": "an",
+      "start": 19.73,
+      "end": 20.09,
+      "probability": 0.892183
+    },
+    {
+      "text": "unexplainable",
+      "start": 20.09,
+      "end": 20.97,
+      "probability": 0.718975
+    },
+    {
+      "text": "score.",
+      "start": 20.97,
+      "end": 21.13,
+      "probability": 0.749936
+    }
+  ],
+  "recognized_text": "Now the deterministic diagnosis is complete, digital maturity is 37.5 out of 100, AI readiness is 42.5, 6 pain findings were triggered. I can open an finding and see the evidence calculation disclosure behind it, rather than accepting an unexplainable score."
+}

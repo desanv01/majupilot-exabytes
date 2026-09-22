@@ -1,0 +1,142 @@
+[
+  {
+    "beat_id": "00_opening",
+    "asr_word_count": 43,
+    "caption_word_count": 42,
+    "exact_token_ratio": 0.860465,
+    "mean_asr_word_probability": 0.874823,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 0.45,
+    "last_caption_s": 18.77
+  },
+  {
+    "beat_id": "01_problem_objectives",
+    "asr_word_count": 107,
+    "caption_word_count": 106,
+    "exact_token_ratio": 0.934579,
+    "mean_asr_word_probability": 0.935298,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 20.3,
+    "last_caption_s": 64.65
+  },
+  {
+    "beat_id": "02_proposed_solution",
+    "asr_word_count": 128,
+    "caption_word_count": 128,
+    "exact_token_ratio": 0.945312,
+    "mean_asr_word_probability": 0.901242,
+    "interpolated_caption_words": 1,
+    "first_caption_s": 65.84,
+    "last_caption_s": 124.65
+  },
+  {
+    "beat_id": "03_technical_approach",
+    "asr_word_count": 164,
+    "caption_word_count": 161,
+    "exact_token_ratio": 0.871951,
+    "mean_asr_word_probability": 0.887495,
+    "interpolated_caption_words": 1,
+    "first_caption_s": 125.3,
+    "last_caption_s": 194.65
+  },
+  {
+    "beat_id": "04a_demo_home",
+    "asr_word_count": 27,
+    "caption_word_count": 25,
+    "exact_token_ratio": 0.777778,
+    "mean_asr_word_probability": 0.839979,
+    "interpolated_caption_words": 1,
+    "first_caption_s": 195.45,
+    "last_caption_s": 207.15
+  },
+  {
+    "beat_id": "04b_demo_review",
+    "asr_word_count": 33,
+    "caption_word_count": 33,
+    "exact_token_ratio": 0.969697,
+    "mean_asr_word_probability": 0.91698,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 208.45,
+    "last_caption_s": 223.11
+  },
+  {
+    "beat_id": "04c_demo_results",
+    "asr_word_count": 43,
+    "caption_word_count": 42,
+    "exact_token_ratio": 0.837209,
+    "mean_asr_word_probability": 0.889477,
+    "interpolated_caption_words": 1,
+    "first_caption_s": 230.45,
+    "last_caption_s": 251.05
+  },
+  {
+    "beat_id": "04d_demo_recommendations",
+    "asr_word_count": 48,
+    "caption_word_count": 45,
+    "exact_token_ratio": 0.791667,
+    "mean_asr_word_probability": 0.856424,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 258.45,
+    "last_caption_s": 279.25
+  },
+  {
+    "beat_id": "04e_demo_scenarios",
+    "asr_word_count": 84,
+    "caption_word_count": 77,
+    "exact_token_ratio": 0.833333,
+    "mean_asr_word_probability": 0.873265,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 285.3,
+    "last_caption_s": 324.65
+  },
+  {
+    "beat_id": "04f_demo_blueprint",
+    "asr_word_count": 119,
+    "caption_word_count": 115,
+    "exact_token_ratio": 0.932773,
+    "mean_asr_word_probability": 0.901013,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 325.25,
+    "last_caption_s": 379.5
+  },
+  {
+    "beat_id": "04g_demo_consultation",
+    "asr_word_count": 55,
+    "caption_word_count": 56,
+    "exact_token_ratio": 0.928571,
+    "mean_asr_word_probability": 0.91534,
+    "interpolated_caption_words": 1,
+    "first_caption_s": 380.45,
+    "last_caption_s": 403.69
+  },
+  {
+    "beat_id": "05_testing_validation",
+    "asr_word_count": 115,
+    "caption_word_count": 114,
+    "exact_token_ratio": 0.878261,
+    "mean_asr_word_probability": 0.852223,
+    "interpolated_caption_words": 2,
+    "first_caption_s": 415.45,
+    "last_caption_s": 470.97
+  },
+  {
+    "beat_id": "06_industry_future",
+    "asr_word_count": 165,
+    "caption_word_count": 158,
+    "exact_token_ratio": 0.884848,
+    "mean_asr_word_probability": 0.902823,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 495.3,
+    "last_caption_s": 564.45
+  },
+  {
+    "beat_id": "07_close",
+    "asr_word_count": 29,
+    "caption_word_count": 29,
+    "exact_token_ratio": 0.965517,
+    "mean_asr_word_probability": 0.904441,
+    "interpolated_caption_words": 0,
+    "first_caption_s": 565.45,
+    "last_caption_s": 574.7
+  }
+]

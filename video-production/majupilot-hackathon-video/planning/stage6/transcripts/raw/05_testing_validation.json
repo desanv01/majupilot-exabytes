@@ -1,0 +1,1476 @@
+{
+  "beat_id": "05_testing_validation",
+  "source": ".media/audio/voice/voice_012.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 57.216,
+  "duration_after_vad": 56.16,
+  "segments": [
+    {
+      "start": 0.62,
+      "end": 7.3,
+      "text": "Validation is kept into clearly labeled layers. In accepted hosted integration, 47 test files",
+      "avg_logprob": -0.312092,
+      "no_speech_prob": 0.064615,
+      "words": [
+        {
+          "text": "Validation",
+          "start": 0.62,
+          "end": 1.44,
+          "probability": 0.898358
+        },
+        {
+          "text": "is",
+          "start": 1.44,
+          "end": 1.7,
+          "probability": 0.984088
+        },
+        {
+          "text": "kept",
+          "start": 1.7,
+          "end": 1.96,
+          "probability": 0.97833
+        },
+        {
+          "text": "into",
+          "start": 1.96,
+          "end": 2.34,
+          "probability": 0.797911
+        },
+        {
+          "text": "clearly",
+          "start": 2.34,
+          "end": 2.82,
+          "probability": 0.902509
+        },
+        {
+          "text": "labeled",
+          "start": 2.82,
+          "end": 3.2,
+          "probability": 0.69898
+        },
+        {
+          "text": "layers.",
+          "start": 3.2,
+          "end": 3.7,
+          "probability": 0.996347
+        },
+        {
+          "text": "In",
+          "start": 4.24,
+          "end": 4.32,
+          "probability": 0.973329
+        },
+        {
+          "text": "accepted",
+          "start": 4.32,
+          "end": 4.76,
+          "probability": 0.630536
+        },
+        {
+          "text": "hosted",
+          "start": 4.76,
+          "end": 5.22,
+          "probability": 0.978173
+        },
+        {
+          "text": "integration,",
+          "start": 5.22,
+          "end": 5.86,
+          "probability": 0.942401
+        },
+        {
+          "text": "47",
+          "start": 6.24,
+          "end": 6.62,
+          "probability": 0.982716
+        },
+        {
+          "text": "test",
+          "start": 6.62,
+          "end": 7.04,
+          "probability": 0.925328
+        },
+        {
+          "text": "files",
+          "start": 7.04,
+          "end": 7.3,
+          "probability": 0.98912
+        }
+      ]
+    },
+    {
+      "start": 7.3,
+      "end": 15.68,
+      "text": "ran, 221 tests passed and one test was intentionally skipped. TypeScript, ESE, ESLid and the BIL",
+      "avg_logprob": -0.312092,
+      "no_speech_prob": 0.064615,
+      "words": [
+        {
+          "text": "ran,",
+          "start": 7.3,
+          "end": 7.64,
+          "probability": 0.983353
+        },
+        {
+          "text": "221",
+          "start": 8.14,
+          "end": 8.72,
+          "probability": 0.966078
+        },
+        {
+          "text": "tests",
+          "start": 8.72,
+          "end": 9.4,
+          "probability": 0.904327
+        },
+        {
+          "text": "passed",
+          "start": 9.4,
+          "end": 9.8,
+          "probability": 0.985213
+        },
+        {
+          "text": "and",
+          "start": 9.8,
+          "end": 10.24,
+          "probability": 0.54158
+        },
+        {
+          "text": "one",
+          "start": 10.24,
+          "end": 10.52,
+          "probability": 0.569452
+        },
+        {
+          "text": "test",
+          "start": 10.52,
+          "end": 10.8,
+          "probability": 0.98714
+        },
+        {
+          "text": "was",
+          "start": 10.8,
+          "end": 11.0,
+          "probability": 0.99461
+        },
+        {
+          "text": "intentionally",
+          "start": 11.0,
+          "end": 11.58,
+          "probability": 0.994493
+        },
+        {
+          "text": "skipped.",
+          "start": 11.58,
+          "end": 12.1,
+          "probability": 0.998166
+        },
+        {
+          "text": "TypeScript,",
+          "start": 12.74,
+          "end": 13.06,
+          "probability": 0.698385
+        },
+        {
+          "text": "ESE,",
+          "start": 13.5,
+          "end": 13.78,
+          "probability": 0.556721
+        },
+        {
+          "text": "ESLid",
+          "start": 14.46,
+          "end": 14.6,
+          "probability": 0.629526
+        },
+        {
+          "text": "and",
+          "start": 14.6,
+          "end": 15.0,
+          "probability": 0.740917
+        },
+        {
+          "text": "the",
+          "start": 15.0,
+          "end": 15.34,
+          "probability": 0.506799
+        },
+        {
+          "text": "BIL",
+          "start": 15.34,
+          "end": 15.68,
+          "probability": 0.274521
+        }
+      ]
+    },
+    {
+      "start": 15.68,
+      "end": 22.54,
+      "text": "passed, generating 38 static pages. The consolidated smoke used the labeled fictional business",
+      "avg_logprob": -0.312092,
+      "no_speech_prob": 0.064615,
+      "words": [
+        {
+          "text": "passed,",
+          "start": 15.68,
+          "end": 16.14,
+          "probability": 0.502687
+        },
+        {
+          "text": "generating",
+          "start": 16.72,
+          "end": 17.12,
+          "probability": 0.98171
+        },
+        {
+          "text": "38",
+          "start": 17.12,
+          "end": 17.7,
+          "probability": 0.994239
+        },
+        {
+          "text": "static",
+          "start": 17.7,
+          "end": 18.08,
+          "probability": 0.994642
+        },
+        {
+          "text": "pages.",
+          "start": 18.08,
+          "end": 18.56,
+          "probability": 0.999245
+        },
+        {
+          "text": "The",
+          "start": 19.3,
+          "end": 19.4,
+          "probability": 0.951389
+        },
+        {
+          "text": "consolidated",
+          "start": 19.4,
+          "end": 19.88,
+          "probability": 0.916491
+        },
+        {
+          "text": "smoke",
+          "start": 19.88,
+          "end": 20.46,
+          "probability": 0.551873
+        },
+        {
+          "text": "used",
+          "start": 20.46,
+          "end": 20.78,
+          "probability": 0.844896
+        },
+        {
+          "text": "the",
+          "start": 20.78,
+          "end": 21.04,
+          "probability": 0.866312
+        },
+        {
+          "text": "labeled",
+          "start": 21.04,
+          "end": 21.38,
+          "probability": 0.341274
+        },
+        {
+          "text": "fictional",
+          "start": 21.38,
+          "end": 21.98,
+          "probability": 0.888177
+        },
+        {
+          "text": "business",
+          "start": 21.98,
+          "end": 22.54,
+          "probability": 0.96382
+        }
+      ]
+    },
+    {
+      "start": 22.54,
+      "end": 27.98,
+      "text": "and synthetic contact details. It verified the durable journey, private report handling,",
+      "avg_logprob": -0.312092,
+      "no_speech_prob": 0.064615,
+      "words": [
+        {
+          "text": "and",
+          "start": 22.54,
+          "end": 22.82,
+          "probability": 0.980086
+        },
+        {
+          "text": "synthetic",
+          "start": 22.82,
+          "end": 23.24,
+          "probability": 0.976497
+        },
+        {
+          "text": "contact",
+          "start": 23.24,
+          "end": 23.76,
+          "probability": 0.952313
+        },
+        {
+          "text": "details.",
+          "start": 23.76,
+          "end": 24.26,
+          "probability": 0.997581
+        },
+        {
+          "text": "It",
+          "start": 24.82,
+          "end": 25.08,
+          "probability": 0.990885
+        },
+        {
+          "text": "verified",
+          "start": 25.08,
+          "end": 25.48,
+          "probability": 0.942024
+        },
+        {
+          "text": "the",
+          "start": 25.48,
+          "end": 25.76,
+          "probability": 0.982268
+        },
+        {
+          "text": "durable",
+          "start": 25.76,
+          "end": 26.14,
+          "probability": 0.985829
+        },
+        {
+          "text": "journey,",
+          "start": 26.14,
+          "end": 26.56,
+          "probability": 0.991248
+        },
+        {
+          "text": "private",
+          "start": 26.88,
+          "end": 27.14,
+          "probability": 0.887578
+        },
+        {
+          "text": "report",
+          "start": 27.14,
+          "end": 27.56,
+          "probability": 0.904762
+        },
+        {
+          "text": "handling,",
+          "start": 27.56,
+          "end": 27.98,
+          "probability": 0.996356
+        }
+      ]
+    },
+    {
+      "start": 27.98,
+      "end": 35.08,
+      "text": "a consent and leak flow, signed delivery, yes denial and the live co-pilot boundary.",
+      "avg_logprob": -0.295904,
+      "no_speech_prob": 0.18137,
+      "words": [
+        {
+          "text": "a",
+          "start": 27.98,
+          "end": 28.38,
+          "probability": 0.124213
+        },
+        {
+          "text": "consent",
+          "start": 28.38,
+          "end": 29.02,
+          "probability": 0.756709
+        },
+        {
+          "text": "and",
+          "start": 29.02,
+          "end": 29.4,
+          "probability": 0.922194
+        },
+        {
+          "text": "leak",
+          "start": 29.4,
+          "end": 29.66,
+          "probability": 0.760374
+        },
+        {
+          "text": "flow,",
+          "start": 29.66,
+          "end": 30.16,
+          "probability": 0.930899
+        },
+        {
+          "text": "signed",
+          "start": 31.04,
+          "end": 31.1,
+          "probability": 0.82427
+        },
+        {
+          "text": "delivery,",
+          "start": 31.1,
+          "end": 31.68,
+          "probability": 0.978271
+        },
+        {
+          "text": "yes",
+          "start": 32.04,
+          "end": 32.14,
+          "probability": 0.822071
+        },
+        {
+          "text": "denial",
+          "start": 32.14,
+          "end": 32.54,
+          "probability": 0.652516
+        },
+        {
+          "text": "and",
+          "start": 32.54,
+          "end": 33.1,
+          "probability": 0.746388
+        },
+        {
+          "text": "the",
+          "start": 33.1,
+          "end": 33.4,
+          "probability": 0.555258
+        },
+        {
+          "text": "live",
+          "start": 33.4,
+          "end": 33.94,
+          "probability": 0.753763
+        },
+        {
+          "text": "co",
+          "start": 33.94,
+          "end": 34.26,
+          "probability": 0.428153
+        },
+        {
+          "text": "-pilot",
+          "start": 34.26,
+          "end": 34.58,
+          "probability": 0.980102
+        },
+        {
+          "text": "boundary.",
+          "start": 34.58,
+          "end": 35.08,
+          "probability": 0.386264
+        }
+      ]
+    },
+    {
+      "start": 36.08,
+      "end": 41.48,
+      "text": "Release evidence also recorded required security headers, no horizontal overflow at the tested",
+      "avg_logprob": -0.295904,
+      "no_speech_prob": 0.18137,
+      "words": [
+        {
+          "text": "Release",
+          "start": 36.08,
+          "end": 36.08,
+          "probability": 0.906923
+        },
+        {
+          "text": "evidence",
+          "start": 36.08,
+          "end": 36.46,
+          "probability": 0.993998
+        },
+        {
+          "text": "also",
+          "start": 36.46,
+          "end": 36.9,
+          "probability": 0.964185
+        },
+        {
+          "text": "recorded",
+          "start": 36.9,
+          "end": 37.38,
+          "probability": 0.787538
+        },
+        {
+          "text": "required",
+          "start": 37.38,
+          "end": 37.94,
+          "probability": 0.98741
+        },
+        {
+          "text": "security",
+          "start": 37.94,
+          "end": 38.54,
+          "probability": 0.993375
+        },
+        {
+          "text": "headers,",
+          "start": 38.54,
+          "end": 38.88,
+          "probability": 0.989943
+        },
+        {
+          "text": "no",
+          "start": 39.26,
+          "end": 39.42,
+          "probability": 0.983511
+        },
+        {
+          "text": "horizontal",
+          "start": 39.42,
+          "end": 39.86,
+          "probability": 0.993561
+        },
+        {
+          "text": "overflow",
+          "start": 39.86,
+          "end": 40.62,
+          "probability": 0.9741
+        },
+        {
+          "text": "at",
+          "start": 40.62,
+          "end": 40.86,
+          "probability": 0.965799
+        },
+        {
+          "text": "the",
+          "start": 40.86,
+          "end": 41.0,
+          "probability": 0.987264
+        },
+        {
+          "text": "tested",
+          "start": 41.0,
+          "end": 41.48,
+          "probability": 0.76806
+        }
+      ]
+    },
+    {
+      "start": 41.48,
+      "end": 48.26,
+      "text": "desktop viewport, zero browser console errors and no recent vessel production error logs.",
+      "avg_logprob": -0.295904,
+      "no_speech_prob": 0.18137,
+      "words": [
+        {
+          "text": "desktop",
+          "start": 41.48,
+          "end": 41.98,
+          "probability": 0.955548
+        },
+        {
+          "text": "viewport,",
+          "start": 41.98,
+          "end": 42.56,
+          "probability": 0.707188
+        },
+        {
+          "text": "zero",
+          "start": 43.12,
+          "end": 43.46,
+          "probability": 0.710712
+        },
+        {
+          "text": "browser",
+          "start": 43.46,
+          "end": 43.9,
+          "probability": 0.996922
+        },
+        {
+          "text": "console",
+          "start": 43.9,
+          "end": 44.28,
+          "probability": 0.992123
+        },
+        {
+          "text": "errors",
+          "start": 44.28,
+          "end": 44.56,
+          "probability": 0.979257
+        },
+        {
+          "text": "and",
+          "start": 44.56,
+          "end": 45.26,
+          "probability": 0.740955
+        },
+        {
+          "text": "no",
+          "start": 45.26,
+          "end": 45.58,
+          "probability": 0.975215
+        },
+        {
+          "text": "recent",
+          "start": 45.58,
+          "end": 46.1,
+          "probability": 0.568531
+        },
+        {
+          "text": "vessel",
+          "start": 46.1,
+          "end": 46.7,
+          "probability": 0.081259
+        },
+        {
+          "text": "production",
+          "start": 46.7,
+          "end": 47.38,
+          "probability": 0.960751
+        },
+        {
+          "text": "error",
+          "start": 47.38,
+          "end": 47.86,
+          "probability": 0.994808
+        },
+        {
+          "text": "logs.",
+          "start": 47.86,
+          "end": 48.26,
+          "probability": 0.853502
+        }
+      ]
+    },
+    {
+      "start": 49.12,
+      "end": 54.2,
+      "text": "Those are the scope results from the recorded test environment and not a claim of perfect",
+      "avg_logprob": -0.295904,
+      "no_speech_prob": 0.18137,
+      "words": [
+        {
+          "text": "Those",
+          "start": 49.12,
+          "end": 49.34,
+          "probability": 0.954723
+        },
+        {
+          "text": "are",
+          "start": 49.34,
+          "end": 49.56,
+          "probability": 0.997303
+        },
+        {
+          "text": "the",
+          "start": 49.56,
+          "end": 49.68,
+          "probability": 0.987163
+        },
+        {
+          "text": "scope",
+          "start": 49.68,
+          "end": 49.92,
+          "probability": 0.863506
+        },
+        {
+          "text": "results",
+          "start": 49.92,
+          "end": 50.32,
+          "probability": 0.99216
+        },
+        {
+          "text": "from",
+          "start": 50.32,
+          "end": 50.64,
+          "probability": 0.973822
+        },
+        {
+          "text": "the",
+          "start": 50.64,
+          "end": 50.78,
+          "probability": 0.967438
+        },
+        {
+          "text": "recorded",
+          "start": 50.78,
+          "end": 51.12,
+          "probability": 0.973985
+        },
+        {
+          "text": "test",
+          "start": 51.12,
+          "end": 51.5,
+          "probability": 0.977566
+        },
+        {
+          "text": "environment",
+          "start": 51.5,
+          "end": 51.98,
+          "probability": 0.978836
+        },
+        {
+          "text": "and",
+          "start": 51.98,
+          "end": 52.94,
+          "probability": 0.819623
+        },
+        {
+          "text": "not",
+          "start": 52.94,
+          "end": 53.16,
+          "probability": 0.796725
+        },
+        {
+          "text": "a",
+          "start": 53.16,
+          "end": 53.3,
+          "probability": 0.803961
+        },
+        {
+          "text": "claim",
+          "start": 53.3,
+          "end": 53.54,
+          "probability": 0.877974
+        },
+        {
+          "text": "of",
+          "start": 53.54,
+          "end": 53.76,
+          "probability": 0.992868
+        },
+        {
+          "text": "perfect",
+          "start": 53.76,
+          "end": 54.2,
+          "probability": 0.691937
+        }
+      ]
+    },
+    {
+      "start": 54.2,
+      "end": 56.14,
+      "text": "production performances also.",
+      "avg_logprob": -0.678544,
+      "no_speech_prob": 0.115307,
+      "words": [
+        {
+          "text": "production",
+          "start": 54.2,
+          "end": 54.82,
+          "probability": 0.851748
+        },
+        {
+          "text": "performances",
+          "start": 54.82,
+          "end": 55.78,
+          "probability": 0.744832
+        },
+        {
+          "text": "also.",
+          "start": 55.78,
+          "end": 56.14,
+          "probability": 0.932031
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Validation",
+      "start": 0.62,
+      "end": 1.44,
+      "probability": 0.898358
+    },
+    {
+      "text": "is",
+      "start": 1.44,
+      "end": 1.7,
+      "probability": 0.984088
+    },
+    {
+      "text": "kept",
+      "start": 1.7,
+      "end": 1.96,
+      "probability": 0.97833
+    },
+    {
+      "text": "into",
+      "start": 1.96,
+      "end": 2.34,
+      "probability": 0.797911
+    },
+    {
+      "text": "clearly",
+      "start": 2.34,
+      "end": 2.82,
+      "probability": 0.902509
+    },
+    {
+      "text": "labeled",
+      "start": 2.82,
+      "end": 3.2,
+      "probability": 0.69898
+    },
+    {
+      "text": "layers.",
+      "start": 3.2,
+      "end": 3.7,
+      "probability": 0.996347
+    },
+    {
+      "text": "In",
+      "start": 4.24,
+      "end": 4.32,
+      "probability": 0.973329
+    },
+    {
+      "text": "accepted",
+      "start": 4.32,
+      "end": 4.76,
+      "probability": 0.630536
+    },
+    {
+      "text": "hosted",
+      "start": 4.76,
+      "end": 5.22,
+      "probability": 0.978173
+    },
+    {
+      "text": "integration,",
+      "start": 5.22,
+      "end": 5.86,
+      "probability": 0.942401
+    },
+    {
+      "text": "47",
+      "start": 6.24,
+      "end": 6.62,
+      "probability": 0.982716
+    },
+    {
+      "text": "test",
+      "start": 6.62,
+      "end": 7.04,
+      "probability": 0.925328
+    },
+    {
+      "text": "files",
+      "start": 7.04,
+      "end": 7.3,
+      "probability": 0.98912
+    },
+    {
+      "text": "ran,",
+      "start": 7.3,
+      "end": 7.64,
+      "probability": 0.983353
+    },
+    {
+      "text": "221",
+      "start": 8.14,
+      "end": 8.72,
+      "probability": 0.966078
+    },
+    {
+      "text": "tests",
+      "start": 8.72,
+      "end": 9.4,
+      "probability": 0.904327
+    },
+    {
+      "text": "passed",
+      "start": 9.4,
+      "end": 9.8,
+      "probability": 0.985213
+    },
+    {
+      "text": "and",
+      "start": 9.8,
+      "end": 10.24,
+      "probability": 0.54158
+    },
+    {
+      "text": "one",
+      "start": 10.24,
+      "end": 10.52,
+      "probability": 0.569452
+    },
+    {
+      "text": "test",
+      "start": 10.52,
+      "end": 10.8,
+      "probability": 0.98714
+    },
+    {
+      "text": "was",
+      "start": 10.8,
+      "end": 11.0,
+      "probability": 0.99461
+    },
+    {
+      "text": "intentionally",
+      "start": 11.0,
+      "end": 11.58,
+      "probability": 0.994493
+    },
+    {
+      "text": "skipped.",
+      "start": 11.58,
+      "end": 12.1,
+      "probability": 0.998166
+    },
+    {
+      "text": "TypeScript,",
+      "start": 12.74,
+      "end": 13.06,
+      "probability": 0.698385
+    },
+    {
+      "text": "ESE,",
+      "start": 13.5,
+      "end": 13.78,
+      "probability": 0.556721
+    },
+    {
+      "text": "ESLid",
+      "start": 14.46,
+      "end": 14.6,
+      "probability": 0.629526
+    },
+    {
+      "text": "and",
+      "start": 14.6,
+      "end": 15.0,
+      "probability": 0.740917
+    },
+    {
+      "text": "the",
+      "start": 15.0,
+      "end": 15.34,
+      "probability": 0.506799
+    },
+    {
+      "text": "BIL",
+      "start": 15.34,
+      "end": 15.68,
+      "probability": 0.274521
+    },
+    {
+      "text": "passed,",
+      "start": 15.68,
+      "end": 16.14,
+      "probability": 0.502687
+    },
+    {
+      "text": "generating",
+      "start": 16.72,
+      "end": 17.12,
+      "probability": 0.98171
+    },
+    {
+      "text": "38",
+      "start": 17.12,
+      "end": 17.7,
+      "probability": 0.994239
+    },
+    {
+      "text": "static",
+      "start": 17.7,
+      "end": 18.08,
+      "probability": 0.994642
+    },
+    {
+      "text": "pages.",
+      "start": 18.08,
+      "end": 18.56,
+      "probability": 0.999245
+    },
+    {
+      "text": "The",
+      "start": 19.3,
+      "end": 19.4,
+      "probability": 0.951389
+    },
+    {
+      "text": "consolidated",
+      "start": 19.4,
+      "end": 19.88,
+      "probability": 0.916491
+    },
+    {
+      "text": "smoke",
+      "start": 19.88,
+      "end": 20.46,
+      "probability": 0.551873
+    },
+    {
+      "text": "used",
+      "start": 20.46,
+      "end": 20.78,
+      "probability": 0.844896
+    },
+    {
+      "text": "the",
+      "start": 20.78,
+      "end": 21.04,
+      "probability": 0.866312
+    },
+    {
+      "text": "labeled",
+      "start": 21.04,
+      "end": 21.38,
+      "probability": 0.341274
+    },
+    {
+      "text": "fictional",
+      "start": 21.38,
+      "end": 21.98,
+      "probability": 0.888177
+    },
+    {
+      "text": "business",
+      "start": 21.98,
+      "end": 22.54,
+      "probability": 0.96382
+    },
+    {
+      "text": "and",
+      "start": 22.54,
+      "end": 22.82,
+      "probability": 0.980086
+    },
+    {
+      "text": "synthetic",
+      "start": 22.82,
+      "end": 23.24,
+      "probability": 0.976497
+    },
+    {
+      "text": "contact",
+      "start": 23.24,
+      "end": 23.76,
+      "probability": 0.952313
+    },
+    {
+      "text": "details.",
+      "start": 23.76,
+      "end": 24.26,
+      "probability": 0.997581
+    },
+    {
+      "text": "It",
+      "start": 24.82,
+      "end": 25.08,
+      "probability": 0.990885
+    },
+    {
+      "text": "verified",
+      "start": 25.08,
+      "end": 25.48,
+      "probability": 0.942024
+    },
+    {
+      "text": "the",
+      "start": 25.48,
+      "end": 25.76,
+      "probability": 0.982268
+    },
+    {
+      "text": "durable",
+      "start": 25.76,
+      "end": 26.14,
+      "probability": 0.985829
+    },
+    {
+      "text": "journey,",
+      "start": 26.14,
+      "end": 26.56,
+      "probability": 0.991248
+    },
+    {
+      "text": "private",
+      "start": 26.88,
+      "end": 27.14,
+      "probability": 0.887578
+    },
+    {
+      "text": "report",
+      "start": 27.14,
+      "end": 27.56,
+      "probability": 0.904762
+    },
+    {
+      "text": "handling,",
+      "start": 27.56,
+      "end": 27.98,
+      "probability": 0.996356
+    },
+    {
+      "text": "a",
+      "start": 27.98,
+      "end": 28.38,
+      "probability": 0.124213
+    },
+    {
+      "text": "consent",
+      "start": 28.38,
+      "end": 29.02,
+      "probability": 0.756709
+    },
+    {
+      "text": "and",
+      "start": 29.02,
+      "end": 29.4,
+      "probability": 0.922194
+    },
+    {
+      "text": "leak",
+      "start": 29.4,
+      "end": 29.66,
+      "probability": 0.760374
+    },
+    {
+      "text": "flow,",
+      "start": 29.66,
+      "end": 30.16,
+      "probability": 0.930899
+    },
+    {
+      "text": "signed",
+      "start": 31.04,
+      "end": 31.1,
+      "probability": 0.82427
+    },
+    {
+      "text": "delivery,",
+      "start": 31.1,
+      "end": 31.68,
+      "probability": 0.978271
+    },
+    {
+      "text": "yes",
+      "start": 32.04,
+      "end": 32.14,
+      "probability": 0.822071
+    },
+    {
+      "text": "denial",
+      "start": 32.14,
+      "end": 32.54,
+      "probability": 0.652516
+    },
+    {
+      "text": "and",
+      "start": 32.54,
+      "end": 33.1,
+      "probability": 0.746388
+    },
+    {
+      "text": "the",
+      "start": 33.1,
+      "end": 33.4,
+      "probability": 0.555258
+    },
+    {
+      "text": "live",
+      "start": 33.4,
+      "end": 33.94,
+      "probability": 0.753763
+    },
+    {
+      "text": "co",
+      "start": 33.94,
+      "end": 34.26,
+      "probability": 0.428153
+    },
+    {
+      "text": "-pilot",
+      "start": 34.26,
+      "end": 34.58,
+      "probability": 0.980102
+    },
+    {
+      "text": "boundary.",
+      "start": 34.58,
+      "end": 35.08,
+      "probability": 0.386264
+    },
+    {
+      "text": "Release",
+      "start": 36.08,
+      "end": 36.08,
+      "probability": 0.906923
+    },
+    {
+      "text": "evidence",
+      "start": 36.08,
+      "end": 36.46,
+      "probability": 0.993998
+    },
+    {
+      "text": "also",
+      "start": 36.46,
+      "end": 36.9,
+      "probability": 0.964185
+    },
+    {
+      "text": "recorded",
+      "start": 36.9,
+      "end": 37.38,
+      "probability": 0.787538
+    },
+    {
+      "text": "required",
+      "start": 37.38,
+      "end": 37.94,
+      "probability": 0.98741
+    },
+    {
+      "text": "security",
+      "start": 37.94,
+      "end": 38.54,
+      "probability": 0.993375
+    },
+    {
+      "text": "headers,",
+      "start": 38.54,
+      "end": 38.88,
+      "probability": 0.989943
+    },
+    {
+      "text": "no",
+      "start": 39.26,
+      "end": 39.42,
+      "probability": 0.983511
+    },
+    {
+      "text": "horizontal",
+      "start": 39.42,
+      "end": 39.86,
+      "probability": 0.993561
+    },
+    {
+      "text": "overflow",
+      "start": 39.86,
+      "end": 40.62,
+      "probability": 0.9741
+    },
+    {
+      "text": "at",
+      "start": 40.62,
+      "end": 40.86,
+      "probability": 0.965799
+    },
+    {
+      "text": "the",
+      "start": 40.86,
+      "end": 41.0,
+      "probability": 0.987264
+    },
+    {
+      "text": "tested",
+      "start": 41.0,
+      "end": 41.48,
+      "probability": 0.76806
+    },
+    {
+      "text": "desktop",
+      "start": 41.48,
+      "end": 41.98,
+      "probability": 0.955548
+    },
+    {
+      "text": "viewport,",
+      "start": 41.98,
+      "end": 42.56,
+      "probability": 0.707188
+    },
+    {
+      "text": "zero",
+      "start": 43.12,
+      "end": 43.46,
+      "probability": 0.710712
+    },
+    {
+      "text": "browser",
+      "start": 43.46,
+      "end": 43.9,
+      "probability": 0.996922
+    },
+    {
+      "text": "console",
+      "start": 43.9,
+      "end": 44.28,
+      "probability": 0.992123
+    },
+    {
+      "text": "errors",
+      "start": 44.28,
+      "end": 44.56,
+      "probability": 0.979257
+    },
+    {
+      "text": "and",
+      "start": 44.56,
+      "end": 45.26,
+      "probability": 0.740955
+    },
+    {
+      "text": "no",
+      "start": 45.26,
+      "end": 45.58,
+      "probability": 0.975215
+    },
+    {
+      "text": "recent",
+      "start": 45.58,
+      "end": 46.1,
+      "probability": 0.568531
+    },
+    {
+      "text": "vessel",
+      "start": 46.1,
+      "end": 46.7,
+      "probability": 0.081259
+    },
+    {
+      "text": "production",
+      "start": 46.7,
+      "end": 47.38,
+      "probability": 0.960751
+    },
+    {
+      "text": "error",
+      "start": 47.38,
+      "end": 47.86,
+      "probability": 0.994808
+    },
+    {
+      "text": "logs.",
+      "start": 47.86,
+      "end": 48.26,
+      "probability": 0.853502
+    },
+    {
+      "text": "Those",
+      "start": 49.12,
+      "end": 49.34,
+      "probability": 0.954723
+    },
+    {
+      "text": "are",
+      "start": 49.34,
+      "end": 49.56,
+      "probability": 0.997303
+    },
+    {
+      "text": "the",
+      "start": 49.56,
+      "end": 49.68,
+      "probability": 0.987163
+    },
+    {
+      "text": "scope",
+      "start": 49.68,
+      "end": 49.92,
+      "probability": 0.863506
+    },
+    {
+      "text": "results",
+      "start": 49.92,
+      "end": 50.32,
+      "probability": 0.99216
+    },
+    {
+      "text": "from",
+      "start": 50.32,
+      "end": 50.64,
+      "probability": 0.973822
+    },
+    {
+      "text": "the",
+      "start": 50.64,
+      "end": 50.78,
+      "probability": 0.967438
+    },
+    {
+      "text": "recorded",
+      "start": 50.78,
+      "end": 51.12,
+      "probability": 0.973985
+    },
+    {
+      "text": "test",
+      "start": 51.12,
+      "end": 51.5,
+      "probability": 0.977566
+    },
+    {
+      "text": "environment",
+      "start": 51.5,
+      "end": 51.98,
+      "probability": 0.978836
+    },
+    {
+      "text": "and",
+      "start": 51.98,
+      "end": 52.94,
+      "probability": 0.819623
+    },
+    {
+      "text": "not",
+      "start": 52.94,
+      "end": 53.16,
+      "probability": 0.796725
+    },
+    {
+      "text": "a",
+      "start": 53.16,
+      "end": 53.3,
+      "probability": 0.803961
+    },
+    {
+      "text": "claim",
+      "start": 53.3,
+      "end": 53.54,
+      "probability": 0.877974
+    },
+    {
+      "text": "of",
+      "start": 53.54,
+      "end": 53.76,
+      "probability": 0.992868
+    },
+    {
+      "text": "perfect",
+      "start": 53.76,
+      "end": 54.2,
+      "probability": 0.691937
+    },
+    {
+      "text": "production",
+      "start": 54.2,
+      "end": 54.82,
+      "probability": 0.851748
+    },
+    {
+      "text": "performances",
+      "start": 54.82,
+      "end": 55.78,
+      "probability": 0.744832
+    },
+    {
+      "text": "also.",
+      "start": 55.78,
+      "end": 56.14,
+      "probability": 0.932031
+    }
+  ],
+  "recognized_text": "Validation is kept into clearly labeled layers. In accepted hosted integration, 47 test files ran, 221 tests passed and one test was intentionally skipped. TypeScript, ESE, ESLid and the BIL passed, generating 38 static pages. The consolidated smoke used the labeled fictional business and synthetic contact details. It verified the durable journey, private report handling, a consent and leak flow, signed delivery, yes denial and the live co-pilot boundary. Release evidence also recorded required security headers, no horizontal overflow at the tested desktop viewport, zero browser console errors and no recent vessel production error logs. Those are the scope results from the recorded test environment and not a claim of perfect production performances also."
+}

@@ -1,0 +1,1686 @@
+{
+  "beat_id": "02_proposed_solution",
+  "source": ".media/audio/voice/voice_003.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 68.650625,
+  "duration_after_vad": 66.816,
+  "segments": [
+    {
+      "start": 0.75,
+      "end": 7.05,
+      "text": "Multi-pilot organizes that path as answer, diagnose, compare, blueprint and handoff.",
+      "avg_logprob": -0.267907,
+      "no_speech_prob": 0.068704,
+      "words": [
+        {
+          "text": "Multi",
+          "start": 0.75,
+          "end": 1.29,
+          "probability": 0.039359
+        },
+        {
+          "text": "-pilot",
+          "start": 1.29,
+          "end": 1.75,
+          "probability": 0.733943
+        },
+        {
+          "text": "organizes",
+          "start": 1.75,
+          "end": 2.43,
+          "probability": 0.910101
+        },
+        {
+          "text": "that",
+          "start": 2.43,
+          "end": 2.67,
+          "probability": 0.940298
+        },
+        {
+          "text": "path",
+          "start": 2.67,
+          "end": 2.97,
+          "probability": 0.927861
+        },
+        {
+          "text": "as",
+          "start": 2.97,
+          "end": 3.31,
+          "probability": 0.931319
+        },
+        {
+          "text": "answer,",
+          "start": 3.31,
+          "end": 3.73,
+          "probability": 0.628286
+        },
+        {
+          "text": "diagnose,",
+          "start": 4.09,
+          "end": 4.41,
+          "probability": 0.979429
+        },
+        {
+          "text": "compare,",
+          "start": 4.67,
+          "end": 5.19,
+          "probability": 0.989719
+        },
+        {
+          "text": "blueprint",
+          "start": 5.75,
+          "end": 5.89,
+          "probability": 0.971246
+        },
+        {
+          "text": "and",
+          "start": 5.89,
+          "end": 6.43,
+          "probability": 0.583394
+        },
+        {
+          "text": "handoff.",
+          "start": 6.43,
+          "end": 7.05,
+          "probability": 0.856544
+        }
+      ]
+    },
+    {
+      "start": 7.89,
+      "end": 9.67,
+      "text": "Answer captures evidence before scoring.",
+      "avg_logprob": -0.267907,
+      "no_speech_prob": 0.068704,
+      "words": [
+        {
+          "text": "Answer",
+          "start": 7.89,
+          "end": 7.89,
+          "probability": 0.967176
+        },
+        {
+          "text": "captures",
+          "start": 7.89,
+          "end": 8.35,
+          "probability": 0.912007
+        },
+        {
+          "text": "evidence",
+          "start": 8.35,
+          "end": 8.79,
+          "probability": 0.991553
+        },
+        {
+          "text": "before",
+          "start": 8.79,
+          "end": 9.19,
+          "probability": 0.987024
+        },
+        {
+          "text": "scoring.",
+          "start": 9.19,
+          "end": 9.67,
+          "probability": 0.998152
+        }
+      ]
+    },
+    {
+      "start": 10.15,
+      "end": 15.81,
+      "text": "Diagnose applies deterministic rules to produce maturity, readiness and pain findings.",
+      "avg_logprob": -0.267907,
+      "no_speech_prob": 0.068704,
+      "words": [
+        {
+          "text": "Diagnose",
+          "start": 10.15,
+          "end": 10.45,
+          "probability": 0.970586
+        },
+        {
+          "text": "applies",
+          "start": 10.45,
+          "end": 10.91,
+          "probability": 0.994705
+        },
+        {
+          "text": "deterministic",
+          "start": 10.91,
+          "end": 11.61,
+          "probability": 0.988012
+        },
+        {
+          "text": "rules",
+          "start": 11.61,
+          "end": 12.07,
+          "probability": 0.984556
+        },
+        {
+          "text": "to",
+          "start": 12.07,
+          "end": 12.37,
+          "probability": 0.979836
+        },
+        {
+          "text": "produce",
+          "start": 12.37,
+          "end": 12.75,
+          "probability": 0.995693
+        },
+        {
+          "text": "maturity,",
+          "start": 12.75,
+          "end": 13.41,
+          "probability": 0.998052
+        },
+        {
+          "text": "readiness",
+          "start": 13.71,
+          "end": 14.05,
+          "probability": 0.998759
+        },
+        {
+          "text": "and",
+          "start": 14.05,
+          "end": 15.03,
+          "probability": 0.61156
+        },
+        {
+          "text": "pain",
+          "start": 15.03,
+          "end": 15.35,
+          "probability": 0.817298
+        },
+        {
+          "text": "findings.",
+          "start": 15.35,
+          "end": 15.81,
+          "probability": 0.880497
+        }
+      ]
+    },
+    {
+      "start": 16.71,
+      "end": 22.37,
+      "text": "Compare places, alternative plans side by side with their assumptions, schedules, cost,",
+      "avg_logprob": -0.267907,
+      "no_speech_prob": 0.068704,
+      "words": [
+        {
+          "text": "Compare",
+          "start": 16.71,
+          "end": 16.71,
+          "probability": 0.971568
+        },
+        {
+          "text": "places,",
+          "start": 16.71,
+          "end": 17.23,
+          "probability": 0.983148
+        },
+        {
+          "text": "alternative",
+          "start": 17.57,
+          "end": 17.91,
+          "probability": 0.921859
+        },
+        {
+          "text": "plans",
+          "start": 17.91,
+          "end": 18.69,
+          "probability": 0.932117
+        },
+        {
+          "text": "side",
+          "start": 18.69,
+          "end": 19.15,
+          "probability": 0.533936
+        },
+        {
+          "text": "by",
+          "start": 19.15,
+          "end": 19.33,
+          "probability": 0.7136
+        },
+        {
+          "text": "side",
+          "start": 19.33,
+          "end": 19.65,
+          "probability": 0.995493
+        },
+        {
+          "text": "with",
+          "start": 19.65,
+          "end": 19.95,
+          "probability": 0.897241
+        },
+        {
+          "text": "their",
+          "start": 19.95,
+          "end": 20.17,
+          "probability": 0.882536
+        },
+        {
+          "text": "assumptions,",
+          "start": 20.17,
+          "end": 20.57,
+          "probability": 0.987939
+        },
+        {
+          "text": "schedules,",
+          "start": 21.05,
+          "end": 21.49,
+          "probability": 0.990961
+        },
+        {
+          "text": "cost,",
+          "start": 22.23,
+          "end": 22.37,
+          "probability": 0.522231
+        }
+      ]
+    },
+    {
+      "start": 22.81,
+      "end": 25.97,
+      "text": "operational value, net value and payback ranges.",
+      "avg_logprob": -0.267907,
+      "no_speech_prob": 0.068704,
+      "words": [
+        {
+          "text": "operational",
+          "start": 22.81,
+          "end": 23.29,
+          "probability": 0.997828
+        },
+        {
+          "text": "value,",
+          "start": 23.29,
+          "end": 23.79,
+          "probability": 0.963724
+        },
+        {
+          "text": "net",
+          "start": 24.21,
+          "end": 24.49,
+          "probability": 0.99276
+        },
+        {
+          "text": "value",
+          "start": 24.49,
+          "end": 24.89,
+          "probability": 0.994371
+        },
+        {
+          "text": "and",
+          "start": 24.89,
+          "end": 25.19,
+          "probability": 0.89925
+        },
+        {
+          "text": "payback",
+          "start": 25.19,
+          "end": 25.57,
+          "probability": 0.973644
+        },
+        {
+          "text": "ranges.",
+          "start": 25.57,
+          "end": 25.97,
+          "probability": 0.993649
+        }
+      ]
+    },
+    {
+      "start": 25.97,
+      "end": 33.59,
+      "text": "Blueprint brings the selected path, risks, open questions, evidence links, and five specialist",
+      "avg_logprob": -0.212181,
+      "no_speech_prob": 0.100424,
+      "words": [
+        {
+          "text": "Blueprint",
+          "start": 25.97,
+          "end": 27.03,
+          "probability": 0.537396
+        },
+        {
+          "text": "brings",
+          "start": 27.03,
+          "end": 27.65,
+          "probability": 0.928894
+        },
+        {
+          "text": "the",
+          "start": 27.65,
+          "end": 27.93,
+          "probability": 0.947669
+        },
+        {
+          "text": "selected",
+          "start": 27.93,
+          "end": 28.25,
+          "probability": 0.989103
+        },
+        {
+          "text": "path,",
+          "start": 28.25,
+          "end": 28.75,
+          "probability": 0.911737
+        },
+        {
+          "text": "risks,",
+          "start": 29.23,
+          "end": 29.31,
+          "probability": 0.713313
+        },
+        {
+          "text": "open",
+          "start": 29.99,
+          "end": 30.03,
+          "probability": 0.911301
+        },
+        {
+          "text": "questions,",
+          "start": 30.03,
+          "end": 30.57,
+          "probability": 0.96984
+        },
+        {
+          "text": "evidence",
+          "start": 31.17,
+          "end": 31.43,
+          "probability": 0.977697
+        },
+        {
+          "text": "links,",
+          "start": 31.43,
+          "end": 32.05,
+          "probability": 0.800162
+        },
+        {
+          "text": "and",
+          "start": 32.69,
+          "end": 32.77,
+          "probability": 0.982541
+        },
+        {
+          "text": "five",
+          "start": 32.77,
+          "end": 33.05,
+          "probability": 0.502849
+        },
+        {
+          "text": "specialist",
+          "start": 33.05,
+          "end": 33.59,
+          "probability": 0.700788
+        }
+      ]
+    },
+    {
+      "start": 33.59,
+      "end": 35.71,
+      "text": "reviews into one full report.",
+      "avg_logprob": -0.212181,
+      "no_speech_prob": 0.100424,
+      "words": [
+        {
+          "text": "reviews",
+          "start": 33.59,
+          "end": 34.13,
+          "probability": 0.903344
+        },
+        {
+          "text": "into",
+          "start": 34.13,
+          "end": 34.67,
+          "probability": 0.927032
+        },
+        {
+          "text": "one",
+          "start": 34.67,
+          "end": 34.97,
+          "probability": 0.878661
+        },
+        {
+          "text": "full",
+          "start": 34.97,
+          "end": 35.23,
+          "probability": 0.942528
+        },
+        {
+          "text": "report.",
+          "start": 35.23,
+          "end": 35.71,
+          "probability": 0.993433
+        }
+      ]
+    },
+    {
+      "start": 36.37,
+      "end": 41.87,
+      "text": "Handoff opens only after the blueprint is verified and the person decides what information to",
+      "avg_logprob": -0.212181,
+      "no_speech_prob": 0.100424,
+      "words": [
+        {
+          "text": "Handoff",
+          "start": 36.37,
+          "end": 36.61,
+          "probability": 0.893971
+        },
+        {
+          "text": "opens",
+          "start": 36.61,
+          "end": 37.01,
+          "probability": 0.97781
+        },
+        {
+          "text": "only",
+          "start": 37.01,
+          "end": 37.47,
+          "probability": 0.995047
+        },
+        {
+          "text": "after",
+          "start": 37.47,
+          "end": 37.85,
+          "probability": 0.994418
+        },
+        {
+          "text": "the",
+          "start": 37.85,
+          "end": 38.03,
+          "probability": 0.991418
+        },
+        {
+          "text": "blueprint",
+          "start": 38.03,
+          "end": 38.33,
+          "probability": 0.875515
+        },
+        {
+          "text": "is",
+          "start": 38.33,
+          "end": 38.55,
+          "probability": 0.996435
+        },
+        {
+          "text": "verified",
+          "start": 38.55,
+          "end": 38.99,
+          "probability": 0.997927
+        },
+        {
+          "text": "and",
+          "start": 38.99,
+          "end": 39.67,
+          "probability": 0.663012
+        },
+        {
+          "text": "the",
+          "start": 39.67,
+          "end": 39.79,
+          "probability": 0.98009
+        },
+        {
+          "text": "person",
+          "start": 39.79,
+          "end": 40.11,
+          "probability": 0.997721
+        },
+        {
+          "text": "decides",
+          "start": 40.11,
+          "end": 40.61,
+          "probability": 0.996652
+        },
+        {
+          "text": "what",
+          "start": 40.61,
+          "end": 41.07,
+          "probability": 0.989614
+        },
+        {
+          "text": "information",
+          "start": 41.07,
+          "end": 41.51,
+          "probability": 0.996926
+        },
+        {
+          "text": "to",
+          "start": 41.51,
+          "end": 41.87,
+          "probability": 0.995591
+        }
+      ]
+    },
+    {
+      "start": 41.87,
+      "end": 42.15,
+      "text": "share.",
+      "avg_logprob": -0.212181,
+      "no_speech_prob": 0.100424,
+      "words": [
+        {
+          "text": "share.",
+          "start": 41.87,
+          "end": 42.15,
+          "probability": 0.996758
+        }
+      ]
+    },
+    {
+      "start": 42.83,
+      "end": 49.07,
+      "text": "Throughout the journey, facts, calculations, assumptions, catalog mappings, and model interpretation",
+      "avg_logprob": -0.212181,
+      "no_speech_prob": 0.100424,
+      "words": [
+        {
+          "text": "Throughout",
+          "start": 42.83,
+          "end": 43.09,
+          "probability": 0.972113
+        },
+        {
+          "text": "the",
+          "start": 43.09,
+          "end": 43.39,
+          "probability": 0.995671
+        },
+        {
+          "text": "journey,",
+          "start": 43.39,
+          "end": 43.71,
+          "probability": 0.987102
+        },
+        {
+          "text": "facts,",
+          "start": 44.05,
+          "end": 44.37,
+          "probability": 0.967621
+        },
+        {
+          "text": "calculations,",
+          "start": 44.71,
+          "end": 45.33,
+          "probability": 0.988858
+        },
+        {
+          "text": "assumptions,",
+          "start": 45.71,
+          "end": 46.21,
+          "probability": 0.993107
+        },
+        {
+          "text": "catalog",
+          "start": 46.79,
+          "end": 46.99,
+          "probability": 0.880658
+        },
+        {
+          "text": "mappings,",
+          "start": 46.99,
+          "end": 47.57,
+          "probability": 0.762352
+        },
+        {
+          "text": "and",
+          "start": 47.97,
+          "end": 48.07,
+          "probability": 0.994146
+        },
+        {
+          "text": "model",
+          "start": 48.07,
+          "end": 48.41,
+          "probability": 0.986564
+        },
+        {
+          "text": "interpretation",
+          "start": 48.41,
+          "end": 49.07,
+          "probability": 0.963007
+        }
+      ]
+    },
+    {
+      "start": 49.59,
+      "end": 50.93,
+      "text": "are visibly different.",
+      "avg_logprob": -0.212181,
+      "no_speech_prob": 0.100424,
+      "words": [
+        {
+          "text": "are",
+          "start": 49.59,
+          "end": 50.01,
+          "probability": 0.962587
+        },
+        {
+          "text": "visibly",
+          "start": 50.01,
+          "end": 50.45,
+          "probability": 0.980705
+        },
+        {
+          "text": "different.",
+          "start": 50.45,
+          "end": 50.93,
+          "probability": 0.998621
+        }
+      ]
+    },
+    {
+      "start": 50.93,
+      "end": 56.29,
+      "text": "deterministic values remain authoritative. Optional AI can interpret",
+      "avg_logprob": -0.241576,
+      "no_speech_prob": 0.081641,
+      "words": [
+        {
+          "text": "deterministic",
+          "start": 50.93,
+          "end": 51.99,
+          "probability": 0.603454
+        },
+        {
+          "text": "values",
+          "start": 51.99,
+          "end": 52.49,
+          "probability": 0.980046
+        },
+        {
+          "text": "remain",
+          "start": 52.49,
+          "end": 52.93,
+          "probability": 0.96582
+        },
+        {
+          "text": "authoritative.",
+          "start": 52.93,
+          "end": 53.77,
+          "probability": 0.987333
+        },
+        {
+          "text": "Optional",
+          "start": 54.89,
+          "end": 55.09,
+          "probability": 0.885248
+        },
+        {
+          "text": "AI",
+          "start": 55.09,
+          "end": 55.41,
+          "probability": 0.964583
+        },
+        {
+          "text": "can",
+          "start": 55.41,
+          "end": 55.73,
+          "probability": 0.994675
+        },
+        {
+          "text": "interpret",
+          "start": 55.73,
+          "end": 56.29,
+          "probability": 0.937517
+        }
+      ]
+    },
+    {
+      "start": 56.29,
+      "end": 61.17,
+      "text": "within a bounded row but it does not calculate or override numeric truth.",
+      "avg_logprob": -0.241576,
+      "no_speech_prob": 0.081641,
+      "words": [
+        {
+          "text": "within",
+          "start": 56.29,
+          "end": 56.75,
+          "probability": 0.837991
+        },
+        {
+          "text": "a",
+          "start": 56.75,
+          "end": 56.91,
+          "probability": 0.950582
+        },
+        {
+          "text": "bounded",
+          "start": 56.91,
+          "end": 57.17,
+          "probability": 0.995488
+        },
+        {
+          "text": "row",
+          "start": 57.17,
+          "end": 57.55,
+          "probability": 0.919854
+        },
+        {
+          "text": "but",
+          "start": 57.55,
+          "end": 58.03,
+          "probability": 0.494514
+        },
+        {
+          "text": "it",
+          "start": 58.03,
+          "end": 58.23,
+          "probability": 0.95035
+        },
+        {
+          "text": "does",
+          "start": 58.23,
+          "end": 58.41,
+          "probability": 0.983621
+        },
+        {
+          "text": "not",
+          "start": 58.41,
+          "end": 58.67,
+          "probability": 0.995269
+        },
+        {
+          "text": "calculate",
+          "start": 58.67,
+          "end": 59.13,
+          "probability": 0.975614
+        },
+        {
+          "text": "or",
+          "start": 59.13,
+          "end": 59.49,
+          "probability": 0.939313
+        },
+        {
+          "text": "override",
+          "start": 59.49,
+          "end": 60.05,
+          "probability": 0.367428
+        },
+        {
+          "text": "numeric",
+          "start": 60.05,
+          "end": 60.75,
+          "probability": 0.914615
+        },
+        {
+          "text": "truth.",
+          "start": 60.75,
+          "end": 61.17,
+          "probability": 0.738291
+        }
+      ]
+    },
+    {
+      "start": 62.07,
+      "end": 66.63,
+      "text": "Loading a fictional demonstration also does not create consent or consultation",
+      "avg_logprob": -0.241576,
+      "no_speech_prob": 0.081641,
+      "words": [
+        {
+          "text": "Loading",
+          "start": 62.07,
+          "end": 62.07,
+          "probability": 0.973828
+        },
+        {
+          "text": "a",
+          "start": 62.07,
+          "end": 62.27,
+          "probability": 0.976682
+        },
+        {
+          "text": "fictional",
+          "start": 62.27,
+          "end": 62.63,
+          "probability": 0.989071
+        },
+        {
+          "text": "demonstration",
+          "start": 62.63,
+          "end": 63.31,
+          "probability": 0.99684
+        },
+        {
+          "text": "also",
+          "start": 63.31,
+          "end": 63.89,
+          "probability": 0.978766
+        },
+        {
+          "text": "does",
+          "start": 63.89,
+          "end": 64.13,
+          "probability": 0.993075
+        },
+        {
+          "text": "not",
+          "start": 64.13,
+          "end": 64.37,
+          "probability": 0.997007
+        },
+        {
+          "text": "create",
+          "start": 64.37,
+          "end": 64.65,
+          "probability": 0.997407
+        },
+        {
+          "text": "consent",
+          "start": 64.65,
+          "end": 65.15,
+          "probability": 0.943162
+        },
+        {
+          "text": "or",
+          "start": 65.15,
+          "end": 65.69,
+          "probability": 0.945626
+        },
+        {
+          "text": "consultation",
+          "start": 65.69,
+          "end": 66.63,
+          "probability": 0.774824
+        }
+      ]
+    },
+    {
+      "start": 66.63,
+      "end": 67.05,
+      "text": "need.",
+      "avg_logprob": -0.959637,
+      "no_speech_prob": 0.487153,
+      "words": [
+        {
+          "text": "need.",
+          "start": 66.63,
+          "end": 67.05,
+          "probability": 0.405991
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Multi",
+      "start": 0.75,
+      "end": 1.29,
+      "probability": 0.039359
+    },
+    {
+      "text": "-pilot",
+      "start": 1.29,
+      "end": 1.75,
+      "probability": 0.733943
+    },
+    {
+      "text": "organizes",
+      "start": 1.75,
+      "end": 2.43,
+      "probability": 0.910101
+    },
+    {
+      "text": "that",
+      "start": 2.43,
+      "end": 2.67,
+      "probability": 0.940298
+    },
+    {
+      "text": "path",
+      "start": 2.67,
+      "end": 2.97,
+      "probability": 0.927861
+    },
+    {
+      "text": "as",
+      "start": 2.97,
+      "end": 3.31,
+      "probability": 0.931319
+    },
+    {
+      "text": "answer,",
+      "start": 3.31,
+      "end": 3.73,
+      "probability": 0.628286
+    },
+    {
+      "text": "diagnose,",
+      "start": 4.09,
+      "end": 4.41,
+      "probability": 0.979429
+    },
+    {
+      "text": "compare,",
+      "start": 4.67,
+      "end": 5.19,
+      "probability": 0.989719
+    },
+    {
+      "text": "blueprint",
+      "start": 5.75,
+      "end": 5.89,
+      "probability": 0.971246
+    },
+    {
+      "text": "and",
+      "start": 5.89,
+      "end": 6.43,
+      "probability": 0.583394
+    },
+    {
+      "text": "handoff.",
+      "start": 6.43,
+      "end": 7.05,
+      "probability": 0.856544
+    },
+    {
+      "text": "Answer",
+      "start": 7.89,
+      "end": 7.89,
+      "probability": 0.967176
+    },
+    {
+      "text": "captures",
+      "start": 7.89,
+      "end": 8.35,
+      "probability": 0.912007
+    },
+    {
+      "text": "evidence",
+      "start": 8.35,
+      "end": 8.79,
+      "probability": 0.991553
+    },
+    {
+      "text": "before",
+      "start": 8.79,
+      "end": 9.19,
+      "probability": 0.987024
+    },
+    {
+      "text": "scoring.",
+      "start": 9.19,
+      "end": 9.67,
+      "probability": 0.998152
+    },
+    {
+      "text": "Diagnose",
+      "start": 10.15,
+      "end": 10.45,
+      "probability": 0.970586
+    },
+    {
+      "text": "applies",
+      "start": 10.45,
+      "end": 10.91,
+      "probability": 0.994705
+    },
+    {
+      "text": "deterministic",
+      "start": 10.91,
+      "end": 11.61,
+      "probability": 0.988012
+    },
+    {
+      "text": "rules",
+      "start": 11.61,
+      "end": 12.07,
+      "probability": 0.984556
+    },
+    {
+      "text": "to",
+      "start": 12.07,
+      "end": 12.37,
+      "probability": 0.979836
+    },
+    {
+      "text": "produce",
+      "start": 12.37,
+      "end": 12.75,
+      "probability": 0.995693
+    },
+    {
+      "text": "maturity,",
+      "start": 12.75,
+      "end": 13.41,
+      "probability": 0.998052
+    },
+    {
+      "text": "readiness",
+      "start": 13.71,
+      "end": 14.05,
+      "probability": 0.998759
+    },
+    {
+      "text": "and",
+      "start": 14.05,
+      "end": 15.03,
+      "probability": 0.61156
+    },
+    {
+      "text": "pain",
+      "start": 15.03,
+      "end": 15.35,
+      "probability": 0.817298
+    },
+    {
+      "text": "findings.",
+      "start": 15.35,
+      "end": 15.81,
+      "probability": 0.880497
+    },
+    {
+      "text": "Compare",
+      "start": 16.71,
+      "end": 16.71,
+      "probability": 0.971568
+    },
+    {
+      "text": "places,",
+      "start": 16.71,
+      "end": 17.23,
+      "probability": 0.983148
+    },
+    {
+      "text": "alternative",
+      "start": 17.57,
+      "end": 17.91,
+      "probability": 0.921859
+    },
+    {
+      "text": "plans",
+      "start": 17.91,
+      "end": 18.69,
+      "probability": 0.932117
+    },
+    {
+      "text": "side",
+      "start": 18.69,
+      "end": 19.15,
+      "probability": 0.533936
+    },
+    {
+      "text": "by",
+      "start": 19.15,
+      "end": 19.33,
+      "probability": 0.7136
+    },
+    {
+      "text": "side",
+      "start": 19.33,
+      "end": 19.65,
+      "probability": 0.995493
+    },
+    {
+      "text": "with",
+      "start": 19.65,
+      "end": 19.95,
+      "probability": 0.897241
+    },
+    {
+      "text": "their",
+      "start": 19.95,
+      "end": 20.17,
+      "probability": 0.882536
+    },
+    {
+      "text": "assumptions,",
+      "start": 20.17,
+      "end": 20.57,
+      "probability": 0.987939
+    },
+    {
+      "text": "schedules,",
+      "start": 21.05,
+      "end": 21.49,
+      "probability": 0.990961
+    },
+    {
+      "text": "cost,",
+      "start": 22.23,
+      "end": 22.37,
+      "probability": 0.522231
+    },
+    {
+      "text": "operational",
+      "start": 22.81,
+      "end": 23.29,
+      "probability": 0.997828
+    },
+    {
+      "text": "value,",
+      "start": 23.29,
+      "end": 23.79,
+      "probability": 0.963724
+    },
+    {
+      "text": "net",
+      "start": 24.21,
+      "end": 24.49,
+      "probability": 0.99276
+    },
+    {
+      "text": "value",
+      "start": 24.49,
+      "end": 24.89,
+      "probability": 0.994371
+    },
+    {
+      "text": "and",
+      "start": 24.89,
+      "end": 25.19,
+      "probability": 0.89925
+    },
+    {
+      "text": "payback",
+      "start": 25.19,
+      "end": 25.57,
+      "probability": 0.973644
+    },
+    {
+      "text": "ranges.",
+      "start": 25.57,
+      "end": 25.97,
+      "probability": 0.993649
+    },
+    {
+      "text": "Blueprint",
+      "start": 25.97,
+      "end": 27.03,
+      "probability": 0.537396
+    },
+    {
+      "text": "brings",
+      "start": 27.03,
+      "end": 27.65,
+      "probability": 0.928894
+    },
+    {
+      "text": "the",
+      "start": 27.65,
+      "end": 27.93,
+      "probability": 0.947669
+    },
+    {
+      "text": "selected",
+      "start": 27.93,
+      "end": 28.25,
+      "probability": 0.989103
+    },
+    {
+      "text": "path,",
+      "start": 28.25,
+      "end": 28.75,
+      "probability": 0.911737
+    },
+    {
+      "text": "risks,",
+      "start": 29.23,
+      "end": 29.31,
+      "probability": 0.713313
+    },
+    {
+      "text": "open",
+      "start": 29.99,
+      "end": 30.03,
+      "probability": 0.911301
+    },
+    {
+      "text": "questions,",
+      "start": 30.03,
+      "end": 30.57,
+      "probability": 0.96984
+    },
+    {
+      "text": "evidence",
+      "start": 31.17,
+      "end": 31.43,
+      "probability": 0.977697
+    },
+    {
+      "text": "links,",
+      "start": 31.43,
+      "end": 32.05,
+      "probability": 0.800162
+    },
+    {
+      "text": "and",
+      "start": 32.69,
+      "end": 32.77,
+      "probability": 0.982541
+    },
+    {
+      "text": "five",
+      "start": 32.77,
+      "end": 33.05,
+      "probability": 0.502849
+    },
+    {
+      "text": "specialist",
+      "start": 33.05,
+      "end": 33.59,
+      "probability": 0.700788
+    },
+    {
+      "text": "reviews",
+      "start": 33.59,
+      "end": 34.13,
+      "probability": 0.903344
+    },
+    {
+      "text": "into",
+      "start": 34.13,
+      "end": 34.67,
+      "probability": 0.927032
+    },
+    {
+      "text": "one",
+      "start": 34.67,
+      "end": 34.97,
+      "probability": 0.878661
+    },
+    {
+      "text": "full",
+      "start": 34.97,
+      "end": 35.23,
+      "probability": 0.942528
+    },
+    {
+      "text": "report.",
+      "start": 35.23,
+      "end": 35.71,
+      "probability": 0.993433
+    },
+    {
+      "text": "Handoff",
+      "start": 36.37,
+      "end": 36.61,
+      "probability": 0.893971
+    },
+    {
+      "text": "opens",
+      "start": 36.61,
+      "end": 37.01,
+      "probability": 0.97781
+    },
+    {
+      "text": "only",
+      "start": 37.01,
+      "end": 37.47,
+      "probability": 0.995047
+    },
+    {
+      "text": "after",
+      "start": 37.47,
+      "end": 37.85,
+      "probability": 0.994418
+    },
+    {
+      "text": "the",
+      "start": 37.85,
+      "end": 38.03,
+      "probability": 0.991418
+    },
+    {
+      "text": "blueprint",
+      "start": 38.03,
+      "end": 38.33,
+      "probability": 0.875515
+    },
+    {
+      "text": "is",
+      "start": 38.33,
+      "end": 38.55,
+      "probability": 0.996435
+    },
+    {
+      "text": "verified",
+      "start": 38.55,
+      "end": 38.99,
+      "probability": 0.997927
+    },
+    {
+      "text": "and",
+      "start": 38.99,
+      "end": 39.67,
+      "probability": 0.663012
+    },
+    {
+      "text": "the",
+      "start": 39.67,
+      "end": 39.79,
+      "probability": 0.98009
+    },
+    {
+      "text": "person",
+      "start": 39.79,
+      "end": 40.11,
+      "probability": 0.997721
+    },
+    {
+      "text": "decides",
+      "start": 40.11,
+      "end": 40.61,
+      "probability": 0.996652
+    },
+    {
+      "text": "what",
+      "start": 40.61,
+      "end": 41.07,
+      "probability": 0.989614
+    },
+    {
+      "text": "information",
+      "start": 41.07,
+      "end": 41.51,
+      "probability": 0.996926
+    },
+    {
+      "text": "to",
+      "start": 41.51,
+      "end": 41.87,
+      "probability": 0.995591
+    },
+    {
+      "text": "share.",
+      "start": 41.87,
+      "end": 42.15,
+      "probability": 0.996758
+    },
+    {
+      "text": "Throughout",
+      "start": 42.83,
+      "end": 43.09,
+      "probability": 0.972113
+    },
+    {
+      "text": "the",
+      "start": 43.09,
+      "end": 43.39,
+      "probability": 0.995671
+    },
+    {
+      "text": "journey,",
+      "start": 43.39,
+      "end": 43.71,
+      "probability": 0.987102
+    },
+    {
+      "text": "facts,",
+      "start": 44.05,
+      "end": 44.37,
+      "probability": 0.967621
+    },
+    {
+      "text": "calculations,",
+      "start": 44.71,
+      "end": 45.33,
+      "probability": 0.988858
+    },
+    {
+      "text": "assumptions,",
+      "start": 45.71,
+      "end": 46.21,
+      "probability": 0.993107
+    },
+    {
+      "text": "catalog",
+      "start": 46.79,
+      "end": 46.99,
+      "probability": 0.880658
+    },
+    {
+      "text": "mappings,",
+      "start": 46.99,
+      "end": 47.57,
+      "probability": 0.762352
+    },
+    {
+      "text": "and",
+      "start": 47.97,
+      "end": 48.07,
+      "probability": 0.994146
+    },
+    {
+      "text": "model",
+      "start": 48.07,
+      "end": 48.41,
+      "probability": 0.986564
+    },
+    {
+      "text": "interpretation",
+      "start": 48.41,
+      "end": 49.07,
+      "probability": 0.963007
+    },
+    {
+      "text": "are",
+      "start": 49.59,
+      "end": 50.01,
+      "probability": 0.962587
+    },
+    {
+      "text": "visibly",
+      "start": 50.01,
+      "end": 50.45,
+      "probability": 0.980705
+    },
+    {
+      "text": "different.",
+      "start": 50.45,
+      "end": 50.93,
+      "probability": 0.998621
+    },
+    {
+      "text": "deterministic",
+      "start": 50.93,
+      "end": 51.99,
+      "probability": 0.603454
+    },
+    {
+      "text": "values",
+      "start": 51.99,
+      "end": 52.49,
+      "probability": 0.980046
+    },
+    {
+      "text": "remain",
+      "start": 52.49,
+      "end": 52.93,
+      "probability": 0.96582
+    },
+    {
+      "text": "authoritative.",
+      "start": 52.93,
+      "end": 53.77,
+      "probability": 0.987333
+    },
+    {
+      "text": "Optional",
+      "start": 54.89,
+      "end": 55.09,
+      "probability": 0.885248
+    },
+    {
+      "text": "AI",
+      "start": 55.09,
+      "end": 55.41,
+      "probability": 0.964583
+    },
+    {
+      "text": "can",
+      "start": 55.41,
+      "end": 55.73,
+      "probability": 0.994675
+    },
+    {
+      "text": "interpret",
+      "start": 55.73,
+      "end": 56.29,
+      "probability": 0.937517
+    },
+    {
+      "text": "within",
+      "start": 56.29,
+      "end": 56.75,
+      "probability": 0.837991
+    },
+    {
+      "text": "a",
+      "start": 56.75,
+      "end": 56.91,
+      "probability": 0.950582
+    },
+    {
+      "text": "bounded",
+      "start": 56.91,
+      "end": 57.17,
+      "probability": 0.995488
+    },
+    {
+      "text": "row",
+      "start": 57.17,
+      "end": 57.55,
+      "probability": 0.919854
+    },
+    {
+      "text": "but",
+      "start": 57.55,
+      "end": 58.03,
+      "probability": 0.494514
+    },
+    {
+      "text": "it",
+      "start": 58.03,
+      "end": 58.23,
+      "probability": 0.95035
+    },
+    {
+      "text": "does",
+      "start": 58.23,
+      "end": 58.41,
+      "probability": 0.983621
+    },
+    {
+      "text": "not",
+      "start": 58.41,
+      "end": 58.67,
+      "probability": 0.995269
+    },
+    {
+      "text": "calculate",
+      "start": 58.67,
+      "end": 59.13,
+      "probability": 0.975614
+    },
+    {
+      "text": "or",
+      "start": 59.13,
+      "end": 59.49,
+      "probability": 0.939313
+    },
+    {
+      "text": "override",
+      "start": 59.49,
+      "end": 60.05,
+      "probability": 0.367428
+    },
+    {
+      "text": "numeric",
+      "start": 60.05,
+      "end": 60.75,
+      "probability": 0.914615
+    },
+    {
+      "text": "truth.",
+      "start": 60.75,
+      "end": 61.17,
+      "probability": 0.738291
+    },
+    {
+      "text": "Loading",
+      "start": 62.07,
+      "end": 62.07,
+      "probability": 0.973828
+    },
+    {
+      "text": "a",
+      "start": 62.07,
+      "end": 62.27,
+      "probability": 0.976682
+    },
+    {
+      "text": "fictional",
+      "start": 62.27,
+      "end": 62.63,
+      "probability": 0.989071
+    },
+    {
+      "text": "demonstration",
+      "start": 62.63,
+      "end": 63.31,
+      "probability": 0.99684
+    },
+    {
+      "text": "also",
+      "start": 63.31,
+      "end": 63.89,
+      "probability": 0.978766
+    },
+    {
+      "text": "does",
+      "start": 63.89,
+      "end": 64.13,
+      "probability": 0.993075
+    },
+    {
+      "text": "not",
+      "start": 64.13,
+      "end": 64.37,
+      "probability": 0.997007
+    },
+    {
+      "text": "create",
+      "start": 64.37,
+      "end": 64.65,
+      "probability": 0.997407
+    },
+    {
+      "text": "consent",
+      "start": 64.65,
+      "end": 65.15,
+      "probability": 0.943162
+    },
+    {
+      "text": "or",
+      "start": 65.15,
+      "end": 65.69,
+      "probability": 0.945626
+    },
+    {
+      "text": "consultation",
+      "start": 65.69,
+      "end": 66.63,
+      "probability": 0.774824
+    },
+    {
+      "text": "need.",
+      "start": 66.63,
+      "end": 67.05,
+      "probability": 0.405991
+    }
+  ],
+  "recognized_text": "Multi-pilot organizes that path as answer, diagnose, compare, blueprint and handoff. Answer captures evidence before scoring. Diagnose applies deterministic rules to produce maturity, readiness and pain findings. Compare places, alternative plans side by side with their assumptions, schedules, cost, operational value, net value and payback ranges. Blueprint brings the selected path, risks, open questions, evidence links, and five specialist reviews into one full report. Handoff opens only after the blueprint is verified and the person decides what information to share. Throughout the journey, facts, calculations, assumptions, catalog mappings, and model interpretation are visibly different. deterministic values remain authoritative. Optional AI can interpret within a bounded row but it does not calculate or override numeric truth. Loading a fictional demonstration also does not create consent or consultation need."
+}

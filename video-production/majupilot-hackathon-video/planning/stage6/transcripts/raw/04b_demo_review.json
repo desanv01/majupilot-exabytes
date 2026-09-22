@@ -1,0 +1,447 @@
+{
+  "beat_id": "04b_demo_review",
+  "source": ".media/audio/voice/voice_006.wav",
+  "engine": "faster-whisper 1.2.1",
+  "model": "small.en",
+  "language": "en",
+  "language_probability": 1.0,
+  "duration": 16.149313,
+  "duration_after_vad": 15.36,
+  "segments": [
+    {
+      "start": 0.53,
+      "end": 7.43,
+      "text": "Before any score appears, the review screen shows 5 complete evidence groups and an explicit",
+      "avg_logprob": -0.230687,
+      "no_speech_prob": 0.029552,
+      "words": [
+        {
+          "text": "Before",
+          "start": 0.53,
+          "end": 1.19,
+          "probability": 0.808557
+        },
+        {
+          "text": "any",
+          "start": 1.19,
+          "end": 1.61,
+          "probability": 0.939444
+        },
+        {
+          "text": "score",
+          "start": 1.61,
+          "end": 1.93,
+          "probability": 0.96707
+        },
+        {
+          "text": "appears,",
+          "start": 1.93,
+          "end": 2.35,
+          "probability": 0.9681
+        },
+        {
+          "text": "the",
+          "start": 2.77,
+          "end": 2.81,
+          "probability": 0.949996
+        },
+        {
+          "text": "review",
+          "start": 2.81,
+          "end": 3.09,
+          "probability": 0.884235
+        },
+        {
+          "text": "screen",
+          "start": 3.09,
+          "end": 3.67,
+          "probability": 0.977112
+        },
+        {
+          "text": "shows",
+          "start": 3.67,
+          "end": 4.11,
+          "probability": 0.985697
+        },
+        {
+          "text": "5",
+          "start": 4.11,
+          "end": 4.61,
+          "probability": 0.58184
+        },
+        {
+          "text": "complete",
+          "start": 4.61,
+          "end": 5.21,
+          "probability": 0.946088
+        },
+        {
+          "text": "evidence",
+          "start": 5.21,
+          "end": 5.65,
+          "probability": 0.989962
+        },
+        {
+          "text": "groups",
+          "start": 5.65,
+          "end": 6.01,
+          "probability": 0.963314
+        },
+        {
+          "text": "and",
+          "start": 6.01,
+          "end": 6.61,
+          "probability": 0.889665
+        },
+        {
+          "text": "an",
+          "start": 6.61,
+          "end": 6.97,
+          "probability": 0.956082
+        },
+        {
+          "text": "explicit",
+          "start": 6.97,
+          "end": 7.43,
+          "probability": 0.991062
+        }
+      ]
+    },
+    {
+      "start": 7.43,
+      "end": 8.01,
+      "text": "unknown.",
+      "avg_logprob": -0.230687,
+      "no_speech_prob": 0.029552,
+      "words": [
+        {
+          "text": "unknown.",
+          "start": 7.43,
+          "end": 8.01,
+          "probability": 0.871857
+        }
+      ]
+    },
+    {
+      "start": 8.63,
+      "end": 9.99,
+      "text": "The record is still editable.",
+      "avg_logprob": -0.230687,
+      "no_speech_prob": 0.029552,
+      "words": [
+        {
+          "text": "The",
+          "start": 8.63,
+          "end": 8.71,
+          "probability": 0.964682
+        },
+        {
+          "text": "record",
+          "start": 8.71,
+          "end": 8.95,
+          "probability": 0.994598
+        },
+        {
+          "text": "is",
+          "start": 8.95,
+          "end": 9.21,
+          "probability": 0.99207
+        },
+        {
+          "text": "still",
+          "start": 9.21,
+          "end": 9.43,
+          "probability": 0.997637
+        },
+        {
+          "text": "editable.",
+          "start": 9.43,
+          "end": 9.99,
+          "probability": 0.992978
+        }
+      ]
+    },
+    {
+      "start": 10.63,
+      "end": 15.19,
+      "text": "Confirm Business Twin is the deliberate handoff from captured evidence to calculation.",
+      "avg_logprob": -0.230687,
+      "no_speech_prob": 0.029552,
+      "words": [
+        {
+          "text": "Confirm",
+          "start": 10.63,
+          "end": 11.03,
+          "probability": 0.893785
+        },
+        {
+          "text": "Business",
+          "start": 11.03,
+          "end": 11.43,
+          "probability": 0.41275
+        },
+        {
+          "text": "Twin",
+          "start": 11.43,
+          "end": 11.71,
+          "probability": 0.914678
+        },
+        {
+          "text": "is",
+          "start": 11.71,
+          "end": 11.91,
+          "probability": 0.99151
+        },
+        {
+          "text": "the",
+          "start": 11.91,
+          "end": 12.09,
+          "probability": 0.948719
+        },
+        {
+          "text": "deliberate",
+          "start": 12.09,
+          "end": 12.39,
+          "probability": 0.984876
+        },
+        {
+          "text": "handoff",
+          "start": 12.39,
+          "end": 12.95,
+          "probability": 0.911791
+        },
+        {
+          "text": "from",
+          "start": 12.95,
+          "end": 13.47,
+          "probability": 0.908471
+        },
+        {
+          "text": "captured",
+          "start": 13.47,
+          "end": 13.95,
+          "probability": 0.854803
+        },
+        {
+          "text": "evidence",
+          "start": 13.95,
+          "end": 14.39,
+          "probability": 0.994279
+        },
+        {
+          "text": "to",
+          "start": 14.39,
+          "end": 14.77,
+          "probability": 0.987942
+        },
+        {
+          "text": "calculation.",
+          "start": 14.77,
+          "end": 15.19,
+          "probability": 0.844685
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "text": "Before",
+      "start": 0.53,
+      "end": 1.19,
+      "probability": 0.808557
+    },
+    {
+      "text": "any",
+      "start": 1.19,
+      "end": 1.61,
+      "probability": 0.939444
+    },
+    {
+      "text": "score",
+      "start": 1.61,
+      "end": 1.93,
+      "probability": 0.96707
+    },
+    {
+      "text": "appears,",
+      "start": 1.93,
+      "end": 2.35,
+      "probability": 0.9681
+    },
+    {
+      "text": "the",
+      "start": 2.77,
+      "end": 2.81,
+      "probability": 0.949996
+    },
+    {
+      "text": "review",
+      "start": 2.81,
+      "end": 3.09,
+      "probability": 0.884235
+    },
+    {
+      "text": "screen",
+      "start": 3.09,
+      "end": 3.67,
+      "probability": 0.977112
+    },
+    {
+      "text": "shows",
+      "start": 3.67,
+      "end": 4.11,
+      "probability": 0.985697
+    },
+    {
+      "text": "5",
+      "start": 4.11,
+      "end": 4.61,
+      "probability": 0.58184
+    },
+    {
+      "text": "complete",
+      "start": 4.61,
+      "end": 5.21,
+      "probability": 0.946088
+    },
+    {
+      "text": "evidence",
+      "start": 5.21,
+      "end": 5.65,
+      "probability": 0.989962
+    },
+    {
+      "text": "groups",
+      "start": 5.65,
+      "end": 6.01,
+      "probability": 0.963314
+    },
+    {
+      "text": "and",
+      "start": 6.01,
+      "end": 6.61,
+      "probability": 0.889665
+    },
+    {
+      "text": "an",
+      "start": 6.61,
+      "end": 6.97,
+      "probability": 0.956082
+    },
+    {
+      "text": "explicit",
+      "start": 6.97,
+      "end": 7.43,
+      "probability": 0.991062
+    },
+    {
+      "text": "unknown.",
+      "start": 7.43,
+      "end": 8.01,
+      "probability": 0.871857
+    },
+    {
+      "text": "The",
+      "start": 8.63,
+      "end": 8.71,
+      "probability": 0.964682
+    },
+    {
+      "text": "record",
+      "start": 8.71,
+      "end": 8.95,
+      "probability": 0.994598
+    },
+    {
+      "text": "is",
+      "start": 8.95,
+      "end": 9.21,
+      "probability": 0.99207
+    },
+    {
+      "text": "still",
+      "start": 9.21,
+      "end": 9.43,
+      "probability": 0.997637
+    },
+    {
+      "text": "editable.",
+      "start": 9.43,
+      "end": 9.99,
+      "probability": 0.992978
+    },
+    {
+      "text": "Confirm",
+      "start": 10.63,
+      "end": 11.03,
+      "probability": 0.893785
+    },
+    {
+      "text": "Business",
+      "start": 11.03,
+      "end": 11.43,
+      "probability": 0.41275
+    },
+    {
+      "text": "Twin",
+      "start": 11.43,
+      "end": 11.71,
+      "probability": 0.914678
+    },
+    {
+      "text": "is",
+      "start": 11.71,
+      "end": 11.91,
+      "probability": 0.99151
+    },
+    {
+      "text": "the",
+      "start": 11.91,
+      "end": 12.09,
+      "probability": 0.948719
+    },
+    {
+      "text": "deliberate",
+      "start": 12.09,
+      "end": 12.39,
+      "probability": 0.984876
+    },
+    {
+      "text": "handoff",
+      "start": 12.39,
+      "end": 12.95,
+      "probability": 0.911791
+    },
+    {
+      "text": "from",
+      "start": 12.95,
+      "end": 13.47,
+      "probability": 0.908471
+    },
+    {
+      "text": "captured",
+      "start": 13.47,
+      "end": 13.95,
+      "probability": 0.854803
+    },
+    {
+      "text": "evidence",
+      "start": 13.95,
+      "end": 14.39,
+      "probability": 0.994279
+    },
+    {
+      "text": "to",
+      "start": 14.39,
+      "end": 14.77,
+      "probability": 0.987942
+    },
+    {
+      "text": "calculation.",
+      "start": 14.77,
+      "end": 15.19,
+      "probability": 0.844685
+    }
+  ],
+  "recognized_text": "Before any score appears, the review screen shows 5 complete evidence groups and an explicit unknown. The record is still editable. Confirm Business Twin is the deliberate handoff from captured evidence to calculation."
+}
