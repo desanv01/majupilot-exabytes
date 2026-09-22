@@ -19,13 +19,29 @@ import {
   shouldOfferCopilotRetry,
 } from "./copilot-client-utils";
 
-type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null };
+type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null; result?: Record<string, unknown> | null };
 type Message = CopilotClientMessage & { tools?: ToolCall[] };
 type Session = { id: string };
 type HistoryResponse = { session: Session; messages: CopilotMessage[] };
 type HealthResponse = { state: string; liveAvailable: boolean };
 
 const withRequestId = (message: string, requestId: string | null) => requestId ? `${message} Request ID: ${requestId}` : message;
+
+type Citation = { documentId: string; chunkId: string; documentName: string; pageNumber: number | null; sectionRef: string; excerpt: string; reference: string };
+function citationsFor(tools: ToolCall[] | undefined) {
+  const citations: Citation[] = [];
+  for (const call of tools ?? []) {
+    if (call.toolName === "searchUploadedEvidence" && Array.isArray(call.result?.citations)) citations.push(...call.result.citations as Citation[]);
+    if (call.toolName === "getDocumentExcerpt" && call.result?.citation) citations.push(call.result.citation as Citation);
+  }
+  return citations.filter((citation) => citation?.documentId && citation?.chunkId && citation?.documentName && citation?.excerpt);
+}
+
+function UploadedCitations({ tools }: { tools: ToolCall[] | undefined }) {
+  const citations = citationsFor(tools);
+  if (!citations.length) return null;
+  return <aside className="copilot-citations" aria-label="Uploaded evidence citations"><strong>Uploaded evidence</strong>{citations.map((citation) => <blockquote key={citation.chunkId}><header><b>{citation.documentName}</b><span>{citation.pageNumber ? `Page ${citation.pageNumber}` : citation.sectionRef}</span></header><p>{citation.excerpt}</p><code>{citation.reference}</code></blockquote>)}</aside>;
+}
 
 async function api<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, { ...init, cache: "no-store" });
@@ -159,7 +175,7 @@ export function CopilotClient({
 
   return (
     <div className="copilot-page">
-      <header className="topbar copilot-topbar"><Brand /><nav aria-label="Copilot navigation"><Link href="/">Home</Link><Link href="/blueprint">Blueprint</Link><Link href="/consultation">Consultation</Link></nav></header>
+      <header className="topbar copilot-topbar"><Brand /><nav aria-label="Copilot navigation"><Link href="/">Home</Link><Link href="/blueprint">Blueprint</Link><Link href="/evidence">Evidence Library</Link><Link href="/consultation">Consultation</Link></nav></header>
       <main className="copilot-shell">
         <section className="copilot-intro"><p className="eyebrow">MajuPilot Transformation Copilot</p><h1>Turn your evidence into a confident next move.</h1><p>Explore the reasoning behind your plan, retrieve exact evidence, and prepare changes for explicit confirmation.</p><span className="copilot-live-status" role="status">{status}</span></section>
         {!ready ? <section className="copilot-empty" aria-busy="true"><h2>Opening your workspace</h2><p>Your authorized Twin and Blueprint are being loaded.</p></section> : !available ? (
@@ -167,7 +183,7 @@ export function CopilotClient({
         ) : (
           <section className="copilot-workspace" aria-label="Transformation Copilot conversation">
             <div className="copilot-log" ref={logRef} role="log" aria-live="polite">
-              {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}`}><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span><p>{message.text}</p>{message.requestId ? <small className="copilot-diagnostic">Request ID: <code>{message.requestId}</code></small> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Retry</button> : null}{message.tools?.filter((tool) => tool.status === "confirmation_required" && tool.confirmationId).map((tool) => <button key={tool.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(tool.confirmationId!)}>Confirm {tool.toolName}</button>)}</article>)}
+              {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}`}><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span><p>{message.text}</p><UploadedCitations tools={message.tools} />{message.requestId ? <small className="copilot-diagnostic">Request ID: <code>{message.requestId}</code></small> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Retry</button> : null}{message.tools?.filter((tool) => tool.status === "confirmation_required" && tool.confirmationId).map((tool) => <button key={tool.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(tool.confirmationId!)}>Confirm {tool.toolName}</button>)}</article>)}
               {busy ? <article className="copilot-message status"><span>Status</span><p>Working with your authorized evidence...</p></article> : null}
             </div>
             <form className="copilot-composer" onSubmit={submit}><label htmlFor="copilot-message">Ask about your transformation plan</label><div><textarea id="copilot-message" value={input} onChange={(event) => setInput(event.target.value)} maxLength={4000} rows={3} placeholder="For example: Why is CRM prioritised before AI automation?" disabled={!session || busy} /><button className="button primary" type="submit" disabled={!session || busy || !input.trim()}>Send</button></div><small>Writes are never automatic. Copilot will ask for confirmation before any approved action.</small></form>

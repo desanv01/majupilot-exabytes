@@ -48,6 +48,15 @@ terminal safe fallbacks and are not retried. The accepted Phase C, D, G, and I
 evidence records successful required-mode calls through Vercel AI Gateway using
 `deepseek/deepseek-v4.1-flash`.
 
+The assessment-scoped Evidence Library accepts bounded PDF, DOCX, and TXT files,
+stores originals in a private Supabase bucket, and exposes them only through
+short-lived server-issued download URLs. Extracted chunks use the fixed
+`openai/text-embedding-3-small` Gateway route and pgvector cosine search. Copilot
+labels every uploaded-document citation with filename, page or section, excerpt,
+and stable document/chunk references; no-upload and no-match cases fail closed.
+See [Document RAG](./docs/phase3-document-rag.md) for limits, setup, security,
+and verification.
+
 The repository-level [README](../README.md) describes the product, architecture,
 status, roadmap, security posture, and contribution workflow. For application
 details, see [Local development](./docs/local-development.md) and

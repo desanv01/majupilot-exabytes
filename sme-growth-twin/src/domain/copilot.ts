@@ -25,6 +25,8 @@ export const copilotReadToolNameSchema = z.enum([
   "getReportMetadata",
   "getLeadStatus",
   "getAcceptedConsultantNotes",
+  "searchUploadedEvidence",
+  "getDocumentExcerpt",
 ]);
 
 export const copilotWriteToolNameSchema = z.enum([
@@ -49,10 +51,19 @@ const optionalArtifactIds = {
   blueprintId: persistenceUuidSchema.optional(),
   reportArtifactId: persistenceUuidSchema.optional(),
   leadId: persistenceUuidSchema.optional(),
+  query: z.string().trim().min(2).max(500).optional(),
+  maxResults: z.number().int().min(1).max(8).optional(),
+  relevanceThreshold: z.number().min(0.4).max(0.95).optional(),
+  documentId: persistenceUuidSchema.optional(),
+  chunkId: persistenceUuidSchema.optional(),
 };
 
 export const copilotReadToolInputSchema = z.object(optionalArtifactIds).strict();
 export type CopilotReadToolInput = z.infer<typeof copilotReadToolInputSchema>;
+export const copilotReadToolInputSchemas = {
+  searchUploadedEvidence: z.object({ query: z.string().trim().min(2).max(500), maxResults: z.number().int().min(1).max(8).default(5), relevanceThreshold: z.number().min(0.4).max(0.95).default(0.62) }).strict(),
+  getDocumentExcerpt: z.object({ documentId: persistenceUuidSchema, chunkId: persistenceUuidSchema }).strict(),
+} as const;
 
 const boundedJson = z.record(z.string().max(80), z.unknown()).superRefine((value, context) => {
   if (JSON.stringify(value).length > 24_000) context.addIssue({ code: "custom", message: "Payload too large" });
