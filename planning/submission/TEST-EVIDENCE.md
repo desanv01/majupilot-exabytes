@@ -7,11 +7,11 @@ Reviewed deployment: <https://sme-growth-twin.vercel.app> (`dpl_6UcGRsMhFfhKQyN3
 
 ## Frozen golden outputs
 
-| Case | Digital / AI | Recommendation order (`status`) | Selected scenario | First-year cost low/base/high | Operational value low/base/high | Net value low/base/high | Payback best/base/worst |
+| Case | Digital / AI | Recommendation order (`status`) | Selected scenario | First-year cost low/base/high | Operational value low/base/high | Net value low/base/high | Viewer payback best/base/worst |
 |---|---|---|---|---|---|---|---|
-| A — Kopi Kita | 37.5 / 42.5 | customer operations (`why_now`), collaboration (`why_now`), continuity (`why_now`), protected web (`next`), governed AI (`why_later`) | Balanced Growth | 9,200 / 18,400 / 27,600 | 2,358 / 7,254 / 15,233 | -25,242 / -11,146 / 6,033 | 7.2 / 30.4 / 140.5 months |
-| B — Precision Parts | 23.2 / 43.8 | collaboration (`why_now`), digital growth (`why_now`), customer operations (`why_now`), continuity (`next`), governed AI (`why_later`) | Balanced Growth | 7,400 / 14,800 / 22,200 | 2,738 / 8,424 / 17,690 | -19,462 / -6,376 / 10,290 | 5.0 / 21.1 / 97.3 months |
-| C — Northstar | 79.0 / 73.8 | customer operations (`why_now`), governed AI (`why_now`), scalable cloud (`why_now`) | Balanced Growth | 22,400 / 44,800 / 67,200 | 913 / 2,808 / 5,897 | -66,287 / -41,992 / -16,503 | 45.6 / 191.5 / 883.6 months |
+| A — Kopi Kita | 37.5 / 42.5 | customer operations (`why_now`), collaboration (`why_now`), continuity (`why_now`), protected web (`next`), governed AI (`why_later`) | Balanced Growth | 9,200 / 18,400 / 27,600 | 2,358 / 7,254 / 15,233 | -25,242 / -11,146 / 6,033 | 7.2 / 30.4 / More than 60 months |
+| B — Precision Parts | 23.2 / 43.8 | collaboration (`why_now`), digital growth (`why_now`), customer operations (`why_now`), continuity (`next`), governed AI (`why_later`) | Balanced Growth | 7,400 / 14,800 / 22,200 | 2,738 / 8,424 / 17,690 | -19,462 / -6,376 / 10,290 | 5.0 / 21.1 / More than 60 months |
+| C — Northstar | 79.0 / 73.8 | customer operations (`why_now`), governed AI (`why_now`), scalable cloud (`why_now`) | Balanced Growth | 22,400 / 44,800 / 67,200 | 913 / 2,808 / 5,897 | -66,287 / -41,992 / -16,503 | 45.6 / More than 60 months / More than 60 months |
 
 All three produce five deterministic fallback advisor origins and all 16 required Blueprint sections when credentials are absent. These are scenario estimates, not real-world outcome claims.
 

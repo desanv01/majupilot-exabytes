@@ -1,8 +1,8 @@
 {
   "composition": "C:\\Users\\Dv\\.codex\\worktrees\\a634\\MajuPilot\\video-production\\majupilot-hackathon-video",
   "duration": 580,
-  "totalTweens": 544,
-  "mappedTweens": 397,
+  "totalTweens": 545,
+  "mappedTweens": 398,
   "skippedMicroTweens": 147,
   "tweens": [
     {
@@ -17510,7 +17510,7 @@
           "x": 120,
           "y": 264,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
@@ -17519,7 +17519,7 @@
           "x": 120,
           "y": 236,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
@@ -17528,7 +17528,7 @@
           "x": 120,
           "y": 236,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
@@ -17537,7 +17537,7 @@
           "x": 120,
           "y": 224,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
@@ -17546,7 +17546,7 @@
           "x": 120,
           "y": 221,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
@@ -17555,7 +17555,7 @@
           "x": 120,
           "y": 220,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         }
@@ -17563,7 +17563,7 @@
       "flags": [
         "paced-fast"
       ],
-      "summary": "#f17-testing-chapter-word-1 animates y over 0.19s (power4.out). moves 44px up. ends at (120, 220) 614×102px. FLAGS: paced-fast."
+      "summary": "#f17-testing-chapter-word-1 animates y over 0.19s (power4.out). moves 44px up. ends at (120, 220) 614×118px. FLAGS: paced-fast."
     },
     {
       "index": 263,
@@ -17581,54 +17581,54 @@
         {
           "t": 412.383,
           "x": 120,
-          "y": 386,
+          "y": 402,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 0,
           "visible": true
         },
         {
           "t": 412.41,
           "x": 120,
-          "y": 345,
+          "y": 361,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
         {
           "t": 412.437,
           "x": 120,
-          "y": 327,
+          "y": 343,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
         {
           "t": 412.463,
           "x": 120,
-          "y": 327,
+          "y": 343,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
         {
           "t": 412.49,
           "x": 120,
-          "y": 323,
+          "y": 339,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         },
         {
           "t": 412.517,
           "x": 120,
-          "y": 322,
+          "y": 338,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1,
           "visible": true
         }
@@ -17636,7 +17636,7 @@
       "flags": [
         "paced-fast"
       ],
-      "summary": "#f17-testing-chapter-word-2 animates y over 0.16s (power4.out). moves 64px up. fades in. ends at (120, 322) 281×102px. FLAGS: paced-fast."
+      "summary": "#f17-testing-chapter-word-2 animates y over 0.16s (power4.out). moves 64px up. fades in. ends at (120, 338) 281×118px. FLAGS: paced-fast."
     },
     {
       "index": 264,
@@ -19039,7 +19039,7 @@
         {
           "t": 439.371,
           "x": 1261,
-          "y": 234,
+          "y": 250,
           "w": 255,
           "h": 43,
           "opacity": 0.3633,
@@ -19048,7 +19048,7 @@
         {
           "t": 439.472,
           "x": 1252,
-          "y": 232,
+          "y": 248,
           "w": 271,
           "h": 46,
           "opacity": 0.8493,
@@ -19057,7 +19057,7 @@
         {
           "t": 439.574,
           "x": 1249,
-          "y": 232,
+          "y": 248,
           "w": 277,
           "h": 47,
           "opacity": 1,
@@ -19066,7 +19066,7 @@
         {
           "t": 439.676,
           "x": 1249,
-          "y": 232,
+          "y": 248,
           "w": 277,
           "h": 47,
           "opacity": 1,
@@ -19075,7 +19075,7 @@
         {
           "t": 439.778,
           "x": 1250,
-          "y": 232,
+          "y": 248,
           "w": 276,
           "h": 47,
           "opacity": 1,
@@ -19084,7 +19084,7 @@
         {
           "t": 439.879,
           "x": 1250,
-          "y": 232,
+          "y": 248,
           "w": 276,
           "h": 47,
           "opacity": 1,
@@ -19092,7 +19092,7 @@
         }
       ],
       "flags": [],
-      "summary": "span.f19-chip.f19-chip-fiction animates opacity+scale over 0.61s (back.out(1.25)). moves 11px left. opacity 0.4→1.0. scales. width 255→276px. ends at (1250, 232) 276×47px."
+      "summary": "span.f19-chip.f19-chip-fiction animates opacity+scale over 0.61s (back.out(1.25)). moves 11px left. opacity 0.4→1.0. scales. width 255→276px. ends at (1250, 248) 276×47px."
     },
     {
       "index": 285,
@@ -19110,7 +19110,7 @@
         {
           "t": 441.07,
           "x": 150,
-          "y": 370,
+          "y": 386,
           "w": 0,
           "h": 444,
           "opacity": 1,
@@ -19119,7 +19119,7 @@
         {
           "t": 443.77,
           "x": 150,
-          "y": 370,
+          "y": 386,
           "w": 0,
           "h": 444,
           "opacity": 1,
@@ -19128,7 +19128,7 @@
         {
           "t": 446.47,
           "x": 150,
-          "y": 370,
+          "y": 386,
           "w": 0,
           "h": 444,
           "opacity": 1,
@@ -19137,7 +19137,7 @@
         {
           "t": 449.17,
           "x": 150,
-          "y": 370,
+          "y": 386,
           "w": 0,
           "h": 444,
           "opacity": 1,
@@ -19146,7 +19146,7 @@
         {
           "t": 451.87,
           "x": 150,
-          "y": 370,
+          "y": 386,
           "w": 0,
           "h": 444,
           "opacity": 1,
@@ -19155,7 +19155,7 @@
         {
           "t": 454.57,
           "x": 150,
-          "y": 370,
+          "y": 386,
           "w": 0,
           "h": 444,
           "opacity": 1,
@@ -19166,7 +19166,7 @@
         "degenerate",
         "paced-slow"
       ],
-      "summary": "#f19-production-smoke-route animates strokeDashoffset over 16.20s (none). ends at (150, 370) 0×444px. FLAGS: degenerate, paced-slow."
+      "summary": "#f19-production-smoke-route animates strokeDashoffset over 16.20s (none). ends at (150, 386) 0×444px. FLAGS: degenerate, paced-slow."
     },
     {
       "index": 286,
@@ -19185,7 +19185,7 @@
         {
           "t": 439.885,
           "x": 202,
-          "y": 347,
+          "y": 363,
           "w": 1587,
           "h": 77,
           "opacity": 1,
@@ -19194,7 +19194,7 @@
         {
           "t": 439.955,
           "x": 197,
-          "y": 338,
+          "y": 355,
           "w": 1598,
           "h": 78,
           "opacity": 1,
@@ -19203,7 +19203,7 @@
         {
           "t": 440.025,
           "x": 194,
-          "y": 334,
+          "y": 350,
           "w": 1604,
           "h": 78,
           "opacity": 1,
@@ -19212,7 +19212,7 @@
         {
           "t": 440.095,
           "x": 193,
-          "y": 332,
+          "y": 348,
           "w": 1607,
           "h": 78,
           "opacity": 1,
@@ -19221,7 +19221,7 @@
         {
           "t": 440.165,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19230,7 +19230,7 @@
         {
           "t": 440.235,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19238,7 +19238,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). moves 16px up and 10px left. scales. width 1587→1608px. ends at (192, 331) 1608×78px."
+      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). moves 16px up and 10px left. scales. width 1587→1608px. ends at (192, 347) 1608×78px."
     },
     {
       "index": 287,
@@ -19256,7 +19256,7 @@
         {
           "t": 440.09,
           "x": 217,
-          "y": 391,
+          "y": 407,
           "w": 1,
           "h": 4,
           "opacity": 1,
@@ -19265,7 +19265,7 @@
         {
           "t": 440.21,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 82,
           "h": 4,
           "opacity": 1,
@@ -19274,7 +19274,7 @@
         {
           "t": 440.33,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 329,
           "h": 4,
           "opacity": 1,
@@ -19283,7 +19283,7 @@
         {
           "t": 440.45,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1029,
           "h": 4,
           "opacity": 1,
@@ -19292,7 +19292,7 @@
         {
           "t": 440.57,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1457,
           "h": 4,
           "opacity": 1,
@@ -19301,7 +19301,7 @@
         {
           "t": 440.69,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1550,
           "h": 4,
           "opacity": 1,
@@ -19309,7 +19309,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. width 1→1550px. ends at (216, 390) 1550×4px."
+      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. width 1→1550px. ends at (216, 406) 1550×4px."
     },
     {
       "index": 288,
@@ -19328,7 +19328,7 @@
         {
           "t": 443.035,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19337,7 +19337,7 @@
         {
           "t": 443.105,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19346,7 +19346,7 @@
         {
           "t": 443.175,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19355,7 +19355,7 @@
         {
           "t": 443.245,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19364,7 +19364,7 @@
         {
           "t": 443.315,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19373,7 +19373,7 @@
         {
           "t": 443.385,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19381,7 +19381,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 331) 1608×78px."
+      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 347) 1608×78px."
     },
     {
       "index": 289,
@@ -19399,7 +19399,7 @@
         {
           "t": 443.24,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19408,7 +19408,7 @@
         {
           "t": 443.36,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19417,7 +19417,7 @@
         {
           "t": 443.48,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19426,7 +19426,7 @@
         {
           "t": 443.6,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19435,7 +19435,7 @@
         {
           "t": 443.72,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19444,7 +19444,7 @@
         {
           "t": 443.84,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19452,7 +19452,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 390) 1560×4px."
+      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 406) 1560×4px."
     },
     {
       "index": 290,
@@ -19471,7 +19471,7 @@
         {
           "t": 446.235,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19480,7 +19480,7 @@
         {
           "t": 446.305,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19489,7 +19489,7 @@
         {
           "t": 446.375,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19498,7 +19498,7 @@
         {
           "t": 446.445,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19507,7 +19507,7 @@
         {
           "t": 446.515,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19516,7 +19516,7 @@
         {
           "t": 446.585,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19524,7 +19524,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 331) 1608×78px."
+      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 347) 1608×78px."
     },
     {
       "index": 291,
@@ -19542,7 +19542,7 @@
         {
           "t": 446.44,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19551,7 +19551,7 @@
         {
           "t": 446.56,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19560,7 +19560,7 @@
         {
           "t": 446.68,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19569,7 +19569,7 @@
         {
           "t": 446.8,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19578,7 +19578,7 @@
         {
           "t": 446.92,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19587,7 +19587,7 @@
         {
           "t": 447.04,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19595,7 +19595,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 390) 1560×4px."
+      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 406) 1560×4px."
     },
     {
       "index": 292,
@@ -19614,7 +19614,7 @@
         {
           "t": 449.435,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19623,7 +19623,7 @@
         {
           "t": 449.505,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19632,7 +19632,7 @@
         {
           "t": 449.575,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19641,7 +19641,7 @@
         {
           "t": 449.645,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19650,7 +19650,7 @@
         {
           "t": 449.715,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19659,7 +19659,7 @@
         {
           "t": 449.785,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19667,7 +19667,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 331) 1608×78px."
+      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 347) 1608×78px."
     },
     {
       "index": 293,
@@ -19685,7 +19685,7 @@
         {
           "t": 449.64,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19694,7 +19694,7 @@
         {
           "t": 449.76,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19703,7 +19703,7 @@
         {
           "t": 449.88,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19712,7 +19712,7 @@
         {
           "t": 450,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19721,7 +19721,7 @@
         {
           "t": 450.12,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19730,7 +19730,7 @@
         {
           "t": 450.24,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19738,7 +19738,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 390) 1560×4px."
+      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 406) 1560×4px."
     },
     {
       "index": 294,
@@ -19757,7 +19757,7 @@
         {
           "t": 452.635,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19766,7 +19766,7 @@
         {
           "t": 452.705,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19775,7 +19775,7 @@
         {
           "t": 452.775,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19784,7 +19784,7 @@
         {
           "t": 452.845,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19793,7 +19793,7 @@
         {
           "t": 452.915,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19802,7 +19802,7 @@
         {
           "t": 452.985,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19810,7 +19810,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 331) 1608×78px."
+      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 347) 1608×78px."
     },
     {
       "index": 295,
@@ -19828,7 +19828,7 @@
         {
           "t": 452.84,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19837,7 +19837,7 @@
         {
           "t": 452.96,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19846,7 +19846,7 @@
         {
           "t": 453.08,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19855,7 +19855,7 @@
         {
           "t": 453.2,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19864,7 +19864,7 @@
         {
           "t": 453.32,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19873,7 +19873,7 @@
         {
           "t": 453.44,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -19881,7 +19881,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 390) 1560×4px."
+      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 406) 1560×4px."
     },
     {
       "index": 296,
@@ -19972,7 +19972,7 @@
         {
           "t": 455.885,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19981,7 +19981,7 @@
         {
           "t": 455.955,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19990,7 +19990,7 @@
         {
           "t": 456.025,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -19999,7 +19999,7 @@
         {
           "t": 456.095,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -20008,7 +20008,7 @@
         {
           "t": 456.165,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -20017,7 +20017,7 @@
         {
           "t": 456.235,
           "x": 192,
-          "y": 331,
+          "y": 347,
           "w": 1608,
           "h": 78,
           "opacity": 1,
@@ -20025,7 +20025,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 331) 1608×78px."
+      "summary": "div.f19-mk-sl-row animates y+scale over 0.42s (power3.out). scales. ends at (192, 347) 1608×78px."
     },
     {
       "index": 298,
@@ -20043,7 +20043,7 @@
         {
           "t": 456.09,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -20052,7 +20052,7 @@
         {
           "t": 456.21,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -20061,7 +20061,7 @@
         {
           "t": 456.33,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -20070,7 +20070,7 @@
         {
           "t": 456.45,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -20079,7 +20079,7 @@
         {
           "t": 456.57,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -20088,7 +20088,7 @@
         {
           "t": 456.69,
           "x": 216,
-          "y": 390,
+          "y": 406,
           "w": 1560,
           "h": 4,
           "opacity": 1,
@@ -20096,7 +20096,7 @@
         }
       ],
       "flags": [],
-      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 390) 1560×4px."
+      "summary": "div.f19-mk-sl-fill animates scaleX over 0.72s (power2.inOut). scales. ends at (216, 406) 1560×4px."
     },
     {
       "index": 299,
@@ -27019,6 +27019,78 @@
     },
     {
       "index": 394,
+      "selector": "p",
+      "driver": "target",
+      "targets": 1,
+      "props": [
+        "opacity",
+        "y"
+      ],
+      "start": 571.45,
+      "end": 571.9,
+      "duration": 0.45,
+      "ease": "power2.out",
+      "bboxes": [
+        {
+          "t": 571.488,
+          "x": 124,
+          "y": 544,
+          "w": 770,
+          "h": 45,
+          "opacity": 1,
+          "visible": false
+        },
+        {
+          "t": 571.563,
+          "x": 124,
+          "y": 544,
+          "w": 770,
+          "h": 45,
+          "opacity": 1,
+          "visible": false
+        },
+        {
+          "t": 571.638,
+          "x": 124,
+          "y": 544,
+          "w": 770,
+          "h": 45,
+          "opacity": 1,
+          "visible": false
+        },
+        {
+          "t": 571.713,
+          "x": 124,
+          "y": 544,
+          "w": 770,
+          "h": 45,
+          "opacity": 1,
+          "visible": false
+        },
+        {
+          "t": 571.788,
+          "x": 124,
+          "y": 544,
+          "w": 770,
+          "h": 45,
+          "opacity": 1,
+          "visible": false
+        },
+        {
+          "t": 571.863,
+          "x": 124,
+          "y": 544,
+          "w": 770,
+          "h": 45,
+          "opacity": 1,
+          "visible": false
+        }
+      ],
+      "flags": [],
+      "summary": "p animates opacity+y over 0.45s (power2.out). ends at (124, 544) 770×45px."
+    },
+    {
+      "index": 395,
       "selector": "span",
       "driver": "target",
       "targets": 1,
@@ -27089,7 +27161,7 @@
       "summary": "span animates y over 0.80s (sine.inOut). ends at (120, 88) 37×26px."
     },
     {
-      "index": 395,
+      "index": 396,
       "selector": "span",
       "driver": "target",
       "targets": 1,
@@ -27160,7 +27232,7 @@
       "summary": "span animates y over 0.80s (sine.inOut). ends at (120, 88) 37×26px."
     },
     {
-      "index": 396,
+      "index": 397,
       "selector": "span",
       "driver": "target",
       "targets": 1,
@@ -27231,7 +27303,7 @@
       "summary": "span animates y over 0.70s (sine.inOut). ends at (120, 88) 37×26px."
     },
     {
-      "index": 397,
+      "index": 398,
       "selector": "span",
       "driver": "target",
       "targets": 1,
@@ -27302,7 +27374,7 @@
       "summary": "span animates y over 0.70s (sine.inOut). ends at (120, 88) 37×26px."
     }
   ],
-  "choreography": "Timeline (580.0s, each char ≈ 9.67s):\n  0s                                                    580s\n  ┼───────────────────────────────────────────────────────────┤\n  █                                                             div.f01-kicker opacity+y\n  █                                                             h2.f01-name opacity+scale+y\n  █                                                             div.f01-portrait-wrap opacity+scale+y\n  █                                                             #f01-evidence-path strokeDashoffset\n  █                                                             p.f01-body.f01-role opacity+y\n  █                                                             p.f01-body.f01-thesis opacity+y\n  █                                                             circle.f01-proof-dot opacity+scale\n  ██                                                            (onUpdate driver) p\n    █                                                           #related-wipe clipPath\n    █                                                           #related-wipe clipPath\n    █                                                           div.f02-kicker opacity+y\n    █                                                           h2.f02-display opacity+scale\n    █                                                           div.f02-q opacity+x+y+scale\n    █                                                           div.f02-q opacity+x+y+scale\n    ██                                                          div.f02-q opacity+x+y+scale\n     █                                                          div.f02-q opacity+x+y+scale\n     █                                                          span.f02-answer y\n     █                                                          div.f02-evidence scaleX\n     █                                                          (onUpdate driver) p\n     █                                                          div.f02-ghost opacity\n      █                                                         #related-wipe clipPath\n      █                                                         #related-wipe clipPath\n      █                                                         div.f03-kicker opacity+y\n      █                                                         div.f03-card opacity+scale+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-leaf y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         path strokeDashoffset\n      █                                                         p.f03-body opacity+y\n      █                                                         path strokeDashoffset\n       █                                                        path strokeDashoffset\n       █                                                        path strokeDashoffset\n       █                                                        path strokeDashoffset\n       █                                                        h2.f03-display opacity+y\n       █                                                        div.f03-card borderColor\n       █                                                        #f03-check-ring strokeDashoffset\n       █                                                        #f03-check-mark strokeDashoffset\n        █                                                       span.f03-chip opacity+scale\n        █                                                       span.f03-chip.f03-chip-unknown opacity+scale\n        █                                                       span.f03-chip opacity+scale\n        █                                                       span.f03-edit-tab opacity+y\n        █                                                       #chapter-push yPercent\n        █                                                       (onUpdate driver) x\n        █                                                       #chapter-push yPercent\n        █                                                       div opacity+y\n        █                                                       #f04-five-stage-route-answer opacity+scale\n        █                                                       span opacity+scale\n        █                                                       div opacity+y\n        ███                                                     #f04-five-stage-route-path strokeDashoffset\n        ███                                                     #f04-five-stage-route-progress-fill scaleX\n         █                                                      (onUpdate driver) x\n         █                                                      #f04-five-stage-route-diagnose opacity+scale\n         █                                                      span opacity+scale\n         █                                                      (onUpdate driver) x\n         █                                                      #f04-five-stage-route-compare opacity+scale\n         █                                                      span opacity+scale\n         █                                                      (onUpdate driver) x\n         █                                                      #f04-five-stage-route-blueprint opacity+scale\n         █                                                      span opacity+scale\n          █                                                     (onUpdate driver) x\n          █                                                     #f04-five-stage-route-handoff opacity+scale\n          █                                                     span opacity+scale\n          █                                                     #related-wipe clipPath\n          █                                                     #related-wipe clipPath\n          █                                                     div opacity+y\n          █                                                     div opacity+y\n          █                                                     #f05-stage-ownership-head-0 scaleX\n          ███                                                   #f05-stage-ownership-rail strokeDashoffset\n          █                                                     strong opacity+y\n          █                                                     div opacity+y\n          ██                                                    (onUpdate driver) v\n           █                                                    #f05-stage-ownership-head-1 scaleX\n           █                                                    (onUpdate driver) v\n           █                                                    strong opacity+y\n           █                                                    (onUpdate driver) v\n           █                                                    #f05-stage-ownership-head-2 scaleX\n           █                                                    (onUpdate driver) v\n           █                                                    strong opacity+y\n           ██                                                   (onUpdate driver) v\n            █                                                   #f05-stage-ownership-head-3 scaleX\n            █                                                   (onUpdate driver) v\n            █                                                   strong opacity+y\n            █                                                   (onUpdate driver) v\n            █                                                   #f05-stage-ownership-head-4 scaleX\n            █                                                   (onUpdate driver) v\n            █                                                   strong opacity+y\n             █                                                  #related-wipe clipPath\n             █                                                  #related-wipe clipPath\n             █                                                  div opacity+y\n             █                                                  #f06-truth-boundary-left x+rotateY+scale+opacity\n             █                                                  div opacity+y\n             █                                                  div opacity+x\n             █                                                  #f06-truth-boundary-seal opacity+scale\n             █                                                  #f06-truth-boundary-line scaleY\n             █                                                  #f06-truth-boundary-right x+rotateY+scale+opacity\n             █                                                  #f06-truth-boundary-bridge opacity+scale\n             █                                                  div opacity+y\n             █                                                  div opacity+x\n              █                                                 #f06-truth-boundary-bridge scale+borderRadius+backgroundColor+boxShadow\n              █                                                 #f06-truth-boundary-bridge-old opacity\n              █                                                 #f06-truth-boundary-bridge-new opacity\n              █                                                 span opacity+scale\n              █                                                 #f06-truth-boundary-line backgroundColor\n              █                                                 #chapter-push yPercent\n              █                                                 #chapter-push yPercent\n              █                                                 #f07-production-architecture-core opacity+scale\n              ██                                                #f07-production-architecture-ui opacity+x\n              ████                                              (onUpdate driver) x\n               █                                                #f07-production-architecture-path-1 strokeDashoffset\n               █                                                #f07-production-architecture-routes opacity+scale+x\n               █                                                #f07-production-architecture-path-2 strokeDashoffset\n               █                                                #f07-production-architecture-core-label opacity+y\n               █                                                #f07-production-architecture-core boxShadow\n                █                                               #f07-production-architecture-path-3 strokeDashoffset\n                █                                               #f07-production-architecture-domain opacity+x\n                █                                               #f07-production-architecture-path-4 strokeDashoffset\n                █                                               #f07-production-architecture-supabase opacity+x+y+scale\n                ██                                              #f07-production-architecture-path-5 strokeDashoffset\n                 █                                              #f07-production-architecture-gateway opacity+y+scale\n                 █                                              (onUpdate driver) x\n                 █                                              #f07-production-architecture-path-6 strokeDashoffset\n                 █                                              #f07-production-architecture-outbox opacity+x+y+scale\n                 █                                              #related-wipe clipPath\n                 █                                              #related-wipe clipPath\n                 █                                              #f08-provenance-specialists-claim opacity+scale\n                 █                                              #f08-provenance-specialists-path-1 strokeDashoffset\n                 ██                                             #f08-provenance-specialists-calc opacity+x+scale\n                  █                                             #f08-provenance-specialists-path-2 strokeDashoffset\n                  █                                             #f08-provenance-specialists-evidence opacity+x+scale\n                  █                                             div.f08-advisor y+scale\n                  █                                             div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                    █                                           #f08-provenance-specialists-fallback opacity+scale+y\n                    █                                           #related-wipe clipPath\n                    █                                           #related-wipe clipPath\n                    █                                           #f09-no-current-rag-rule strokeDashoffset\n                    ██                                          (onUpdate driver) p\n                      █                                         #chapter-push yPercent\n                      █                                         #chapter-push yPercent\n                      █                                         div.f10-capture opacity+y+scale\n                      █                                         #f10-track-2 opacity+x\n                      █                                         div.f10-cursor opacity+x+y+scale\n                      █                                         div.f10-cursor x+y\n                      █                                         div.f10-cursor-pulse opacity+scale\n                       █                                        #related-wipe clipPath\n                       █                                        #related-wipe clipPath\n                       █                                        div.f11-capture opacity+y+scale\n                       █                                        #f11-track-2 opacity+x\n                       █                                        div.f11-highlight opacity\n                        █                                       div.f11-highlight --f11-hl-x+--f11-hl-y+--f11-hl-rx+--f11-hl-ry\n                        ██                                      div.f11-highlight --f11-hl-x+--f11-hl-y+--f11-hl-rx+--f11-hl-ry\n                         █                                      div.f11-cursor opacity+x+y+scale\n                         █                                      div.f11-cursor x+y\n                         █                                      #related-wipe clipPath\n                         █                                      #related-wipe clipPath\n                         █                                      div.f12-capture opacity+y+scale\n                         █                                      #f12-track-2 opacity+x\n                         █                                      div.f12-stat-card.f12-stat-one opacity+y\n                         ██                                     (onUpdate driver) tenths\n                         ██                                     span.f12-value scale\n                         ██                                     div.f12-fill scaleX\n                          █                                     div.f12-stat-card.f12-stat-two opacity+y\n                          █                                     (onUpdate driver) tenths\n                          █                                     span.f12-value scale\n                          █                                     div.f12-fill scaleX\n                           █                                    (onUpdate driver) scale+x+y\n                           █                                    div.f12-halo opacity+scale\n                           █                                    (onUpdate driver) scale+x+y\n                           █                                    div.f12-halo opacity\n                           ██                                   div.f12-findings opacity+scale+y\n                           ██                                   (onUpdate driver) value\n                            █                                   #related-wipe clipPath\n                            █                                   #related-wipe clipPath\n                            █                                   #f13-demo-recommendations-capture opacity+scale\n                            █                                   aside opacity+x\n                            █                                   #f13-demo-recommendations-now y\n                            █                                   i scaleX\n                             █                                  #f13-demo-recommendations-next scale\n                             █                                  i scaleX\n                              █                                 #f13-demo-recommendations-later scale\n                              █                                 i scaleX\n                              █                                 #f13-demo-recommendations-provenance opacity+scale\n                               █                                #related-wipe clipPath\n                               █                                #related-wipe clipPath\n                               █                                #f14-demo-scenarios-frame opacity+y+scale\n                               █                                div opacity+y\n                               █                                #f14-demo-scenarios-sidecar opacity+x\n                               █                                #f14-demo-scenarios-cursor opacity\n                               █                                #f14-demo-scenarios-cursor --hf-cursor-x+--hf-cursor-y\n                               █                                (onUpdate driver) s+x+y\n                               █                                #f14-demo-scenarios-halo opacity+scale\n                               █                                div scale+color\n                               █                                #f14-demo-scenarios-pulse opacity+scale\n                                █                               (onUpdate driver) s+x+y\n                                █                               #f14-demo-scenarios-halo opacity+scale\n                                █                               #f14-demo-scenarios-cost opacity+x\n                                ██                              i scaleX\n                                 █                              #f14-demo-scenarios-value opacity+x\n                                 █                              i scaleX\n                                 ██                             #f14-demo-scenarios-net opacity+x\n                                 ██                             i scaleX\n                                  █                             #f14-demo-scenarios-payback opacity+x\n                                  █                             i scaleX\n                                   █                            #f14-demo-scenarios-qualifier opacity+y\n                                   █                            #related-wipe clipPath\n                                   █                            #related-wipe clipPath\n                                   █                            #f15-demo-blueprint-frame opacity+y+scale\n                                   █                            #f15-demo-blueprint-ledger opacity+x\n                                   █                            div opacity+y\n                                   █                            #f15-demo-blueprint-advisor-0 opacity+scale\n                                   █                            #f15-demo-blueprint-advisor-1 opacity+scale\n                                   █                            #f15-demo-blueprint-advisor-2 opacity+scale\n                                   █                            #f15-demo-blueprint-advisor-3 opacity+scale\n                                   ██                           #f15-demo-blueprint-advisor-4 opacity+scale\n                                    █                           #f15-demo-blueprint-section-count opacity+scale\n                                    ████                        #f15-demo-blueprint-index-path strokeDashoffset\n                                    █                           #f15-demo-blueprint-index-0 x\n                                    █                           #f15-demo-blueprint-spotlight opacity\n                                     █                          #f15-demo-blueprint-index-1 x\n                                      █                         #f15-demo-blueprint-index-2 x\n                                      █                         #f15-demo-blueprint-spotlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                      █                         #f15-demo-blueprint-index-3 x\n                                       █                        #f15-demo-blueprint-index-4 x\n                                       █                        #f15-demo-blueprint-spotlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                       █                        (onUpdate driver) s+x+y\n                                       █                        #f15-demo-blueprint-ledger --dof+opacity\n                                       ██                       span opacity+scale\n                                        █                       (onUpdate driver) s+x+y\n                                        █                       #f15-demo-blueprint-ledger --dof+opacity\n                                        █                       #f15-demo-blueprint-spotlight opacity\n                                        █                       #f15-demo-blueprint-landing opacity+y\n                                         █                      #related-wipe clipPath\n                                         █                      #related-wipe clipPath\n                                         █                      #f16-demo-consent-boundary-verified opacity+scale\n                                         █                      #f16-demo-consent-boundary-cursor opacity+x+y\n                                         █                      #f16-demo-consent-boundary-highlight opacity\n                                         ██                     #f16-demo-consent-boundary-verified --dof+opacity\n                                         ██                     #f16-demo-consent-boundary-sharing opacity+scale\n                                         ██                     #f16-demo-consent-boundary-highlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                         ██                     #f16-demo-consent-boundary-cursor x+y\n                                          █                     #f16-demo-consent-boundary-sharing --dof+opacity\n                                          █                     #f16-demo-consent-boundary-consent opacity+scale\n                                          █                     #f16-demo-consent-boundary-highlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                          █                     #f16-demo-consent-boundary-cursor x+y\n                                           █                    #f16-demo-consent-boundary-stop opacity+scale+y\n                                           █                    #f16-demo-consent-boundary-highlight opacity\n                                           █                    #f16-demo-consent-boundary-verified --dof+opacity\n                                            █                   #chapter-push yPercent\n                                            █                   #chapter-push yPercent\n                                            █                   #f17-testing-chapter-trunk strokeDashoffset\n                                            █                   #f17-testing-chapter-kicker y\n                                            █                   #f17-testing-chapter-word-1 y\n                                            █                   #f17-testing-chapter-word-2 y\n                                            █                   #f17-testing-chapter-left-rail strokeDashoffset\n                                            █                   #f17-testing-chapter-right-rail strokeDashoffset\n                                            █                   #f17-testing-chapter-hosted opacity+scale+y\n                                            █                   #f17-testing-chapter-local opacity+scale+y\n                                            █                   #related-wipe clipPath\n                                            █                   #related-wipe clipPath\n                                            ██                  (onUpdate driver) value\n                                            ██                  #f18-hosted-gates-num-221 scale\n                                            ██                  #f18-hosted-gates-fill-221 scaleX\n                                             █                  #f18-hosted-gates-stat-47 opacity+scale+y\n                                             █                  div.f18-mk-ps-fill scaleX\n                                              █                 #f18-hosted-gates-stat-38 opacity+scale+y\n                                              █                 div.f18-mk-ps-fill scaleX\n                                              █                 #f18-hosted-gates-row-skipped opacity+x\n                                              █                 div.f18-mk-sl-fill scaleX\n                                              █                 #f18-hosted-gates-row-gates opacity+x\n                                              █                 div.f18-mk-sl-fill scaleX\n                                               █                #related-wipe clipPath\n                                               █                #related-wipe clipPath\n                                               █                div.f19-register opacity+y\n                                               █                span.f19-chip.f19-chip-fiction opacity+scale\n                                               ███              #f19-production-smoke-route strokeDashoffset\n                                               █                div.f19-mk-sl-row y+scale\n                                               █                div.f19-mk-sl-fill scaleX\n                                               █                div.f19-mk-sl-row y+scale\n                                               █                div.f19-mk-sl-fill scaleX\n                                                █               div.f19-mk-sl-row y+scale\n                                                █               div.f19-mk-sl-fill scaleX\n                                                █               div.f19-mk-sl-row y+scale\n                                                █               div.f19-mk-sl-fill scaleX\n                                                █               div.f19-mk-sl-row y+scale\n                                                █               div.f19-mk-sl-fill scaleX\n                                                 █              div.f19-source opacity+x\n                                                 █              div.f19-mk-sl-row y+scale\n                                                 █              div.f19-mk-sl-fill scaleX\n                                                 █              #related-wipe clipPath\n                                                 █              #related-wipe clipPath\n                                                 █              div.f20-register opacity+y\n                                                 █              section.f20-claim opacity+x\n                                                 █              div.f20-kicker opacity+y\n                                                 █              div.f20-mk-sl-row y+scale\n                                                 █              div.f20-mk-sl-fill scaleX\n                                                  █             div.f20-mk-sl-row y+scale\n                                                  █             div.f20-mk-sl-fill scaleX\n                                                  █             div.f20-mk-sl-row y+scale\n                                                  █             div.f20-mk-sl-fill scaleX\n                                                  █             div.f20-mk-sl-row y+scale\n                                                  █             div.f20-mk-sl-fill scaleX\n                                                   █            div.f20-foot opacity+y\n                                                   █            #related-wipe clipPath\n                                                   █            #related-wipe clipPath\n                                                   █            div.f21-register opacity+y\n                                                   █            section.f21-card.f21-card-hosted opacity+x+rotateY+scale\n                                                   █            section.f21-card.f21-card-local opacity+x+rotateY+scale\n                                                   █            div.f21-divider scaleY\n                                                   █            div.f21-band opacity+scale\n                                                   █            div.f21-stat opacity+y\n                                                   ██           div.f21-stat opacity+y\n                                                    █           div.f21-provenance opacity+y\n                                                    █           #related-wipe clipPath\n                                                    █           #related-wipe clipPath\n                                                    █           div opacity+y\n                                                    █           #f22-bounded-model-path-receipt opacity+scale\n                                                    █           #f22-bounded-model-path-line strokeDashoffset\n                                                    █           span opacity+y\n                                                    █           span opacity+y\n                                                    █           span opacity+y\n                                                    █           span opacity+y\n                                                     █          #chapter-push yPercent\n                                                     █          #chapter-push yPercent\n                                                     █          div opacity+y\n                                                     █          div opacity+scale\n                                                     █          #f23-owner-advisor-value-top-left strokeDashoffset\n                                                     █          #f23-owner-advisor-value-owner x+rotateY+scale+opacity\n                                                     █          div opacity+y\n                                                     █          div opacity+y\n                                                      █         #f23-owner-advisor-value-owner-badge opacity+scale\n                                                      █         #f23-owner-advisor-value-top-right strokeDashoffset\n                                                      █         #f23-owner-advisor-value-advisor x+rotateY+scale+opacity\n                                                      █         div opacity+y\n                                                       █        div opacity+y\n                                                       █        #f23-owner-advisor-value-advisor-badge opacity+scale\n                                                       █        #f23-owner-advisor-value-bottom-left strokeDashoffset\n                                                       █        #f23-owner-advisor-value-bottom-right strokeDashoffset\n                                                       █        #f23-owner-advisor-value-consent opacity+scale\n                                                        █       #related-wipe clipPath\n                                                        █       #related-wipe clipPath\n                                                        █       div opacity+y\n                                                        █       path strokeDashoffset\n                                                        █       #f24-no-promises-skin-1 opacity\n                                                        █       #f24-no-promises-skin-0 opacity\n                                                        █       path strokeDashoffset\n                                                        █       #f24-no-promises-skin-2 opacity\n                                                        █       #f24-no-promises-skin-1 opacity\n                                                        ██      path strokeDashoffset\n                                                         █      #f24-no-promises-skin-3 opacity\n                                                         █      #f24-no-promises-skin-2 opacity\n                                                         █      path strokeDashoffset\n                                                         █      #f24-no-promises-skin-4 opacity\n                                                         █      #f24-no-promises-skin-3 opacity\n                                                         █      path strokeDashoffset\n                                                         █      #f24-no-promises-skin-final opacity\n                                                         █      #f24-no-promises-skin-4 opacity\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                          █     #related-wipe clipPath\n                                                          █     div x\n                                                          █     #related-wipe clipPath\n                                                          █     div opacity+y\n                                                          █     section opacity+scale\n                                                          █     div scaleX\n                                                          █     span scaleY\n                                                          █     span opacity\n                                                          █     span opacity+scale\n                                                          █     path strokeDashoffset\n                                                          █     div opacity+x+y+scale\n                                                          █     div opacity+x+y+scale\n                                                           █    div opacity+x+y+scale\n                                                           █    div opacity+x+y+scale\n                                                            █   #related-wipe clipPath\n                                                            █   #related-wipe clipPath\n                                                            █   path strokeDashoffset\n                                                            █   div opacity+scale\n                                                            █   h1 opacity+y+scale\n                                                            █   span opacity+scale\n                                                            █   p opacity+y\n                                                             █  span opacity+scale\n                                                             █  span y\n                                                             █  span y\n                                                             █  span y\n                                                             █  span y",
+  "choreography": "Timeline (580.0s, each char ≈ 9.67s):\n  0s                                                    580s\n  ┼───────────────────────────────────────────────────────────┤\n  █                                                             div.f01-kicker opacity+y\n  █                                                             h2.f01-name opacity+scale+y\n  █                                                             div.f01-portrait-wrap opacity+scale+y\n  █                                                             #f01-evidence-path strokeDashoffset\n  █                                                             p.f01-body.f01-role opacity+y\n  █                                                             p.f01-body.f01-thesis opacity+y\n  █                                                             circle.f01-proof-dot opacity+scale\n  ██                                                            (onUpdate driver) p\n    █                                                           #related-wipe clipPath\n    █                                                           #related-wipe clipPath\n    █                                                           div.f02-kicker opacity+y\n    █                                                           h2.f02-display opacity+scale\n    █                                                           div.f02-q opacity+x+y+scale\n    █                                                           div.f02-q opacity+x+y+scale\n    ██                                                          div.f02-q opacity+x+y+scale\n     █                                                          div.f02-q opacity+x+y+scale\n     █                                                          span.f02-answer y\n     █                                                          div.f02-evidence scaleX\n     █                                                          (onUpdate driver) p\n     █                                                          div.f02-ghost opacity\n      █                                                         #related-wipe clipPath\n      █                                                         #related-wipe clipPath\n      █                                                         div.f03-kicker opacity+y\n      █                                                         div.f03-card opacity+scale+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         div.f03-leaf y\n      █                                                         div.f03-state-chip opacity+y\n      █                                                         path strokeDashoffset\n      █                                                         p.f03-body opacity+y\n      █                                                         path strokeDashoffset\n       █                                                        path strokeDashoffset\n       █                                                        path strokeDashoffset\n       █                                                        path strokeDashoffset\n       █                                                        h2.f03-display opacity+y\n       █                                                        div.f03-card borderColor\n       █                                                        #f03-check-ring strokeDashoffset\n       █                                                        #f03-check-mark strokeDashoffset\n        █                                                       span.f03-chip opacity+scale\n        █                                                       span.f03-chip.f03-chip-unknown opacity+scale\n        █                                                       span.f03-chip opacity+scale\n        █                                                       span.f03-edit-tab opacity+y\n        █                                                       #chapter-push yPercent\n        █                                                       (onUpdate driver) x\n        █                                                       #chapter-push yPercent\n        █                                                       div opacity+y\n        █                                                       #f04-five-stage-route-answer opacity+scale\n        █                                                       span opacity+scale\n        █                                                       div opacity+y\n        ███                                                     #f04-five-stage-route-path strokeDashoffset\n        ███                                                     #f04-five-stage-route-progress-fill scaleX\n         █                                                      (onUpdate driver) x\n         █                                                      #f04-five-stage-route-diagnose opacity+scale\n         █                                                      span opacity+scale\n         █                                                      (onUpdate driver) x\n         █                                                      #f04-five-stage-route-compare opacity+scale\n         █                                                      span opacity+scale\n         █                                                      (onUpdate driver) x\n         █                                                      #f04-five-stage-route-blueprint opacity+scale\n         █                                                      span opacity+scale\n          █                                                     (onUpdate driver) x\n          █                                                     #f04-five-stage-route-handoff opacity+scale\n          █                                                     span opacity+scale\n          █                                                     #related-wipe clipPath\n          █                                                     #related-wipe clipPath\n          █                                                     div opacity+y\n          █                                                     div opacity+y\n          █                                                     #f05-stage-ownership-head-0 scaleX\n          ███                                                   #f05-stage-ownership-rail strokeDashoffset\n          █                                                     strong opacity+y\n          █                                                     div opacity+y\n          ██                                                    (onUpdate driver) v\n           █                                                    #f05-stage-ownership-head-1 scaleX\n           █                                                    (onUpdate driver) v\n           █                                                    strong opacity+y\n           █                                                    (onUpdate driver) v\n           █                                                    #f05-stage-ownership-head-2 scaleX\n           █                                                    (onUpdate driver) v\n           █                                                    strong opacity+y\n           ██                                                   (onUpdate driver) v\n            █                                                   #f05-stage-ownership-head-3 scaleX\n            █                                                   (onUpdate driver) v\n            █                                                   strong opacity+y\n            █                                                   (onUpdate driver) v\n            █                                                   #f05-stage-ownership-head-4 scaleX\n            █                                                   (onUpdate driver) v\n            █                                                   strong opacity+y\n             █                                                  #related-wipe clipPath\n             █                                                  #related-wipe clipPath\n             █                                                  div opacity+y\n             █                                                  #f06-truth-boundary-left x+rotateY+scale+opacity\n             █                                                  div opacity+y\n             █                                                  div opacity+x\n             █                                                  #f06-truth-boundary-seal opacity+scale\n             █                                                  #f06-truth-boundary-line scaleY\n             █                                                  #f06-truth-boundary-right x+rotateY+scale+opacity\n             █                                                  #f06-truth-boundary-bridge opacity+scale\n             █                                                  div opacity+y\n             █                                                  div opacity+x\n              █                                                 #f06-truth-boundary-bridge scale+borderRadius+backgroundColor+boxShadow\n              █                                                 #f06-truth-boundary-bridge-old opacity\n              █                                                 #f06-truth-boundary-bridge-new opacity\n              █                                                 span opacity+scale\n              █                                                 #f06-truth-boundary-line backgroundColor\n              █                                                 #chapter-push yPercent\n              █                                                 #chapter-push yPercent\n              █                                                 #f07-production-architecture-core opacity+scale\n              ██                                                #f07-production-architecture-ui opacity+x\n              ████                                              (onUpdate driver) x\n               █                                                #f07-production-architecture-path-1 strokeDashoffset\n               █                                                #f07-production-architecture-routes opacity+scale+x\n               █                                                #f07-production-architecture-path-2 strokeDashoffset\n               █                                                #f07-production-architecture-core-label opacity+y\n               █                                                #f07-production-architecture-core boxShadow\n                █                                               #f07-production-architecture-path-3 strokeDashoffset\n                █                                               #f07-production-architecture-domain opacity+x\n                █                                               #f07-production-architecture-path-4 strokeDashoffset\n                █                                               #f07-production-architecture-supabase opacity+x+y+scale\n                ██                                              #f07-production-architecture-path-5 strokeDashoffset\n                 █                                              #f07-production-architecture-gateway opacity+y+scale\n                 █                                              (onUpdate driver) x\n                 █                                              #f07-production-architecture-path-6 strokeDashoffset\n                 █                                              #f07-production-architecture-outbox opacity+x+y+scale\n                 █                                              #related-wipe clipPath\n                 █                                              #related-wipe clipPath\n                 █                                              #f08-provenance-specialists-claim opacity+scale\n                 █                                              #f08-provenance-specialists-path-1 strokeDashoffset\n                 ██                                             #f08-provenance-specialists-calc opacity+x+scale\n                  █                                             #f08-provenance-specialists-path-2 strokeDashoffset\n                  █                                             #f08-provenance-specialists-evidence opacity+x+scale\n                  █                                             div.f08-advisor y+scale\n                  █                                             div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                   █                                            div.f08-advisor y+scale\n                   █                                            div.f08-state opacity+scale\n                    █                                           #f08-provenance-specialists-fallback opacity+scale+y\n                    █                                           #related-wipe clipPath\n                    █                                           #related-wipe clipPath\n                    █                                           #f09-no-current-rag-rule strokeDashoffset\n                    ██                                          (onUpdate driver) p\n                      █                                         #chapter-push yPercent\n                      █                                         #chapter-push yPercent\n                      █                                         div.f10-capture opacity+y+scale\n                      █                                         #f10-track-2 opacity+x\n                      █                                         div.f10-cursor opacity+x+y+scale\n                      █                                         div.f10-cursor x+y\n                      █                                         div.f10-cursor-pulse opacity+scale\n                       █                                        #related-wipe clipPath\n                       █                                        #related-wipe clipPath\n                       █                                        div.f11-capture opacity+y+scale\n                       █                                        #f11-track-2 opacity+x\n                       █                                        div.f11-highlight opacity\n                        █                                       div.f11-highlight --f11-hl-x+--f11-hl-y+--f11-hl-rx+--f11-hl-ry\n                        ██                                      div.f11-highlight --f11-hl-x+--f11-hl-y+--f11-hl-rx+--f11-hl-ry\n                         █                                      div.f11-cursor opacity+x+y+scale\n                         █                                      div.f11-cursor x+y\n                         █                                      #related-wipe clipPath\n                         █                                      #related-wipe clipPath\n                         █                                      div.f12-capture opacity+y+scale\n                         █                                      #f12-track-2 opacity+x\n                         █                                      div.f12-stat-card.f12-stat-one opacity+y\n                         ██                                     (onUpdate driver) tenths\n                         ██                                     span.f12-value scale\n                         ██                                     div.f12-fill scaleX\n                          █                                     div.f12-stat-card.f12-stat-two opacity+y\n                          █                                     (onUpdate driver) tenths\n                          █                                     span.f12-value scale\n                          █                                     div.f12-fill scaleX\n                           █                                    (onUpdate driver) scale+x+y\n                           █                                    div.f12-halo opacity+scale\n                           █                                    (onUpdate driver) scale+x+y\n                           █                                    div.f12-halo opacity\n                           ██                                   div.f12-findings opacity+scale+y\n                           ██                                   (onUpdate driver) value\n                            █                                   #related-wipe clipPath\n                            █                                   #related-wipe clipPath\n                            █                                   #f13-demo-recommendations-capture opacity+scale\n                            █                                   aside opacity+x\n                            █                                   #f13-demo-recommendations-now y\n                            █                                   i scaleX\n                             █                                  #f13-demo-recommendations-next scale\n                             █                                  i scaleX\n                              █                                 #f13-demo-recommendations-later scale\n                              █                                 i scaleX\n                              █                                 #f13-demo-recommendations-provenance opacity+scale\n                               █                                #related-wipe clipPath\n                               █                                #related-wipe clipPath\n                               █                                #f14-demo-scenarios-frame opacity+y+scale\n                               █                                div opacity+y\n                               █                                #f14-demo-scenarios-sidecar opacity+x\n                               █                                #f14-demo-scenarios-cursor opacity\n                               █                                #f14-demo-scenarios-cursor --hf-cursor-x+--hf-cursor-y\n                               █                                (onUpdate driver) s+x+y\n                               █                                #f14-demo-scenarios-halo opacity+scale\n                               █                                div scale+color\n                               █                                #f14-demo-scenarios-pulse opacity+scale\n                                █                               (onUpdate driver) s+x+y\n                                █                               #f14-demo-scenarios-halo opacity+scale\n                                █                               #f14-demo-scenarios-cost opacity+x\n                                ██                              i scaleX\n                                 █                              #f14-demo-scenarios-value opacity+x\n                                 █                              i scaleX\n                                 ██                             #f14-demo-scenarios-net opacity+x\n                                 ██                             i scaleX\n                                  █                             #f14-demo-scenarios-payback opacity+x\n                                  █                             i scaleX\n                                   █                            #f14-demo-scenarios-qualifier opacity+y\n                                   █                            #related-wipe clipPath\n                                   █                            #related-wipe clipPath\n                                   █                            #f15-demo-blueprint-frame opacity+y+scale\n                                   █                            #f15-demo-blueprint-ledger opacity+x\n                                   █                            div opacity+y\n                                   █                            #f15-demo-blueprint-advisor-0 opacity+scale\n                                   █                            #f15-demo-blueprint-advisor-1 opacity+scale\n                                   █                            #f15-demo-blueprint-advisor-2 opacity+scale\n                                   █                            #f15-demo-blueprint-advisor-3 opacity+scale\n                                   ██                           #f15-demo-blueprint-advisor-4 opacity+scale\n                                    █                           #f15-demo-blueprint-section-count opacity+scale\n                                    ████                        #f15-demo-blueprint-index-path strokeDashoffset\n                                    █                           #f15-demo-blueprint-index-0 x\n                                    █                           #f15-demo-blueprint-spotlight opacity\n                                     █                          #f15-demo-blueprint-index-1 x\n                                      █                         #f15-demo-blueprint-index-2 x\n                                      █                         #f15-demo-blueprint-spotlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                      █                         #f15-demo-blueprint-index-3 x\n                                       █                        #f15-demo-blueprint-index-4 x\n                                       █                        #f15-demo-blueprint-spotlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                       █                        (onUpdate driver) s+x+y\n                                       █                        #f15-demo-blueprint-ledger --dof+opacity\n                                       ██                       span opacity+scale\n                                        █                       (onUpdate driver) s+x+y\n                                        █                       #f15-demo-blueprint-ledger --dof+opacity\n                                        █                       #f15-demo-blueprint-spotlight opacity\n                                        █                       #f15-demo-blueprint-landing opacity+y\n                                         █                      #related-wipe clipPath\n                                         █                      #related-wipe clipPath\n                                         █                      #f16-demo-consent-boundary-verified opacity+scale\n                                         █                      #f16-demo-consent-boundary-cursor opacity+x+y\n                                         █                      #f16-demo-consent-boundary-highlight opacity\n                                         ██                     #f16-demo-consent-boundary-verified --dof+opacity\n                                         ██                     #f16-demo-consent-boundary-sharing opacity+scale\n                                         ██                     #f16-demo-consent-boundary-highlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                         ██                     #f16-demo-consent-boundary-cursor x+y\n                                          █                     #f16-demo-consent-boundary-sharing --dof+opacity\n                                          █                     #f16-demo-consent-boundary-consent opacity+scale\n                                          █                     #f16-demo-consent-boundary-highlight --yt-hl-x+--yt-hl-y+--yt-hl-rx+--yt-hl-ry\n                                          █                     #f16-demo-consent-boundary-cursor x+y\n                                           █                    #f16-demo-consent-boundary-stop opacity+scale+y\n                                           █                    #f16-demo-consent-boundary-highlight opacity\n                                           █                    #f16-demo-consent-boundary-verified --dof+opacity\n                                            █                   #chapter-push yPercent\n                                            █                   #chapter-push yPercent\n                                            █                   #f17-testing-chapter-trunk strokeDashoffset\n                                            █                   #f17-testing-chapter-kicker y\n                                            █                   #f17-testing-chapter-word-1 y\n                                            █                   #f17-testing-chapter-word-2 y\n                                            █                   #f17-testing-chapter-left-rail strokeDashoffset\n                                            █                   #f17-testing-chapter-right-rail strokeDashoffset\n                                            █                   #f17-testing-chapter-hosted opacity+scale+y\n                                            █                   #f17-testing-chapter-local opacity+scale+y\n                                            █                   #related-wipe clipPath\n                                            █                   #related-wipe clipPath\n                                            ██                  (onUpdate driver) value\n                                            ██                  #f18-hosted-gates-num-221 scale\n                                            ██                  #f18-hosted-gates-fill-221 scaleX\n                                             █                  #f18-hosted-gates-stat-47 opacity+scale+y\n                                             █                  div.f18-mk-ps-fill scaleX\n                                              █                 #f18-hosted-gates-stat-38 opacity+scale+y\n                                              █                 div.f18-mk-ps-fill scaleX\n                                              █                 #f18-hosted-gates-row-skipped opacity+x\n                                              █                 div.f18-mk-sl-fill scaleX\n                                              █                 #f18-hosted-gates-row-gates opacity+x\n                                              █                 div.f18-mk-sl-fill scaleX\n                                               █                #related-wipe clipPath\n                                               █                #related-wipe clipPath\n                                               █                div.f19-register opacity+y\n                                               █                span.f19-chip.f19-chip-fiction opacity+scale\n                                               ███              #f19-production-smoke-route strokeDashoffset\n                                               █                div.f19-mk-sl-row y+scale\n                                               █                div.f19-mk-sl-fill scaleX\n                                               █                div.f19-mk-sl-row y+scale\n                                               █                div.f19-mk-sl-fill scaleX\n                                                █               div.f19-mk-sl-row y+scale\n                                                █               div.f19-mk-sl-fill scaleX\n                                                █               div.f19-mk-sl-row y+scale\n                                                █               div.f19-mk-sl-fill scaleX\n                                                █               div.f19-mk-sl-row y+scale\n                                                █               div.f19-mk-sl-fill scaleX\n                                                 █              div.f19-source opacity+x\n                                                 █              div.f19-mk-sl-row y+scale\n                                                 █              div.f19-mk-sl-fill scaleX\n                                                 █              #related-wipe clipPath\n                                                 █              #related-wipe clipPath\n                                                 █              div.f20-register opacity+y\n                                                 █              section.f20-claim opacity+x\n                                                 █              div.f20-kicker opacity+y\n                                                 █              div.f20-mk-sl-row y+scale\n                                                 █              div.f20-mk-sl-fill scaleX\n                                                  █             div.f20-mk-sl-row y+scale\n                                                  █             div.f20-mk-sl-fill scaleX\n                                                  █             div.f20-mk-sl-row y+scale\n                                                  █             div.f20-mk-sl-fill scaleX\n                                                  █             div.f20-mk-sl-row y+scale\n                                                  █             div.f20-mk-sl-fill scaleX\n                                                   █            div.f20-foot opacity+y\n                                                   █            #related-wipe clipPath\n                                                   █            #related-wipe clipPath\n                                                   █            div.f21-register opacity+y\n                                                   █            section.f21-card.f21-card-hosted opacity+x+rotateY+scale\n                                                   █            section.f21-card.f21-card-local opacity+x+rotateY+scale\n                                                   █            div.f21-divider scaleY\n                                                   █            div.f21-band opacity+scale\n                                                   █            div.f21-stat opacity+y\n                                                   ██           div.f21-stat opacity+y\n                                                    █           div.f21-provenance opacity+y\n                                                    █           #related-wipe clipPath\n                                                    █           #related-wipe clipPath\n                                                    █           div opacity+y\n                                                    █           #f22-bounded-model-path-receipt opacity+scale\n                                                    █           #f22-bounded-model-path-line strokeDashoffset\n                                                    █           span opacity+y\n                                                    █           span opacity+y\n                                                    █           span opacity+y\n                                                    █           span opacity+y\n                                                     █          #chapter-push yPercent\n                                                     █          #chapter-push yPercent\n                                                     █          div opacity+y\n                                                     █          div opacity+scale\n                                                     █          #f23-owner-advisor-value-top-left strokeDashoffset\n                                                     █          #f23-owner-advisor-value-owner x+rotateY+scale+opacity\n                                                     █          div opacity+y\n                                                     █          div opacity+y\n                                                      █         #f23-owner-advisor-value-owner-badge opacity+scale\n                                                      █         #f23-owner-advisor-value-top-right strokeDashoffset\n                                                      █         #f23-owner-advisor-value-advisor x+rotateY+scale+opacity\n                                                      █         div opacity+y\n                                                       █        div opacity+y\n                                                       █        #f23-owner-advisor-value-advisor-badge opacity+scale\n                                                       █        #f23-owner-advisor-value-bottom-left strokeDashoffset\n                                                       █        #f23-owner-advisor-value-bottom-right strokeDashoffset\n                                                       █        #f23-owner-advisor-value-consent opacity+scale\n                                                        █       #related-wipe clipPath\n                                                        █       #related-wipe clipPath\n                                                        █       div opacity+y\n                                                        █       path strokeDashoffset\n                                                        █       #f24-no-promises-skin-1 opacity\n                                                        █       #f24-no-promises-skin-0 opacity\n                                                        █       path strokeDashoffset\n                                                        █       #f24-no-promises-skin-2 opacity\n                                                        █       #f24-no-promises-skin-1 opacity\n                                                        ██      path strokeDashoffset\n                                                         █      #f24-no-promises-skin-3 opacity\n                                                         █      #f24-no-promises-skin-2 opacity\n                                                         █      path strokeDashoffset\n                                                         █      #f24-no-promises-skin-4 opacity\n                                                         █      #f24-no-promises-skin-3 opacity\n                                                         █      path strokeDashoffset\n                                                         █      #f24-no-promises-skin-final opacity\n                                                         █      #f24-no-promises-skin-4 opacity\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                         █      path strokeDashoffset\n                                                          █     #related-wipe clipPath\n                                                          █     div x\n                                                          █     #related-wipe clipPath\n                                                          █     div opacity+y\n                                                          █     section opacity+scale\n                                                          █     div scaleX\n                                                          █     span scaleY\n                                                          █     span opacity\n                                                          █     span opacity+scale\n                                                          █     path strokeDashoffset\n                                                          █     div opacity+x+y+scale\n                                                          █     div opacity+x+y+scale\n                                                           █    div opacity+x+y+scale\n                                                           █    div opacity+x+y+scale\n                                                            █   #related-wipe clipPath\n                                                            █   #related-wipe clipPath\n                                                            █   path strokeDashoffset\n                                                            █   div opacity+scale\n                                                            █   h1 opacity+y+scale\n                                                            █   span opacity+scale\n                                                            █   p opacity+y\n                                                             █  span opacity+scale\n                                                             █  p opacity+y\n                                                             █  span y\n                                                             █  span y\n                                                             █  span y\n                                                             █  span y",
   "density": [
     {
       "t": 0,
@@ -31874,11 +31946,11 @@
     },
     {
       "t": 571,
-      "activeTweens": 1
+      "activeTweens": 2
     },
     {
       "t": 571.5,
-      "activeTweens": 2
+      "activeTweens": 3
     },
     {
       "t": 572,
@@ -34173,7 +34245,7 @@
         "x": 120,
         "y": 220,
         "w": 614,
-        "h": 102
+        "h": 118
       }
     },
     "#f17-testing-chapter-word-2": {
@@ -34186,9 +34258,9 @@
       "endsVisible": true,
       "finalPosition": {
         "x": 120,
-        "y": 322,
+        "y": 338,
         "w": 281,
-        "h": 102
+        "h": 118
       }
     },
     "#f17-testing-chapter-left-rail": {
@@ -34408,7 +34480,7 @@
       "endsVisible": true,
       "finalPosition": {
         "x": 1250,
-        "y": 232,
+        "y": 248,
         "w": 276,
         "h": 47
       }
@@ -34423,7 +34495,7 @@
       "endsVisible": true,
       "finalPosition": {
         "x": 150,
-        "y": 370,
+        "y": 386,
         "w": 0,
         "h": 444
       }
@@ -34439,7 +34511,7 @@
       "endsVisible": true,
       "finalPosition": {
         "x": 192,
-        "y": 331,
+        "y": 347,
         "w": 1608,
         "h": 78
       }
@@ -34454,7 +34526,7 @@
       "endsVisible": true,
       "finalPosition": {
         "x": 216,
-        "y": 390,
+        "y": 406,
         "w": 1560,
         "h": 4
       }
@@ -34985,8 +35057,8 @@
     },
     "p": {
       "firstAppears": 568.45,
-      "lastAnimates": 568.99,
-      "tweenCount": 1,
+      "lastAnimates": 571.9,
+      "tweenCount": 2,
       "props": [
         "opacity",
         "y"
@@ -38322,15 +38394,15 @@
           "x": 120,
           "y": 220,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1
         },
         {
           "id": "f17-testing-chapter-word-2",
           "x": 120,
-          "y": 322,
+          "y": 338,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1
         },
         {
@@ -39225,15 +39297,15 @@
           "x": 120,
           "y": 220,
           "w": 614,
-          "h": 102,
+          "h": 118,
           "opacity": 1
         },
         {
           "id": "f17-testing-chapter-word-2",
           "x": 120,
-          "y": 322,
+          "y": 338,
           "w": 281,
-          "h": 102,
+          "h": 118,
           "opacity": 1
         },
         {

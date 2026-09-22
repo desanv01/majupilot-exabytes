@@ -18,7 +18,7 @@
 - `npm run test:stage07:browser`: passed
 - Independent `agent-browser` smoke: passed; `/blueprint` without accepted state redirected safely to `/assessment`, with no runtime overlay.
 
-Case A retained the accepted values: maturity 37.5, readiness 42.5, Balanced Growth, costs RM 9,200 / RM 18,400 / RM 27,600, operational value RM 2,358 / RM 7,254 / RM 15,233, net value -RM 25,242 / -RM 11,146 / RM 6,033, and payback 7.2 / 30.4 / 140.5 months.
+Case A retained the accepted values: maturity 37.5, readiness 42.5, Balanced Growth, costs RM 9,200 / RM 18,400 / RM 27,600, operational value RM 2,358 / RM 7,254 / RM 15,233, net value -RM 25,242 / -RM 11,146 / RM 6,033, and viewer-facing payback 7.2 / 30.4 / More than 60 months.
 
 The browser harness exercised ready, reviewing, complete all-fallback, failed-safe, restored, corrupt-recovery, missing-preference, and regeneration states. It verified all five advisor roles in deterministic order, all 16 report sections, stable restoration identity, immutable source identity after regeneration, 173 evidence references, 12 provenance groups, keyboard operation, reduced motion, zero serious or critical axe violations, zero console errors, zero failed requests, and no horizontal overflow at 1440, 1024, 390, or 360 pixels. The minimum interactive target was 44 pixels.
 

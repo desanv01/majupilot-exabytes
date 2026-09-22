@@ -2,8 +2,8 @@
   "stage": 5,
   "fps": 30,
   "durationSec": 580,
-  "purpose": "Deterministic silent VO and BGM timeline placeholders only; replace with approved Stage 6 assets.",
+  "purpose": "Deterministic silent VO timeline placeholders; replace with approved Stage 6 narration assets.",
   "voiceover": "26 frame-aligned silent clips on track 50, including the intentional silent chapter card.",
-  "music": "One silent full-program BGM placeholder on track 60.",
+  "music": "Track 60 now carries the rights-safe New Direction underscore; see ../../MEDIA-CREDITS.md.",
   "sfx": "Rights-safe bundled HyperFrames SFX are authored separately on track 70."
 }

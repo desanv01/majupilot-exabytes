@@ -96,7 +96,7 @@ Recommendations are capability-first. For this case, three moves are marked Why 
 
 > Visual proof: Lean Foundation, Balanced Growth, and Accelerated AI; Balanced Growth selected; planning-assumption label; low, base, and high values all visible.
 >
-> Exact on-screen range: cost `RM9,200 / RM18,400 / RM27,600`; operational value `RM2,358 / RM7,254 / RM15,233`; net value `-RM25,242 / -RM11,146 / RM6,033`; payback `7.2 / 30.4 / More than 60 months`. The underlying deterministic worst-case value remains `140.5 months`, but the production UI intentionally displays the capped label.
+> Exact on-screen range: cost `RM9,200 / RM18,400 / RM27,600`; operational value `RM2,358 / RM7,254 / RM15,233`; net value `-RM25,242 / -RM11,146 / RM6,033`; payback `7.2 / 30.4 / More than 60 months`. Use the capped label consistently in narration, captions, captures, and supporting viewer-facing copy.
 
 <!-- VO-START -->
 The scenario lab compares Lean Foundation, Balanced Growth, and Accelerated AI. I'm selecting Balanced Growth; inspection alone does not save the preference. The screen labels figures as planning assumptions, not an Exabytes quote.

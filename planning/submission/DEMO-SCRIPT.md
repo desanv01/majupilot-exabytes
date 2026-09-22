@@ -22,7 +22,7 @@ On `/recommendations`, show capability-first sequencing, official-source links, 
 
 ## 4:20–5:25 — Scenarios and ROI
 
-On `/scenarios`, compare Lean, Balanced, and Accelerated. Select Balanced Growth. Show Case A first-year cost `9,200 / 18,400 / 27,600` and payback `7.2 / 30.4 / 140.5` months. Edit one assumption if recording time permits and state that values are conditional planning estimates.
+On `/scenarios`, compare Lean, Balanced, and Accelerated. Select Balanced Growth. Show Case A first-year cost `9,200 / 18,400 / 27,600` and payback `7.2 / 30.4 / More than 60 months`. Edit one assumption if recording time permits and state that values are conditional planning estimates.
 
 ## 5:25–6:35 — Advisor panel and Blueprint
 

@@ -66,9 +66,9 @@ The frozen Case A values remain:
 
 | Path | First-year cost low/base/high | Operational value low/base/high | Net value low/base/high | Payback best/base/worst | Budget fit |
 |---|---|---|---|---|---|
-| Lean | RM5,640 / RM11,280 / RM16,920 | RM1,088 / RM3,778 / RM8,392 | -RM15,832 / -RM7,502 / RM2,752 | 8.1 / 35.8 / 186.6 months | Base within |
-| Balanced | RM9,200 / RM18,400 / RM27,600 | RM2,358 / RM7,254 / RM15,233 | -RM25,242 / -RM11,146 / RM6,033 | 7.2 / 30.4 / 140.5 months | Only low within |
-| Accelerated | RM10,320 / RM20,640 / RM30,960 | RM2,327 / RM8,312 / RM17,377 | -RM28,633 / -RM12,328 / RM7,057 | 7.1 / 29.8 / 159.6 months | Only low within |
+| Lean | RM5,640 / RM11,280 / RM16,920 | RM1,088 / RM3,778 / RM8,392 | -RM15,832 / -RM7,502 / RM2,752 | 8.1 / 35.8 / More than 60 months | Base within |
+| Balanced | RM9,200 / RM18,400 / RM27,600 | RM2,358 / RM7,254 / RM15,233 | -RM25,242 / -RM11,146 / RM6,033 | 7.2 / 30.4 / More than 60 months | Only low within |
+| Accelerated | RM10,320 / RM20,640 / RM30,960 | RM2,327 / RM8,312 / RM17,377 | -RM28,633 / -RM12,328 / RM7,057 | 7.1 / 29.8 / More than 60 months | Only low within |
 
 Accelerated conditional expansion cost remains RM7,200 / RM14,400 / RM21,600
 and remains outside committed ROI while its gate is blocked. Default Case A

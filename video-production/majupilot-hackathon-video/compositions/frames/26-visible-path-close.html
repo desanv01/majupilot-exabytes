@@ -150,6 +150,14 @@
         transform-origin: 50% 50%;
         will-change: transform, opacity;
       }
+      [data-f26-role="music-credit"] {
+        margin: 18px 0 0;
+        color: #8faeb6;
+        font-size: 14px;
+        line-height: 1.3;
+        letter-spacing: .025em;
+        will-change: transform, opacity;
+      }
     </style>
 
     <div data-hf-id="hf-c500" id="f26-track-1" class="clip" data-f26-layer="background" data-start="0" data-duration="15" data-track-index="0"></div>
@@ -166,6 +174,7 @@
         </div>
         <p data-hf-id="hf-yqs8" data-f26-role="creator">Desan Vasu · Student · USM — Universiti Sains Malaysia</p>
         <span data-hf-id="hf-rpyb" data-f26-role="thanks">Thank you</span>
+        <p data-hf-id="hf-f26m" data-f26-role="music-credit">Music: “New Direction” — Kevin MacLeod · CC BY 4.0</p>
       </section>
     </div>
 
@@ -188,6 +197,7 @@
         tl.fromTo(pathNode, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.42, ease: "power3.out" }, 1.22);
         tl.fromTo(root.querySelector('[data-f26-role="creator"]'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.54, ease: "power3.out" }, 3.45);
         tl.fromTo(root.querySelector('[data-f26-role="thanks"]'), { opacity: 0, scale: 0.82 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 6.1);
+        tl.fromTo(root.querySelector('[data-f26-role="music-credit"]'), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 6.45);
         tl.to(pathNode, { y: -5, duration: 0.8, ease: "sine.inOut" }, 6.9);
         tl.to(pathNode, { y: 0, duration: 0.8, ease: "sine.inOut" }, 7.7);
         tl.to(pathNode, { y: -3, duration: 0.7, ease: "sine.inOut" }, 8.5);

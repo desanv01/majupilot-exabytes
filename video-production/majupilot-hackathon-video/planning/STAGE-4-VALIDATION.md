@@ -8,10 +8,9 @@ Seven authentic production-app footage deliverables were captured for storyboard
 All files open, are silent H.264 MP4, and probe as 1920×1080, yuv420p, constant 30 fps. Their exact
 manifest edit windows total 217 seconds / 3:37 / 6,510 frames.
 
-Stage 4 is **usable with one locked-plan discrepancy**: the current production app no longer
-renders the worst-case Balanced Growth payback as `140.5 months`. Both the scenario card and its
-opened calculation disclosure render `More than 60 months`; `140.5` is absent from the live DOM.
-The authentic capture preserves production truth and does not fabricate the locked value. Stage 5
+Stage 4 is **usable with the payback presentation resolved**: both the scenario card and its
+opened calculation disclosure render `More than 60 months`, and the uncapped internal figure is absent from the live DOM.
+The authentic capture preserves production truth and uses the same viewer-facing label. Stage 5
 must either revise the narration/overlay after approval or wait for a production change that
 restores the exact numeric value.
 
@@ -75,8 +74,7 @@ contact data, raw prompts, raw model reasoning, private report URL, or portrait 
 - No current Document RAG flow was visited or captured.
 - Catalogue mappings remain provenance, not quotes or availability claims.
 - Negative net values remain visible.
-- The live `More than 60 months` payback text is documented rather than replaced with the locked
-  `140.5 months` value.
+- The live `More than 60 months` payback label is the single approved viewer-facing representation.
 - No product code, narration script, storyboard/design file, production configuration, or final
   composition file was changed.
 

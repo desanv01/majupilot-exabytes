@@ -3,7 +3,7 @@
 ## Delivery state
 
 - Branch: `codex/video-phase5-composition`
-- HyperFrames CLI: `0.8.56` (latest and pinned)
+- HyperFrames CLI: `0.8.59` (latest and pinned; upgraded from `0.8.56` during the corrective pass)
 - Canvas: 1920×1080 at 30 fps
 - Program duration: exactly 580.000 seconds / 17,400 frames
 - Structure: thin `index.html` orchestrator, 26 frame sub-compositions, one transition-seam sub-composition, and one `*.motion.json` sidecar per frame
@@ -48,7 +48,7 @@ Frames 10–16 form the exact 217-second product demonstration from 03:15 to 06:
 - Track 30: transition seams in `compositions/transition-seams.html`.
 - Track 40: non-rendered caption-safe marker; captions remain deferred.
 - Track 50: 26 frame-aligned silent narration placeholders, including the intentional silent Frame 17 chapter card.
-- Track 60: one 580-second silent BGM placeholder.
+- Track 60: `New Direction` by Kevin MacLeod, trimmed to the 580-second program with a gentle entrance, chapter-card dip, and closing fade.
 - Track 70: conservative bundled whooshes at chapter seams and one closing chime.
 
 The silent WAV is deterministic and exists only to reserve editable timing. Stage 6 should replace the 26 narration regions with Desan's approved recordings without moving scene boundaries.
@@ -62,13 +62,13 @@ Installed registry sources:
 
 The composition adapts those primitives rather than treating them as a separate visual system. Directional wipes and chapter pushes are centralized in the transition sub-composition; cursor, highlight, focus, counter, chip-rail, progress-stat, and specs-list mechanics are adapted in the relevant scene files. No registry component is allowed to override the Stage 3 palette, typography, evidence-ledger framing, or 896px caption keep-out.
 
-The media resolver found no locally available rights-safe BGM candidate and no authenticated generation provider, so BGM remains an explicit silent placeholder. It resolved bundled `sfx_001.mp3` (whoosh) and `sfx_002.mp3` (chime); both are mixed conservatively. Authentic UI capture receives no color treatment or replacement.
+The media resolver found no reusable local BGM and the authenticated catalog was unavailable. A rights-safe external fallback was therefore frozen locally: `New Direction` by Kevin MacLeod, licensed CC BY 4.0, with attribution in the final frame and `assets/audio/MEDIA-CREDITS.md`. Bundled `sfx_001.mp3` (whoosh) and `sfx_002.mp3` (chime) remain mixed conservatively. Authentic UI capture receives no color treatment or replacement.
 
 GSAP `3.14.2` is vendored at `assets/vendor/gsap-3.14.2.min.js`; every composition references that local asset, so browser rendering does not depend on the CDN.
 
 ## Truth and privacy boundaries
 
-- Frame 14 visibly renders `More than 60 months`. The deterministic 140.5-month value remains documentation-only.
+- Frame 14 visibly renders `More than 60 months`; the uncapped internal value is intentionally excluded from all viewer-facing video material.
 - Hosted evidence and historical local evidence remain separate receipts; no totals are merged.
 - `deepseek/deepseek-v4.1-flash` is the only exact model identifier shown.
 - Document RAG is labeled not implemented and deferred P1 future potential.
@@ -78,4 +78,4 @@ GSAP `3.14.2` is vendored at `assets/vendor/gsap-3.14.2.min.js`; every compositi
 
 ## Stage 6 provisional audio carve
 
-Use the locked frame slots as the first recording carve. Prefer natural delivery and short breaths within each slot; do not time-stretch speech to fill the region. Frame 17 remains silent. Duck future BGM under speech, keep chapter SFX short, and preserve the final five-second legal-close hold in Frame 26.
+Use the locked frame slots as the first recording carve. Prefer natural delivery and short breaths within each slot; do not time-stretch speech to fill the region. Frame 17 remains silent. Re-run the voiceover carve after final narration replaces the silent placeholders, keep chapter SFX short, and preserve the final five-second legal-close hold in Frame 26.

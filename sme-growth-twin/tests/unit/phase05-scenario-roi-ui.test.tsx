@@ -30,6 +30,8 @@ describe("Phase 05 Scenario and ROI Lab UI contract", () => {
       "RM 7,200", "RM 14,400", "RM 21,600",
     ]) expect(html).toContain(value);
     expect(html).toContain("Planning assumptions, not an Exabytes quote");
+    expect(html).toContain("More than 60 months");
+    expect(html).not.toContain("140.5 months");
     expect(html).toContain("Conditional scope, outside committed economics");
     expect(html).toContain("Governed AI automation");
     expect(html.match(/Not estimated/g)?.length).toBeGreaterThanOrEqual(6);

@@ -93,8 +93,8 @@ recomputed through the actual application journey.
 - Primary recommended demo.
 - Preserve the exact accepted Stage 02-06 answers and follow-ups.
 - Expected frozen headline outputs include digital maturity `37.5`, AI readiness
-  `42.5`, Balanced Growth, first-year cost `9200/18400/27600`, and payback
-  `7.2/30.4/140.5` months.
+  `42.5`, Balanced Growth, first-year cost `9200/18400/27600`, and viewer-facing
+  payback `7.2/30.4/More than 60 months`.
 
 ### Case B - Precision Parts Manufacturing
 
