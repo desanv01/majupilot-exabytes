@@ -60,9 +60,9 @@ executor, and renders the returned citation through the production citation
 component. Exact sanitized receipt:
 
 - Model: `deepseek/deepseek-v4.1-flash`
-- Answerable request: `phase3-answer-098dd14e-4c60-4d87-81f2-efd6d222b53a`
-- Unsupported request: `phase3-unsupported-3e70fe97-4dcb-48fb-8e2a-923613b5368f`
-- Model-call receipts: `71abbfe3-8c07-48cc-9e5b-73eb207bcc7e`, `ec6897d0-05fa-4f02-906d-34df16b17063`
+- Answerable request: `phase3-answer-62835531-925f-4bbd-949a-f86ef78f95f0`
+- Unsupported request: `phase3-unsupported-891058e4-994a-4665-9c43-dacf6edf8849`
+- Model-call receipts: `3d8383fd-92c3-46cf-90c7-fa88c4b50cc3`, `3f03b581-91ac-416c-8b29-b782ca5f42d3`
 - Upload: ready, 1 chunk, `openai-text-embedding-3-small-1536-v1`
 - Answerable: correct target and owner; uploaded filename, section, excerpt, and
   `doc:<document-id>#chunk:<chunk-id>` reference rendered by the UI component

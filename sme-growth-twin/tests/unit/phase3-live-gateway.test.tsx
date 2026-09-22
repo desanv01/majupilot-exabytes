@@ -156,7 +156,8 @@ describe.skipIf(!enabled)("Phase 3 live Gateway document RAG", () => {
       const unsupportedSearch = unsupported.toolCalls.find((call) => call.toolName === "searchUploadedEvidence");
       expect(unsupported.state).toBe("live");
       expect(unsupportedSearch?.result).toMatchObject({ answerable: false, reason: "NO_RELEVANT_EVIDENCE", citations: [] });
-      expect(unsupported.text).toMatch(/(?:does not|doesn't|do not|cannot|can't|unable|no relevant).{0,80}(?:evidence|document)|(?:evidence|document).{0,80}(?:does not|doesn't|do not|cannot|can't|unable|no relevant)/i);
+      const semanticRefusal = unsupported.text.replace(/[*_~`>#]/g, " ").replace(/\s+/g, " ");
+      expect(semanticRefusal).toMatch(/(?:does not|doesn't|do not|cannot|can't|unable|no relevant).{0,80}(?:evidence|document)|(?:evidence|document).{0,80}(?:does not|doesn't|do not|cannot|can't|unable|no relevant)/i);
 
       expect(repository.proposedWrites).toBe(0);
       expect(answer.toolCalls.every((call) => call.status === "completed" && !call.confirmationId)).toBe(true);
