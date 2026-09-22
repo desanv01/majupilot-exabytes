@@ -19,7 +19,7 @@ import {
   shouldOfferCopilotRetry,
 } from "./copilot-client-utils";
 
-type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null; result?: Record<string, unknown> | null };
+export type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null; result?: Record<string, unknown> | null };
 type Message = CopilotClientMessage & { tools?: ToolCall[] };
 type Session = { id: string };
 type HistoryResponse = { session: Session; messages: CopilotMessage[] };
@@ -37,7 +37,7 @@ function citationsFor(tools: ToolCall[] | undefined) {
   return citations.filter((citation) => citation?.documentId && citation?.chunkId && citation?.documentName && citation?.excerpt);
 }
 
-function UploadedCitations({ tools }: { tools: ToolCall[] | undefined }) {
+export function UploadedCitations({ tools }: { tools: ToolCall[] | undefined }) {
   const citations = citationsFor(tools);
   if (!citations.length) return null;
   return <aside className="copilot-citations" aria-label="Uploaded evidence citations"><strong>Uploaded evidence</strong>{citations.map((citation) => <blockquote key={citation.chunkId}><header><b>{citation.documentName}</b><span>{citation.pageNumber ? `Page ${citation.pageNumber}` : citation.sectionRef}</span></header><p>{citation.excerpt}</p><code>{citation.reference}</code></blockquote>)}</aside>;

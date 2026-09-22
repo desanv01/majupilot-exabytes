@@ -102,6 +102,7 @@ npm run type-check
 npm run lint
 npm test
 npm run build
+npm run test:phase3:gateway-live
 ```
 
 The SQL suite covers owner/member access, cross-tenant denial, separate assessment
