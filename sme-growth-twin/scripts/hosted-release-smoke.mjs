@@ -5,6 +5,7 @@ import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 const baseUrl = (process.env.MAJUPILOT_RELEASE_BASE_URL || "https://majupilot-exabytes.vercel.app").replace(/\/$/, "");
+const securityBaseUrl = (process.env.MAJUPILOT_SECURITY_BASE_URL || baseUrl).replace(/\/$/, "");
 const chromePath = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const debugPort = Number(process.env.MAJUPILOT_RELEASE_DEBUG_PORT || 9563);
 const cronSecret = process.env.CRON_SECRET;
@@ -26,7 +27,7 @@ let profile;
 let chrome;
 let socket;
 try {
-  const home = await requireOk(await fetch(baseUrl), "home");
+  const home = await requireOk(await fetch(securityBaseUrl), "security origin home");
   const securityHeaders = {
     frame: home.headers.get("x-frame-options") === "DENY",
     contentType: home.headers.get("x-content-type-options") === "nosniff",
@@ -185,6 +186,7 @@ try {
   process.stdout.write(`${JSON.stringify({
     ok: true,
     baseUrl,
+    securityBaseUrl,
     brand: "MajuPilot",
     legacyBrandAbsent: true,
     copilotProductSurface: true,

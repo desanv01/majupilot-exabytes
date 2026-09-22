@@ -7,7 +7,7 @@
 - Reviewed implementation commit: `9792f9c76f27b9c5b7c258de49c446729d6d82f3`.
 - Retry correction snapshot: `1965ff141d03ffc1d87005ec0a0421a1cc2a3e15`.
 - Request-binding and executed-evidence follow-up: this file's next containing commit; its exact SHA is recorded in the final handoff because a Git commit cannot contain its own hash.
-- Boundary preserved: Blueprint sync remains the browser prerequisite. No Blueprint navigation/resync work, document RAG, redesign, deployment, or later-phase work is included.
+- Boundary preserved: Blueprint sync remains the browser prerequisite. No Blueprint navigation/resync work, document RAG, redesign, production deployment, or later-phase work is included.
 
 ## Root cause and reproduction
 
@@ -22,7 +22,7 @@ Safe hosted baseline reproduction against `https://majupilot-exabytes.vercel.app
 
 - Invalid synthetic session: HTTP 404, code `NOT_FOUND`, request ID `e4ac34a0-973c-425f-9247-f8e67b295371`. Phase 1 maps this to `session_failure`.
 - Successful live turn: request ID `e4beda21-24ed-4785-bfa5-77099cd69cbf`, state `live`; executed tools included `getEvidenceForClaim` and `getBusinessTwinSummary`.
-- The hosted deployment was not changed, so it does not yet emit the new `category` field or patched history/retry UI. The hosted release smoke now asserts those behaviors for the next authorized deployment.
+- Production `main` was not changed. The patched behavior was exercised on the isolated Vercel branch preview.
 
 ## Implemented contract
 
@@ -50,6 +50,27 @@ Safe hosted baseline reproduction against `https://majupilot-exabytes.vercel.app
   - `getBlueprint`: `fb3a2850-bbc1-49de-abe4-9f1db4020d19`
 - Safe local failure proof: category `session_failure`, request ID `b7987d89-d28d-4784-8af3-9933e857c100`.
 
+### Hosted branch-preview proof
+
+- Preview: `https://majupilot-exabytes-ijd2nwdg1-desans-projects.vercel.app` for commit `12e75bf0057db24481a8e6420dcd655ab0e7e5c5`.
+- Focused hosted run ID: `8d588681-7fae-4a5d-8271-bb6a3d3731fe`.
+- The run created only explicitly labelled synthetic records in the configured hosted Supabase project:
+  - assessment session `851aa638-0e2a-40e1-aa4f-d21f5f500fbf`
+  - Business Twin `c7d44efe-b716-426e-91ba-dd3d10c7aaf7`
+  - evidence `b7f123c2-c74e-4f15-bc6c-0cb54aa2ffbf`
+  - Blueprint `f3a138ce-71ab-464b-98dd-5f3fb718734b`
+  - Copilot session `8103b4ea-f024-469b-b98f-267e8e3ca4f3`
+- Live turn `f21a9712-c12a-452c-981e-8015ba0816d9` used `deepseek/deepseek-v4.1-flash` and executed both `getBusinessTwinSummary` and `getEvidenceForClaim`.
+- Same-key replay returned the durable result with the history fixed at four messages.
+- Safe hosted failure: category `session_failure`, request ID `e7de9aea-7734-47e8-956a-0ca2ab09f728`, `retryable: false`.
+- A second guest was denied, and the persisted evidence row was byte-for-byte unchanged after replay and failure probes.
+
+### Branch CI
+
+- GitHub Actions run `35693513668` completed successfully for branch commit `12e75bf0057db24481a8e6420dcd655ab0e7e5c5`.
+- The workflow now validates pushes to `codex/**`, so isolated phase branches receive CI without a pull request or a `main` push.
+- Vercel preview deployment completed successfully. Supabase Preview was skipped by the integration; local Supabase 2.117.0 plus the configured hosted database were both exercised directly.
+
 ## Evidence non-mutation and authorization
 
 - The required-mode retry test snapshots deterministic evidence, records one pending confirmation proposal, fails with a retryable timeout, then proves one claimed same-key re-execution can succeed and replay without duplicating the user row or proposal.
@@ -65,10 +86,11 @@ Safe hosted baseline reproduction against `https://majupilot-exabytes.vercel.app
 - AI error domain and Gateway classification.
 - Copilot turn execution receipts and retry replay.
 - Copilot client history, diagnostics, and retry behavior plus minimal diagnostic styling.
-- Focused unit tests, local API smoke, and hosted release smoke assertions.
+- Focused unit tests, local Supabase API smoke, focused hosted Copilot smoke, and hosted release smoke assertions.
+- Branch-only CI trigger for `codex/**`.
 
-## Known limits
+## Remaining boundaries
 
-- No push, merge, deployment, PR, or production configuration change was made.
-- The updated hosted smoke was syntax-checked but not run end-to-end against the undeployed patch; its prior Chrome launch was unavailable in this environment.
-- Document ingestion/RAG remains explicitly out of scope.
+- The Phase 1 branch was pushed and received a Vercel preview only. No pull request, merge, `main` update, or production deployment was performed.
+- The broad release smoke is still a later release gate; Phase 1 now has a dedicated hosted Copilot smoke that passed against the protected preview.
+- Document ingestion/RAG remains explicitly out of scope for Phase 1.
