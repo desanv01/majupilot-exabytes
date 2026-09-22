@@ -13,6 +13,7 @@ export const aiErrorCodeSchema = z.enum([
   "AI_REQUIRED_UNAVAILABLE",
   "AI_INVALID_OUTPUT",
   "AI_BUDGET_EXCEEDED",
+  "AI_RATE_LIMITED",
   "AI_TIMEOUT",
 ]);
 export type AiErrorCode = z.infer<typeof aiErrorCodeSchema>;

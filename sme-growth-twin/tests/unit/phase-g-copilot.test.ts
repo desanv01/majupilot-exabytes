@@ -22,7 +22,7 @@ class FakeRepository implements CopilotRepository {
   findTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string) => this.receipts.has(key) ? { turnId: uuid(8), response: this.receipts.get(key)! } : null);
   rememberTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string, _turnId: string, response: Record<string, unknown>) => { this.receipts.set(key, response); });
   appendMessage = vi.fn(async (_owner: OwnershipContext, _sessionId: string, message: AppendCopilotMessage) => { this.messages.push(message); return {} as CopilotMessage; });
-  invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: never) => { this.invoked.push(name); return { artifactId: uuid(5), trusted: true }; });
+  invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: string) => { this.invoked.push(name); return name === "getEvidenceForClaim" ? { evidence: [{ id: uuid(6), sourceRef: "question:3", payload: { value: "Synthetic evidence" } }] } : { artifactId: uuid(5), trusted: true }; });
   proposeWrite = vi.fn(); claimConfirmation = vi.fn(); completeConfirmation = vi.fn(); failConfirmation = vi.fn();
   appendModelCall = vi.fn(async (_owner, sessionId, turnId, telemetry, toolNames, finishReason) => { this.calls.push({ sessionId, turnId, telemetry, toolNames, finishReason }); });
   getDailyModelSpend = vi.fn(async () => 0);
@@ -44,14 +44,24 @@ describe("Phase G Transformation Copilot", () => {
     expect((repository.calls[0].telemetry as { outcome: string }).outcome).toBe("ai_disabled");
   });
 
-  it("returns the persisted response for an idempotent replay without appending messages", async () => {
+  it("reuses the stable turn idempotency key without appending messages twice", async () => {
     process.env.AI_EXECUTION_MODE = "disabled";
     const repository = new FakeRepository();
     const request = copilotTurnRequestSchema.parse({ message: "Show my Blueprint", idempotencyKey: "turn-replay-01" });
     const first = await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "test-client" });
     const count = repository.messages.length;
     const replay = await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "test-client" });
-    expect(replay).toEqual(first); expect(repository.messages).toHaveLength(count);
+    expect(replay).toEqual(first); expect(repository.messages).toHaveLength(count); expect(repository.receipts.size).toBe(1);
+  });
+
+  it("proves an authorized evidence-reading tool returns persisted evidence", async () => {
+    process.env.AI_EXECUTION_MODE = "disabled";
+    const repository = new FakeRepository();
+    const request = copilotTurnRequestSchema.parse({ message: "Read the saved evidence", requestedTool: "getEvidenceForClaim", requestedToolInput: { evidenceId: uuid(6) }, idempotencyKey: "turn-evidence-01" });
+    const result = await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "test-client" });
+    expect(result.toolCalls[0]).toMatchObject({ toolName: "getEvidenceForClaim", status: "completed" });
+    expect(result.toolCalls[0].result).toMatchObject({ evidence: [{ id: uuid(6), sourceRef: "question:3" }] });
+    expect(repository.invoked).toEqual(["getEvidenceForClaim"]);
   });
 
   it("fails closed for prompt injection and unknown tools", async () => {
