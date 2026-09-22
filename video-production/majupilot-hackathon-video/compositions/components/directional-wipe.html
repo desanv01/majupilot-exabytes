@@ -21,7 +21,12 @@
 -->
 
 <div
+  id="root"
   class="hf-catalog-directional-wipe"
+  data-composition-id="directional-wipe"
+  data-width="760"
+  data-height="428"
+  data-duration="1"
   data-composition-variables='[
     { "id": "palette", "type": "enum", "role": "style", "label": "Palette", "description": "Theme token for the ring marking the incoming panel. Slate rides --accent, teal --brand, ember --accent-2; each falls back to a neutral hairline.", "default": "slate", "options": [{ "value": "slate", "label": "Slate" }, { "value": "teal", "label": "Teal" }, { "value": "ember", "label": "Ember" }] },
     { "id": "corner", "type": "enum", "role": "style", "label": "Corner", "description": "Corner radius of the transition card.", "default": "rounded", "options": [{ "value": "square", "label": "Square" }, { "value": "rounded", "label": "Rounded" }, { "value": "soft", "label": "Soft" }] }
@@ -34,7 +39,7 @@
 </div>
 
 <style>
-  .hf-catalog-directional-wipe {
+  #root {
     --hf-accent: var(--accent, rgba(255, 255, 255, 0.28));
     --hf-l1: rgba(255, 255, 255, 0.72);
     --hf-l3: rgba(255, 255, 255, 0.18);
@@ -46,7 +51,7 @@
     color: var(--hf-ink);
     font-family: Inter, system-ui, sans-serif;
   }
-  .hf-catalog-directional-wipe {
+  #root {
     position: relative;
     width: 760px;
     height: 428px;
@@ -55,7 +60,7 @@
     background: #111827;
     box-shadow: 0 28px 80px rgba(15, 23, 42, 0.2);
   }
-  .hf-catalog-directional-wipe .scene {
+  .scene {
     position: absolute;
     inset: 0;
     display: grid;
@@ -65,7 +70,7 @@
     letter-spacing: -0.05em;
     color: #fff;
   }
-  .hf-catalog-directional-wipe .from {
+  .from {
     background:
       repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 4px),
       var(--hf-l4);
@@ -73,7 +78,7 @@
       scale(var(--hf-from-scale, 1));
     filter: blur(var(--hf-from-blur, 0px));
   }
-  .hf-catalog-directional-wipe .to {
+  .to {
     background:
       repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px),
       var(--hf-l3);
@@ -84,14 +89,14 @@
         var(--hf-clip-left, 0%)
     );
   }
-  .hf-catalog-directional-wipe .fx {
+  .fx {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
     mix-blend-mode: screen;
     transform: translateX(var(--hf-fx-x, -110%));
   }
-  .hf-catalog-directional-wipe .rgb {
+  .rgb {
     position: absolute;
     inset: 0;
     pointer-events: none;

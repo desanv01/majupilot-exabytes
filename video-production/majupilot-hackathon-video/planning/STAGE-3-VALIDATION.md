@@ -16,7 +16,7 @@ Validated: 2026-09-21 (Asia/Kuala_Lumpur)
 ## Privacy and truth
 
 - Authorized portrait reference occurs once, in Frame 01 only.
-- No script tags or external URLs occur in `storyboard.html`.
+- No script tags or external URLs occur in `planning/storyboard.htm`.
 - Product surfaces are explicitly labelled `AUTHENTIC CAPTURE SLOT`; they are planning
   placeholders, not reconstructed product proof.
 - Consent remains unchecked and the journey stops before submit in Frame 16.

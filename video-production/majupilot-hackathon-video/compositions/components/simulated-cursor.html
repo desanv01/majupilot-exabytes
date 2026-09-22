@@ -28,8 +28,13 @@
 -->
 
 <div
+  id="root"
   class="hf-simulated-cursor"
   aria-hidden="true"
+  data-composition-id="simulated-cursor"
+  data-width="44"
+  data-height="44"
+  data-duration="1"
   data-composition-variables='[
     {"id": "size", "type": "number", "role": "layout", "label": "Size", "description": "Height and width of the pointer in pixels. The click ring scales with it. Values outside the range clamp to the nearest end and anything that is not a number falls back to 44.", "default": 44, "min": 20, "max": 120, "step": 2, "unit": "px"},
     {"id": "tone", "type": "enum", "role": "style", "label": "Tone", "description": "Pointer fill and click ring colour: light reads on dark screens, dark reads on light ones, accent rides --hf-ui-accent.", "default": "light", "options": [{"value": "light", "label": "Light"}, {"value": "dark", "label": "Dark"}, {"value": "accent", "label": "Accent"}]},
@@ -48,7 +53,7 @@
 </div>
 
 <style>
-  .hf-simulated-cursor {
+  #root {
     position: absolute;
     left: 0;
     top: 0;
@@ -59,11 +64,11 @@
     z-index: 999;
     filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.24));
   }
-  .hf-simulated-cursor svg {
+  #root svg {
     width: 100%;
     height: 100%;
   }
-  .hf-simulated-cursor svg path {
+  #root svg path {
     fill: var(--hf-cursor-fill, #ffffff);
     stroke: var(--hf-cursor-edge, rgba(0, 0, 0, 0.45));
   }

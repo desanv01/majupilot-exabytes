@@ -1,0 +1,230 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  isolation: isolate;
+  color: var(--fg, #f8fafc);
+  font-family: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+  pointer-events: none;
+}
+
+.ufz-clip {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--bg, transparent);
+}
+
+.ufz-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity;
+}
+
+/* the fixed frame: the camera moves the world inside this window */
+.ufz-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 0.16cqmin solid color-mix(in srgb, var(--border, #475569) 85%, transparent);
+  border-radius: calc(var(--radius, 2cqmin) * 1.2);
+  background: color-mix(in srgb, var(--surface, #0b1016) 96%, var(--ufz-accent));
+  box-shadow: 0 3cqh 9cqh color-mix(in srgb, var(--bg, #000000) 45%, transparent);
+}
+
+/* ONE world wrapper: all camera motion is this element's transform */
+.ufz-world {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.ufz-surface {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface, #0b1016) 88%, var(--bg, #05070c));
+}
+
+.ufz-surface > img,
+.ufz-surface > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ufz-halo {
+  position: absolute;
+  z-index: 2;
+  width: 30cqmin;
+  height: 30cqmin;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--ufz-accent) 26%, transparent) 0%,
+    color-mix(in srgb, var(--ufz-accent) 12%, transparent) 42%,
+    transparent 70%
+  );
+  will-change: transform, opacity;
+}
+
+/* default skeleton surface: pure token furniture, no branding */
+.ufz-skel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.ufz-skel-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1, 1.6cqmin);
+  padding: 1.8cqmin 2.6cqmin;
+  border-bottom: 0.14cqmin solid
+    color-mix(in srgb, var(--border, #475569) 55%, transparent);
+}
+
+.ufz-skel-mark {
+  width: 2.6cqmin;
+  height: 2.6cqmin;
+  border-radius: 0.8cqmin;
+  background: color-mix(in srgb, var(--ufz-accent) 74%, var(--surface, #0b1016));
+}
+
+.ufz-skel-line {
+  height: 1.25cqmin;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg, #f8fafc) 13%, transparent);
+}
+
+.ufz-skel-top .ufz-skel-line:nth-of-type(1) {
+  width: 9cqmin;
+}
+
+.ufz-skel-top .ufz-skel-line:nth-of-type(2) {
+  width: 6.5cqmin;
+}
+
+.ufz-skel-spring {
+  flex: 1;
+}
+
+.ufz-skel-chip {
+  width: 8.5cqmin;
+  height: 2.9cqmin;
+  border: 0.14cqmin solid color-mix(in srgb, var(--ufz-accent) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ufz-accent) 28%, transparent);
+}
+
+.ufz-skel-avatar {
+  width: 2.8cqmin;
+  height: 2.8cqmin;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--fg, #f8fafc) 18%, transparent);
+}
+
+.ufz-skel-body {
+  display: grid;
+  grid-template-columns: 22% minmax(0, 1fr);
+  min-height: 0;
+}
+
+.ufz-skel-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2cqmin;
+  padding: 2.6cqmin;
+  border-right: 0.14cqmin solid
+    color-mix(in srgb, var(--border, #475569) 55%, transparent);
+}
+
+.ufz-skel-side .ufz-skel-line:nth-child(1) {
+  width: 78%;
+  background: color-mix(in srgb, var(--fg, #f8fafc) 22%, transparent);
+}
+
+.ufz-skel-side .ufz-skel-line:nth-child(2) {
+  width: 56%;
+}
+
+.ufz-skel-side .ufz-skel-line:nth-child(3) {
+  width: 66%;
+}
+
+.ufz-skel-side .ufz-skel-line:nth-child(4) {
+  width: 44%;
+}
+
+.ufz-skel-side .ufz-skel-line:nth-child(5) {
+  width: 60%;
+}
+
+.ufz-skel-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 1.8cqmin);
+  min-height: 0;
+  padding: var(--space-3, 2.8cqmin);
+}
+
+.ufz-skel-heading {
+  width: 34%;
+  height: 2.5cqmin;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg, #f8fafc) 21%, transparent);
+}
+
+.ufz-skel-sub {
+  width: 52%;
+  height: 1.25cqmin;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg, #f8fafc) 9%, transparent);
+}
+
+.ufz-skel-cards {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.1cqmin;
+  min-height: 0;
+  margin-top: 0.8cqmin;
+}
+
+.ufz-skel-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5cqmin;
+  min-height: 0;
+  padding: 2.1cqmin;
+  border: 0.14cqmin solid color-mix(in srgb, var(--border, #475569) 60%, transparent);
+  border-radius: var(--radius, 1.6cqmin);
+  background: color-mix(in srgb, var(--bg, #05070c) 30%, transparent);
+}
+
+.ufz-skel-card .ufz-skel-line {
+  width: 55%;
+}
+
+.ufz-skel-block {
+  flex: 1;
+  min-height: 3cqmin;
+  border-radius: calc(var(--radius, 1.6cqmin) * 0.6);
+  background: color-mix(in srgb, var(--fg, #f8fafc) 7%, transparent);
+}
+
+.ufz-skel-card:nth-child(2) .ufz-skel-block {
+  background: color-mix(in srgb, var(--ufz-accent) 17%, transparent);
+}
