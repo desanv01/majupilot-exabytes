@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "file": "deliverables/MajuPilot_Prototype_Demo_Desan_Vasu_v1.mp4",
+  "bytes": 79886988,
+  "sha256": "40929eaf83b3b6428d46e49d835132ace4379efdb4a3f50085b180a893c141b1",
+  "format": {
+    "start_seconds": 0,
+    "duration_seconds": 580,
+    "bit_rate": 1101889
+  },
+  "video": {
+    "codec": "h264",
+    "profile": "High",
+    "width": 1920,
+    "height": 1080,
+    "pixel_format": "yuv420p",
+    "frame_rate": "30/1",
+    "start_seconds": 0,
+    "duration_seconds": 580,
+    "bit_rate": 901773,
+    "frames": 17400
+  },
+  "audio": {
+    "codec": "aac",
+    "profile": "LC",
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "channel_layout": "stereo",
+    "start_seconds": 0,
+    "duration_seconds": 580,
+    "bit_rate": 193178
+  },
+  "source_contract": {
+    "scenes": 26,
+    "authentic_demo_start_seconds": 195,
+    "authentic_demo_end_seconds": 412,
+    "narration_clips": 14,
+    "caption_cards": 266,
+    "caption_words": 1131,
+    "intentional_narration_silence_start_seconds": 412,
+    "intentional_narration_silence_end_seconds": 415,
+    "final_narration_end_seconds": 574.850042,
+    "capped_payback_text": "More than 60 months",
+    "document_rag_future_p1_only": true,
+    "music_attribution_present": true,
+    "viewer_absolute_paths_absent": true
+  },
+  "full_decode": "pass"
+}

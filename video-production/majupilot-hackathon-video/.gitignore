@@ -1,3 +1,8 @@
 .thumbnails/
 .waveform-cache/
 node_modules/
+
+# Local Stage 7 delivery masters and heavyweight QA derivatives.
+/deliverables/*.mp4
+/deliverables/qa/
+/deliverables/LOCAL-HANDOFF.txt
