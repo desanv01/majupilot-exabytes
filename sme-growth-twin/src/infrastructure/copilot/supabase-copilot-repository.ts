@@ -17,6 +17,7 @@ import type { ModelCallTelemetry } from "@/domain/ai-execution";
 import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import { createAdminSupabaseClient } from "@/infrastructure/supabase/admin";
 import { SupabasePersistenceRepository } from "@/infrastructure/persistence/supabase-repository";
+import { assertCopilotSessionBinding, type StoredCopilotSessionBinding } from "./copilot-session-binding";
 import { DurableLeadService } from "@/infrastructure/leads/durable-lead-service";
 import { SupabaseDurableLeadRepository } from "@/infrastructure/leads/supabase-durable-lead-repository";
 
@@ -82,7 +83,10 @@ export class SupabaseCopilotRepository implements CopilotRepository {
     const ownerFilters = owner.kind === "guest" ? { guest_session_id: owner.guestSessionId, organization_id: null } : { organization_id: owner.organizationId, guest_session_id: null };
     const existing = await this.db.from("chat_sessions").select("*").eq("assessment_session_id", input.assessmentSessionId).eq("idempotency_key", input.idempotencyKey).maybeSingle();
     if (existing.error) failure(existing.error);
-    if (existing.data) return sessionView(existing.data as Row);
+    if (existing.data) {
+      assertCopilotSessionBinding(existing.data as Row & StoredCopilotSessionBinding, owner, input);
+      return sessionView(existing.data as Row);
+    }
     for (const [table, id] of [["business_twins", input.businessTwinId], ["blueprints", input.blueprintId]] as const) {
       if (!id) continue;
       const check = await this.db.from(table).select("id").eq("id", id).eq("assessment_session_id", input.assessmentSessionId).maybeSingle();

@@ -5,7 +5,8 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import type { CopilotMessage } from "@/domain/copilot";
 import { Brand } from "@/components/assessment/brand";
-import { loadDurableJourney } from "@/infrastructure/persistence/durable-journey-client";
+import { matchesCopilotDeepLink } from "@/infrastructure/persistence/durable-journey-client";
+import { loadCurrentDurableJourney } from "@/infrastructure/persistence/current-durable-journey";
 
 import {
   CopilotApiError,
@@ -42,7 +43,13 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
   return body.data;
 }
 
-export function CopilotClient() {
+export function CopilotClient({
+  requestedAssessmentSessionId,
+  requestedBlueprintId,
+}: {
+  requestedAssessmentSessionId?: string;
+  requestedBlueprintId?: string;
+}) {
   const [ready, setReady] = useState(false);
   const [available, setAvailable] = useState(false);
   const [session, setSession] = useState<Session>();
@@ -59,23 +66,31 @@ export function CopilotClient() {
   useEffect(() => {
     if (openingRef.current) return;
     openingRef.current = true;
-    const context = loadDurableJourney(localStorage);
-    const artifactIds = context?.artifactIds;
-    if (!context?.syncedAt || !artifactIds) {
-      queueMicrotask(() => {
-        setStatus("Complete and sync a Blueprint before opening Copilot.");
-        setReady(true);
-      });
-      return;
-    }
-    queueMicrotask(() => setAvailable(true));
     const openWorkspace = async () => {
       try {
+        const query = new URLSearchParams(window.location.search);
+        const linkedAssessmentSessionId = requestedAssessmentSessionId ?? query.get("assessmentSessionId") ?? undefined;
+        const linkedBlueprintId = requestedBlueprintId ?? query.get("blueprintId") ?? undefined;
+        const context = await loadCurrentDurableJourney(localStorage);
+        const artifactIds = context?.artifactIds;
+        if (!context || !artifactIds) {
+          setStatus("Complete and sync the current Blueprint before opening Copilot.");
+          return;
+        }
+        if (!matchesCopilotDeepLink(context, {
+          assessmentSessionId: linkedAssessmentSessionId,
+          blueprintId: linkedBlueprintId,
+        })) {
+          setStatus("This Copilot link does not match the current secure workspace.");
+          setOpenFailure({ message: "Return to the current Blueprint and continue from its Copilot action.", requestId: null, retryable: false });
+          return;
+        }
+        setAvailable(true);
         const [healthResult, sessionResult] = await Promise.allSettled([
           api<HealthResponse>("/api/v2/copilot/status?detail=safe"),
           api<Session>("/api/v2/copilot/sessions", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, businessTwinId: artifactIds.businessTwin, blueprintId: artifactIds.blueprint, idempotencyKey: `copilot:${context.assessmentSessionId}` }),
+            body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, businessTwinId: artifactIds.businessTwin, blueprintId: artifactIds.blueprint, idempotencyKey: `copilot:${context.assessmentSessionId}:${artifactIds.blueprint}` }),
           }),
         ]);
         if (sessionResult.status === "rejected") throw sessionResult.reason;
@@ -96,7 +111,7 @@ export function CopilotClient() {
       } finally { setReady(true); }
     };
     void openWorkspace();
-  }, []);
+  }, [requestedAssessmentSessionId, requestedBlueprintId]);
 
   useEffect(() => { logRef.current?.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, [messages]);
 

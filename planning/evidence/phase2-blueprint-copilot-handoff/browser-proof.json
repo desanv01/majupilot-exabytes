@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "synthetic": true,
+  "savingDidNotClaimReady": true,
+  "deepLink": {
+    "assessment": "00000000-0000-4000-8000-000000000002",
+    "blueprint": "b06a1cf0-fb7a-4cea-acda-987e9412a5b9"
+  },
+  "refreshResumed": true,
+  "crossSessionDenied": true,
+  "failure": {
+    "noReadyClaim": true,
+    "noCopilotAction": true
+  },
+  "regeneration": {
+    "newArtifactSet": true,
+    "retryReusedWriteSet": true
+  },
+  "syncAttempts": 3,
+  "responsive": [
+    {
+      "label": "ready",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 44
+    },
+    {
+      "label": "ready",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 44
+    }
+  ],
+  "axe": [],
+  "consoleErrors": [],
+  "failedRequests": []
+}

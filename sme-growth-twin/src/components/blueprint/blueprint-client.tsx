@@ -21,7 +21,12 @@ import { loadBlueprint, saveBlueprint } from "@/infrastructure/persistence/local
 import { loadDiagnosticResult } from "@/infrastructure/persistence/local-diagnostic-store";
 import { loadRecommendationResult } from "@/infrastructure/persistence/local-recommendation-store";
 import { loadScenarioComparison } from "@/infrastructure/persistence/local-scenario-store";
-import { syncDurableJourney } from "@/infrastructure/persistence/durable-journey-client";
+import {
+  copilotJourneyHref,
+  invalidateDurableJourney,
+  syncDurableJourney,
+  type DurableJourneyContext,
+} from "@/infrastructure/persistence/durable-journey-client";
 
 import { Brand } from "../assessment/brand";
 import { PostAssessmentShell } from "../diagnostics/post-assessment-shell";
@@ -35,6 +40,7 @@ export type BlueprintSources = {
 };
 
 export type AdvisorStatus = "ready" | "reviewing" | "live" | "fallback" | "failed-safe";
+export type DurableSyncState = "idle" | "saving" | "ready" | "failed";
 
 const makeId = (prefix: string) => `${prefix}_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}`;
 const readyStatuses = () => Object.fromEntries(EXABYTES_ADVISORS_1_0_0.map((advisor) => [advisor.id, "ready"])) as Record<string, AdvisorStatus>;
@@ -129,12 +135,58 @@ function BlueprintCommandHeader({
         <button className="button secondary" type="button" onClick={onGenerate} disabled={busy}>
           {blueprint ? "Regenerate review" : "Generate review"}
         </button>
-        <button className="button primary" type="button" disabled={!blueprint || busy} onClick={() => window.print()}>
+        <button className="button secondary" type="button" disabled={!blueprint || busy} onClick={() => window.print()}>
           Print or save as PDF
         </button>
-        {blueprint ? <Link className="button consultation-cta" href="/consultation">Request consultation</Link> : null}
       </nav>
     </header>
+  );
+}
+
+export function BlueprintHandoff({
+  context,
+  onRetry,
+  state,
+}: {
+  context?: DurableJourneyContext;
+  onRetry: () => void;
+  state: DurableSyncState;
+}) {
+  const copilotHref = context ? copilotJourneyHref(context) : undefined;
+  const failed = state === "failed";
+  const ready = state === "ready" && Boolean(copilotHref);
+  return (
+    <section className={`phase02-handoff sync-${state} no-print`} role={failed ? "alert" : "status"} aria-live={failed ? "assertive" : "polite"} aria-busy={state === "saving"}>
+      <div className="phase02-handoff-copy">
+        <p className="eyebrow">Next step</p>
+        <h2>{ready ? "Your evidence is ready for Copilot." : failed ? "Evidence sync needs attention." : "Preparing your Copilot workspace."}</h2>
+        <p>
+          {ready
+            ? "Continue with this exact assessment and Blueprint. Copilot can explain saved evidence, while every write still requires explicit confirmation."
+            : failed
+              ? "Copilot is not ready because the current evidence was not durably synchronized. Your on-device Blueprint remains intact."
+              : "MajuPilot is saving the current source-linked evidence before Copilot can open."}
+        </p>
+        <ol className="phase02-sync-steps" aria-label="Copilot preparation progress">
+          <li className={failed ? "is-failed" : ready ? "is-complete" : "is-current"}>
+            <span aria-hidden="true">1</span><strong>Saving evidence</strong>
+          </li>
+          <li className={ready ? "is-complete" : "is-pending"}>
+            <span aria-hidden="true">2</span><strong>Copilot ready</strong>
+          </li>
+        </ol>
+      </div>
+      <div className="phase02-handoff-actions">
+        {ready && copilotHref ? (
+          <Link className="button primary" href={copilotHref}>Continue to Copilot</Link>
+        ) : failed ? (
+          <button className="button primary" type="button" onClick={onRetry}>Retry sync</button>
+        ) : (
+          <button className="button primary" type="button" disabled aria-busy="true">Saving evidence</button>
+        )}
+        <Link className="button secondary consultation-cta" href="/consultation">Request consultation</Link>
+      </div>
+    </section>
   );
 }
 
@@ -154,7 +206,9 @@ export function BlueprintView({
   const [blueprint, setBlueprint] = useState(initialBlueprint);
   const [notice, setNotice] = useState(initialNotice);
   const [busy, setBusy] = useState(false);
-  const [durableNotice, setDurableNotice] = useState<string>();
+  const [syncState, setSyncState] = useState<DurableSyncState>(blueprint ? "saving" : "idle");
+  const [syncContext, setSyncContext] = useState<DurableJourneyContext>();
+  const [syncAttempt, setSyncAttempt] = useState(0);
   const [statuses, setStatuses] = useState<Record<string, AdvisorStatus>>(() =>
     initialBlueprint ? originStatuses(initialBlueprint) : readyStatuses(),
   );
@@ -181,12 +235,21 @@ export function BlueprintView({
   useEffect(() => {
     if (!assessment || !blueprint) return;
     let active = true;
-    setDurableNotice("Securing this Blueprint and its evidence in your MajuPilot workspace...");
+    setSyncState("saving");
+    setSyncContext(undefined);
     syncDurableJourney(localStorage, { draft: assessment, ...sources, blueprint })
-      .then(() => { if (active) setDurableNotice("Blueprint and evidence securely synced."); })
-      .catch(() => { if (active) setDurableNotice("Secure sync is temporarily unavailable. Your on-device copy remains intact and can be retried."); });
+      .then((context) => {
+        if (!active) return;
+        setSyncContext(context);
+        setSyncState("ready");
+      })
+      .catch(() => {
+        if (!active) return;
+        setSyncContext(undefined);
+        setSyncState("failed");
+      });
     return () => { active = false; };
-  }, [assessment, blueprint, sources]);
+  }, [assessment, blueprint, sources, syncAttempt]);
 
   const generate = async () => {
     setBusy(true);
@@ -225,6 +288,9 @@ export function BlueprintView({
         { id: () => makeId("blueprint"), now: () => new Date().toISOString() },
       );
       onPersist?.(next);
+      invalidateDurableJourney(localStorage);
+      setSyncContext(undefined);
+      setSyncState("saving");
       setBlueprint(next);
       setStatuses(originStatuses(next));
       setNotice(
@@ -246,7 +312,6 @@ export function BlueprintView({
       <main id="main-content" className="phase06-shell">
         <BlueprintCommandHeader blueprint={blueprint} busy={busy} onGenerate={generate} sources={sources} />
         <AdvisorStatusBoard blueprint={blueprint} busy={busy} notice={notice} statuses={statuses} />
-        {durableNotice ? <p className="phase06-status-notice no-print" role="status">{durableNotice}</p> : null}
         {!blueprint ? (
           <section className="phase06-empty no-print">
             <p className="eyebrow">Ready to review</p>
@@ -261,6 +326,7 @@ export function BlueprintView({
           </section>
         ) : (
           <>
+            <BlueprintHandoff context={syncContext} state={syncState} onRetry={() => setSyncAttempt((attempt) => attempt + 1)} />
             <DecisionOverview blueprint={blueprint} />
             <BlueprintReport blueprint={blueprint} />
           </>
@@ -306,6 +372,7 @@ export function BlueprintClient() {
       }
 
       const saved = loadBlueprint(localStorage, twin, diagnostic.result, recommendations.result, comparison.result);
+      if (saved.status !== "ok") invalidateDurableJourney(localStorage);
       setLoaded({
         assessment: assessment.draft,
         sources,

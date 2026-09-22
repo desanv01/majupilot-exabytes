@@ -2565,6 +2565,33 @@ select:focus-visible, textarea:focus-visible {
   background: var(--color-amber-100);
   line-height: 1.5;
 }
+
+.phase02-handoff {
+  margin: 24px 0 0;
+  padding: clamp(22px, 3vw, 32px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 28px;
+  align-items: end;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.phase02-handoff.sync-ready { border-color: #86c7bd; box-shadow: inset 4px 0 0 var(--color-teal-700); }
+.phase02-handoff.sync-failed { border-color: #d9a39d; box-shadow: inset 4px 0 0 var(--color-coral-700); }
+.phase02-handoff .eyebrow { color: var(--color-teal-700); }
+.phase02-handoff h2 { margin: 7px 0 10px; color: var(--color-ink-950); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
+.phase02-handoff-copy > p:not(.eyebrow) { max-width: 760px; margin: 0; color: var(--color-text-muted); line-height: 1.65; }
+.phase02-sync-steps { margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; list-style: none; }
+.phase02-sync-steps li { min-height: 52px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--color-border); border-radius: 10px; color: var(--color-text-muted); background: var(--color-paper-100); }
+.phase02-sync-steps li span { width: 28px; height: 28px; display: inline-grid; place-items: center; flex: 0 0 auto; border: 1px solid currentColor; border-radius: 50%; font-size: 12px; font-weight: 800; }
+.phase02-sync-steps .is-current { color: var(--color-teal-800); border-color: #86c7bd; background: var(--color-teal-100); }
+.phase02-sync-steps .is-complete { color: var(--color-teal-800); border-color: #86c7bd; }
+.phase02-sync-steps .is-failed { color: var(--color-coral-700); border-color: #d9a39d; background: var(--color-coral-100); }
+.phase02-sync-steps .is-pending { opacity: .72; }
+.phase02-handoff-actions { display: grid; gap: 10px; }
+.phase02-handoff-actions .button { width: 100%; min-height: 48px; }
+.phase02-handoff-actions .consultation-cta { color: var(--color-teal-800); border-color: #9bcfc7; background: var(--color-teal-100); }
 .phase06-empty {
   margin-top: 24px;
   padding: clamp(28px, 5vw, 54px);
@@ -2846,6 +2873,8 @@ select:focus-visible, textarea:focus-visible {
   .phase06-command.blueprint-hero h1 { font-size: 40px; }
   .phase06-command.blueprint-hero p:not(.eyebrow) { font-size: 16px; }
   .phase06-command-actions { grid-template-columns: 1fr; }
+  .phase02-handoff { grid-template-columns: 1fr; gap: 22px; }
+  .phase02-sync-steps { grid-template-columns: 1fr; }
   .phase06-status-board { padding: 18px 14px; }
   .phase06-status-board ol { grid-template-columns: 1fr; }
   .advisor-status-item { min-height: 58px; }
