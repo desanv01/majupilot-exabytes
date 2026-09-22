@@ -11,7 +11,7 @@ describe("Phase 05 Scenario and ROI Lab UI contract", () => {
   const html = renderToStaticMarkup(<ScenariosView initialResult={full.comparison} twin={full.twin} diagnostic={full.diagnostic} recommendations={full.recommendation} />);
 
   it("starts with Balanced inspection focus and no implied preferred selection", () => {
-    expect(html).toContain("Compare - 3 of 4");
+    expect(html).toContain("Compare - 3 of 5");
     expect(html).toContain("Balanced Growth starts in inspection focus");
     expect(html).toMatch(/balanced_growth is-focused/);
     expect(html).toContain("None selected");

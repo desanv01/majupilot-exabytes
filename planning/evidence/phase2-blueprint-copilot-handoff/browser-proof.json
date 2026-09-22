@@ -1,10 +1,15 @@
 {
   "ok": true,
   "synthetic": true,
+  "journey": {
+    "blueprintCount": true,
+    "copilotUpcoming": true,
+    "copilotNext": true
+  },
   "savingDidNotClaimReady": true,
   "deepLink": {
     "assessment": "00000000-0000-4000-8000-000000000002",
-    "blueprint": "b06a1cf0-fb7a-4cea-acda-987e9412a5b9"
+    "blueprint": "3f3afee0-3a79-42ab-815d-409b05de4ee6"
   },
   "refreshResumed": true,
   "crossSessionDenied": true,

@@ -153,6 +153,7 @@ try {
   await poll("document.body.innerText.includes('Saving evidence')");
   const savingDidNotClaimReady = await evaluate("!document.body.innerText.includes('Your evidence is ready for Copilot.')");
   await poll("document.body.innerText.includes('Your evidence is ready for Copilot.')");
+  const journey = await evaluate("({blueprintCount:document.querySelector('.diagnostic-mobile-header')?.innerText.includes('Blueprint - 4 of 5')===true,copilotUpcoming:Array.from(document.querySelectorAll('.diagnostic-rail li')).some((item)=>item.innerText.includes('Copilot')&&item.innerText.includes('Upcoming')),copilotNext:document.querySelector('.diagnostic-mobile-journey')?.innerText.includes('Copilot next')===true})");
   const firstHref = await evaluate("document.querySelector('a[href^=\"/copilot?\"]')?.getAttribute('href')");
   if (!firstHref) throw new Error("ready state did not expose the Copilot deep link");
   await screenshot("ready-desktop.png");
@@ -192,7 +193,7 @@ try {
   const axeSource = await readFile(path.resolve("node_modules", "axe-core", "axe.min.js"), "utf8");
   await evaluate(axeSource);
   const axe = await evaluate("axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']}}).then((r)=>r.violations.filter((v)=>v.impact==='critical'||v.impact==='serious').map((v)=>({id:v.id,impact:v.impact,nodes:v.nodes.length})))");
-  const result = { ok: savingDidNotClaimReady && refreshResumed && crossSessionDenied && failure.noReadyClaim && failure.noCopilotAction && regeneration.newArtifactSet && regeneration.retryReusedWriteSet && axe.length === 0 && responsive.every((item) => !item.overflow && item.minTarget >= 44), synthetic: true, savingDidNotClaimReady, deepLink, refreshResumed, crossSessionDenied, failure, regeneration, syncAttempts: syncBodies.length, responsive, axe, consoleErrors, failedRequests };
+  const result = { ok: Object.values(journey).every(Boolean) && savingDidNotClaimReady && refreshResumed && crossSessionDenied && failure.noReadyClaim && failure.noCopilotAction && regeneration.newArtifactSet && regeneration.retryReusedWriteSet && axe.length === 0 && responsive.every((item) => !item.overflow && item.minTarget >= 44), synthetic: true, journey, savingDidNotClaimReady, deepLink, refreshResumed, crossSessionDenied, failure, regeneration, syncAttempts: syncBodies.length, responsive, axe, consoleErrors, failedRequests };
   if (!result.ok || consoleErrors.length || failedRequests.length) throw new Error(`Phase 2 browser proof failed: ${JSON.stringify(result, null, 2)}`);
   await writeFile(path.join(artifacts, "browser-proof.json"), `${JSON.stringify(result, null, 2)}\n`);
   process.stdout.write(`${JSON.stringify({ ...result, artifacts }, null, 2)}\n`);

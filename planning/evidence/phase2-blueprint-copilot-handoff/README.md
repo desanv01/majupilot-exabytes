@@ -7,6 +7,7 @@ API requests, so it does not read or write customer data.
 ## Covered flow
 
 - Blueprint generation visibly enters `Saving evidence` before any ready claim.
+- The shared journey shows Blueprint as step 4 of 5 and Copilot as the upcoming step.
 - `Continue to Copilot` appears only after the full durable chain is acknowledged.
 - The deep link carries the exact assessment-session and blueprint identifiers.
 - Refresh resumes the current durable journey.
