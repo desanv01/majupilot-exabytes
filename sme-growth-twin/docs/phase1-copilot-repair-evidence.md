@@ -5,7 +5,8 @@
 - Branch: `codex/phase1-copilot-repair`
 - Baseline: `b493f8f`
 - Reviewed implementation commit: `9792f9c76f27b9c5b7c258de49c446729d6d82f3`.
-- Retry correction commit: this file's next containing commit; its exact SHA is recorded in the final handoff because a Git commit cannot contain its own hash.
+- Retry correction snapshot: `1965ff141d03ffc1d87005ec0a0421a1cc2a3e15`.
+- Request-binding and executed-evidence follow-up: this file's next containing commit; its exact SHA is recorded in the final handoff because a Git commit cannot contain its own hash.
 - Boundary preserved: Blueprint sync remains the browser prerequisite. No Blueprint navigation/resync work, document RAG, redesign, deployment, or later-phase work is included.
 
 ## Root cause and reproduction
@@ -34,23 +35,26 @@ Safe hosted baseline reproduction against `https://majupilot-exabytes.vercel.app
 
 ## Verification
 
-- Focused Vitest: 2 files, 10 tests passed.
+- Focused Vitest: 2 files, 11 tests passed.
+- Full Vitest suite: 48 files passed, 1 skipped; 228 tests passed, 1 skipped.
 - TypeScript: `npm run type-check` passed.
 - ESLint: `npm run lint` passed.
 - Next.js 16.3.5 production build: passed; 38 static pages generated and all Copilot routes compiled.
 - Synthetic API smoke: passed with 18 persisted messages after server restart, stable replay, prompt-injection and unknown-tool rejection, and cross-session denial.
+- The API smoke ran against the repository-pinned local Supabase 2.117.0 stack with all checked-in migrations applied; it did not use an in-memory persistence substitute.
 - Grounded read request IDs:
-  - `getEvidenceForClaim`: `d99a92e7-97de-47d2-8fa7-4536a9a24b4f`
-  - `getBusinessTwinSummary`: `2e835ac3-d66a-4546-a39a-b844600a1a6d`
-  - `listRecommendations`: `b117a698-9b1f-4ce4-a18b-289c18ccdf22`
-  - `compareScenarios`: `636ecd3b-2d50-4240-881e-6f813a5ab107`
-  - `getBlueprint`: `900f59d4-e25a-4de3-9c80-49551bee866a`
-- Safe local failure proof: category `session_failure`, request ID `fae084d2-e237-4e14-8803-b20e6eb9d0ff`.
+  - `getEvidenceForClaim`: `6c2559d2-f360-47d3-95f2-8b2828f9b542`
+  - `getBusinessTwinSummary`: `01228163-faeb-48c9-b753-d623c3fc0356`
+  - `listRecommendations`: `02c6873d-542d-4f2d-87cc-3e41cfdf2987`
+  - `compareScenarios`: `89b59bfd-29c6-43c2-a94d-9b150c80d33b`
+  - `getBlueprint`: `fb3a2850-bbc1-49de-abe4-9f1db4020d19`
+- Safe local failure proof: category `session_failure`, request ID `b7987d89-d28d-4784-8af3-9933e857c100`.
 
 ## Evidence non-mutation and authorization
 
 - The required-mode retry test snapshots deterministic evidence, records one pending confirmation proposal, fails with a retryable timeout, then proves one claimed same-key re-execution can succeed and replay without duplicating the user row or proposal.
 - A terminal invalid-output test proves non-retryable receipts never re-enter execution. A concurrent-claim test proves one executor wins while the other receives a safe retryable persistence response and later replays the winner's durable result.
+- Each claim is bound to the canonical request payload hash. Reusing the same idempotency key with different text or tool input fails with `IDEMPOTENCY_CONFLICT` before model or tool execution.
 - The API smoke reads the same persisted evidence before and after invalid-session, prompt-injection, and unknown-tool probes; the grounded result is byte-for-byte unchanged.
 - Session creation, history, turns, reads, proposals, and confirmations continue to resolve an owner and re-authorize the session. Cross-session history access fails closed.
 - Write tools still create pending confirmation proposals only. Execution remains behind explicit `CONFIRM`, owner authorization, stable execution idempotency, service-role-only tables, and immutable chat/audit/receipt triggers.

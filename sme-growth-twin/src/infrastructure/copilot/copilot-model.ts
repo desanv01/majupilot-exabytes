@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import { APICallError, NoOutputGeneratedError, ToolLoopAgent, isStepCount, tool, type ToolSet } from "ai";
 import { z } from "zod";
 
+import { canonicalJson } from "@/core/reports/canonical-json";
 import {
   COPILOT_PROMPT_VERSION,
   COPILOT_SCHEMA_VERSION,
@@ -37,6 +38,11 @@ const failedTurnReceiptSchema = z.object({
   httpStatus: z.number().int().min(400).max(599),
   retryable: z.boolean(),
 }).strict();
+const claimedTurnReceiptSchema = z.object({
+  claimed: z.literal(true),
+  attempt: z.union([z.literal(0), z.literal(1)]),
+  requestSha256: z.string().regex(/^[a-f0-9]{64}$/),
+}).strict();
 
 function replayStoredTurn(response: Record<string, unknown>) {
   const failed = failedTurnReceiptSchema.safeParse(response);
@@ -48,6 +54,22 @@ function replayStoredTurn(response: Record<string, unknown>) {
 function attemptReceiptKey(sessionId: string, idempotencyKey: string, attempt: number, kind: "claim" | "result") {
   const digest = createHash("sha256").update(`${sessionId}:${idempotencyKey}:${attempt}:${kind}`).digest("hex");
   return `turn-attempt:${digest}`;
+}
+
+function turnRequestSha256(request: CopilotTurnRequest) {
+  const payload = {
+    organizationId: request.organizationId,
+    message: request.message,
+    requestedTool: request.requestedTool,
+    requestedToolInput: request.requestedToolInput,
+  };
+  return createHash("sha256").update(canonicalJson(payload)).digest("hex");
+}
+
+function assertClaimMatches(response: Record<string, unknown>, requestSha256: string) {
+  const claim = claimedTurnReceiptSchema.safeParse(response);
+  if (!claim.success) throw new PersistenceError("INTERNAL_RETRYABLE", 503);
+  if (claim.data.requestSha256 !== requestSha256) throw new PersistenceError("IDEMPOTENCY_CONFLICT", 409);
 }
 
 const descriptions: Record<CopilotReadToolName | CopilotWriteToolName, string> = {
@@ -124,7 +146,13 @@ export async function executeCopilotTurn(args: {
 }) {
   if (rejectsInjection(args.request.message)) throw new PersistenceError("VALIDATION_FAILED", 422);
   const session = await args.repository.getSession(args.owner, args.sessionId);
-  const baseReplay = await args.repository.findTurn(args.owner, args.sessionId, args.request.idempotencyKey);
+  const requestSha256 = turnRequestSha256(args.request);
+  const baseClaimKey = attemptReceiptKey(session.id, args.request.idempotencyKey, 0, "claim");
+  const [baseReplay, baseClaim] = await Promise.all([
+    args.repository.findTurn(args.owner, args.sessionId, args.request.idempotencyKey),
+    args.repository.findTurn(args.owner, args.sessionId, baseClaimKey),
+  ]);
+  if (baseClaim) assertClaimMatches(baseClaim.response, requestSha256);
   let attempt: 0 | 1 = 0;
   let turnId = crypto.randomUUID();
   let resultKey = args.request.idempotencyKey;
@@ -139,9 +167,12 @@ export async function executeCopilotTurn(args: {
   }
   const claimKey = attemptReceiptKey(session.id, args.request.idempotencyKey, attempt, "claim");
   try {
-    await args.repository.rememberTurn(args.owner, session.id, claimKey, turnId, { claimed: true, attempt });
+    await args.repository.rememberTurn(args.owner, session.id, claimKey, turnId, { claimed: true, attempt, requestSha256 });
   } catch (error) {
     if (!(error instanceof PersistenceError) || error.code !== "IDEMPOTENCY_CONFLICT") throw error;
+    const existingClaim = await args.repository.findTurn(args.owner, session.id, claimKey);
+    if (!existingClaim) throw new PersistenceError("INTERNAL_RETRYABLE", 503);
+    assertClaimMatches(existingClaim.response, requestSha256);
     const completed = await args.repository.findTurn(args.owner, session.id, resultKey);
     if (completed) return replayStoredTurn(completed.response);
     throw new PersistenceError("INTERNAL_RETRYABLE", 503);

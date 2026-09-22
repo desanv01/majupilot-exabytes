@@ -166,6 +166,24 @@ describe("Phase 1 Copilot repair", () => {
     expect(repository.receipts.size).toBe(2);
   });
 
+  it("binds an idempotency key to the original request payload", async () => {
+    preflightMock.mockResolvedValue({ id: "test/model", supported_parameters: ["tools"], pricing: { input: 0, output: 0 } });
+    generateMock.mockResolvedValue(liveResult("Original request completed."));
+    const repository = new FailureRepository();
+    const request = { message: "Summarize the saved plan", idempotencyKey: "turn-phase1-payload-binding" } as const;
+
+    await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "phase1-payload-test" });
+    await expect(executeCopilotTurn({
+      owner,
+      sessionId: session.id,
+      request: { ...request, message: "Use the same key for a different instruction" },
+      repository,
+      clientKey: "phase1-payload-test",
+    })).rejects.toMatchObject({ code: "IDEMPOTENCY_CONFLICT" });
+    expect(generateMock).toHaveBeenCalledTimes(1);
+    expect(repository.messages.map((item) => item.role)).toEqual(["user", "assistant"]);
+  });
+
   it("lets one concurrent claimant execute and makes the loser retry safely", async () => {
     preflightMock.mockResolvedValue({ id: "test/model", supported_parameters: ["tools"], pricing: { input: 0, output: 0 } });
     let complete: (() => void) | undefined;
