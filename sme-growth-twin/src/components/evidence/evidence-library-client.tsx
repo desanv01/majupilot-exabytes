@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
-import { Brand } from "@/components/assessment/brand";
+import Link from "next/link";
+
+import { ProductHeader } from "@/components/navigation/product-header";
 import { DOCUMENT_LIMITS, type EvidenceDocument } from "@/domain/documents";
 import { loadCurrentDurableJourney } from "@/infrastructure/persistence/current-durable-journey";
 
@@ -47,33 +48,37 @@ export function EvidenceLibraryClient() {
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<File>();
+  const [pendingDelete, setPendingDelete] = useState<EvidenceDocument>();
   const [notice, setNotice] = useState<Notice>({ kind: "info", text: "Opening your assessment-scoped Evidence Library..." });
   const inputRef = useRef<HTMLInputElement>(null);
+  const deleteDialogRef = useRef<HTMLDialogElement>(null);
 
   const refresh = useCallback(async (assessmentId: string) => {
     const data = await api<EvidenceDocument[]>(`/api/v2/evidence-documents?assessmentSessionId=${encodeURIComponent(assessmentId)}`);
     setDocuments(data);
   }, []);
 
-  useEffect(() => {
-    const open = async () => {
-      try {
-        const context = await loadCurrentDurableJourney(localStorage);
-        if (!context?.artifactIds?.blueprint) {
-          setNotice({ kind: "error", text: "Complete and sync the current Blueprint before adding uploaded evidence." });
-          return;
-        }
-        setAssessmentSessionId(context.assessmentSessionId);
-        await refresh(context.assessmentSessionId);
-        setNotice({ kind: "info", text: "Files stay private and are available only inside this assessment." });
-      } catch {
-        setNotice({ kind: "error", text: "The Evidence Library could not be opened safely. Refresh from your current Blueprint." });
-      } finally {
-        setReady(true);
+  const openLibrary = useCallback(async () => {
+    try {
+      const context = await loadCurrentDurableJourney(localStorage);
+      if (!context?.artifactIds?.blueprint) {
+        setNotice({ kind: "error", text: "Complete and sync the current Blueprint before adding uploaded evidence." });
+        return;
       }
-    };
-    void open();
+      setAssessmentSessionId(context.assessmentSessionId);
+      await refresh(context.assessmentSessionId);
+      setNotice({ kind: "info", text: "Files stay private and are available only inside this assessment." });
+    } catch {
+      setNotice({ kind: "error", text: "The Evidence Library could not be opened safely. Your saved work was not changed." });
+    } finally {
+      setReady(true);
+    }
   }, [refresh]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => { void openLibrary(); });
+    return () => window.cancelAnimationFrame(frame);
+  }, [openLibrary]);
 
   const choose = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -118,15 +123,27 @@ export function EvidenceLibraryClient() {
     } finally { setBusy(false); }
   };
 
-  const remove = async (document: EvidenceDocument) => {
-    if (!assessmentSessionId || busy || !window.confirm(`Delete ${document.originalFilename}? Its file and searchable chunks will no longer be retrievable.`)) return;
+  const requestDelete = (document: EvidenceDocument) => {
+    setPendingDelete(document);
+    deleteDialogRef.current?.showModal();
+  };
+
+  const cancelDelete = () => {
+    deleteDialogRef.current?.close();
+    setPendingDelete(undefined);
+  };
+
+  const remove = async () => {
+    const document = pendingDelete;
+    if (!document || !assessmentSessionId || busy) return;
+    deleteDialogRef.current?.close();
     setBusy(true);
     try {
       await api(`/api/v2/evidence-documents/${document.id}?assessmentSessionId=${assessmentSessionId}`, { method: "DELETE" });
       await refresh(assessmentSessionId);
       setNotice({ kind: "success", text: `${document.originalFilename} was deleted and excluded from retrieval.` });
     } catch { setNotice({ kind: "error", text: "The document could not be deleted safely." }); }
-    finally { setBusy(false); }
+    finally { setBusy(false); setPendingDelete(undefined); }
   };
 
   const reprocess = async (document: EvidenceDocument) => {
@@ -153,15 +170,19 @@ export function EvidenceLibraryClient() {
 
   return (
     <div className="evidence-page">
-      <header className="topbar evidence-topbar"><Brand /><nav aria-label="Evidence Library navigation"><Link href="/blueprint">Blueprint</Link><Link href="/copilot">Copilot</Link><Link href="/consultation">Consultation</Link></nav></header>
-      <main className="evidence-shell">
+      <ProductHeader current="evidence" />
+      <main id="main-content" className="evidence-shell">
         <section className="evidence-intro">
           <div><p className="eyebrow">Assessment Evidence Library</p><h1>Give Copilot a private source shelf.</h1><p>Upload bounded documents for cited answers without changing your deterministic Business Twin, scores, or Blueprint.</p></div>
           <dl><div><dt>Formats</dt><dd>PDF, DOCX, TXT</dd></div><div><dt>Limit</dt><dd>{formatBytes(DOCUMENT_LIMITS.maxFileBytes)}</dd></div><div><dt>PDF cap</dt><dd>{DOCUMENT_LIMITS.maxPdfPages} pages</dd></div></dl>
         </section>
 
         {!ready || !assessmentSessionId ? (
-          <section className="evidence-gate" aria-busy={!ready}><h2>{ready ? "A completed Blueprint is required" : "Opening your library"}</h2><p>{notice.text}</p>{ready ? <Link className="button primary" href="/blueprint">Return to Blueprint</Link> : null}</section>
+          <section className="evidence-gate" aria-busy={!ready} role={ready && notice.kind === "error" ? "alert" : undefined}>
+            <h2>{ready ? (notice.text.startsWith("Complete") ? "A completed Blueprint is required" : "The library could not open") : "Opening your library"}</h2>
+            <p>{notice.text}</p>
+            {ready ? <div className="evidence-gate-actions"><Link className="button primary" href="/blueprint">Return to Blueprint</Link>{!notice.text.startsWith("Complete") ? <button className="button secondary" type="button" onClick={() => { setReady(false); setNotice({ kind: "info", text: "Opening your assessment-scoped Evidence Library..." }); void openLibrary(); }}>Try again</button> : null}</div> : null}
+          </section>
         ) : (
           <div className="evidence-grid">
             <section className="evidence-upload" aria-labelledby="upload-heading">
@@ -183,12 +204,12 @@ export function EvidenceLibraryClient() {
                 <ul>
                   {documents.map((document) => (
                     <li key={document.id} className={`document-row status-${document.status}`}>
-                      <div className="document-main"><span className="document-type">{document.mimeType === "application/pdf" ? "PDF" : document.mimeType === "text/plain" ? "TXT" : "DOCX"}</span><div><h3>{document.originalFilename}</h3><p>{formatBytes(document.byteLength)} · {document.pageCount ? `${document.pageCount} pages · ` : ""}{document.chunkCount} searchable chunks</p></div></div>
-                      <div className="document-state"><strong>{statusCopy[document.status]}</strong><small>{document.status === "failed" && document.canReprocess ? "The private original is stored and can be reprocessed." : document.failureCode ? failureCopy[document.failureCode] ?? document.failureCode : document.status === "ready" ? `Embedded with ${document.embeddingVersion}` : `Reference ${document.id.slice(0, 8)}`}</small></div>
+                      <div className="document-main"><span className="document-type">{document.mimeType === "application/pdf" ? "PDF" : document.mimeType === "text/plain" ? "TXT" : "DOCX"}</span><div><h3>{document.originalFilename}</h3><p>{formatBytes(document.byteLength)}; {document.pageCount ? `${document.pageCount} pages; ` : ""}{document.chunkCount} searchable chunks</p></div></div>
+                      <div className="document-state"><strong>{statusCopy[document.status]}</strong><small>{document.status === "failed" && document.canReprocess ? "The private original is stored and can be reprocessed." : document.failureCode ? failureCopy[document.failureCode] ?? document.failureCode : document.status === "ready" ? "Available for grounded answers" : "Processing record retained"}</small><details className="evidence-technical"><summary>Technical details</summary><dl><div><dt>Document reference</dt><dd>{document.id}</dd></div>{document.embeddingVersion ? <div><dt>Embedding version</dt><dd>{document.embeddingVersion}</dd></div> : null}</dl></details></div>
                       <div className="document-actions">
                         {document.status === "ready" ? <button type="button" onClick={() => void download(document)} disabled={busy}>Download</button> : null}
                         {document.status === "failed" && document.canReprocess ? <button type="button" onClick={() => void reprocess(document)} disabled={busy}>Reprocess</button> : null}
-                        {document.status !== "deleted" ? <button className="danger-link" type="button" onClick={() => void remove(document)} disabled={busy}>Delete</button> : null}
+                        {document.status !== "deleted" ? <button className="danger-link" type="button" onClick={() => requestDelete(document)} disabled={busy}>Delete</button> : null}
                       </div>
                     </li>
                   ))}
@@ -198,6 +219,17 @@ export function EvidenceLibraryClient() {
           </div>
         )}
       </main>
+      <dialog className="evidence-delete-dialog" ref={deleteDialogRef} onClose={() => setPendingDelete(undefined)}>
+        <div>
+          <p className="eyebrow">Remove private evidence</p>
+          <h2>Delete {pendingDelete?.originalFilename}?</h2>
+          <p>Its original file and searchable chunks will no longer be available to Copilot. This cannot be undone.</p>
+          <div className="evidence-delete-actions">
+            <button className="button secondary" type="button" onClick={cancelDelete}>Keep document</button>
+            <button className="button danger" type="button" onClick={() => void remove()} disabled={busy}>Delete document</button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 }

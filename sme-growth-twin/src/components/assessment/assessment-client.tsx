@@ -564,7 +564,7 @@ export function AssessmentClient() {
         currentTopic="Business context"
         saveState="restoring"
       >
-        <main className="assessment-shell loading" aria-live="polite">
+        <main id="main-content" className="assessment-shell loading" aria-live="polite">
           Restoring your saved assessment...
         </main>
       </AssessmentFrame>
@@ -579,7 +579,7 @@ export function AssessmentClient() {
       mode="assessment"
       currentTopic={isFollowUp ? "Useful follow-ups" : titles[draft.currentStep - 1]}
     >
-      <main className="assessment-shell">
+      <main id="main-content" className="assessment-shell">
         {message ? (
           <div className="notice" role="status">
             {message}

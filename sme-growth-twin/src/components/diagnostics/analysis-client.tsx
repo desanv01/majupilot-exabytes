@@ -76,7 +76,7 @@ export function AnalysisClient() {
 
   return (
     <PostAssessmentShell businessName={businessName} context={error ? "restoring" : "analysis"}>
-      <main className="analysis-shell">
+      <main id="main-content" className="analysis-shell">
         <p className="eyebrow">Local deterministic analysis</p>
         <h1>Turning recorded facts into a clear diagnosis.</h1>
         <p className="lead">

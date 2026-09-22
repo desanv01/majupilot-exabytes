@@ -226,7 +226,7 @@ export function RecommendationsView({ result, twin, diagnostic }: { result: Reco
 
   return (
     <PostAssessmentShell businessName={twin.identity.businessName} context="recommendations">
-      <main className="recommendations-shell">
+      <main id="main-content" className="recommendations-shell">
         <header className="recommendations-heading">
           <div><p className="eyebrow">Capability decisions</p><h1>Your recommended sequence.</h1><p className="lead">Start with the strongest supported capability, then keep later work visible in the order the rules produced.</p></div>
           <Link className="recommendations-results-link" href="/results">Review full diagnosis</Link>
@@ -307,6 +307,6 @@ export function RecommendationsClient() {
     } catch { router.replace("/results"); }
   }, [router]);
 
-  if (!state) return <PostAssessmentShell context="restoring"><main className="recommendations-restoring"><p className="eyebrow">Restoring decisions</p><h1>Preparing your capability sequence.</h1><p>Your current Business Twin, diagnosis, and saved recommendation are being checked locally.</p></main></PostAssessmentShell>;
+  if (!state) return <PostAssessmentShell context="restoring"><main id="main-content" className="recommendations-restoring"><p className="eyebrow">Restoring decisions</p><h1>Preparing your capability sequence.</h1><p>Your current Business Twin, diagnosis, and saved recommendation are being checked locally.</p></main></PostAssessmentShell>;
   return <RecommendationsView {...state} />;
 }

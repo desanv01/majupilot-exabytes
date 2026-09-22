@@ -55,7 +55,7 @@ export default function HomePage() {
         </details>
       </header>
 
-      <main>
+      <main id="main-content">
         <section className="home-hero" aria-labelledby="home-title">
           <div className="home-hero-copy">
             <p className="home-kicker">Build your Business Twin</p>
