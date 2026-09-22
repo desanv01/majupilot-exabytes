@@ -63,11 +63,15 @@ only to the service role through a bounded RPC that requires an exact assessment
 ID and excludes failed, unsupported, duplicate, and deleted documents.
 
 Duplicate detection is SHA-256 scoped to one assessment. Unsupported files are
-recorded without an object. Failed extraction/embedding is recoverable through
-reprocessing when an original exists. Delete first tombstones the ledger row,
-then removes the private object and chunks. Cleanup can be retried, and concurrent
-reprocessing uses a conditional state update. In-progress processing cannot be
-deleted until it settles.
+recorded without an object. `storage_path` is cleared whenever extraction fails
+before upload or Storage does not confirm the upload. The API derives
+`canReprocess` only for a failed row with a confirmed stored original, so corrupt,
+over-limit, and upload-failure rows cannot falsely offer or reach reprocessing.
+Embedding failures retain the private original and can recover through
+reprocessing. Delete first tombstones the ledger row, then removes the private
+object and chunks; duplicate metadata rows are also user-deletable. Cleanup can
+be retried, and concurrent reprocessing uses a conditional state update.
+In-progress processing cannot be deleted until it settles.
 
 ## Copilot retrieval
 
@@ -108,7 +112,11 @@ retrieval behavior, citation schemas, and UI lifecycle states.
 
 `tests/unit/phase3-document-rag-local.test.ts` is an opt-in loopback-only integration
 test (`PHASE3_LOCAL_DB_TEST=1`) using real Supabase Storage/PostgREST/pgvector and
-injected deterministic embeddings. It creates and cleans up its own synthetic
-fixtures and refuses a hosted database URL. `npm run test:phase3:browser` covers
-the production UI with synthetic API responses, including upload/rejection,
-reprocessing/deletion, visible Copilot citations, and desktop/mobile accessibility.
+injected deterministic embeddings. It covers corrupt and extraction-limit
+failures, a simulated Storage upload failure over the real local ledger, and
+provider-failure recovery from a confirmed original. It creates and cleans up
+its own synthetic fixtures and refuses a hosted database URL.
+`npm run test:phase3:browser` covers the production UI with synthetic API
+responses, including upload/rejection, duplicate deletion, truthful reprocessing,
+the accessible visually-hidden native picker, visible Copilot citations, and
+desktop/mobile accessibility.

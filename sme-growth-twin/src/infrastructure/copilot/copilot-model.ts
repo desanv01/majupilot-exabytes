@@ -122,7 +122,10 @@ function rejectsInjection(text: string) {
 
 function routeFallback(text: string): CopilotReadToolName {
   const value = text.toLowerCase();
-  if (/uploaded|document|pdf|docx|txt/.test(value)) return "searchUploadedEvidence";
+  // Report/download intent wins over file-format words such as "PDF". Uploaded
+  // evidence search remains the fallback for questions about document content.
+  if (/\b(report|download)\b/.test(value)) return "getReportMetadata";
+  if (/\b(uploaded?|documents?|pdf|docx|txt)\b/.test(value)) return "searchUploadedEvidence";
   if (/evidence|caused|provenance/.test(value)) return "getEvidenceForClaim";
   if (/digital maturity|maturity score/.test(value)) return "explainDigitalMaturity";
   if (/ai readiness|automation deferred/.test(value)) return "explainAiReadiness";
@@ -130,7 +133,6 @@ function routeFallback(text: string): CopilotReadToolName {
   if (/recommend|offering|alternative/.test(value)) return "listRecommendations";
   if (/scenario|roi|budget|payback/.test(value)) return "compareScenarios";
   if (/catalogue|exabytes product/.test(value)) return "searchExabytesCatalogue";
-  if (/report|pdf|download/.test(value)) return "getReportMetadata";
   if (/lead|salesperson|consultation/.test(value)) return "getLeadStatus";
   if (/note/.test(value)) return "getAcceptedConsultantNotes";
   if (/blueprint|first 30 days|team/.test(value)) return "getBlueprint";

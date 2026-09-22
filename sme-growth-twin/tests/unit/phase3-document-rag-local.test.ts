@@ -24,6 +24,22 @@ describe.skipIf(process.env.PHASE3_LOCAL_DB_TEST !== "1")("Phase 3 real local St
       embedOne: vi.fn(async (query: string) => vector(query.includes("unrelated") ? 1 : 0)),
     };
     const service = new EvidenceDocumentService(db, embeddings);
+    const storageFailureDb = {
+      from: db.from.bind(db),
+      rpc: db.rpc.bind(db),
+      storage: {
+        from(bucketName: string) {
+          const storage = db.storage.from(bucketName);
+          return {
+            upload: vi.fn(async () => ({ data: null, error: { message: "Synthetic storage failure" } })),
+            remove: storage.remove.bind(storage),
+            download: storage.download.bind(storage),
+            createSignedUrl: storage.createSignedUrl.bind(storage),
+          };
+        },
+      },
+    };
+    const storageFailureService = new EvidenceDocumentService(storageFailureDb as never, embeddings);
     const bucket = db.storage.from("majupilot-evidence");
     try {
       const expiry = new Date(Date.now() + 3_600_000).toISOString();
@@ -53,12 +69,31 @@ describe.skipIf(process.env.PHASE3_LOCAL_DB_TEST !== "1")("Phase 3 real local St
       await expect(service.excerpt(owner, otherAssessmentId, { documentId: document.id, chunkId: citation.chunkId })).rejects.toMatchObject({ code: "NOT_FOUND" });
       expect((await service.search(owner, otherAssessmentId, { query: "stockout target" })).reason).toBe("NO_UPLOADED_EVIDENCE");
       expect((await service.search(owner, assessmentId, { query: "unrelated evidence" })).reason).toBe("NO_RELEVANT_EVIDENCE");
-      expect((await service.upload(owner, assessmentId, file)).status).toBe("duplicate");
+      const duplicate = await service.upload(owner, assessmentId, file);
+      expect(duplicate.status).toBe("duplicate");
+      expect(duplicate.canReprocess).toBe(false);
+      expect((await service.remove(owner, assessmentId, duplicate.id)).status).toBe("deleted");
       expect((await service.upload(owner, assessmentId, new File(["unsupported"], "unsafe.exe", { type: "application/octet-stream" }))).status).toBe("unsupported");
+
+      const corrupt = await service.upload(owner, assessmentId, new File(["%PDF-1.7\nnot a valid PDF"], "corrupt.pdf", { type: "application/pdf" }));
+      expect(corrupt).toMatchObject({ status: "failed", canReprocess: false, failureCode: "DOCUMENT_CORRUPT" });
+      await expect(service.reprocess(owner, assessmentId, corrupt.id)).rejects.toMatchObject({ code: "VALIDATION_FAILED", httpStatus: 422 });
+
+      const extractionLimit = await service.upload(owner, assessmentId, new File(["x".repeat(120_001)], "too-much-text.txt", { type: "text/plain" }));
+      expect(extractionLimit).toMatchObject({ status: "failed", canReprocess: false, failureCode: "DOCUMENT_TEXT_LIMIT" });
+      await expect(service.reprocess(owner, assessmentId, extractionLimit.id)).rejects.toMatchObject({ code: "VALIDATION_FAILED", httpStatus: 422 });
+
+      const storageFailed = await storageFailureService.upload(owner, assessmentId, new File(["Synthetic storage failure fixture."], "storage-failure.txt", { type: "text/plain" }));
+      expect(storageFailed).toMatchObject({ status: "failed", canReprocess: false, failureCode: "DOCUMENT_PROCESSING_FAILED" });
+      await expect(service.reprocess(owner, assessmentId, storageFailed.id)).rejects.toMatchObject({ code: "VALIDATION_FAILED", httpStatus: 422 });
+      const nonReprocessableRows = await db.from("evidence_documents").select("id,storage_path").in("id", [corrupt.id, extractionLimit.id, storageFailed.id]);
+      expect(nonReprocessableRows.error).toBeNull();
+      expect(nonReprocessableRows.data?.every((row) => row.storage_path === null)).toBe(true);
 
       unavailable = true;
       const failed = await service.upload(owner, assessmentId, new File(["Another fictional operations plan."], "retry.txt", { type: "text/plain" }));
-      expect(failed.status).toBe("failed");
+      expect(failed).toMatchObject({ status: "failed", canReprocess: true, failureCode: "DOCUMENT_PROCESSING_FAILED" });
+      expect((await db.from("evidence_documents").select("storage_path").eq("id", failed.id).single()).data?.storage_path).toBeTruthy();
       unavailable = false;
       expect((await service.reprocess(owner, assessmentId, failed.id)).status).toBe("ready");
       await service.remove(owner, assessmentId, failed.id);

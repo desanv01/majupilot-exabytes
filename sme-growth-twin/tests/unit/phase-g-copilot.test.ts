@@ -74,6 +74,20 @@ describe("Phase G Transformation Copilot", () => {
     expect(result.text).toContain("deterministic MajuPilot facts");
   });
 
+  it.each([
+    ["Download the PDF report", "getReportMetadata"],
+    ["Where can I download my report?", "getReportMetadata"],
+    ["What does the uploaded PDF say about payroll?", "searchUploadedEvidence"],
+    ["Search the DOCX document for the service owner", "searchUploadedEvidence"],
+  ] as const)("routes deterministic fallback intent for %s", async (message, expectedTool) => {
+    process.env.AI_EXECUTION_MODE = "disabled";
+    const repository = new FakeRepository();
+    const request = copilotTurnRequestSchema.parse({ message, idempotencyKey: `turn-route-${expectedTool}-${message.length}` });
+    const result = await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "test-client" });
+    expect(result.toolCalls[0]?.toolName).toBe(expectedTool);
+    expect(repository.invoked).toEqual([expectedTool]);
+  });
+
   it("fails closed for prompt injection and unknown tools", async () => {
     process.env.AI_EXECUTION_MODE = "disabled";
     const repository = new FakeRepository();

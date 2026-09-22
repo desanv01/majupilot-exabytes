@@ -45,7 +45,7 @@ let evidenceDocuments = [];
 const evidenceDocument = (overrides = {}) => ({
   id: uuid(70), assessmentSessionId: uuid(2), originalFilename: "synthetic-operations-plan.txt",
   mimeType: "text/plain", byteLength: 132, checksumSha256: "a".repeat(64), status: "ready",
-  failureCode: null, duplicateOfDocumentId: null, pageCount: null, extractedCharCount: 132,
+  canReprocess: false, failureCode: null, duplicateOfDocumentId: null, pageCount: null, extractedCharCount: 132,
   chunkCount: 1, schemaVersion: "phase3-document-rag-1.0.0",
   embeddingVersion: "openai-text-embedding-3-small-1536-v1",
   createdAt: "2026-09-22T12:00:00+08:00", processedAt: "2026-09-22T12:00:01+08:00",
@@ -134,8 +134,9 @@ try {
           const row = evidenceDocument(); evidenceDocuments = [row]; return fulfill(requestId, 200, { data: row });
         }
         if (verifyEvidence && /^\/api\/v2\/evidence-documents\/[^/]+$/.test(url.pathname) && request.method === "DELETE") {
-          evidenceDocuments = evidenceDocuments.map((row) => row.id === uuid(70) ? evidenceDocument({ status: "deleted", chunkCount: 0, extractedCharCount: 132, deletedAt: "2026-09-22T12:00:03+08:00" }) : row);
-          return fulfill(requestId, 200, { data: evidenceDocuments.find((row) => row.id === uuid(70)) });
+          const documentId = url.pathname.split("/").at(-1);
+          evidenceDocuments = evidenceDocuments.map((row) => row.id === documentId ? { ...row, status: "deleted", canReprocess: false, duplicateOfDocumentId: null, chunkCount: 0, deletedAt: "2026-09-22T12:00:03+08:00" } : row);
+          return fulfill(requestId, 200, { data: evidenceDocuments.find((row) => row.id === documentId) });
         }
         return cdp("Fetch.continueRequest", { requestId });
       })().catch((error) => consoleErrors.push(String(error)));
@@ -238,6 +239,19 @@ try {
     await writeFile(oversizedFile, Buffer.alloc(4 * 1024 * 1024 + 1, 65));
     await navigate(`${baseUrl}/evidence`);
     await poll("document.body.innerText.includes('No uploaded evidence yet')");
+    const fileControl = await evaluate(`(() => {
+      const input = document.querySelector('#evidence-file');
+      const label = document.querySelector('label[for="evidence-file"]');
+      const rect = input.getBoundingClientRect();
+      input.focus();
+      const style = getComputedStyle(label);
+      return {
+        visuallyHidden: rect.width <= 1 && rect.height <= 1 && getComputedStyle(input).clipPath !== 'none',
+        focusable: document.activeElement === input,
+        styledFocusVisible: style.outlineStyle !== 'none' && parseFloat(style.outlineWidth) >= 2,
+      };
+    })()`);
+    await screenshot("evidence-file-focus.png");
     await setFile("#evidence-file", textFile);
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent.includes('Upload and process'))?.click()");
     await poll("document.body.innerText.includes('ready for cited Copilot answers')");
@@ -245,18 +259,23 @@ try {
     await setFile("#evidence-file", textFile);
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent.includes('Upload and process'))?.click()");
     await poll("document.body.innerText.includes('A duplicate was not stored')");
+    const duplicateDeleteVisible = await evaluate("document.querySelector('.status-duplicate .danger-link')?.textContent === 'Delete'");
+    await evaluate("window.confirm=()=>true");
+    await evaluate("document.querySelector('.status-duplicate .danger-link')?.click()");
+    await poll("document.body.innerText.includes('was deleted and excluded from retrieval')");
+    const duplicateDeleted = await evaluate("document.querySelector('.status-deleted') !== null");
     await setFile("#evidence-file", unsupportedFile);
     await poll("document.body.innerText.includes('Unsupported file')");
     await setFile("#evidence-file", oversizedFile);
     await poll("document.body.innerText.includes('Oversized file')");
-    evidenceDocuments = [evidenceDocument({ status: "failed", failureCode: "DOCUMENT_PROCESSING_FAILED", chunkCount: 0, extractedCharCount: null, processedAt: null, failedAt: "2026-09-22T12:00:02+08:00" })];
+    evidenceDocuments = [evidenceDocument({ status: "failed", canReprocess: true, failureCode: "DOCUMENT_PROCESSING_FAILED", chunkCount: 0, extractedCharCount: null, processedAt: null, failedAt: "2026-09-22T12:00:02+08:00" })];
     await navigate(`${baseUrl}/evidence`);
     await poll("document.body.innerText.includes('Processing failed')");
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent.includes('Reprocess'))?.click()");
     await poll("document.body.innerText.includes('is ready again')");
     await screenshot("evidence-ready-desktop.png");
     const evidenceResponsive = [await audit("evidence-ready", 1440)];
-    await viewport(390, 844); evidenceResponsive.push(await audit("evidence-ready", 390)); await screenshot("evidence-ready-mobile.png");
+    await viewport(390, 844); evidenceResponsive.push(await audit("evidence-ready", 390)); await evaluate("document.querySelector('.evidence-upload')?.scrollIntoView({block:'start'})"); await screenshot("evidence-ready-mobile.png");
     await viewport(1440, 1000);
     await navigate(`${baseUrl}/copilot`);
     await poll("document.body.innerText.includes('Ask about your transformation plan')");
@@ -270,13 +289,13 @@ try {
     await evaluate("window.confirm=()=>true");
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent==='Delete')?.click()");
     await poll("document.body.innerText.includes('was deleted and excluded from retrieval')");
-    evidence = { readyState, citationsVisible, uploadCount: evidenceUploads, responsive: evidenceResponsive, deletedExcluded: await evaluate("document.body.innerText.includes('Deleted and excluded')") };
+    evidence = { readyState, citationsVisible, uploadCount: evidenceUploads, fileControl, duplicateDeleteVisible, duplicateDeleted, responsive: evidenceResponsive, deletedExcluded: await evaluate("document.body.innerText.includes('Deleted and excluded')") };
   }
 
   const axeSource = await readFile(path.resolve("node_modules", "axe-core", "axe.min.js"), "utf8");
   await evaluate(axeSource);
   const axe = await evaluate("axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']}}).then((r)=>r.violations.filter((v)=>v.impact==='critical'||v.impact==='serious').map((v)=>({id:v.id,impact:v.impact,nodes:v.nodes.length,targets:v.nodes.map((n)=>n.target),summaries:v.nodes.map((n)=>n.failureSummary)})))");
-  const evidenceOk = !verifyEvidence || (evidence?.readyState && evidence.citationsVisible && evidence.deletedExcluded && evidence.uploadCount === 2 && evidence.responsive.every((item) => !item.overflow && item.minTarget >= 44));
+  const evidenceOk = !verifyEvidence || (evidence?.readyState && evidence.citationsVisible && evidence.deletedExcluded && evidence.duplicateDeleteVisible && evidence.duplicateDeleted && Object.values(evidence.fileControl).every(Boolean) && evidence.uploadCount === 2 && evidence.responsive.every((item) => !item.overflow && item.minTarget >= 44));
   const result = { ok: Object.values(journey).every(Boolean) && savingDidNotClaimReady && refreshResumed && crossSessionDenied && failure.noReadyClaim && failure.noCopilotAction && regeneration.newArtifactSet && regeneration.retryReusedWriteSet && axe.length === 0 && responsive.every((item) => !item.overflow && item.minTarget >= 44) && evidenceOk, synthetic: true, journey, savingDidNotClaimReady, deepLink, refreshResumed, crossSessionDenied, failure, regeneration, evidence, syncAttempts: syncBodies.length, responsive, axe, consoleErrors, failedRequests };
   if (!result.ok || consoleErrors.length || failedRequests.length) throw new Error(`Phase 2 browser proof failed: ${JSON.stringify(result, null, 2)}`);
   await writeFile(path.join(artifacts, "browser-proof.json"), `${JSON.stringify(result, null, 2)}\n`);

@@ -74,6 +74,7 @@ function view(row: Row): EvidenceDocument {
     byteLength: Number(row.byte_length),
     checksumSha256: row.checksum_sha256,
     status: row.status,
+    canReprocess: row.status === "failed" && typeof row.storage_path === "string" && row.storage_path.length > 0,
     failureCode: row.failure_code ?? null,
     duplicateOfDocumentId: row.duplicate_of_document_id ?? null,
     pageCount: row.page_count === null || row.page_count === undefined ? null : Number(row.page_count),
@@ -188,22 +189,29 @@ export class EvidenceDocumentService {
     return view(result.data as Row);
   }
 
-  private async markFailed(documentId: string, code: string) {
+  private async markFailed(documentId: string, code: string, originalStored: boolean) {
     const timestamp = new Date().toISOString();
     const removed = await this.db.from("evidence_document_chunks").delete().eq("document_id", documentId);
     fail(removed.error);
-    const result = await this.db.from("evidence_documents").update({ status: "failed", failure_code: code.slice(0, 80), chunk_count: 0, failed_at: timestamp, processed_at: null, updated_at: timestamp }).eq("id", documentId).eq("status", "processing").select("*").single();
+    const update: Row = { status: "failed", failure_code: code.slice(0, 80), chunk_count: 0, failed_at: timestamp, processed_at: null, updated_at: timestamp };
+    if (!originalStored) update.storage_path = null;
+    const result = await this.db.from("evidence_documents").update(update).eq("id", documentId).eq("status", "processing").select("*").single();
     fail(result.error);
     return view(result.data as Row);
   }
 
-  private async finish(document: Row, bytes: Uint8Array, mime: SupportedDocumentMime, chunks: DocumentChunk[], extractedCharCount: number, pageCount: number | null, upload = true) {
+  private async storeOriginal(path: string, bytes: Uint8Array, mime: SupportedDocumentMime) {
+    const stored = await this.db.storage.from(BUCKET).upload(path, bytes, { contentType: mime, upsert: false, cacheControl: "0" });
+    if (!stored.error) return;
+    // An upload error can be ambiguous at the transport boundary. Best-effort
+    // cleanup prevents an untracked object; the ledger is never marked as if an
+    // original were available after an unsuccessful response.
+    await this.db.storage.from(BUCKET).remove([path]);
+    throw new PersistenceError("INTERNAL_RETRYABLE", 503, { cause: stored.error });
+  }
+
+  private async finish(document: Row, chunks: DocumentChunk[], extractedCharCount: number, pageCount: number | null) {
     const documentId = String(document.id);
-    const path = String(document.storage_path);
-    if (upload) {
-      const stored = await this.db.storage.from(BUCKET).upload(path, bytes, { contentType: mime, upsert: false, cacheControl: "0" });
-      if (stored.error) throw new PersistenceError("INTERNAL_RETRYABLE", 503, { cause: stored.error });
-    }
     let vectors: number[][];
     try { vectors = await this.embeddings.embedMany(chunks.map((chunk) => chunk.content)); }
     catch (error) { throw error instanceof DocumentError ? error : new DocumentError("DOCUMENT_PROCESSING_FAILED", 503, { cause: error }); }
@@ -252,13 +260,16 @@ export class EvidenceDocumentService {
     }
     const storagePath = this.storagePath(owner, assessmentSessionId, id, mime);
     const document = await this.insertDocument({ id, owner, assessmentSessionId, filename, mime, bytes: bytes.byteLength, checksum, status: "processing", storagePath });
+    let originalStored = false;
     try {
       const extracted = await extractDocument(bytes, mime);
       const chunks = chunkDocument(extracted);
-      return await this.finish(document, bytes, mime, chunks, extracted.extractedCharCount, extracted.pageCount);
+      await this.storeOriginal(storagePath, bytes, mime);
+      originalStored = true;
+      return await this.finish(document, chunks, extracted.extractedCharCount, extracted.pageCount);
     } catch (error) {
       const code = error instanceof DocumentError ? error.code : "DOCUMENT_PROCESSING_FAILED";
-      return this.markFailed(id, code);
+      return this.markFailed(id, code, originalStored);
     }
   }
 
@@ -276,9 +287,9 @@ export class EvidenceDocumentService {
     fail(removed.error);
     try {
       const extracted = await extractDocument(bytes, mime);
-      return await this.finish({ ...document, status: "processing" }, bytes, mime, chunkDocument(extracted), extracted.extractedCharCount, extracted.pageCount, false);
+      return await this.finish({ ...document, status: "processing" }, chunkDocument(extracted), extracted.extractedCharCount, extracted.pageCount);
     } catch (error) {
-      return this.markFailed(documentId, error instanceof DocumentError ? error.code : "DOCUMENT_PROCESSING_FAILED");
+      return this.markFailed(documentId, error instanceof DocumentError ? error.code : "DOCUMENT_PROCESSING_FAILED", true);
     }
   }
 

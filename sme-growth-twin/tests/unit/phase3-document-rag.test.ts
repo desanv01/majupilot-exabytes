@@ -149,6 +149,9 @@ describe("Phase 3 bounded Document RAG", () => {
     const copilot = readFileSync(join(process.cwd(), "src/components/copilot/copilot-client.tsx"), "utf8");
     for (const state of ["processing", "ready", "failed", "unsupported", "duplicate", "deleted"]) expect(library).toContain(`${state}:`);
     expect(library).toContain("Uploading privately, extracting text, and creating bounded embeddings");
+    expect(library).toContain('document.status === "failed" && document.canReprocess');
+    expect(library).toContain('document.status !== "deleted"');
+    expect(library).toContain('className="evidence-file-input"');
     expect(copilot).toContain("Uploaded evidence citations");
     expect(copilot).toContain("citation.reference");
   });

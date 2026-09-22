@@ -44,6 +44,7 @@ export const evidenceDocumentSchema = z.object({
   byteLength: z.number().int().min(0).max(DOCUMENT_LIMITS.maxFileBytes),
   checksumSha256: z.string().regex(/^[a-f0-9]{64}$/),
   status: evidenceDocumentStatusSchema,
+  canReprocess: z.boolean(),
   failureCode: z.string().max(80).nullable(),
   duplicateOfDocumentId: persistenceUuidSchema.nullable(),
   pageCount: z.number().int().min(0).max(DOCUMENT_LIMITS.maxPdfPages).nullable(),

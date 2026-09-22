@@ -25,7 +25,7 @@ const failureCopy: Record<string, string> = {
   DOCUMENT_PAGE_LIMIT: `The PDF exceeds the ${DOCUMENT_LIMITS.maxPdfPages} page limit.`,
   DOCUMENT_TEXT_LIMIT: "The extracted text exceeds the bounded processing limit.",
   DOCUMENT_CHUNK_LIMIT: "The document would create too many evidence chunks.",
-  DOCUMENT_PROCESSING_FAILED: "Embedding is temporarily unavailable. You can safely reprocess this file.",
+  DOCUMENT_PROCESSING_FAILED: "Document processing did not complete.",
 };
 
 function formatBytes(bytes: number) {
@@ -168,8 +168,10 @@ export function EvidenceLibraryClient() {
               <p className="eyebrow">Private upload</p><h2 id="upload-heading">Add one trusted source</h2>
               <p>Uploaded text is treated as untrusted evidence, never as instructions. Files are scanned structurally, extracted server-side, and never executed.</p>
               <form onSubmit={upload}>
-                <label className="evidence-file" htmlFor="evidence-file"><span>{selected ? selected.name : "Choose a PDF, DOCX, or TXT file"}</span><small>{selected ? formatBytes(selected.size) : `Maximum ${formatBytes(DOCUMENT_LIMITS.maxFileBytes)}`}</small></label>
-                <input ref={inputRef} id="evidence-file" name="file" type="file" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" onChange={choose} disabled={busy} />
+                <div className="evidence-file-control">
+                  <input className="evidence-file-input" ref={inputRef} id="evidence-file" name="file" type="file" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" onChange={choose} disabled={busy} />
+                  <label className="evidence-file" htmlFor="evidence-file"><span>{selected ? selected.name : "Choose a PDF, DOCX, or TXT file"}</span><small>{selected ? formatBytes(selected.size) : `Maximum ${formatBytes(DOCUMENT_LIMITS.maxFileBytes)}`}</small></label>
+                </div>
                 <button className="button primary" type="submit" disabled={!selected || busy}>{busy ? "Processing securely..." : "Upload and process"}</button>
               </form>
               <p className={`evidence-notice ${notice.kind}`} role={notice.kind === "error" ? "alert" : "status"}>{notice.text}</p>
@@ -182,11 +184,11 @@ export function EvidenceLibraryClient() {
                   {documents.map((document) => (
                     <li key={document.id} className={`document-row status-${document.status}`}>
                       <div className="document-main"><span className="document-type">{document.mimeType === "application/pdf" ? "PDF" : document.mimeType === "text/plain" ? "TXT" : "DOCX"}</span><div><h3>{document.originalFilename}</h3><p>{formatBytes(document.byteLength)} · {document.pageCount ? `${document.pageCount} pages · ` : ""}{document.chunkCount} searchable chunks</p></div></div>
-                      <div className="document-state"><strong>{statusCopy[document.status]}</strong><small>{document.failureCode ? failureCopy[document.failureCode] ?? document.failureCode : document.status === "ready" ? `Embedded with ${document.embeddingVersion}` : `Reference ${document.id.slice(0, 8)}`}</small></div>
+                      <div className="document-state"><strong>{statusCopy[document.status]}</strong><small>{document.status === "failed" && document.canReprocess ? "The private original is stored and can be reprocessed." : document.failureCode ? failureCopy[document.failureCode] ?? document.failureCode : document.status === "ready" ? `Embedded with ${document.embeddingVersion}` : `Reference ${document.id.slice(0, 8)}`}</small></div>
                       <div className="document-actions">
                         {document.status === "ready" ? <button type="button" onClick={() => void download(document)} disabled={busy}>Download</button> : null}
-                        {document.status === "failed" ? <button type="button" onClick={() => void reprocess(document)} disabled={busy}>Reprocess</button> : null}
-                        {document.status !== "deleted" && document.status !== "duplicate" ? <button className="danger-link" type="button" onClick={() => void remove(document)} disabled={busy}>Delete</button> : null}
+                        {document.status === "failed" && document.canReprocess ? <button type="button" onClick={() => void reprocess(document)} disabled={busy}>Reprocess</button> : null}
+                        {document.status !== "deleted" ? <button className="danger-link" type="button" onClick={() => void remove(document)} disabled={busy}>Delete</button> : null}
                       </div>
                     </li>
                   ))}
