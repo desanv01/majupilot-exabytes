@@ -69,3 +69,7 @@ export function restoreCopilotMessages(messages: readonly CopilotMessage[]): Cop
 export function prepareCopilotRetry(messages: readonly CopilotClientMessage[], failedStatusId: string) {
   return messages.filter((message) => message.id !== failedStatusId);
 }
+
+export function shouldOfferCopilotRetry(failure: { retryable: boolean } | undefined) {
+  return failure?.retryable === true;
+}

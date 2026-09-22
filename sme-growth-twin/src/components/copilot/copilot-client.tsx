@@ -15,6 +15,7 @@ import {
   COPILOT_WELCOME_TEXT,
   prepareCopilotRetry,
   restoreCopilotMessages,
+  shouldOfferCopilotRetry,
 } from "./copilot-client-utils";
 
 type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null };
@@ -45,7 +46,7 @@ export function CopilotClient() {
   const [ready, setReady] = useState(false);
   const [available, setAvailable] = useState(false);
   const [session, setSession] = useState<Session>();
-  const [openFailure, setOpenFailure] = useState<{ message: string; requestId: string | null }>();
+  const [openFailure, setOpenFailure] = useState<{ message: string; requestId: string | null; retryable: boolean }>();
   const [messages, setMessages] = useState<Message[]>([
     { id: "welcome", role: "assistant", text: COPILOT_WELCOME_TEXT },
   ]);
@@ -90,7 +91,7 @@ export function CopilotClient() {
         }
       } catch (error) {
         const presentation = copilotErrorPresentation(error);
-        setOpenFailure({ message: presentation.message, requestId: presentation.requestId });
+        setOpenFailure({ message: presentation.message, requestId: presentation.requestId, retryable: presentation.retryable });
         setAvailable(false);
       } finally { setReady(true); }
     };
@@ -147,7 +148,7 @@ export function CopilotClient() {
       <main className="copilot-shell">
         <section className="copilot-intro"><p className="eyebrow">MajuPilot Transformation Copilot</p><h1>Turn your evidence into a confident next move.</h1><p>Explore the reasoning behind your plan, retrieve exact evidence, and prepare changes for explicit confirmation.</p><span className="copilot-live-status" role="status">{status}</span></section>
         {!ready ? <section className="copilot-empty" aria-busy="true"><h2>Opening your workspace</h2><p>Your authorized Twin and Blueprint are being loaded.</p></section> : !available ? (
-          <section className="copilot-empty" role={openFailure ? "alert" : undefined}><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot answers from your persisted evidence, so it opens after a Blueprint is securely synced."}</p>{openFailure?.requestId ? <p className="copilot-diagnostic">Request ID: <code>{openFailure.requestId}</code></p> : null}{openFailure ? <button className="button secondary" type="button" onClick={() => window.location.reload()}>Retry</button> : <Link className="button primary" href="/assessment">Start or resume assessment</Link>}</section>
+          <section className="copilot-empty" role={openFailure ? "alert" : undefined}><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot answers from your persisted evidence, so it opens after a Blueprint is securely synced."}</p>{openFailure?.requestId ? <p className="copilot-diagnostic">Request ID: <code>{openFailure.requestId}</code></p> : null}{shouldOfferCopilotRetry(openFailure) ? <button className="button secondary" type="button" onClick={() => window.location.reload()}>Retry</button> : !openFailure ? <Link className="button primary" href="/assessment">Start or resume assessment</Link> : null}</section>
         ) : (
           <section className="copilot-workspace" aria-label="Transformation Copilot conversation">
             <div className="copilot-log" ref={logRef} role="log" aria-live="polite">

@@ -20,7 +20,7 @@ class FakeRepository implements CopilotRepository {
   getSession = vi.fn(async () => session);
   history = vi.fn(async () => [] as CopilotMessage[]);
   findTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string) => this.receipts.has(key) ? { turnId: uuid(8), response: this.receipts.get(key)! } : null);
-  rememberTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string, _turnId: string, response: Record<string, unknown>) => { this.receipts.set(key, response); });
+  rememberTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string, _turnId: string, response: Record<string, unknown>) => { if (this.receipts.has(key)) throw new PersistenceError("IDEMPOTENCY_CONFLICT", 409); this.receipts.set(key, response); });
   appendMessage = vi.fn(async (_owner: OwnershipContext, _sessionId: string, message: AppendCopilotMessage) => { this.messages.push(message); return {} as CopilotMessage; });
   invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: string) => { this.invoked.push(name); return name === "getEvidenceForClaim" ? { evidence: [{ id: uuid(6), sourceRef: "question:3", payload: { value: "Synthetic evidence" } }] } : { artifactId: uuid(5), trusted: true }; });
   proposeWrite = vi.fn(); claimConfirmation = vi.fn(); completeConfirmation = vi.fn(); failConfirmation = vi.fn();
@@ -51,7 +51,7 @@ describe("Phase G Transformation Copilot", () => {
     const first = await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "test-client" });
     const count = repository.messages.length;
     const replay = await executeCopilotTurn({ owner, sessionId: session.id, request, repository, clientKey: "test-client" });
-    expect(replay).toEqual(first); expect(repository.messages).toHaveLength(count); expect(repository.receipts.size).toBe(1);
+    expect(replay).toEqual(first); expect(repository.messages).toHaveLength(count); expect(repository.receipts.size).toBe(2);
   });
 
   it("proves an authorized evidence-reading tool returns persisted evidence", async () => {
