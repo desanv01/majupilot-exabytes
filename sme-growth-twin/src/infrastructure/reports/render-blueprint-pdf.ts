@@ -20,6 +20,22 @@ function ascii(value: unknown) {
   return String(value ?? "").replace(/[\u2013\u2014]/g, "-").replace(/\u00d7/g, "x").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^\x20-\x7E]/g, "-").replace(/\s+/g, " ").trim();
 }
 function escapePdf(value: string) { return value.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)"); }
+function label(value: string) {
+  const known: Record<string, string> = {
+    food_beverage: "Food and beverage", retail_ecommerce: "Retail and e-commerce",
+    professional_services: "Professional services", technology_digital: "Technology and digital",
+    health_wellness: "Health and wellness", education_training: "Education and training",
+    logistics_distribution: "Logistics and distribution", construction_property: "Construction and property",
+    b2b: "B2B", b2c: "B2C", hybrid: "Hybrid",
+    under_5k: "Under RM5,000", "5k_15k": "RM5,000-RM15,000",
+    "15k_50k": "RM15,000-RM50,000", "50k_plus": "RM50,000+", unknown: "Not sure",
+    within_30_days: "Within 30 days", "1_3_months": "1-3 months",
+    "3_6_months": "3-6 months", "6_12_months": "6-12 months",
+  };
+  return known[value] ?? value.replaceAll("_", " ").replace(/^./, (first) => first.toUpperCase());
+}
+function employeeBand(value: string) { return value === "100_plus" ? "100+" : value.replaceAll("_", "-"); }
+function money(value: number) { return `${value < 0 ? "-" : ""}RM ${Math.abs(Math.round(value)).toLocaleString("en-MY")}`; }
 function wrap(text: string, size: number, width = CONTENT_WIDTH) {
   const words = ascii(text).split(" ").filter(Boolean);
   const max = Math.max(12, Math.floor(width / (size * 0.53)));
@@ -56,14 +72,20 @@ class Layout {
     }
     this.y -= style.after ?? 0;
   }
-  title(value: string) { this.text(value, { size: 18, bold: true, color: NAVY, before: 12, after: 6 }); }
-  heading(value: string) { this.text(value, { size: 12.5, bold: true, color: BLUE, before: 10, after: 4 }); }
+  title(value: string) {
+    this.ensure(12 + wrap(value, 18).length * 18 * 1.34 + 6 + 42);
+    this.text(value, { size: 18, bold: true, color: NAVY, before: 12, after: 6 });
+  }
+  heading(value: string) {
+    this.ensure(10 + wrap(value, 12.5).length * 12.5 * 1.34 + 4 + 24);
+    this.text(value, { size: 12.5, bold: true, color: BLUE, before: 10, after: 4 });
+  }
   body(value: string) { this.text(value, { size: 9.5, after: 3 }); }
   bullet(value: string) { this.text(`- ${value}`, { size: 9.25, after: 2 }, LEFT + 10, CONTENT_WIDTH - 10); }
 }
 
 function range(value: { low: number | null; base: number | null; high: number | null }) {
-  return value.low === null || value.base === null || value.high === null ? "Not estimated" : `Low ${value.low.toFixed(0)} | Base ${value.base.toFixed(0)} | High ${value.high.toFixed(0)}`;
+  return value.low === null || value.base === null || value.high === null ? "Not estimated" : `Low ${money(value.low)} | Base ${money(value.base)} | High ${money(value.high)}`;
 }
 
 export interface BlueprintPdfInput {
@@ -87,18 +109,16 @@ export function renderBlueprintPdf(input: BlueprintPdfInput): { bytes: Uint8Arra
 
   layout.text("EXABYTES", { size: 11, bold: true, color: TEAL, after: 3 });
   layout.text("MajuPilot Digital & AI Transformation Blueprint", { size: 22, bold: true, color: NAVY, after: 8 });
-  layout.body(`Report ${input.reportNumber} | Version ${input.reportVersion} | Blueprint ${blueprint.id} revision ${input.blueprintRevision}`);
-  layout.body(`Generated ${input.generatedAt} | Locale ${input.locale} | Template exabytes-blueprint-1.0.0`);
-  layout.body(`Provenance ${input.provenanceHash}`);
+  layout.body(`Report ${input.reportNumber} | Version ${input.reportVersion} | Generated ${input.generatedAt}`);
 
   layout.title("Executive summary");
-  layout.body(`Business: ${twin.identity.businessName} | Industry: ${twin.identity.industry} | Employees: ${twin.identity.employeeBand}`);
-  layout.body(`Primary objective: ${twin.objectives[0]?.type ?? "Not recorded"}. Selected plan: ${scenario.title}. ${scenario.intent}`);
+  layout.body(`Business: ${twin.identity.businessName} | Industry: ${label(twin.identity.industry)} | Employees: ${employeeBand(twin.identity.employeeBand)}`);
+  layout.body(`Primary objective: ${twin.objectives[0] ? label(twin.objectives[0].type) : "Not recorded"}. Selected plan: ${scenario.title}. ${scenario.intent}`);
   layout.body(`Digital maturity: ${diagnostic.digitalMaturity.value ?? "insufficient evidence"} (${diagnostic.digitalMaturity.bandLabel}). AI readiness: ${diagnostic.aiReadiness.value ?? "insufficient evidence"} (${diagnostic.aiReadiness.bandLabel}).`);
 
   layout.title("Business profile and constraints");
-  layout.body(`Business model: ${twin.identity.businessModel}. Budget: ${twin.constraints.budgetBand}. Implementation pace: ${twin.constraints.implementationPace}.`);
-  for (const concern of twin.constraints.concerns) layout.bullet(concern);
+  layout.body(`Business model: ${label(twin.identity.businessModel)}. Budget: ${label(twin.constraints.budgetBand)}. Implementation pace: ${label(twin.constraints.implementationPace)}.`);
+  for (const concern of twin.constraints.concerns) layout.bullet(`Concern: ${label(concern)}`);
 
   layout.title("Maturity and AI readiness");
   for (const metric of [diagnostic.digitalMaturity, diagnostic.aiReadiness]) {
@@ -137,7 +157,7 @@ export function renderBlueprintPdf(input: BlueprintPdfInput): { bytes: Uint8Arra
   }
 
   layout.title("ROI, assumptions, and unestimated streams");
-  layout.body(`First-year cost: ${range(scenario.costs.firstYear)}. Budget fit: ${scenario.budgetFit.replaceAll("_", " ")}.`);
+  layout.body(`First-year cost: ${range(scenario.costs.firstYear)}. Budget fit: ${label(scenario.budgetFit)}.`);
   const valueStreams = [["Operational value", scenario.value.operational], ["Revenue value", scenario.value.revenue], ["Avoided-risk value", scenario.value.avoidedRisk], ["Gross value", scenario.value.gross], ["Net value", scenario.value.net]] as const;
   for (const [label, stream] of valueStreams) {
     layout.heading(label);
@@ -164,10 +184,10 @@ export function renderBlueprintPdf(input: BlueprintPdfInput): { bytes: Uint8Arra
 
   layout.title("Evidence, limitations, and provenance");
   for (const limitation of blueprint.limitations) layout.bullet(limitation);
+  layout.heading("Technical report identity");
+  layout.body(`Blueprint ${blueprint.id} revision ${input.blueprintRevision} | Locale ${input.locale} | Template exabytes-blueprint-1.0.0`);
+  layout.body(`Provenance SHA-256 ${input.provenanceHash}`);
   for (const claim of blueprint.provenance) layout.bullet(`${claim.claimId} [${claim.category}]: ${claim.sourceRefs.join(", ")}`);
-  layout.gap(8);
-  layout.body("This Blueprint is planning guidance, not a vendor quote, legal advice, or a guaranteed outcome. Product facts should be revalidated at consultation time.");
-
   return buildPdf(layout.pages, input.reportNumber);
 }
 
@@ -182,6 +202,7 @@ function buildPdf(pages: PdfLine[][], reportNumber: string) {
     const drawing = ["0.035 0.102 0.196 rg", `0 ${PAGE_HEIGHT - 34} ${PAGE_WIDTH} 34 re f`, "0 0.49 0.53 rg", `0 ${PAGE_HEIGHT - 38} ${PAGE_WIDTH} 4 re f`];
     for (const line of lines) drawing.push(`${line.color.join(" ")} rg BT /${line.bold ? "F2" : "F1"} ${line.size.toFixed(2)} Tf 1 0 0 1 ${line.x.toFixed(2)} ${line.y.toFixed(2)} Tm (${escapePdf(line.text)}) Tj ET`);
     drawing.push(`0.22 0.27 0.34 rg BT /F1 8 Tf 1 0 0 1 ${LEFT} 28 Tm (${escapePdf(reportNumber)}) Tj ET`);
+    drawing.push("0.22 0.27 0.34 rg BT /F1 7 Tf 1 0 0 1 185 28 Tm (Planning guidance; not legal advice or a guarantee) Tj ET");
     drawing.push(`0.22 0.27 0.34 rg BT /F1 8 Tf 1 0 0 1 ${PAGE_WIDTH - RIGHT - 44} 28 Tm (Page ${pageIndex + 1} of ${pages.length}) Tj ET`);
     const stream = `${drawing.join("\n")}\n`;
     const contentId = add(`<< /Length ${new TextEncoder().encode(stream).byteLength} >>\nstream\n${stream}endstream`);
