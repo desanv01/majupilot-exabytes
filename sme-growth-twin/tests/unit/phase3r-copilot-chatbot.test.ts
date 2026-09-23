@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
+import { ToolChoiceViolationError } from "ai";
+
 const generateMock = vi.hoisted(() => vi.fn());
 const streamMock = vi.hoisted(() => vi.fn());
 const preflightMock = vi.hoisted(() => vi.fn());
@@ -113,8 +115,10 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
       toolName: null, toolCallId: null, toolPayload: null, modelCallId: null, executionState: "live", schemaVersion: "phase-g-copilot-1.0.0", createdAt: "2026-09-23T00:00:00.000Z",
     }];
     generateMock.mockImplementation(async (options: unknown, input: unknown) => {
-      const tools = (options as { tools: Record<string, unknown> }).tools;
+      const configured = options as { tools: Record<string, unknown>; prepareStep: (value: unknown) => unknown };
+      const tools = configured.tools;
       expect(Object.keys(tools)).toEqual(expect.arrayContaining(["searchUploadedEvidence", "searchWeb", "getBlueprint", "requestConsultation"]));
+      expect(configured.prepareStep({ steps: [] })).toBeUndefined();
       expect((input as { prompt: string }).prompt).toContain("A webhook is an HTTP callback.");
       return completed("It lets one service notify another when an event occurs.");
     });
@@ -186,6 +190,113 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
 
     expect(result.toolCalls).toMatchObject([{ toolName: "searchWeb", status: "rejected", result: { reason: "UNSAFE_WEB_QUERY" } }]);
     expect(perplexitySearchMock).not.toHaveBeenCalled();
+  });
+
+  it("preserves public company questions while rejecting explicitly private text", () => {
+    const publicQuestion = "What is company Apple doing today?";
+    expect(derivePublicWebQuery(publicQuestion, publicQuestion)).toBe("what is company apple doing today");
+    expect(isPublicWebQuerySafe("what is company apple doing today", publicQuestion)).toBe(true);
+
+    expect(() => derivePublicWebQuery(
+      "our customer's secret margin 43127",
+      "Search the web for our customer's secret margin 43127.",
+    )).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("customer Acme", "Search the web for customer Acme.")).toThrowError(PersistenceError);
+    expect(derivePublicWebQuery("current customer service trends", "Find current customer service trends.")).toBe("current customer service trends");
+  });
+
+  it("honors explicit tool and private-document exclusions", async () => {
+    const repository = new Phase3rRepository();
+    generateMock.mockImplementation(async (options: unknown) => {
+      const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: unknown } | undefined };
+      const initial = configured.prepareStep({ steps: [] });
+      expect(initial).toMatchObject({ activeTools: [], toolChoice: "none" });
+      return completed("A webhook is an HTTP callback.");
+    });
+    await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-no-tools",
+      request: { message: "Explain a webhook simply. Do not use tools.", idempotencyKey: "phase3r-no-tools-turn" },
+    });
+
+    generateMock.mockImplementation(async (options: unknown) => {
+      const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: { toolName: string } } | undefined };
+      const initial = configured.prepareStep({ steps: [] });
+      expect(initial?.toolChoice?.toolName).toBe("searchWeb");
+      expect(initial?.activeTools).not.toContain("searchUploadedEvidence");
+      expect(initial?.activeTools).not.toContain("getDocumentExcerpt");
+      return completed("I need current public sources for today's activity.");
+    });
+    await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-no-documents",
+      request: { message: "What is company Apple doing today? Search the public web. Do not use private documents.", idempotencyKey: "phase3r-no-documents-turn" },
+    });
+
+    generateMock.mockImplementation(async (options: unknown) => {
+      const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: unknown } | undefined };
+      const initial = configured.prepareStep({ steps: [] });
+      expect(initial?.activeTools).not.toContain("searchWeb");
+      expect(initial?.toolChoice).toBeUndefined();
+      return completed("I can answer from general knowledge without current sources.");
+    });
+    await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-no-web",
+      request: { message: "Explain Apple in general terms, but do not search the web.", idempotencyKey: "phase3r-no-web-turn" },
+    });
+  });
+
+  it("plans both tools for a natural uploaded-plan and current-benchmark request", async () => {
+    const repository = new Phase3rRepository();
+    generateMock.mockImplementation(async (options: unknown) => {
+      const configured = options as {
+        tools: Record<string, { execute: (value: Record<string, unknown>) => Promise<unknown> }>;
+        prepareStep: (value: unknown) => { toolChoice?: { toolName: string }; activeTools?: string[] } | undefined;
+      };
+      if (configured.tools.providerSearch) return {
+        ...completed(""),
+        toolResults: [{ toolName: "providerSearch", output: { results: [{ title: "Public benchmark", url: "https://example.org/benchmark", snippet: "Public stockout benchmark", date: "2026-09-22" }] } }],
+      };
+      expect(configured.prepareStep({ steps: [] })?.toolChoice?.toolName).toBe("searchWeb");
+      await configured.tools.searchWeb.execute({ query: "current public stockout benchmark" });
+      const afterWeb = configured.prepareStep({ steps: [{ toolCalls: [{ toolName: "searchWeb" }] }] });
+      expect(afterWeb?.toolChoice?.toolName).toBe("searchUploadedEvidence");
+      expect(afterWeb?.activeTools).not.toContain("searchWeb");
+      await configured.tools.searchUploadedEvidence.execute({ query: "uploaded stockout plan", maxResults: 5, relevanceThreshold: 0.62 });
+      expect(configured.prepareStep({ steps: [{ toolCalls: [{ toolName: "searchWeb" }] }, { toolCalls: [{ toolName: "searchUploadedEvidence" }] }] })?.activeTools).not.toContain("searchWeb");
+      return completed("The uploaded plan and public benchmark are shown separately.");
+    });
+
+    const result = await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-natural-mixed",
+      request: { message: "Compare the uploaded stockout plan with a current public stockout benchmark.", idempotencyKey: "phase3r-natural-mixed-turn" },
+    });
+    expect(result.toolCalls.map((call) => call.toolName)).toEqual(["searchWeb", "searchUploadedEvidence"]);
+    expect(result.toolCalls[0].result).toMatchObject({ answerable: true, query: "current public stockout benchmark" });
+  });
+
+  it("retries a missing provider search tool call once without private context", async () => {
+    const repository = new Phase3rRepository();
+    let providerAttempts = 0;
+    generateMock.mockImplementation(async (options: unknown, input: unknown) => {
+      const configured = options as { tools: Record<string, { execute: (value: Record<string, unknown>) => Promise<unknown> }> };
+      if (configured.tools.providerSearch) {
+        providerAttempts += 1;
+        expect((input as { prompt: string }).prompt).toContain("apple");
+        expect((input as { prompt: string }).prompt).not.toContain("Amina");
+        if (providerAttempts === 1) throw new ToolChoiceViolationError({
+          toolChoice: { type: "tool", toolName: "providerSearch" }, finishReason: "stop",
+          provider: "test", modelId: "test/model", content: [],
+        });
+        return { ...completed(""), toolResults: [{ toolName: "providerSearch", output: { results: [{ title: "Apple public news", url: "https://example.org/apple", snippet: "Public news", date: "2026-09-23" }] } }] };
+      }
+      await configured.tools.searchWeb.execute({ query: "apple today" });
+      return completed("Public sources are available.");
+    });
+    const result = await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-provider-retry",
+      request: { message: "What is company Apple doing today?", idempotencyKey: "phase3r-provider-retry-turn" },
+    });
+    expect(providerAttempts).toBe(2);
+    expect(result.toolCalls).toMatchObject([{ toolName: "searchWeb", result: { answerable: true, query: "apple today" } }]);
   });
 
   it("aborts a partial stream without persisting it as a completed assistant message", async () => {

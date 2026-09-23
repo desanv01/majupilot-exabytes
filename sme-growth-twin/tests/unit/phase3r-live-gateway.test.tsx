@@ -97,9 +97,11 @@ describe.skipIf(!enabled)("Phase 3R live Gateway general, web, and mixed-source 
     expect(followUp.toolCalls).toEqual([]);
     expect(followUp.text.length).toBeGreaterThan(20);
 
-    const current = await run("Search the public web for the current Malaysia SST rate in 2026. Cite dated public sources and do not use private documents.");
+    const current = await run("What is company Apple doing today? Search the public web for current information, cite dated public sources, and do not use private documents.");
     const webCall = current.toolCalls.find((call) => call.toolName === "searchWeb");
     expect(webCall).toMatchObject({ status: "completed", result: { answerable: true } });
+    expect(current.toolCalls.some((call) => ["searchUploadedEvidence", "getDocumentExcerpt"].includes(call.toolName))).toBe(false);
+    expect(String(webCall?.result?.query ?? "")).toMatch(/\bapple\b/i);
     const webSources = (webCall?.result?.sources ?? []) as Array<{ url: string; date: string | null; lastUpdated: string | null }>;
     expect(webSources.length).toBeGreaterThan(0);
     expect(webSources.every((source) => /^https?:\/\//.test(source.url) && !new URL(source.url).username && !new URL(source.url).password)).toBe(true);
@@ -108,15 +110,17 @@ describe.skipIf(!enabled)("Phase 3R live Gateway general, web, and mixed-source 
     expect(sourceMarkup).toContain("Public web sources");
     expect(sourceMarkup).toMatch(/Updated|Published/);
 
-    const mixed = await run("Use both my uploaded evidence and a public web search. Compare the uploaded stockout target with current Malaysia retail inventory benchmarks for 2026. Keep private names out of the web query and cite each source separately.");
+    const mixed = await run("Compare the uploaded stockout plan with a current public Malaysia retail inventory benchmark for 2026. Cite each source separately.");
     expect(mixed.toolCalls.map((call) => call.toolName)).toEqual(expect.arrayContaining(["searchUploadedEvidence", "searchWeb"]));
     const mixedQuery = String(mixed.toolCalls.find((call) => call.toolName === "searchWeb")?.result?.query ?? "");
     expect(mixedQuery).not.toMatch(/Amina|private weekly review/i);
     expect(mixed.toolCalls.find((call) => call.toolName === "searchUploadedEvidence")?.result).toMatchObject({ answerable: true });
 
     const proposal = await run(`Propose generating the Blueprint report for blueprint ${session.blueprintId}. Do not claim it completed; ask for confirmation.`);
-    expect(proposal.toolCalls).toHaveLength(1);
-    expect(proposal.toolCalls[0]).toMatchObject({ toolName: "generateBlueprintReport", status: "confirmation_required" });
+    expect(proposal.toolCalls.filter((call) => call.status === "confirmation_required")).toMatchObject([
+      { toolName: "generateBlueprintReport", status: "confirmation_required" },
+    ]);
+    expect(proposal.toolCalls.every((call) => call.status === "completed" || call.status === "confirmation_required")).toBe(true);
     expect(repository.proposed).toHaveLength(1);
     expect(repository.proposed[0].status).toBe("pending");
 

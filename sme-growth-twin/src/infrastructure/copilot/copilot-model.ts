@@ -2,7 +2,7 @@ import "server-only";
 
 import { createHash } from "node:crypto";
 
-import { APICallError, NoOutputGeneratedError, ToolLoopAgent, isStepCount, tool, type ToolSet } from "ai";
+import { APICallError, NoOutputGeneratedError, ToolChoiceViolationError, ToolLoopAgent, isStepCount, tool, type ToolSet } from "ai";
 import { gateway } from "@ai-sdk/gateway";
 import { z } from "zod";
 
@@ -170,6 +170,27 @@ function normalizeWebSearchOutput(output: unknown) {
 }
 
 const queryTerms = (value: string) => value.toLocaleLowerCase("en-MY").normalize("NFKC").match(/[\p{L}\p{N}]+/gu) ?? [];
+const PUBLIC_RELATIONSHIP_TERMS = new Set(["service", "support", "experience", "relations", "relationship", "management", "records", "retention", "acquisition", "journey", "feedback", "trends", "trend", "benchmark", "benchmarks", "data", "privacy", "security", "rights", "side", "server", "success", "care", "satisfaction", "login"]);
+
+function explicitPublicWebIntent(message: string) {
+  return /\b(?:search|browse|look up)\b.{0,30}\b(?:web|online)\b|\b(?:web|online)\s+(?:search|sources?)\b|\b(?:today|latest|recent)\b|\bcurrent\b.{0,80}\b(?:public|benchmark|industry)\b|\bpublic\b.{0,80}\bcurrent\b/i.test(message);
+}
+
+function explicitUploadedEvidenceIntent(message: string) {
+  return /\b(?:uploaded?|documents?|files?|pdf|docx|txt)\b/i.test(message);
+}
+
+function explicitlyForbidsTools(message: string) {
+  return /\b(?:do not|don't)\s+use\b.{0,50}\btools?\b|\bwithout\s+(?:using\s+)?(?:any\s+)?tools?\b/i.test(message);
+}
+
+function explicitlyForbidsUploadedEvidence(message: string) {
+  return /\b(?:do not|don't)\s+(?:use|search|read)\b.{0,40}\b(?:private|uploaded|assessment|documents?|files?|evidence)\b|\bwithout\b.{0,30}\b(?:uploaded|private|documents?|files?|evidence)\b/i.test(message);
+}
+
+function explicitlyForbidsWebSearch(message: string) {
+  return /\b(?:do not|don't|never)\s+(?:search|browse|look up|use)\b.{0,30}\b(?:web|online)\b|\bwithout\b.{0,30}\b(?:web|online)\s+(?:search|sources?)\b/i.test(message);
+}
 
 function redactPrivateQueryMaterial(value: string) {
   return value
@@ -178,7 +199,10 @@ function redactPrivateQueryMaterial(value: string) {
     .replace(/\b[0-9a-f]{8}-[0-9a-f-]{27,}\b/gi, " ")
     .replace(/\+?\d[\d()\s-]{7,}\d/g, " ")
     .replace(/\b\d{5,}\b/g, " ")
-    .replace(/\b(?:customer|client|company|business|tenant|account)\b[^,.!?;:\n]*/gi, " ");
+    .replace(/\b(?:private|confidential|internal)\s+(?:customer|client|company|business|tenant|account)\s*[:=]\s*[^,.!?;:\n]*/gi, " ")
+    .replace(/\b(?:customer|client|company|business|tenant|account)\s+(?:name|id|identifier|record|reference|number|secret|credential|token|password|margin|revenue|phone|email|contact)\s*[:=]\s*[^,.!?;:\n]*/gi, " ")
+    .replace(/\b(?:(?:my|our)\s+(?:customer|client|company|business|tenant|account)|(?:customer|client|company|business|tenant|account)(?:'s|’s))\b[^,.!?;:\n]*/gi, " ")
+    .replace(/\b(?:customer|client|tenant|account)\s+([\p{L}\p{N}][\p{L}\p{N}-]*)[^,.!?;:\n]*/giu, (match, following: string) => PUBLIC_RELATIONSHIP_TERMS.has(following.toLocaleLowerCase("en-MY")) ? match : " ");
 }
 
 export function derivePublicWebQuery(proposedQuery: string, userMessage: string) {
@@ -323,6 +347,11 @@ export async function executeCopilotTurn(args: {
   }
   const history = (await args.repository.history(args.owner, session.id, 0, MAX_HISTORY_MESSAGES)).filter((item) => item.turnId !== turnId && item.text).map((item) => `${item.role.toUpperCase()}: ${item.text}`).join("\n");
   const prompt = `<UNTRUSTED_CHAT_HISTORY>${history}</UNTRUSTED_CHAT_HISTORY>\n<UNTRUSTED_USER_TEXT>${args.request.message}</UNTRUSTED_USER_TEXT>`;
+  const noToolsRequested = explicitlyForbidsTools(args.request.message);
+  const noUploadedEvidenceRequested = explicitlyForbidsUploadedEvidence(args.request.message);
+  const noWebRequested = explicitlyForbidsWebSearch(args.request.message);
+  const requestedPublicWeb = !noToolsRequested && !noWebRequested && explicitPublicWebIntent(args.request.message);
+  const requestedUploadedEvidence = requestedPublicWeb && !noUploadedEvidenceRequested && explicitUploadedEvidenceIntent(args.request.message);
   const estimatedInput = tokenEstimate(prompt);
   if (estimatedInput > policy.maxInputTokens || await args.repository.getDailyModelSpend(args.owner) >= policy.dailyCostUsd) {
     const error = new AiExecutionError("AI_BUDGET_EXCEEDED", 402, false);
@@ -416,7 +445,13 @@ export async function executeCopilotTurn(args: {
           timeout: { totalMs: Math.max(1_000, policy.timeoutMs - (now() - started)) },
           providerOptions: { gateway: { user: args.owner.kind === "guest" ? `guest:${args.owner.guestSessionId}` : `user:${args.owner.userId}`, tags: ["feature:transformation-copilot-web-search"] } },
         });
-        const search = await searchAgent.generate({ prompt: `Public query: ${publicQuery}`, abortSignal: args.signal });
+        let search;
+        try { search = await searchAgent.generate({ prompt: `Public query: ${publicQuery}`, abortSignal: args.signal }); }
+        catch (error) {
+          if (!ToolChoiceViolationError.isInstance(error)) throw error;
+          // A tool-choice violation means no provider search executed; retry the same safe query once.
+          search = await searchAgent.generate({ prompt: `Call providerSearch once with this public query: ${publicQuery}`, abortSignal: args.signal });
+        }
         webInputTokens += search.usage.inputTokens ?? 0;
         webOutputTokens += search.usage.outputTokens ?? 0;
         const providerResult = search.toolResults.find((item) => item.toolName === "providerSearch");
@@ -442,7 +477,14 @@ export async function executeCopilotTurn(args: {
           prepareStep: ({ steps }) => {
             const priorNames = steps.flatMap((step) => step.toolCalls.map((call) => call.toolName));
             const webWasUsed = priorNames.includes("searchWeb");
-            return webWasUsed ? { activeTools: Object.keys(tools).filter((name) => name !== "searchWeb") } : undefined;
+            if (noToolsRequested) return { activeTools: [], toolChoice: "none" };
+            const activeTools = Object.keys(tools).filter((name) => !((webWasUsed || noWebRequested) && name === "searchWeb") && !(noUploadedEvidenceRequested && ["searchUploadedEvidence", "getDocumentExcerpt"].includes(name)));
+            if (requestedPublicWeb && !webWasUsed) return { activeTools, toolChoice: { type: "tool", toolName: "searchWeb" } };
+            if (requestedUploadedEvidence && !priorNames.includes("searchUploadedEvidence")) return {
+              activeTools,
+              toolChoice: { type: "tool", toolName: "searchUploadedEvidence" },
+            };
+            return webWasUsed || noWebRequested || noUploadedEvidenceRequested ? { activeTools } : undefined;
           },
           maxRetries: 0,
           timeout: { totalMs: Math.max(1_000, policy.timeoutMs - (now() - started)) },
