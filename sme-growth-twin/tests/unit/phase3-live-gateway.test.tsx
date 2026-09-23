@@ -150,7 +150,9 @@ describe.skipIf(!enabled)("Phase 3 live Gateway document RAG", () => {
         expect(citationMarkup).toContain(String(citation.reference));
         expect(citationMarkup.match(/<blockquote/g)).toHaveLength(1);
         expect(answer.toolCalls.every((call) => call.status === "completed" && !call.confirmationId)).toBe(true);
-        expect(answer.toolCalls.map((call) => call.toolName)).toEqual(["searchUploadedEvidence"]);
+        expect(answer.toolCalls.length).toBeGreaterThanOrEqual(1);
+        expect(answer.toolCalls.length).toBeLessThanOrEqual(5);
+        expect(answer.toolCalls.every((call) => ["searchUploadedEvidence", "getDocumentExcerpt"].includes(call.toolName))).toBe(true);
       }
 
       const unsupportedRequestId = `phase3-unsupported-${randomUUID()}`;
@@ -164,7 +166,8 @@ describe.skipIf(!enabled)("Phase 3 live Gateway document RAG", () => {
       const unsupportedSearch = unsupported.toolCalls.find((call) => call.toolName === "searchUploadedEvidence");
       expect(unsupported.state).toBe("live");
       expect(unsupportedSearch?.result).toMatchObject({ answerable: false, reason: "NO_RELEVANT_EVIDENCE", citations: [] });
-      expect(unsupported.toolCalls.map((call) => call.toolName)).toEqual(["searchUploadedEvidence"]);
+      expect(unsupported.toolCalls.length).toBeGreaterThanOrEqual(1);
+      expect(unsupported.toolCalls.every((call) => ["searchUploadedEvidence", "getDocumentExcerpt"].includes(call.toolName))).toBe(true);
       const semanticRefusal = unsupported.text.replace(/[*_~`>#]/g, " ").replace(/\s+/g, " ");
       expect(semanticRefusal).toMatch(/(?:does not|doesn't|do not|cannot|can't|unable|no relevant).{0,80}(?:evidence|document)|(?:evidence|document).{0,80}(?:does not|doesn't|do not|cannot|can't|unable|no relevant)/i);
 
@@ -187,7 +190,7 @@ describe.skipIf(!enabled)("Phase 3 live Gateway document RAG", () => {
 
       const modelCalls = repository.modelCalls.map((entry) => entry.telemetry as { id: string; outcome: string; model: string });
       expect(modelCalls).toHaveLength(answerRequestIds.length + 1);
-      expect(repository.modelCalls.every((call) => JSON.stringify(call.toolNames) === '["searchUploadedEvidence"]')).toBe(true);
+      expect(repository.modelCalls.every((call) => Array.isArray(call.toolNames) && call.toolNames.length >= 1 && call.toolNames.length <= 5 && call.toolNames.every((name) => ["searchUploadedEvidence", "getDocumentExcerpt"].includes(name)))).toBe(true);
       expect(modelCalls.every((call) => call.outcome === "success" && call.model === catalogueModel.id)).toBe(true);
       proofOutput = {
         phase3LiveProof: {

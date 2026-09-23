@@ -3,7 +3,7 @@ import { z } from "zod";
 import { persistenceUuidSchema } from "./persistence";
 
 export const COPILOT_SCHEMA_VERSION = "phase-g-copilot-1.0.0" as const;
-export const COPILOT_PROMPT_VERSION = "phase-g-copilot-1.0.0" as const;
+export const COPILOT_PROMPT_VERSION = "phase3r-general-copilot-2.0.0" as const;
 
 export const copilotExecutionStateSchema = z.enum([
   "live",
@@ -27,6 +27,7 @@ export const copilotReadToolNameSchema = z.enum([
   "getAcceptedConsultantNotes",
   "searchUploadedEvidence",
   "getDocumentExcerpt",
+  "searchWeb",
 ]);
 
 export const copilotWriteToolNameSchema = z.enum([
@@ -64,6 +65,34 @@ export const copilotReadToolInputSchemas = {
   searchUploadedEvidence: z.object({ query: z.string().trim().min(2).max(500), maxResults: z.number().int().min(1).max(8).default(5), relevanceThreshold: z.number().min(0.4).max(0.95).default(0.62) }).strict(),
   getDocumentExcerpt: z.object({ documentId: persistenceUuidSchema, chunkId: persistenceUuidSchema }).strict(),
 } as const;
+
+export const copilotMessagePartSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("text"), text: z.string().max(12_000) }).strict(),
+  z.object({
+    type: z.literal("tool-status"),
+    toolName: copilotToolNameSchema,
+    state: z.enum(["completed", "confirmation_required", "rejected"]),
+  }).strict(),
+  z.object({
+    type: z.literal("source-document"),
+    documentId: persistenceUuidSchema,
+    chunkId: persistenceUuidSchema,
+    documentName: z.string().trim().min(1).max(240),
+    pageNumber: z.number().int().positive().max(40).nullable(),
+    sectionRef: z.string().trim().min(1).max(120),
+    excerpt: z.string().trim().min(1).max(900),
+    reference: z.string().trim().min(1).max(220),
+  }).strict(),
+  z.object({
+    type: z.literal("source-url"),
+    url: z.url().max(2_048).refine((value) => { try { const parsed = new URL(value); return ["http:", "https:"].includes(parsed.protocol) && !parsed.username && !parsed.password; } catch { return false; } }, "Only credential-free HTTP(S) sources are allowed"),
+    title: z.string().trim().min(1).max(300),
+    snippet: z.string().trim().max(1_200),
+    date: z.string().trim().max(40).nullable(),
+    lastUpdated: z.string().trim().max(40).nullable(),
+  }).strict(),
+]);
+export type CopilotMessagePart = z.infer<typeof copilotMessagePartSchema>;
 
 const boundedJson = z.record(z.string().max(80), z.unknown()).superRefine((value, context) => {
   if (JSON.stringify(value).length > 24_000) context.addIssue({ code: "custom", message: "Payload too large" });
@@ -123,6 +152,7 @@ export const copilotMessageSchema = z.object({
   toolPayload: z.record(z.string(), z.unknown()).nullable(),
   modelCallId: persistenceUuidSchema.nullable(),
   executionState: copilotExecutionStateSchema.nullable(),
+  parts: z.array(copilotMessagePartSchema).max(24).optional(),
   schemaVersion: z.literal(COPILOT_SCHEMA_VERSION),
   createdAt: z.iso.datetime({ offset: true }),
 }).strict();

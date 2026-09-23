@@ -48,12 +48,21 @@ terminal safe fallbacks and are not retried. The accepted Phase C, D, G, and I
 evidence records successful required-mode calls through Vercel AI Gateway using
 `deepseek/deepseek-v4.1-flash`.
 
+The general multi-turn Transformation Copilot answers ordinary questions without
+requiring an upload, restores durable history, and can combine authorized
+assessment evidence with bounded, dated public-web sources. Public search receives
+only a derived query from the current user turn and never private document text.
+Writes remain pending until explicit confirmation. See
+[Phase 3R general Copilot](./docs/phase3r-general-copilot.md) for the streaming,
+privacy, persistence, source, and verification contract.
+
 The assessment-scoped Evidence Library accepts bounded PDF, DOCX, and TXT files,
 stores originals in a private Supabase bucket, and exposes them only through
 short-lived server-issued download URLs. Extracted chunks use the fixed
 `openai/text-embedding-3-small` Gateway route and pgvector cosine search. Copilot
 labels every uploaded-document citation with filename, page or section, excerpt,
-and stable document/chunk references; no-upload and no-match cases fail closed.
+and stable document/chunk references; no-match results cannot support a document
+claim but do not prevent a separately labelled general answer.
 See [Document RAG](./docs/phase3-document-rag.md) for limits, setup, security,
 and verification.
 

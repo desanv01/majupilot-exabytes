@@ -1,6 +1,7 @@
 import type { ModelCallTelemetry } from "@/domain/ai-execution";
 import type {
   CopilotMessage,
+  CopilotMessagePart,
   CopilotReadToolInput,
   CopilotReadToolName,
   CopilotSession,
@@ -20,6 +21,7 @@ export interface AppendCopilotMessage {
   toolPayload?: Record<string, unknown>;
   modelCallId?: string;
   executionState?: "live" | "deterministic_fallback" | "ai_disabled" | "failed";
+  parts?: CopilotMessagePart[];
 }
 
 export interface CopilotConfirmation {

@@ -22,7 +22,7 @@ import { AiExecutionError } from "@/domain/ai-execution";
 import type { CopilotMessage, CopilotSession } from "@/domain/copilot";
 import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import { copilotErrorResponse } from "@/infrastructure/copilot/copilot-errors";
-import { executeCopilotTurn, isUploadedDocumentQuestion } from "@/infrastructure/copilot/copilot-model";
+import { executeCopilotTurn } from "@/infrastructure/copilot/copilot-model";
 import type { AppendCopilotMessage, CopilotConfirmation, CopilotRepository } from "@/infrastructure/copilot/copilot-repository";
 import { CopilotApiError, copilotErrorPresentation, prepareCopilotRetry, restoreCopilotMessages, shouldOfferCopilotRetry } from "@/components/copilot/copilot-client-utils";
 
@@ -35,7 +35,7 @@ const message = (role: CopilotMessage["role"], sequence: number, text: string | 
   toolName: null, toolCallId: null, toolPayload: null, modelCallId: null, executionState: role === "tool" ? "ai_disabled" : null,
   schemaVersion: "phase-g-copilot-1.0.0", createdAt: "2026-09-20T00:00:00.000Z",
 });
-const liveResult = (text = "Recovered from the retryable failure.") => ({ text, usage: { inputTokens: 24, outputTokens: 12 }, finishReason: "stop" });
+const liveResult = (text = "Recovered from the retryable failure.") => ({ text, usage: { inputTokens: 24, outputTokens: 12 }, finishReason: "stop", toolResults: [] });
 
 class FailureRepository implements CopilotRepository {
   messages: AppendCopilotMessage[] = [];
@@ -126,9 +126,13 @@ describe("Phase 1 Copilot repair", () => {
     expect(shouldOfferCopilotRetry(undefined)).toBe(false);
   });
 
-  it("anchors explicit uploaded-document questions to an authorized read even when the model skips tools", async () => {
+  it("offers uploaded-document retrieval inside the normal tool loop", async () => {
     preflightMock.mockResolvedValue({ id: "test/model", supported_parameters: ["tools"], pricing: { input: 0, output: 0 } });
-    generateMock.mockResolvedValue(liveResult("The stockout target is 17 percent."));
+    generateMock.mockImplementation(async (options: unknown) => {
+      const tools = (options as { tools: Record<string, { execute: (input: Record<string, unknown>) => Promise<unknown> }> }).tools;
+      await tools.searchUploadedEvidence.execute({ query: "stockout target", maxResults: 5, relevanceThreshold: 0.62 });
+      return liveResult("The stockout target is 17 percent.");
+    });
     const repository = new FailureRepository();
     const citation = { documentId: uuid(61), chunkId: uuid(62), documentName: "synthetic-plan.txt", pageNumber: null, sectionRef: "Text document", excerpt: "The stockout target is 17 percent.", similarity: 0.59, reference: `doc:${uuid(61)}#chunk:${uuid(62)}`, provenance: "uploaded_document" };
     repository.invokeReadTool.mockResolvedValue({ answerable: true, reason: null, citations: [citation] });
@@ -139,27 +143,29 @@ describe("Phase 1 Copilot repair", () => {
     expect(result.toolCalls[0]).toMatchObject({ toolName: "searchUploadedEvidence", result: { citations: [citation] } });
     expect(repository.invokeReadTool).toHaveBeenCalledWith(owner, session, "searchUploadedEvidence", expect.objectContaining({ query: expect.stringContaining("stockout") }));
     expect(repository.messages.map((item) => item.role)).toEqual(["user", "tool", "assistant"]);
-    expect(generateMock.mock.calls[0][0]).toMatchObject({ tools: {} });
-    expect(generateMock.mock.calls[0][1].prompt).toContain("UNTRUSTED_UPLOADED_EVIDENCE");
+    expect(generateMock.mock.calls[0][0].tools).toHaveProperty("searchUploadedEvidence");
+    expect(generateMock.mock.calls[0][0].tools).toHaveProperty("searchWeb");
     expect(repository.proposeWrite).not.toHaveBeenCalled();
   });
 
-  it("overrides unsupported document claims with an explicit no-evidence refusal", async () => {
+  it("allows clearly labelled general guidance after an unsupported document claim", async () => {
     preflightMock.mockResolvedValue({ id: "test/model", supported_parameters: ["tools"], pricing: { input: 0, output: 0 } });
-    generateMock.mockResolvedValue(liveResult("The lunar payroll deadline is tomorrow."));
+    generateMock.mockImplementation(async (options: unknown) => {
+      const tools = (options as { tools: Record<string, { execute: (input: Record<string, unknown>) => Promise<unknown> }> }).tools;
+      await tools.searchUploadedEvidence.execute({ query: "lunar payroll deadline", maxResults: 5, relevanceThreshold: 0.62 });
+      return liveResult("The upload does not support a lunar payroll deadline. General guidance: confirm payroll deadlines with the relevant authority.");
+    });
     const repository = new FailureRepository();
     repository.invokeReadTool.mockResolvedValue({ answerable: false, reason: "NO_RELEVANT_EVIDENCE", citations: [] });
     const result = await executeCopilotTurn({ owner, sessionId: session.id,
       request: { message: "What lunar payroll deadline is in the uploaded document?", idempotencyKey: "phase5-anchored-refusal" },
       repository, clientKey: "phase5-anchored-test" });
     expect(result.state).toBe("live");
-    expect(result.text).toContain("NO_RELEVANT_EVIDENCE");
-    expect(result.text).not.toContain("tomorrow");
+    expect(result.text).toContain("upload does not support");
+    expect(result.text).toContain("General guidance");
     expect(result.toolCalls[0]).toMatchObject({ toolName: "searchUploadedEvidence", result: { answerable: false } });
-    expect(generateMock.mock.calls[0][0]).toMatchObject({ tools: {} });
-    expect(result.toolCalls).toHaveLength(1); // No model-initiated broader search can override the original refusal.
-    expect(isUploadedDocumentQuestion("Download my PDF report")).toBe(false);
-    expect(isUploadedDocumentQuestion("From the uploaded evidence, report the stockout target")).toBe(true);
+    expect(generateMock.mock.calls[0][0].tools).toHaveProperty("searchUploadedEvidence");
+    expect(result.toolCalls).toHaveLength(1);
   });
 
   it("claims one same-key retry, succeeds, and replays without duplicate messages or proposals", async () => {

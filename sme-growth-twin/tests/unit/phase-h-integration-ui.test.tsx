@@ -9,7 +9,8 @@ describe("MajuPilot application integration", () => {
   it("exposes Copilot as a first-class product surface without internal phase copy", () => {
     const html = renderToStaticMarkup(<CopilotPage />);
     expect(html).toContain("MajuPilot Transformation Copilot");
-    expect(html).toContain("Turn your evidence into a confident next move.");
+    expect(html).toContain("A practical copilot for the work after your Blueprint.");
+    expect(html).toContain("search the public web when current information matters");
     expect(html).toContain("Blueprint");
     expect(html).toContain("Consultation");
     expect(html).not.toContain("Phase H");

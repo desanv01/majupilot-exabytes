@@ -30,12 +30,12 @@ flowchart LR
 - Deterministic canonical PDF generation, private Supabase Storage, content hashes, and short-lived signed downloads.
 - Immutable accepted consultant notes derived from reviewed drafts.
 - Durable Supabase persistence, guest ownership, organization roles, tenant isolation, RLS, consent records, leads, deterministic assignment, audit events, and export/deletion request contracts.
-- A persisted Transformation Copilot with typed reads and confirmation-gated, idempotent writes.
+- A persisted general Transformation Copilot with multi-turn streaming, typed assessment reads, bounded public-web search, and confirmation-gated idempotent writes.
 - An assessment-scoped private Evidence Library for bounded PDF, DOCX, and TXT uploads, with cited Copilot retrieval.
 - A durable signed-webhook outbox with leasing, bounded retry, dead-letter handling, replay authorization, SSRF protection, and redacted delivery receipts.
 - Responsive, keyboard-accessible interfaces plus three clearly labelled fictional demonstration cases.
 
-Copilot answers from the persisted structured Business Twin, diagnosis, recommendations, scenarios, Blueprint, report, lead, and audit records. Uploaded documents add a separate, bounded and cited evidence source; unsupported or unanswerable document questions fail closed.
+Copilot can answer ordinary questions without an upload and can separately ground answers in the persisted structured Business Twin, diagnosis, recommendations, scenarios, Blueprint, report, lead, audit records, private uploaded evidence, or dated public-web sources. Unsupported document claims fail closed for that document claim without banning clearly labelled general guidance.
 
 ## Architecture
 
