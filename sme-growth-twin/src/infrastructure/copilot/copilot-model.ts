@@ -170,8 +170,19 @@ function normalizeWebSearchOutput(output: unknown) {
 }
 
 const queryTerms = (value: string) => value.toLocaleLowerCase("en-MY").normalize("NFKC").match(/[\p{L}\p{N}]+/gu) ?? [];
+const PRIVATE_WEB_CONTEXT_MARKER = /\b(?:(?:my|our|private|confidential|internal)\s+(?:customer|client|company|business|tenant|account)\b|(?:customer|client|company|business|tenant|account)(?:'s|’s)\b)/i;
 const PUBLIC_RELATIONSHIP_TERMS = new Set(["service", "support", "experience", "relations", "relationship", "management", "records", "retention", "acquisition", "journey", "feedback", "trends", "trend", "benchmark", "benchmarks", "data", "privacy", "security", "rights", "side", "server", "success", "care", "satisfaction", "login", "guidance"]);
 const PUBLIC_RELATIONSHIP_CONNECTORS = new Set(["a", "an", "and", "for", "in", "of", "on", "the", "with"]);
+const RELATIONSHIP_CONTEXT = /\b(?:customers?|clients?|tenants?|accounts?)\b/i;
+const GENERIC_RELATIONSHIP_QUERY_TERMS = new Set([
+  ...PUBLIC_RELATIONSHIP_TERMS, ...PUBLIC_RELATIONSHIP_CONNECTORS, ...WEB_QUERY_GENERIC_TERMS,
+  "customer", "customers", "client", "clients", "tenant", "tenants", "account", "accounts",
+  "what", "are", "is", "how", "can", "do", "does", "find", "look", "up", "browse", "tell", "me", "about", "please", "explain", "give", "examples", "example", "best", "practices", "strategy", "strategies", "software", "tools",
+]);
+
+function hasNonGenericRelationshipContext(value: string) {
+  return RELATIONSHIP_CONTEXT.test(value) && queryTerms(value).some((term) => !GENERIC_RELATIONSHIP_QUERY_TERMS.has(term) && !/^(?:19|20)\d{2}$/.test(term));
+}
 
 function explicitPublicWebIntent(message: string) {
   return /\b(?:search|browse|look up)\b.{0,30}\b(?:web|online)\b|\b(?:web|online)\s+(?:search|sources?)\b|\b(?:today|latest|recent)\b|\bcurrent\b.{0,80}\b(?:public|benchmark|industry)\b|\bpublic\b.{0,80}\bcurrent\b/i.test(message);
@@ -210,6 +221,8 @@ function redactPrivateQueryMaterial(value: string) {
 }
 
 export function derivePublicWebQuery(proposedQuery: string, userMessage: string) {
+  // Private names can precede relationship terms, so only wholly generic relationship requests are searchable.
+  if ([userMessage, proposedQuery].some((value) => PRIVATE_WEB_CONTEXT_MARKER.test(value) || hasNonGenericRelationshipContext(value))) throw new PersistenceError("VALIDATION_FAILED", 422);
   const publicUserTerms = new Set(queryTerms(redactPrivateQueryMaterial(userMessage)));
   const safeTerms = queryTerms(redactPrivateQueryMaterial(proposedQuery))
     .filter((term) => term.length <= 2 || publicUserTerms.has(term) || WEB_QUERY_GENERIC_TERMS.has(term))

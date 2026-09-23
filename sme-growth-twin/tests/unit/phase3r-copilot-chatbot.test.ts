@@ -205,8 +205,32 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
     expect(() => derivePublicWebQuery("customer relationship Acme", "Search the web for customer relationship Acme.")).toThrowError(PersistenceError);
     expect(() => derivePublicWebQuery("customer relationship Acme, Inc", "Search the web for customer relationship Acme, Inc.")).toThrowError(PersistenceError);
     expect(() => derivePublicWebQuery("customer service Acme", "Search the web for customer service Acme.")).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("Acme today", "Search web for Acme, my customer.")).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("Acme today", "Search web for confidential company Acme.")).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("Acme client benchmark", "Search web for Acme client benchmark.")).toThrowError(PersistenceError);
     expect(derivePublicWebQuery("customer relationship management", "Find customer relationship management guidance.")).toBe("customer relationship management");
+    expect(derivePublicWebQuery("customer service trends", "What are current customer service trends?")).toBe("customer service trends");
     expect(derivePublicWebQuery("current customer service trends", "Find current customer service trends.")).toBe("current customer service trends");
+  });
+
+  it.each([
+    "Search web for Acme, my customer.",
+    "Search web for confidential company Acme.",
+    "Search web for Acme client benchmark.",
+  ])("rejects a name-first private web request before invoking the provider: %s", async (message) => {
+    const repository = new Phase3rRepository();
+    generateMock.mockImplementation(async (options: unknown) => {
+      const tools = (options as { tools: Record<string, { execute: (value: Record<string, unknown>) => Promise<Record<string, unknown>> }> }).tools;
+      const rejected = await tools.searchWeb.execute({ query: "Acme today" });
+      expect(rejected).toMatchObject({ answerable: false, reason: "UNSAFE_WEB_QUERY", query: null, sources: [] });
+      return completed("I cannot safely form a public search query from that private context.");
+    });
+    const result = await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-name-first-private",
+      request: { message, idempotencyKey: `phase3r-name-first-${message.length}` },
+    });
+    expect(result.toolCalls).toMatchObject([{ toolName: "searchWeb", status: "rejected", result: { reason: "UNSAFE_WEB_QUERY" } }]);
+    expect(perplexitySearchMock).not.toHaveBeenCalled();
   });
 
   it("honors explicit tool and private-document exclusions", async () => {
