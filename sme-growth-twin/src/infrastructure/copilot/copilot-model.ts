@@ -170,7 +170,8 @@ function normalizeWebSearchOutput(output: unknown) {
 }
 
 const queryTerms = (value: string) => value.toLocaleLowerCase("en-MY").normalize("NFKC").match(/[\p{L}\p{N}]+/gu) ?? [];
-const PUBLIC_RELATIONSHIP_TERMS = new Set(["service", "support", "experience", "relations", "relationship", "management", "records", "retention", "acquisition", "journey", "feedback", "trends", "trend", "benchmark", "benchmarks", "data", "privacy", "security", "rights", "side", "server", "success", "care", "satisfaction", "login"]);
+const PUBLIC_RELATIONSHIP_TERMS = new Set(["service", "support", "experience", "relations", "relationship", "management", "records", "retention", "acquisition", "journey", "feedback", "trends", "trend", "benchmark", "benchmarks", "data", "privacy", "security", "rights", "side", "server", "success", "care", "satisfaction", "login", "guidance"]);
+const PUBLIC_RELATIONSHIP_CONNECTORS = new Set(["a", "an", "and", "for", "in", "of", "on", "the", "with"]);
 
 function explicitPublicWebIntent(message: string) {
   return /\b(?:search|browse|look up)\b.{0,30}\b(?:web|online)\b|\b(?:web|online)\s+(?:search|sources?)\b|\b(?:today|latest|recent)\b|\bcurrent\b.{0,80}\b(?:public|benchmark|industry)\b|\bpublic\b.{0,80}\bcurrent\b/i.test(message);
@@ -202,7 +203,10 @@ function redactPrivateQueryMaterial(value: string) {
     .replace(/\b(?:private|confidential|internal)\s+(?:customer|client|company|business|tenant|account)\s*[:=]\s*[^,.!?;:\n]*/gi, " ")
     .replace(/\b(?:customer|client|company|business|tenant|account)\s+(?:name|id|identifier|record|reference|number|secret|credential|token|password|margin|revenue|phone|email|contact)\s*[:=]\s*[^,.!?;:\n]*/gi, " ")
     .replace(/\b(?:(?:my|our)\s+(?:customer|client|company|business|tenant|account)|(?:customer|client|company|business|tenant|account)(?:'s|’s))\b[^,.!?;:\n]*/gi, " ")
-    .replace(/\b(?:customer|client|tenant|account)\s+([\p{L}\p{N}][\p{L}\p{N}-]*)[^,.!?;:\n]*/giu, (match, following: string) => PUBLIC_RELATIONSHIP_TERMS.has(following.toLocaleLowerCase("en-MY")) ? match : " ");
+    .replace(/\b(?:customer|client|tenant|account)\s+[\p{L}\p{N}][\p{L}\p{N}-]*[^.!?;:\n]*/giu, (phrase: string) => {
+      const tail = queryTerms(phrase).slice(1);
+      return tail.every((term) => PUBLIC_RELATIONSHIP_TERMS.has(term) || PUBLIC_RELATIONSHIP_CONNECTORS.has(term) || WEB_QUERY_GENERIC_TERMS.has(term) || /^(?:19|20)\d{2}$/.test(term)) ? phrase : " ";
+    });
 }
 
 export function derivePublicWebQuery(proposedQuery: string, userMessage: string) {

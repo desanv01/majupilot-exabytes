@@ -202,6 +202,10 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
       "Search the web for our customer's secret margin 43127.",
     )).toThrowError(PersistenceError);
     expect(() => derivePublicWebQuery("customer Acme", "Search the web for customer Acme.")).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("customer relationship Acme", "Search the web for customer relationship Acme.")).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("customer relationship Acme, Inc", "Search the web for customer relationship Acme, Inc.")).toThrowError(PersistenceError);
+    expect(() => derivePublicWebQuery("customer service Acme", "Search the web for customer service Acme.")).toThrowError(PersistenceError);
+    expect(derivePublicWebQuery("customer relationship management", "Find customer relationship management guidance.")).toBe("customer relationship management");
     expect(derivePublicWebQuery("current customer service trends", "Find current customer service trends.")).toBe("current customer service trends");
   });
 
