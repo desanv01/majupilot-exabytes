@@ -142,6 +142,6 @@ face.
 - No equal-weight card grids used as a default layout; grids are reserved for real breadth or proof.
 - No slideshow cadence where every scene is a new card, and no screensaver motion that carries no
   meaning.
-- No invented metrics, customer data, current Document RAG, vendor guarantees, ROI promises,
+- No invented metrics, customer data, unrestricted document ingestion, vendor guarantees, ROI promises,
   automatic CRM creation, or human consultant acceptance.
 - No portrait outside the opening identity card and no private asset path on screen.

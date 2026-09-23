@@ -260,21 +260,21 @@ than a decorative footnote.
 - src: compositions/frames/09-no-current-rag.html
 - duration: 16s
 - transition_in: fade-through
-- scene: Held amber boundary card: “Document RAG and arbitrary document ingestion — NOT IMPLEMENTED NOW.”
-- voiceover: "One limitation is equally important. Document R A G and arbitrary document ingestion are not current product features. They are deferred P one future potential, not something demonstrated here. In this video, the source of truth is the live, labelled, fictional journey."
+- scene: Phase 6 correction: current Evidence Library and cited Copilot proof from the accepted synthetic Phase 5 journey.
+- voiceover: The obsolete standalone recorded future/P1 claim is muted; the later authentic sentence about the labelled fictional journey remains.
 - poster: 10s
 - time: 02:59–03:15
 - section: 03 — Technical Approach / Design
 - type: benefit_highlight
 - script_ref: SCRIPT.md § 2:05–3:15 ¶3; SCRIPT-COVERAGE-AUDIT.md TECH-04 at 3:02–3:15
 - evidence: TECH-04; FUT-01
-- narrative_role: Earn trust by stating the most important non-feature before the demo.
+- narrative_role: Show the bounded current document capability before the Case A demo.
 - blueprint: titlecard-reveal (Adapt; one restrained reveal and deliberate still hold)
 - rules: svg-path-draw; sine-wave-loop
 - registry: fade-through selected; chapter-title search had no on-brand fit.
-- layer_plan: BG amber-100 paper field; MG large boundary statement and thin coral prohibition rule; FG `CURRENT` / `DEFERRED P1` labels and source-of-truth note.
-- truthfulness: Document RAG and arbitrary ingestion are future-only, not current.
-- constraint: No upload icon, file-ingestion animation, Copilot answer, or roadmap date.
+- layer_plan: Warm paper field, bounded feature statement, authentic Evidence Library and cited Copilot captures.
+- truthfulness: PDF/DOCX/TXT assessment-scoped RAG is current; unrestricted ingestion is not claimed.
+- constraint: Synthetic company label stays visible; no roadmap date.
 - first_motion: Coral rule draws once; all other motion stops for the final six-second hold.
 
 This is the planned stillness beat. The absence of motion gives the limitation enough time to be
@@ -635,8 +635,8 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 - src: compositions/frames/25-future-potential.html
 - duration: 23s
 - transition_in: fade-through
-- scene: The current validated boundary stays solid; four future branches and deferred P1 Document RAG remain amber outlines beyond it.
-- voiceover: "Future work can extend domain packs, evidence sources, integrations, and consultant workflows after this boundary is validated. Document R A G and arbitrary uploaded-document ingestion may be explored later as deferred P one scope only. They are not implemented now. The opportunity is to broaden the evidence available to the system without weakening provenance, consent, or deterministic ownership."
+- scene: The current boundary includes cited Document RAG; four other expansion opportunities remain amber outlines.
+- voiceover: The obsolete recorded future/P1 Document RAG sentences are muted; the surrounding future-work and provenance sentences remain.
 - poster: 15s
 - time: 09:02–09:25
 - section: 06 — Industry Value / Future Potential
@@ -647,9 +647,9 @@ This is the second intentional stillness beat and the demo’s terminal frame.
 - blueprint: spatial-pan-stations (Adapt; current station and four outlined future branches)
 - rules: svg-path-draw; center-outward-expansion; stat-bars-and-fills
 - registry: No architecture/provenance diagram fit; hand-authored outlined branches.
-- layer_plan: BG paper field with solid current boundary; MG four outlined future branches; FG amber `FUTURE / DEFERRED P1` stamps and persistent provenance/consent/deterministic anchors.
-- truthfulness: Domain packs, sources, integrations, consultant workflows, and Document RAG are opportunities only; no release date.
-- constraint: Document RAG branch never fills, activates, or receives current-feature styling.
+- layer_plan: Paper field with solid current boundary and cited-document anchor; four outlined expansion branches without a Document RAG future stamp.
+- truthfulness: Bounded Document RAG is current; additional document types and other expansion paths have no release date.
+- constraint: Do not imply unrestricted ingestion or guaranteed consultant workflows.
 - first_motion: Future branches draw as outlines but stop before crossing the validated-boundary rule.
 
 ## Frame 26 — The path stays visible
@@ -712,7 +712,7 @@ and ending at second 412.
 
 | Check | Frames | Result |
 |---|---|---|
-| No current Document RAG / arbitrary ingestion | 09, 25 | PASS — explicitly not implemented; future/deferred P1 only. |
+| Bounded current Document RAG / no unrestricted ingestion | 09, 25 | Phase 6 correction — accepted synthetic Evidence Library and cited Copilot proof; no future/P1 Document RAG claim. |
 | No catalogue quote, availability, or vendor guarantee | 13, 24 | PASS — catalogue is provenance; boundaries repeated. |
 | No ROI prediction or guarantee | 14, 23–24 | PASS — conditional ranges, negative values retained, no outcome promise. |
 | No real customer/contact data or completed handoff | 10, 16, 19 | PASS — fictional/synthetic labels; empty fields; unchecked consent; no submission. |

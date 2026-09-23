@@ -55,3 +55,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Phase 6 video source invariants
+        run: node ../video-production/majupilot-hackathon-video/scripts/verify-phase6.mjs --checked

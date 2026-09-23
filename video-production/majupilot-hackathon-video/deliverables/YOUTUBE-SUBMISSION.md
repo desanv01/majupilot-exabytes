@@ -10,19 +10,19 @@ MajuPilot is a prototype decision-support workflow for Malaysian SMEs. It turns 
 
 This 9:40 walkthrough covers the problem, proposed solution, technical approach, an authentic end-to-end product demonstration, validation evidence, industry value, current product boundaries, and future potential.
 
-The demonstrated business and contact details are fictional and synthetic. Scenario outputs are decision-support ranges, not promises of business outcomes. Document RAG, retrieval-augmented generation, and arbitrary uploaded-document ingestion are future/deferred P1 possibilities only; they are not implemented or demonstrated as current features.
+The demonstrated businesses and contact details are fictional and synthetic. Scenario outputs are decision-support ranges, not promises of business outcomes. The current Evidence Library supports bounded assessment-scoped PDF, DOCX and TXT uploads, and Copilot can provide cited answers from these documents. Uploaded text remains untrusted evidence; deterministic scores and the Blueprint remain authoritative. Broader evidence formats and integrations are future possibilities.
 
 Chapters:
 
 00:00 Opening
 00:20 Problem and objectives
 01:05 Proposed solution
-02:05 Technical approach and truth boundaries
+02:05 Technical approach and current evidence path
 03:15 Authentic prototype demo
 06:52 Testing and validation
 08:15 Owner and advisor value
 08:47 Current product boundaries
-09:02 Future potential and deferred P1
+09:02 Current capability and future expansion
 09:25 Close
 
 Created and presented by Desan Vasu.

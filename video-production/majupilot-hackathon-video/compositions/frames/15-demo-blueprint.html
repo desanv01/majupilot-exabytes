@@ -66,6 +66,8 @@
         object-fit: contain;
         background: #0e3a4b;
       }
+      .f15-current-handoff { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; object-fit: contain; background: #fffdf8; }
+      .f15-current-label { position: absolute; z-index: 7; right: 92px; top: 846px; color: #8ee2d3; font: 700 18px/1.2 "JetBrains Mono"; text-transform: uppercase; }
       [data-f15-role="spotlight"] {
         --yt-hl-x: 50%;
         --yt-hl-y: 30%;
@@ -259,6 +261,7 @@
         <div data-hf-id="hf-5ju2" id="f15-demo-blueprint-world" data-f15-role="world" data-layout-allow-overflow="">
           <video data-hf-id="hf-gw24" id="f15-authentic-capture" class="clip" data-start="0" data-track-index="1" data-media-start="1" data-duration="55" muted playsinline preload="auto" src="assets/capture/frame-15-blueprint-specialists.mp4"></video>
         </div>
+        <img id="f15-current-handoff" class="clip f15-current-handoff" data-start="48" data-duration="7" src="assets/capture/phase6-current/fresh-blueprint-1366.png" alt="Current Blueprint handoff with Continue to Copilot">
         <div data-hf-id="hf-flmb" id="f15-demo-blueprint-spotlight" data-f15-role="spotlight"></div>
       </div>
     </div>
@@ -294,6 +297,7 @@
         <div data-hf-id="hf-9kxp" id="f15-demo-blueprint-landing" data-f15-role="landing">Reviewable package,<br data-hf-id="hf-rsrt">not automatic decision.</div>
       </aside>
       <div data-hf-id="hf-97ep" data-f15-role="capture-register">Authentic capture · source-linked</div>
+      <div id="f15-current-label" class="clip f15-current-label" data-start="48" data-duration="7">Current handoff · fresh synthetic verification</div>
     </div>
 
     <script src="assets/vendor/gsap-3.14.2.min.js"></script>
