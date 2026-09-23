@@ -18,6 +18,7 @@ import { chunkDocument } from "@/infrastructure/documents/chunk-document";
 import { DocumentError } from "@/infrastructure/documents/document-errors";
 import { readDocumentForm } from "@/infrastructure/documents/document-api";
 import { EvidenceDocumentService } from "@/infrastructure/documents/document-service";
+import { hasStrongDocumentTermOverlap } from "@/infrastructure/documents/document-relevance";
 import { extractDocument, validateDocumentEnvelope } from "@/infrastructure/documents/extract-document";
 
 const uuid = (n: number) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -110,6 +111,14 @@ describe("Phase 3 bounded Document RAG", () => {
     expect(() => documentExcerptInputSchema.parse({ documentId: uuid(1), chunkId: "other-tenant" })).toThrow();
     expect(documentSearchInputSchema.parse({ query: "stockout reduction" }).relevanceThreshold).toBe(0.62);
     expect(documentCitationSchema.parse({ documentId: uuid(1), chunkId: uuid(2), documentName: "fictional-plan.txt", pageNumber: null, sectionRef: "Section 1", excerpt: "Fictional stockout target.", similarity: 0.88, reference: `doc:${uuid(1)}#chunk:${uuid(2)}`, provenance: "uploaded_document" }).provenance).toBe("uploaded_document");
+  });
+
+  it("rescues distinctive near-threshold text without matching unrelated document questions", () => {
+    const excerpt = "The approved stockout reduction target is exactly 17 percent. Amina Rahman owns the weekly operations triage.";
+    expect(hasStrongDocumentTermOverlap("What exact stockout target does the uploaded operations document approve?", excerpt)).toBe(true);
+    expect(hasStrongDocumentTermOverlap("According to the uploaded TXT, who handles weekly operations triage?", excerpt)).toBe(true);
+    expect(hasStrongDocumentTermOverlap("What are the board-approved lunar payroll tax filing dates in the uploaded document?", excerpt)).toBe(false);
+    expect(hasStrongDocumentTermOverlap("What does the uploaded document say?", excerpt)).toBe(false);
   });
 
   it("continues gracefully without uploads and does not spend an embedding call", async () => {

@@ -32,7 +32,14 @@ function citationsFor(tools: ToolCall[] | undefined) {
     if (call.toolName === "searchUploadedEvidence" && Array.isArray(call.result?.citations)) citations.push(...call.result.citations as Citation[]);
     if (call.toolName === "getDocumentExcerpt" && call.result?.citation) citations.push(call.result.citation as Citation);
   }
-  return citations.filter((citation) => citation?.documentId && citation?.chunkId && citation?.documentName && citation?.excerpt);
+  const seen = new Set<string>();
+  return citations.filter((citation) => {
+    if (!citation?.documentId || !citation?.chunkId || !citation?.documentName || !citation?.excerpt) return false;
+    const key = `${citation.documentId}:${citation.chunkId}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 export function UploadedCitations({ tools }: { tools: ToolCall[] | undefined }) {

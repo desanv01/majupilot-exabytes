@@ -23,6 +23,7 @@ import { createAdminSupabaseClient } from "@/infrastructure/supabase/admin";
 
 import { chunkDocument, type DocumentChunk } from "./chunk-document";
 import { DocumentError } from "./document-errors";
+import { hasStrongDocumentTermOverlap } from "./document-relevance";
 import { extractDocument, validateDocumentEnvelope } from "./extract-document";
 
 const BUCKET = "majupilot-evidence";
@@ -330,11 +331,15 @@ export class EvidenceDocumentService {
     const result = await this.db.rpc("search_evidence_document_chunks", {
       p_assessment_session_id: assessmentSessionId,
       p_query_embedding: assertEmbedding(queryEmbedding),
-      p_match_threshold: input.relevanceThreshold,
-      p_match_count: input.maxResults,
+      p_match_threshold: Math.min(input.relevanceThreshold, 0.4),
+      p_match_count: DOCUMENT_LIMITS.maxSearchResults,
     });
     fail(result.error);
-    const citations = (result.data ?? []).map((row: Row) => documentCitationSchema.parse({
+    const relevant = (result.data ?? []).filter((row: Row) =>
+      Number(row.similarity) >= input.relevanceThreshold ||
+      (input.relevanceThreshold <= 0.62 && hasStrongDocumentTermOverlap(input.query, String(row.content))),
+    ).slice(0, input.maxResults);
+    const citations = relevant.map((row: Row) => documentCitationSchema.parse({
       documentId: row.document_id,
       chunkId: row.chunk_id,
       documentName: row.document_name,
