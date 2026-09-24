@@ -22,7 +22,7 @@ import {
 } from "./copilot-client-utils";
 
 export type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null; result?: Record<string, unknown> | null };
-type Message = CopilotClientMessage & { tools?: ToolCall[]; streaming?: boolean };
+type Message = CopilotClientMessage & { tools?: ToolCall[]; streaming?: boolean; draft?: boolean };
 type Session = { id: string };
 type HistoryResponse = { session: Session; messages: CopilotMessage[] };
 type HealthResponse = { state: string; liveAvailable: boolean };
@@ -147,6 +147,10 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
   const [activity, setActivity] = useState("");
   const [status, setStatus] = useState("Checking your secure MajuPilot workspace...");
   const logRef = useRef<HTMLDivElement>(null);
+  const followLatestRef = useRef(true);
+  const manualPauseRef = useRef(false);
+  const touchYRef = useRef<number | null>(null);
+  const [showLatest, setShowLatest] = useState(false);
   const openingRef = useRef(false);
   const abortRef = useRef<AbortController | undefined>(undefined);
 
@@ -190,15 +194,46 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
   }, [requestedAssessmentSessionId, requestedBlueprintId]);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    logRef.current?.lastElementChild?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
+    if (!followLatestRef.current) return;
+    const frame = requestAnimationFrame(() => {
+      const log = logRef.current;
+      if (log && followLatestRef.current) log.scrollTop = log.scrollHeight;
+    });
+    return () => cancelAnimationFrame(frame);
   }, [messages, activity]);
+
+  const onLogScroll = () => {
+    const log = logRef.current;
+    if (!log) return;
+    const distance = log.scrollHeight - log.scrollTop - log.clientHeight;
+    if (manualPauseRef.current && distance <= 4) manualPauseRef.current = false;
+    const nearBottom = !manualPauseRef.current && distance < 96;
+    followLatestRef.current = nearBottom;
+    setShowLatest(!nearBottom);
+  };
+
+  const pauseFollowing = () => {
+    manualPauseRef.current = true;
+    followLatestRef.current = false;
+    setShowLatest(true);
+  };
+
+  const jumpToLatest = () => {
+    manualPauseRef.current = false;
+    followLatestRef.current = true;
+    setShowLatest(false);
+    const log = logRef.current;
+    if (log) log.scrollTop = log.scrollHeight;
+  };
 
   const sendTurn = async (message: string, idempotencyKey = `turn:${crypto.randomUUID()}`, appendOptimisticUser = true) => {
     if (!message || !session || busy) return;
     const streamingId = `stream:${crypto.randomUUID()}`;
     const controller = new AbortController();
     abortRef.current = controller;
+    manualPauseRef.current = false;
+    followLatestRef.current = true;
+    setShowLatest(false);
     setInput(""); setBusy(true); setActivity("Thinking through your question…");
     setMessages((current) => [...current, ...(appendOptimisticUser ? [{ id: crypto.randomUUID(), role: "user" as const, text: message }] : []), { id: streamingId, role: "assistant", text: "", streaming: true }]);
     try {
@@ -210,7 +245,11 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
     } catch (error) {
       const stopped = error instanceof DOMException && error.name === "AbortError";
       const presentation = stopped ? { message: "Response stopped. You can retry this turn without duplicating saved messages.", requestId: null, retryable: true } : copilotErrorPresentation(error);
-      setMessages((current) => [...current.filter((item) => item.id !== streamingId), { id: crypto.randomUUID(), role: "status", text: presentation.message, requestId: presentation.requestId, retryMessage: presentation.retryable ? message : undefined, retryIdempotencyKey: presentation.retryable ? idempotencyKey : undefined }]);
+      setMessages((current) => {
+        const draft = current.find((item) => item.id === streamingId);
+        const retained = current.flatMap((item) => item.id === streamingId ? draft?.text ? [{ ...item, streaming: false, draft: true }] : [] : [item]);
+        return [...retained, { id: crypto.randomUUID(), role: "status" as const, text: draft?.text ? `${presentation.message} The draft above was interrupted and may not be saved.` : presentation.message, requestId: presentation.requestId, retryMessage: presentation.retryable ? message : undefined, retryIdempotencyKey: presentation.retryable ? idempotencyKey : undefined }];
+      });
     } finally { abortRef.current = undefined; setActivity(""); setBusy(false); }
   };
 
@@ -232,10 +271,10 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
     <section className="copilot-intro"><p className="eyebrow">MajuPilot Transformation Copilot</p><h1>A practical copilot for the work after your Blueprint.</h1><p>Ask anything, inspect your private assessment evidence with exact citations, or search the public web when current information matters.</p><span className="copilot-live-status" role="status">{status}</span></section>
     {!ready ? <section className="copilot-empty" aria-busy="true"><h2>Opening your workspace</h2><p>Your authorized Twin and completed Blueprint are being loaded.</p></section> : !available ? <section className="copilot-empty" role={openFailure ? "alert" : undefined}><p className="eyebrow">Workspace status</p><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot opens only after a completed Blueprint is securely synced."}</p>{openFailure?.requestId ? <TechnicalDiagnostic requestId={openFailure.requestId} /> : null}<div className="copilot-recovery-actions">{shouldOfferCopilotRetry(openFailure) ? <button className="button primary" type="button" onClick={() => window.location.reload()}>Try again</button> : !openFailure ? <Link className="button primary" href="/assessment">Start or resume assessment</Link> : null}<Link className="button secondary" href="/blueprint">Return to Blueprint</Link></div></section> : <section className="copilot-workspace" aria-label="Transformation Copilot conversation">
       <header className="copilot-workspace-header"><div><p className="eyebrow">Saved conversation</p><h2>Ask, explore, decide</h2></div><Link href="/evidence" className="button secondary">Evidence Library</Link></header>
-      <div className="copilot-log" ref={logRef} role="log" aria-live="polite" aria-relevant="additions text">
-        {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}${message.streaming ? " streaming" : ""}`}><header><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span>{message.streaming ? <small>Streaming</small> : null}</header>{message.text ? <Markdown>{message.text}</Markdown> : <span className="copilot-thinking-dots" aria-label="MajuPilot is thinking">•••</span>}<UploadedCitations tools={message.tools} /><WebSources tools={message.tools} />{message.requestId ? <TechnicalDiagnostic requestId={message.requestId} /> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Retry turn</button> : null}{message.tools?.filter((toolCall) => toolCall.status === "confirmation_required" && toolCall.confirmationId).map((toolCall) => <button key={toolCall.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(toolCall.confirmationId!)}>Confirm {toolCall.toolName}</button>)}</article>)}
+      <div className="copilot-log-frame"><div className="copilot-log" ref={logRef} onScroll={onLogScroll} onWheel={(event) => { if (event.deltaY < 0) pauseFollowing(); }} onTouchStart={(event) => { touchYRef.current = event.touches[0]?.clientY ?? null; }} onTouchMove={(event) => { const y = event.touches[0]?.clientY; if (y !== undefined && touchYRef.current !== null && y > touchYRef.current) pauseFollowing(); if (y !== undefined) touchYRef.current = y; }} onTouchEnd={() => { touchYRef.current = null; }} onKeyDown={(event) => { if (["ArrowUp", "PageUp", "Home"].includes(event.key) || (event.key === " " && event.shiftKey)) pauseFollowing(); }} tabIndex={0} role="log" aria-label="Copilot messages" aria-live="polite" aria-relevant="additions text">
+        {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}${message.streaming ? " streaming" : ""}${message.draft ? " draft" : ""}`}><header><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span>{message.streaming ? <small>Streaming</small> : message.draft ? <small>Interrupted draft · save unconfirmed</small> : null}</header>{message.text ? <Markdown>{message.text}</Markdown> : <span className="copilot-thinking-dots" aria-label="MajuPilot is thinking">•••</span>}<UploadedCitations tools={message.tools} /><WebSources tools={message.tools} />{message.requestId ? <TechnicalDiagnostic requestId={message.requestId} /> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Retry turn</button> : null}{message.tools?.filter((toolCall) => toolCall.status === "confirmation_required" && toolCall.confirmationId).map((toolCall) => <button key={toolCall.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(toolCall.confirmationId!)}>Confirm {toolCall.toolName}</button>)}</article>)}
         {busy && activity ? <div className="copilot-activity" role="status"><span aria-hidden="true" />{activity}</div> : null}
-      </div>
+      </div>{showLatest ? <button type="button" className="copilot-jump-latest" onClick={jumpToLatest}>Jump to latest ↓</button> : null}</div>
       {messages.length <= 1 ? <div className="copilot-prompts" aria-label="Conversation starters">{["Explain my top Blueprint priority", "Compare a document claim with current public information", "What can you help me reason through today?"].map((prompt) => <button type="button" key={prompt} onClick={() => setInput(prompt)}>{prompt}</button>)}</div> : null}
       <form className="copilot-composer" onSubmit={submit}><label htmlFor="copilot-message">Message MajuPilot</label><div><textarea id="copilot-message" value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={onComposerKeyDown} maxLength={4000} rows={3} placeholder="Ask a general question, reference your Blueprint, or request a current web check…" disabled={!session} /><div className="copilot-composer-actions">{busy ? <button className="button secondary" type="button" onClick={() => abortRef.current?.abort()}>Stop</button> : <button className="button primary" type="submit" disabled={!session || !input.trim()}>Send</button>}</div></div><footer><small>Enter to send · Shift+Enter for a new line · writes always require confirmation</small><small>{input.length}/4000</small></footer></form>
     </section>}
