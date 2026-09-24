@@ -1,6 +1,6 @@
 import type { CopilotMessage } from "@/domain/copilot";
 
-export const COPILOT_WELCOME_TEXT = "Ask me to explain your Business Twin, recommendations, scenario, Blueprint, uploaded evidence, or consultation status. I will keep deterministic platform facts, uploaded sources, and AI interpretation visibly separate.";
+export const COPILOT_WELCOME_TEXT = "Ask me anything. I can reason conversationally, explain your saved MajuPilot plan, search your private Evidence Library with exact citations, or check the public web when current information matters.";
 
 export type CopilotClientMessage = {
   id: string;
@@ -60,7 +60,16 @@ export function restoreCopilotMessages(messages: readonly CopilotMessage[]): Cop
   for (const message of messages) {
     if (message.role !== "tool" || !message.toolName || !message.toolPayload) continue;
     const current = toolResults.get(message.turnId) ?? [];
-    current.push({ toolName: message.toolName, status: "completed", confirmationId: null, result: message.toolPayload });
+    const confirmationId = typeof message.toolPayload.confirmationId === "string" ? message.toolPayload.confirmationId : null;
+    const persistedStatus = message.parts?.find((part) => part.type === "tool-status");
+    current.push({
+      toolName: message.toolName,
+      status: persistedStatus?.type === "tool-status"
+        ? persistedStatus.state
+        : message.toolPayload.confirmationRequired === true ? "confirmation_required" : "completed",
+      confirmationId,
+      result: message.toolPayload,
+    });
     toolResults.set(message.turnId, current);
   }
   const restored = messages

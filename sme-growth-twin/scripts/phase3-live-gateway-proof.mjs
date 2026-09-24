@@ -32,7 +32,7 @@ const secretKey = local.SECRET_KEY || local.SERVICE_ROLE_KEY;
 if (!publishableKey || !secretKey) throw new Error("Local Supabase keys are unavailable");
 
 const vitest = path.join(process.cwd(), "node_modules", "vitest", "vitest.mjs");
-const proof = spawnSync(process.execPath, [vitest, "run", "tests/unit/phase3-live-gateway.test.tsx", "--reporter=verbose"], {
+const proof = spawnSync(process.execPath, [vitest, "run", "tests/unit/phase3-live-gateway.test.tsx", "tests/unit/phase3r-live-gateway.test.tsx", "--reporter=verbose"], {
   cwd: process.cwd(),
   env: {
     ...process.env,

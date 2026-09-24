@@ -60,6 +60,7 @@ const messageView = (row: Row) => copilotMessageSchema.parse({
   toolPayload: row.tool_provenance,
   modelCallId: row.model_call_id,
   executionState: row.execution_state,
+  parts: Array.isArray(row.parts) ? row.parts : typeof row.text_content === "string" ? [{ type: "text", text: row.text_content }] : [],
   schemaVersion: row.schema_version,
   createdAt: row.created_at,
 });
@@ -127,7 +128,7 @@ export class SupabaseCopilotRepository implements CopilotRepository {
 
   async appendMessage(owner: OwnershipContext, sessionId: string, message: AppendCopilotMessage) {
     await this.authorize(owner, sessionId);
-    const parts = message.text === null ? [] : [{ type: "text", text: message.text }];
+    const parts = message.parts ?? (message.text === null ? [] : [{ type: "text" as const, text: message.text }]);
     const result = await this.db.rpc("append_copilot_message", {
       p_chat_session_id: sessionId, p_message_id: message.id, p_turn_id: message.turnId, p_role: message.role,
       p_message_type: message.messageType, p_text_content: message.text, p_tool_name: message.toolName ?? null,
@@ -209,6 +210,7 @@ export class SupabaseCopilotRepository implements CopilotRepository {
       case "getDocumentExcerpt": {
         return { citation: await new EvidenceDocumentService().excerpt(owner, assessment, { documentId: input.documentId, chunkId: input.chunkId }) };
       }
+      case "searchWeb": throw new PersistenceError("VALIDATION_FAILED", 422);
     }
   }
 

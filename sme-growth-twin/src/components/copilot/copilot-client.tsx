@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-import type { CopilotMessage } from "@/domain/copilot";
 import { ProductHeader } from "@/components/navigation/product-header";
-import { matchesCopilotDeepLink } from "@/infrastructure/persistence/durable-journey-client";
+import type { CopilotMessage } from "@/domain/copilot";
 import { loadCurrentDurableJourney } from "@/infrastructure/persistence/current-durable-journey";
+import { matchesCopilotDeepLink } from "@/infrastructure/persistence/durable-journey-client";
 
 import {
   CopilotApiError,
@@ -20,12 +22,21 @@ import {
 } from "./copilot-client-utils";
 
 export type ToolCall = { toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null; result?: Record<string, unknown> | null };
-type Message = CopilotClientMessage & { tools?: ToolCall[] };
+type Message = CopilotClientMessage & { tools?: ToolCall[]; streaming?: boolean };
 type Session = { id: string };
 type HistoryResponse = { session: Session; messages: CopilotMessage[] };
 type HealthResponse = { state: string; liveAvailable: boolean };
+type TurnResult = { turnId: string; text: string; state: string; toolCalls: ToolCall[] };
+type StreamEvent =
+  | { type: "turn_started"; turnId: string }
+  | { type: "status"; phase: "thinking" | "tool_running" | "tool_completed" | "persisting"; toolName?: string }
+  | { type: "text_delta"; delta: string }
+  | { type: "completed"; data: TurnResult }
+  | { type: "error"; error: CopilotApiErrorBody };
 
 type Citation = { documentId: string; chunkId: string; documentName: string; pageNumber: number | null; sectionRef: string; excerpt: string; reference: string };
+type WebSource = { title: string; url: string; snippet: string; date: string | null; lastUpdated: string | null };
+
 function citationsFor(tools: ToolCall[] | undefined) {
   const citations: Citation[] = [];
   for (const call of tools ?? []) {
@@ -42,10 +53,38 @@ function citationsFor(tools: ToolCall[] | undefined) {
   });
 }
 
+function webSourcesFor(tools: ToolCall[] | undefined) {
+  const sources = (tools ?? []).flatMap((call) => call.toolName === "searchWeb" && Array.isArray(call.result?.sources) ? call.result.sources as WebSource[] : []);
+  const seen = new Set<string>();
+  return sources.filter((source) => {
+    try { const parsed = new URL(source.url); if (!["http:", "https:"].includes(parsed.protocol) || parsed.username || parsed.password) return false; } catch { return false; }
+    if (!source.title || seen.has(source.url)) return false;
+    seen.add(source.url);
+    return true;
+  });
+}
+
 export function UploadedCitations({ tools }: { tools: ToolCall[] | undefined }) {
   const citations = citationsFor(tools);
   if (!citations.length) return null;
   return <aside className="copilot-citations" aria-label="Uploaded evidence citations"><strong>Uploaded evidence</strong>{citations.map((citation) => <blockquote key={citation.chunkId}><header><b>{citation.documentName}</b><span>{citation.pageNumber ? `Page ${citation.pageNumber}` : citation.sectionRef}</span></header><p>{citation.excerpt}</p><details><summary>Technical citation</summary><code>{citation.reference}</code></details></blockquote>)}</aside>;
+}
+
+export function WebSources({ tools }: { tools: ToolCall[] | undefined }) {
+  const sources = webSourcesFor(tools);
+  if (!sources.length) return null;
+  return <aside className="copilot-web-sources" aria-label="Public web sources"><strong>Public web sources</strong><ol>{sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer"><span>{source.title}</span><small>{new URL(source.url).hostname} · {source.lastUpdated ? `Updated ${source.lastUpdated}` : source.date ? `Published ${source.date}` : "Date not provided"}</small></a>{source.snippet ? <p>{source.snippet}</p> : null}</li>)}</ol></aside>;
+}
+
+export function Markdown({ children }: { children: string }) {
+  const safeLink = (url: string) => {
+    try { const parsed = new URL(url); return ["http:", "https:"].includes(parsed.protocol) && !parsed.username && !parsed.password ? parsed.href : ""; }
+    catch { return ""; }
+  };
+  return <div className="copilot-markdown"><ReactMarkdown remarkPlugins={[remarkGfm]} urlTransform={safeLink} components={{
+    a: ({ href, children: label }) => href ? <a href={href} target="_blank" rel="noreferrer">{label}</a> : <span>{label}</span>,
+    img: () => null,
+  }}>{children}</ReactMarkdown></div>;
 }
 
 function TechnicalDiagnostic({ requestId }: { requestId: string }) {
@@ -57,36 +96,59 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
   const body = await response.json().catch(() => undefined) as { data?: T; error?: CopilotApiErrorBody } | undefined;
   if (!response.ok || body?.data === undefined) {
     const error = body?.error;
-    throw new CopilotApiError(
-      error?.code ?? `request_${response.status}`,
-      error?.category ?? null,
-      error?.requestId ?? response.headers.get("x-correlation-id"),
-      error?.retryable ?? response.status >= 500,
-      response.status,
-    );
+    throw new CopilotApiError(error?.code ?? `request_${response.status}`, error?.category ?? null, error?.requestId ?? response.headers.get("x-correlation-id"), error?.retryable ?? response.status >= 500, response.status);
   }
   return body.data;
 }
 
-export function CopilotClient({
-  requestedAssessmentSessionId,
-  requestedBlueprintId,
-}: {
-  requestedAssessmentSessionId?: string;
-  requestedBlueprintId?: string;
-}) {
+async function streamTurn(url: string, body: Record<string, unknown>, signal: AbortSignal, onEvent: (event: StreamEvent) => void) {
+  const response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/x-ndjson" }, body: JSON.stringify(body), cache: "no-store", signal });
+  if (!response.ok || !response.body) {
+    const payload = await response.json().catch(() => undefined) as { error?: CopilotApiErrorBody } | undefined;
+    const error = payload?.error;
+    throw new CopilotApiError(error?.code ?? `request_${response.status}`, error?.category ?? null, error?.requestId ?? response.headers.get("x-correlation-id"), error?.retryable ?? response.status >= 500, response.status);
+  }
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let completed: TurnResult | undefined;
+  while (true) {
+    const { value, done } = await reader.read();
+    buffer += decoder.decode(value, { stream: !done });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+      if (!line.trim()) continue;
+      const event = JSON.parse(line) as StreamEvent;
+      onEvent(event);
+      if (event.type === "completed") completed = event.data;
+      if (event.type === "error") throw new CopilotApiError(event.error.code ?? "INTERNAL_RETRYABLE", event.error.category ?? null, event.error.requestId ?? null, event.error.retryable ?? true, 503);
+    }
+    if (done) break;
+  }
+  if (!completed) throw new CopilotApiError("INTERNAL_RETRYABLE", "persistence_failure", response.headers.get("x-correlation-id"), true, 503);
+  return completed;
+}
+
+const activityText = (phase: string, toolName?: string) => {
+  if (phase === "tool_running") return toolName === "searchWeb" ? "Searching the public web…" : toolName === "searchUploadedEvidence" || toolName === "getDocumentExcerpt" ? "Searching your private Evidence Library…" : "Reading your authorized MajuPilot records…";
+  if (phase === "persisting") return "Saving this turn securely…";
+  return "Thinking through your question…";
+};
+
+export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprintId }: { requestedAssessmentSessionId?: string; requestedBlueprintId?: string }) {
   const [ready, setReady] = useState(false);
   const [available, setAvailable] = useState(false);
   const [session, setSession] = useState<Session>();
   const [openFailure, setOpenFailure] = useState<{ message: string; requestId: string | null; retryable: boolean }>();
-  const [messages, setMessages] = useState<Message[]>([
-    { id: "welcome", role: "assistant", text: COPILOT_WELCOME_TEXT },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([{ id: "welcome", role: "assistant", text: COPILOT_WELCOME_TEXT }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  const [activity, setActivity] = useState("");
   const [status, setStatus] = useState("Checking your secure MajuPilot workspace...");
   const logRef = useRef<HTMLDivElement>(null);
   const openingRef = useRef(false);
+  const abortRef = useRef<AbortController | undefined>(undefined);
 
   useEffect(() => {
     if (openingRef.current) return;
@@ -98,14 +160,8 @@ export function CopilotClient({
         const linkedBlueprintId = requestedBlueprintId ?? query.get("blueprintId") ?? undefined;
         const context = await loadCurrentDurableJourney(localStorage);
         const artifactIds = context?.artifactIds;
-        if (!context || !artifactIds) {
-          setStatus("Complete and sync the current Blueprint before opening Copilot.");
-          return;
-        }
-        if (!matchesCopilotDeepLink(context, {
-          assessmentSessionId: linkedAssessmentSessionId,
-          blueprintId: linkedBlueprintId,
-        })) {
+        if (!context || !artifactIds) { setStatus("Complete and sync the current Blueprint before opening Copilot."); return; }
+        if (!matchesCopilotDeepLink(context, { assessmentSessionId: linkedAssessmentSessionId, blueprintId: linkedBlueprintId })) {
           setStatus("This Copilot link does not match the current secure workspace.");
           setOpenFailure({ message: "Return to the current Blueprint and continue from its Copilot action.", requestId: null, retryable: false });
           return;
@@ -113,22 +169,15 @@ export function CopilotClient({
         setAvailable(true);
         const [healthResult, sessionResult] = await Promise.allSettled([
           api<HealthResponse>("/api/v2/copilot/status?detail=safe"),
-          api<Session>("/api/v2/copilot/sessions", {
-            method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, businessTwinId: artifactIds.businessTwin, blueprintId: artifactIds.blueprint, idempotencyKey: `copilot:${context.assessmentSessionId}:${artifactIds.blueprint}` }),
-          }),
+          api<Session>("/api/v2/copilot/sessions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, businessTwinId: artifactIds.businessTwin, blueprintId: artifactIds.blueprint, idempotencyKey: `copilot:${context.assessmentSessionId}:${artifactIds.blueprint}` }) }),
         ]);
         if (sessionResult.status === "rejected") throw sessionResult.reason;
         const nextSession = sessionResult.value;
         const history = await api<HistoryResponse>(`/api/v2/copilot/sessions/${nextSession.id}/messages`);
         setSession(nextSession);
         setMessages(restoreCopilotMessages(history.messages));
-        if (healthResult.status === "fulfilled") {
-          setStatus(healthResult.value.liveAvailable ? "Live DeepSeek guidance is available through Vercel AI Gateway." : "Copilot is using its safe deterministic response path.");
-        } else {
-          const presentation = copilotErrorPresentation(healthResult.reason);
-          setStatus(presentation.message);
-        }
+        if (healthResult.status === "fulfilled") setStatus(healthResult.value.liveAvailable ? "Live AI, private evidence tools, and bounded public web search are available." : "Copilot is using its safe deterministic response path.");
+        else setStatus(copilotErrorPresentation(healthResult.reason).message);
       } catch (error) {
         const presentation = copilotErrorPresentation(error);
         setStatus(presentation.message);
@@ -137,44 +186,37 @@ export function CopilotClient({
       } finally { setReady(true); }
     };
     void openWorkspace();
+    return () => abortRef.current?.abort();
   }, [requestedAssessmentSessionId, requestedBlueprintId]);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     logRef.current?.lastElementChild?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
-  }, [messages]);
+  }, [messages, activity]);
 
   const sendTurn = async (message: string, idempotencyKey = `turn:${crypto.randomUUID()}`, appendOptimisticUser = true) => {
     if (!message || !session || busy) return;
-    setInput(""); setBusy(true);
-    if (appendOptimisticUser) setMessages((current) => [...current, { id: crypto.randomUUID(), role: "user", text: message }]);
+    const streamingId = `stream:${crypto.randomUUID()}`;
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setInput(""); setBusy(true); setActivity("Thinking through your question…");
+    setMessages((current) => [...current, ...(appendOptimisticUser ? [{ id: crypto.randomUUID(), role: "user" as const, text: message }] : []), { id: streamingId, role: "assistant", text: "", streaming: true }]);
     try {
-      const result = await api<{ text: string; state: string; toolCalls: ToolCall[] }>(`/api/v2/copilot/sessions/${session.id}/turns`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, idempotencyKey }),
+      const result = await streamTurn(`/api/v2/copilot/sessions/${session.id}/turns`, { message, idempotencyKey }, controller.signal, (event) => {
+        if (event.type === "status") setActivity(activityText(event.phase, event.toolName));
+        if (event.type === "text_delta") setMessages((current) => current.map((item) => item.id === streamingId ? { ...item, text: item.text + event.delta } : item));
       });
-      setMessages((current) => [...current, { id: crypto.randomUUID(), role: "assistant", text: result.text, tools: result.toolCalls }]);
+      setMessages((current) => current.map((item) => item.id === streamingId ? { id: crypto.randomUUID(), role: "assistant", text: result.text, tools: result.toolCalls } : item));
     } catch (error) {
-      const presentation = copilotErrorPresentation(error);
-      setMessages((current) => [...current, {
-        id: crypto.randomUUID(), role: "status", text: presentation.message,
-        requestId: presentation.requestId,
-        retryMessage: presentation.retryable ? message : undefined,
-        retryIdempotencyKey: presentation.retryable ? idempotencyKey : undefined,
-      }]);
-    } finally { setBusy(false); }
+      const stopped = error instanceof DOMException && error.name === "AbortError";
+      const presentation = stopped ? { message: "Response stopped. You can retry this turn without duplicating saved messages.", requestId: null, retryable: true } : copilotErrorPresentation(error);
+      setMessages((current) => [...current.filter((item) => item.id !== streamingId), { id: crypto.randomUUID(), role: "status", text: presentation.message, requestId: presentation.requestId, retryMessage: presentation.retryable ? message : undefined, retryIdempotencyKey: presentation.retryable ? idempotencyKey : undefined }]);
+    } finally { abortRef.current = undefined; setActivity(""); setBusy(false); }
   };
 
-  const submit = (event: FormEvent) => {
-    event.preventDefault();
-    void sendTurn(input.trim());
-  };
-
-  const retryTurn = (failedStatusId: string, message: string, idempotencyKey: string) => {
-    setMessages((current) => prepareCopilotRetry(current, failedStatusId));
-    void sendTurn(message, idempotencyKey, false);
-  };
-
+  const submit = (event: FormEvent) => { event.preventDefault(); void sendTurn(input.trim()); };
+  const onComposerKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); if (input.trim()) void sendTurn(input.trim()); } };
+  const retryTurn = (failedStatusId: string, message: string, idempotencyKey: string) => { setMessages((current) => prepareCopilotRetry(current, failedStatusId)); void sendTurn(message, idempotencyKey, false); };
   const confirm = async (confirmationId: string) => {
     setBusy(true);
     try {
@@ -186,23 +228,16 @@ export function CopilotClient({
     } finally { setBusy(false); }
   };
 
-  return (
-    <div className="copilot-page">
-      <ProductHeader current="copilot" />
-      <main id="main-content" className="copilot-shell">
-        <section className="copilot-intro"><p className="eyebrow">MajuPilot Transformation Copilot</p><h1>Turn your evidence into a confident next move.</h1><p>Explore the reasoning behind your plan, retrieve exact evidence, and prepare changes for explicit confirmation.</p><span className="copilot-live-status" role="status">{status}</span></section>
-        {!ready ? <section className="copilot-empty" aria-busy="true"><h2>Opening your workspace</h2><p>Your authorized Twin and Blueprint are being loaded.</p></section> : !available ? (
-          <section className="copilot-empty" role={openFailure ? "alert" : undefined}><p className="eyebrow">Workspace status</p><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot answers from your persisted evidence, so it opens after a Blueprint is securely synced."}</p>{openFailure?.requestId ? <TechnicalDiagnostic requestId={openFailure.requestId} /> : null}<div className="copilot-recovery-actions">{shouldOfferCopilotRetry(openFailure) ? <button className="button primary" type="button" onClick={() => window.location.reload()}>Try again</button> : !openFailure ? <Link className="button primary" href="/assessment">Start or resume assessment</Link> : null}<Link className="button secondary" href="/blueprint">Return to Blueprint</Link></div></section>
-        ) : (
-          <section className="copilot-workspace" aria-label="Transformation Copilot conversation">
-            <div className="copilot-log" ref={logRef} role="log" aria-live="polite">
-              {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}`}><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span><p>{message.text}</p><UploadedCitations tools={message.tools} />{message.requestId ? <TechnicalDiagnostic requestId={message.requestId} /> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Try again</button> : null}{message.tools?.filter((tool) => tool.status === "confirmation_required" && tool.confirmationId).map((tool) => <button key={tool.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(tool.confirmationId!)}>Confirm {tool.toolName}</button>)}</article>)}
-              {busy ? <article className="copilot-message status"><span>Status</span><p>Working with your authorized evidence...</p></article> : null}
-            </div>
-            <form className="copilot-composer" onSubmit={submit}><label htmlFor="copilot-message">Ask about your transformation plan</label><div><textarea id="copilot-message" value={input} onChange={(event) => setInput(event.target.value)} maxLength={4000} rows={3} placeholder="For example: Why is CRM prioritised before AI automation?" disabled={!session || busy} /><button className="button primary" type="submit" disabled={!session || busy || !input.trim()}>Send</button></div><small>Writes are never automatic. Copilot will ask for confirmation before any approved action.</small></form>
-          </section>
-        )}
-      </main>
-    </div>
-  );
+  return <div className="copilot-page"><ProductHeader current="copilot" /><main id="main-content" className="copilot-shell">
+    <section className="copilot-intro"><p className="eyebrow">MajuPilot Transformation Copilot</p><h1>A practical copilot for the work after your Blueprint.</h1><p>Ask anything, inspect your private assessment evidence with exact citations, or search the public web when current information matters.</p><span className="copilot-live-status" role="status">{status}</span></section>
+    {!ready ? <section className="copilot-empty" aria-busy="true"><h2>Opening your workspace</h2><p>Your authorized Twin and completed Blueprint are being loaded.</p></section> : !available ? <section className="copilot-empty" role={openFailure ? "alert" : undefined}><p className="eyebrow">Workspace status</p><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot opens only after a completed Blueprint is securely synced."}</p>{openFailure?.requestId ? <TechnicalDiagnostic requestId={openFailure.requestId} /> : null}<div className="copilot-recovery-actions">{shouldOfferCopilotRetry(openFailure) ? <button className="button primary" type="button" onClick={() => window.location.reload()}>Try again</button> : !openFailure ? <Link className="button primary" href="/assessment">Start or resume assessment</Link> : null}<Link className="button secondary" href="/blueprint">Return to Blueprint</Link></div></section> : <section className="copilot-workspace" aria-label="Transformation Copilot conversation">
+      <header className="copilot-workspace-header"><div><p className="eyebrow">Saved conversation</p><h2>Ask, explore, decide</h2></div><Link href="/evidence" className="button secondary">Evidence Library</Link></header>
+      <div className="copilot-log" ref={logRef} role="log" aria-live="polite" aria-relevant="additions text">
+        {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}${message.streaming ? " streaming" : ""}`}><header><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span>{message.streaming ? <small>Streaming</small> : null}</header>{message.text ? <Markdown>{message.text}</Markdown> : <span className="copilot-thinking-dots" aria-label="MajuPilot is thinking">•••</span>}<UploadedCitations tools={message.tools} /><WebSources tools={message.tools} />{message.requestId ? <TechnicalDiagnostic requestId={message.requestId} /> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Retry turn</button> : null}{message.tools?.filter((toolCall) => toolCall.status === "confirmation_required" && toolCall.confirmationId).map((toolCall) => <button key={toolCall.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(toolCall.confirmationId!)}>Confirm {toolCall.toolName}</button>)}</article>)}
+        {busy && activity ? <div className="copilot-activity" role="status"><span aria-hidden="true" />{activity}</div> : null}
+      </div>
+      {messages.length <= 1 ? <div className="copilot-prompts" aria-label="Conversation starters">{["Explain my top Blueprint priority", "Compare a document claim with current public information", "What can you help me reason through today?"].map((prompt) => <button type="button" key={prompt} onClick={() => setInput(prompt)}>{prompt}</button>)}</div> : null}
+      <form className="copilot-composer" onSubmit={submit}><label htmlFor="copilot-message">Message MajuPilot</label><div><textarea id="copilot-message" value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={onComposerKeyDown} maxLength={4000} rows={3} placeholder="Ask a general question, reference your Blueprint, or request a current web check…" disabled={!session} /><div className="copilot-composer-actions">{busy ? <button className="button secondary" type="button" onClick={() => abortRef.current?.abort()}>Stop</button> : <button className="button primary" type="submit" disabled={!session || !input.trim()}>Send</button>}</div></div><footer><small>Enter to send · Shift+Enter for a new line · writes always require confirmation</small><small>{input.length}/4000</small></footer></form>
+    </section>}
+  </main></div>;
 }
