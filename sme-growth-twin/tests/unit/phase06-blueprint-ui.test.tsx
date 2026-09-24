@@ -21,7 +21,9 @@ describe("UI Upgrade Phase 06 Blueprint contract", () => {
   it("uses the shared frame with Blueprint current and a finite five-role status board", () => {
     expect(html).toContain("Post-assessment journey");
     expect(html).toContain('aria-current="step"');
-    expect(html).toContain("Blueprint - 4 of 4");
+    expect(html).toContain("Blueprint - 4 of 5");
+    expect(html).toContain("<strong>Copilot</strong><small>Upcoming</small>");
+    expect(html).toContain("<span>Copilot next</span>");
     expect(html.match(/advisor-status-item status-fallback/g)).toHaveLength(5);
     for (const role of ["Growth advisor", "Operations advisor", "Finance advisor", "Cybersecurity advisor", "Change advisor"]) {
       expect(html).toContain(role);

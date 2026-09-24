@@ -6,6 +6,7 @@ import type { RecommendationResult } from "@/domain/recommendations";
 import type { ReportArtifact } from "@/domain/reports";
 import type { ScenarioComparison } from "@/domain/scenarios";
 import type { DiagnosticResult } from "@/domain/scoring";
+import { canonicalJson } from "@/core/reports/canonical-json";
 
 export const DURABLE_JOURNEY_STORAGE_KEY = "majupilot:durable-journey:1.0.0";
 
@@ -24,6 +25,7 @@ export type DurableJourneyContext = {
   guestSessionId: string;
   assessmentSessionId: string;
   artifactIds?: DurableArtifactIds;
+  sourceFingerprint?: string;
   syncedAt?: string;
   report?: ReportArtifact;
   lead?: LeadReceiptV2;
@@ -49,6 +51,46 @@ function load(storage: Storage): DurableJourneyContext | undefined {
 function save(storage: Storage, context: DurableJourneyContext) {
   storage.setItem(DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify(context));
   return context;
+}
+
+async function sha256(value: string) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+export function invalidateDurableJourney(storage: Storage) {
+  const context = load(storage);
+  if (!context) return;
+  save(storage, {
+    ...context,
+    artifactIds: undefined,
+    sourceFingerprint: undefined,
+    syncedAt: undefined,
+    report: undefined,
+    lead: undefined,
+    leadIdempotencyKey: `lead:${crypto.randomUUID()}`,
+  });
+}
+
+export async function durableJourneySourceFingerprint(source: DurableJourneySource) {
+  const wireSource = JSON.parse(JSON.stringify(source)) as DurableJourneySource;
+  return sha256(canonicalJson(wireSource));
+}
+
+export function copilotJourneyHref(context: DurableJourneyContext) {
+  const blueprintId = context.artifactIds?.blueprint;
+  if (!context.syncedAt || !blueprintId) return undefined;
+  const query = new URLSearchParams({ assessmentSessionId: context.assessmentSessionId, blueprintId });
+  return `/copilot?${query.toString()}`;
+}
+
+export function matchesCopilotDeepLink(
+  context: DurableJourneyContext,
+  requested: { assessmentSessionId?: string; blueprintId?: string },
+) {
+  if (requested.assessmentSessionId && requested.assessmentSessionId !== context.assessmentSessionId) return false;
+  if (requested.blueprintId && requested.blueprintId !== context.artifactIds?.blueprint) return false;
+  return true;
 }
 
 async function json<T>(url: string, init?: RequestInit): Promise<T> {
@@ -87,20 +129,25 @@ function createIds(source: DurableJourneySource): DurableArtifactIds {
 
 export async function syncDurableJourney(storage: Storage, source: DurableJourneySource) {
   let context = await ensureSession(storage);
-  if (context.syncedAt && context.artifactIds) return context;
-  const artifactIds = context.artifactIds ?? createIds(source);
-  context = save(storage, { ...context, artifactIds });
+  const sourceFingerprint = await durableJourneySourceFingerprint(source);
+  if (context.syncedAt && context.artifactIds && context.sourceFingerprint === sourceFingerprint) return context;
+  const sourceChanged = context.sourceFingerprint !== sourceFingerprint;
+  const artifactIds = sourceChanged || !context.artifactIds ? createIds(source) : context.artifactIds;
+  context = save(storage, {
+    ...context,
+    artifactIds,
+    sourceFingerprint,
+    syncedAt: undefined,
+    report: sourceChanged ? undefined : context.report,
+    lead: sourceChanged ? undefined : context.lead,
+    leadIdempotencyKey: sourceChanged ? `lead:${crypto.randomUUID()}` : context.leadIdempotencyKey,
+  });
   await json("/api/v2/journey/sync", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, ids: artifactIds, ...source }),
   });
   return save(storage, { ...context, artifactIds, syncedAt: new Date().toISOString() });
-}
-
-async function sha256(value: string) {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
-  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
 export async function createDurableConsultation(

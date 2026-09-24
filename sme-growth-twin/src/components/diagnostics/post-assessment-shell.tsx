@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { Brand } from "../assessment/brand";
 
-const journey = ["Discover", "Diagnose", "Compare", "Blueprint"] as const;
+const journey = ["Discover", "Diagnose", "Compare", "Blueprint", "Copilot"] as const;
 
 type ShellContext =
   | "analysis"
@@ -73,7 +73,7 @@ export function PostAssessmentShell({
       <div className="diagnostic-workspace">
         <header className="diagnostic-mobile-header">
           <Brand />
-          <span>{currentLabel} - {contextContent.currentIndex + 1} of 4</span>
+          <span>{currentLabel} - {contextContent.currentIndex + 1} of {journey.length}</span>
         </header>
         <div className="diagnostic-mobile-journey" aria-label="Current transformation journey stage">
           <span>{previousLabel} {contextContent.currentIndex === 0 ? "starts here" : "complete"}</span>

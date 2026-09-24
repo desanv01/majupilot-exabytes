@@ -16,7 +16,7 @@ describe("Phase 04 recommendation decision workspace", () => {
     const firstOffering = html.indexOf("Freshsales CRM");
 
     expect(html).toContain("Post-assessment journey");
-    expect(html).toContain("Diagnose - 2 of 4");
+    expect(html).toContain("Diagnose - 2 of 5");
     expect(html).toContain("Lead with the highest-ranked decision");
     expect(html).toContain("Ordered capability ledger");
     expect(html.match(/<ol/g)?.length).toBeGreaterThanOrEqual(2);

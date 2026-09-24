@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "synthetic": true,
+  "journey": {
+    "blueprintCount": true,
+    "copilotUpcoming": true,
+    "copilotNext": true
+  },
+  "savingDidNotClaimReady": true,
+  "deepLink": {
+    "assessment": "00000000-0000-4000-8000-000000000002",
+    "blueprint": "3f3afee0-3a79-42ab-815d-409b05de4ee6"
+  },
+  "refreshResumed": true,
+  "crossSessionDenied": true,
+  "failure": {
+    "noReadyClaim": true,
+    "noCopilotAction": true
+  },
+  "regeneration": {
+    "newArtifactSet": true,
+    "retryReusedWriteSet": true
+  },
+  "syncAttempts": 3,
+  "responsive": [
+    {
+      "label": "ready",
+      "width": 1440,
+      "overflow": false,
+      "minTarget": 44
+    },
+    {
+      "label": "ready",
+      "width": 390,
+      "overflow": false,
+      "minTarget": 44
+    }
+  ],
+  "axe": [],
+  "consoleErrors": [],
+  "failedRequests": []
+}
