@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import type { CopilotMessage } from "@/domain/copilot";
-import { Brand } from "@/components/assessment/brand";
+import { ProductHeader } from "@/components/navigation/product-header";
 import { matchesCopilotDeepLink } from "@/infrastructure/persistence/durable-journey-client";
 import { loadCurrentDurableJourney } from "@/infrastructure/persistence/current-durable-journey";
 
@@ -25,8 +25,6 @@ type Session = { id: string };
 type HistoryResponse = { session: Session; messages: CopilotMessage[] };
 type HealthResponse = { state: string; liveAvailable: boolean };
 
-const withRequestId = (message: string, requestId: string | null) => requestId ? `${message} Request ID: ${requestId}` : message;
-
 type Citation = { documentId: string; chunkId: string; documentName: string; pageNumber: number | null; sectionRef: string; excerpt: string; reference: string };
 function citationsFor(tools: ToolCall[] | undefined) {
   const citations: Citation[] = [];
@@ -40,7 +38,11 @@ function citationsFor(tools: ToolCall[] | undefined) {
 export function UploadedCitations({ tools }: { tools: ToolCall[] | undefined }) {
   const citations = citationsFor(tools);
   if (!citations.length) return null;
-  return <aside className="copilot-citations" aria-label="Uploaded evidence citations"><strong>Uploaded evidence</strong>{citations.map((citation) => <blockquote key={citation.chunkId}><header><b>{citation.documentName}</b><span>{citation.pageNumber ? `Page ${citation.pageNumber}` : citation.sectionRef}</span></header><p>{citation.excerpt}</p><code>{citation.reference}</code></blockquote>)}</aside>;
+  return <aside className="copilot-citations" aria-label="Uploaded evidence citations"><strong>Uploaded evidence</strong>{citations.map((citation) => <blockquote key={citation.chunkId}><header><b>{citation.documentName}</b><span>{citation.pageNumber ? `Page ${citation.pageNumber}` : citation.sectionRef}</span></header><p>{citation.excerpt}</p><details><summary>Technical citation</summary><code>{citation.reference}</code></details></blockquote>)}</aside>;
+}
+
+function TechnicalDiagnostic({ requestId }: { requestId: string }) {
+  return <details className="copilot-diagnostic"><summary>Technical details for support</summary><code>{requestId}</code></details>;
 }
 
 async function api<T>(url: string, init?: RequestInit): Promise<T> {
@@ -118,10 +120,11 @@ export function CopilotClient({
           setStatus(healthResult.value.liveAvailable ? "Live DeepSeek guidance is available through Vercel AI Gateway." : "Copilot is using its safe deterministic response path.");
         } else {
           const presentation = copilotErrorPresentation(healthResult.reason);
-          setStatus(withRequestId(presentation.message, presentation.requestId));
+          setStatus(presentation.message);
         }
       } catch (error) {
         const presentation = copilotErrorPresentation(error);
+        setStatus(presentation.message);
         setOpenFailure({ message: presentation.message, requestId: presentation.requestId, retryable: presentation.retryable });
         setAvailable(false);
       } finally { setReady(true); }
@@ -129,7 +132,10 @@ export function CopilotClient({
     void openWorkspace();
   }, [requestedAssessmentSessionId, requestedBlueprintId]);
 
-  useEffect(() => { logRef.current?.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, [messages]);
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    logRef.current?.lastElementChild?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
+  }, [messages]);
 
   const sendTurn = async (message: string, idempotencyKey = `turn:${crypto.randomUUID()}`, appendOptimisticUser = true) => {
     if (!message || !session || busy) return;
@@ -175,15 +181,15 @@ export function CopilotClient({
 
   return (
     <div className="copilot-page">
-      <header className="topbar copilot-topbar"><Brand /><nav aria-label="Copilot navigation"><Link href="/">Home</Link><Link href="/blueprint">Blueprint</Link><Link href="/evidence">Evidence Library</Link><Link href="/consultation">Consultation</Link></nav></header>
-      <main className="copilot-shell">
+      <ProductHeader current="copilot" />
+      <main id="main-content" className="copilot-shell">
         <section className="copilot-intro"><p className="eyebrow">MajuPilot Transformation Copilot</p><h1>Turn your evidence into a confident next move.</h1><p>Explore the reasoning behind your plan, retrieve exact evidence, and prepare changes for explicit confirmation.</p><span className="copilot-live-status" role="status">{status}</span></section>
         {!ready ? <section className="copilot-empty" aria-busy="true"><h2>Opening your workspace</h2><p>Your authorized Twin and Blueprint are being loaded.</p></section> : !available ? (
-          <section className="copilot-empty" role={openFailure ? "alert" : undefined}><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot answers from your persisted evidence, so it opens after a Blueprint is securely synced."}</p>{openFailure?.requestId ? <p className="copilot-diagnostic">Request ID: <code>{openFailure.requestId}</code></p> : null}{shouldOfferCopilotRetry(openFailure) ? <button className="button secondary" type="button" onClick={() => window.location.reload()}>Retry</button> : !openFailure ? <Link className="button primary" href="/assessment">Start or resume assessment</Link> : null}</section>
+          <section className="copilot-empty" role={openFailure ? "alert" : undefined}><p className="eyebrow">Workspace status</p><h2>{openFailure ? "Copilot could not open this workspace" : "Your Blueprint comes first"}</h2><p>{openFailure?.message ?? "Copilot answers from your persisted evidence, so it opens after a Blueprint is securely synced."}</p>{openFailure?.requestId ? <TechnicalDiagnostic requestId={openFailure.requestId} /> : null}<div className="copilot-recovery-actions">{shouldOfferCopilotRetry(openFailure) ? <button className="button primary" type="button" onClick={() => window.location.reload()}>Try again</button> : !openFailure ? <Link className="button primary" href="/assessment">Start or resume assessment</Link> : null}<Link className="button secondary" href="/blueprint">Return to Blueprint</Link></div></section>
         ) : (
           <section className="copilot-workspace" aria-label="Transformation Copilot conversation">
             <div className="copilot-log" ref={logRef} role="log" aria-live="polite">
-              {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}`}><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span><p>{message.text}</p><UploadedCitations tools={message.tools} />{message.requestId ? <small className="copilot-diagnostic">Request ID: <code>{message.requestId}</code></small> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Retry</button> : null}{message.tools?.filter((tool) => tool.status === "confirmation_required" && tool.confirmationId).map((tool) => <button key={tool.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(tool.confirmationId!)}>Confirm {tool.toolName}</button>)}</article>)}
+              {messages.map((message) => <article key={message.id} className={`copilot-message ${message.role}`}><span>{message.role === "user" ? "You" : message.role === "assistant" ? "MajuPilot" : "Status"}</span><p>{message.text}</p><UploadedCitations tools={message.tools} />{message.requestId ? <TechnicalDiagnostic requestId={message.requestId} /> : null}{message.retryMessage && message.retryIdempotencyKey ? <button type="button" className="button secondary" disabled={busy} onClick={() => retryTurn(message.id, message.retryMessage!, message.retryIdempotencyKey!)}>Try again</button> : null}{message.tools?.filter((tool) => tool.status === "confirmation_required" && tool.confirmationId).map((tool) => <button key={tool.confirmationId} type="button" className="button secondary" disabled={busy} onClick={() => confirm(tool.confirmationId!)}>Confirm {tool.toolName}</button>)}</article>)}
               {busy ? <article className="copilot-message status"><span>Status</span><p>Working with your authorized evidence...</p></article> : null}
             </div>
             <form className="copilot-composer" onSubmit={submit}><label htmlFor="copilot-message">Ask about your transformation plan</label><div><textarea id="copilot-message" value={input} onChange={(event) => setInput(event.target.value)} maxLength={4000} rows={3} placeholder="For example: Why is CRM prioritised before AI automation?" disabled={!session || busy} /><button className="button primary" type="submit" disabled={!session || busy || !input.trim()}>Send</button></div><small>Writes are never automatic. Copilot will ask for confirmation before any approved action.</small></form>

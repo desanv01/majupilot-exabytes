@@ -55,7 +55,8 @@ describe("UI Upgrade Phase 06 Blueprint contract", () => {
 
   it("keeps every report section and advisor detail accessible through native disclosures", () => {
     for (const sectionId of BLUEPRINT_SECTION_IDS) expect(html).toContain(`id="${sectionId}"`);
-    expect(html).toContain("Browse all 16 report sections");
+    expect(html).toContain("Section 1 of 16: Cover");
+    expect(html).toContain('aria-current="location"');
     expect(html.match(/class="phase06-advisor-card /g)).toHaveLength(5);
     expect(html).toContain("material items across support, concerns, evidence gaps, and adjustments");
     for (const label of ["Support", "Concerns", "Missing evidence", "Advisory adjustments", "Evidence references"]) {

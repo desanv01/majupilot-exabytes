@@ -7,7 +7,8 @@ const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const appPort = 3026;
 const debugPort = 9566;
 const baseUrl = `http://localhost:${appPort}`;
-const evidenceDir = path.resolve("..", "planning", "evidence", "ui-upgrade", "phase-06-blueprint-advisors");
+const configuredEvidenceDir = process.env.PHASE4_BLUEPRINT_ARTIFACT_DIR?.trim() || process.env.PHASE06_ARTIFACT_DIR?.trim();
+const evidenceDir = path.resolve(configuredEvidenceDir || path.join("..", "planning", "evidence", "ui-upgrade", "phase-06-blueprint-advisors"));
 const expectedRoles = ["growth", "operations", "finance", "cybersecurity", "change"];
 const expectedSectionIds = ["cover", "executive-summary", "business-profile", "maturity-readiness", "pain-points", "recommendations", "scenario-comparison", "selected-plan", "roi", "roadmap", "risks", "advisor-reviews", "synthesis", "consultant-notes", "methodology", "consultation-preview"];
 const expectedFigures = {
@@ -265,11 +266,18 @@ try {
   };
 
   const responsive = [];
-  for (const width of [1440, 1024, 390, 360]) {
-    await viewport(width, width >= 1024 ? 1000 : 844);
+  for (const [width, height] of [[1920, 1080], [1366, 900], [768, 1024], [390, 844]]) {
+    await viewport(width, height);
     responsive.push(await layoutAudit("complete", width));
     await screenshot(`completed-overview-${width}.png`, width >= 1024);
   }
+
+  await viewport(1366, 900);
+  await evaluate("document.querySelector('#roi').scrollIntoView({block:'start'})");
+  await poll("document.querySelector('.phase06-contents-rail a[aria-current=location]')?.getAttribute('href')", "#roi");
+  const sectionTracking = await evaluate("document.querySelector('.phase06-contents-rail a[aria-current=location]')?.textContent.includes('ROI assumptions') === true");
+  const metadataRestraint = await evaluate("!document.querySelector('.phase06-report-cover > dl')?.innerText.includes(JSON.parse(localStorage.getItem('sme-growth-twin:blueprint:1.0.0')).id) && !document.querySelector('.phase06-cover-technical')?.open");
+  await screenshot("section-tracking-1366.png", false);
 
   await viewport(1440, 1000);
   await evaluate("document.querySelector('.phase06-advisor-card summary').focus()");
@@ -337,7 +345,8 @@ try {
   await poll("document.body.innerText.includes('safely discarded')", true);
   const recoveryNotice = await evaluate("document.querySelector('.phase06-status-notice')?.textContent");
   await screenshot("corrupt-recovery-1440.png", false);
-  await evaluate("Array.from(document.querySelectorAll('button')).find((item)=>item.textContent.includes('Generate advisor review and Blueprint'))?.click()");
+  await evaluate(`localStorage.setItem('sme-growth-twin:blueprint:1.0.0', ${JSON.stringify(JSON.stringify(blueprint))})`);
+  await cdp("Page.reload", { ignoreCache: true });
   await poll("document.body.innerText.includes('Five advisor reviews')", true, 30_000);
 
   const scenarioRaw = await evaluate("localStorage.getItem('sme-growth-twin:scenarios:1.0.0')");
@@ -392,6 +401,7 @@ try {
     states: { ready: true, reviewing: true, allFallback: origins.every((origin) => origin === "deterministic_fallback"), mixedOriginCoveredByRenderTest: true, failedSafe, recoveryNotice, missingPreference },
     contentEvidence,
     keyboard: { generationFocusVisible, disclosureFocusVisible, contentsKeyboard },
+    clarity: { sectionTracking, metadataRestraint },
     responsive,
     accessibility: axe,
     print,
@@ -410,7 +420,7 @@ try {
   const keyboardPass = generationFocusVisible && disclosureFocusVisible && contentsKeyboard;
 
   const reducedMotionPass = reducedMotion.preferenceActive && parseFloat(reducedMotion.animationDuration) <= 0.001;
-  if (!figuresPass || !identitiesPass || !structurePass || !statePass || !printPass || !keyboardPass || !reducedMotionPass || !allAxeClean || !allResponsiveClean || consoleErrors.length || failedRequests.length) {
+  if (!figuresPass || !identitiesPass || !structurePass || !statePass || !printPass || !keyboardPass || !sectionTracking || !metadataRestraint || !reducedMotionPass || !allAxeClean || !allResponsiveClean || consoleErrors.length || failedRequests.length) {
     throw new Error("Phase 06 browser assertions failed");
   }
   await cdp("Browser.close");

@@ -2588,7 +2588,7 @@ select:focus-visible, textarea:focus-visible {
 .phase02-sync-steps .is-current { color: var(--color-teal-800); border-color: #86c7bd; background: var(--color-teal-100); }
 .phase02-sync-steps .is-complete { color: var(--color-teal-800); border-color: #86c7bd; }
 .phase02-sync-steps .is-failed { color: var(--color-coral-700); border-color: #d9a39d; background: var(--color-coral-100); }
-.phase02-sync-steps .is-pending { opacity: .72; }
+.phase02-sync-steps .is-pending { color: #435e68; opacity: 1; }
 .phase02-handoff-actions { display: grid; gap: 10px; }
 .phase02-handoff-actions .button { width: 100%; min-height: 48px; }
 .phase02-handoff-actions .consultation-cta { color: var(--color-teal-800); border-color: #9bcfc7; background: var(--color-teal-100); }
@@ -3634,4 +3634,125 @@ a { color: inherit; }
   .document-row { grid-template-columns: 1fr; }
   .document-state, .document-actions { grid-column: 1; grid-row: auto; }
   .document-actions { align-items: stretch; flex-direction: row; justify-content: flex-start; }
+}
+
+/* Phase 4: product-wide clarity, navigation, and recovery states */
+html { scroll-padding-top: 24px; }
+.skip-link {
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  left: 12px;
+  padding: 11px 16px;
+  color: var(--color-ink-950);
+  background: var(--color-focus);
+  border-radius: 8px;
+  font-weight: 850;
+  text-decoration: none;
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.product-header { width: 100%; color: var(--color-paper-50); background: var(--color-ink-950); }
+.product-header-inner {
+  width: min(1280px, calc(100% - 48px));
+  min-height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.product-header .brand small { color: #b9cbd2; }
+.product-header nav { display: flex; align-items: stretch; gap: 6px; }
+.product-header nav a {
+  min-height: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  color: #dbe8ea;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+}
+.product-header nav a:hover { color: white; background: rgb(255 255 255 / 8%); }
+.product-header nav a[aria-current="page"] { color: var(--color-ink-950); background: var(--color-teal-200); }
+
+.phase06-contents-heading { padding: 0 8px 10px; display: grid; gap: 3px; }
+.phase06-contents-rail > .phase06-contents-heading > strong { font-family: var(--font-libre-baskerville), Georgia, serif; }
+.phase06-contents-heading > span { color: var(--color-text-muted); font-size: 10px; font-weight: 750; text-transform: uppercase; }
+.phase06-contents-rail a strong { font-weight: 650; }
+.phase06-contents-rail a[aria-current="location"] { color: var(--color-teal-800); background: var(--color-teal-100); box-shadow: inset 3px 0 0 var(--color-teal-700); }
+.phase06-mobile-contents a[aria-current="location"] { color: var(--color-teal-800); background: var(--color-teal-100); }
+.phase06-report-cover { min-height: 470px; }
+.phase06-report-cover dl { margin-top: 36px; }
+.phase06-cover-technical { margin-top: 18px; max-width: 760px; color: #dce9ec; }
+.phase06-cover-technical summary { min-height: 44px; display: inline-flex; align-items: center; color: var(--color-teal-200); cursor: pointer; font-weight: 750; }
+.phase06-cover-technical p { margin: 6px 0; font-size: 12px; }
+.phase06-cover-technical code { overflow-wrap: anywhere; }
+.phase06-evidence { margin-top: 8px; }
+.phase06-evidence > summary { min-height: 44px; display: inline-flex; align-items: center; color: var(--color-teal-800); cursor: pointer; font-size: 12px; font-weight: 750; }
+.phase06-evidence > div { display: flex; flex-wrap: wrap; gap: 5px; }
+.phase06-report.blueprint-report > section { scroll-margin-top: 24px; }
+.phase06-technical-ledger > .phase06-versions { padding-bottom: 18px; }
+.phase06-safe-return { min-height: 44px; margin-left: 16px; display: inline-flex; align-items: center; color: var(--color-teal-800); font-weight: 800; }
+.phase06-empty.is-error { border-left: 5px solid var(--color-coral-700); background: var(--color-coral-100); }
+
+.copilot-intro > p:not(.eyebrow) { max-width: 65ch; }
+.copilot-empty > p { max-width: 68ch; line-height: 1.6; }
+.copilot-recovery-actions, .evidence-gate-actions { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+.copilot-diagnostic { margin-top: 14px; color: var(--color-text-muted); font-size: 12px; }
+.copilot-diagnostic summary { min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; font-weight: 750; }
+.copilot-diagnostic code { display: block; padding-top: 6px; overflow-wrap: anywhere; }
+.copilot-message.status { max-width: min(680px, 92%); align-self: flex-start; border-left: 4px solid var(--color-teal-700); }
+.copilot-citations details summary { min-height: 44px; display: inline-flex; align-items: center; color: var(--color-teal-800); cursor: pointer; font-size: 12px; font-weight: 750; }
+.copilot-citations blockquote code { display: block; }
+
+.evidence-technical { margin-top: 8px; }
+.evidence-technical summary { min-height: 44px; display: inline-flex; align-items: center; color: var(--color-teal-800); cursor: pointer; font-size: 11px; font-weight: 750; }
+.evidence-technical dl { margin: 0; padding: 4px 0 8px; }
+.evidence-technical dl div { margin-top: 6px; }
+.evidence-technical dt { color: var(--color-text-muted); font-size: 10px; text-transform: uppercase; }
+.evidence-technical dd { margin: 2px 0 0; font-size: 11px; overflow-wrap: anywhere; }
+.evidence-delete-dialog {
+  width: min(540px, calc(100% - 32px));
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: 0 28px 80px rgb(8 45 63 / 28%);
+}
+.evidence-delete-dialog::backdrop { background: rgb(8 45 63 / 62%); }
+.evidence-delete-dialog > div { padding: 28px; }
+.evidence-delete-dialog h2 { margin: 6px 0 10px; color: var(--color-ink-950); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: 28px; overflow-wrap: anywhere; }
+.evidence-delete-dialog p:not(.eyebrow) { color: var(--color-text-muted); line-height: 1.6; }
+.evidence-delete-actions { margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px; }
+
+.consultation-context > div { min-width: 0; }
+.consultation-context strong, .receipt-card dd { overflow-wrap: anywhere; }
+.consultation-technical { margin-top: 18px; border-top: 1px solid var(--color-border); }
+.consultation-technical > summary { min-height: 48px; display: flex; align-items: center; color: var(--color-teal-800); cursor: pointer; font-weight: 800; }
+.consultation-technical dl { margin-top: 0; }
+
+@media (max-width: 700px) {
+  .product-header-inner { width: min(100% - 28px, 1280px); padding: 12px 0; align-items: flex-start; flex-direction: column; gap: 10px; }
+  .product-header nav { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .product-header nav a { min-height: 44px; padding: 0 10px; justify-content: center; text-align: center; }
+  .phase06-cover-technical p { font-size: 14px; }
+  .phase06-safe-return { margin: 10px 0 0; display: flex; }
+  .copilot-recovery-actions .button, .evidence-gate-actions .button { width: 100%; }
+  .evidence-delete-actions { align-items: stretch; flex-direction: column-reverse; }
+  .evidence-delete-actions .button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+@media print {
+  .product-header, .skip-link { display: none !important; }
+  .phase06-cover-technical { display: block; color: #111; }
 }

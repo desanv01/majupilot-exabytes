@@ -5,6 +5,8 @@ import type { AdvisorReview } from "@/domain/advisors";
 import type { Blueprint } from "@/domain/blueprint";
 import { EXABYTES_ADVISORS_1_0_0 } from "@/domain-packs/exabytes/advisor-rules";
 
+import { BlueprintContentsNavigation } from "./blueprint-contents-navigation";
+
 const reportSections = [
   ["cover", "Cover"],
   ["executive-summary", "Executive summary"],
@@ -28,6 +30,7 @@ const money = (value: number) =>
   new Intl.NumberFormat("en-MY", { style: "currency", currency: "MYR", maximumFractionDigits: 0 }).format(value);
 
 const cleanText = (value: string) => value.replace(/[–—]/g, "-");
+const reportReference = (id: string) => `MP-${id.slice(-8).toUpperCase()}`;
 const humanize = (value: string) =>
   cleanText(value)
     .replaceAll("_", " ")
@@ -48,9 +51,12 @@ function Provenance({ category, children }: { category: string; children: ReactN
 
 function Evidence({ refs }: { refs: readonly string[] }) {
   return (
-    <div className="phase06-evidence" aria-label="Evidence references">
-      {refs.map((reference, index) => <code key={`${reference}-${index}`}>{cleanText(reference)}</code>)}
-    </div>
+    <details className="phase06-evidence">
+      <summary>{refs.length} evidence reference{refs.length === 1 ? "" : "s"}</summary>
+      <div aria-label="Evidence references">
+        {refs.map((reference, index) => <code key={`${reference}-${index}`}>{cleanText(reference)}</code>)}
+      </div>
+    </details>
   );
 }
 
@@ -250,24 +256,6 @@ export function DecisionOverview({ blueprint }: { blueprint: Blueprint }) {
   );
 }
 
-function ContentsNavigation() {
-  const links = reportSections.map(([anchor, label], index) => (
-    <a href={`#${anchor}`} key={anchor}><span>{String(index + 1).padStart(2, "0")}</span>{label}</a>
-  ));
-  return (
-    <>
-      <aside className="phase06-contents-rail no-print">
-        <strong>Blueprint contents</strong>
-        <nav aria-label="Blueprint sections">{links}</nav>
-      </aside>
-      <details className="phase06-mobile-contents no-print">
-        <summary>Browse all 16 report sections</summary>
-        <nav aria-label="Blueprint sections on small screens">{links}</nav>
-      </details>
-    </>
-  );
-}
-
 export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
   const { twin, diagnostic, recommendations, comparison, selectedScenario: selected } = blueprint.snapshot;
   const modelCount = blueprint.advisorReviews.filter((review) => review.origin === "model").length;
@@ -275,7 +263,7 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
 
   return (
     <div className="phase06-blueprint-layout">
-      <ContentsNavigation />
+      <BlueprintContentsNavigation sections={reportSections} />
       <article className="phase06-report blueprint-report" aria-label="Digital and AI Transformation Blueprint">
         <section id="cover" className="phase06-report-cover">
           <p className="eyebrow">Digital and AI Transformation Blueprint</p>
@@ -283,10 +271,15 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
           <p>{cleanText(selected.title)}</p>
           <p>12-month transformation plan</p>
           <dl>
-            <div><dt>Blueprint ID</dt><dd>{blueprint.id}</dd></div>
+            <div><dt>Report reference</dt><dd>{reportReference(blueprint.id)}</dd></div>
             <div><dt>Generated</dt><dd>{new Date(blueprint.generatedAt).toLocaleString("en-MY", { dateStyle: "long", timeStyle: "short" })}</dd></div>
-            <div><dt>Model version</dt><dd>{blueprint.modelVersion}</dd></div>
+            <div><dt>Planning horizon</dt><dd>12 months</dd></div>
           </dl>
+          <details className="phase06-cover-technical">
+            <summary>Technical report details</summary>
+            <p>Blueprint ID <code>{blueprint.id}</code></p>
+            <p>Model version <code>{blueprint.modelVersion}</code></p>
+          </details>
         </section>
 
         <section id="executive-summary">
@@ -331,7 +324,7 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
             <article><strong>{diagnostic.aiReadiness.value ?? "Not calculated"}</strong><span>AI readiness</span><small>{cleanText(diagnostic.aiReadiness.bandLabel)}</small></article>
           </div>
           <p>{cleanText(diagnostic.digitalMaturity.improvementAction)}</p>
-          <Provenance category="calculated_rule">Calculated rule: {diagnostic.id}</Provenance>
+          <Provenance category="calculated_rule">Calculated rule</Provenance>
         </section>
 
         <section id="pain-points">
@@ -379,7 +372,7 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
               </article>
             ))}
           </div>
-          <Provenance category="calculated_rule">Scenario and ROI Model {comparison.scenarioModelVersion}</Provenance>
+          <Provenance category="calculated_rule">Scenario and ROI model</Provenance>
         </section>
 
         <section id="selected-plan">
@@ -394,7 +387,7 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
               </li>
             ))}
           </ul>
-          <Provenance category="scenario_assumption">Selected scenario: {selected.id}</Provenance>
+          <Provenance category="scenario_assumption">Selected scenario</Provenance>
         </section>
 
         <section id="roi">
@@ -470,13 +463,16 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
           <ReportHeading index={15}>Evidence, provenance, versions, and methodology</ReportHeading>
           <p>Deterministic code owns scores, rankings, scenario composition, schedules, costs, and ROI. Optional model output is schema-validated and evidence-bounded. Invalid or unavailable output falls back per role.</p>
           <p><strong>Evidence references</strong> appear beside every supported claim so a consultant can trace the source record without inferring provenance.</p>
-          <dl className="phase06-versions">
-            <div><dt>Twin</dt><dd>{twin.id}<br />Revision {twin.revision}<br />{twin.schemaVersion}</dd></div>
-            <div><dt>Diagnostic</dt><dd>{diagnostic.id}<br />{diagnostic.scoreModelVersion}<br />{diagnostic.painModelVersion}</dd></div>
-            <div><dt>Recommendations</dt><dd>{recommendations.id}<br />{recommendations.recommendationModelVersion}<br />Catalogue {recommendations.catalogueVersion}</dd></div>
-            <div><dt>Scenario</dt><dd>{comparison.id}<br />{comparison.scenarioModelVersion}<br />{comparison.roiModelVersion}</dd></div>
-            <div><dt>Advisor and Blueprint</dt><dd>{blueprint.synthesis.modelVersion}<br />{blueprint.modelVersion}</dd></div>
-          </dl>
+          <details className="phase06-disclosure phase06-technical-ledger">
+            <summary>Inspect record IDs and model versions</summary>
+            <dl className="phase06-versions">
+              <div><dt>Twin</dt><dd>{twin.id}<br />Revision {twin.revision}<br />{twin.schemaVersion}</dd></div>
+              <div><dt>Diagnostic</dt><dd>{diagnostic.id}<br />{diagnostic.scoreModelVersion}<br />{diagnostic.painModelVersion}</dd></div>
+              <div><dt>Recommendations</dt><dd>{recommendations.id}<br />{recommendations.recommendationModelVersion}<br />Catalogue {recommendations.catalogueVersion}</dd></div>
+              <div><dt>Scenario</dt><dd>{comparison.id}<br />{comparison.scenarioModelVersion}<br />{comparison.roiModelVersion}</dd></div>
+              <div><dt>Advisor and Blueprint</dt><dd>{blueprint.synthesis.modelVersion}<br />{blueprint.modelVersion}</dd></div>
+            </dl>
+          </details>
           <details className="phase06-disclosure">
             <summary>Inspect claim provenance</summary>
             <ul>
@@ -512,9 +508,9 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
         </section>
 
         <footer className="phase06-report-footer">
-          <span>Blueprint {blueprint.id}</span>
+          <span>Report {reportReference(blueprint.id)}</span>
           <span>Generated {new Date(blueprint.generatedAt).toLocaleString("en-MY")}</span>
-          <span>Model {blueprint.modelVersion}</span>
+          <span>Technical identity available in methodology</span>
         </footer>
       </article>
     </div>

@@ -298,7 +298,7 @@ export function ReviewClient() {
   if (!draft || !twin) {
     return (
       <AssessmentFrame step={5} currentTopic="Business Twin review" mode="review" saveState={saveState}>
-        <main className="review-shell loading-state" aria-live="polite">
+        <main id="main-content" className="review-shell loading-state" aria-live="polite">
           <p className="eyebrow">Review your Business Twin</p>
           <h1>{loadError ? "Your review is not ready yet" : "Building your evidence review"}</h1>
           <p className="lead">{loadError || "We are rebuilding your Business Twin from the facts saved on this device."}</p>
@@ -310,7 +310,7 @@ export function ReviewClient() {
 
   return (
     <AssessmentFrame step={5} currentTopic="Business Twin review" mode="review" saveState={saveState}>
-      <main className="review-shell">
+      <main id="main-content" className="review-shell">
         <header className="review-heading">
           <div>
             <p className="eyebrow">Review your Business Twin</p>

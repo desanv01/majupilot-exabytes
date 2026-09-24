@@ -213,7 +213,7 @@ export function ResultsView({ result, twin, onEdit }: { result: DiagnosticResult
 
   return (
     <PostAssessmentShell businessName={twin.identity.businessName} context="results">
-      <main className="results-shell">
+      <main id="main-content" className="results-shell">
         <header className="results-heading">
           <div>
             <p className="eyebrow">Evidence-based diagnosis</p>
@@ -294,7 +294,7 @@ export function ResultsClient() {
   if (!state) {
     return (
       <PostAssessmentShell context="restoring">
-        <main className="results-restoring" aria-live="polite" aria-busy="true">
+        <main id="main-content" className="results-restoring" aria-live="polite" aria-busy="true">
           <p className="eyebrow">Restoring saved diagnosis</p>
           <h1>Bringing your validated results back into view.</h1>
           <div className="results-restoring-shape" aria-hidden="true"><span /><span /><span /></div>

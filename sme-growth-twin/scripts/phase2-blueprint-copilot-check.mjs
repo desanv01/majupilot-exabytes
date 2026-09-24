@@ -8,7 +8,7 @@ const appPort = 3032;
 const debugPort = 9572;
 const baseUrl = `http://localhost:${appPort}`;
 const verifyEvidence = process.argv.includes("--evidence");
-const configuredArtifacts = process.env.PHASE2_ARTIFACT_DIR;
+const configuredArtifacts = process.env.PHASE4_WORKSPACE_ARTIFACT_DIR?.trim() || process.env.PHASE2_ARTIFACT_DIR?.trim();
 const artifacts = configuredArtifacts ? path.resolve(configuredArtifacts) : await mkdtemp(path.join(tmpdir(), "majupilot-phase2-artifacts-"));
 const profile = await mkdtemp(path.join(tmpdir(), "majupilot-phase2-profile-"));
 const uuid = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -37,6 +37,7 @@ let server;
 let chrome;
 let ws;
 let syncMode = "success";
+let copilotSessionMode = "success";
 const syncBodies = [];
 const consoleErrors = [];
 const failedRequests = [];
@@ -115,7 +116,9 @@ try {
             : fulfill(requestId, 503, { error: { code: "INTERNAL_RETRYABLE", requestId: "phase2-browser-sync-failure" } });
         }
         if (url.pathname === "/api/v2/copilot/status") return fulfill(requestId, 200, { data: { state: "deterministic_fallback", liveAvailable: false } });
-        if (url.pathname === "/api/v2/copilot/sessions" && request.method === "POST") return fulfill(requestId, 201, { data: { id: uuid(50) } });
+        if (url.pathname === "/api/v2/copilot/sessions" && request.method === "POST") return copilotSessionMode === "success"
+          ? fulfill(requestId, 201, { data: { id: uuid(50) } })
+          : fulfill(requestId, 503, { error: { code: "AI_REQUIRED_UNAVAILABLE", category: "model_unavailable", requestId: "phase4-copilot-open-failure", retryable: true } });
         if (/^\/api\/v2\/copilot\/sessions\/[^/]+\/messages$/.test(url.pathname)) return fulfill(requestId, 200, { data: { session: { id: uuid(50) }, messages: [] } });
         if (verifyEvidence && /^\/api\/v2\/copilot\/sessions\/[^/]+\/turns$/.test(url.pathname)) {
           const citations = [{ documentId: uuid(70), chunkId: uuid(72), documentName: "synthetic-operations-plan.txt", pageNumber: null, sectionRef: "Text document", excerpt: "Customer follow-up is owned by the service desk.", reference: `doc:${uuid(70)}#chunk:${uuid(72)}`, provenance: "uploaded_document", similarity: 0.9 }];
@@ -196,8 +199,13 @@ try {
   const firstHref = await evaluate("document.querySelector('a[href^=\"/copilot?\"]')?.getAttribute('href')");
   if (!firstHref) throw new Error("ready state did not expose the Copilot deep link");
   await screenshot("ready-desktop.png");
-  const responsive = [await audit("ready", 1440)];
-  await viewport(390, 844); responsive.push(await audit("ready", 390)); await evaluate("document.querySelector('.phase02-handoff')?.scrollIntoView({block:'start'})"); await screenshot("ready-mobile.png");
+  const responsive = [];
+  for (const [width, height] of [[1920, 1080], [1366, 900], [768, 1024], [390, 844]]) {
+    await viewport(width, height);
+    responsive.push(await audit("ready", width));
+    await evaluate("document.querySelector('.phase02-handoff')?.scrollIntoView({block:'start'})");
+    await screenshot(`ready-${width}.png`);
+  }
 
   await viewport(1440, 1000);
   await evaluate("document.querySelector('a[href^=\"/copilot?\"]')?.click()");
@@ -210,6 +218,14 @@ try {
   await navigate(`${baseUrl}/copilot?assessmentSessionId=${uuid(99)}&blueprintId=${deepLink.blueprint}`);
   await poll("document.body.innerText.includes('does not match the current secure workspace')");
   const crossSessionDenied = await evaluate("!document.body.innerText.includes('Ask about your transformation plan')");
+
+  copilotSessionMode = "failure";
+  await navigate(`${baseUrl}/copilot`);
+  await poll("document.body.innerText.includes('Copilot could not open this workspace')");
+  const copilotFailure = await evaluate("(() => { const code=document.querySelector('.copilot-diagnostic code'); return {retry:document.body.innerText.includes('Try again'),safe:document.body.innerText.includes('saved evidence was not changed'),technicalClosed:Boolean(document.querySelector('.copilot-diagnostic:not([open])')),rawRequestVisible:Boolean(code?.checkVisibility({checkOpacity:true,checkVisibilityCSS:true}))}; })()");
+  await viewport(390, 844); responsive.push(await audit("copilot-failure", 390)); await screenshot("copilot-failure-390.png");
+  await viewport(1366, 900); responsive.push(await audit("copilot-failure", 1366)); await screenshot("copilot-failure-1366.png");
+  copilotSessionMode = "success";
 
   await navigate(`${baseUrl}/blueprint`);
   await poll("document.body.innerText.includes('Your evidence is ready for Copilot.')");
@@ -255,13 +271,17 @@ try {
     await setFile("#evidence-file", textFile);
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent.includes('Upload and process'))?.click()");
     await poll("document.body.innerText.includes('ready for cited Copilot answers')");
-    const readyState = await evaluate("document.body.innerText.includes('Ready for Copilot') && document.body.innerText.includes('openai-text-embedding-3-small-1536-v1')");
+    const readyState = await evaluate("document.body.innerText.includes('Ready for Copilot') && document.body.innerText.includes('Available for grounded answers') && !document.querySelector('.evidence-technical')?.open");
+    await evaluate("document.querySelector('.evidence-technical summary')?.click()");
+    const technicalEvidence = await evaluate("document.querySelector('.evidence-technical')?.open && document.querySelector('.evidence-technical')?.innerText.includes('openai-text-embedding-3-small-1536-v1')");
     await setFile("#evidence-file", textFile);
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent.includes('Upload and process'))?.click()");
     await poll("document.body.innerText.includes('A duplicate was not stored')");
     const duplicateDeleteVisible = await evaluate("document.querySelector('.status-duplicate .danger-link')?.textContent === 'Delete'");
-    await evaluate("window.confirm=()=>true");
     await evaluate("document.querySelector('.status-duplicate .danger-link')?.click()");
+    await poll("document.querySelector('.evidence-delete-dialog')?.open", true);
+    const deleteDialogAccessible = await evaluate("document.querySelector('.evidence-delete-dialog h2')?.textContent.includes('Delete') && document.activeElement.closest('.evidence-delete-dialog') !== null");
+    await evaluate("Array.from(document.querySelectorAll('.evidence-delete-dialog button')).find((button)=>button.textContent.includes('Delete document'))?.click()");
     await poll("document.body.innerText.includes('was deleted and excluded from retrieval')");
     const duplicateDeleted = await evaluate("document.querySelector('.status-deleted') !== null");
     await setFile("#evidence-file", unsupportedFile);
@@ -274,29 +294,37 @@ try {
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent.includes('Reprocess'))?.click()");
     await poll("document.body.innerText.includes('is ready again')");
     await screenshot("evidence-ready-desktop.png");
-    const evidenceResponsive = [await audit("evidence-ready", 1440)];
-    await viewport(390, 844); evidenceResponsive.push(await audit("evidence-ready", 390)); await evaluate("document.querySelector('.evidence-upload')?.scrollIntoView({block:'start'})"); await screenshot("evidence-ready-mobile.png");
+    const evidenceResponsive = [];
+    for (const [width, height] of [[1920, 1080], [1366, 900], [768, 1024], [390, 844]]) {
+      await viewport(width, height); evidenceResponsive.push(await audit("evidence-ready", width));
+      await evaluate("document.querySelector('.evidence-upload')?.scrollIntoView({block:'start'})");
+      await screenshot(`evidence-ready-${width}.png`);
+    }
     await viewport(1440, 1000);
     await navigate(`${baseUrl}/copilot`);
     await poll("document.body.innerText.includes('Ask about your transformation plan')");
     await evaluate("(() => {const input=document.querySelector('#copilot-message');Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set.call(input,'What does the uploaded plan say?');input.dispatchEvent(new Event('input',{bubbles:true}));})()");
     await evaluate("document.querySelector('.copilot-composer button').click()");
     await poll("document.querySelector('.copilot-citations') !== null");
-    const citationsVisible = await evaluate("document.querySelector('.copilot-citations').innerText.includes('synthetic-operations-plan.txt') && document.querySelector('.copilot-citations').innerText.includes('Text document') && document.querySelector('.copilot-citations').innerText.includes('doc:')");
+    const citationsVisible = await evaluate("document.querySelector('.copilot-citations').innerText.includes('synthetic-operations-plan.txt') && document.querySelector('.copilot-citations').innerText.includes('Text document') && !document.querySelector('.copilot-citations details')?.open");
+    await evaluate("document.querySelector('.copilot-citations details summary')?.click()");
+    const technicalCitation = await evaluate("document.querySelector('.copilot-citations details')?.open && document.querySelector('.copilot-citations code')?.innerText.includes('doc:')");
     await screenshot("evidence-copilot-citation.png");
     await navigate(`${baseUrl}/evidence`);
     await poll("document.body.innerText.includes('Ready for Copilot')");
-    await evaluate("window.confirm=()=>true");
     await evaluate("Array.from(document.querySelectorAll('button')).find((button)=>button.textContent==='Delete')?.click()");
+    await poll("document.querySelector('.evidence-delete-dialog')?.open", true);
+    await evaluate("Array.from(document.querySelectorAll('.evidence-delete-dialog button')).find((button)=>button.textContent.includes('Delete document'))?.click()");
     await poll("document.body.innerText.includes('was deleted and excluded from retrieval')");
-    evidence = { readyState, citationsVisible, uploadCount: evidenceUploads, fileControl, duplicateDeleteVisible, duplicateDeleted, responsive: evidenceResponsive, deletedExcluded: await evaluate("document.body.innerText.includes('Deleted and excluded')") };
+    evidence = { readyState, technicalEvidence, citationsVisible, technicalCitation, deleteDialogAccessible, uploadCount: evidenceUploads, fileControl, duplicateDeleteVisible, duplicateDeleted, responsive: evidenceResponsive, deletedExcluded: await evaluate("document.body.innerText.includes('Deleted and excluded')") };
   }
 
   const axeSource = await readFile(path.resolve("node_modules", "axe-core", "axe.min.js"), "utf8");
   await evaluate(axeSource);
   const axe = await evaluate("axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']}}).then((r)=>r.violations.filter((v)=>v.impact==='critical'||v.impact==='serious').map((v)=>({id:v.id,impact:v.impact,nodes:v.nodes.length,targets:v.nodes.map((n)=>n.target),summaries:v.nodes.map((n)=>n.failureSummary)})))");
-  const evidenceOk = !verifyEvidence || (evidence?.readyState && evidence.citationsVisible && evidence.deletedExcluded && evidence.duplicateDeleteVisible && evidence.duplicateDeleted && Object.values(evidence.fileControl).every(Boolean) && evidence.uploadCount === 2 && evidence.responsive.every((item) => !item.overflow && item.minTarget >= 44));
-  const result = { ok: Object.values(journey).every(Boolean) && savingDidNotClaimReady && refreshResumed && crossSessionDenied && failure.noReadyClaim && failure.noCopilotAction && regeneration.newArtifactSet && regeneration.retryReusedWriteSet && axe.length === 0 && responsive.every((item) => !item.overflow && item.minTarget >= 44) && evidenceOk, synthetic: true, journey, savingDidNotClaimReady, deepLink, refreshResumed, crossSessionDenied, failure, regeneration, evidence, syncAttempts: syncBodies.length, responsive, axe, consoleErrors, failedRequests };
+  const evidenceOk = !verifyEvidence || (evidence?.readyState && evidence.technicalEvidence && evidence.citationsVisible && evidence.technicalCitation && evidence.deleteDialogAccessible && evidence.deletedExcluded && evidence.duplicateDeleteVisible && evidence.duplicateDeleted && Object.values(evidence.fileControl).every(Boolean) && evidence.uploadCount === 2 && evidence.responsive.every((item) => !item.overflow && item.minTarget >= 44));
+  const copilotFailureOk = copilotFailure.retry && copilotFailure.safe && copilotFailure.technicalClosed && !copilotFailure.rawRequestVisible;
+  const result = { ok: Object.values(journey).every(Boolean) && savingDidNotClaimReady && refreshResumed && crossSessionDenied && copilotFailureOk && failure.noReadyClaim && failure.noCopilotAction && regeneration.newArtifactSet && regeneration.retryReusedWriteSet && axe.length === 0 && responsive.every((item) => !item.overflow && item.minTarget >= 44) && evidenceOk, synthetic: true, journey, savingDidNotClaimReady, deepLink, refreshResumed, crossSessionDenied, copilotFailure, failure, regeneration, evidence, syncAttempts: syncBodies.length, responsive, axe, consoleErrors, failedRequests };
   if (!result.ok || consoleErrors.length || failedRequests.length) throw new Error(`Phase 2 browser proof failed: ${JSON.stringify(result, null, 2)}`);
   await writeFile(path.join(artifacts, "browser-proof.json"), `${JSON.stringify(result, null, 2)}\n`);
   process.stdout.write(`${JSON.stringify({ ...result, artifacts }, null, 2)}\n`);

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-import { Brand } from "@/components/assessment/brand";
+import { ProductHeader } from "@/components/navigation/product-header";
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
 import type { AssessmentDraft } from "@/domain/assessment";
 import type { Blueprint } from "@/domain/blueprint";
@@ -52,6 +52,8 @@ const fieldIds: Record<Exclude<keyof FormState, "website">, string> = {
   consent: "consultation-consent",
 };
 
+const reportReference = (id: string) => `MP-${id.slice(-8).toUpperCase()}`;
+
 function JourneyRail() {
   return (
     <nav className="journey-rail consultation-journey" aria-label="Growth Twin journey">
@@ -86,7 +88,7 @@ function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt:
   const durable = "receiptId" in receipt;
 
   return (
-    <main className="consultation-shell success-shell" data-consultation-state={receipt.replayed ? "idempotent-replay" : "success"}>
+    <main id="main-content" className="consultation-shell success-shell" data-consultation-state={receipt.replayed ? "idempotent-replay" : "success"}>
       <section className="consultation-success-hero" aria-labelledby="receipt-title">
         <span className="success-check" aria-hidden="true">✓</span>
         <div>
@@ -103,13 +105,13 @@ function Success({ blueprint, receipt, onNew }: { blueprint: Blueprint; receipt:
         </div>
         <dl>
           <div><dt>Receipt reference</dt><dd>{durable ? receipt.receiptId : receipt.leadReference}</dd></div>
-          <div><dt>Lead reference</dt><dd>{durable ? receipt.leadId : receipt.leadReference}</dd></div>
           <div><dt>Submitted business</dt><dd>{blueprint.snapshot.twin.identity.businessName}</dd></div>
           <div><dt>Consultation focus</dt><dd>{blueprint.snapshot.selectedScenario.title}</dd></div>
-          <div><dt>Blueprint ID</dt><dd>{blueprint.id}</dd></div>
+          <div><dt>Report reference</dt><dd>{reportReference(blueprint.id)}</dd></div>
           <div><dt>Recorded time</dt><dd>{durable ? "Recorded securely" : new Date(receipt.submittedAt).toLocaleString("en-MY", { timeZone: "Asia/Kuala_Lumpur" })}</dd></div>
           <div><dt>Assignment</dt><dd>{durable && receipt.assignmentState === "assigned" ? "Assigned for follow-up" : "Queued for assignment"}</dd></div>
         </dl>
+        <details className="consultation-technical"><summary>Technical receipt details</summary><dl><div><dt>Lead reference</dt><dd>{durable ? receipt.leadId : receipt.leadReference}</dd></div><div><dt>Blueprint ID</dt><dd>{blueprint.id}</dd></div></dl></details>
       </section>
 
       <section className="receipt-boundary" aria-labelledby="receipt-boundary-title">
@@ -194,7 +196,7 @@ export function ConsultationView({ journey, blueprint: suppliedBlueprint, initia
   const visibleErrors = errorOrder.filter((key) => errors[key]);
 
   return (
-    <main className="consultation-shell" data-consultation-state={busy ? "submitting" : status || visibleErrors.length ? "failure" : "idle"}>
+    <main id="main-content" className="consultation-shell" data-consultation-state={busy ? "submitting" : status || visibleErrors.length ? "failure" : "idle"}>
       <header className="consultation-hero">
         <p className="eyebrow">Blueprint handoff</p>
         <h1>Request an evidence-ready consultation.</h1>
@@ -206,8 +208,9 @@ export function ConsultationView({ journey, blueprint: suppliedBlueprint, initia
         <div><span>Selected path</span><strong>{selected.title}</strong></div>
         <div><span>Digital maturity</span><strong>{score(diagnostic.digitalMaturity.value)} /100</strong></div>
         <div><span>AI readiness</span><strong>{score(diagnostic.aiReadiness.value)} /100</strong></div>
-        <div><span>Blueprint ID</span><strong>{blueprint.id}</strong></div>
+        <div><span>Report reference</span><strong>{reportReference(blueprint.id)}</strong></div>
       </section>
+      <details className="consultation-technical consultation-source-identity"><summary>Technical Blueprint identity</summary><dl><div><dt>Blueprint ID</dt><dd>{blueprint.id}</dd></div></dl></details>
 
       <div className="consultation-grid">
         <form className="consultation-form" onSubmit={submit} noValidate aria-busy={busy}>
@@ -273,7 +276,7 @@ export function ConsultationClient() {
     } catch { router.replace("/blueprint"); }
   }, [router]);
 
-  if (!loaded) return <main className="consultation-loading" aria-live="polite"><div className="consultation-loading-shape" aria-hidden="true"><span /><span /><span /></div><p className="eyebrow">Blueprint handoff</p><h1>Validating your current Blueprint.</h1><p>Checking the saved source chain before contact details are requested.</p></main>;
+  if (!loaded) return <><ProductHeader current="consultation" /><main id="main-content" className="consultation-loading" aria-live="polite"><div className="consultation-loading-shape" aria-hidden="true"><span /><span /><span /></div><p className="eyebrow">Blueprint handoff</p><h1>Validating your current Blueprint.</h1><p>Checking the saved source chain before contact details are requested.</p></main></>;
 
-  return <><header className="topbar consultation-topbar"><Brand /><span className="save-status">Blueprint verified</span></header><JourneyRail /><ConsultationView journey={loaded.journey} initialReceipt={loaded.receipt} /></>;
+  return <><ProductHeader current="consultation" /><JourneyRail /><ConsultationView journey={loaded.journey} initialReceipt={loaded.receipt} /></>;
 }

@@ -206,6 +206,7 @@ export function BlueprintView({
   const [blueprint, setBlueprint] = useState(initialBlueprint);
   const [notice, setNotice] = useState(initialNotice);
   const [busy, setBusy] = useState(false);
+  const [generationFailed, setGenerationFailed] = useState(false);
   const [syncState, setSyncState] = useState<DurableSyncState>(blueprint ? "saving" : "idle");
   const [syncContext, setSyncContext] = useState<DurableJourneyContext>();
   const [syncAttempt, setSyncAttempt] = useState(0);
@@ -253,6 +254,7 @@ export function BlueprintView({
 
   const generate = async () => {
     setBusy(true);
+    setGenerationFailed(false);
     setNotice(undefined);
     setStatuses(reviewingStatuses());
     const controller = new AbortController();
@@ -300,6 +302,7 @@ export function BlueprintView({
       );
     } catch {
       setStatuses(failedStatuses());
+      setGenerationFailed(true);
       setNotice("The Blueprint could not be saved safely. Upstream records were not changed. Retry when ready.");
     } finally {
       window.clearTimeout(timeout);
@@ -313,16 +316,18 @@ export function BlueprintView({
         <BlueprintCommandHeader blueprint={blueprint} busy={busy} onGenerate={generate} sources={sources} />
         <AdvisorStatusBoard blueprint={blueprint} busy={busy} notice={notice} statuses={statuses} />
         {!blueprint ? (
-          <section className="phase06-empty no-print">
-            <p className="eyebrow">Ready to review</p>
-            <h2>No Blueprint has been generated</h2>
+          <section className={`phase06-empty no-print${generationFailed ? " is-error" : ""}`} role={generationFailed ? "alert" : undefined}>
+            <p className="eyebrow">{generationFailed ? "Generation paused safely" : "Ready to review"}</p>
+            <h2>{generationFailed ? "The Blueprint was not created" : "No Blueprint has been generated"}</h2>
             <p>
-              The preferred scenario is ready. Generation creates a new immutable, source-linked record without changing the
-              Business Twin, diagnosis, recommendations, or scenario.
+              {generationFailed
+                ? "Your preferred scenario and all upstream records are unchanged. Try again when the review service is available."
+                : "The preferred scenario is ready. Generation creates a new immutable, source-linked record without changing the Business Twin, diagnosis, recommendations, or scenario."}
             </p>
             <button className="button primary" type="button" onClick={generate} disabled={busy}>
-              {busy ? "Reviewing five perspectives" : "Generate advisor review and Blueprint"}
+              {busy ? "Reviewing five perspectives" : generationFailed ? "Try generation again" : "Generate advisor review and Blueprint"}
             </button>
+            {generationFailed ? <Link className="phase06-safe-return" href="/scenarios">Return to scenarios</Link> : null}
           </section>
         ) : (
           <>
@@ -390,7 +395,7 @@ export function BlueprintClient() {
   if (!loaded) {
     return (
       <PostAssessmentShell context="restoring-blueprint">
-        <main className="phase06-restoring" aria-busy="true">
+        <main id="main-content" className="phase06-restoring" aria-busy="true">
           <p className="eyebrow">Validating source chain</p>
           <h1>Preparing the decision Blueprint.</h1>
           <p>The selected scenario, immutable source identities, and saved review are being checked locally.</p>
@@ -403,7 +408,7 @@ export function BlueprintClient() {
   if (!loaded.sources.comparison.selectedScenarioId) {
     return (
       <PostAssessmentShell businessName={loaded.sources.twin.identity.businessName} context="blueprint">
-        <main className="phase06-missing">
+        <main id="main-content" className="phase06-missing">
           <Brand />
           <p className="eyebrow">Safe return required</p>
           <h1>A preferred scenario is required.</h1>
