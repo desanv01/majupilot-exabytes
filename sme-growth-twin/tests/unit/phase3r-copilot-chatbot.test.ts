@@ -196,6 +196,7 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
     const publicQuestion = "What is company Apple doing today?";
     expect(derivePublicWebQuery(publicQuestion, publicQuestion)).toBe("what is company apple doing today");
     expect(isPublicWebQuerySafe("what is company apple doing today", publicQuestion)).toBe(true);
+    expect(derivePublicWebQuery("AB apple today", publicQuestion)).toBe("apple today");
 
     expect(() => derivePublicWebQuery(
       "our customer's secret margin 43127",

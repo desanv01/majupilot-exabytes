@@ -225,7 +225,7 @@ export function derivePublicWebQuery(proposedQuery: string, userMessage: string)
   if ([userMessage, proposedQuery].some((value) => PRIVATE_WEB_CONTEXT_MARKER.test(value) || hasNonGenericRelationshipContext(value))) throw new PersistenceError("VALIDATION_FAILED", 422);
   const publicUserTerms = new Set(queryTerms(redactPrivateQueryMaterial(userMessage)));
   const safeTerms = queryTerms(redactPrivateQueryMaterial(proposedQuery))
-    .filter((term) => term.length <= 2 || publicUserTerms.has(term) || WEB_QUERY_GENERIC_TERMS.has(term))
+    .filter((term) => publicUserTerms.has(term) || WEB_QUERY_GENERIC_TERMS.has(term))
     .slice(0, 12);
   const meaningful = safeTerms.filter((term) => term.length > 2);
   const query = safeTerms.join(" ").slice(0, 160).trim();
