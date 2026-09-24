@@ -223,7 +223,10 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
     followLatestRef.current = true;
     setShowLatest(false);
     const log = logRef.current;
-    if (log) log.scrollTop = log.scrollHeight;
+    if (log) {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      log.scrollTo({ top: log.scrollHeight, behavior: reducedMotion ? "auto" : "smooth" });
+    }
   };
 
   const sendTurn = async (message: string, idempotencyKey = `turn:${crypto.randomUUID()}`, appendOptimisticUser = true) => {
