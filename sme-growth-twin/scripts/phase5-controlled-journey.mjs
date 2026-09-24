@@ -182,6 +182,7 @@ try {
   await click('a[href="/recommendations"]');
   await poll("location.pathname", "/recommendations");
   await evaluate("[...document.querySelectorAll('.recommendation-record')].forEach(x=>x.open=true)");
+  await evaluate("[...document.querySelectorAll('.recommendation-record .recommendation-supporting-detail:not(.catalogue-disclosure)')].forEach(x=>x.open=true)");
   const recommendation = await storage("sme-growth-twin:recommendations:1.0.0");
   requirePass(recommendation.recommendations.length >= 3 && await evaluate("document.body.innerText.includes('Six exact fit components')"), "Recommendation details missing");
   checks.recommendations = recommendation.recommendations.map((item) => `${item.capabilityId}:${item.status}`);
