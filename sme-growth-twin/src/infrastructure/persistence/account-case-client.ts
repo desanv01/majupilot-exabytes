@@ -1,6 +1,7 @@
 "use client";
 
 import { accountCaseSnapshotSchema, type AccountCaseSnapshot } from "@/domain/account-cases";
+import { canonicalJson } from "@/core/reports/canonical-json";
 import { ASSESSMENT_STORAGE_KEY } from "./local-assessment-store";
 import { DIAGNOSTIC_STORAGE_KEY } from "./local-diagnostic-store";
 import { RECOMMENDATION_STORAGE_KEY } from "./local-recommendation-store";
@@ -28,10 +29,13 @@ function parseLocal(key: string): unknown {
 export function collectAccountCaseSnapshot(active: ActiveAccountCase): AccountCaseSnapshot | undefined {
   if (localStorage.getItem(DEMO_SESSION_STORAGE_KEY)) return undefined;
   const journey = parseLocal(DURABLE_JOURNEY_STORAGE_KEY);
-  const context = journey && typeof journey === "object" ? journey as Record<string, unknown> : undefined;
-  const durableJourney = context?.assessmentSessionId === active.caseId && context?.organizationId === active.organizationId
-    ? { ...Object.fromEntries(Object.entries(context).filter(([key]) => key !== "guestSessionId")), schemaVersion: "1.0.0" }
-    : { schemaVersion: "1.0.0", organizationId: active.organizationId, assessmentSessionId: active.caseId, leadIdempotencyKey: `lead:${crypto.randomUUID()}` };
+  let context = journey && typeof journey === "object" ? journey as Record<string, unknown> : undefined;
+  if (!context) {
+    context = { organizationId: active.organizationId, assessmentSessionId: active.caseId, leadIdempotencyKey: `lead:${crypto.randomUUID()}` };
+    localStorage.setItem(DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify(context));
+  }
+  if (context.assessmentSessionId !== active.caseId || context.organizationId !== active.organizationId) return undefined;
+  const durableJourney = { ...Object.fromEntries(Object.entries(context).filter(([key]) => key !== "guestSessionId")), schemaVersion: "1.0.0" };
   const candidate = {
     schemaVersion: "1.0.0", draft: parseLocal(ASSESSMENT_STORAGE_KEY),
     diagnostic: parseLocal(DIAGNOSTIC_STORAGE_KEY),
@@ -61,10 +65,18 @@ async function saveOnce() {
     if (hasWork) throw new Error("LOCAL_SNAPSHOT_INVALID");
     return;
   }
-  const saved = await request<{ revision: number }>(`/api/v2/cases/${active.caseId}`, {
-    method: "PUT", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ organizationId: active.organizationId, expectedRevision: active.revision, snapshot }),
-  });
+  let saved: { revision: number };
+  try {
+    saved = await request<{ revision: number }>(`/api/v2/cases/${active.caseId}`, {
+      method: "PUT", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ organizationId: active.organizationId, expectedRevision: active.revision, snapshot }),
+    });
+  } catch (error) {
+    if (!(error instanceof Error) || error.message !== "IDEMPOTENCY_CONFLICT" || active.revision !== 0) throw error;
+    const existing = await request<{ revision: number; snapshot: unknown }>(`/api/v2/cases/${active.caseId}?organizationId=${encodeURIComponent(active.organizationId)}`, { method: "GET" });
+    if (!existing.snapshot || canonicalJson(existing.snapshot) !== canonicalJson(JSON.parse(JSON.stringify(snapshot)) as unknown)) throw error;
+    saved = { revision: existing.revision };
+  }
   const latest = activeAccountCase(localStorage);
   if (latest?.caseId === active.caseId && latest.revision === active.revision) setActiveAccountCase(localStorage, { ...active, revision: saved.revision });
   return saved;

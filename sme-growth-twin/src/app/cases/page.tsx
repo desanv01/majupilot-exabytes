@@ -2,13 +2,10 @@ import Link from "next/link";
 
 import { AccountCasesClient } from "@/components/account/account-cases-client";
 import { Brand } from "@/components/assessment/brand";
-import { createServerSupabaseClient } from "@/infrastructure/supabase/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function CasesPage({ searchParams }: { searchParams: Promise<{ auth?: string }> }) {
-  const client = await createServerSupabaseClient();
-  const { data } = await client.auth.getUser();
   const authError = (await searchParams).auth === "expired";
 
   return (
@@ -23,7 +20,7 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
           <h1>Keep your Business Twin close.</h1>
           <p>Sign in to save assessments and reopen them on another device. Your current browser work can be added to your account.</p>
         </div>
-        <AccountCasesClient initialEmail={data.user?.email ?? null} initialAuthError={authError} />
+        <AccountCasesClient initialAuthError={authError} />
       </main>
     </div>
   );

@@ -18,10 +18,11 @@ async function parseResponse<T>(result: Response): Promise<T> {
   return body.data;
 }
 
-export function AccountCasesClient({ initialEmail, initialAuthError }: { initialEmail: string | null; initialAuthError: boolean }) {
+export function AccountCasesClient({ initialAuthError }: { initialAuthError: boolean }) {
   const router = useRouter();
-  const [email, setEmail] = useState(initialEmail ?? "");
-  const [signedInEmail, setSignedInEmail] = useState(initialEmail);
+  const [email, setEmail] = useState("");
+  const [signedInEmail, setSignedInEmail] = useState<string | null>(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [organizationId, setOrganizationId] = useState<string>();
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [busy, setBusy] = useState(false);
@@ -31,6 +32,11 @@ export function AccountCasesClient({ initialEmail, initialAuthError }: { initial
   useEffect(() => {
     const active = activeAccountCase(localStorage);
     setBrowserWork(loadAssessmentDraft(localStorage).status === "ok" && !loadDemoSession(localStorage) && (!active || active.revision === 0));
+    try {
+      void createBrowserSupabaseClient().auth.getUser().then(({ data }) => {
+        if (data.user?.email) { setSignedInEmail(data.user.email); setEmail(data.user.email); }
+      }).catch(() => undefined).finally(() => setCheckingAuth(false));
+    } catch { setCheckingAuth(false); }
   }, []);
 
   useEffect(() => {
@@ -135,6 +141,7 @@ export function AccountCasesClient({ initialEmail, initialAuthError }: { initial
       } else {
         const created = await parseResponse<{ id: string }>(await fetch("/api/v2/cases", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ organizationId }) }));
         caseId = created.id;
+        localStorage.setItem(DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify({ organizationId, assessmentSessionId: caseId, leadIdempotencyKey: `lead:${crypto.randomUUID()}` }));
       }
       setActiveAccountCase(localStorage, { organizationId, caseId, revision: 0 });
       await saveActiveAccountCase();
@@ -145,6 +152,8 @@ export function AccountCasesClient({ initialEmail, initialAuthError }: { initial
       setMessage("Could not add this browser's work yet. The work remains on this device; please retry.");
     } finally { setBusy(false); }
   }
+
+  if (checkingAuth) return <section className="account-card" aria-busy="true"><h2>Checking your account…</h2><p>Opening your saved workspace.</p></section>;
 
   if (!signedInEmail) return (
     <section className="account-card" aria-labelledby="account-signin-title">
