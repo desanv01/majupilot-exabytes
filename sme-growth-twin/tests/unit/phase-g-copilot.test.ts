@@ -79,6 +79,7 @@ describe("Phase G Transformation Copilot", () => {
     ["Where can I download my report?", "getReportMetadata"],
     ["What does the uploaded PDF say about payroll?", "searchUploadedEvidence"],
     ["Search the DOCX document for the service owner", "searchUploadedEvidence"],
+    ["From the uploaded evidence, report the stockout target", "searchUploadedEvidence"],
   ] as const)("routes deterministic fallback intent for %s", async (message, expectedTool) => {
     process.env.AI_EXECUTION_MODE = "disabled";
     const repository = new FakeRepository();

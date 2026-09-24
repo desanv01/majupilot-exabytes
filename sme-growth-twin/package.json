@@ -21,6 +21,7 @@
     "test:phase2:browser": "node scripts/phase2-blueprint-copilot-check.mjs",
     "test:phase3:browser": "node scripts/phase2-blueprint-copilot-check.mjs --evidence",
     "test:phase4:browser": "node scripts/phase4-ui-browser-check.mjs",
+    "test:phase5:journey": "node --env-file=.env.local scripts/phase5-controlled-journey.mjs",
     "test:phase3:gateway-live": "node --env-file=.env.local scripts/phase3-live-gateway-proof.mjs",
     "test:release:hosted": "node --env-file=.env.local scripts/hosted-release-smoke.mjs",
     "test:phase02:browser": "node scripts/phase02-browser-check.mjs",

@@ -1,4 +1,4 @@
-import { execFileSync, spawn } from "node:child_process";
+import { execFileSync, spawn, spawnSync } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -15,6 +15,20 @@ if (configuredBaseUrl) {
 }
 const artifactOverride = process.env.STAGE07_ARTIFACT_DIR?.trim();
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const cliStatus = spawnSync(process.execPath, ["node_modules/supabase/dist/supabase.js", "status", "-o", "env"], {
+  cwd: process.cwd(), encoding: "utf8", windowsHide: true, maxBuffer: 4 * 1024 * 1024,
+});
+if (cliStatus.status !== 0) throw new Error("Loopback Supabase is required for the production browser journey");
+const localSupabase = Object.fromEntries(cliStatus.stdout.split(/\r?\n/).map((line) => line.match(/^([A-Z0-9_]+)="?(.*?)"?$/)).filter(Boolean).map((match) => [match[1], match[2].replace(/"$/, "")]));
+if (!["127.0.0.1", "localhost"].includes(new URL(localSupabase.API_URL).hostname)) throw new Error("Browser journey database must be loopback");
+const localEnv = {
+  ...process.env,
+  NEXT_PUBLIC_SUPABASE_URL: localSupabase.API_URL,
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: localSupabase.PUBLISHABLE_KEY || localSupabase.ANON_KEY,
+  SUPABASE_SECRET_KEY: localSupabase.SECRET_KEY || localSupabase.SERVICE_ROLE_KEY,
+  MAJUPILOT_GUEST_TOKEN_PEPPER: `stage07-${crypto.randomUUID()}`,
+  AI_EXECUTION_MODE: "disabled", AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "",
+};
 const stopTree = (child) => { if (!child?.pid) return; try { execFileSync("taskkill", ["/PID", String(child.pid), "/T", "/F"], { stdio: "ignore", windowsHide: true }); } catch { try { child.kill(); } catch {} } };
 
 let artifacts; let profile; let server; let chrome; let ws;
@@ -26,7 +40,6 @@ try {
 
   let serverOutput = "";
   if (!configuredBaseUrl) {
-    const localEnv = { ...process.env, AI_EXECUTION_MODE: "disabled", AI_GATEWAY_MODEL: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "" };
     execFileSync(process.execPath, ["node_modules/next/dist/bin/next", "build"], { cwd: process.cwd(), env: localEnv, stdio: "inherit", windowsHide: true });
     server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--port", String(appPort)], {
       cwd: process.cwd(), env: localEnv, stdio: ["ignore", "pipe", "pipe"], windowsHide: true,
@@ -129,6 +142,20 @@ try {
   const caseA = await runToBlueprint("Load CASE A", true);
   const blueprintDurationMs = Date.now() - journeyStarted;
   accessibility.push(await axe("reviewed blueprint")); await checkLayout("/blueprint", 1440);
+  await poll("Boolean(document.querySelector('.phase02-handoff.sync-ready a[href^=\"/copilot\"]'))", true, 60_000);
+  await activateText("Continue to Copilot");
+  await poll("location.pathname", "/copilot");
+  await poll("Boolean(document.querySelector('#copilot-message:not([disabled])'))", true, 60_000);
+  const copilotBeforeTurn = await evaluate("document.querySelectorAll('.copilot-message.assistant').length");
+  await evaluate(`(() => { const field=document.querySelector('#copilot-message'); const setter=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set; setter.call(field,'Summarize the saved Business Twin for this fictional company.'); field.dispatchEvent(new Event('input',{bubbles:true})); field.form.requestSubmit(); })()`);
+  await poll(`document.querySelectorAll('.copilot-message.assistant').length>${copilotBeforeTurn}`, true, 60_000);
+  await cdp("Page.reload");
+  await poll("document.readyState", "complete");
+  await poll("Boolean(document.querySelector('#copilot-message:not([disabled])'))", true, 60_000);
+  const copilotJourney = { openedFromBlueprint: true, turnCompleted: true, historyRestored: await evaluate("document.querySelectorAll('.copilot-message.user').length>=1") };
+  if (!copilotJourney.historyRestored) throw new Error("Case A Copilot history did not restore");
+  await navigate("/blueprint");
+  await poll("document.body.innerText.includes('Five advisor reviews')", true);
   await activateText("Request consultation"); await poll("location.pathname", "/consultation"); accessibility.push(await axe("consultation")); await checkLayout("/consultation", 1440);
   await insert("name", "Aiman Demo");
   await insert("businessName", "Kopi Kita Café Group");
@@ -137,9 +164,9 @@ try {
   await tabTo("e.getAttribute('name')==='urgency'"); await key("ArrowDown");
   await tabTo("e.getAttribute('name')==='consent'"); await key(" ", "Space");
   await tabTo("e.getAttribute('type')==='submit'"); await key("Enter");
-  await poll("document.body.innerText.includes('Request recorded.')", true, 15_000);
+  await poll("document.body.innerText.includes('Request recorded.')", true, 90_000);
   accessibility.push(await axe("consultation success")); await checkLayout("/consultation success", 1440);
-  const receiptSafe = await evaluate(`(() => { const raw=sessionStorage.getItem('sme-growth-twin:lead-receipt:1.0.0'); const lower=(raw||'').toLowerCase(); return Boolean(raw)&&!['aiman','example.test','+60','email','phone','contact'].some(value=>lower.includes(value)); })()`);
+  const receiptSafe = await evaluate(`(() => { const raw=localStorage.getItem('majupilot:durable-journey:1.0.0'); const value=JSON.parse(raw||'null'); const receipt=JSON.stringify(value?.lead||{}).toLowerCase(); return Boolean(value?.lead?.leadId&&value?.report?.contentSha256)&&!['aiman','example.test','+60','email','phone','contact'].some(item=>receipt.includes(item)); })()`);
   await evaluate("localStorage.setItem('unrelated-stage07','preserve-me');sessionStorage.setItem('unrelated-stage07-session','preserve-me')");
   await resetViaBanner();
   const scopedReset = await evaluate("localStorage.getItem('unrelated-stage07')==='preserve-me'&&sessionStorage.getItem('unrelated-stage07-session')==='preserve-me'&&localStorage.getItem('sme-growth-twin:demo-session:1.0.0')===null");
@@ -166,10 +193,10 @@ try {
   };
   const casesMatch = [[caseA, expected.caseA], [caseB, expected.caseB], [caseC, expected.caseC]].every(([actual, frozen]) => Object.entries(frozen).every(([keyName, value]) => JSON.stringify(actual[keyName]) === JSON.stringify(value)) && actual.origins.every((origin) => origin === "deterministic_fallback"));
   const headersPass = securityHeaders["x-frame-options"] === "DENY" && securityHeaders["x-content-type-options"] === "nosniff" && securityHeaders["referrer-policy"] === "strict-origin-when-cross-origin" && securityHeaders["content-security-policy"]?.includes("frame-ancestors 'none'") && securityHeaders["permissions-policy"]?.includes("camera=()");
-  const evidence = { environment: { node: process.version, chromePath, mode: configuredBaseUrl ? "external" : "local-production", baseUrl }, cases: { caseA, caseB, caseC }, accessibility, responsive: checks, keyboardJourney: { completed: true, receiptSafe, blueprintDurationMs, underFiveMinutes: blueprintDurationMs < 300_000 }, homeReset, scopedReset, securityHeaders, consoleErrors, failedRequests, overlay: await evaluate("Boolean(document.querySelector('[data-nextjs-dialog],.vite-error-overlay,#webpack-dev-server-client-overlay'))") };
+  const evidence = { environment: { node: process.version, chromePath, mode: configuredBaseUrl ? "external" : "local-production", baseUrl }, cases: { caseA, caseB, caseC }, copilotJourney, accessibility, responsive: checks, keyboardJourney: { completed: true, receiptSafe, blueprintDurationMs, underFiveMinutes: blueprintDurationMs < 300_000 }, homeReset, scopedReset, securityHeaders, consoleErrors, failedRequests, overlay: await evaluate("Boolean(document.querySelector('[data-nextjs-dialog],.vite-error-overlay,#webpack-dev-server-client-overlay'))") };
   await writeFile(path.join(artifacts, "stage-07-browser-evidence.json"), `${JSON.stringify(evidence, null, 2)}\n`);
   console.log(JSON.stringify(evidence, null, 2));
-  if (!casesMatch || !receiptSafe || !Object.values(homeReset).every(Boolean) || !scopedReset || !headersPass || blueprintDurationMs >= 300_000 || consoleErrors.length || failedRequests.length || evidence.overlay) throw new Error("Stage 07 browser assertions failed");
+  if (!casesMatch || !Object.values(copilotJourney).every(Boolean) || !receiptSafe || !Object.values(homeReset).every(Boolean) || !scopedReset || !headersPass || blueprintDurationMs >= 300_000 || consoleErrors.length || failedRequests.length || evidence.overlay) throw new Error("Stage 07 browser assertions failed");
   await cdp("Browser.close");
 } finally {
   try { ws?.close(); } catch {}

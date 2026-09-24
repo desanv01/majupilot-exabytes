@@ -22,7 +22,7 @@ import { AiExecutionError } from "@/domain/ai-execution";
 import type { CopilotMessage, CopilotSession } from "@/domain/copilot";
 import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import { copilotErrorResponse } from "@/infrastructure/copilot/copilot-errors";
-import { executeCopilotTurn } from "@/infrastructure/copilot/copilot-model";
+import { executeCopilotTurn, isUploadedDocumentQuestion } from "@/infrastructure/copilot/copilot-model";
 import type { AppendCopilotMessage, CopilotConfirmation, CopilotRepository } from "@/infrastructure/copilot/copilot-repository";
 import { CopilotApiError, copilotErrorPresentation, prepareCopilotRetry, restoreCopilotMessages, shouldOfferCopilotRetry } from "@/components/copilot/copilot-client-utils";
 
@@ -48,7 +48,7 @@ class FailureRepository implements CopilotRepository {
   findTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string) => this.receipts.get(key) ?? null);
   rememberTurn = vi.fn(async (_owner: OwnershipContext, _sessionId: string, key: string, turnId: string, response: Record<string, unknown>) => { if (this.receipts.has(key)) throw new PersistenceError("IDEMPOTENCY_CONFLICT", 409); this.receipts.set(key, { turnId, response }); });
   appendMessage = vi.fn(async (_owner: OwnershipContext, _sessionId: string, input: AppendCopilotMessage) => { this.messages.push(input); return {} as CopilotMessage; });
-  invokeReadTool = vi.fn(async () => ({ evidence: this.deterministicEvidence.evidence }));
+  invokeReadTool = vi.fn(async (): Promise<Record<string, unknown>> => ({ evidence: this.deterministicEvidence.evidence }));
   proposeWrite = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, turnId: string, toolName: CopilotConfirmation["toolName"], args: Record<string, unknown>, proposalKey: string) => {
     const existing = this.proposals.get(proposalKey);
     if (existing) return existing;
@@ -124,6 +124,42 @@ describe("Phase 1 Copilot repair", () => {
     expect(shouldOfferCopilotRetry({ retryable: true })).toBe(true);
     expect(shouldOfferCopilotRetry({ retryable: false })).toBe(false);
     expect(shouldOfferCopilotRetry(undefined)).toBe(false);
+  });
+
+  it("anchors explicit uploaded-document questions to an authorized read even when the model skips tools", async () => {
+    preflightMock.mockResolvedValue({ id: "test/model", supported_parameters: ["tools"], pricing: { input: 0, output: 0 } });
+    generateMock.mockResolvedValue(liveResult("The stockout target is 17 percent."));
+    const repository = new FailureRepository();
+    const citation = { documentId: uuid(61), chunkId: uuid(62), documentName: "synthetic-plan.txt", pageNumber: null, sectionRef: "Text document", excerpt: "The stockout target is 17 percent.", similarity: 0.59, reference: `doc:${uuid(61)}#chunk:${uuid(62)}`, provenance: "uploaded_document" };
+    repository.invokeReadTool.mockResolvedValue({ answerable: true, reason: null, citations: [citation] });
+    const result = await executeCopilotTurn({ owner, sessionId: session.id,
+      request: { message: "What stockout target is in the uploaded document? Cite it.", idempotencyKey: "phase5-anchored-answer" },
+      repository, clientKey: "phase5-anchored-test" });
+    expect(result.state).toBe("live");
+    expect(result.toolCalls[0]).toMatchObject({ toolName: "searchUploadedEvidence", result: { citations: [citation] } });
+    expect(repository.invokeReadTool).toHaveBeenCalledWith(owner, session, "searchUploadedEvidence", expect.objectContaining({ query: expect.stringContaining("stockout") }));
+    expect(repository.messages.map((item) => item.role)).toEqual(["user", "tool", "assistant"]);
+    expect(generateMock.mock.calls[0][0]).toMatchObject({ tools: {} });
+    expect(generateMock.mock.calls[0][1].prompt).toContain("UNTRUSTED_UPLOADED_EVIDENCE");
+    expect(repository.proposeWrite).not.toHaveBeenCalled();
+  });
+
+  it("overrides unsupported document claims with an explicit no-evidence refusal", async () => {
+    preflightMock.mockResolvedValue({ id: "test/model", supported_parameters: ["tools"], pricing: { input: 0, output: 0 } });
+    generateMock.mockResolvedValue(liveResult("The lunar payroll deadline is tomorrow."));
+    const repository = new FailureRepository();
+    repository.invokeReadTool.mockResolvedValue({ answerable: false, reason: "NO_RELEVANT_EVIDENCE", citations: [] });
+    const result = await executeCopilotTurn({ owner, sessionId: session.id,
+      request: { message: "What lunar payroll deadline is in the uploaded document?", idempotencyKey: "phase5-anchored-refusal" },
+      repository, clientKey: "phase5-anchored-test" });
+    expect(result.state).toBe("live");
+    expect(result.text).toContain("NO_RELEVANT_EVIDENCE");
+    expect(result.text).not.toContain("tomorrow");
+    expect(result.toolCalls[0]).toMatchObject({ toolName: "searchUploadedEvidence", result: { answerable: false } });
+    expect(generateMock.mock.calls[0][0]).toMatchObject({ tools: {} });
+    expect(result.toolCalls).toHaveLength(1); // No model-initiated broader search can override the original refusal.
+    expect(isUploadedDocumentQuestion("Download my PDF report")).toBe(false);
+    expect(isUploadedDocumentQuestion("From the uploaded evidence, report the stockout target")).toBe(true);
   });
 
   it("claims one same-key retry, succeeds, and replays without duplicate messages or proposals", async () => {

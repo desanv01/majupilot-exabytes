@@ -62,6 +62,9 @@ describe("Phase E canonical report", () => {
     expect(text).toContain("MajuPilot Digital & AI Transformation");
     expect(text).toContain("(Blueprint)");
     expect(text).toContain("Accepted consultant notes");
+    expect(text).toContain("RM ");
+    expect(text).toContain("Technical report identity");
+    expect(text).not.toContain("Industry: food_beverage");
     expect(first.pageCount).toBeGreaterThan(1);
     if (process.env.WRITE_PHASE_E_PDF_PROOF === "1") {
       const output = resolve(process.cwd(), "artifacts", "phase-e", "representative-blueprint.pdf");
