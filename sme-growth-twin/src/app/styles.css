@@ -1388,6 +1388,23 @@ select:focus-visible, textarea:focus-visible {
 .results-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; }
 .results-heading .edit-twin { flex: none; margin-top: 24px; }
 .diagnostic-page .missing-notice { margin: 30px 0 0; border-color: #dfbd7d; border-radius: 10px; background: var(--color-amber-100); }
+.diagnostic-decision-map { margin-top: 22px; padding: 14px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) auto; gap: 10px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.diagnostic-decision-map > div { min-width: 0; padding: 10px 14px; border-left: 3px solid var(--color-teal-700); background: var(--color-paper-100); }
+.diagnostic-decision-map span, .diagnostic-decision-map small { display: block; color: var(--color-text-muted); font-size: 12px; }
+.diagnostic-decision-map strong { margin: 4px 0; display: block; color: var(--color-ink-950); font-size: 16px; line-height: 1.35; }
+.diagnostic-decision-map a { min-height: 44px; padding: 10px 12px; align-self: center; color: var(--color-teal-800); font-size: 13px; font-weight: 800; }
+.diagnostic-dimensions { margin-top: 18px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.diagnostic-dimensions > summary { min-height: 64px; padding: 14px 20px; display: flex; align-items: center; color: var(--color-ink-950); cursor: pointer; }
+.diagnostic-dimensions > summary strong, .diagnostic-dimensions > summary small { display: block; }
+.diagnostic-dimensions > summary strong { font-size: 16px; }
+.diagnostic-dimensions > summary small { margin-top: 3px; color: var(--color-text-muted); font-size: 13px; }
+.diagnostic-dimensions .breakdown-grid { margin: 0; padding: 0 14px 14px; }
+.diagnostic-dimensions:focus-within { outline: 2px solid var(--color-teal-700); outline-offset: 2px; }
+@media (max-width: 700px) {
+  .diagnostic-decision-map { grid-template-columns: 1fr; }
+  .diagnostic-decision-map a { padding-left: 14px; }
+  .diagnostic-dimensions .breakdown-grid { padding: 0 8px 8px; }
+}
 .score-grid,
 .breakdown-grid,
 .diagnostic-page .insight-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; align-items: start; }
@@ -1801,6 +1818,13 @@ select:focus-visible, textarea:focus-visible {
 .recommendation-record[open] .recommendation-inspect::after { content: "-"; }
 .recommendation-record[open] > summary { border-bottom: 1px solid var(--color-border); background: #fbfefd; }
 .recommendation-detail { padding: clamp(22px, 3.5vw, 40px); display: grid; gap: 26px; }
+.recommendation-supporting-detail { min-width: 0; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+.recommendation-supporting-detail > summary { min-height: 58px; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center; gap: 2px; color: var(--color-teal-800); cursor: pointer; }
+.recommendation-supporting-detail > summary span { font-size: 14px; font-weight: 800; }
+.recommendation-supporting-detail > summary small { color: var(--color-text-muted); font-size: 12px; }
+.recommendation-supporting-detail[open] > summary { border-bottom: 1px solid var(--color-border); }
+.recommendation-supporting-detail .fit-section, .recommendation-supporting-detail .decision-meta, .recommendation-supporting-detail .offering-detail, .recommendation-supporting-detail .mapping-unavailable { margin: 14px; }
+.recommendation-supporting-detail:focus-within { outline: 2px solid var(--color-teal-700); outline-offset: 2px; }
 .recommendation-detail section,
 .recommendation-detail div { min-width: 0; }
 .recommendation-detail h3,

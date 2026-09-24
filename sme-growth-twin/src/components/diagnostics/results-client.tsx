@@ -227,17 +227,26 @@ export function ResultsView({ result, twin, onEdit }: { result: DiagnosticResult
           <p className="missing-notice" role="status">Some evidence is unavailable. It was excluded from scoring and lowers confidence instead of being treated as zero.</p>
         ) : null}
 
+        <nav className="diagnostic-decision-map" aria-label="Diagnosis at a glance">
+          <div><span>Largest measured gap</span><strong>{gaps[0]?.label ?? "More evidence needed"}</strong><small>{gaps[0]?.score === undefined ? "No available dimension score" : `${gaps[0].score}/100`}</small></div>
+          <div><span>Top evidence-linked pain</span><strong>{topPainPoints[0]?.title ?? "None emitted"}</strong><small>{topPainPoints[0] ? `${topPainPoints[0].priority.toFixed(1)} priority` : "No linked finding"}</small></div>
+          <a href="#diagnostic-priorities">Review priorities <span aria-hidden="true">↓</span></a>
+        </nav>
+
         <div className="score-grid">
           <ScorePanel title="Digital maturity" description="How consistently the business uses digital tools, processes, and data." metric={result.digitalMaturity} twin={twin} tone="maturity" />
           <ScorePanel title="AI readiness" description="How prepared the business is to adopt AI responsibly for useful work." metric={result.aiReadiness} twin={twin} tone="readiness" />
         </div>
 
-        <div className="breakdown-grid">
-          <DimensionPanel title="Six maturity dimensions" metric={result.digitalMaturity} tone="maturity" />
-          <DimensionPanel title="Four readiness dimensions" metric={result.aiReadiness} tone="readiness" />
-        </div>
+        <details className="diagnostic-dimensions">
+          <summary><span><strong>Inspect all score dimensions</strong><small>Six maturity and four AI readiness measures, with their evidence confidence</small></span></summary>
+          <div className="breakdown-grid">
+            <DimensionPanel title="Six maturity dimensions" metric={result.digitalMaturity} tone="maturity" />
+            <DimensionPanel title="Four readiness dimensions" metric={result.aiReadiness} tone="readiness" />
+          </div>
+        </details>
 
-        <div className="insight-grid">
+        <div className="insight-grid" id="diagnostic-priorities">
           <section className="gaps-panel">
             <h2>Three largest gaps</h2>
             <p>These are the lowest available dimensions, not distances from an invented target.</p>

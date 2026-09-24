@@ -166,7 +166,7 @@ function RecommendationDisclosure({ recommendation, twin, diagnostic, featured =
           <div><p className="detail-kicker">{statusLabels[recommendation.status]}</p><h3>Why this timing</h3><p>{displayText(recommendation.whyNowOrLater)}</p></div>
         </section>
 
-        <section className="fit-section">
+        <details className="recommendation-supporting-detail"><summary><span>Inspect fit calculation and delivery profile</span><small>Six component scores, formula, effort, cost, and time to value</small></summary><section className="fit-section">
           <header><div><p className="detail-kicker">Calculation</p><h3>Six exact fit components</h3></div><strong>{recommendation.fitScore.toFixed(1)} fit</strong></header>
           <code className="formula">fit = pain_point_fit * 0.30 + prerequisite_readiness * 0.20 + budget_fit * 0.15 + time_to_value * 0.15 + risk_fit * 0.10 + data_readiness * 0.10</code>
           <dl className="fit-components">
@@ -181,7 +181,7 @@ function RecommendationDisclosure({ recommendation, twin, diagnostic, featured =
           <div><dt>Effort tier</dt><dd>{recommendation.effortTier} of 4</dd></div>
           <div><dt>Relative cost tier</dt><dd>{recommendation.relativeCostTier} of 4</dd></div>
           <div><dt>Time-to-value tier</dt><dd>{recommendation.timeToValueTier} of 4</dd></div>
-        </dl>
+        </dl></details>
 
         <section>
           <p className="detail-kicker">Readiness gate</p>
@@ -213,7 +213,7 @@ function RecommendationDisclosure({ recommendation, twin, diagnostic, featured =
           </div>
         </section>
 
-        <OfferingDetails recommendation={recommendation} />
+        <details className="recommendation-supporting-detail catalogue-disclosure"><summary><span>Inspect catalogue mapping and source</span><small>{offering ? `${displayText(offering.name)} · verified catalogue details` : "No current offering passed the mapping rules"}</small></summary><OfferingDetails recommendation={recommendation} /></details>
       </div>
     </details>
   );
