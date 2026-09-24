@@ -64,7 +64,7 @@ class Phase3rRepository implements CopilotRepository {
     this.messages.push(input);
     return {} as CopilotMessage;
   });
-  invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: string) => {
+  invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: string): Promise<Record<string, unknown>> => {
     if (name === "searchUploadedEvidence") return {
       answerable: true,
       reason: null,
