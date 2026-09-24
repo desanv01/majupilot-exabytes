@@ -29,7 +29,8 @@ export function AccountCasesClient({ initialEmail, initialAuthError }: { initial
   const [message, setMessage] = useState(initialAuthError ? "This sign-in link has expired. Request a new one." : "");
 
   useEffect(() => {
-    setBrowserWork(loadAssessmentDraft(localStorage).status === "ok" && !loadDemoSession(localStorage) && !activeAccountCase(localStorage));
+    const active = activeAccountCase(localStorage);
+    setBrowserWork(loadAssessmentDraft(localStorage).status === "ok" && !loadDemoSession(localStorage) && (!active || active.revision === 0));
   }, []);
 
   useEffect(() => {
@@ -87,18 +88,21 @@ export function AccountCasesClient({ initialEmail, initialAuthError }: { initial
 
   async function openCase(caseId: string) {
     if (!organizationId || busy) return;
+    if (browserWork) { setMessage("Add this browser's work to your account before opening another case."); return; }
     setBusy(true); setMessage("");
     try {
       await flushCurrent();
       const record = await parseResponse<{ revision: number; snapshot: unknown }>(await fetch(`/api/v2/cases/${caseId}?organizationId=${encodeURIComponent(organizationId)}`, { cache: "no-store" }));
       restoreAccountCase(record.snapshot, { organizationId, caseId, revision: record.revision });
-      router.push(record.snapshot ? "/assessment/review" : "/assessment?new=1");
+      const restoredDraft = loadAssessmentDraft(localStorage);
+      router.push(restoredDraft.status === "ok" ? restoredDraft.draft.status === "ready_for_review" ? "/assessment/review" : "/assessment" : "/assessment?new=1");
     } catch (error) { setMessage(error instanceof Error && error.message === "IDEMPOTENCY_CONFLICT" ? "This case changed on another device. Reload it before switching so your edits are preserved." : "Could not open this case. Your current browser work has not been cleared."); }
     finally { setBusy(false); }
   }
 
   async function newCase() {
     if (!organizationId || busy) return;
+    if (browserWork) { setMessage("Add this browser's work to your account before starting another case."); return; }
     setBusy(true); setMessage("");
     try {
       await flushCurrent();
@@ -113,6 +117,15 @@ export function AccountCasesClient({ initialEmail, initialAuthError }: { initial
     if (!organizationId || busy) return;
     setBusy(true); setMessage("");
     try {
+      const pendingCase = activeAccountCase(localStorage);
+      if (pendingCase) {
+        if (pendingCase.organizationId !== organizationId) throw new Error("Case workspace mismatch");
+        await saveActiveAccountCase();
+        setBrowserWork(false);
+        await refreshCases(organizationId);
+        setMessage("This browser's work is now saved to your account.");
+        return;
+      }
       const journey = loadDurableJourney(localStorage);
       let caseId: string;
       if (journey?.guestSessionId) {

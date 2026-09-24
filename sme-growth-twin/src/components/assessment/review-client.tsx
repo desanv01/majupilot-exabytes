@@ -309,7 +309,7 @@ export function ReviewClient() {
         <main id="main-content" className="review-shell loading-state" aria-live="polite">
           <p className="eyebrow">Review your Business Twin</p>
           <h1>{loadError ? "Your review is not ready yet" : "Building your evidence review"}</h1>
-          <p className="lead">{loadError || "We are rebuilding your Business Twin from the facts saved on this device."}</p>
+          <p className="lead">{loadError || "We are rebuilding your Business Twin from the facts saved for this case."}</p>
           {loadError ? <Link className="button primary" href="/assessment">Return to assessment</Link> : null}
         </main>
       </AssessmentFrame>

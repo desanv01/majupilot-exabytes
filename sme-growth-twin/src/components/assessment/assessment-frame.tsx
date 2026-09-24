@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { Brand } from "./brand";
 import { Progress } from "./progress";
+import { AccountSaveScope } from "@/components/account/account-save-scope";
 
 export type SaveState = "restoring" | "saving" | "saved" | "unavailable";
 
@@ -51,11 +52,11 @@ export function AssessmentFrame({
           <section>
             <span className={`save-indicator ${saveState}`} aria-hidden="true" />
             <div>
-              <strong>{saveCopy[saveState]}</strong>
+              <strong>{saveState === "saved" ? <AccountSaveScope guestText="Saved on this device" accountText="Saved here; syncing to your account" /> : saveCopy[saveState]}</strong>
               <p aria-live="polite">
                 {saveState === "unavailable"
                   ? "You can continue this page, but review requires browser storage."
-                  : "Your draft stays in this browser and can be edited later."}
+                  : <AccountSaveScope guestText="Your draft stays in this browser and can be edited later." accountText="Your draft belongs to this saved case and is synced as you work." />}
               </p>
             </div>
           </section>
@@ -78,7 +79,7 @@ export function AssessmentFrame({
         <header className="assessment-mobile-header">
           <Brand />
           <span className={`mobile-save-state ${saveState}`}>
-            {saveState === "unavailable" ? "Not saving" : saveCopy[saveState]}
+            {saveState === "unavailable" ? "Not saving" : saveState === "saved" ? <AccountSaveScope guestText="Saved on this device" accountText="Syncing to account" /> : saveCopy[saveState]}
           </span>
         </header>
         <Progress step={step} currentTopic={currentTopic} mode={mode} />

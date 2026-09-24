@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect -- versioned browser records are restored at this client boundary */
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { AccountSaveScope } from "@/components/account/account-save-scope";
 import { useRouter } from "next/navigation";
 
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
@@ -287,7 +288,7 @@ export function ScenariosView({ initialResult, twin, diagnostic, recommendations
     <PostAssessmentShell businessName={twin.identity.businessName} context="scenarios">
       <main id="main-content" className="scenario-lab-shell">
         <RecoveryNotice status={recoveryStatus} />
-        <header className="scenario-lab-heading"><div><p className="eyebrow">Scenario and ROI Lab</p><h1>Choose a path with the evidence in view.</h1><p className="lead">Compare three transformation paths, inspect one in detail, then save a preferred direction for advisor review.</p></div><aside><strong>{twin.identity.businessName}</strong><span>Saved on this device</span><small>{summary}</small><small>Scenario Model {comparison.scenarioModelVersion} | ROI Model {comparison.roiModelVersion}</small></aside></header>
+        <header className="scenario-lab-heading"><div><p className="eyebrow">Scenario and ROI Lab</p><h1>Choose a path with the evidence in view.</h1><p className="lead">Compare three transformation paths, inspect one in detail, then save a preferred direction for advisor review.</p></div><aside><strong>{twin.identity.businessName}</strong><span><AccountSaveScope guestText="Saved on this device" accountText="Syncing to your account" /></span><small>{summary}</small><small>Scenario Model {comparison.scenarioModelVersion} | ROI Model {comparison.roiModelVersion}</small></aside></header>
         <section className="comparison-command" aria-labelledby="comparison-title"><header className="comparison-command-heading"><div><p className="eyebrow">Three-path comparison</p><h2 id="comparison-title">Compare the same decision fields in the same order.</h2><p>Balanced Growth starts in inspection focus. Inspection does not save a preference.</p></div><div className={preferred ? "selection-readout has-selection" : "selection-readout"}><span>Saved preference</span><strong>{preferred?.title ?? "None selected"}</strong><small>{preferred ? "You can change this selection at any time." : "Select a path explicitly before Blueprint handoff."}</small></div></header><div className="scenario-command-grid">{comparison.scenarios.map((scenario) => <ScenarioCard key={scenario.id} scenario={scenario} focused={focusedId === scenario.templateId} preferred={comparison.selectedScenarioId === scenario.id} onFocus={() => setFocusedId(scenario.templateId)} onPrefer={() => prefer(scenario)} />)}</div></section>
         <ScenarioDetail scenario={focused} />
         <AssumptionWorkbench scenario={focused} drafts={drafts} errors={errors} onChange={edit} onReset={reset} />

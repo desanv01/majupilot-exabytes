@@ -127,7 +127,7 @@ export default function HomePage() {
             ))}
           </ol>
           <p className="home-local-note">
-            <strong>Saved as you work.</strong> Your browser keeps a recoverable draft; completed evidence is securely synced for reports, Copilot, and consultation.
+            <strong>Saved as you work.</strong> This browser keeps a draft. Sign in to save cases and reopen them on another device; completed evidence syncs securely for reports, Copilot, and consultation.
           </p>
         </section>
 

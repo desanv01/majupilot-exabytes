@@ -21,7 +21,7 @@ import {
 import {
   clearKnownProjectStorage,
   DEMO_SESSION_CHANGED_EVENT,
-  PROJECT_LOCAL_STORAGE_KEYS,
+  loadDemoSession,
   RESET_STATUS_SESSION_KEY,
   saveDemoSession,
 } from "@/infrastructure/persistence/project-storage";
@@ -41,9 +41,7 @@ export function DemoLauncher() {
 
   useEffect(() => {
     const refresh = () => {
-      setHasProjectRecords(
-        PROJECT_LOCAL_STORAGE_KEYS.some((key) => localStorage.getItem(key) !== null),
-      );
+      setHasProjectRecords(Boolean(loadDemoSession(localStorage)));
 
       const resetStatus = sessionStorage.getItem(RESET_STATUS_SESSION_KEY);
       if (resetStatus) {
@@ -66,6 +64,11 @@ export function DemoLauncher() {
     setLoadingFixtureId(fixture.id);
     setStatus(`Loading ${fixture.label} as fictional demonstration data.`);
     try {
+      if (loadAssessmentDraft(localStorage).status === "ok" && !loadDemoSession(localStorage)) {
+        setLoadingFixtureId(null);
+        setStatus("Finish or save your current assessment before opening a fictional demo case.");
+        return;
+      }
       if (activeAccountCase(localStorage)) await saveActiveAccountCase();
       localStorage.removeItem(ACCOUNT_CASE_STORAGE_KEY);
       clearKnownProjectStorage(localStorage, sessionStorage);
