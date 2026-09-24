@@ -8,7 +8,7 @@ The `/cases` flow uses Supabase email OTP links. Its browser client uses only `N
 2. Set the Auth Site URL to the deployed MajuPilot origin.
 3. Add the deployed `/auth/confirm` URL and local development `/auth/confirm` URL to the Auth redirect allowlist. The browser supplies the exact current origin as `emailRedirectTo`.
 4. Ensure the email template redirects to `/auth/confirm`. The callback accepts a PKCE `code` from the standard link or a `token_hash` plus `type` from a custom template. For a custom template, use Supabase's `{{ .TokenHash }}` with `type=email`, and point the link at the allowed `/auth/confirm` URL.
-5. Apply `20260924022616_account_cases.sql` and `20260924030200_personal_workspace_rls.sql` in order before enabling the UI. Do not expose the secret key in any `NEXT_PUBLIC_` variable.
+5. Apply `20260924022616_account_cases.sql`, `20260924030200_personal_workspace_rls.sql`, and `20260924031000_claim_case_related_owners.sql` in order before enabling the UI. Do not expose the secret key in any `NEXT_PUBLIC_` variable.
 
 ## Recovery behavior
 

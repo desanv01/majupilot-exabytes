@@ -16,7 +16,7 @@ export const accountDurableJourneySchema = z.object({
   artifactIds: z.object({
     answers: z.record(z.string().min(1).max(80), persistenceUuidSchema),
     businessTwin: persistenceUuidSchema,
-    evidence: z.array(persistenceUuidSchema).max(100),
+    evidence: z.array(persistenceUuidSchema).max(128),
     diagnostic: persistenceUuidSchema,
     recommendations: persistenceUuidSchema,
     scenarioComparison: persistenceUuidSchema,
