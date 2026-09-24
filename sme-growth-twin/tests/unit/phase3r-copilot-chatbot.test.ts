@@ -29,6 +29,7 @@ import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import {
   derivePublicWebQuery,
   executeCopilotTurn,
+  focusedBlueprintRead,
   isPublicWebQuerySafe,
   isSafePublicSourceUrl,
 } from "@/infrastructure/copilot/copilot-model";
@@ -37,6 +38,7 @@ import { restoreCopilotMessages } from "@/components/copilot/copilot-client-util
 import { Markdown } from "@/components/copilot/copilot-client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createElement } from "react";
+import { stage05CaseA } from "./stage05-fixtures";
 
 const uuid = (n: number) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 const owner: OwnershipContext = { kind: "guest", guestSessionId: uuid(1) };
@@ -275,11 +277,14 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
 
   it("uses one authorized Blueprint read for a brief overview without blocking mixed evidence questions", async () => {
     const repository = new Phase3rRepository();
+    const blueprint = stage05CaseA().blueprint;
+    repository.invokeReadTool.mockResolvedValueOnce({ blueprint: { id: blueprint.id, payload: blueprint } });
     generateMock.mockImplementationOnce(async (options: unknown, input: unknown) => {
       const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: { toolName: string } | string } | undefined };
       expect(configured.prepareStep({ steps: [] })).toMatchObject({ activeTools: [], toolChoice: "none" });
       expect(configured.prepareStep({ steps: [{ toolCalls: [{ toolName: "getBlueprint" }] }] })).toMatchObject({ activeTools: [], toolChoice: "none" });
       expect((input as { prompt: string }).prompt).toContain("AUTHORIZED_BLUEPRINT_READ");
+      expect((input as { prompt: string }).prompt).toContain(blueprint.snapshot.recommendations.recommendations[0].evidenceIds[0]);
       return completed("The Blueprint's selected path is Balanced Growth.");
     });
     await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-blueprint-overview", request: { message: "Give me a brief summary of my Blueprint.", idempotencyKey: "phase3r-blueprint-overview" } });
@@ -372,6 +377,18 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
 
     expect(repository.messages.map((item) => item.role)).toEqual(["user"]);
     expect(repository.receipts.get("phase3r-cancel-turn")?.response).toMatchObject({ failed: true, retryable: true });
+  });
+
+  it("keeps the recorded top recommendation and its source evidence in a focused Blueprint read", () => {
+    const blueprint = stage05CaseA().blueprint;
+    const result = focusedBlueprintRead({ blueprint: { id: blueprint.id, payload: blueprint } });
+    const excerpt = result.blueprint as Record<string, unknown>;
+    const top = excerpt.topRecommendation as Record<string, unknown>;
+    const expected = [...blueprint.snapshot.recommendations.recommendations].sort((a, b) => a.rank - b.rank)[0];
+    expect(top.title).toBe(expected.title);
+    expect(top.evidenceIds).toEqual(expected.evidenceIds);
+    expect(excerpt.evidence).toEqual(expect.arrayContaining(expected.evidenceIds.map((id) => expect.objectContaining({ id }))));
+    expect(JSON.stringify(result)).not.toContain("omittedItems");
   });
 
   it("rejects provider tool markup instead of showing or saving it as an answer", async () => {

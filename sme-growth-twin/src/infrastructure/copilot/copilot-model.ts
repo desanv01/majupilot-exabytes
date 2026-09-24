@@ -7,6 +7,7 @@ import { gateway } from "@ai-sdk/gateway";
 import { z } from "zod";
 
 import { canonicalJson } from "@/core/reports/canonical-json";
+import { blueprintSchema } from "@/domain/blueprint";
 import {
   COPILOT_PROMPT_VERSION,
   COPILOT_SCHEMA_VERSION,
@@ -135,6 +136,32 @@ const bounded = (value: unknown): Record<string, unknown> => {
   }
   return value as Record<string, unknown>;
 };
+
+export function focusedBlueprintRead(value: Record<string, unknown>): Record<string, unknown> {
+  const row = value.blueprint;
+  if (!row || typeof row !== "object" || !("payload" in row)) return bounded(value);
+  const parsed = blueprintSchema.safeParse(row.payload);
+  if (!parsed.success) return bounded(value);
+  const blueprint = parsed.data;
+  const top = [...blueprint.snapshot.recommendations.recommendations].sort((a, b) => a.rank - b.rank)[0];
+  const linkedPainPoints = blueprint.snapshot.diagnostic.painPoints.filter((item) => top?.addressedPainPointIds.includes(item.id));
+  const evidenceIds = new Set([...(top?.evidenceIds ?? []), ...linkedPainPoints.flatMap((item) => item.evidenceIds)]);
+  const evidence = blueprint.snapshot.twin.evidence.filter((item) => evidenceIds.has(item.id)).slice(0, 12).map((item) => ({
+    id: item.id, source: item.source, sourceRef: item.sourceRef, questionId: item.questionId,
+    rawAnswer: item.rawAnswer, normalizedValue: item.normalizedValue,
+  }));
+  return bounded({ blueprint: {
+    id: blueprint.id, selectedPlan: { title: blueprint.snapshot.selectedScenario.title, intent: blueprint.snapshot.selectedScenario.intent },
+    topRecommendation: top ? {
+      rank: top.rank, title: top.title, outcome: top.outcome, status: top.status,
+      whySelected: top.whySelected, whyNowOrLater: top.whyNowOrLater,
+      roadmapPhase: top.roadmapPhase, evidenceIds: top.evidenceIds, addressedPainPointIds: top.addressedPainPointIds,
+    } : null,
+    linkedPainPoints: linkedPainPoints.map((item) => ({ id: item.id, title: item.title, mechanism: item.mechanism, evidenceIds: item.evidenceIds })),
+    evidence, missingEvidenceIds: [...evidenceIds].filter((id) => !evidence.some((item) => item.id === id)),
+    limitations: blueprint.limitations,
+  } });
+}
 
 function savedAnswer(value: string, finishReason: unknown) {
   const limitedByModel = ["length", "max_output_tokens", "max-tokens"].includes(String(finishReason));
@@ -570,13 +597,13 @@ export async function executeCopilotTurn(args: {
           let blueprintResult = toolCalls.find((call) => call.toolName === "getBlueprint")?.result;
           if (!blueprintResult) {
             await args.onEvent?.({ type: "status", phase: "tool_running", toolName: "getBlueprint" });
-            blueprintResult = bounded(await args.repository.invokeReadTool(args.owner, session, "getBlueprint", {}));
+            blueprintResult = focusedBlueprintRead(await args.repository.invokeReadTool(args.owner, session, "getBlueprint", {}));
             executedToolNames.push("getBlueprint");
             toolCalls.push({ toolName: "getBlueprint", status: "completed", confirmationId: null, result: blueprintResult });
             await args.onEvent?.({ type: "status", phase: "tool_completed", toolName: "getBlueprint" });
           }
           // The Blueprint overview needs one trusted read; the model only writes the explanation.
-          turnPrompt += `\n<AUTHORIZED_BLUEPRINT_READ>${JSON.stringify(blueprintResult)}</AUTHORIZED_BLUEPRINT_READ>`;
+          turnPrompt += `\n<AUTHORIZED_BLUEPRINT_READ>${JSON.stringify(blueprintResult)}</AUTHORIZED_BLUEPRINT_READ>\nThe focused Blueprint read identifies the recorded rank-one recommendation and linked evidence. Cite only source references and IDs present in that read; explain any missing evidence.`;
         }
         const agent = new ToolLoopAgent({
           model: policy.model,
