@@ -38,7 +38,7 @@ try {
   if (!Object.values(securityHeaders).every(Boolean)) throw new Error("production security headers are incomplete");
 
   const integration = (await (await requireOk(await fetch(`${baseUrl}/api/v2/integration/status`), "integration status")).json()).data;
-  if (!integration?.delivery?.configured || integration.documentRag !== "P1_not_enabled") throw new Error("integration status is not release-ready");
+  if (!integration?.delivery?.configured || !integration.capabilities?.includes("evidence_document_rag") || integration.documentRag?.capability !== "implemented" || integration.documentRag?.embeddingGatewayCredentialPresent !== true || integration.documentRag?.liveEmbeddingCheck !== "not_performed") throw new Error("integration status is not release-ready");
   const ai = (await (await requireOk(await fetch(`${baseUrl}/api/v2/ai/preflight`), "AI preflight")).json()).data;
   if (ai?.state !== "ready" || ai.model !== "deepseek/deepseek-v4.1-flash") throw new Error("AI Gateway preflight did not return the approved model");
 
@@ -196,7 +196,7 @@ try {
     lead: { created: true, assignmentState: durable.lead.assignmentState, audited: true, guestEventHistoryDenied: true },
     outbox: { unauthorizedRejected: true, deliveryOutcome: outcome.outcome, externalReceiverAccepted: true },
     copilot: { live: copilot.live, assistantMessages: copilot.messages, historyRestored: restoredAssistantMessages >= expectedPersistedAssistantMessages, evidenceRead: true, evidenceRequestId: copilotProbe.evidenceRequestId, safeSessionFailure: { category: copilotProbe.failureBody.error.category, requestId: copilotProbe.failureBody.error.requestId } },
-    documentRag: "deferred_P1",
+    documentRag: integration.documentRag,
     securityHeaders,
     consoleErrors: 0,
   }, null, 2)}\n`);
