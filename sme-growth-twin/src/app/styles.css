@@ -2623,6 +2623,8 @@ select:focus-visible, textarea:focus-visible {
 }
 .phase06-command-actions .consultation-cta { color: var(--color-teal-800); border: 1px solid #9bcfc7; background: var(--color-teal-100); }
 .phase06-command-actions button:disabled { opacity: .48; cursor: not-allowed; }
+.saved-report-action { min-width: 0; }
+.saved-report-action small { display: block; margin-top: 7px; color: var(--color-text-muted); font-size: 12px; line-height: 1.35; }
 
 .phase06-status-board {
   margin-top: 24px;
