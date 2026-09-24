@@ -1414,6 +1414,36 @@ select:focus-visible, textarea:focus-visible {
   .diagnostic-decision-map a { padding-left: 14px; }
   .diagnostic-dimensions .breakdown-grid { padding: 0 8px 8px; }
 }
+
+.account-page { min-height: 100dvh; background: var(--color-paper-50); }
+.account-topbar { padding: 0 max(24px, calc((100vw - 1120px) / 2)); color: #fff; background: var(--color-ink-950); }
+.account-topbar a { color: #dbe8ea; }
+.account-main { max-width: 1120px; margin: 0 auto; padding: clamp(42px, 7vw, 92px) 24px 100px; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 7vw, 96px); align-items: start; }
+.account-heading h1 { margin: 10px 0 20px; max-width: 580px; color: var(--color-ink-950); font-family: var(--font-libre-baskerville), Georgia, serif; font-size: clamp(38px, 4vw, 56px); line-height: 1.1; letter-spacing: -.035em; }
+.account-heading > p:last-child { max-width: 520px; color: var(--color-text-muted); font-size: 17px; line-height: 1.65; }
+.account-card { padding: clamp(24px, 3vw, 40px); border: 1px solid var(--color-border); border-radius: 18px; background: #fff; box-shadow: 0 18px 55px rgba(8,45,63,.07); }
+.account-step { margin: 0 0 12px; color: var(--color-teal-700); font-size: 12px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+.account-card h2 { margin: 0 0 10px; color: var(--color-ink-950); font-size: 25px; line-height: 1.2; }
+.account-card p { line-height: 1.55; }
+.account-signin-form { margin-top: 30px; display: grid; gap: 10px; }
+.account-signin-form label { font-weight: 700; }
+.account-signin-form input { min-height: 48px; padding: 10px 14px; border: 1px solid #9db5ba; border-radius: 9px; font: inherit; }
+.account-signin-form .button { justify-self: start; margin-top: 12px; color: #fff; background: var(--color-teal-700); }
+.account-message { margin-top: 20px; padding: 12px 15px; border-radius: 9px; color: var(--color-ink-800); background: var(--color-teal-100); }
+.account-footnote { margin-top: 28px; color: var(--color-text-muted); font-size: 13px; }
+.account-card-header { display: flex; justify-content: space-between; gap: 20px; align-items: start; }
+.account-card-header p:last-child { margin: 0; color: var(--color-text-muted); overflow-wrap: anywhere; }
+.account-text-button { min-height: 44px; padding: 8px 4px; border: 0; color: var(--color-teal-800); background: transparent; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.account-case-actions { margin: 24px 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.account-case-actions .button { min-height: 44px; color: #fff; background: var(--color-teal-700); }
+.account-case-actions .account-secondary-button { color: var(--color-teal-800); background: var(--color-teal-100); }
+.account-case-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
+.account-case-list li { padding: 17px 0; display: flex; justify-content: space-between; gap: 16px; align-items: center; border-bottom: 1px solid var(--color-border); }
+.account-case-list strong, .account-case-list span { display: block; }
+.account-case-list span { margin-top: 4px; color: var(--color-text-muted); font-size: 13px; }
+.account-empty { padding: 20px; border-radius: 10px; background: var(--color-paper-100); }
+.account-save-warning { position: sticky; top: 0; z-index: 30; padding: 12px 24px; color: #702b23; background: var(--color-coral-100); font-weight: 700; text-align: center; }
+@media (max-width: 760px) { .account-main { grid-template-columns: 1fr; gap: 28px; } }
 .score-grid,
 .breakdown-grid,
 .diagnostic-page .insight-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; align-items: start; }

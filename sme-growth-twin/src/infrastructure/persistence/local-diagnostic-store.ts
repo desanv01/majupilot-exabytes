@@ -1,4 +1,5 @@
 import type { BusinessTwin } from "@/domain/business-twin";
+import { notifyAccountCaseLocalChange } from "./account-case-events";
 import {
   diagnosticResultSchema,
   PAIN_MODEL_VERSION,
@@ -21,10 +22,12 @@ export type DiagnosticLoadResult =
 
 export function saveDiagnosticResult(storage: DiagnosticStorage, result: DiagnosticResult) {
   storage.setItem(DIAGNOSTIC_STORAGE_KEY, JSON.stringify(diagnosticResultSchema.parse(result)));
+  notifyAccountCaseLocalChange(storage);
 }
 
 export function clearDiagnosticResult(storage: DiagnosticStorage) {
   storage.removeItem(DIAGNOSTIC_STORAGE_KEY);
+  notifyAccountCaseLocalChange(storage);
 }
 
 export function isDiagnosticCurrent(result: DiagnosticResult, twin: BusinessTwin) {

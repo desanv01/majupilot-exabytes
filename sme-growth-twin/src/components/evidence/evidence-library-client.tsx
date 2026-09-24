@@ -44,6 +44,7 @@ async function api<T>(url: string, init?: RequestInit) {
 
 export function EvidenceLibraryClient() {
   const [assessmentSessionId, setAssessmentSessionId] = useState<string>();
+  const [organizationId, setOrganizationId] = useState<string>();
   const [documents, setDocuments] = useState<EvidenceDocument[]>([]);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -54,9 +55,10 @@ export function EvidenceLibraryClient() {
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
 
   const refresh = useCallback(async (assessmentId: string) => {
-    const data = await api<EvidenceDocument[]>(`/api/v2/evidence-documents?assessmentSessionId=${encodeURIComponent(assessmentId)}`);
+    const scope = organizationId ? `&organizationId=${encodeURIComponent(organizationId)}` : "";
+    const data = await api<EvidenceDocument[]>(`/api/v2/evidence-documents?assessmentSessionId=${encodeURIComponent(assessmentId)}${scope}`);
     setDocuments(data);
-  }, []);
+  }, [organizationId]);
 
   const openLibrary = useCallback(async () => {
     try {
@@ -66,6 +68,7 @@ export function EvidenceLibraryClient() {
         return;
       }
       setAssessmentSessionId(context.assessmentSessionId);
+      setOrganizationId(context.organizationId);
       await refresh(context.assessmentSessionId);
       setNotice({ kind: "info", text: "Files stay private and are available only inside this assessment." });
     } catch {
@@ -107,6 +110,7 @@ export function EvidenceLibraryClient() {
     try {
       const form = new FormData();
       form.set("assessmentSessionId", assessmentSessionId);
+      if (organizationId) form.set("organizationId", organizationId);
       form.set("file", selected);
       const document = await api<EvidenceDocument>("/api/v2/evidence-documents", { method: "POST", body: form });
       await refresh(assessmentSessionId);
@@ -139,7 +143,7 @@ export function EvidenceLibraryClient() {
     deleteDialogRef.current?.close();
     setBusy(true);
     try {
-      await api(`/api/v2/evidence-documents/${document.id}?assessmentSessionId=${assessmentSessionId}`, { method: "DELETE" });
+      await api(`/api/v2/evidence-documents/${document.id}?assessmentSessionId=${assessmentSessionId}${organizationId ? `&organizationId=${organizationId}` : ""}`, { method: "DELETE" });
       await refresh(assessmentSessionId);
       setNotice({ kind: "success", text: `${document.originalFilename} was deleted and excluded from retrieval.` });
     } catch { setNotice({ kind: "error", text: "The document could not be deleted safely." }); }
@@ -151,7 +155,7 @@ export function EvidenceLibraryClient() {
     setBusy(true);
     setNotice({ kind: "info", text: `Reprocessing ${document.originalFilename} with the current embedding version...` });
     try {
-      const updated = await api<EvidenceDocument>(`/api/v2/evidence-documents/${document.id}/reprocess`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ assessmentSessionId }) });
+      const updated = await api<EvidenceDocument>(`/api/v2/evidence-documents/${document.id}/reprocess`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ assessmentSessionId, organizationId }) });
       await refresh(assessmentSessionId);
       setNotice(updated.status === "ready" ? { kind: "success", text: `${updated.originalFilename} is ready again.` } : { kind: "error", text: failureCopy[updated.failureCode ?? ""] ?? "Reprocessing failed safely." });
     } catch { setNotice({ kind: "error", text: "The document could not be reprocessed safely." }); }
@@ -162,7 +166,7 @@ export function EvidenceLibraryClient() {
     if (!assessmentSessionId || busy) return;
     setBusy(true);
     try {
-      const signed = await api<{ url: string }>(`/api/v2/evidence-documents/${document.id}/download?assessmentSessionId=${assessmentSessionId}`);
+      const signed = await api<{ url: string }>(`/api/v2/evidence-documents/${document.id}/download?assessmentSessionId=${assessmentSessionId}${organizationId ? `&organizationId=${organizationId}` : ""}`);
       window.location.assign(signed.url);
     } catch { setNotice({ kind: "error", text: "A short-lived authorized download could not be created." }); }
     finally { setBusy(false); }

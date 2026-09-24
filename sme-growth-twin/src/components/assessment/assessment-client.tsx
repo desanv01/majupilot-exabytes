@@ -32,6 +32,7 @@ import {
   saveAssessmentDraft,
 } from "@/infrastructure/persistence/local-assessment-store";
 import { clearKnownProjectStorage } from "@/infrastructure/persistence/project-storage";
+import { activeAccountCase } from "@/infrastructure/persistence/account-case-scope";
 
 import { AssessmentFrame, type SaveState } from "./assessment-frame";
 
@@ -367,6 +368,10 @@ export function AssessmentClient() {
     }
 
     if (params.get("new") === "1") {
+      if (activeAccountCase(localStorage) && loadAssessmentDraft(localStorage).status === "ok") {
+        router.replace("/cases");
+        return;
+      }
       try {
         clearKnownProjectStorage(localStorage, sessionStorage);
       } catch {
@@ -408,7 +413,7 @@ export function AssessmentClient() {
       }
     }
     setReady(true);
-  }, [params]);
+  }, [params, router]);
 
   useEffect(() => {
     if (ready && draft.sessionId !== emptyDraft.sessionId) {

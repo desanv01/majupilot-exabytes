@@ -7,6 +7,8 @@ import type { ReportArtifact } from "@/domain/reports";
 import type { ScenarioComparison } from "@/domain/scenarios";
 import type { DiagnosticResult } from "@/domain/scoring";
 import { canonicalJson } from "@/core/reports/canonical-json";
+import { activeAccountCase } from "./account-case-scope";
+import { notifyAccountCaseLocalChange } from "./account-case-events";
 
 export const DURABLE_JOURNEY_STORAGE_KEY = "majupilot:durable-journey:1.0.0";
 
@@ -22,7 +24,8 @@ export type DurableArtifactIds = {
 };
 
 export type DurableJourneyContext = {
-  guestSessionId: string;
+  guestSessionId?: string;
+  organizationId?: string;
   assessmentSessionId: string;
   artifactIds?: DurableArtifactIds;
   sourceFingerprint?: string;
@@ -50,6 +53,7 @@ function load(storage: Storage): DurableJourneyContext | undefined {
 
 function save(storage: Storage, context: DurableJourneyContext) {
   storage.setItem(DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify(context));
+  notifyAccountCaseLocalChange(storage);
   return context;
 }
 
@@ -103,6 +107,8 @@ async function json<T>(url: string, init?: RequestInit): Promise<T> {
 async function ensureSession(storage: Storage) {
   const existing = load(storage);
   if (existing) return existing;
+  const accountCase = activeAccountCase(storage);
+  if (accountCase) return save(storage, { organizationId: accountCase.organizationId, assessmentSessionId: accountCase.caseId, leadIdempotencyKey: `lead:${crypto.randomUUID()}` });
   const receipt = await json<{ guestSessionId: string; assessmentSessionId: string }>("/api/v2/guest/session", { method: "POST" });
   return save(storage, {
     ...receipt,
@@ -145,7 +151,7 @@ export async function syncDurableJourney(storage: Storage, source: DurableJourne
   await json("/api/v2/journey/sync", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, ids: artifactIds, ...source }),
+    body: JSON.stringify({ organizationId: context.organizationId, assessmentSessionId: context.assessmentSessionId, ids: artifactIds, ...source }),
   });
   return save(storage, { ...context, artifactIds, syncedAt: new Date().toISOString() });
 }
@@ -161,7 +167,7 @@ export async function createDurableConsultation(
   if (context.lead) return context;
   const report = context.report ?? await json<ReportArtifact>("/api/v2/reports", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, blueprintId: artifactIds.blueprint, locale: "en-MY", acceptedNoteIds: [] }),
+    body: JSON.stringify({ organizationId: context.organizationId, assessmentSessionId: context.assessmentSessionId, blueprintId: artifactIds.blueprint, locale: "en-MY", acceptedNoteIds: [] }),
   });
   context = save(storage, { ...context, report });
   if (!report.contentSha256) throw new Error("report_not_ready");
@@ -170,6 +176,7 @@ export async function createDurableConsultation(
   const requestId = crypto.randomUUID();
   const common = {
     assessmentSessionId: context.assessmentSessionId,
+    organizationId: context.organizationId,
     blueprintId: artifactIds.blueprint,
     reportArtifactId: report.id,
     action: "granted",
@@ -182,16 +189,17 @@ export async function createDurableConsultation(
   } as const;
   await json("/api/v2/consents", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ consent: { ...common, id: contactConsentId, purpose: "consultation_contact", textHash: await sha256("I consent to MajuPilot using my contact details to respond to this consultation request."), snapshot: { contact, granted: true } } }),
+    body: JSON.stringify({ organizationId: context.organizationId, consent: { ...common, id: contactConsentId, purpose: "consultation_contact", textHash: await sha256("I consent to MajuPilot using my contact details to respond to this consultation request."), snapshot: { contact, granted: true } } }),
   });
   await json("/api/v2/consents", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ consent: { ...common, id: reportConsentId, purpose: "report_share_with_sales", textHash: await sha256("I consent to MajuPilot sharing this exact Blueprint report with the assigned consultation team."), snapshot: { reportId: report.id, contentSha256: report.contentSha256, granted: true } } }),
+    body: JSON.stringify({ organizationId: context.organizationId, consent: { ...common, id: reportConsentId, purpose: "report_share_with_sales", textHash: await sha256("I consent to MajuPilot sharing this exact Blueprint report with the assigned consultation team."), snapshot: { reportId: report.id, contentSha256: report.contentSha256, granted: true } } }),
   });
   const lead = await json<LeadReceiptV2>("/api/v2/leads", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       assessmentSessionId: context.assessmentSessionId,
+      organizationId: context.organizationId,
       blueprintId: artifactIds.blueprint,
       blueprintRevision: 1,
       reportArtifactId: report.id,

@@ -23,15 +23,12 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const caseId = persistenceUuidSchema.parse((await params).id);
     const input = saveAccountCaseSchema.parse(await readJson(request, 2 * 1024 * 1024));
     const owner = await resolveOwner(request, input.organizationId);
-    const snapshotCaseId = input.snapshot.durableJourney?.assessmentSessionId;
-    if (snapshotCaseId !== undefined && snapshotCaseId !== caseId) throw new PersistenceError("VALIDATION_FAILED", 422);
-    const snapshotOrganizationId = input.snapshot.durableJourney?.organizationId;
-    if (snapshotOrganizationId !== undefined && snapshotOrganizationId !== input.organizationId) throw new PersistenceError("VALIDATION_FAILED", 422);
-    if (input.snapshot.diagnostic && input.snapshot.diagnostic.assessmentSessionId !== input.snapshot.draft.sessionId) {
-      // The local assessment identifier is distinct from the durable UUID; the
-      // stage records must still agree with the draft before a case is saved.
-      throw new PersistenceError("VALIDATION_FAILED", 422);
-    }
+    const snapshot = input.snapshot;
+    const journey = snapshot.durableJourney;
+    if (journey && (journey.assessmentSessionId !== caseId || journey.organizationId !== input.organizationId)) throw new PersistenceError("VALIDATION_FAILED", 422);
+    if ([snapshot.diagnostic?.assessmentSessionId, snapshot.recommendations?.assessmentSessionId, snapshot.comparison?.assessmentSessionId, snapshot.blueprint?.sourceIdentity.assessmentSessionId]
+      .some((stageId) => stageId !== undefined && stageId !== snapshot.draft.sessionId)) throw new PersistenceError("VALIDATION_FAILED", 422);
+    if (journey?.report && (journey.report.assessmentSessionId !== caseId || journey.report.blueprintId !== journey.artifactIds?.blueprint)) throw new PersistenceError("VALIDATION_FAILED", 422);
     return response({ data: await new AccountCaseRepository().save(owner, caseId, input.expectedRevision, input.snapshot) }, 200, requestId);
   } catch (error) {
     return errorResponse(error, requestId);

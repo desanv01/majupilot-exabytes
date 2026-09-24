@@ -140,6 +140,7 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
   const [ready, setReady] = useState(false);
   const [available, setAvailable] = useState(false);
   const [session, setSession] = useState<Session>();
+  const [organizationId, setOrganizationId] = useState<string>();
   const [openFailure, setOpenFailure] = useState<{ message: string; requestId: string | null; retryable: boolean }>();
   const [messages, setMessages] = useState<Message[]>([{ id: "welcome", role: "assistant", text: COPILOT_WELCOME_TEXT }]);
   const [input, setInput] = useState("");
@@ -171,13 +172,14 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
           return;
         }
         setAvailable(true);
+        setOrganizationId(context.organizationId);
         const [healthResult, sessionResult] = await Promise.allSettled([
           api<HealthResponse>("/api/v2/copilot/status?detail=safe"),
-          api<Session>("/api/v2/copilot/sessions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ assessmentSessionId: context.assessmentSessionId, businessTwinId: artifactIds.businessTwin, blueprintId: artifactIds.blueprint, idempotencyKey: `copilot:${context.assessmentSessionId}:${artifactIds.blueprint}` }) }),
+          api<Session>("/api/v2/copilot/sessions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ organizationId: context.organizationId, assessmentSessionId: context.assessmentSessionId, businessTwinId: artifactIds.businessTwin, blueprintId: artifactIds.blueprint, idempotencyKey: `copilot:${context.assessmentSessionId}:${artifactIds.blueprint}` }) }),
         ]);
         if (sessionResult.status === "rejected") throw sessionResult.reason;
         const nextSession = sessionResult.value;
-        const history = await api<HistoryResponse>(`/api/v2/copilot/sessions/${nextSession.id}/messages`);
+        const history = await api<HistoryResponse>(`/api/v2/copilot/sessions/${nextSession.id}/messages${context.organizationId ? `?organizationId=${context.organizationId}` : ""}`);
         setSession(nextSession);
         setMessages(restoreCopilotMessages(history.messages));
         if (healthResult.status === "fulfilled") setStatus(healthResult.value.liveAvailable ? "Live AI, private evidence tools, and bounded public web search are available." : "Copilot is using its safe deterministic response path.");
@@ -240,7 +242,7 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
     setInput(""); setBusy(true); setActivity("Thinking through your question…");
     setMessages((current) => [...current, ...(appendOptimisticUser ? [{ id: crypto.randomUUID(), role: "user" as const, text: message }] : []), { id: streamingId, role: "assistant", text: "", streaming: true }]);
     try {
-      const result = await streamTurn(`/api/v2/copilot/sessions/${session.id}/turns`, { message, idempotencyKey }, controller.signal, (event) => {
+      const result = await streamTurn(`/api/v2/copilot/sessions/${session.id}/turns`, { message, idempotencyKey, organizationId }, controller.signal, (event) => {
         if (event.type === "status") setActivity(activityText(event.phase, event.toolName));
         if (event.type === "text_delta") setMessages((current) => current.map((item) => item.id === streamingId ? { ...item, text: item.text + event.delta } : item));
       });
@@ -262,7 +264,7 @@ export function CopilotClient({ requestedAssessmentSessionId, requestedBlueprint
   const confirm = async (confirmationId: string) => {
     setBusy(true);
     try {
-      await api(`/api/v2/copilot/confirmations/${confirmationId}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ confirmationText: "CONFIRM", idempotencyKey: `confirm:${crypto.randomUUID()}` }) });
+      await api(`/api/v2/copilot/confirmations/${confirmationId}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ organizationId, confirmationText: "CONFIRM", idempotencyKey: `confirm:${crypto.randomUUID()}` }) });
       setMessages((current) => [...current, { id: crypto.randomUUID(), role: "status", text: "Confirmed action completed and added to the audit trail." }]);
     } catch (error) {
       const presentation = copilotErrorPresentation(error);

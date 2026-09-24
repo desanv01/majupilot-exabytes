@@ -1,4 +1,5 @@
 import { rebuildCurrentTwin } from "@/core/assessment/rebuild-current-twin";
+import { activeAccountCase } from "./account-case-scope";
 
 import { loadAssessmentDraft } from "./local-assessment-store";
 import { loadBlueprint } from "./local-blueprint-store";
@@ -14,6 +15,8 @@ import {
 export async function loadCurrentDurableJourney(storage: Storage): Promise<DurableJourneyContext | undefined> {
   const context = loadDurableJourney(storage);
   if (!context?.syncedAt || !context.artifactIds || !context.sourceFingerprint) return undefined;
+  const accountCase = activeAccountCase(storage);
+  if (accountCase && (context.organizationId !== accountCase.organizationId || context.assessmentSessionId !== accountCase.caseId)) return undefined;
 
   try {
     const assessment = loadAssessmentDraft(storage);

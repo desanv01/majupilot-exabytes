@@ -43,6 +43,7 @@ export default function HomePage() {
           <Link href="#assessment-topics">Assessment</Link>
           <Link href="#demo-cases">Demo cases</Link>
           <Link href="/copilot">Copilot</Link>
+          <Link href="/cases">Saved cases</Link>
         </nav>
         <details className="home-mobile-menu">
           <summary>Menu</summary>
@@ -51,6 +52,7 @@ export default function HomePage() {
             <Link href="#assessment-topics">Assessment</Link>
             <Link href="#demo-cases">Demo cases</Link>
             <Link href="/copilot">Copilot</Link>
+            <Link href="/cases">Saved cases</Link>
           </nav>
         </details>
       </header>
