@@ -91,6 +91,8 @@ describe("Phase 3R saved-stage resume", () => {
     expect(accountCaseResumePath({ ...ready, diagnostic: {} as AccountCaseSnapshot["diagnostic"] })).toBe("/results");
     expect(accountCaseResumePath({ ...ready, recommendations: {} as AccountCaseSnapshot["recommendations"] })).toBe("/recommendations");
     expect(accountCaseResumePath({ ...ready, comparison: {} as AccountCaseSnapshot["comparison"] })).toBe("/scenarios");
+    expect(accountCaseResumePath({ ...ready, diagnostic: {} as AccountCaseSnapshot["diagnostic"], recommendations: {} as AccountCaseSnapshot["recommendations"], lastStage: "/results" })).toBe("/results");
+    expect(accountCaseResumePath({ ...ready, comparison: {} as AccountCaseSnapshot["comparison"], lastStage: "/assessment/review" })).toBe("/assessment/review");
   });
 
   it("opens a saved Blueprint and only resumes Copilot when its durable artifact is synced", () => {

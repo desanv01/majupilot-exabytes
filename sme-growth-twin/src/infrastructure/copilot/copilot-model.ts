@@ -21,6 +21,7 @@ import {
   type CopilotWriteToolName,
 } from "@/domain/copilot";
 import { aiErrorCodeSchema, AiExecutionError, type ModelCallTelemetry } from "@/domain/ai-execution";
+import { containsCopilotToolProtocol } from "@/domain/copilot-output";
 import { persistenceErrorCodeSchema, PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import { enterAiLimit } from "@/infrastructure/model-provider/ai-rate-limit";
 import { hasGatewayCredential, operationPolicy } from "@/infrastructure/model-provider/ai-execution-policy";
@@ -184,10 +185,6 @@ function routeFallback(text: string): CopilotReadToolName {
   if (/note/.test(value)) return "getAcceptedConsultantNotes";
   if (/blueprint|first 30 days|team/.test(value)) return "getBlueprint";
   return "getBusinessTwinSummary";
-}
-
-function leakedToolProtocol(text: string) {
-  return /<[｜|]{2}DSML[｜|]{2}\s*(?:calls|invoke|parameter)|<\|(?:tool_call|function_call)\|>/i.test(text);
 }
 
 type SearchResult = { title: string; url: string; snippet: string; date: string | null; lastUpdated: string | null };
@@ -438,7 +435,7 @@ export async function executeCopilotTurn(args: {
     if (policy.mode === "preferred") return fallback("deterministic_fallback", "AI_REQUIRED_UNAVAILABLE", policy.model ?? "not_configured");
     const error = new AiExecutionError("AI_REQUIRED_UNAVAILABLE", 503, false); await persistEarlyFailure(error, policy.model ?? "not_configured"); throw error;
   }
-  const history = (await args.repository.history(args.owner, session.id, 0, MAX_HISTORY_MESSAGES)).filter((item) => item.turnId !== turnId && item.text).map((item) => `${item.role.toUpperCase()}: ${item.text}`).join("\n");
+  const history = (await args.repository.history(args.owner, session.id, 0, MAX_HISTORY_MESSAGES)).filter((item) => item.turnId !== turnId && item.text && !containsCopilotToolProtocol(item.text)).map((item) => `${item.role.toUpperCase()}: ${item.text}`).join("\n");
   const prompt = `<UNTRUSTED_CHAT_HISTORY>${history}</UNTRUSTED_CHAT_HISTORY>\n<UNTRUSTED_USER_TEXT>${args.request.message}</UNTRUSTED_USER_TEXT>`;
   const noToolsRequested = explicitlyForbidsTools(args.request.message);
   const noUploadedEvidenceRequested = explicitlyForbidsUploadedEvidence(args.request.message);
@@ -614,7 +611,7 @@ export async function executeCopilotTurn(args: {
           for await (const part of streaming.fullStream) {
             if (part.type === "text-delta" && !invalidStream) {
               pendingText += part.text;
-              if (leakedToolProtocol(pendingText)) {
+              if (containsCopilotToolProtocol(pendingText)) {
                 invalidStream = true;
               } else {
                 // Hold an unfinished tag so a provider marker split across deltas stays hidden.
@@ -637,7 +634,7 @@ export async function executeCopilotTurn(args: {
             finishReason: await streaming.finishReason,
             toolResults: (await streaming.toolResults).map((item) => ({ toolName: item.toolName, output: item.output })),
           };
-          if (invalidStream || leakedToolProtocol(generated.text)) throw new AiExecutionError("AI_INVALID_OUTPUT", 502, true);
+          if (invalidStream || containsCopilotToolProtocol(generated.text)) throw new AiExecutionError("AI_INVALID_OUTPUT", 502, true);
           if (pendingText && streamedChars < MAX_SAVED_ANSWER_CHARS) {
             await args.onEvent({ type: "text_delta", delta: pendingText.slice(0, MAX_SAVED_ANSWER_CHARS - streamedChars) });
           }
@@ -651,7 +648,7 @@ export async function executeCopilotTurn(args: {
           };
         }
         let answer = generated.text;
-        if (leakedToolProtocol(answer)) throw new AiExecutionError("AI_INVALID_OUTPUT", 502, true);
+        if (containsCopilotToolProtocol(answer)) throw new AiExecutionError("AI_INVALID_OUTPUT", 502, true);
         let finishReason = generated.finishReason;
         let continuationInputTokens = 0;
         let continuationOutputTokens = 0;

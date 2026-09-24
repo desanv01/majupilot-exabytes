@@ -496,6 +496,23 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
     expect(restoreCopilotMessages(messages)[0].tools?.[0]).toMatchObject({ toolName: "searchWeb", status: "rejected" });
   });
 
+  it("hides a malformed historical answer and excludes it from later model context", async () => {
+    const repository = new Phase3rRepository();
+    const malformed = '<｜｜DSML｜｜ calls> <｜｜DSML｜｜ invoke name="searchUploadedEvidence">';
+    const prior: CopilotMessage = {
+      id: uuid(60), chatSessionId: session.id, sequence: 1, turnId: uuid(61), role: "assistant", text: malformed,
+      toolName: null, toolCallId: null, toolPayload: null, modelCallId: uuid(62), executionState: "live",
+      schemaVersion: "phase-g-copilot-1.0.0", createdAt: "2026-09-23T00:00:00.000Z",
+    };
+    repository.savedHistory = [prior];
+    expect(restoreCopilotMessages([prior])[0].text).toContain("could not be displayed safely");
+    generateMock.mockImplementation(async (_options: unknown, input: unknown) => {
+      expect((input as { prompt: string }).prompt).not.toContain("DSML");
+      return completed("Here is a fresh answer.");
+    });
+    await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-historical-malformed", request: { message: "Explain the plan again.", idempotencyKey: "phase3r-historical-malformed" } });
+  });
+
   it("never renders Markdown images that could auto-fetch attacker URLs", () => {
     const html = renderToStaticMarkup(createElement(Markdown, null, "Safe text ![tracking pixel](https://attacker.invalid/private-beacon)"));
     expect(html).toContain("Safe text");

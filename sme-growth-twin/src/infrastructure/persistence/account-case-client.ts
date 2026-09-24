@@ -119,9 +119,16 @@ export function restoreAccountCase(snapshot: unknown, active: ActiveAccountCase)
 
 export function accountCaseResumePath(snapshot: AccountCaseSnapshot): string {
   if (snapshot.draft.status !== "ready_for_review") return "/assessment";
+  const lastStage = snapshot.lastStage;
+  if (lastStage === "/assessment") return lastStage;
+  if (lastStage === "/assessment/review") return lastStage;
+  if (lastStage === "/results" && snapshot.diagnostic) return lastStage;
+  if (lastStage === "/recommendations" && snapshot.recommendations) return lastStage;
+  if (lastStage === "/scenarios" && snapshot.comparison) return lastStage;
   if (snapshot.blueprint) {
     const context = snapshot.durableJourney;
-    if (context?.syncedAt && context.artifactIds?.blueprint && ["/copilot", "/evidence", "/consultation"].includes(snapshot.lastStage ?? "")) return snapshot.lastStage!;
+    if (lastStage === "/blueprint") return lastStage;
+    if (context?.syncedAt && context.artifactIds?.blueprint && ["/copilot", "/evidence", "/consultation"].includes(lastStage ?? "")) return lastStage!;
     return "/blueprint";
   }
   if (snapshot.comparison) return "/scenarios";

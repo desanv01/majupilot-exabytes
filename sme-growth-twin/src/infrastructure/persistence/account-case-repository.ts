@@ -41,11 +41,13 @@ export class AccountCaseRepository {
     const byId = new Map((snapshots.data ?? []).map((row) => [row.assessment_session_id, row]));
     return rows.map((row) => {
       const snapshot = byId.get(row.id);
-      const payload = snapshot?.payload as { draft?: { answers?: { q1?: { businessName?: unknown } } } } | undefined;
+      const payload = snapshot?.payload as { draft?: { answers?: { q1?: { businessName?: unknown } } }; diagnostic?: unknown; recommendations?: unknown; comparison?: unknown; blueprint?: unknown } | undefined;
       const name = payload?.draft?.answers?.q1?.businessName;
+      const progress = payload?.blueprint ? "Blueprint ready" : payload?.comparison ? "Comparing scenarios" : payload?.recommendations ? "Reviewing recommendations" : payload?.diagnostic ? "Reviewing results" : snapshot ? "Assessment in progress" : "Not started";
       return {
         id: row.id,
         state: row.state,
+        progress,
         businessName: typeof name === "string" && name.trim() ? name.slice(0, 160) : "Untitled case",
         revision: snapshot?.revision ?? 0,
         createdAt: row.created_at,

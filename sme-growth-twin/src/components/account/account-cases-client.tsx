@@ -13,8 +13,17 @@ import { loadDurableJourney, DURABLE_JOURNEY_STORAGE_KEY } from "@/infrastructur
 import { ACCOUNT_CASE_CHANGED_EVENT } from "@/infrastructure/persistence/account-case-scope";
 import { ACCOUNT_CASE_LOCAL_CHANGE_EVENT } from "@/infrastructure/persistence/account-case-events";
 
-type CaseListItem = { id: string; businessName: string; state: string; revision: number; updatedAt: string };
+type CaseListItem = { id: string; businessName: string; state: string; progress: string; revision: number; updatedAt: string };
 type Envelope<T> = { data?: T; error?: { code: string } };
+type AuthMode = "sign_in" | "sign_up" | "reset";
+
+function authFailureMessage(error: unknown, action: "sign_in" | "email" | "password") {
+  const code = error && typeof error === "object" && "code" in error ? String(error.code) : "";
+  if (code === "over_email_send_rate_limit" || code === "over_request_rate_limit") return "Email requests are temporarily limited. Please try again later.";
+  if (action === "sign_in") return "We couldn't sign you in. Check your email and password, then try again.";
+  if (action === "password") return "Could not save your password. Please try again.";
+  return "We couldn't send an email right now. Please try again later.";
+}
 
 async function parseResponse<T>(result: Response): Promise<T> {
   const body = await result.json() as Envelope<T>;
@@ -46,13 +55,18 @@ function browserWorkSnapshot() {
 export function AccountCasesClient({ initialAuthError }: { initialAuthError: boolean }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [authMode, setAuthMode] = useState<AuthMode>("sign_in");
+  const [newPassword, setNewPassword] = useState("");
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [signedInEmail, setSignedInEmail] = useState<string | null>(null);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [organizationId, setOrganizationId] = useState<string>();
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [busy, setBusy] = useState(false);
   const browserWork = useSyncExternalStore(subscribeBrowserWork, browserWorkSnapshot, () => false);
-  const [message, setMessage] = useState(initialAuthError ? "This sign-in link has expired. Request a new one." : "");
+  const [message, setMessage] = useState(initialAuthError ? "This email link has expired. Request a new confirmation or password reset link." : "");
 
   useEffect(() => {
     void Promise.resolve().then(() => createBrowserSupabaseClient().auth.getUser()).then(({ data }) => {
@@ -76,18 +90,53 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
     return () => { cancelled = true; };
   }, [signedInEmail]);
 
-  async function sendLink(event: FormEvent<HTMLFormElement>) {
+  async function submitAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true);
     setMessage("");
     try {
       const client = createBrowserSupabaseClient();
-      const { error } = await client.auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: `${location.origin}/auth/confirm` } });
-      if (error) throw error;
-      setMessage("Check your email for a sign-in link. Keep this tab open if you want to add the work saved in this browser.");
-    } catch {
-      setMessage("Sign-in is unavailable right now. Please try again later.");
+      if (authMode === "reset") {
+        const { error } = await client.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${location.origin}/auth/confirm` });
+        if (error) throw error;
+        setMessage("If this address has an account, a password reset link is on its way. After opening it, set a new password in Saved cases.");
+      } else if (authMode === "sign_up") {
+        if (password.length < 8 || password !== confirmPassword) {
+          setMessage("Use at least 8 characters and enter the same password twice.");
+          return;
+        }
+        const { data, error } = await client.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: `${location.origin}/auth/confirm` } });
+        if (error) throw error;
+        setPassword(""); setConfirmPassword("");
+        if (data.session && data.user?.email) {
+          setSignedInEmail(data.user.email);
+          setMessage("Your account is ready. New cases can now be saved to it.");
+        } else {
+          setMessage("Check your email once to confirm your account. Then sign in with your password on this or another device.");
+        }
+      } else {
+        const { data, error } = await client.auth.signInWithPassword({ email: email.trim(), password });
+        if (error) throw error;
+        setPassword("");
+        setSignedInEmail(data.user.email ?? email.trim());
+        setMessage("Signed in. Your saved cases are loading.");
+      }
+    } catch (error) {
+      setMessage(authFailureMessage(error, authMode === "sign_in" ? "sign_in" : "email"));
     } finally { setBusy(false); }
+  }
+
+  async function savePassword(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (newPassword.length < 8) { setMessage("Use at least 8 characters for your password."); return; }
+    setBusy(true); setMessage("");
+    try {
+      const { error } = await createBrowserSupabaseClient().auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      setNewPassword(""); setShowPasswordForm(false);
+      setMessage("Password saved. You can use it to sign in on another device without an email link.");
+    } catch (error) { setMessage(authFailureMessage(error, "password")); }
+    finally { setBusy(false); }
   }
 
   async function signOut() {
@@ -176,14 +225,21 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
 
   if (!signedInEmail) return (
     <section className="account-card" aria-labelledby="account-signin-title">
-      <p className="account-step">01 / Sign in</p>
-      <h2 id="account-signin-title">Get a secure link by email</h2>
-      <p>No password to remember. The link opens your saved cases.</p>
-      <form onSubmit={sendLink} className="account-signin-form">
+      <p className="account-step">Your account</p>
+      <h2 id="account-signin-title">{authMode === "sign_up" ? "Create your account" : authMode === "reset" ? "Reset your password" : "Sign in to your workspace"}</h2>
+      <p>{authMode === "sign_up" ? "Confirm your email once, then use your password to sign in on any device." : authMode === "reset" ? "We'll email a link to help you set a new password." : "Return to your saved cases with your email and password."}</p>
+      <div className="account-auth-tabs" role="group" aria-label="Account access">
+        <button type="button" className={authMode === "sign_in" ? "selected" : ""} aria-pressed={authMode === "sign_in"} onClick={() => { setAuthMode("sign_in"); setMessage(""); }}>Sign in</button>
+        <button type="button" className={authMode === "sign_up" ? "selected" : ""} aria-pressed={authMode === "sign_up"} onClick={() => { setAuthMode("sign_up"); setMessage(""); }}>Create account</button>
+      </div>
+      <form onSubmit={submitAuth} className="account-signin-form">
         <label htmlFor="account-email">Email address</label>
         <input id="account-email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} />
-        <button className="button" type="submit" disabled={busy}>{busy ? "Sending…" : "Email me a sign-in link"}</button>
+        {authMode !== "reset" && <><label htmlFor="account-password">Password</label><input id="account-password" type="password" autoComplete={authMode === "sign_up" ? "new-password" : "current-password"} minLength={authMode === "sign_up" ? 8 : undefined} required value={password} onChange={(event) => setPassword(event.target.value)} /></>}
+        {authMode === "sign_up" && <><label htmlFor="account-confirm-password">Confirm password</label><input id="account-confirm-password" type="password" autoComplete="new-password" minLength={8} required value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} /></>}
+        <button className="button" type="submit" disabled={busy}>{busy ? "Working…" : authMode === "sign_up" ? "Create account" : authMode === "reset" ? "Send reset link" : "Sign in"}</button>
       </form>
+      <button className="account-text-button account-reset-link" type="button" onClick={() => { setAuthMode(authMode === "reset" ? "sign_in" : "reset"); setMessage(""); }}>{authMode === "reset" ? "Back to sign in" : "Forgot your password?"}</button>
       {message && <p role="status" className="account-message">{message}</p>}
       <p className="account-footnote">Work started without sign-in stays in this browser until you add it to your account.</p>
     </section>
@@ -195,6 +251,10 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
         <div><p className="account-step">Your account</p><h2 id="account-cases-title">Saved cases</h2><p>Signed in as {signedInEmail}</p></div>
         <button className="account-text-button" type="button" onClick={signOut} disabled={busy}>Sign out</button>
       </div>
+      <div className="account-security">
+        <button className="account-text-button" type="button" disabled={busy} onClick={() => setShowPasswordForm((value) => !value)}>{showPasswordForm ? "Cancel password change" : "Set or change password"}</button>
+        {showPasswordForm && <form onSubmit={savePassword} className="account-signin-form"><label htmlFor="account-new-password">New password</label><input id="account-new-password" type="password" autoComplete="new-password" minLength={8} required value={newPassword} onChange={(event) => setNewPassword(event.target.value)} /><button className="button" type="submit" disabled={busy}>{busy ? "Saving…" : "Save password"}</button></form>}
+      </div>
       {message && <p role="status" className="account-message">{message}</p>}
       {!organizationId ? <p>Loading your workspace…</p> : (
         <>
@@ -203,7 +263,7 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
             {browserWork && <button className="button account-secondary-button" type="button" disabled={busy} onClick={() => void addBrowserWork()}>Add this browser&apos;s work</button>}
           </div>
           {cases.length ? <ul className="account-case-list">{cases.map((item) => (
-            <li key={item.id}><div><strong>{item.businessName}</strong><span>Updated {new Date(item.updatedAt).toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" })}</span></div><button type="button" className="account-text-button" disabled={busy} onClick={() => void openCase(item.id)}>Open case</button></li>
+            <li key={item.id}><div><strong>{item.businessName}</strong><span>{item.progress} · Updated {new Date(item.updatedAt).toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" })}</span></div><button type="button" className="account-text-button" disabled={busy} onClick={() => void openCase(item.id)}>Resume case</button></li>
           ))}</ul> : <p className="account-empty">No saved cases yet. You can start a new assessment or add the work in this browser.</p>}
         </>
       )}

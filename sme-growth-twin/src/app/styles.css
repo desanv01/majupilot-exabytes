@@ -1425,10 +1425,16 @@ select:focus-visible, textarea:focus-visible {
 .account-step { margin: 0 0 12px; color: var(--color-teal-700); font-size: 12px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
 .account-card h2 { margin: 0 0 10px; color: var(--color-ink-950); font-size: 25px; line-height: 1.2; }
 .account-card p { line-height: 1.55; }
-.account-signin-form { margin-top: 30px; display: grid; gap: 10px; }
+.account-auth-tabs { margin-top: 24px; display: flex; gap: 8px; padding: 5px; border-radius: 10px; background: var(--color-paper-100); }
+.account-auth-tabs button { flex: 1; min-height: 42px; border: 0; border-radius: 7px; color: var(--color-ink-800); background: transparent; font: inherit; font-weight: 700; cursor: pointer; }
+.account-auth-tabs button.selected { color: var(--color-teal-800); background: #fff; box-shadow: 0 1px 5px rgb(8 45 63 / 10%); }
+.account-signin-form { margin-top: 24px; display: grid; gap: 10px; }
 .account-signin-form label { font-weight: 700; }
 .account-signin-form input { min-height: 48px; padding: 10px 14px; border: 1px solid #9db5ba; border-radius: 9px; font: inherit; }
 .account-signin-form .button { justify-self: start; margin-top: 12px; color: #fff; background: var(--color-teal-700); }
+.account-reset-link { margin-top: 12px; }
+.account-security { margin-top: 16px; border-top: 1px solid var(--color-border); }
+.account-security .account-signin-form { margin: 0 0 12px; }
 .account-message { margin-top: 20px; padding: 12px 15px; border-radius: 9px; color: var(--color-ink-800); background: var(--color-teal-100); }
 .account-footnote { margin-top: 28px; color: var(--color-text-muted); font-size: 13px; }
 .account-card-header { display: flex; justify-content: space-between; gap: 20px; align-items: start; }

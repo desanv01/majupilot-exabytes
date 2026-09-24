@@ -43,7 +43,7 @@ export default function HomePage() {
           <Link href="#assessment-topics">Assessment</Link>
           <Link href="#demo-cases">Demo cases</Link>
           <Link href="/copilot">Copilot</Link>
-          <Link href="/cases">Saved cases</Link>
+          <Link href="/cases">Account</Link>
         </nav>
         <details className="home-mobile-menu">
           <summary>Menu</summary>
@@ -52,7 +52,7 @@ export default function HomePage() {
             <Link href="#assessment-topics">Assessment</Link>
             <Link href="#demo-cases">Demo cases</Link>
             <Link href="/copilot">Copilot</Link>
-            <Link href="/cases">Saved cases</Link>
+            <Link href="/cases">Account</Link>
           </nav>
         </details>
       </header>
@@ -127,7 +127,7 @@ export default function HomePage() {
             ))}
           </ol>
           <p className="home-local-note">
-            <strong>Saved as you work.</strong> This browser keeps a draft. Sign in to save cases and reopen them on another device; completed evidence syncs securely for reports, Copilot, and consultation.
+            <strong>Saved as you work.</strong> Sign in before you start to save each case to your account and resume it on another device. Guest work stays in this browser until you add it to your account.
           </p>
         </section>
 
