@@ -1442,7 +1442,8 @@ select:focus-visible, textarea:focus-visible {
 .account-case-list strong, .account-case-list span { display: block; }
 .account-case-list span { margin-top: 4px; color: var(--color-text-muted); font-size: 13px; }
 .account-empty { padding: 20px; border-radius: 10px; background: var(--color-paper-100); }
-.account-save-warning { position: sticky; top: 0; z-index: 30; padding: 12px 24px; color: #702b23; background: var(--color-coral-100); font-weight: 700; text-align: center; }
+.account-save-warning { padding: 12px 24px; color: #702b23; background: var(--color-coral-100); font-weight: 700; text-align: center; }
+.account-save-warning a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 760px) { .account-main { grid-template-columns: 1fr; gap: 28px; } }
 .score-grid,
 .breakdown-grid,
