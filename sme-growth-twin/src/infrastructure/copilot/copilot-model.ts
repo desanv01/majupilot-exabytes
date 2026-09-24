@@ -107,7 +107,7 @@ const descriptions: Record<CopilotReadToolName | CopilotWriteToolName, string> =
 const tokenEstimate = (value: string) => Math.ceil(value.length / 4);
 const price = (value: string | undefined) => value && Number.isFinite(Number(value)) ? Number(value) : 0;
 const cost = (model: GatewayModel, input: number, output: number) => Number((input * price(model.pricing?.input) + output * price(model.pricing?.output)).toFixed(6));
-const bounded = (value: unknown) => {
+const bounded = (value: unknown): Record<string, unknown> => {
   const serialized = JSON.stringify(value);
   if (Buffer.byteLength(serialized, "utf8") > MAX_TOOL_RESULT_CHARS) {
     const compact = (item: unknown, depth: number, maxItems: number, maxText: number): unknown => {
@@ -442,6 +442,9 @@ export async function executeCopilotTurn(args: {
   const requestedPublicWeb = !noToolsRequested && !noWebRequested && explicitPublicWebIntent(args.request.message);
   const requestedUploadedEvidence = requestedPublicWeb && !noUploadedEvidenceRequested && explicitUploadedEvidenceIntent(args.request.message);
   const blueprintOverview = !requestedPublicWeb && !requestedUploadedEvidence
+    && !explicitUploadedEvidenceIntent(args.request.message)
+    && !/\b(?:compare|comparison|contrast|versus|vs\.?)\b/i.test(args.request.message)
+    && !args.request.requestedTool
     && /(?:summari[sz]e|summary|overview|explain|tell me about).{0,70}blueprint|blueprint.{0,70}(?:summari[sz]e|summary|overview|explain)/i.test(args.request.message);
   const estimatedInput = tokenEstimate(prompt);
   if (estimatedInput > policy.maxInputTokens || await args.repository.getDailyModelSpend(args.owner) >= policy.dailyCostUsd) {
