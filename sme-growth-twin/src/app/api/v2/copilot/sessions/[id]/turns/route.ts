@@ -1,6 +1,8 @@
 import { z } from "zod";
 
+import { AiExecutionError } from "@/domain/ai-execution";
 import { copilotTurnRequestSchema } from "@/domain/copilot";
+import { PersistenceError } from "@/domain/persistence";
 import { executeCopilotTurn } from "@/infrastructure/copilot/copilot-model";
 import { SupabaseCopilotRepository } from "@/infrastructure/copilot/supabase-copilot-repository";
 import { correlationId, readJson, resolveOwner, response } from "@/infrastructure/persistence/api";
@@ -17,6 +19,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
     const clientKey = (forwarded || request.headers.get("x-real-ip") || "unidentified-client").slice(0, 128);
     if (request.headers.get("accept")?.includes("application/x-ndjson")) {
+      const startedAt = Date.now();
+      let phase = "starting";
       const encoder = new TextEncoder();
       const executionController = new AbortController();
       const abortExecution = () => executionController.abort("copilot_stream_cancelled");
@@ -43,10 +47,26 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
             repository: new SupabaseCopilotRepository(),
             clientKey,
             signal: executionController.signal,
-            onEvent: (event) => write(event),
+            onEvent: (event) => {
+              if (event.type === "status") phase = event.phase;
+              else if (event.type === "text_delta") phase = "streaming";
+              write(event);
+            },
           }).then((data) => { write({ type: "completed", data }); close(); }).catch(async (error) => {
             const failure = copilotErrorResponse(error, requestId);
             const body = await failure.json() as { error?: Record<string, unknown> };
+            console.error(JSON.stringify({
+              level: "error",
+              event: "copilot.stream.failed",
+              requestId,
+              code: body.error?.code ?? "INTERNAL_RETRYABLE",
+              category: body.error?.category ?? "persistence_failure",
+              errorClass: error instanceof AiExecutionError ? "AiExecutionError"
+                : error instanceof PersistenceError ? "PersistenceError"
+                  : error instanceof z.ZodError ? "ZodError" : "UnknownError",
+              phase,
+              durationMs: Date.now() - startedAt,
+            }));
             write({ type: "error", error: body.error ?? { code: "INTERNAL_RETRYABLE", requestId, retryable: true } });
             close();
           });
