@@ -3507,6 +3507,7 @@ a { color: inherit; }
 .copilot-message > span { display: block; margin-bottom: 5px; color: var(--color-teal-700); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
 .copilot-message.user > span { color: var(--color-teal-200); }
 .copilot-message p { margin: 0; line-height: 1.6; white-space: pre-wrap; }
+.copilot-diagnostic { display: block; margin-top: 10px; color: inherit; font-size: 12px; overflow-wrap: anywhere; }
 .copilot-message .button { margin-top: 14px; }
 .copilot-composer { padding: 22px 24px; border-top: 1px solid var(--color-border); background: var(--color-paper-100); }
 .copilot-composer > label { display: block; margin-bottom: 9px; color: var(--color-ink-950); font-weight: 800; }

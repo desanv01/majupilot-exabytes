@@ -5,6 +5,7 @@ import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 const baseUrl = (process.env.MAJUPILOT_RELEASE_BASE_URL || "https://majupilot-exabytes.vercel.app").replace(/\/$/, "");
+const securityBaseUrl = (process.env.MAJUPILOT_SECURITY_BASE_URL || baseUrl).replace(/\/$/, "");
 const chromePath = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const debugPort = Number(process.env.MAJUPILOT_RELEASE_DEBUG_PORT || 9563);
 const cronSecret = process.env.CRON_SECRET;
@@ -26,7 +27,7 @@ let profile;
 let chrome;
 let socket;
 try {
-  const home = await requireOk(await fetch(baseUrl), "home");
+  const home = await requireOk(await fetch(securityBaseUrl), "security origin home");
   const securityHeaders = {
     frame: home.headers.get("x-frame-options") === "DENY",
     contentType: home.headers.get("x-content-type-options") === "nosniff",
@@ -162,11 +163,30 @@ try {
   await poll("document.querySelectorAll('.copilot-message.assistant').length>=2", true, 90_000);
   const copilot = await evaluate("({messages:document.querySelectorAll('.copilot-message.assistant').length,live:document.body.innerText.includes('Live DeepSeek guidance is available'),overflow:document.documentElement.scrollWidth>innerWidth})");
   if (!copilot.live || copilot.overflow) throw new Error("live Copilot or layout gate failed");
+  await cdp("Page.reload");
+  await poll("document.readyState", "complete");
+  await poll("Boolean(document.querySelector('#copilot-message:not([disabled])'))", true, 60_000);
+  const restoredAssistantMessages = await evaluate("document.querySelectorAll('.copilot-message.assistant').length");
+  const expectedPersistedAssistantMessages = Math.max(1, copilot.messages - 1);
+  if (restoredAssistantMessages < expectedPersistedAssistantMessages) throw new Error("Copilot history was not restored after browser refresh");
+  const copilotProbe = await evaluate(`(async () => {
+    const value = JSON.parse(localStorage.getItem('majupilot:durable-journey:1.0.0') || 'null');
+    const sessionResponse = await fetch('/api/v2/copilot/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assessmentSessionId: value.assessmentSessionId, businessTwinId: value.artifactIds.businessTwin, blueprintId: value.artifactIds.blueprint, idempotencyKey: 'phase1-hosted-smoke-session' }) });
+    const sessionBody = await sessionResponse.json();
+    const turnResponse = await fetch('/api/v2/copilot/sessions/' + sessionBody.data.id + '/turns', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: 'Read the saved evidence for this synthetic release fixture.', requestedTool: 'getEvidenceForClaim', requestedToolInput: { evidenceId: value.artifactIds.evidence[0] }, idempotencyKey: 'phase1-hosted-evidence-read' }) });
+    const turnBody = await turnResponse.json();
+    const failureResponse = await fetch('/api/v2/copilot/sessions/00000000-0000-4000-8000-000000000099/turns', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: 'Synthetic session failure probe', idempotencyKey: 'phase1-hosted-session-failure' }) });
+    const failureBody = await failureResponse.json();
+    return { evidenceStatus: turnResponse.status, evidenceRequestId: turnResponse.headers.get('x-correlation-id'), evidenceTool: turnBody.data?.toolCalls?.[0]?.toolName, failureStatus: failureResponse.status, failureBody };
+  })()`);
+  if (copilotProbe.evidenceStatus !== 200 || copilotProbe.evidenceTool !== 'getEvidenceForClaim' || !copilotProbe.evidenceRequestId) throw new Error("hosted evidence-reading tool proof failed");
+  if (copilotProbe.failureStatus !== 404 || copilotProbe.failureBody?.error?.category !== 'session_failure' || !copilotProbe.failureBody?.error?.requestId) throw new Error("hosted safe session failure envelope failed");
   if (consoleErrors.length) throw new Error(`browser console emitted ${consoleErrors.length} error(s)`);
 
   process.stdout.write(`${JSON.stringify({
     ok: true,
     baseUrl,
+    securityBaseUrl,
     brand: "MajuPilot",
     legacyBrandAbsent: true,
     copilotProductSurface: true,
@@ -175,7 +195,7 @@ try {
     report: { status: durable.report.status, pageCount: durable.report.pageCount, hashPresent: true, signedDownloadPdf: true },
     lead: { created: true, assignmentState: durable.lead.assignmentState, audited: true, guestEventHistoryDenied: true },
     outbox: { unauthorizedRejected: true, deliveryOutcome: outcome.outcome, externalReceiverAccepted: true },
-    copilot: { live: copilot.live, assistantMessages: copilot.messages },
+    copilot: { live: copilot.live, assistantMessages: copilot.messages, historyRestored: restoredAssistantMessages >= expectedPersistedAssistantMessages, evidenceRead: true, evidenceRequestId: copilotProbe.evidenceRequestId, safeSessionFailure: { category: copilotProbe.failureBody.error.category, requestId: copilotProbe.failureBody.error.requestId } },
     documentRag: "deferred_P1",
     securityHeaders,
     consoleErrors: 0,

@@ -1,7 +1,11 @@
 import "server-only";
 
-import { APICallError, NoOutputGeneratedError, ToolLoopAgent, isStepCount, tool, type ToolSet } from "ai";
+import { createHash } from "node:crypto";
 
+import { APICallError, NoOutputGeneratedError, ToolLoopAgent, isStepCount, tool, type ToolSet } from "ai";
+import { z } from "zod";
+
+import { canonicalJson } from "@/core/reports/canonical-json";
 import {
   COPILOT_PROMPT_VERSION,
   COPILOT_SCHEMA_VERSION,
@@ -12,8 +16,8 @@ import {
   type CopilotTurnRequest,
   type CopilotWriteToolName,
 } from "@/domain/copilot";
-import { AiExecutionError, type ModelCallTelemetry } from "@/domain/ai-execution";
-import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
+import { aiErrorCodeSchema, AiExecutionError, type ModelCallTelemetry } from "@/domain/ai-execution";
+import { persistenceErrorCodeSchema, PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import { enterAiLimit } from "@/infrastructure/model-provider/ai-rate-limit";
 import { hasGatewayCredential, operationPolicy } from "@/infrastructure/model-provider/ai-execution-policy";
 import { preflightModel, type GatewayModel } from "@/infrastructure/model-provider/gateway-catalogue";
@@ -27,6 +31,46 @@ const READ_TOOLS: CopilotReadToolName[] = [
 const MAX_TOOL_CALLS = 5;
 const MAX_HISTORY_MESSAGES = 24;
 const MAX_TOOL_RESULT_CHARS = 18_000;
+const failedTurnReceiptSchema = z.object({
+  failed: z.literal(true),
+  kind: z.enum(["ai", "persistence"]),
+  code: z.string().min(1).max(80),
+  httpStatus: z.number().int().min(400).max(599),
+  retryable: z.boolean(),
+}).strict();
+const claimedTurnReceiptSchema = z.object({
+  claimed: z.literal(true),
+  attempt: z.union([z.literal(0), z.literal(1)]),
+  requestSha256: z.string().regex(/^[a-f0-9]{64}$/),
+}).strict();
+
+function replayStoredTurn(response: Record<string, unknown>) {
+  const failed = failedTurnReceiptSchema.safeParse(response);
+  if (!failed.success) return copilotTurnResponseSchema.parse(response);
+  if (failed.data.kind === "ai") throw new AiExecutionError(aiErrorCodeSchema.parse(failed.data.code), failed.data.httpStatus, failed.data.retryable);
+  throw new PersistenceError(persistenceErrorCodeSchema.parse(failed.data.code), failed.data.httpStatus);
+}
+
+function attemptReceiptKey(sessionId: string, idempotencyKey: string, attempt: number, kind: "claim" | "result") {
+  const digest = createHash("sha256").update(`${sessionId}:${idempotencyKey}:${attempt}:${kind}`).digest("hex");
+  return `turn-attempt:${digest}`;
+}
+
+function turnRequestSha256(request: CopilotTurnRequest) {
+  const payload = {
+    organizationId: request.organizationId,
+    message: request.message,
+    requestedTool: request.requestedTool,
+    requestedToolInput: request.requestedToolInput,
+  };
+  return createHash("sha256").update(canonicalJson(payload)).digest("hex");
+}
+
+function assertClaimMatches(response: Record<string, unknown>, requestSha256: string) {
+  const claim = claimedTurnReceiptSchema.safeParse(response);
+  if (!claim.success) throw new PersistenceError("INTERNAL_RETRYABLE", 503);
+  if (claim.data.requestSha256 !== requestSha256) throw new PersistenceError("IDEMPOTENCY_CONFLICT", 409);
+}
 
 const descriptions: Record<CopilotReadToolName | CopilotWriteToolName, string> = {
   getBusinessTwinSummary: "Read the current authorized Business Twin summary.",
@@ -62,7 +106,7 @@ function classify(error: unknown) {
   if (error instanceof AiExecutionError) return error;
   if (NoOutputGeneratedError.isInstance(error)) return new AiExecutionError("AI_INVALID_OUTPUT", 502, false);
   if (APICallError.isInstance(error) && error.statusCode === 402) return new AiExecutionError("AI_BUDGET_EXCEEDED", 402, false);
-  if (APICallError.isInstance(error) && error.statusCode === 429) return new AiExecutionError("AI_BUDGET_EXCEEDED", 429, true);
+  if (APICallError.isInstance(error) && error.statusCode === 429) return new AiExecutionError("AI_RATE_LIMITED", 429, true);
   if (APICallError.isInstance(error) && error.statusCode === 408) return new AiExecutionError("AI_TIMEOUT", 504, true);
   if (error instanceof Error && /timeout|abort/i.test(error.message)) return new AiExecutionError("AI_TIMEOUT", 504, true);
   return new AiExecutionError("AI_REQUIRED_UNAVAILABLE", 503, true);
@@ -102,13 +146,54 @@ export async function executeCopilotTurn(args: {
 }) {
   if (rejectsInjection(args.request.message)) throw new PersistenceError("VALIDATION_FAILED", 422);
   const session = await args.repository.getSession(args.owner, args.sessionId);
-  const replay = await args.repository.findTurn(args.owner, args.sessionId, args.request.idempotencyKey);
-  if (replay) return copilotTurnResponseSchema.parse(replay.response);
+  const requestSha256 = turnRequestSha256(args.request);
+  const baseClaimKey = attemptReceiptKey(session.id, args.request.idempotencyKey, 0, "claim");
+  const [baseReplay, baseClaim] = await Promise.all([
+    args.repository.findTurn(args.owner, args.sessionId, args.request.idempotencyKey),
+    args.repository.findTurn(args.owner, args.sessionId, baseClaimKey),
+  ]);
+  if (baseClaim) assertClaimMatches(baseClaim.response, requestSha256);
+  let attempt: 0 | 1 = 0;
+  let turnId = crypto.randomUUID();
+  let resultKey = args.request.idempotencyKey;
+  if (baseReplay) {
+    const failed = failedTurnReceiptSchema.safeParse(baseReplay.response);
+    if (!failed.success || !failed.data.retryable) return replayStoredTurn(baseReplay.response);
+    attempt = 1;
+    turnId = baseReplay.turnId;
+    resultKey = attemptReceiptKey(session.id, args.request.idempotencyKey, attempt, "result");
+    const retryResult = await args.repository.findTurn(args.owner, session.id, resultKey);
+    if (retryResult) return replayStoredTurn(retryResult.response);
+  }
+  const claimKey = attemptReceiptKey(session.id, args.request.idempotencyKey, attempt, "claim");
+  try {
+    await args.repository.rememberTurn(args.owner, session.id, claimKey, turnId, { claimed: true, attempt, requestSha256 });
+  } catch (error) {
+    if (!(error instanceof PersistenceError) || error.code !== "IDEMPOTENCY_CONFLICT") throw error;
+    const existingClaim = await args.repository.findTurn(args.owner, session.id, claimKey);
+    if (!existingClaim) throw new PersistenceError("INTERNAL_RETRYABLE", 503);
+    assertClaimMatches(existingClaim.response, requestSha256);
+    const completed = await args.repository.findTurn(args.owner, session.id, resultKey);
+    if (completed) return replayStoredTurn(completed.response);
+    throw new PersistenceError("INTERNAL_RETRYABLE", 503);
+  }
   const now = args.now ?? Date.now;
   const started = now();
-  const turnId = crypto.randomUUID();
-  await args.repository.appendMessage(args.owner, session.id, { id: crypto.randomUUID(), turnId, role: "user", messageType: "text", text: args.request.message });
-  const policy = operationPolicy("transformation_copilot");
+  const rememberFailure = async (error: unknown) => {
+    const receipt = error instanceof AiExecutionError
+      ? { failed: true as const, kind: "ai" as const, code: error.code, httpStatus: error.httpStatus, retryable: error.retryable }
+      : error instanceof PersistenceError
+        ? { failed: true as const, kind: "persistence" as const, code: error.code, httpStatus: error.httpStatus, retryable: error.code === "INTERNAL_RETRYABLE" }
+        : null;
+    if (!receipt) return;
+    try { await args.repository.rememberTurn(args.owner, session.id, resultKey, turnId, receipt); }
+    catch (receiptError) {
+      if (!(receiptError instanceof PersistenceError) || receiptError.code !== "IDEMPOTENCY_CONFLICT") throw receiptError;
+    }
+  };
+  try {
+    if (attempt === 0) await args.repository.appendMessage(args.owner, session.id, { id: crypto.randomUUID(), turnId, role: "user", messageType: "text", text: args.request.message });
+    const policy = operationPolicy("transformation_copilot");
   const persistEarlyFailure = async (error: AiExecutionError, model: string) => {
     await args.repository.appendModelCall(args.owner, session.id, turnId, telemetry({ id: crypto.randomUUID(), assessmentSessionId: session.assessmentSessionId, model, started, ended: now(), state: "failed", reason: error.code, inputTokens: null, outputTokens: null, estimatedCost: null, retryCount: 0 }), [], "preflight_error");
   };
@@ -124,7 +209,7 @@ export async function executeCopilotTurn(args: {
     await args.repository.appendMessage(args.owner, session.id, { id: crypto.randomUUID(), turnId, role: "tool", messageType: "tool_result", text: null, toolName, toolCallId: `fallback:${turnId}`, toolPayload: result, executionState: state });
     await args.repository.appendMessage(args.owner, session.id, { id: crypto.randomUUID(), turnId, role: "assistant", messageType: "disclosure", text, modelCallId, executionState: state });
     const response = copilotTurnResponseSchema.parse({ turnId, state, text, model: policy.model, toolCalls: [{ toolName, status: "completed", confirmationId: null, result }] });
-    await args.repository.rememberTurn(args.owner, session.id, args.request.idempotencyKey, turnId, response);
+    await args.repository.rememberTurn(args.owner, session.id, resultKey, turnId, response);
     return response;
   };
 
@@ -158,7 +243,7 @@ export async function executeCopilotTurn(args: {
   let release: () => void;
   try { release = enterAiLimit(`${args.owner.kind}:${args.owner.kind === "guest" ? args.owner.guestSessionId : args.owner.organizationId}:${args.clientKey}`, policy.perMinuteLimit); }
   catch {
-    const error = new AiExecutionError("AI_BUDGET_EXCEEDED", 429, true);
+    const error = new AiExecutionError("AI_RATE_LIMITED", 429, true);
     if (policy.mode === "preferred") return fallback("deterministic_fallback", error.code, policy.model);
     await persistEarlyFailure(error, policy.model); throw error;
   }
@@ -207,7 +292,7 @@ export async function executeCopilotTurn(args: {
         for (const call of toolCalls) await args.repository.appendMessage(args.owner, session.id, { id: crypto.randomUUID(), turnId, role: "tool", messageType: "tool_result", text: null, toolName: call.toolName, toolCallId: crypto.randomUUID(), toolPayload: call.result ?? {}, modelCallId, executionState: "live" });
         await args.repository.appendMessage(args.owner, session.id, { id: crypto.randomUUID(), turnId, role: "assistant", messageType: "text", text, modelCallId, executionState: "live" });
         const response = copilotTurnResponseSchema.parse({ turnId, state: "live", text, model: policy.model, toolCalls });
-        await args.repository.rememberTurn(args.owner, session.id, args.request.idempotencyKey, turnId, response);
+        await args.repository.rememberTurn(args.owner, session.id, resultKey, turnId, response);
         return response;
       } catch (error) {
         lastError = classify(error);
@@ -218,5 +303,9 @@ export async function executeCopilotTurn(args: {
   if (policy.mode === "preferred") return fallback("deterministic_fallback", lastError?.code ?? "AI_REQUIRED_UNAVAILABLE", policy.model);
   const failed = lastError ?? new AiExecutionError("AI_REQUIRED_UNAVAILABLE", 503, true);
   await args.repository.appendModelCall(args.owner, session.id, turnId, telemetry({ id: crypto.randomUUID(), assessmentSessionId: session.assessmentSessionId, model: policy.model, started, ended: now(), state: "failed", reason: failed.code, inputTokens: null, outputTokens: null, estimatedCost: null, retryCount: policy.maxRetries }), executedToolNames, "error");
-  throw failed;
+    throw failed;
+  } catch (error) {
+    await rememberFailure(error);
+    throw error;
+  }
 }

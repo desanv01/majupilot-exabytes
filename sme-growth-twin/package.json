@@ -17,6 +17,7 @@
     "test:phase-c:smoke": "node scripts/phase-c-api-smoke.mjs",
     "test:phase-c:gateway-live": "node scripts/phase-c-live-gateway-proof.mjs",
     "test:phase-g:smoke": "node scripts/phase-g-copilot-smoke.mjs",
+    "test:phase1:hosted": "node --env-file=.env.local scripts/phase1-hosted-copilot-smoke.mjs",
     "test:release:hosted": "node --env-file=.env.local scripts/hosted-release-smoke.mjs",
     "test:phase02:browser": "node scripts/phase02-browser-check.mjs",
     "test:phase03:browser": "node scripts/phase03-browser-check.mjs",

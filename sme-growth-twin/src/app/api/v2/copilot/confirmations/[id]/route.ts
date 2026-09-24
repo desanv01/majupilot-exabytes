@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 import { confirmCopilotToolSchema } from "@/domain/copilot";
-import { AiExecutionError } from "@/domain/ai-execution";
 import { CopilotWriteExecutor } from "@/infrastructure/copilot/copilot-write-executor";
 import { SupabaseCopilotRepository } from "@/infrastructure/copilot/supabase-copilot-repository";
-import { correlationId, errorResponse, readJson, resolveOwner, response } from "@/infrastructure/persistence/api";
+import { correlationId, readJson, resolveOwner, response } from "@/infrastructure/persistence/api";
+import { copilotErrorResponse } from "@/infrastructure/copilot/copilot-errors";
 
 export const runtime = "nodejs";
 
@@ -20,7 +20,6 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     const confirmation = await new CopilotWriteExecutor(repository).execute(owner, confirmationId, input.idempotencyKey, clientKey);
     return response({ data: confirmation }, 200, requestId);
   } catch (error) {
-    if (error instanceof AiExecutionError) return response({ error: { code: error.code, requestId, retryable: error.retryable } }, error.httpStatus, requestId);
-    return errorResponse(error, requestId);
+    return copilotErrorResponse(error, requestId);
   }
 }
