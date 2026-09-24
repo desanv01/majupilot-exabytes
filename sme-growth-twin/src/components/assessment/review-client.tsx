@@ -197,10 +197,17 @@ function EvidenceDetails({ twin }: { twin: BusinessTwin }) {
 }
 
 export function BusinessTwinReviewCards({ twin, onEdit }: { twin: BusinessTwin; onEdit: (step: number) => void }) {
+  const cards = buildReviewCards(twin);
+  const unknownCount = cards.reduce((count, card) => count + card.rows.filter((item) => item.unknown).length, 0);
   return (
-    <div className="review-grid">
-      {buildReviewCards(twin).map((card, index) => (
-        <section className="review-card" key={card.title}>
+    <>
+      <nav className="review-overview" aria-label="Jump to Business Twin facts">
+        <div><strong>{cards.length} fact groups</strong><span>{cards.reduce((count, card) => count + card.rows.length, 0)} recorded fields · {unknownCount} marked not sure</span></div>
+        <a href="#review-identity">Identity</a><a href="#review-capabilities">Capabilities</a><a href="#review-readiness">Readiness</a><a href="#review-evidence">Evidence</a>
+      </nav>
+      <div className="review-grid">
+      {cards.map((card, index) => (
+        <section className="review-card" id={`review-${card.title.toLowerCase().replaceAll(" ", "-")}`} key={card.title}>
           <header>
             <div>
               <span className="review-section-index">{String(index + 1).padStart(2, "0")}</span>
@@ -224,7 +231,8 @@ export function BusinessTwinReviewCards({ twin, onEdit }: { twin: BusinessTwin; 
           {card.title === "Evidence" ? <EvidenceDetails twin={twin} /> : null}
         </section>
       ))}
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -1138,6 +1138,15 @@ select:focus-visible, textarea:focus-visible {
 .review-trust-note strong { color: var(--color-ink-950); font-size: 14px; }
 .review-trust-note p { margin: 5px 0 0; color: var(--color-text-muted); font-size: 12px; line-height: 1.5; }
 .assessment-page .review-grid { margin-top: 38px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.review-overview { margin-top: 26px; padding: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+.review-overview > div { min-width: 220px; margin-right: auto; padding: 4px 8px; }
+.review-overview > div strong, .review-overview > div span { display: block; }
+.review-overview > div strong { color: var(--color-ink-950); font-size: 16px; }
+.review-overview > div span { margin-top: 2px; color: var(--color-text-muted); font-size: 12px; }
+.review-overview > a { min-height: 44px; padding: 9px 12px; display: inline-flex; align-items: center; border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-teal-800); background: var(--color-paper-100); font-size: 13px; font-weight: 800; text-decoration: none; }
+.review-overview > a:hover, .review-overview > a:focus-visible { border-color: var(--color-teal-700); background: var(--color-teal-100); }
+.assessment-page .review-overview + .review-grid { margin-top: 14px; }
+.assessment-page .review-card { scroll-margin-top: 20px; }
 .assessment-page .review-card { padding: 0; border-color: #cfdcda; border-radius: 14px; overflow: hidden; box-shadow: 0 12px 32px rgb(8 45 63 / 4%); }
 .assessment-page .review-card:last-child { grid-column: 1 / -1; }
 .assessment-page .review-card > header { min-height: 76px; padding: 17px 19px; border-bottom: 1px solid #dce5e3; background: #f9fbfa; }
@@ -2691,12 +2700,17 @@ select:focus-visible, textarea:focus-visible {
 .phase06-contents-rail {
   position: sticky;
   top: 18px;
+  max-height: calc(100dvh - 36px);
   padding: 16px 10px;
   border: 1px solid var(--color-border);
   background: white;
+  overflow-y: auto;
 }
 .phase06-contents-rail > strong { display: block; padding: 0 8px 10px; font-family: var(--font-libre-baskerville), Georgia, serif; }
 .phase06-contents-rail nav { display: grid; }
+.phase06-contents-group { min-width: 0; display: grid; }
+.phase06-contents-group + .phase06-contents-group { margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--color-border); }
+.phase06-contents-group > p { margin: 0; padding: 3px 8px 6px; color: var(--color-teal-800); font-size: 11px; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
 .phase06-contents-rail a {
   min-height: 44px;
   padding: 6px 8px;
@@ -2712,6 +2726,14 @@ select:focus-visible, textarea:focus-visible {
 .phase06-contents-rail a:focus-visible { color: var(--color-teal-800); background: var(--color-teal-100); }
 .phase06-contents-rail a span { font-family: var(--font-mono); font-size: 9px; }
 .phase06-mobile-contents { display: none; }
+.phase06-mobile-contents .phase06-contents-group { grid-column: 1 / -1; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.phase06-mobile-contents .phase06-contents-group > p { grid-column: 1 / -1; }
+@media (max-width: 700px) {
+  .phase06-mobile-contents .phase06-contents-group { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .phase06-mobile-contents .phase06-contents-group { grid-template-columns: 1fr; }
+}
 
 .phase06-report.blueprint-report {
   min-width: 0;
@@ -2815,6 +2837,10 @@ select:focus-visible, textarea:focus-visible {
 .phase06-disclosure > ul { padding: 0 0 18px; }
 .phase06-disclosure li { margin: 8px 0; }
 .phase06-timeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+.phase06-roadmap-disclosure { margin-top: 14px; border: 1px solid var(--color-border); border-radius: 10px; }
+.phase06-roadmap-disclosure > summary { min-height: 60px; padding: 12px 16px; color: var(--color-teal-800); font-size: 15px; font-weight: 800; cursor: pointer; }
+.phase06-roadmap-disclosure > summary span { margin-top: 3px; display: block; color: var(--color-text-muted); font-size: 12px; font-weight: 500; }
+.phase06-roadmap-disclosure .phase06-timeline { padding: 10px; }
 .phase06-timeline article { min-height: 126px; padding: 12px; border-top: 4px solid var(--color-teal-500); background: var(--color-paper-100); }
 .phase06-timeline strong,
 .phase06-timeline small { display: block; }
@@ -2868,9 +2894,9 @@ select:focus-visible, textarea:focus-visible {
 .phase06-synthesis-panel.disagreement .phase06-empty-copy { color: var(--color-ink-950); }
 .phase06-synthesis-panel.conditions { border-color: #c4872f; background: var(--color-amber-100); }
 .phase06-synthesis-panel.questions { border-color: #527d9b; background: #eef4f8; }
-.phase06-synthesis-panel > header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.phase06-synthesis-panel h3 { margin: 0; font-size: 20px; }
-.phase06-synthesis-panel > header span { min-width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid currentColor; font-weight: 850; }
+.phase06-synthesis-panel > summary { min-height: 48px; display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--color-ink-950); cursor: pointer; }
+.phase06-synthesis-panel > summary strong { font-size: 20px; }
+.phase06-synthesis-panel > summary span { min-width: 28px; padding: 5px 8px; border: 1px solid currentColor; font-size: 12px; font-weight: 850; white-space: nowrap; }
 .phase06-synthesis-panel > ul { margin: 14px 0 0; padding-left: 19px; }
 .phase06-perspectives { margin: 8px 0 15px; padding: 0; list-style: none; }
 .phase06-perspectives > li { padding: 9px 0; border-top: 1px solid rgb(20 57 72 / 14%); }
@@ -3084,7 +3110,7 @@ select:focus-visible, textarea:focus-visible {
   .phase06-versions div { margin-bottom: 3mm; }
   .phase06-synthesis-grid.synthesis-grid { grid-template-columns: 1fr; }
   .phase06-synthesis-panel { break-inside: auto; page-break-inside: auto; }
-  .phase06-synthesis-panel > header { break-after: avoid-page; page-break-after: avoid; }
+  .phase06-synthesis-panel > summary { break-after: avoid-page; page-break-after: avoid; }
   .phase06-synthesis-panel > ul > li { break-inside: avoid-page; page-break-inside: avoid; }
   .phase06-report-footer { padding: 5mm 0; color: #111; background: white; border-top: 1px solid #333; }
   .phase06-report a { color: #111; text-decoration: none; }

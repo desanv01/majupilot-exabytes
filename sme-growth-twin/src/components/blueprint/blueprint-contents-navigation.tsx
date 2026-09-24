@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 export type BlueprintSection = readonly [anchor: string, label: string];
 
-function SectionLinks({ active, sections }: { active: string; sections: readonly BlueprintSection[] }) {
+function SectionLinks({ active, sections, startIndex }: { active: string; sections: readonly BlueprintSection[]; startIndex: number }) {
   return sections.map(([anchor, label], index) => (
     <a href={`#${anchor}`} key={anchor} aria-current={active === anchor ? "location" : undefined}>
-      <span>{String(index + 1).padStart(2, "0")}</span>
+      <span>{String(startIndex + index + 1).padStart(2, "0")}</span>
       <strong>{label}</strong>
     </a>
   ));
@@ -16,6 +16,11 @@ function SectionLinks({ active, sections }: { active: string; sections: readonly
 export function BlueprintContentsNavigation({ sections }: { sections: readonly BlueprintSection[] }) {
   const [active, setActive] = useState(sections[0]?.[0] ?? "cover");
   const activeIndex = Math.max(0, sections.findIndex(([anchor]) => anchor === active));
+  const groups = [
+    { label: "Decision", startIndex: 0, items: sections.slice(0, 8) },
+    { label: "Plan and delivery", startIndex: 8, items: sections.slice(8, 11) },
+    { label: "Review and evidence", startIndex: 11, items: sections.slice(11) },
+  ];
 
   useEffect(() => {
     const targets = sections
@@ -43,11 +48,11 @@ export function BlueprintContentsNavigation({ sections }: { sections: readonly B
           <strong>Blueprint contents</strong>
           <span>Section {activeIndex + 1} of {sections.length}</span>
         </div>
-        <nav aria-label="Blueprint sections"><SectionLinks active={active} sections={sections} /></nav>
+        <nav aria-label="Blueprint sections">{groups.map((group) => <div className="phase06-contents-group" key={group.label}><p>{group.label}</p><SectionLinks active={active} sections={group.items} startIndex={group.startIndex} /></div>)}</nav>
       </aside>
       <details className="phase06-mobile-contents no-print">
         <summary>Section {activeIndex + 1} of {sections.length}: {sections[activeIndex]?.[1]}</summary>
-        <nav aria-label="Blueprint sections on small screens"><SectionLinks active={active} sections={sections} /></nav>
+        <nav aria-label="Blueprint sections on small screens">{groups.map((group) => <div className="phase06-contents-group" key={group.label}><p>{group.label}</p><SectionLinks active={active} sections={group.items} startIndex={group.startIndex} /></div>)}</nav>
       </details>
     </>
   );
