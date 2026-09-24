@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react-hooks/set-state-in-effect -- localStorage restoration is an intentional client boundary */
 /* eslint-disable jsx-a11y/role-supports-aria-props -- validation is intentionally mirrored on the first radio and its fieldset */
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";

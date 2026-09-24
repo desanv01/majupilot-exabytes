@@ -1,14 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
 
 import { createBrowserSupabaseClient } from "@/infrastructure/supabase/browser";
 import { accountCaseResumePath, activeAccountCase, clearAccountCaseStorage, restoreAccountCase, saveActiveAccountCase, setActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
 import { accountCaseSnapshotSchema } from "@/domain/account-cases";
-import { loadAssessmentDraft } from "@/infrastructure/persistence/local-assessment-store";
-import { loadDemoSession } from "@/infrastructure/persistence/project-storage";
+import { assessmentDraftSchema } from "@/domain/assessment";
+import { ASSESSMENT_STORAGE_KEY } from "@/infrastructure/persistence/local-assessment-store";
+import { DEMO_SESSION_STORAGE_KEY } from "@/infrastructure/persistence/project-storage";
 import { loadDurableJourney, DURABLE_JOURNEY_STORAGE_KEY } from "@/infrastructure/persistence/durable-journey-client";
+import { ACCOUNT_CASE_CHANGED_EVENT } from "@/infrastructure/persistence/account-case-scope";
+import { ACCOUNT_CASE_LOCAL_CHANGE_EVENT } from "@/infrastructure/persistence/account-case-events";
 
 type CaseListItem = { id: string; businessName: string; state: string; revision: number; updatedAt: string };
 type Envelope<T> = { data?: T; error?: { code: string } };
@@ -19,6 +22,27 @@ async function parseResponse<T>(result: Response): Promise<T> {
   return body.data;
 }
 
+function subscribeBrowserWork(callback: () => void) {
+  window.addEventListener(ACCOUNT_CASE_CHANGED_EVENT, callback);
+  window.addEventListener(ACCOUNT_CASE_LOCAL_CHANGE_EVENT, callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    window.removeEventListener(ACCOUNT_CASE_CHANGED_EVENT, callback);
+    window.removeEventListener(ACCOUNT_CASE_LOCAL_CHANGE_EVENT, callback);
+    window.removeEventListener("storage", callback);
+  };
+}
+
+function browserWorkSnapshot() {
+  try {
+    const raw = localStorage.getItem(ASSESSMENT_STORAGE_KEY);
+    if (!raw || localStorage.getItem(DEMO_SESSION_STORAGE_KEY)) return false;
+    if (!assessmentDraftSchema.safeParse(JSON.parse(raw) as unknown).success) return false;
+    const active = activeAccountCase(localStorage);
+    return !active || active.revision === 0;
+  } catch { return false; }
+}
+
 export function AccountCasesClient({ initialAuthError }: { initialAuthError: boolean }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -27,12 +51,10 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
   const [organizationId, setOrganizationId] = useState<string>();
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [busy, setBusy] = useState(false);
-  const [browserWork, setBrowserWork] = useState(false);
+  const browserWork = useSyncExternalStore(subscribeBrowserWork, browserWorkSnapshot, () => false);
   const [message, setMessage] = useState(initialAuthError ? "This sign-in link has expired. Request a new one." : "");
 
   useEffect(() => {
-    const active = activeAccountCase(localStorage);
-    setBrowserWork(loadAssessmentDraft(localStorage).status === "ok" && !loadDemoSession(localStorage) && (!active || active.revision === 0));
     try {
       void createBrowserSupabaseClient().auth.getUser().then(({ data }) => {
         if (data.user?.email) { setSignedInEmail(data.user.email); setEmail(data.user.email); }
@@ -128,7 +150,6 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
       if (pendingCase) {
         if (pendingCase.organizationId !== organizationId) throw new Error("Case workspace mismatch");
         await saveActiveAccountCase();
-        setBrowserWork(false);
         await refreshCases(organizationId);
         setMessage("This browser's work is now saved to your account.");
         return;
@@ -146,7 +167,6 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
       }
       setActiveAccountCase(localStorage, { organizationId, caseId, revision: 0 });
       await saveActiveAccountCase();
-      setBrowserWork(false);
       await refreshCases(organizationId);
       setMessage("This browser's work is now saved to your account.");
     } catch {
