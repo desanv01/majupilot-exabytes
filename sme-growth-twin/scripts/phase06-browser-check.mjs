@@ -274,7 +274,19 @@ try {
     exclusions: await evaluate("Boolean(document.querySelector('#roi .phase06-disclosure'))"),
     limitations: await evaluate("document.body.innerText.includes('Inspect limitations')"),
     modelCalls: await evaluate("document.body.innerText.includes('Inspect model-call disclosure')"),
-    noHiddenDisagreement: await evaluate("document.body.innerText.includes('No material disagreement detected')"),
+    noHiddenDisagreement: await evaluate(`(() => {
+      const disclosure = document.querySelector('details.phase06-synthesis-panel.disagreement');
+      const summary = disclosure?.querySelector('summary');
+      const emptyState = disclosure?.querySelector('.phase06-empty-copy');
+      if (!disclosure || !summary || !emptyState || !summary.innerText.includes('Disagreement')) return false;
+      const wasOpen = disclosure.open;
+      try {
+        disclosure.open = true;
+        return emptyState.getClientRects().length > 0 && emptyState.innerText.includes('No material disagreement detected');
+      } finally {
+        disclosure.open = wasOpen;
+      }
+    })()`),
   };
 
   const responsive = [];
