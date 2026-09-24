@@ -12,11 +12,13 @@ import { DEMO_SESSION_STORAGE_KEY, PROJECT_LOCAL_STORAGE_KEYS, PROJECT_SESSION_S
 import { ACCOUNT_CASE_STORAGE_KEY, activeAccountCase, setActiveAccountCase, type ActiveAccountCase } from "./account-case-scope";
 
 export { activeAccountCase, setActiveAccountCase } from "./account-case-scope";
+export const ACCOUNT_CASE_LAST_STAGE_KEY = "majupilot:account-case-last-stage:1.0.0";
 
 export function clearAccountCaseStorage(local: Storage, session: Storage) {
   for (const key of PROJECT_LOCAL_STORAGE_KEYS) local.removeItem(key);
   for (const key of PROJECT_SESSION_STORAGE_KEYS) session.removeItem(key);
   local.removeItem(ACCOUNT_CASE_STORAGE_KEY);
+  local.removeItem(ACCOUNT_CASE_LAST_STAGE_KEY);
   window.dispatchEvent(new Event("majupilot:account-case-changed"));
 }
 
@@ -37,7 +39,7 @@ export function collectAccountCaseSnapshot(active: ActiveAccountCase): AccountCa
   if (context.assessmentSessionId !== active.caseId || context.organizationId !== active.organizationId) return undefined;
   const durableJourney = { ...Object.fromEntries(Object.entries(context).filter(([key]) => key !== "guestSessionId")), schemaVersion: "1.0.0" };
   const candidate = {
-    schemaVersion: "1.0.0", draft: parseLocal(ASSESSMENT_STORAGE_KEY),
+    schemaVersion: "1.0.0", lastStage: localStorage.getItem(ACCOUNT_CASE_LAST_STAGE_KEY) ?? undefined, draft: parseLocal(ASSESSMENT_STORAGE_KEY),
     diagnostic: parseLocal(DIAGNOSTIC_STORAGE_KEY),
     recommendations: parseLocal(RECOMMENDATION_STORAGE_KEY),
     comparison: parseLocal(SCENARIO_STORAGE_KEY),
@@ -104,5 +106,19 @@ export function restoreAccountCase(snapshot: unknown, active: ActiveAccountCase)
     [DURABLE_JOURNEY_STORAGE_KEY, parsed.durableJourney ? { ...parsed.durableJourney, schemaVersion: undefined } : { organizationId: active.organizationId, assessmentSessionId: active.caseId, leadIdempotencyKey: `lead:${crypto.randomUUID()}` }],
   ];
   for (const [key, value] of entries) if (value !== undefined) localStorage.setItem(key, JSON.stringify(value));
+  if (parsed.lastStage) localStorage.setItem(ACCOUNT_CASE_LAST_STAGE_KEY, parsed.lastStage);
   setActiveAccountCase(localStorage, active);
+}
+
+export function accountCaseResumePath(snapshot: AccountCaseSnapshot): string {
+  if (snapshot.draft.status !== "ready_for_review") return "/assessment";
+  if (snapshot.blueprint) {
+    const context = snapshot.durableJourney;
+    if (context?.syncedAt && context.artifactIds?.blueprint && ["/copilot", "/evidence", "/consultation"].includes(snapshot.lastStage ?? "")) return snapshot.lastStage!;
+    return "/blueprint";
+  }
+  if (snapshot.comparison) return "/scenarios";
+  if (snapshot.recommendations) return "/recommendations";
+  if (snapshot.diagnostic) return "/results";
+  return "/assessment/review";
 }

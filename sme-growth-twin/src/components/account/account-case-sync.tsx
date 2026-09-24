@@ -1,13 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ACCOUNT_CASE_LOCAL_CHANGE_EVENT } from "@/infrastructure/persistence/account-case-events";
-import { activeAccountCase, saveActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
+import { ACCOUNT_CASE_LAST_STAGE_KEY, activeAccountCase, saveActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
 
 export function AccountCaseSync() {
+  const pathname = usePathname();
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!activeAccountCase(localStorage)) return;
+    if (!["/assessment", "/assessment/review", "/assessment/analysis", "/results", "/recommendations", "/scenarios", "/blueprint", "/copilot", "/evidence", "/consultation"].includes(pathname)) return;
+    if (localStorage.getItem(ACCOUNT_CASE_LAST_STAGE_KEY) === pathname) return;
+    localStorage.setItem(ACCOUNT_CASE_LAST_STAGE_KEY, pathname);
+    window.dispatchEvent(new Event(ACCOUNT_CASE_LOCAL_CHANGE_EVENT));
+  }, [pathname]);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;

@@ -32,6 +32,7 @@ export const accountDurableJourneySchema = z.object({
 
 export const accountCaseSnapshotSchema = z.object({
   schemaVersion: z.literal("1.0.0"),
+  lastStage: z.enum(["/assessment", "/assessment/review", "/assessment/analysis", "/results", "/recommendations", "/scenarios", "/blueprint", "/copilot", "/evidence", "/consultation"]).optional(),
   draft: assessmentDraftSchema,
   diagnostic: diagnosticResultSchema.optional(),
   recommendations: recommendationResultSchema.optional(),

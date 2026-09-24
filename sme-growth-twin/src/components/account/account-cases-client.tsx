@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { createBrowserSupabaseClient } from "@/infrastructure/supabase/browser";
-import { activeAccountCase, clearAccountCaseStorage, restoreAccountCase, saveActiveAccountCase, setActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
+import { accountCaseResumePath, activeAccountCase, clearAccountCaseStorage, restoreAccountCase, saveActiveAccountCase, setActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
+import { accountCaseSnapshotSchema } from "@/domain/account-cases";
 import { loadAssessmentDraft } from "@/infrastructure/persistence/local-assessment-store";
 import { loadDemoSession } from "@/infrastructure/persistence/project-storage";
 import { loadDurableJourney, DURABLE_JOURNEY_STORAGE_KEY } from "@/infrastructure/persistence/durable-journey-client";
@@ -99,9 +100,9 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
     try {
       await flushCurrent();
       const record = await parseResponse<{ revision: number; snapshot: unknown }>(await fetch(`/api/v2/cases/${caseId}?organizationId=${encodeURIComponent(organizationId)}`, { cache: "no-store" }));
+      const snapshot = record.snapshot === null ? null : accountCaseSnapshotSchema.parse(record.snapshot);
       restoreAccountCase(record.snapshot, { organizationId, caseId, revision: record.revision });
-      const restoredDraft = loadAssessmentDraft(localStorage);
-      router.push(restoredDraft.status === "ok" ? restoredDraft.draft.status === "ready_for_review" ? "/assessment/review" : "/assessment" : "/assessment?new=1");
+      router.push(snapshot ? accountCaseResumePath(snapshot) : "/assessment?new=1");
     } catch (error) { setMessage(error instanceof Error && error.message === "IDEMPOTENCY_CONFLICT" ? "This case changed on another device. Reload it before switching so your edits are preserved." : "Could not open this case. Your current browser work has not been cleared."); }
     finally { setBusy(false); }
   }
