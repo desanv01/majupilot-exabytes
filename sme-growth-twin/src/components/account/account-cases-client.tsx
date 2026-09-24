@@ -66,6 +66,7 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [organizationId, setOrganizationId] = useState<string>();
   const [cases, setCases] = useState<CaseListItem[]>([]);
+  const [conflictCaseId, setConflictCaseId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const browserWork = useSyncExternalStore(subscribeBrowserWork, browserWorkSnapshot, () => false);
   const [message, setMessage] = useState(initialAuthError ? "This email link has expired. Request a new confirmation or password reset link." : "");
@@ -164,17 +165,36 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
     if (activeAccountCase(localStorage)) await saveActiveAccountCase();
   }
 
+  async function loadSavedCase(caseId: string, scope: string) {
+    const record = await parseResponse<{ revision: number; snapshot: unknown }>(await fetch(`/api/v2/cases/${caseId}?organizationId=${encodeURIComponent(scope)}`, { cache: "no-store" }));
+    const snapshot = record.snapshot === null ? null : accountCaseSnapshotSchema.parse(record.snapshot);
+    restoreAccountCase(record.snapshot, { organizationId: scope, caseId, revision: record.revision });
+    router.push(snapshot ? accountCaseResumePath(snapshot) : "/assessment?new=1");
+  }
+
   async function openCase(caseId: string) {
     if (!organizationId || busy) return;
     if (browserWork) { setMessage("Add this browser's work to your account before opening another case."); return; }
-    setBusy(true); setMessage("");
+    setBusy(true); setMessage(""); setConflictCaseId(null);
     try {
       await flushCurrent();
-      const record = await parseResponse<{ revision: number; snapshot: unknown }>(await fetch(`/api/v2/cases/${caseId}?organizationId=${encodeURIComponent(organizationId)}`, { cache: "no-store" }));
-      const snapshot = record.snapshot === null ? null : accountCaseSnapshotSchema.parse(record.snapshot);
-      restoreAccountCase(record.snapshot, { organizationId, caseId, revision: record.revision });
-      router.push(snapshot ? accountCaseResumePath(snapshot) : "/assessment?new=1");
-    } catch (error) { setMessage(error instanceof Error && error.message === "IDEMPOTENCY_CONFLICT" ? "This case changed on another device. Reload it before switching so your edits are preserved." : "Could not open this case. Your current browser work has not been cleared."); }
+      await loadSavedCase(caseId, organizationId);
+    } catch (error) {
+      if (error instanceof Error && error.message === "IDEMPOTENCY_CONFLICT") {
+        setConflictCaseId(caseId);
+        setMessage("This browser has edits that differ from the latest saved case. You can open the saved version, which will replace this browser's copy, or keep this page to preserve the browser copy.");
+      } else setMessage("Could not open this case. Your current browser work has not been cleared.");
+    }
+    finally { setBusy(false); }
+  }
+
+  async function openSavedVersion() {
+    if (!organizationId || !conflictCaseId || busy) return;
+    setBusy(true); setMessage("");
+    try {
+      await loadSavedCase(conflictCaseId, organizationId);
+      setConflictCaseId(null);
+    } catch { setMessage("Could not open the saved version. This browser's copy is still here."); }
     finally { setBusy(false); }
   }
 
@@ -259,6 +279,7 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
         {showPasswordForm && <form onSubmit={savePassword} className="account-signin-form"><label htmlFor="account-new-password">New password</label><input id="account-new-password" type="password" autoComplete="new-password" minLength={8} required value={newPassword} onChange={(event) => setNewPassword(event.target.value)} /><button className="button" type="submit" disabled={busy}>{busy ? "Saving…" : "Save password"}</button></form>}
       </div>
       {message && <p role="status" className="account-message">{message}</p>}
+      {conflictCaseId && <button className="button account-secondary-button" type="button" disabled={busy} onClick={() => void openSavedVersion()}>Open latest saved version</button>}
       {!organizationId ? <p>Loading your workspace…</p> : (
         <>
           <div className="account-case-actions">

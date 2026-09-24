@@ -81,7 +81,7 @@ async function saveOnce() {
       body: JSON.stringify({ organizationId: active.organizationId, expectedRevision: active.revision, snapshot }),
     });
   } catch (error) {
-    if (!(error instanceof Error) || error.message !== "IDEMPOTENCY_CONFLICT" || active.revision !== 0) throw error;
+    if (!(error instanceof Error) || error.message !== "IDEMPOTENCY_CONFLICT") throw error;
     const existing = await request<{ revision: number; snapshot: unknown }>(`/api/v2/cases/${active.caseId}?organizationId=${encodeURIComponent(active.organizationId)}`, { method: "GET" });
     if (!existing.snapshot || canonicalJson(existing.snapshot) !== canonicalJson(JSON.parse(JSON.stringify(snapshot)) as unknown)) throw error;
     saved = { revision: existing.revision };
