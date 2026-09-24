@@ -6,7 +6,7 @@ import { Brand } from "@/components/assessment/brand";
 export const dynamic = "force-dynamic";
 
 export default async function CasesPage({ searchParams }: { searchParams: Promise<{ auth?: string }> }) {
-  const authError = (await searchParams).auth === "expired";
+  const auth = (await searchParams).auth;
 
   return (
     <div className="account-page">
@@ -20,7 +20,7 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
           <h1>Keep your Business Twin close.</h1>
           <p>Create an account to save every case as you work, then pick up from your last step on another device. You can add work already started in this browser.</p>
         </div>
-        <AccountCasesClient initialAuthError={authError} />
+        <AccountCasesClient initialAuthError={auth === "expired"} initialAuthCallback={auth === "callback"} initialRecovery={auth === "recovery"} />
       </main>
     </div>
   );

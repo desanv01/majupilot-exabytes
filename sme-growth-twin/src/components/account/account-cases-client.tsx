@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
 
-import { createBrowserSupabaseClient } from "@/infrastructure/supabase/browser";
+import { createBrowserSupabaseClient, createPasswordRecoveryRequestClient } from "@/infrastructure/supabase/browser";
 import { accountCaseResumePath, activeAccountCase, clearAccountCaseStorage, restoreAccountCase, saveActiveAccountCase, setActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
 import { accountCaseSnapshotSchema } from "@/domain/account-cases";
 import { assessmentDraftSchema } from "@/domain/assessment";
@@ -54,7 +54,7 @@ function browserWorkSnapshot() {
   } catch { return false; }
 }
 
-export function AccountCasesClient({ initialAuthError }: { initialAuthError: boolean }) {
+export function AccountCasesClient({ initialAuthError, initialAuthCallback = false, initialRecovery = false }: { initialAuthError: boolean; initialAuthCallback?: boolean; initialRecovery?: boolean }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -72,10 +72,39 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
   const [message, setMessage] = useState(initialAuthError ? "This email link has expired. Request a new confirmation or password reset link." : "");
 
   useEffect(() => {
-    void Promise.resolve().then(() => createBrowserSupabaseClient().auth.getUser()).then(({ data }) => {
-      if (data.user?.email) { setSignedInEmail(data.user.email); setEmail(data.user.email); }
-    }).catch(() => undefined).finally(() => setCheckingAuth(false));
-  }, []);
+    const openAccount = async () => {
+      const client = createBrowserSupabaseClient();
+      if (initialAuthCallback) {
+        const fragment = new URLSearchParams(window.location.hash.slice(1));
+        const accessToken = fragment.get("access_token");
+        const refreshToken = fragment.get("refresh_token");
+        const isRecovery = fragment.get("type") === "recovery";
+        window.history.replaceState(null, "", "/cases");
+        if (!accessToken || !refreshToken) throw new Error("missing_recovery_session");
+        const { data, error } = await client.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+        if (error || !data.user?.email) throw error ?? new Error("invalid_recovery_session");
+        setSignedInEmail(data.user.email);
+        setEmail(data.user.email);
+        if (isRecovery) {
+          setShowPasswordForm(true);
+          setMessage("Choose a new password to finish resetting your account.");
+        }
+        return;
+      }
+      const { data } = await client.auth.getUser();
+      if (data.user?.email) {
+        setSignedInEmail(data.user.email);
+        setEmail(data.user.email);
+        if (initialRecovery) {
+          setShowPasswordForm(true);
+          setMessage("Choose a new password to finish resetting your account.");
+        }
+      } else if (initialRecovery) throw new Error("missing_recovery_session");
+    };
+    void openAccount().catch(() => {
+      if (initialAuthCallback || initialRecovery) setMessage("This email link is invalid or expired. Request a new password reset link.");
+    }).finally(() => setCheckingAuth(false));
+  }, [initialAuthCallback, initialRecovery]);
 
   useEffect(() => {
     if (!signedInEmail) return;
@@ -100,7 +129,7 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
     try {
       const client = createBrowserSupabaseClient();
       if (authMode === "reset") {
-        const { error } = await client.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${location.origin}/auth/confirm` });
+        const { error } = await createPasswordRecoveryRequestClient().auth.resetPasswordForEmail(email.trim(), { redirectTo: `${location.origin}/auth/confirm` });
         if (error) throw error;
         setMessage("If this address has an account, a password reset link is on its way. After opening it, set a new password in Saved cases.");
       } else if (authMode === "sign_up") {
