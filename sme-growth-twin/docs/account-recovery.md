@@ -9,6 +9,8 @@ The `/cases` flow uses Supabase email OTP links. Its browser client uses only `N
 3. Add the deployed `/auth/confirm` URL and local development `/auth/confirm` URL to the Auth redirect allowlist. The browser supplies the exact current origin as `emailRedirectTo`.
 4. Ensure the email template redirects to `/auth/confirm`. The callback accepts a PKCE `code` from the standard link or a `token_hash` plus `type` from a custom template. For a custom template, use Supabase's `{{ .TokenHash }}` with `type=email`, and point the link at the allowed `/auth/confirm` URL.
 5. Apply `20260924022616_account_cases.sql`, `20260924030200_personal_workspace_rls.sql`, and `20260924031000_claim_case_related_owners.sql` in order before enabling the UI. Do not expose the secret key in any `NEXT_PUBLIC_` variable.
+6. Set `NEXT_PUBLIC_SUPABASE_URL` at build time. The deployed Content Security Policy permits browser connections to that exact origin for Auth; production builds fail when the URL is missing.
+7. Configure a custom SMTP provider for live email sign-in. Supabase's default sender is limited to project team addresses and a low project-wide rate. Check Auth logs for delivery errors before diagnosing the callback or case APIs.
 
 ## Recovery behavior
 

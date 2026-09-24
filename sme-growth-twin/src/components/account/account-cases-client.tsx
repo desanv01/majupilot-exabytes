@@ -86,7 +86,7 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
       if (error) throw error;
       setMessage("Check your email for a sign-in link. Keep this tab open if you want to add the work saved in this browser.");
     } catch {
-      setMessage("We could not send the link right now. Check the email address and try again.");
+      setMessage("Sign-in is unavailable right now. Please try again later.");
     } finally { setBusy(false); }
   }
 
