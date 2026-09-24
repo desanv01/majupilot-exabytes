@@ -241,6 +241,7 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
       </form>
       <button className="account-text-button account-reset-link" type="button" onClick={() => { setAuthMode(authMode === "reset" ? "sign_in" : "reset"); setMessage(""); }}>{authMode === "reset" ? "Back to sign in" : "Forgot your password?"}</button>
       {message && <p role="status" className="account-message">{message}</p>}
+      {authMode === "sign_in" && <p className="account-footnote">Already used an email link? In the browser where you are signed in, open Saved cases and choose <strong>Set or change password</strong>.</p>}
       <p className="account-footnote">Work started without sign-in stays in this browser until you add it to your account.</p>
     </section>
   );
