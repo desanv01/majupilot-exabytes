@@ -1,4 +1,5 @@
 import { blueprintIdentity, deepFreeze } from "@/core/blueprint/build-blueprint";
+import { notifyAccountCaseLocalChange } from "./account-case-events";
 import { BLUEPRINT_MODEL_VERSION, BLUEPRINT_STORAGE_VERSION, blueprintSchema, type Blueprint } from "@/domain/blueprint";
 import type { BusinessTwin } from "@/domain/business-twin";
 import type { RecommendationResult } from "@/domain/recommendations";
@@ -9,8 +10,8 @@ export const BLUEPRINT_STORAGE_KEY = "sme-growth-twin:blueprint:1.0.0";
 type StoragePort = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 export type BlueprintLoadResult = { status: "empty" } | { status: "ok"; result: Blueprint } | { status: "discarded"; reason: "corrupt" | "incompatible" | "stale" };
 
-export function saveBlueprint(storage: Pick<StoragePort, "setItem">, blueprint: Blueprint) { storage.setItem(BLUEPRINT_STORAGE_KEY, JSON.stringify(blueprintSchema.parse(blueprint))); }
-export function clearBlueprint(storage: Pick<StoragePort, "removeItem">) { storage.removeItem(BLUEPRINT_STORAGE_KEY); }
+export function saveBlueprint(storage: Pick<StoragePort, "setItem">, blueprint: Blueprint) { storage.setItem(BLUEPRINT_STORAGE_KEY, JSON.stringify(blueprintSchema.parse(blueprint))); notifyAccountCaseLocalChange(storage); }
+export function clearBlueprint(storage: Pick<StoragePort, "removeItem">) { storage.removeItem(BLUEPRINT_STORAGE_KEY); notifyAccountCaseLocalChange(storage); }
 
 export function isBlueprintCurrent(blueprint: Blueprint, twin: BusinessTwin, diagnostic: DiagnosticResult, recommendations: RecommendationResult, comparison: ScenarioComparison) {
   if (!comparison.selectedScenarioId) return false;

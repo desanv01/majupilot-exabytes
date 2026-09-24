@@ -196,6 +196,7 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
     const publicQuestion = "What is company Apple doing today?";
     expect(derivePublicWebQuery(publicQuestion, publicQuestion)).toBe("what is company apple doing today");
     expect(isPublicWebQuerySafe("what is company apple doing today", publicQuestion)).toBe(true);
+    expect(derivePublicWebQuery("AB apple today", publicQuestion)).toBe("apple today");
 
     expect(() => derivePublicWebQuery(
       "our customer's secret margin 43127",
@@ -270,6 +271,26 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
       owner, sessionId: session.id, repository, clientKey: "phase3r-no-web",
       request: { message: "Explain Apple in general terms, but do not search the web.", idempotencyKey: "phase3r-no-web-turn" },
     });
+  });
+
+  it("uses one authorized Blueprint read for a brief overview without blocking mixed evidence questions", async () => {
+    const repository = new Phase3rRepository();
+    generateMock.mockImplementationOnce(async (options: unknown) => {
+      const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: { toolName: string } | string } | undefined };
+      expect(configured.prepareStep({ steps: [] })).toMatchObject({ activeTools: ["getBlueprint"], toolChoice: { toolName: "getBlueprint" } });
+      expect(configured.prepareStep({ steps: [{ toolCalls: [{ toolName: "getBlueprint" }] }] })).toMatchObject({ activeTools: [], toolChoice: "none" });
+      return completed("The Blueprint's selected path is Balanced Growth.");
+    });
+    await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-blueprint-overview", request: { message: "Give me a brief summary of my Blueprint.", idempotencyKey: "phase3r-blueprint-overview" } });
+
+    generateMock.mockImplementationOnce(async (options: unknown) => {
+      const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: { toolName: string } | string } | undefined };
+      const first = configured.prepareStep({ steps: [] });
+      expect(first?.activeTools).not.toEqual(["getBlueprint"]);
+      if (first?.activeTools) expect(first.activeTools).toContain("searchUploadedEvidence");
+      return completed("I can compare the authorized Blueprint with the uploaded document.");
+    });
+    await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-blueprint-doc-mix", request: { message: "Summarize my Blueprint and compare it with my uploaded document.", idempotencyKey: "phase3r-blueprint-doc-mix" } });
   });
 
   it("plans both tools for a natural uploaded-plan and current-benchmark request", async () => {
@@ -348,6 +369,79 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
 
     expect(repository.messages.map((item) => item.role)).toEqual(["user"]);
     expect(repository.receipts.get("phase3r-cancel-turn")?.response).toMatchObject({ failed: true, retryable: true });
+  });
+
+  it("completes a streamed answer that exceeds the saved-message bound without discarding the draft", async () => {
+    const repository = new Phase3rRepository();
+    const longAnswer = "A".repeat(13_000);
+    const deltas: string[] = [];
+    streamMock.mockResolvedValue({
+      fullStream: (async function* () { yield { type: "text-delta", text: longAnswer }; })(),
+      text: Promise.resolve(longAnswer),
+      usage: Promise.resolve({ inputTokens: 100, outputTokens: 3_500 }),
+      finishReason: Promise.resolve("length"),
+      toolResults: Promise.resolve([]),
+    });
+
+    const result = await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-long-stream",
+      request: { message: "Summarize my Blueprint.", idempotencyKey: "phase3r-long-stream-turn" },
+      onEvent: (event) => { if (event.type === "text_delta") deltas.push(event.delta); },
+    });
+
+    expect(result.text.length).toBeLessThanOrEqual(12_000);
+    expect(result.text).toMatch(/incomplete/i);
+    expect(repository.messages.at(-1)).toMatchObject({ role: "assistant", text: result.text });
+    expect(repository.receipts.get("phase3r-long-stream-turn")?.response).toMatchObject({ text: result.text });
+    expect(deltas.join("").length).toBeLessThanOrEqual(12_000);
+  });
+
+  it("continues a length-limited answer once without repeating retrieval or claiming completion early", async () => {
+    const repository = new Phase3rRepository();
+    generateMock
+      .mockResolvedValueOnce({ text: "The first supported finding is clear.", usage: { inputTokens: 100, outputTokens: 1500 }, finishReason: "length", toolResults: [] })
+      .mockResolvedValueOnce({ text: "The next supported step is to review the owner and timeline.", usage: { inputTokens: 120, outputTokens: 30 }, finishReason: "stop", toolResults: [] });
+
+    const result = await executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-continue-once",
+      request: { message: "Explain my Blueprint in detail.", idempotencyKey: "phase3r-continue-once" },
+    });
+
+    expect(result.text).toContain("The first supported finding is clear.");
+    expect(result.text).toContain("The next supported step is to review the owner and timeline.");
+    expect(result.text).not.toContain("This answer is incomplete");
+    expect(generateMock).toHaveBeenCalledTimes(2);
+    expect(repository.invokeReadTool).not.toHaveBeenCalled();
+    expect(repository.messages.filter((item) => item.role === "assistant")).toHaveLength(1);
+  });
+
+  it("replays an already saved assistant turn when only its result receipt failed", async () => {
+    const repository = new Phase3rRepository();
+    let failResultReceipt = true;
+    repository.rememberTurn.mockImplementation(async (_owner, _sessionId, key, turnId, response) => {
+      if (key === "phase3r-receipt-recovery" && failResultReceipt) {
+        failResultReceipt = false;
+        throw new PersistenceError("INTERNAL_RETRYABLE", 503);
+      }
+      repository.receipts.set(key, { turnId, response });
+    });
+    generateMock.mockResolvedValue(completed("The authorized Blueprint is ready."));
+    const request = { message: "Summarize my Blueprint.", idempotencyKey: "phase3r-receipt-recovery" };
+
+    await expect(executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-receipt-recovery", request })).rejects.toMatchObject({ code: "INTERNAL_RETRYABLE" });
+    const savedAssistant = repository.messages.find((item) => item.role === "assistant");
+    expect(savedAssistant?.text).toBe("The authorized Blueprint is ready.");
+    repository.savedHistory = [{
+      id: uuid(50), chatSessionId: session.id, sequence: 2, turnId: savedAssistant!.turnId,
+      role: "assistant", text: savedAssistant!.text, toolName: null, toolCallId: null,
+      toolPayload: null, modelCallId: uuid(51), executionState: "live", parts: [{ type: "text", text: savedAssistant!.text! }],
+      schemaVersion: "phase-g-copilot-1.0.0", createdAt: "2026-09-24T00:00:00.000Z",
+    }];
+
+    const retried = await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-receipt-recovery", request });
+    expect(retried.text).toBe(savedAssistant!.text);
+    expect(generateMock).toHaveBeenCalledTimes(1);
+    expect(repository.messages.filter((item) => item.role === "assistant")).toHaveLength(1);
   });
 
   it("enforces credential-free HTTP(S) sources and public-query derivation", () => {

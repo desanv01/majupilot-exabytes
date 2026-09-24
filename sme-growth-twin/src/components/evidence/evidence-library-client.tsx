@@ -44,6 +44,7 @@ async function api<T>(url: string, init?: RequestInit) {
 
 export function EvidenceLibraryClient() {
   const [assessmentSessionId, setAssessmentSessionId] = useState<string>();
+  const [organizationId, setOrganizationId] = useState<string>();
   const [documents, setDocuments] = useState<EvidenceDocument[]>([]);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -53,8 +54,9 @@ export function EvidenceLibraryClient() {
   const inputRef = useRef<HTMLInputElement>(null);
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
 
-  const refresh = useCallback(async (assessmentId: string) => {
-    const data = await api<EvidenceDocument[]>(`/api/v2/evidence-documents?assessmentSessionId=${encodeURIComponent(assessmentId)}`);
+  const refresh = useCallback(async (assessmentId: string, organizationScope?: string) => {
+    const scope = organizationScope ? `&organizationId=${encodeURIComponent(organizationScope)}` : "";
+    const data = await api<EvidenceDocument[]>(`/api/v2/evidence-documents?assessmentSessionId=${encodeURIComponent(assessmentId)}${scope}`);
     setDocuments(data);
   }, []);
 
@@ -66,7 +68,8 @@ export function EvidenceLibraryClient() {
         return;
       }
       setAssessmentSessionId(context.assessmentSessionId);
-      await refresh(context.assessmentSessionId);
+      setOrganizationId(context.organizationId);
+      await refresh(context.assessmentSessionId, context.organizationId);
       setNotice({ kind: "info", text: "Files stay private and are available only inside this assessment." });
     } catch {
       setNotice({ kind: "error", text: "The Evidence Library could not be opened safely. Your saved work was not changed." });
@@ -107,9 +110,10 @@ export function EvidenceLibraryClient() {
     try {
       const form = new FormData();
       form.set("assessmentSessionId", assessmentSessionId);
+      if (organizationId) form.set("organizationId", organizationId);
       form.set("file", selected);
       const document = await api<EvidenceDocument>("/api/v2/evidence-documents", { method: "POST", body: form });
-      await refresh(assessmentSessionId);
+      await refresh(assessmentSessionId, organizationId);
       setSelected(undefined);
       if (inputRef.current) inputRef.current.value = "";
       setNotice(document.status === "ready"
@@ -139,8 +143,8 @@ export function EvidenceLibraryClient() {
     deleteDialogRef.current?.close();
     setBusy(true);
     try {
-      await api(`/api/v2/evidence-documents/${document.id}?assessmentSessionId=${assessmentSessionId}`, { method: "DELETE" });
-      await refresh(assessmentSessionId);
+      await api(`/api/v2/evidence-documents/${document.id}?assessmentSessionId=${assessmentSessionId}${organizationId ? `&organizationId=${organizationId}` : ""}`, { method: "DELETE" });
+      await refresh(assessmentSessionId, organizationId);
       setNotice({ kind: "success", text: `${document.originalFilename} was deleted and excluded from retrieval.` });
     } catch { setNotice({ kind: "error", text: "The document could not be deleted safely." }); }
     finally { setBusy(false); setPendingDelete(undefined); }
@@ -151,8 +155,8 @@ export function EvidenceLibraryClient() {
     setBusy(true);
     setNotice({ kind: "info", text: `Reprocessing ${document.originalFilename} with the current embedding version...` });
     try {
-      const updated = await api<EvidenceDocument>(`/api/v2/evidence-documents/${document.id}/reprocess`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ assessmentSessionId }) });
-      await refresh(assessmentSessionId);
+      const updated = await api<EvidenceDocument>(`/api/v2/evidence-documents/${document.id}/reprocess`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ assessmentSessionId, organizationId }) });
+      await refresh(assessmentSessionId, organizationId);
       setNotice(updated.status === "ready" ? { kind: "success", text: `${updated.originalFilename} is ready again.` } : { kind: "error", text: failureCopy[updated.failureCode ?? ""] ?? "Reprocessing failed safely." });
     } catch { setNotice({ kind: "error", text: "The document could not be reprocessed safely." }); }
     finally { setBusy(false); }
@@ -162,7 +166,7 @@ export function EvidenceLibraryClient() {
     if (!assessmentSessionId || busy) return;
     setBusy(true);
     try {
-      const signed = await api<{ url: string }>(`/api/v2/evidence-documents/${document.id}/download?assessmentSessionId=${assessmentSessionId}`);
+      const signed = await api<{ url: string }>(`/api/v2/evidence-documents/${document.id}/download?assessmentSessionId=${assessmentSessionId}${organizationId ? `&organizationId=${organizationId}` : ""}`);
       window.location.assign(signed.url);
     } catch { setNotice({ kind: "error", text: "A short-lived authorized download could not be created." }); }
     finally { setBusy(false); }

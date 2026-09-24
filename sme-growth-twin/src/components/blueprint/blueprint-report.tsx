@@ -169,8 +169,8 @@ function SynthesisPanel({ blueprint }: { blueprint: Blueprint }) {
   return (
     <div className="phase06-synthesis-grid synthesis-grid">
       {groups.map(([label, entries, className]) => (
-        <section className={`phase06-synthesis-panel ${className}`} key={label}>
-          <header><h3>{label}</h3><span>{entries.length}</span></header>
+        <details className={`phase06-synthesis-panel ${className}`} key={label}>
+          <summary><strong>{label}</strong><span>{entries.length} topic{entries.length === 1 ? "" : "s"}</span></summary>
           {entries.length ? (
             <ul>
               {entries.map((entry) => (
@@ -194,7 +194,7 @@ function SynthesisPanel({ blueprint }: { blueprint: Blueprint }) {
               {label === "Disagreement" ? "No material disagreement detected" : `No ${label.toLowerCase()} recorded.`}
             </p>
           )}
-        </section>
+        </details>
       ))}
     </div>
   );
@@ -418,6 +418,8 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
 
         <section id="roadmap">
           <ReportHeading index={10}>Month-by-month roadmap</ReportHeading>
+          <details className="phase06-roadmap-disclosure">
+            <summary>Inspect the complete 12-month sequence <span>Starts, activations, and the business owner placeholder for every month</span></summary>
           <div className="phase06-timeline">
             {selected.months.map((month) => (
               <article key={month.month}>
@@ -428,6 +430,7 @@ export function BlueprintReport({ blueprint }: { blueprint: Blueprint }) {
               </article>
             ))}
           </div>
+          </details>
         </section>
 
         <section id="risks">

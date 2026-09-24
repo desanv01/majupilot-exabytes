@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react-hooks/set-state-in-effect -- localStorage restoration is an intentional client boundary */
 /* eslint-disable jsx-a11y/role-supports-aria-props -- validation is intentionally mirrored on the first radio and its fieldset */
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -32,6 +31,7 @@ import {
   saveAssessmentDraft,
 } from "@/infrastructure/persistence/local-assessment-store";
 import { clearKnownProjectStorage } from "@/infrastructure/persistence/project-storage";
+import { activeAccountCase } from "@/infrastructure/persistence/account-case-scope";
 
 import { AssessmentFrame, type SaveState } from "./assessment-frame";
 
@@ -367,6 +367,10 @@ export function AssessmentClient() {
     }
 
     if (params.get("new") === "1") {
+      if (activeAccountCase(localStorage) && loadAssessmentDraft(localStorage).status === "ok") {
+        router.replace("/cases");
+        return;
+      }
       try {
         clearKnownProjectStorage(localStorage, sessionStorage);
       } catch {
@@ -408,7 +412,7 @@ export function AssessmentClient() {
       }
     }
     setReady(true);
-  }, [params]);
+  }, [params, router]);
 
   useEffect(() => {
     if (ready && draft.sessionId !== emptyDraft.sessionId) {

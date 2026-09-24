@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { DemoResetControl } from "@/components/demo/demo-reset-control";
+import { activeAccountCase, saveActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
+import { ACCOUNT_CASE_STORAGE_KEY } from "@/infrastructure/persistence/account-case-scope";
 
 import {
   createGoldenAssessmentDraft,
@@ -19,7 +21,7 @@ import {
 import {
   clearKnownProjectStorage,
   DEMO_SESSION_CHANGED_EVENT,
-  PROJECT_LOCAL_STORAGE_KEYS,
+  loadDemoSession,
   RESET_STATUS_SESSION_KEY,
   saveDemoSession,
 } from "@/infrastructure/persistence/project-storage";
@@ -39,9 +41,7 @@ export function DemoLauncher() {
 
   useEffect(() => {
     const refresh = () => {
-      setHasProjectRecords(
-        PROJECT_LOCAL_STORAGE_KEYS.some((key) => localStorage.getItem(key) !== null),
-      );
+      setHasProjectRecords(Boolean(loadDemoSession(localStorage)));
 
       const resetStatus = sessionStorage.getItem(RESET_STATUS_SESSION_KEY);
       if (resetStatus) {
@@ -60,10 +60,17 @@ export function DemoLauncher() {
     return () => window.removeEventListener(DEMO_SESSION_CHANGED_EVENT, refresh);
   }, []);
 
-  const loadFixture = (fixture: GoldenFixture) => {
+  const loadFixture = async (fixture: GoldenFixture) => {
     setLoadingFixtureId(fixture.id);
     setStatus(`Loading ${fixture.label} as fictional demonstration data.`);
     try {
+      if (loadAssessmentDraft(localStorage).status === "ok" && !loadDemoSession(localStorage)) {
+        setLoadingFixtureId(null);
+        setStatus("Finish or save your current assessment before opening a fictional demo case.");
+        return;
+      }
+      if (activeAccountCase(localStorage)) await saveActiveAccountCase();
+      localStorage.removeItem(ACCOUNT_CASE_STORAGE_KEY);
       clearKnownProjectStorage(localStorage, sessionStorage);
       const sessionId = `assessment_demo_${crypto.randomUUID().replaceAll("-", "").slice(0, 20)}`;
       const loadedAt = new Date().toISOString();
@@ -159,12 +166,14 @@ export function DemoLauncher() {
 
 export function HomePrimaryActions() {
   const [resume, setResume] = useState(false);
+  const [accountCaseActive, setAccountCaseActive] = useState(false);
   const [status, setStatus] = useState("");
 
   useEffect(() => {
     try {
       const storedDraft = loadAssessmentDraft(localStorage);
       setResume(storedDraft.status === "ok");
+      setAccountCaseActive(Boolean(activeAccountCase(localStorage)));
       if (storedDraft.status === "discarded") {
         setStatus("A saved assessment could not be restored and was safely removed. You can start again.");
       }
@@ -182,7 +191,7 @@ export function HomePrimaryActions() {
   return (
     <>
       <div className="home-actions">
-        <Link className="button primary home-primary-action" href="/assessment?new=1">
+        <Link className="button primary home-primary-action" href={accountCaseActive ? "/cases" : "/assessment?new=1"}>
           Start assessment
         </Link>
         {resume ? (

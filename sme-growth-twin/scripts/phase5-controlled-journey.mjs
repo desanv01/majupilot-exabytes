@@ -182,6 +182,7 @@ try {
   await click('a[href="/recommendations"]');
   await poll("location.pathname", "/recommendations");
   await evaluate("[...document.querySelectorAll('.recommendation-record')].forEach(x=>x.open=true)");
+  await evaluate("[...document.querySelectorAll('.recommendation-record .recommendation-supporting-detail:not(.catalogue-disclosure)')].forEach(x=>x.open=true)");
   const recommendation = await storage("sme-growth-twin:recommendations:1.0.0");
   requirePass(recommendation.recommendations.length >= 3 && await evaluate("document.body.innerText.includes('Six exact fit components')"), "Recommendation details missing");
   checks.recommendations = recommendation.recommendations.map((item) => `${item.capabilityId}:${item.status}`);
@@ -233,8 +234,13 @@ try {
   const assistantBeforeTurn = await evaluate("document.querySelectorAll('.copilot-message.assistant').length");
   await input('#copilot-message', "What time does the fictional Meridian depot lead check refrigerated van temperature? Cite the uploaded dispatch document.");
   await clickText("Send");
-  await poll(`document.querySelectorAll('.copilot-message.assistant').length>${assistantBeforeTurn}`, true, 120_000);
-  const cited = await evaluate("Boolean(document.querySelector('.copilot-message.assistant .copilot-citations blockquote'))");
+  const completedReply = `(() => { const replies=[...document.querySelectorAll('.copilot-message.assistant')]; return replies.length>${assistantBeforeTurn} && !replies.at(-1).classList.contains('streaming'); })()`;
+  try { await poll(completedReply, true, 120_000); }
+  catch (error) {
+    const latest = await evaluate("[...document.querySelectorAll('.copilot-message.assistant')].at(-1)?.innerText.slice(0, 600)");
+    throw new Error(`Copilot reply did not finish streaming before citation check: ${latest ?? "no new assistant reply"}`, { cause: error });
+  }
+  const cited = await evaluate("Boolean([...document.querySelectorAll('.copilot-message.assistant')].at(-1)?.querySelector('.copilot-citations blockquote'))");
   const answer = await evaluate("[...document.querySelectorAll('.copilot-message.assistant')].at(-1)?.innerText.slice(0, 600)");
   requirePass(cited, `Copilot did not show uploaded-document citation: ${answer}`);
   await cdp("Page.reload");

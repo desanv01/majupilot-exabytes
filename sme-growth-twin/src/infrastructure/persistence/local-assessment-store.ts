@@ -3,6 +3,7 @@ import {
   assessmentDraftSchema,
   type AssessmentDraft,
 } from "@/domain/assessment";
+import { notifyAccountCaseLocalChange } from "./account-case-events";
 
 export const ASSESSMENT_STORAGE_KEY =
   "sme-growth-twin:assessment-draft:1.0.0";
@@ -47,10 +48,12 @@ export function saveAssessmentDraft(
 ) {
   const validated = assessmentDraftSchema.parse(draft);
   storage.setItem(ASSESSMENT_STORAGE_KEY, JSON.stringify(validated));
+  notifyAccountCaseLocalChange(storage);
 }
 
 export function clearAssessmentDraft(
   storage: Pick<Storage, "removeItem">,
 ) {
   storage.removeItem(ASSESSMENT_STORAGE_KEY);
+  notifyAccountCaseLocalChange(storage);
 }

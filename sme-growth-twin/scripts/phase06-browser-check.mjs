@@ -132,12 +132,24 @@ try {
   const poll = async (expression, expected, timeout = 25_000) => {
     const started = Date.now();
     let actual;
+    let lastNavigationError;
     while (Date.now() - started < timeout) {
-      actual = await evaluate(expression);
+      try {
+        actual = await evaluate(expression);
+        lastNavigationError = undefined;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        // Page.reload returns before the new document and its body are ready.
+        // Retry only navigation/DOM-not-ready failures; other script errors
+        // still fail immediately, and persistent transients still time out.
+        if (!/Cannot read properties of (?:null|undefined) \(reading '[^']+'\)|Execution context was destroyed|Cannot find context with specified id|Inspected target navigated or closed/i.test(message)) throw error;
+        actual = undefined;
+        lastNavigationError = message;
+      }
       if (equal(actual, expected)) return actual;
       await wait(120);
     }
-    throw new Error(`Timed out: ${expression}; actual=${JSON.stringify(actual)}`);
+    throw new Error(`Timed out: ${expression}; actual=${JSON.stringify(actual)}${lastNavigationError ? `; last navigation error=${lastNavigationError}` : ""}`);
   };
   const navigate = async (url) => {
     await cdp("Page.navigate", { url });
@@ -262,7 +274,19 @@ try {
     exclusions: await evaluate("Boolean(document.querySelector('#roi .phase06-disclosure'))"),
     limitations: await evaluate("document.body.innerText.includes('Inspect limitations')"),
     modelCalls: await evaluate("document.body.innerText.includes('Inspect model-call disclosure')"),
-    noHiddenDisagreement: await evaluate("document.body.innerText.includes('No material disagreement detected')"),
+    noHiddenDisagreement: await evaluate(`(() => {
+      const disclosure = document.querySelector('details.phase06-synthesis-panel.disagreement');
+      const summary = disclosure?.querySelector('summary');
+      const emptyState = disclosure?.querySelector('.phase06-empty-copy');
+      if (!disclosure || !summary || !emptyState || !summary.innerText.includes('Disagreement')) return false;
+      const wasOpen = disclosure.open;
+      try {
+        disclosure.open = true;
+        return emptyState.getClientRects().length > 0 && emptyState.innerText.includes('No material disagreement detected');
+      } finally {
+        disclosure.open = wasOpen;
+      }
+    })()`),
   };
 
   const responsive = [];

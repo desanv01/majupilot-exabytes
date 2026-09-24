@@ -1,4 +1,5 @@
 import type { BusinessTwin } from "@/domain/business-twin";
+import { notifyAccountCaseLocalChange } from "./account-case-events";
 import {
   RECOMMENDATION_CATALOGUE_VERSION,
   RECOMMENDATION_MODEL_VERSION,
@@ -14,9 +15,10 @@ export type RecommendationLoadResult =
   | { status: "ok"; result: RecommendationResult }
   | { status: "discarded"; reason: "corrupt" | "incompatible" | "stale" };
 
-export function clearRecommendationResult(storage: RecommendationStorage) { storage.removeItem(RECOMMENDATION_STORAGE_KEY); }
+export function clearRecommendationResult(storage: RecommendationStorage) { storage.removeItem(RECOMMENDATION_STORAGE_KEY); notifyAccountCaseLocalChange(storage); }
 export function saveRecommendationResult(storage: RecommendationStorage, result: RecommendationResult) {
   storage.setItem(RECOMMENDATION_STORAGE_KEY, JSON.stringify(recommendationResultSchema.parse(result)));
+  notifyAccountCaseLocalChange(storage);
 }
 export function isRecommendationCurrent(result: RecommendationResult, twin: BusinessTwin, diagnostic: DiagnosticResult) {
   return result.assessmentSessionId === twin.assessmentSessionId && result.businessTwinId === twin.id && result.twinRevision === twin.revision &&

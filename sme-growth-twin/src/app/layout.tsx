@@ -3,6 +3,7 @@ import { DM_Sans, Libre_Baskerville } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { DemoBanner } from "@/components/assessment/demo-banner";
+import { AccountCaseSync } from "@/components/account/account-case-sync";
 
 import "./styles.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body>
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <DemoBanner />
+        <AccountCaseSync />
         {children}
       </body>
     </html>

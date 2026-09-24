@@ -49,7 +49,7 @@ export function operationPolicy(operation: AiOperation): AiOperationPolicy {
     mode,
     model: process.env[`AI_GATEWAY_MODEL_${suffix}`] || process.env.AI_GATEWAY_MODEL || null,
     timeoutMs: integerEnv(`AI_TIMEOUT_MS_${suffix}`, operation === "assessment_follow_up" ? 20_000 : operation === "transformation_copilot" ? 60_000 : explanation ? 25_000 : 30_000, 1_000, 60_000),
-    maxOutputTokens: integerEnv(`AI_MAX_OUTPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 320 : operation === "transformation_copilot" ? 1_500 : explanation ? 1_000 : operation === "consultant_note_draft" ? 700 : 1_200, 64, 4_096),
+    maxOutputTokens: integerEnv(`AI_MAX_OUTPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 320 : operation === "transformation_copilot" ? 2_400 : explanation ? 1_000 : operation === "consultant_note_draft" ? 700 : 1_200, 64, 4_096),
     maxInputTokens: integerEnv(`AI_MAX_INPUT_TOKENS_${suffix}`, operation === "assessment_follow_up" ? 1_200 : operation === "transformation_copilot" ? 10_000 : explanation ? 5_000 : operation === "consultant_note_draft" ? 5_000 : 8_000, 256, 32_000),
     maxRetries: integerEnv(`AI_MAX_RETRIES_${suffix}`, 1, 0, 1) as 0 | 1,
     perMinuteLimit: integerEnv(`AI_RATE_LIMIT_PER_MINUTE_${suffix}`, operation === "assessment_follow_up" ? 6 : operation === "transformation_copilot" ? 12 : explanation ? 8 : 10, 1, 60),

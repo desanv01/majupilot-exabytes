@@ -41,6 +41,12 @@ fixed Vercel AI Gateway route `openai/text-embedding-3-small`, dimension 1536,
 and version `openai-text-embedding-3-small-1536-v1`. Provider credentials remain
 server-only through `AI_GATEWAY_API_KEY` or Vercel-provided `VERCEL_OIDC_TOKEN`.
 
+`/api/v2/integration/status` and `/api/v2/copilot/status` report Document RAG
+as an implemented capability. Their `embeddingGatewayCredentialPresent` flag
+checks configuration only; `liveEmbeddingCheck: "not_performed"` means those
+status requests did not call the embedding provider. A successful upload and
+retrieval is the live readiness proof.
+
 ## Persistence and authorization
 
 `evidence_documents` is the lifecycle ledger. Its states are `processing`,

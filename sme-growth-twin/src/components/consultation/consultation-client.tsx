@@ -21,6 +21,7 @@ import { loadBlueprint } from "@/infrastructure/persistence/local-blueprint-stor
 import { loadDiagnosticResult } from "@/infrastructure/persistence/local-diagnostic-store";
 import { loadRecommendationResult } from "@/infrastructure/persistence/local-recommendation-store";
 import { clearKnownProjectStorage } from "@/infrastructure/persistence/project-storage";
+import { activeAccountCase } from "@/infrastructure/persistence/account-case-scope";
 import { loadScenarioComparison } from "@/infrastructure/persistence/local-scenario-store";
 import { createDurableConsultation, loadDurableJourney } from "@/infrastructure/persistence/durable-journey-client";
 
@@ -188,6 +189,7 @@ export function ConsultationView({ journey, blueprint: suppliedBlueprint, initia
   };
 
   const startNew = () => {
+    if (activeAccountCase(localStorage)) { router.push("/cases"); return; }
     clearKnownProjectStorage(localStorage, sessionStorage);
     router.push("/assessment?new=1");
   };

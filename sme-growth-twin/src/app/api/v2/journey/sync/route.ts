@@ -24,6 +24,7 @@ const idsSchema = z.object({
 }).strict();
 
 const inputSchema = z.object({
+  organizationId: persistenceUuidSchema.optional(),
   assessmentSessionId: persistenceUuidSchema,
   ids: idsSchema,
   draft: assessmentDraftSchema,
@@ -44,7 +45,7 @@ export async function POST(request: Request) {
     if (!selected || input.ids.evidence.length !== input.twin.evidence.length) {
       return response({ error: { code: "VALIDATION_FAILED", requestId } }, 422, requestId);
     }
-    const owner = await resolveOwner(request);
+    const owner = await resolveOwner(request, input.organizationId);
     const persistence = new PersistenceService(repository());
     const answers = {
       ...input.draft.answers,
