@@ -20,6 +20,8 @@ type AuthMode = "sign_in" | "sign_up" | "reset";
 function authFailureMessage(error: unknown, action: "sign_in" | "email" | "password") {
   const code = error && typeof error === "object" && "code" in error ? String(error.code) : "";
   if (code === "over_email_send_rate_limit" || code === "over_request_rate_limit") return "Email requests are temporarily limited. Please try again later.";
+  if (code === "weak_password") return "Choose a stronger password and try again.";
+  if (code === "email_address_invalid") return "Enter a valid email address and try again.";
   if (action === "sign_in") return "We couldn't sign you in. Check your email and password, then try again.";
   if (action === "password") return "Could not save your password. Please try again.";
   return "We couldn't send an email right now. Please try again later.";
