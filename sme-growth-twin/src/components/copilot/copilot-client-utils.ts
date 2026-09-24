@@ -1,4 +1,5 @@
 import type { CopilotMessage } from "@/domain/copilot";
+import { containsCopilotToolProtocol, INVALID_SAVED_COPILOT_RESPONSE } from "@/domain/copilot-output";
 
 export const COPILOT_WELCOME_TEXT = "Ask me anything. I can reason conversationally, explain your saved MajuPilot plan, search your private Evidence Library with exact citations, or check the public web when current information matters.";
 
@@ -77,7 +78,7 @@ export function restoreCopilotMessages(messages: readonly CopilotMessage[]): Cop
     .map((message) => ({
       id: message.id,
       role: message.role === "user" ? "user" as const : "assistant" as const,
-      text: message.text!,
+      text: message.role === "assistant" && containsCopilotToolProtocol(message.text!) ? INVALID_SAVED_COPILOT_RESPONSE : message.text!,
       tools: message.role === "assistant" ? toolResults.get(message.turnId) : undefined,
     }));
   return restored.length ? restored : [{ id: "welcome", role: "assistant", text: COPILOT_WELCOME_TEXT }];

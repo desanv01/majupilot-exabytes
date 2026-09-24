@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createGoldenAssessmentDraft, goldenFixtureById } from "@/domain-packs/exabytes/golden-fixtures";
-import { accountCaseResumePath } from "@/infrastructure/persistence/account-case-client";
+import { accountCaseResumePath, activeAccountCase, collectAccountCaseSnapshot, saveActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
+import { ACCOUNT_CASE_STORAGE_KEY } from "@/infrastructure/persistence/account-case-scope";
+import { ASSESSMENT_STORAGE_KEY } from "@/infrastructure/persistence/local-assessment-store";
+import { DURABLE_JOURNEY_STORAGE_KEY } from "@/infrastructure/persistence/durable-journey-client";
 import type { AccountCaseSnapshot } from "@/domain/account-cases";
 
 vi.mock("server-only", () => ({}));
@@ -89,11 +92,80 @@ describe("Phase 3R saved-stage resume", () => {
     expect(accountCaseResumePath({ ...ready, diagnostic: {} as AccountCaseSnapshot["diagnostic"] })).toBe("/results");
     expect(accountCaseResumePath({ ...ready, recommendations: {} as AccountCaseSnapshot["recommendations"] })).toBe("/recommendations");
     expect(accountCaseResumePath({ ...ready, comparison: {} as AccountCaseSnapshot["comparison"] })).toBe("/scenarios");
+    expect(accountCaseResumePath({ ...ready, diagnostic: {} as AccountCaseSnapshot["diagnostic"], recommendations: {} as AccountCaseSnapshot["recommendations"], lastStage: "/results" })).toBe("/results");
+    expect(accountCaseResumePath({ ...ready, comparison: {} as AccountCaseSnapshot["comparison"], lastStage: "/assessment/review" })).toBe("/assessment/review");
   });
 
   it("opens a saved Blueprint and only resumes Copilot when its durable artifact is synced", () => {
     const withBlueprint = { ...ready, blueprint: {} as AccountCaseSnapshot["blueprint"], lastStage: "/copilot" as const };
     expect(accountCaseResumePath(withBlueprint)).toBe("/blueprint");
     expect(accountCaseResumePath({ ...withBlueprint, durableJourney: { ...snapshot.durableJourney, syncedAt: "2026-09-24T01:00:00.000Z", artifactIds: { blueprint: uuid(5) } } as AccountCaseSnapshot["durableJourney"] })).toBe("/copilot");
+  });
+});
+
+describe("Phase 3R guest claim snapshot", () => {
+  it("drops guest receipt metadata before saving claimed browser work", () => {
+    const entries = new Map<string, string>([
+      [ASSESSMENT_STORAGE_KEY, JSON.stringify(draft)],
+      [DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify({
+        guestSessionId: uuid(5), assessmentSessionId: caseId, organizationId,
+        leadIdempotencyKey: `lead:${uuid(4)}`,
+        expiresAt: "2026-09-25T01:00:00.000Z",
+        absoluteExpiresAt: "2026-10-01T01:00:00.000Z",
+        replayed: false,
+      })],
+    ]);
+    vi.stubGlobal("localStorage", { getItem: (key: string) => entries.get(key) ?? null });
+    try {
+      const collected = collectAccountCaseSnapshot({ organizationId, caseId, revision: 0 });
+      expect(collected?.durableJourney).toEqual({
+        schemaVersion: "1.0.0", organizationId, assessmentSessionId: caseId,
+        leadIdempotencyKey: `lead:${uuid(4)}`,
+      });
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+});
+
+describe("Phase 3R stale browser revision", () => {
+  function browserStorage() {
+    const entries = new Map<string, string>([
+      [ACCOUNT_CASE_STORAGE_KEY, JSON.stringify({ organizationId, caseId, revision: 1 })],
+      [ASSESSMENT_STORAGE_KEY, JSON.stringify(draft)],
+      [DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify(snapshot.durableJourney)],
+    ]);
+    const storage = {
+      getItem: (key: string) => entries.get(key) ?? null,
+      setItem: (key: string, value: string) => { entries.set(key, value); },
+      removeItem: (key: string) => { entries.delete(key); },
+    } as Storage;
+    vi.stubGlobal("localStorage", storage);
+    vi.stubGlobal("window", { dispatchEvent: vi.fn() });
+    return storage;
+  }
+
+  it("refreshes an old revision when the saved snapshot is identical", async () => {
+    const storage = browserStorage();
+    const saved = collectAccountCaseSnapshot({ organizationId, caseId, revision: 1 });
+    vi.stubGlobal("fetch", vi.fn(async (_url: string, init: RequestInit) => init.method === "PUT"
+      ? Response.json({ error: { code: "IDEMPOTENCY_CONFLICT" } }, { status: 409 })
+      : Response.json({ data: { revision: 4, snapshot: saved } })));
+    try {
+      await expect(saveActiveAccountCase()).resolves.toEqual({ revision: 4 });
+      expect(activeAccountCase(storage)?.revision).toBe(4);
+    } finally { vi.unstubAllGlobals(); }
+  });
+
+  it("keeps local edits when the saved snapshot differs", async () => {
+    const storage = browserStorage();
+    vi.stubGlobal("fetch", vi.fn(async (_url: string, init: RequestInit) => init.method === "PUT"
+      ? Response.json({ error: { code: "IDEMPOTENCY_CONFLICT" } }, { status: 409 })
+      : Response.json({ data: { revision: 4, snapshot: { ...snapshot, lastStage: "/blueprint" } } })));
+    try {
+      await expect(saveActiveAccountCase()).rejects.toThrow("IDEMPOTENCY_CONFLICT");
+      expect(activeAccountCase(storage)?.revision).toBe(1);
+      expect(storage.getItem(ASSESSMENT_STORAGE_KEY)).toBe(JSON.stringify(draft));
+    } finally { vi.unstubAllGlobals(); }
   });
 });

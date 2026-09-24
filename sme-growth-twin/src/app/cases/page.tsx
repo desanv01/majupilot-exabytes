@@ -18,7 +18,7 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
         <div className="account-heading">
           <p className="eyebrow">Your work</p>
           <h1>Keep your Business Twin close.</h1>
-          <p>Sign in to save assessments and reopen them on another device. Your current browser work can be added to your account.</p>
+          <p>Create an account to save every case as you work, then pick up from your last step on another device. You can add work already started in this browser.</p>
         </div>
         <AccountCasesClient initialAuthError={authError} />
       </main>

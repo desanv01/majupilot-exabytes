@@ -29,6 +29,7 @@ import { PersistenceError, type OwnershipContext } from "@/domain/persistence";
 import {
   derivePublicWebQuery,
   executeCopilotTurn,
+  focusedBlueprintRead,
   isPublicWebQuerySafe,
   isSafePublicSourceUrl,
 } from "@/infrastructure/copilot/copilot-model";
@@ -37,6 +38,7 @@ import { restoreCopilotMessages } from "@/components/copilot/copilot-client-util
 import { Markdown } from "@/components/copilot/copilot-client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createElement } from "react";
+import { stage05CaseA } from "./stage05-fixtures";
 
 const uuid = (n: number) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 const owner: OwnershipContext = { kind: "guest", guestSessionId: uuid(1) };
@@ -62,7 +64,7 @@ class Phase3rRepository implements CopilotRepository {
     this.messages.push(input);
     return {} as CopilotMessage;
   });
-  invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: string) => {
+  invokeReadTool = vi.fn(async (_owner: OwnershipContext, _session: CopilotSession, name: string): Promise<Record<string, unknown>> => {
     if (name === "searchUploadedEvidence") return {
       answerable: true,
       reason: null,
@@ -275,13 +277,19 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
 
   it("uses one authorized Blueprint read for a brief overview without blocking mixed evidence questions", async () => {
     const repository = new Phase3rRepository();
-    generateMock.mockImplementationOnce(async (options: unknown) => {
+    const blueprint = stage05CaseA().blueprint;
+    repository.invokeReadTool.mockResolvedValueOnce({ blueprint: { id: blueprint.id, payload: blueprint } });
+    generateMock.mockImplementationOnce(async (options: unknown, input: unknown) => {
       const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: { toolName: string } | string } | undefined };
-      expect(configured.prepareStep({ steps: [] })).toMatchObject({ activeTools: ["getBlueprint"], toolChoice: { toolName: "getBlueprint" } });
+      expect(configured.prepareStep({ steps: [] })).toMatchObject({ activeTools: [], toolChoice: "none" });
       expect(configured.prepareStep({ steps: [{ toolCalls: [{ toolName: "getBlueprint" }] }] })).toMatchObject({ activeTools: [], toolChoice: "none" });
+      expect((input as { prompt: string }).prompt).toContain("AUTHORIZED_BLUEPRINT_READ");
+      expect((input as { prompt: string }).prompt).toContain(blueprint.snapshot.recommendations.recommendations[0].evidenceIds[0]);
       return completed("The Blueprint's selected path is Balanced Growth.");
     });
     await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-blueprint-overview", request: { message: "Give me a brief summary of my Blueprint.", idempotencyKey: "phase3r-blueprint-overview" } });
+    expect(repository.invokeReadTool).toHaveBeenCalledOnce();
+    expect(repository.invokeReadTool).toHaveBeenCalledWith(owner, session, "getBlueprint", {});
 
     generateMock.mockImplementationOnce(async (options: unknown) => {
       const configured = options as { prepareStep: (value: unknown) => { activeTools?: string[]; toolChoice?: { toolName: string } | string } | undefined };
@@ -371,6 +379,41 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
     expect(repository.receipts.get("phase3r-cancel-turn")?.response).toMatchObject({ failed: true, retryable: true });
   });
 
+  it("keeps the recorded top recommendation and its source evidence in a focused Blueprint read", () => {
+    const blueprint = stage05CaseA().blueprint;
+    const result = focusedBlueprintRead({ blueprint: { id: blueprint.id, payload: blueprint } });
+    const excerpt = result.blueprint as Record<string, unknown>;
+    const top = excerpt.topRecommendation as Record<string, unknown>;
+    const expected = [...blueprint.snapshot.recommendations.recommendations].sort((a, b) => a.rank - b.rank)[0];
+    expect(top.title).toBe(expected.title);
+    expect(top.evidenceIds).toEqual(expected.evidenceIds);
+    expect(excerpt.evidence).toEqual(expect.arrayContaining(expected.evidenceIds.map((id) => expect.objectContaining({ id }))));
+    expect(JSON.stringify(result)).not.toContain("omittedItems");
+  });
+
+  it("rejects provider tool markup instead of showing or saving it as an answer", async () => {
+    const repository = new Phase3rRepository();
+    const raw = '<｜｜DSML｜｜ calls> <｜｜DSML｜｜ invoke name="searchUploadedEvidence">';
+    const deltas: string[] = [];
+    streamMock.mockResolvedValue({
+      fullStream: (async function* () {
+        yield { type: "text-delta", text: "<｜｜DS" };
+        yield { type: "text-delta", text: 'ML｜｜ calls> <｜｜DSML｜｜ invoke name="searchUploadedEvidence">' };
+      })(),
+      text: Promise.resolve(raw), usage: Promise.resolve({ inputTokens: 30, outputTokens: 12 }),
+      finishReason: Promise.resolve("stop"), toolResults: Promise.resolve([]),
+    });
+
+    await expect(executeCopilotTurn({
+      owner, sessionId: session.id, repository, clientKey: "phase3r-malformed-tool",
+      request: { message: "Summarize my Blueprint.", idempotencyKey: "phase3r-malformed-tool-turn" },
+      onEvent: (event) => { if (event.type === "text_delta") deltas.push(event.delta); },
+    })).rejects.toMatchObject({ code: "AI_INVALID_OUTPUT" });
+
+    expect(deltas).toEqual([]);
+    expect(repository.messages.map((item) => item.role)).toEqual(["user"]);
+  });
+
   it("completes a streamed answer that exceeds the saved-message bound without discarding the draft", async () => {
     const repository = new Phase3rRepository();
     const longAnswer = "A".repeat(13_000);
@@ -411,7 +454,7 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
     expect(result.text).toContain("The next supported step is to review the owner and timeline.");
     expect(result.text).not.toContain("This answer is incomplete");
     expect(generateMock).toHaveBeenCalledTimes(2);
-    expect(repository.invokeReadTool).not.toHaveBeenCalled();
+    expect(repository.invokeReadTool).toHaveBeenCalledOnce();
     expect(repository.messages.filter((item) => item.role === "assistant")).toHaveLength(1);
   });
 
@@ -468,6 +511,23 @@ describe("Phase 3R general assessment-scoped Copilot", () => {
       },
     ];
     expect(restoreCopilotMessages(messages)[0].tools?.[0]).toMatchObject({ toolName: "searchWeb", status: "rejected" });
+  });
+
+  it("hides a malformed historical answer and excludes it from later model context", async () => {
+    const repository = new Phase3rRepository();
+    const malformed = '<｜｜DSML｜｜ calls> <｜｜DSML｜｜ invoke name="searchUploadedEvidence">';
+    const prior: CopilotMessage = {
+      id: uuid(60), chatSessionId: session.id, sequence: 1, turnId: uuid(61), role: "assistant", text: malformed,
+      toolName: null, toolCallId: null, toolPayload: null, modelCallId: uuid(62), executionState: "live",
+      schemaVersion: "phase-g-copilot-1.0.0", createdAt: "2026-09-23T00:00:00.000Z",
+    };
+    repository.savedHistory = [prior];
+    expect(restoreCopilotMessages([prior])[0].text).toContain("could not be displayed safely");
+    generateMock.mockImplementation(async (_options: unknown, input: unknown) => {
+      expect((input as { prompt: string }).prompt).not.toContain("DSML");
+      return completed("Here is a fresh answer.");
+    });
+    await executeCopilotTurn({ owner, sessionId: session.id, repository, clientKey: "phase3r-historical-malformed", request: { message: "Explain the plan again.", idempotencyKey: "phase3r-historical-malformed" } });
   });
 
   it("never renders Markdown images that could auto-fetch attacker URLs", () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { accountCaseSnapshotSchema, type AccountCaseSnapshot } from "@/domain/account-cases";
+import { accountCaseSnapshotSchema, accountDurableJourneySchema, type AccountCaseSnapshot } from "@/domain/account-cases";
 import { canonicalJson } from "@/core/reports/canonical-json";
 import { ASSESSMENT_STORAGE_KEY } from "./local-assessment-store";
 import { DIAGNOSTIC_STORAGE_KEY } from "./local-diagnostic-store";
@@ -37,7 +37,14 @@ export function collectAccountCaseSnapshot(active: ActiveAccountCase): AccountCa
     localStorage.setItem(DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify(context));
   }
   if (context.assessmentSessionId !== active.caseId || context.organizationId !== active.organizationId) return undefined;
-  const durableJourney = { ...Object.fromEntries(Object.entries(context).filter(([key]) => key !== "guestSessionId")), schemaVersion: "1.0.0" };
+  const parsedJourney = accountDurableJourneySchema.strip().safeParse({
+    ...context,
+    schemaVersion: "1.0.0",
+    organizationId: active.organizationId,
+    assessmentSessionId: active.caseId,
+  });
+  if (!parsedJourney.success) return undefined;
+  const durableJourney = parsedJourney.data;
   const candidate = {
     schemaVersion: "1.0.0", lastStage: localStorage.getItem(ACCOUNT_CASE_LAST_STAGE_KEY) ?? undefined, draft: parseLocal(ASSESSMENT_STORAGE_KEY),
     diagnostic: parseLocal(DIAGNOSTIC_STORAGE_KEY),
@@ -74,7 +81,7 @@ async function saveOnce() {
       body: JSON.stringify({ organizationId: active.organizationId, expectedRevision: active.revision, snapshot }),
     });
   } catch (error) {
-    if (!(error instanceof Error) || error.message !== "IDEMPOTENCY_CONFLICT" || active.revision !== 0) throw error;
+    if (!(error instanceof Error) || error.message !== "IDEMPOTENCY_CONFLICT") throw error;
     const existing = await request<{ revision: number; snapshot: unknown }>(`/api/v2/cases/${active.caseId}?organizationId=${encodeURIComponent(active.organizationId)}`, { method: "GET" });
     if (!existing.snapshot || canonicalJson(existing.snapshot) !== canonicalJson(JSON.parse(JSON.stringify(snapshot)) as unknown)) throw error;
     saved = { revision: existing.revision };
@@ -112,9 +119,16 @@ export function restoreAccountCase(snapshot: unknown, active: ActiveAccountCase)
 
 export function accountCaseResumePath(snapshot: AccountCaseSnapshot): string {
   if (snapshot.draft.status !== "ready_for_review") return "/assessment";
+  const lastStage = snapshot.lastStage;
+  if (lastStage === "/assessment") return lastStage;
+  if (lastStage === "/assessment/review") return lastStage;
+  if (lastStage === "/results" && snapshot.diagnostic) return lastStage;
+  if (lastStage === "/recommendations" && snapshot.recommendations) return lastStage;
+  if (lastStage === "/scenarios" && snapshot.comparison) return lastStage;
   if (snapshot.blueprint) {
     const context = snapshot.durableJourney;
-    if (context?.syncedAt && context.artifactIds?.blueprint && ["/copilot", "/evidence", "/consultation"].includes(snapshot.lastStage ?? "")) return snapshot.lastStage!;
+    if (lastStage === "/blueprint") return lastStage;
+    if (context?.syncedAt && context.artifactIds?.blueprint && ["/copilot", "/evidence", "/consultation"].includes(lastStage ?? "")) return lastStage!;
     return "/blueprint";
   }
   if (snapshot.comparison) return "/scenarios";

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { DemoResetControl } from "@/components/demo/demo-reset-control";
 import { activeAccountCase, saveActiveAccountCase } from "@/infrastructure/persistence/account-case-client";
 import { ACCOUNT_CASE_STORAGE_KEY } from "@/infrastructure/persistence/account-case-scope";
+import { createBrowserSupabaseClient } from "@/infrastructure/supabase/browser";
 
 import {
   createGoldenAssessmentDraft,
@@ -167,9 +168,11 @@ export function DemoLauncher() {
 export function HomePrimaryActions() {
   const [resume, setResume] = useState(false);
   const [accountCaseActive, setAccountCaseActive] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const [status, setStatus] = useState("");
 
   useEffect(() => {
+    void Promise.resolve().then(() => createBrowserSupabaseClient().auth.getUser()).then(({ data }) => setSignedIn(Boolean(data.user))).catch(() => undefined);
     try {
       const storedDraft = loadAssessmentDraft(localStorage);
       setResume(storedDraft.status === "ok");
@@ -191,9 +194,10 @@ export function HomePrimaryActions() {
   return (
     <>
       <div className="home-actions">
-        <Link className="button primary home-primary-action" href={accountCaseActive ? "/cases" : "/assessment?new=1"}>
+        <Link className="button primary home-primary-action" href={signedIn || accountCaseActive ? "/cases" : "/assessment?new=1"}>
           Start assessment
         </Link>
+        <Link className="button secondary home-account-action" href="/cases">{signedIn ? "Saved cases" : "Sign in or create account"}</Link>
         {resume ? (
           <Link className="button secondary home-resume-action" href="/assessment">
             Resume assessment
