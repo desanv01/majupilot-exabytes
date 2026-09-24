@@ -19,6 +19,8 @@
     "test:phase-g:smoke": "node scripts/phase-g-copilot-smoke.mjs",
     "test:phase1:hosted": "node --env-file=.env.local scripts/phase1-hosted-copilot-smoke.mjs",
     "test:phase2:browser": "node scripts/phase2-blueprint-copilot-check.mjs",
+    "test:phase3:browser": "node scripts/phase2-blueprint-copilot-check.mjs --evidence",
+    "test:phase3:gateway-live": "node --env-file=.env.local scripts/phase3-live-gateway-proof.mjs",
     "test:release:hosted": "node --env-file=.env.local scripts/hosted-release-smoke.mjs",
     "test:phase02:browser": "node scripts/phase02-browser-check.mjs",
     "test:phase03:browser": "node scripts/phase03-browser-check.mjs",
@@ -40,7 +42,9 @@
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.116.0",
     "ai": "^7.0.105",
+    "mammoth": "1.12.3",
     "next": "16.3.5",
+    "pdfjs-dist": "6.3.289",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "zod": "4.6.5"

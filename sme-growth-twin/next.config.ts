@@ -15,6 +15,12 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  // Parser packages use Node resources and PDF.js loads its worker dynamically.
+  serverExternalPackages: ["pdfjs-dist", "mammoth"],
+  outputFileTracingIncludes: {
+    "/api/v2/evidence-documents": ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"],
+    "/api/v2/evidence-documents/*/reprocess": ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"],
+  },
   devIndicators: false,
   poweredByHeader: false,
   async headers() {

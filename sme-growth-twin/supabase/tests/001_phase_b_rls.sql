@@ -9,7 +9,7 @@ select ok(has_table_privilege('authenticated','public.assessment_sessions','sele
 select ok(not has_function_privilege('authenticated','public.claim_guest_session(text,uuid,uuid)','execute'),'claim RPC is server-only');
 select ok(has_function_privilege('service_role','public.claim_guest_session(text,uuid,uuid)','execute'),'service role can invoke guarded claim RPC');
 select ok(has_table_privilege('anon','public.public_catalogue_offerings','select'),'safe catalogue projection is public');
-select is((select count(*)::integer from pg_policies where schemaname='storage' and tablename='objects' and policyname like '%objects_%'),8,'private buckets have complete operation policy matrix');
+select is((select count(*)::integer from pg_policies where schemaname='storage' and tablename='objects' and policyname in ('report_objects_select','report_objects_insert','report_objects_update','report_objects_delete','export_objects_select','export_objects_insert','export_objects_update','export_objects_delete')),8,'private report and export buckets have complete operation policy matrix');
 
 insert into auth.users(id,instance_id,aud,role,email,encrypted_password,email_confirmed_at,created_at,updated_at)
 values ('10000000-0000-0000-0000-000000000001','00000000-0000-0000-0000-000000000000','authenticated','authenticated','owner@example.invalid','',now(),now(),now()),

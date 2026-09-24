@@ -1,12 +1,12 @@
 import type { CopilotMessage } from "@/domain/copilot";
 
-export const COPILOT_WELCOME_TEXT = "Ask me to explain your Business Twin, recommendations, scenario, Blueprint, or consultation status. I will keep deterministic facts and AI interpretation visibly separate.";
+export const COPILOT_WELCOME_TEXT = "Ask me to explain your Business Twin, recommendations, scenario, Blueprint, uploaded evidence, or consultation status. I will keep deterministic platform facts, uploaded sources, and AI interpretation visibly separate.";
 
 export type CopilotClientMessage = {
   id: string;
   role: "user" | "assistant" | "status";
   text: string;
-  tools?: Array<{ toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null }>;
+  tools?: Array<{ toolName: string; status: "completed" | "confirmation_required" | "rejected"; confirmationId: string | null; result?: Record<string, unknown> | null }>;
   requestId?: string | null;
   retryMessage?: string;
   retryIdempotencyKey?: string;
@@ -56,12 +56,20 @@ export function copilotErrorPresentation(error: unknown) {
 }
 
 export function restoreCopilotMessages(messages: readonly CopilotMessage[]): CopilotClientMessage[] {
+  const toolResults = new Map<string, CopilotClientMessage["tools"]>();
+  for (const message of messages) {
+    if (message.role !== "tool" || !message.toolName || !message.toolPayload) continue;
+    const current = toolResults.get(message.turnId) ?? [];
+    current.push({ toolName: message.toolName, status: "completed", confirmationId: null, result: message.toolPayload });
+    toolResults.set(message.turnId, current);
+  }
   const restored = messages
     .filter((message) => message.role !== "tool" && typeof message.text === "string" && message.text.length > 0)
     .map((message) => ({
       id: message.id,
       role: message.role === "user" ? "user" as const : "assistant" as const,
       text: message.text!,
+      tools: message.role === "assistant" ? toolResults.get(message.turnId) : undefined,
     }));
   return restored.length ? restored : [{ id: "welcome", role: "assistant", text: COPILOT_WELCOME_TEXT }];
 }

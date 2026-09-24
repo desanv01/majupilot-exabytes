@@ -19,6 +19,7 @@ import { createAdminSupabaseClient } from "@/infrastructure/supabase/admin";
 import { SupabasePersistenceRepository } from "@/infrastructure/persistence/supabase-repository";
 import { assertCopilotSessionBinding, type StoredCopilotSessionBinding } from "./copilot-session-binding";
 import { DurableLeadService } from "@/infrastructure/leads/durable-lead-service";
+import { EvidenceDocumentService } from "@/infrastructure/documents/document-service";
 import { SupabaseDurableLeadRepository } from "@/infrastructure/leads/supabase-durable-lead-repository";
 
 import type { AppendCopilotMessage, CopilotConfirmation, CopilotRepository } from "./copilot-repository";
@@ -201,6 +202,12 @@ export class SupabaseCopilotRepository implements CopilotRepository {
         }
         const result = await this.db.from("consultant_notes").select("id,lead_id,body,author_user_id,accepted_at,source_draft_id,created_at").eq("assessment_session_id", assessment).eq("origin", "human").eq("status", "accepted").limit(50);
         if (result.error) failure(result.error); return { notes: result.data ?? [] };
+      }
+      case "searchUploadedEvidence": {
+        return new EvidenceDocumentService().search(owner, assessment, { query: input.query, maxResults: input.maxResults, relevanceThreshold: input.relevanceThreshold });
+      }
+      case "getDocumentExcerpt": {
+        return { citation: await new EvidenceDocumentService().excerpt(owner, assessment, { documentId: input.documentId, chunkId: input.chunkId }) };
       }
     }
   }
