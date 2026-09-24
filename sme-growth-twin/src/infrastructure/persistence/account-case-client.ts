@@ -1,6 +1,6 @@
 "use client";
 
-import { accountCaseSnapshotSchema, type AccountCaseSnapshot } from "@/domain/account-cases";
+import { accountCaseSnapshotSchema, accountDurableJourneySchema, type AccountCaseSnapshot } from "@/domain/account-cases";
 import { canonicalJson } from "@/core/reports/canonical-json";
 import { ASSESSMENT_STORAGE_KEY } from "./local-assessment-store";
 import { DIAGNOSTIC_STORAGE_KEY } from "./local-diagnostic-store";
@@ -37,7 +37,14 @@ export function collectAccountCaseSnapshot(active: ActiveAccountCase): AccountCa
     localStorage.setItem(DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify(context));
   }
   if (context.assessmentSessionId !== active.caseId || context.organizationId !== active.organizationId) return undefined;
-  const durableJourney = { ...Object.fromEntries(Object.entries(context).filter(([key]) => key !== "guestSessionId")), schemaVersion: "1.0.0" };
+  const parsedJourney = accountDurableJourneySchema.strip().safeParse({
+    ...context,
+    schemaVersion: "1.0.0",
+    organizationId: active.organizationId,
+    assessmentSessionId: active.caseId,
+  });
+  if (!parsedJourney.success) return undefined;
+  const durableJourney = parsedJourney.data;
   const candidate = {
     schemaVersion: "1.0.0", lastStage: localStorage.getItem(ACCOUNT_CASE_LAST_STAGE_KEY) ?? undefined, draft: parseLocal(ASSESSMENT_STORAGE_KEY),
     diagnostic: parseLocal(DIAGNOSTIC_STORAGE_KEY),

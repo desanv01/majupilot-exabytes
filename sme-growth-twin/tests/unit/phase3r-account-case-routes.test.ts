@@ -1,7 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createGoldenAssessmentDraft, goldenFixtureById } from "@/domain-packs/exabytes/golden-fixtures";
-import { accountCaseResumePath } from "@/infrastructure/persistence/account-case-client";
+import { accountCaseResumePath, collectAccountCaseSnapshot } from "@/infrastructure/persistence/account-case-client";
+import { ASSESSMENT_STORAGE_KEY } from "@/infrastructure/persistence/local-assessment-store";
+import { DURABLE_JOURNEY_STORAGE_KEY } from "@/infrastructure/persistence/durable-journey-client";
 import type { AccountCaseSnapshot } from "@/domain/account-cases";
 
 vi.mock("server-only", () => ({}));
@@ -95,5 +97,30 @@ describe("Phase 3R saved-stage resume", () => {
     const withBlueprint = { ...ready, blueprint: {} as AccountCaseSnapshot["blueprint"], lastStage: "/copilot" as const };
     expect(accountCaseResumePath(withBlueprint)).toBe("/blueprint");
     expect(accountCaseResumePath({ ...withBlueprint, durableJourney: { ...snapshot.durableJourney, syncedAt: "2026-09-24T01:00:00.000Z", artifactIds: { blueprint: uuid(5) } } as AccountCaseSnapshot["durableJourney"] })).toBe("/copilot");
+  });
+});
+
+describe("Phase 3R guest claim snapshot", () => {
+  it("drops guest receipt metadata before saving claimed browser work", () => {
+    const entries = new Map<string, string>([
+      [ASSESSMENT_STORAGE_KEY, JSON.stringify(draft)],
+      [DURABLE_JOURNEY_STORAGE_KEY, JSON.stringify({
+        guestSessionId: uuid(5), assessmentSessionId: caseId, organizationId,
+        leadIdempotencyKey: `lead:${uuid(4)}`,
+        expiresAt: "2026-09-25T01:00:00.000Z",
+        absoluteExpiresAt: "2026-10-01T01:00:00.000Z",
+        replayed: false,
+      })],
+    ]);
+    vi.stubGlobal("localStorage", { getItem: (key: string) => entries.get(key) ?? null });
+    try {
+      const collected = collectAccountCaseSnapshot({ organizationId, caseId, revision: 0 });
+      expect(collected?.durableJourney).toEqual({
+        schemaVersion: "1.0.0", organizationId, assessmentSessionId: caseId,
+        leadIdempotencyKey: `lead:${uuid(4)}`,
+      });
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });
