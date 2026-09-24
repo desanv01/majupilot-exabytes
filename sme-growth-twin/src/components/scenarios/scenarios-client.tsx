@@ -98,6 +98,13 @@ function ScenarioCard({ scenario, focused, preferred, onFocus, onPrefer }: { sce
         <div className="path-state" aria-live="polite">{preferred ? <strong className="preferred-state">Preferred path</strong> : null}{focused ? <span className="focus-state">Inspection focus</span> : <span>Available to inspect</span>}</div>
       </header>
 
+      <dl className="scenario-path-glance" aria-label={`${scenario.title} key comparison values`}>
+        <div><dt>First-year cost · base</dt><dd>{formatMoney(scenario.costs.firstYear.base)}</dd></div>
+        <div><dt>Net value · base</dt><dd>{scenario.value.net.status === "estimated" ? formatMoney(scenario.value.net.range.base) : "Not estimated"}</dd></div>
+        <div><dt>Payback · base</dt><dd>{scenario.value.payback.status === "estimated" ? displayPayback(scenario.value.payback.base) : "Not estimated"}</dd></div>
+        <div><dt>Budget fit</dt><dd>{budgetLabels[scenario.budgetFit]}</dd></div>
+      </dl>
+      <details className="scenario-path-breakdown"><summary>Inspect full decision fields <span>Scope, timing, low/base/high ranges, exclusions, and confidence</span></summary>
       <MetricBlock label="Committed scope" note={`${committed.length} evidence-backed capabilities`}>
         <ul className="scope-list">{committed.map((item) => <li key={item.capabilityId}>{safeText(item.title)}</li>)}</ul>
         {conditional.length ? <div className="conditional-scope"><strong>Conditional scope, outside committed economics</strong>{conditional.map((item) => <p key={item.capabilityId}>{safeText(item.title)}</p>)}</div> : <p className="quiet-value">No conditional scope</p>}
@@ -111,6 +118,7 @@ function ScenarioCard({ scenario, focused, preferred, onFocus, onPrefer }: { sce
       <MetricBlock label="Confidence and exclusions"><strong className="single-value">{title(scenario.confidence)} confidence</strong><p>{scenario.value.exclusions.length ? `${scenario.value.exclusions.length} optional value streams excluded` : "No value streams excluded"}</p></MetricBlock>
       <MetricBlock label="Optional value streams"><dl className="optional-streams"><div><dt>Revenue</dt><dd>{scenario.value.revenue.status === "estimated" ? formatMoney(scenario.value.revenue.range.base) : "Not estimated"}</dd></div><div><dt>Avoided risk</dt><dd>{scenario.value.avoidedRisk.status === "estimated" ? formatMoney(scenario.value.avoidedRisk.range.base) : "Not estimated"}</dd></div></dl></MetricBlock>
       {scenario.costs.conditionalExpansionCost ? <MetricBlock label="Conditional expansion cost" note="Excluded while the gate is blocked"><RangeTriplet range={scenario.costs.conditionalExpansionCost} /></MetricBlock> : null}
+      </details>
 
       <footer className="scenario-path-actions">
         <button className="button secondary inspect-action" type="button" onClick={onFocus} aria-pressed={focused}>{focused ? "Inspecting this path" : `Inspect ${scenario.title}`}</button>
@@ -137,15 +145,15 @@ function FinancialOutlook({ scenario }: { scenario: ScenarioResult }) {
 
 function ScenarioTimeline({ scenario }: { scenario: ScenarioResult }) {
   return (
-    <section className="scenario-schedule" aria-labelledby="scenario-schedule-title">
-      <header><p>Decision sequence</p><h3 id="scenario-schedule-title">Months 1 through 12</h3><span>Starts, activations, readiness events, and blocked gates from the scenario engine.</span></header>
+    <details className="scenario-schedule" aria-labelledby="scenario-schedule-title">
+      <summary><span>Decision sequence</span><strong id="scenario-schedule-title">Inspect months 1 through 12</strong><small>Starts, activations, readiness events, and blocked gates from the scenario engine.</small></summary>
       <ol className="scenario-timeline" aria-label="12-month scenario timeline">
         {scenario.months.map((month) => {
           const events = scenario.events.filter((event) => event.month === month.month && relevantTimelineEvents.has(event.type));
           return <li key={month.month} data-month={month.month}><div className="month-marker"><span>{String(month.month).padStart(2, "0")}</span><strong>Month {month.month}</strong></div><div className="month-events">{events.length ? events.map((event) => <p key={event.id}><strong>{title(event.type)}</strong><span>{safeText(event.explanation)}</span></p>) : <p className="quiet-month">No scheduled change</p>}</div></li>;
         })}
       </ol>
-    </section>
+    </details>
   );
 }
 
@@ -196,7 +204,7 @@ function AssumptionGroup({ group, scenario, drafts, errors, open, onToggle, onCh
       <summary><span><strong>{group.label}</strong><small>{group.description}</small></span>{optionalStatus === "not_estimated" ? <b>Not estimated</b> : <b>{group.fields.length} assumptions</b>}</summary>
       <fieldset><legend>{group.label} assumptions for {scenario.title}</legend>{group.fields.map(([field, label]) => {
         const value = getField(scenario.assumptions, group.key, field);
-        return <div className="assumption-row" key={field} data-assumption={field}><div className="assumption-context"><strong className="assumption-label">{label}</strong><span className={`source-badge source-${value.source}`}>{sourceLabels[value.source as keyof typeof sourceLabels]}</span><p><strong>Source:</strong> {safeText(value.sourceRef)}</p><p><strong>Rationale:</strong> {safeText(value.rationale)}</p></div><div className="range-inputs">{bands.map((band) => {
+        return <div className="assumption-row" key={field} data-assumption={field}><div className="assumption-context"><strong className="assumption-label">{label}</strong><span className={`source-badge source-${value.source}`}>{sourceLabels[value.source as keyof typeof sourceLabels]}</span><details className="assumption-provenance"><summary>Source and rationale</summary><p><strong>Source:</strong> {safeText(value.sourceRef)}</p><p><strong>Rationale:</strong> {safeText(value.rationale)}</p></details></div><div className="range-inputs">{bands.map((band) => {
           const key = pathKey(scenario.templateId, group.key, field, band);
           const errorId = `${key}-error`;
           return <label key={band}><span>{title(band)}</span><span className="input-with-unit"><input name={key} aria-label={`${label} ${title(band)}`} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? errorId : `${key}-unit`} inputMode="decimal" value={drafts[key] ?? ""} onChange={(event) => onChange(key, event.target.value)} /><small id={`${key}-unit`}>{value.unit}</small></span>{errors[key] ? <small className="field-error" id={errorId}>{errors[key]}</small> : null}</label>;
@@ -217,7 +225,7 @@ function SensitivityGroup({ scenario, drafts, errors, open, onToggle, onChange }
 }
 
 function AssumptionWorkbench({ scenario, drafts, errors, onChange, onReset }: { scenario: ScenarioResult; drafts: Record<string, string>; errors: Record<string, string>; onChange: (key: string, value: string) => void; onReset: () => void }) {
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({ costs: true, operational: true, revenue: false, avoidedRisk: false, sensitivity: false });
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({ costs: true, operational: false, revenue: false, avoidedRisk: false, sensitivity: false });
   const [resetArmed, setResetArmed] = useState(false);
   const toggle = (key: string, open: boolean) => setOpenGroups((current) => ({ ...current, [key]: open }));
   return (
