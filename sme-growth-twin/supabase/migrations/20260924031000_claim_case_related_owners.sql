@@ -150,6 +150,9 @@ where r.assessment_session_id = a.id and r.guest_session_id = g.id and g.claimed
 update public.leads l set organization_id = a.organization_id, guest_session_id = null
 from public.assessment_sessions a, public.guest_sessions g
 where l.assessment_session_id = a.id and l.guest_session_id = g.id and g.claimed_organization_id = a.organization_id and a.organization_id is not null and a.guest_session_id is null;
+-- Historical consultant notes have no guest owner column. Only the recorded
+-- claimed assessment ID proves provenance; leave any other null-owner notes
+-- unchanged rather than guessing across multiple old guest assessments.
 update public.consultant_notes n set organization_id = a.organization_id
 from public.assessment_sessions a, public.guest_sessions g
 where n.assessment_session_id = a.id and g.claimed_assessment_session_id = a.id and g.claimed_organization_id = a.organization_id and a.guest_session_id is null and n.organization_id is null;
