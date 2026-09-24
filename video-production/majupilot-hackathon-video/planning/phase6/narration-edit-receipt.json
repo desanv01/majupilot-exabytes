@@ -1,0 +1,32 @@
+[
+  {
+    "beat": "03_technical_approach",
+    "source": ".media/audio/voice-program/03_technical_approach.wav",
+    "corrected": ".media/audio/voice-program/03_technical_approach_phase6.wav",
+    "source_sha256": "08954e5e0f8909718c5d92edcb1c53057ffc094990aadb9d113818901ce70e79",
+    "corrected_sha256": "211fcb62fe70b8690d1b0a92478ce9c4b69528c3e05a51865f4e03456ad83a52",
+    "muted_absolute_s": [
+      173.5,
+      189.65
+    ],
+    "duration_s": 69.6,
+    "channels": 1,
+    "sample_width_bytes": 3,
+    "sample_rate": 48000
+  },
+  {
+    "beat": "06_industry_future",
+    "source": ".media/audio/voice-program/06_industry_future.wav",
+    "corrected": ".media/audio/voice-program/06_industry_future_phase6.wav",
+    "source_sha256": "d13116d8ad1a99bdf8e107f325d3098cd29f28ada15eba4b5f2d2754f019c18f",
+    "corrected_sha256": "e80d70c8ab92d9a0c542e63478989e4859ac1ece1373c75006ba8a84ce7efabe",
+    "muted_absolute_s": [
+      544.0,
+      556.2
+    ],
+    "duration_s": 69.4,
+    "channels": 1,
+    "sample_width_bytes": 3,
+    "sample_rate": 48000
+  }
+]

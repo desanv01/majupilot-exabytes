@@ -3,8 +3,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const phase6 = process.argv.includes("--phase6");
 const words = JSON.parse(
-  fs.readFileSync(path.join(root, "planning", "stage6", "captions-words.json"), "utf8"),
+  fs.readFileSync(path.join(root, "planning", phase6 ? "phase6" : "stage6", "captions-words.json"), "utf8"),
 );
 
 const escapeHtml = (value) =>
@@ -116,6 +117,6 @@ ${markup}
 </html>
 `;
 
-const output = path.join(root, "compositions", "captions-stage6.html");
+const output = path.join(root, "compositions", phase6 ? "captions-phase6.html" : "captions-stage6.html");
 fs.writeFileSync(output, html);
 console.log(`captions: ${groups.length} groups / ${words.length} words -> ${path.relative(root, output)}`);

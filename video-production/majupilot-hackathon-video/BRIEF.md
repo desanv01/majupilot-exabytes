@@ -54,7 +54,7 @@ phase.
 - University: USM — Universiti Sains Malaysia.
 - The live branded production surface is MajuPilot. Older repository and evidence files may use the inherited internal name SME Growth Twin; that name is historical context, not the customer-facing brand for this film.
 - The accepted P0 hosted production integration is the primary release fact set. The Phase I local proof remains useful as a historical local baseline and must not be mixed with the hosted numbers.
-- Document RAG is a deferred P1 scope. The product must never be described as ingesting arbitrary uploaded documents or implementing document RAG in this video.
+- Phase 6 correction: bounded assessment-scoped Document RAG is implemented for PDF, DOCX and TXT with cited Copilot answers. Do not claim unrestricted document ingestion. The original recorded future/P1 sentences are muted and captioned out.
 - Current deterministic truth includes scores, rankings, scenario composition, schedules, costs, ROI ranges, catalogue mappings, Blueprint identity, and evidence links. Optional AI interprets within bounded schemas and must not replace those facts.
 - The consultation surface begins with unchecked explicit consent. The video may show the disclosure and privacy boundary, but it must not submit contact data during capture.
 - Scaffold validation note: pinned HyperFrames `0.8.56` lint, runtime, and contrast checks pass, but the untouched blank template's layout sweep reports `sweep_static` / zero-size composition-root geometry. Resolve this during the first real composition pass; do not add a scene-shaped workaround in Phase 1.

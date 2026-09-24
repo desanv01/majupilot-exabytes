@@ -51,7 +51,7 @@ Underneath, MajuPilot is a Next dot J S interface over versioned routes and a de
 
 This separation matters because each stage can be inspected on its own. Evidence-linked records connect claims back to the Business Twin and calculation versions. Once a path is selected, five specialist lenses review it. If model output is invalid or unavailable, each role falls back within a bounded contract; the workflow does not pretend that an unconstrained agent is making the decision.
 
-One limitation is equally important. Document R A G and arbitrary document ingestion are not current product features. They are deferred P one future potential, not something demonstrated here. In this video, the source of truth is the live, labelled, fictional journey.
+The bounded Evidence Library and cited Copilot behavior are shown using accepted Phase 5 local proof with a synthetic company. The obsolete recorded sentence about Document RAG being a future feature is muted in the Phase 6 cut. In this video, the source of truth is the live, labelled, fictional journey.
 <!-- VO-END -->
 
 ## 3:15–6:52 — Requirement 4: Functional Prototype Demonstration
@@ -144,14 +144,14 @@ The earlier Phase I local baseline remains separate: forty seven test files, two
 
 > Chapter card: `06 — Industry Value / Future Potential`
 >
-> Delivery: Broaden the perspective without slipping into promises. Emphasize “not implemented now.”
+> Delivery: Broaden the perspective without slipping into promises. Distinguish bounded current Document RAG from possible future expansion.
 
 <!-- VO-START -->
 For an SME owner, the value is not manufactured certainty. It is a clearer conversation: five answers become a reviewed starting point, scenario ranges show the consequences of assumptions, and the Blueprint preserves why a path was chosen. For an advisor, the same structured handoff can reduce repeated discovery while keeping consent explicit.
 
 The current boundary matters. MajuPilot does not promise business outcomes, vendor fulfilment, guaranteed availability, a human response, or automatic C R M record creation. The prototype shows a deployable workflow and an inspectable decision package, not a completed customer transformation.
 
-Future work can extend domain packs, evidence sources, integrations, and consultant workflows after this boundary is validated. Document R A G and arbitrary uploaded-document ingestion may be explored later as deferred P one scope only. They are not implemented now. The opportunity is to broaden the evidence available to the system without weakening provenance, consent, or deterministic ownership.
+Future work can extend domain packs, evidence sources, integrations, and consultant workflows after this boundary is validated. Bounded assessment-scoped Document RAG is already implemented for PDF, DOCX and TXT. The obsolete recorded future/P1 sentences are muted in the Phase 6 cut. The opportunity is to broaden the evidence available to the system without weakening provenance, consent, or deterministic ownership.
 <!-- VO-END -->
 
 ## 9:25–9:40 — Close

@@ -1,14 +1,14 @@
 # Upload and submission checklist
 
-Public upload remains user-controlled. Nothing in Stage 7 uploads, publishes, or creates a public link.
+Public upload remains user-controlled. Nothing in Phase 6 uploads, publishes, or creates a public link.
 
 ## Before upload
 
-- [ ] Confirm the selected file is `MajuPilot_Prototype_Demo_Desan_Vasu_v1.mp4`.
-- [ ] Compare its SHA-256 with `../planning/stage7/CHECKSUMS.sha256`.
+- [ ] Confirm the selected file is `MajuPilot_Prototype_Demo_Desan_Vasu_Phase6.mp4`.
+- [ ] Compare its SHA-256 with `../planning/phase6/FINAL-DELIVERY-RECEIPT.md`.
 - [ ] Confirm local playback begins at the opening frame, includes audio, and ends on the final visual hold.
 - [ ] Copy the title and description from `YOUTUBE-SUBMISSION.md` without removing the CC BY 4.0 attribution.
-- [ ] Preserve the fictional/synthetic and future/deferred-P1 disclosures in the description.
+- [ ] Preserve the fictional/synthetic, bounded Document RAG, and future-expansion disclosures in the description.
 
 ## Upload settings
 
@@ -23,7 +23,7 @@ Public upload remains user-controlled. Nothing in Stage 7 uploads, publishes, or
 ## After upload
 
 - [ ] Wait for HD processing to finish.
-- [ ] Check the first 30 seconds, the demo at 03:15, scenario payback around 05:05, the silence boundary at 06:52, the future/P1 boundary around 09:02, and the music credit near the close.
+- [ ] Check the first 30 seconds, current Evidence Library/Copilot inset around 03:00, the demo at 03:15, current Blueprint handoff near 06:13, the chapter boundary at 06:52, current-versus-future scene around 09:02, and the music credit near the close.
 - [ ] Confirm captions remain legible on desktop and mobile and are not obscured by platform controls.
 - [ ] Confirm the shared URL uses the intended visibility.
 - [ ] Submit or publish only through the user’s authorized competition workflow.
