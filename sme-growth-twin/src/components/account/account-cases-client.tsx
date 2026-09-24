@@ -55,11 +55,9 @@ export function AccountCasesClient({ initialAuthError }: { initialAuthError: boo
   const [message, setMessage] = useState(initialAuthError ? "This sign-in link has expired. Request a new one." : "");
 
   useEffect(() => {
-    try {
-      void createBrowserSupabaseClient().auth.getUser().then(({ data }) => {
-        if (data.user?.email) { setSignedInEmail(data.user.email); setEmail(data.user.email); }
-      }).catch(() => undefined).finally(() => setCheckingAuth(false));
-    } catch { setCheckingAuth(false); }
+    void Promise.resolve().then(() => createBrowserSupabaseClient().auth.getUser()).then(({ data }) => {
+      if (data.user?.email) { setSignedInEmail(data.user.email); setEmail(data.user.email); }
+    }).catch(() => undefined).finally(() => setCheckingAuth(false));
   }, []);
 
   useEffect(() => {
