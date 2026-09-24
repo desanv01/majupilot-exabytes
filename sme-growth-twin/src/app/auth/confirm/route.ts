@@ -20,6 +20,12 @@ export async function GET(request: Request) {
     succeeded = !error;
   }
 
-  const destination = new URL(succeeded ? "/cases" : "/cases?auth=expired", url.origin);
+  // Supabase's implicit recovery flow returns tokens in a URL fragment, which
+  // the server cannot read. The browser carries that fragment to /cases.
+  const destination = new URL(
+    succeeded ? (type === "recovery" ? "/cases?auth=recovery" : "/cases")
+      : !tokenHash && !code ? "/cases?auth=callback" : "/cases?auth=expired",
+    url.origin,
+  );
   return Response.redirect(destination, 303);
 }

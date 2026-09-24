@@ -13,6 +13,7 @@ import type { AssessmentDraft } from "@/domain/assessment";
 import type { Blueprint } from "@/domain/blueprint";
 import type { BusinessTwin } from "@/domain/business-twin";
 import type { RecommendationResult } from "@/domain/recommendations";
+import { reportArtifactSchema, signedReportDownloadSchema, type ReportArtifact } from "@/domain/reports";
 import type { ScenarioComparison } from "@/domain/scenarios";
 import type { DiagnosticResult } from "@/domain/scoring";
 import { EXABYTES_ADVISORS_1_0_0, buildExabytesFallbackReview } from "@/domain-packs/exabytes/advisor-rules";
@@ -111,11 +112,13 @@ function AdvisorStatusBoard({
 function BlueprintCommandHeader({
   blueprint,
   busy,
+  context,
   onGenerate,
   sources,
 }: {
   blueprint?: Blueprint;
   busy: boolean;
+  context?: DurableJourneyContext;
   onGenerate: () => void;
   sources: BlueprintSources;
 }) {
@@ -138,8 +141,78 @@ function BlueprintCommandHeader({
         <button className="button secondary" type="button" disabled={!blueprint || busy} onClick={() => window.print()}>
           Print or save as PDF
         </button>
+        {context ? <SavedReportDownload key={context.artifactIds?.blueprint} context={context} /> : null}
       </nav>
     </header>
+  );
+}
+
+function SavedReportDownload({ context }: { context: DurableJourneyContext }) {
+  const [report, setReport] = useState<ReportArtifact>();
+  const [downloadLink, setDownloadLink] = useState<{ url: string; expiresAt: string }>();
+  const [state, setState] = useState<"loading" | "ready" | "preparing" | "failed">("loading");
+  const blueprintId = context.artifactIds?.blueprint;
+  const { assessmentSessionId, organizationId } = context;
+
+  useEffect(() => {
+    if (!blueprintId) return;
+    let active = true;
+    const query = new URLSearchParams({ assessmentSessionId });
+    if (organizationId) query.set("organizationId", organizationId);
+    fetch(`/api/v2/reports?${query}`, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("report_list_unavailable");
+        const body = await response.json() as { data: unknown };
+        return reportArtifactSchema.array().parse(body.data);
+      })
+      .then((reports) => {
+        if (!active) return;
+        setReport(reports.filter((item) => item.blueprintId === blueprintId && item.status === "completed")
+          .sort((left, right) => right.reportVersion - left.reportVersion)[0]);
+        setState("ready");
+      })
+      .catch(() => { if (active) setState("failed"); });
+    return () => { active = false; };
+  }, [assessmentSessionId, blueprintId, organizationId]);
+
+  const prepareDownload = async () => {
+    if (!report) return;
+    setState("preparing");
+    setDownloadLink(undefined);
+    try {
+      const query = new URLSearchParams();
+      if (organizationId) query.set("organizationId", organizationId);
+      const suffix = query.size ? `?${query}` : "";
+      const response = await fetch(`/api/v2/reports/${encodeURIComponent(report.id)}/download${suffix}`, { cache: "no-store" });
+      if (!response.ok) throw new Error("report_download_unavailable");
+      const body = await response.json() as { data: unknown };
+      const download = signedReportDownloadSchema.parse(body.data);
+      if (download.reportId !== report.id) throw new Error("report_download_mismatch");
+      setDownloadLink({ url: download.url, expiresAt: download.expiresAt });
+      setState("ready");
+    } catch {
+      setState("failed");
+    }
+  };
+
+  if (!blueprintId || (state === "ready" && !report)) return null;
+  return (
+    <div className="saved-report-action" aria-live="polite">
+      {downloadLink ? (
+        <a className="button secondary" href={downloadLink.url} target="_blank" rel="noopener noreferrer" download={`${report?.reportNumber ?? "majupilot-report"}.pdf`} onClick={(event) => {
+          if (Date.now() < Date.parse(downloadLink.expiresAt) - 5_000) return;
+          event.preventDefault();
+          void prepareDownload();
+        }}>
+          Download saved PDF
+        </a>
+      ) : report ? (
+        <button className="button secondary" type="button" onClick={prepareDownload} disabled={state === "preparing"}>
+          {state === "preparing" ? "Preparing PDF link…" : "Get saved PDF"}
+        </button>
+      ) : null}
+      {state === "failed" ? <small role="alert">{report ? "Could not prepare the PDF link. Try again." : "Could not check for a saved PDF. Reopen this page to retry."}</small> : null}
+    </div>
   );
 }
 
@@ -313,7 +386,7 @@ export function BlueprintView({
   return (
     <PostAssessmentShell businessName={sources.twin.identity.businessName} context="blueprint">
       <main id="main-content" className="phase06-shell">
-        <BlueprintCommandHeader blueprint={blueprint} busy={busy} onGenerate={generate} sources={sources} />
+        <BlueprintCommandHeader blueprint={blueprint} busy={busy} context={syncContext} onGenerate={generate} sources={sources} />
         <AdvisorStatusBoard blueprint={blueprint} busy={busy} notice={notice} statuses={statuses} />
         {!blueprint ? (
           <section className={`phase06-empty no-print${generationFailed ? " is-error" : ""}`} role={generationFailed ? "alert" : undefined}>
