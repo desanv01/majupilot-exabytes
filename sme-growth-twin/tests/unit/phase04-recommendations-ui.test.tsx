@@ -20,7 +20,9 @@ describe("Phase 04 recommendation decision workspace", () => {
     expect(html).toContain("Lead with the highest-ranked decision");
     expect(html).toContain("Ordered capability ledger");
     expect(html.match(/<ol/g)?.length).toBeGreaterThanOrEqual(2);
-    expect(html.match(/<details/g)?.length).toBe(full.recommendation.recommendations.length);
+    expect(html.match(/<details/g)?.length).toBe(full.recommendation.recommendations.length * 3);
+    expect(html).toContain("Inspect fit calculation and delivery profile");
+    expect(html).toContain("Inspect catalogue mapping and source");
     expect(firstTitle).toBeGreaterThan(-1);
     expect(firstTitle).toBeLessThan(firstOffering);
     expect(html).toContain("fit = pain_point_fit * 0.30");
