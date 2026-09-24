@@ -139,7 +139,7 @@ function BlueprintCommandHeader({
           {blueprint ? "Regenerate review" : "Generate review"}
         </button>
         <button className="button secondary" type="button" disabled={!blueprint || busy} onClick={() => window.print()}>
-          Print this page
+          Print or save as PDF
         </button>
         {context ? <SavedReportDownload key={context.artifactIds?.blueprint} context={context} /> : null}
       </nav>
